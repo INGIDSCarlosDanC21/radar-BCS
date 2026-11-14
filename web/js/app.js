@@ -178,10 +178,11 @@
       '<p class="fuente">' + esc(desc) + '</p>';
   }
 
+  function pTexto(p, d) { return p < 0.001 ? '< 0.001' : num(p, d); }
   function conclusion(i) {
     var g = i.significancia || {}, p = g.p_valor, a = g.alfa;
-    if (g.significativo === true && p != null && a != null) return 'Sí. La tendencia es clara: con p = ' + num(p, 2) + ' (menor que alfa = ' + num(a, 2) + ') es poco probable que se deba solo al azar.';
-    if (g.significativo === false && p != null && a != null) return 'No. Con p = ' + num(p, 2) + ' (no menor que alfa = ' + num(a, 2) + ') el cambio no se distingue de la variación natural de un año a otro.';
+    if (g.significativo === true && p != null && a != null) return 'Sí. La tendencia es clara: con p ' + (p < 0.001 ? '< 0.001' : '= ' + num(p, 2)) + ' (menor que alfa = ' + num(a, 2) + ') es poco probable que se deba solo al azar.';
+    if (g.significativo === false && p != null && a != null) return 'No se detecta un cambio claro. Con p = ' + num(p, 2) + ' (no menor que alfa = ' + num(a, 2) + ') lo que vemos cabe dentro de la variación normal de un año a otro. Que no se detecte un cambio no prueba que no exista.';
     return 'Todavía no se calcula para este indicador, así que no podemos decir si la tendencia es clara.';
   }
 
@@ -211,7 +212,7 @@
     h += '<div class="bloque"><h2>¿Es estadísticamente significativo?</h2>' +
       '<p><strong>' + esc(conclusion(i)) + '</strong></p>' +
       '<p>Método: ' + esc(g.metodo || 'sin calcular') + '. Compara cada mes del año con los mismos meses de otros años y ve si el dato sube o baja de forma consistente; la pendiente de Sen estima cuánto cambia por año.</p>' +
-      '<p>p-valor: ' + (g.p_valor != null ? esc(num(g.p_valor, 3)) : 'sin calcular') + ' · alfa: ' + (g.alfa != null ? esc(num(g.alfa, 2)) : 'sin dato') +
+      '<p>p-valor: ' + (g.p_valor != null ? esc(pTexto(g.p_valor, 3)) : 'sin calcular') + ' · alfa: ' + (g.alfa != null ? esc(num(g.alfa, 2)) : 'sin dato') +
       '. Si p es menor que alfa, la tendencia se considera clara.</p></div>';
     h += '<div class="bloque"><h2>Fuente</h2><p><strong>' + esc(f.dataset) + '</strong></p><p>' +
       (f.url ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.url) + '</a><br>' : '') +
@@ -229,20 +230,20 @@
     }
     main.innerHTML = '<h1>¿Qué puedo hacer?</h1>' +
       sec('Contra el calor', [
-        'Toma agua con frecuencia, aunque no tengas sed.',
-        'Evita el sol directo entre las 11 y las 16 h.',
-        'Ventila la casa en la noche y sombrea ventanas y patios.',
-        'Usa ropa ligera, de colores claros, y sombrero.',
-        'Revisa a personas mayores, niñas y niños y vecinos que viven solos.'
-      ], 'https://www.cdc.gov/heat-health/', 'CDC, Heat and Health') +
+        'Usa ropa holgada y de colores claros que cubra brazos y piernas, y un sombrero de ala que dé sombra a la cara, las orejas y la nuca.',
+        'Si puedes, haz tus actividades al aire libre en lo más fresco del día o en la noche.',
+        'Si tienes aire acondicionado, úsalo; si no, busca un lugar fresco. Aun unas horas en un lugar fresco bajan el riesgo.',
+        'Usa ventilador solo si adentro hace menos de 32 °C: por encima de eso puede subir la temperatura del cuerpo.',
+        'Refréscate con una ducha fresca, un paño húmedo o un rociador con agua fresca.',
+        'Toma agua, que suele ser la mejor bebida, y evita el alcohol porque deshidrata.'
+      ], 'https://www.cdc.gov/heat-health/media/pdfs/2025/09/Five-Heat-Steps-factsheet-508.pdf', 'CDC, Five Steps (Heat Action Plan)') +
       sec('Para ahorrar agua', [
-        'Revisa fugas en llaves, mangueras y tinacos.',
-        'Riega plantas en las horas frescas, temprano o al atardecer.',
-        'Reutiliza el agua, por ejemplo la de enjuagar verduras para regar.',
-        'Cierra la llave mientras te enjabonas o te lavas los dientes.',
-        'Usa cubeta en lugar de manguera para lavar el patio o el carro.'
-      ], 'https://www.epa.gov/watersense', 'EPA WaterSense') +
-      '<p class="aviso">Consejos generales; pendiente revisar con Investigación.</p>';
+        'Cierra la llave mientras te lavas los dientes o te rasuras.',
+        'Lava el carro con agua de una cubeta, no con la manguera abierta.',
+        'Barre la banqueta, la entrada y los escalones en lugar de lavarlos con manguera.',
+        'Revisa cada año tus instalaciones de plomería y tu sistema de riego.'
+      ], 'https://www.epa.gov/watersense/start-saving', 'EPA WaterSense, Start Saving') +
+      '<p class="aviso">Consejos generales de CDC y EPA, adaptados al español. Revisados contra las páginas citadas el 14 de noviembre de 2026; no sustituyen la atención médica.</p>';
   }
 
   /* ---------- Enrutador ---------- */
