@@ -1,0 +1,104 @@
+{
+ "prototipo": true,
+ "nota": "prototipo; valores no revisados por Investigacion",
+ "punto": {
+  "lat": 24.14,
+  "lon": -110.31,
+  "fuente_coordenadas": "Wikipedia, infobox La Paz (24.1486, -110.3067), redondeado; ver skill earthdata-datasets"
+ },
+ "generado_con": "analisis/prototipo_power.py (codigo generado con IA, Claude)",
+ "fecha_descarga": "2026-11-14",
+ "tendencias": [
+  {
+   "variable": "T2M",
+   "nombre": "Temperature at 2 Meters",
+   "unidades": "C",
+   "periodo": "2001-2025",
+   "n_meses_validos": 300,
+   "n_meses_faltantes": 0,
+   "metodo": "pymannkendall 1.4.3 seasonal_test (Mann-Kendall estacional, period=12; su docstring cita Hirsch y Slack 1984, varianza sumada sin covarianza entre estaciones) + pendiente de Sen estacional",
+   "tendencia_por_anio": 0.06106,
+   "cambio_total_estimado": 1.4653,
+   "nota_cambio_total": "Estimacion lineal: pendiente por anio x 24 intervalos anuales (2001-2025); no es una medicion",
+   "p_valor": 0.0,
+   "significativo_alfa_0.05": "si",
+   "tau": 0.3486,
+   "verificacion_cruzada": {
+    "mk_estacional_con_correlacion_entre_estaciones": {
+     "funcion": "pymannkendall.correlated_seasonal_test (Hipel y McLeod 1994)",
+     "p_valor": 5.097e-05,
+     "significativo_alfa_0.05": "si",
+     "tendencia_por_anio": 0.06106
+    },
+    "sen_estacional_manual_por_anio": 0.06106,
+    "ols_serie_anual_por_anio": 0.06151,
+    "ols_cambio_total_estimado": 1.4762
+   },
+   "fuente": {
+    "dataset": "NASA POWER Monthly (MERRA-2), community AG",
+    "url": "https://power.larc.nasa.gov/api/temporal/monthly/point",
+    "consulta": {
+     "parameters": "T2M,PRECTOTCORR",
+     "community": "AG",
+     "latitude": 24.14,
+     "longitude": -110.31,
+     "start": 2001,
+     "end": 2025,
+     "format": "JSON"
+    },
+    "api": {
+     "version": "v2.10.0",
+     "name": "POWER Monthly and Annual API"
+    },
+    "fecha_descarga": "2026-11-14"
+   },
+   "nota": "prototipo; valores no revisados por Investigacion"
+  },
+  {
+   "variable": "PRECTOTCORR",
+   "nombre": "Precipitation Corrected",
+   "unidades": "mm/day",
+   "periodo": "2001-2025",
+   "n_meses_validos": 300,
+   "n_meses_faltantes": 0,
+   "metodo": "pymannkendall 1.4.3 seasonal_test (Mann-Kendall estacional, period=12; su docstring cita Hirsch y Slack 1984, varianza sumada sin covarianza entre estaciones) + pendiente de Sen estacional",
+   "tendencia_por_anio": 0.0,
+   "cambio_total_estimado": 0.0,
+   "nota_cambio_total": "Estimacion lineal: pendiente por anio x 24 intervalos anuales (2001-2025); no es una medicion",
+   "p_valor": 0.1782,
+   "significativo_alfa_0.05": "no",
+   "tau": 0.0531,
+   "verificacion_cruzada": {
+    "mk_estacional_con_correlacion_entre_estaciones": {
+     "funcion": "pymannkendall.correlated_seasonal_test (Hipel y McLeod 1994)",
+     "p_valor": 0.2867,
+     "significativo_alfa_0.05": "no",
+     "tendencia_por_anio": 0.0
+    },
+    "sen_estacional_manual_por_anio": 0.0,
+    "ols_serie_anual_por_anio": 0.01521,
+    "ols_cambio_total_estimado": 0.3651
+   },
+   "fuente": {
+    "dataset": "NASA POWER Monthly (MERRA-2), community AG",
+    "url": "https://power.larc.nasa.gov/api/temporal/monthly/point",
+    "consulta": {
+     "parameters": "T2M,PRECTOTCORR",
+     "community": "AG",
+     "latitude": 24.14,
+     "longitude": -110.31,
+     "start": 2001,
+     "end": 2025,
+     "format": "JSON"
+    },
+    "api": {
+     "version": "v2.10.0",
+     "name": "POWER Monthly and Annual API"
+    },
+    "fecha_descarga": "2026-11-14"
+   },
+   "nota": "prototipo; valores no revisados por Investigacion",
+   "limitacion": "Precipitacion mensual con muchos ceros y distribucion muy asimetrica (lluvia concentrada en jul-oct): el MK estacional es no parametrico y tolera empates, pero la pendiente de Sen puede quedar cerca de 0 y el cambio total no capta variaciones de eventos extremos; dato de reanalisis ~50 km, no de pluviometro."
+  }
+ ]
+}
