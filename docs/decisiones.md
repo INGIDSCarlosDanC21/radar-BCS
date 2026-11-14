@@ -46,13 +46,21 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Alternativas descartadas:** mantener el calendario original (dejaba el congelamiento a la misma hora del cierre).
 - **Quién decidió:** Carlos (Líder).
 
+### 2026-11-14 — Tecnología y publicación de la web
+
+- **Contexto:** la skill `rol-programador-b` pide elegir lo más simple que funcione, sin build pesado, y anotar desde dónde se publica.
+- **Decisión:** HTML + CSS + JavaScript sin framework ni build. Mapa con **Leaflet 1.9.4** (versión fija, desde cdnjs) y teselas de OpenStreetMap; gráficas en SVG hecho a mano (sin librería). Los datos son JSON/GeoJSON estáticos en `web/data/` según `docs/contrato-datos.md`. Publicación: GitHub Pages con el workflow `.github/workflows/pages.yml`, que sube la carpeta `web/` al hacer push a `main` (solo el Líder fusiona a `main`). URL: <https://ingidscarlosdanc21.github.io/radar-BCS/>.
+- **Alternativas descartadas:** React/Vite (requiere build y más peso), Chart.js (no hace falta para una línea y unas barras), MapLibre (más pesado que Leaflet para polígonos simples).
+- **Quién decidió:** Diego (Prog. B).
+
 ### 2026-11-14 — Horarios oficiales del domingo: contradicen el cierre a mediodía
 
 - **Contexto:** Carlos compartió la diapositiva oficial "Horarios del evento, domingo 15 de noviembre" de NASA International Space Apps Challenge La Paz 2026 (sede: Comunidad Educativa Juan Pablo II). Dice: 06:00 permisos para abandonar o reincorporarse al recinto; **17:00 evaluación del jurado**; 21:00 cierre del recinto; **23:59 hora límite para subir el proyecto a la plataforma**.
 - **Decisión:**
   - La **evaluación del jurado es el domingo a las 17:00** (ya con documento).
-  - La hora límite en la plataforma que muestra el documento es **23:59**, no las 12:00 que se dijo de palabra. **Las dos fuentes se contradicen y está POR CONFIRMAR con el Local Lead cuál rige.**
-  - Mientras no se aclare, **se mantiene el calendario adelantado**: pulsar "Submit for Judging" a más tardar el domingo a las 11:00. Cumple con cualquiera de las dos horas y deja el proyecto entregado seis horas antes de que evalúe el jurado.
+  - La hora límite en la plataforma que muestra el documento es **23:59**, no las 12:00 que se dijo de palabra. Las dos fuentes se contradecían.
+  - **Aclarado el mismo día:** Carlos preguntó al Local Lead y este **confirmó de palabra que el límite es 12:00** (sigue sin documento escrito; la diapositiva oficial dice 23:59). **Rige el límite de las 12:00.**
+  - Se mantiene el calendario adelantado: pulsar "Submit for Judging" a más tardar el domingo a las 11:00, una hora antes del límite y seis horas antes de que evalúe el jurado.
 - **Alternativas descartadas:** volver al calendario original de golpe, porque la hora de las 12:00 podría ser real; y quedarse solo con las 12:00, porque el documento escrito dice otra cosa.
 - **Quién decidió:** Carlos (Líder) aportó el documento; la decisión de mantener la entrega a las 11:00 es del Líder asistido por Claude, por reversible y prudente.
 
@@ -67,5 +75,5 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 
 - **Contexto:** el requisito oficial de la demo dice: "Do NOT include names, voices, or likenesses of anyone under the age of 18" (`docs/referencia/envio-del-proyecto.md`; regla 7 de `AGENTS.md`). Carlos informó que **un integrante es menor de edad** y que el resto son mayores.
 - **Decisión:** esa persona **no se nombra ni se muestra ni se oye** en el video, las diapositivas, las capturas, la página del proyecto ni los textos de entrega. Puede seguir registrada en la pestaña *Members* de la plataforma, que es un requisito de elegibilidad. Por privacidad **no se anota aquí quién es**.
-- **Pendiente:** quitar su nombre de la lista de integrantes de `docs/entrega/08-demo-draft.md` (diapositiva 1) y revisar que no figure en ningún otro texto. Carlos dirá a quién se refiere o hará el cambio, porque ese borrador lo está editando él.
+- **Hecho:** el nombre se quitó de la lista de integrantes de `docs/entrega/08-demo-draft.md` (diapositiva 1) el 2026-11-14. **Hecho también (2026-11-14, por indicación de Carlos):** se tacharon las dos menciones de esa persona en `docs/referencia/plan-radar-paceno.md` (documento original del equipo, repositorio público), donde figuraba por su nombre de pila con tareas de diseño y de video y narración. Quitarlo no borra el nombre del historial de git. **Pendiente:** el `.docx` original en `docs/referencia/originales/` no se modificó y todavía lo menciona (2 veces); Carlos decide si ese archivo se quita del repositorio público.
 - **Quién decidió:** Carlos (Líder).

@@ -84,9 +84,9 @@ Seis integrantes, el máximo permitido.
 | **Carlos (líder)** | Coordinación, contacto con expertos locales, pitch y video |
 | **Alexys** | Datos y estadística en Python |
 | **Carrega** | Web, mapa, gráficas y publicación |
-| **Arte y Nevid** | Diseño de la interfaz e iconos |
+| **Arte** | Diseño de la interfaz e iconos |
 | **3D (Carlos)** | Relieve de La Paz para el video y la portada |
-| **Samuel y Nevid** | Video, narración y revisión de textos |
+| **Samuel** | Video, narración y revisión de textos |
 
 **Herramientas de IA:** Claude, Codex, Tripo3D y ElevenLabs. Su uso se declara en la presentación, como piden las reglas.
 

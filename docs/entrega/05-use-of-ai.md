@@ -14,24 +14,17 @@ Also from "Project Submission": images and videos that are generated content nee
 
 ## Tools selected in the drop-down menu
 
-- Claude Code (used).
-- TODO: Codex (planned, for delegated tasks): confirm whether it was used.
-- TODO: Tripo3D (planned, 3D terrain model): confirm whether it was used.
-- TODO: ElevenLabs (planned, voice for the video): confirm whether it was used.
-- TODO: Gemini (planned, images and text): confirm whether it was used.
+- Claude Code (used). Confirmed by the team on 2026-11-14: Claude is the only AI tool used so far. TODO: re-check before submitting; if anything else is used later (for example a generated voice or image), add it here.
 
 ## Where and how each tool was used
 
 - Claude Code (Anthropic's AI coding assistant, including smaller Claude models as helpers): repository setup; searching and checking sources for the local context; drafting documentation and the English submission drafts; and writing the trend-analysis prototype code (`analisis/prototipo_power.py`). A team member reviewed the results, reproduced the numbers independently, and checked the sources by opening them.
-- Codex: planned for delegated tasks. TODO: where it was actually used.
-- Tripo3D: planned for a 3D model (terrain). TODO: where it was actually used.
-- ElevenLabs: planned for voice or narration of the demo video. TODO: where it was actually used.
-- Gemini: planned for images and text. TODO: where it was actually used.
+- No other AI tools were used (no image, video, voice or 3D generation so far).
 - Third-party skills and plugins used as development tools: listed in docs/skills-terceros.md. TODO: summarize if needed.
 
 ## Watermarks / metadata indicators in the project
 
-- Generated images and video carry a visible "AI-generated" watermark. TODO: confirm once the assets exist.
+- No generated images or video so far. If any are added, they must carry a visible "AI-generated" watermark. TODO: confirm once the demo assets exist.
 - Generated code and data are acknowledged in descriptive text and metadata. TODO: confirm the exact wording in the repository and data files.
 
 - [ ] No NASA logos, flags or mission identifiers in generated content

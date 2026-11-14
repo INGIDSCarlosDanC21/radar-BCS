@@ -1,0 +1,474 @@
+{
+ "type": "FeatureCollection",
+ "datos_de_prueba": true,
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -110.36,
+       24.17
+      ],
+      [
+       -110.33,
+       24.17
+      ],
+      [
+       -110.33,
+       24.14
+      ],
+      [
+       -110.36,
+       24.14
+      ],
+      [
+       -110.36,
+       24.17
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "z01",
+    "nombre": "Celda A1",
+    "cambios": {
+     "calor": {
+      "cambio_total": 1.4,
+      "significativo": true
+     },
+     "vegetacion": {
+      "cambio_total": -0.05,
+      "significativo": true
+     },
+     "lluvia": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "agua": {
+      "cambio_total": null,
+      "significativo": null
+     }
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -110.33,
+       24.17
+      ],
+      [
+       -110.3,
+       24.17
+      ],
+      [
+       -110.3,
+       24.14
+      ],
+      [
+       -110.33,
+       24.14
+      ],
+      [
+       -110.33,
+       24.17
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "z02",
+    "nombre": "Celda A2",
+    "cambios": {
+     "calor": {
+      "cambio_total": 1.1,
+      "significativo": true
+     },
+     "vegetacion": {
+      "cambio_total": -0.03,
+      "significativo": false
+     },
+     "lluvia": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "agua": {
+      "cambio_total": null,
+      "significativo": null
+     }
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -110.3,
+       24.17
+      ],
+      [
+       -110.27,
+       24.17
+      ],
+      [
+       -110.27,
+       24.14
+      ],
+      [
+       -110.3,
+       24.14
+      ],
+      [
+       -110.3,
+       24.17
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "z03",
+    "nombre": "Celda A3",
+    "cambios": {
+     "calor": {
+      "cambio_total": 0.9,
+      "significativo": false
+     },
+     "vegetacion": {
+      "cambio_total": 0.01,
+      "significativo": false
+     },
+     "lluvia": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "agua": {
+      "cambio_total": null,
+      "significativo": null
+     }
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -110.36,
+       24.14
+      ],
+      [
+       -110.33,
+       24.14
+      ],
+      [
+       -110.33,
+       24.11
+      ],
+      [
+       -110.36,
+       24.11
+      ],
+      [
+       -110.36,
+       24.14
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "z04",
+    "nombre": "Celda B1",
+    "cambios": {
+     "calor": {
+      "cambio_total": 1.6,
+      "significativo": true
+     },
+     "vegetacion": {
+      "cambio_total": -0.04,
+      "significativo": false
+     },
+     "lluvia": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "agua": {
+      "cambio_total": null,
+      "significativo": null
+     }
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -110.33,
+       24.14
+      ],
+      [
+       -110.3,
+       24.14
+      ],
+      [
+       -110.3,
+       24.11
+      ],
+      [
+       -110.33,
+       24.11
+      ],
+      [
+       -110.33,
+       24.14
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "z05",
+    "nombre": "Celda B2",
+    "cambios": {
+     "calor": {
+      "cambio_total": 1.3,
+      "significativo": null
+     },
+     "vegetacion": {
+      "cambio_total": -0.02,
+      "significativo": false
+     },
+     "lluvia": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "agua": {
+      "cambio_total": null,
+      "significativo": null
+     }
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -110.3,
+       24.14
+      ],
+      [
+       -110.27,
+       24.14
+      ],
+      [
+       -110.27,
+       24.11
+      ],
+      [
+       -110.3,
+       24.11
+      ],
+      [
+       -110.3,
+       24.14
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "z06",
+    "nombre": "Celda B3",
+    "cambios": {
+     "calor": {
+      "cambio_total": 1.0,
+      "significativo": false
+     },
+     "vegetacion": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "lluvia": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "agua": {
+      "cambio_total": null,
+      "significativo": null
+     }
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -110.36,
+       24.11
+      ],
+      [
+       -110.33,
+       24.11
+      ],
+      [
+       -110.33,
+       24.08
+      ],
+      [
+       -110.36,
+       24.08
+      ],
+      [
+       -110.36,
+       24.11
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "z07",
+    "nombre": "Celda C1",
+    "cambios": {
+     "calor": {
+      "cambio_total": 1.8,
+      "significativo": true
+     },
+     "vegetacion": {
+      "cambio_total": -0.06,
+      "significativo": true
+     },
+     "lluvia": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "agua": {
+      "cambio_total": null,
+      "significativo": null
+     }
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -110.33,
+       24.11
+      ],
+      [
+       -110.3,
+       24.11
+      ],
+      [
+       -110.3,
+       24.08
+      ],
+      [
+       -110.33,
+       24.08
+      ],
+      [
+       -110.33,
+       24.11
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "z08",
+    "nombre": "Celda C2",
+    "cambios": {
+     "calor": {
+      "cambio_total": 1.5,
+      "significativo": false
+     },
+     "vegetacion": {
+      "cambio_total": -0.01,
+      "significativo": false
+     },
+     "lluvia": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "agua": {
+      "cambio_total": null,
+      "significativo": null
+     }
+    }
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -110.3,
+       24.11
+      ],
+      [
+       -110.27,
+       24.11
+      ],
+      [
+       -110.27,
+       24.08
+      ],
+      [
+       -110.3,
+       24.08
+      ],
+      [
+       -110.3,
+       24.11
+      ]
+     ]
+    ]
+   },
+   "properties": {
+    "id": "z09",
+    "nombre": "Celda C3",
+    "cambios": {
+     "calor": {
+      "cambio_total": 0.7,
+      "significativo": null
+     },
+     "vegetacion": {
+      "cambio_total": 0.02,
+      "significativo": false
+     },
+     "lluvia": {
+      "cambio_total": null,
+      "significativo": null
+     },
+     "agua": {
+      "cambio_total": null,
+      "significativo": null
+     }
+    }
+   }
+  }
+ ]
+}
