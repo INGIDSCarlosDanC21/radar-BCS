@@ -78,7 +78,9 @@ function Invocar($nombre) {
         $todo = & codex @a 2>&1
       }
       'opencode' {
-        $a = @('run', '--standalone')
+        $a = @('run')
+        # --standalone existe solo en versiones nuevas (2.x); en 1.19.x no existe y OpenCode imprime la ayuda y falla (issue #42).
+        if ((& opencode run --help 2>&1 | Out-String) -match '--standalone') { $a += '--standalone' }
         # Por la restriccion de la NASA con entidades chinas (ver AGENTS.md) se fija un modelo gratuito no chino.
         $mOc = if ($mod) { $mod } else { 'opencode/nemotron-3.5-super-vl-free' }
         $a += @('-m', $mOc)
