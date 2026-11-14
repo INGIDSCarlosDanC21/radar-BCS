@@ -5,7 +5,7 @@ Nota interna (español): borrador de la demo. Se elige UNA opción: diapositivas
 Reglas de la guía: la demo es de lo primero que ven los jueces globales. Debe incluir nombre del equipo, integrantes y reto; una imagen del proyecto; la experiencia del usuario; y cómo los datos abiertos y la tecnología de agencias espaciales hacen posible la solución.
 Todo lo marcado [FILL] depende de resultados reales que Luca/Diego aún no entregan: NO inventes números. Completa solo con salidas verificadas de `analisis/`.
 Menor de 18: un integrante del equipo es menor de edad y NO puede aparecer, nombrarse ni oírse (ni en el video, ni en la narración, ni en capturas); la narración la hace otra persona.
-IA: imágenes o video generados llevan marca de agua visible "AI-generated"; la voz generada (ElevenLabs) se declara en docs/entrega/05-use-of-ai.md. Sin logos ni marca de la NASA. Sin menores de 18.
+IA: imágenes o video generados llevan marca de agua visible "AI-generated"; si se agrega voz generada, se declara en docs/entrega/05-use-of-ai.md (hasta ahora solo se usó Claude). Sin logos ni marca de la NASA. Sin menores de 18.
 -->
 
 Pitch line (use in both options): **"Radar BCS turns NASA satellite data into answers for every neighbor in La Paz."**
@@ -88,4 +88,4 @@ Production checklist for the video:
 1. Real results from `analisis/` and real screens from `web/` (issues #7, #9, #11).
 2. Decide slides or video (video is faster to watch for judges; slides are easier to edit).
 3. Verify every local statistic and cite it, or leave it out.
-4. Local site deadline: the lead notes say **local submissions close Sunday 12:00**, earlier than the platform's 11:59 p.m. Confirm and plan the recording for Saturday night or Sunday morning.
+4. Local site deadline: Carlos says local submissions close **Sunday 14:00** (earlier said 12:00), earlier than the platform's 11:59 p.m. Confirm and plan the recording for Saturday night or Sunday morning.

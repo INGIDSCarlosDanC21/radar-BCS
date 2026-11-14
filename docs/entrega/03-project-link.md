@@ -15,4 +15,4 @@ Also from "Project Submission": the final project link must be in written Englis
 **Repository:** https://github.com/INGIDSCarlosDanC21/radar-BCS
 
 - [ ] Opens without password, permission or registration (tested while logged out)
-- [ ] Web Filter Classification requested (recommended for new websites): TODO
+- [x] Web Filter Classification requested (recommended for new websites): form submitted by Carlos on 2026-11-14 (Fortinet). Classification result not checked yet.
