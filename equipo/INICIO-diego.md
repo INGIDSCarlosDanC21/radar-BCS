@@ -11,8 +11,10 @@ Ejecuta tú mismo estos pasos, en orden:
 1. Si el repositorio no está clonado: `gh repo clone INGIDSCarlosDanC21/radar-BCS`. Si falla por permisos, pide al humano que acepte la invitación en https://github.com/INGIDSCarlosDanC21/radar-BCS/invitations y que ejecute `gh auth login`; luego reintenta.
 2. `cd radar-BCS && git checkout dev && git pull`.
 3. Corre `powershell -ExecutionPolicy Bypass -File scripts/setup.ps1` (en macOS/Linux: `scripts/setup.sh`).
+   - Al abrir Claude Code por primera vez en el repo, acepta el diálogo de **confianza de la carpeta** (si no, se ignoran los permisos de `.claude/settings.json`).
+   - Si pide el plugin superpowers, instálalo: `claude plugin install superpowers@claude-plugins-official --scope project` (o `/plugin install superpowers@claude-plugins-official` dentro de la sesión).
 4. Lee `AGENTS.md` completo y carga las skills (`.claude/skills/`): `rol-programador-a`, `orquestar-barato` y `equipo-sync`.
-5. Corre `scripts/sync.ps1`, lee `docs/handoffs/prog-a.md` y toma tu primer issue: `gh issue list -R INGIDSCarlosDanC21/radar-BCS --label rol:prog-a`.
+5. Corre `scripts/sync.ps1`, lee `docs/handoffs/prog-a.md` y toma tu primer issue (tu etiqueta es `rol:prog-a`; las de otros roles solo sirven para avisarles): `gh issue list -R INGIDSCarlosDanC21/radar-BCS --label rol:prog-a`.
 6. Trabaja en una rama `prog-a/<tema>` y abre PR hacia `dev`.
 
 Recuerda siempre:
