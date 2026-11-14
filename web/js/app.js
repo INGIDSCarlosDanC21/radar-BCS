@@ -84,6 +84,8 @@
 
   function pintar() {
     var id = indMapa, i = ind(id), m = maxAbs(id), un = i.unidades;
+    var esPrueba = ZONAS.datos_de_prueba === true, prueba = esPrueba ? ' (dato de prueba)' : '';
+    function zonaTexto(c) { return c.significativo === false ? 'Sin cambio claro' : signo(c.cambio_total, un); }
     var caja = document.getElementById('mapa-caja');
     if (typeof L === 'undefined') {
       document.getElementById('aviso-mapa').innerHTML = '<p class="aviso">No se pudo cargar el mapa (¿sin conexión?). La lista de zonas de abajo sigue disponible.</p>';
@@ -98,13 +100,14 @@
           style: function (f) {
             var c = f.properties.cambios[id];
             var v = c ? c.cambio_total : null;
-            return { color: '#333', weight: 1, fillOpacity: 0.75, fillColor: color(v, m), dashArray: v == null ? '4 3' : null };
+            var fill = (c && c.significativo === false && v != null) ? mezcla(PAL.mid, PAL.mid, 0) : color(v, m);
+            return { color: '#333', weight: 1, fillOpacity: 0.75, fillColor: fill, dashArray: v == null ? '4 3' : null };
           },
           onEachFeature: function (f, l) {
             var c = f.properties.cambios[id] || {};
             var e = etiqueta(c.significativo === undefined ? null : c.significativo);
-            l.bindPopup('<strong>' + esc(f.properties.nombre) + '</strong><br>' + esc(i.titulo) + ': ' +
-              esc(signo(c.cambio_total, un)) + '<br>' + e[0]);
+            l.bindPopup('<strong>' + esc(f.properties.nombre) + '</strong>' + prueba + '<br>' + esc(i.titulo) + ': ' +
+              esc(zonaTexto(c)) + '<br>' + e[0]);
           }
         }).addTo(mapa);
         mapa.fitBounds(capa.getBounds());
@@ -124,7 +127,7 @@
     document.getElementById('leyenda').innerHTML = ley;
 
     var lista = ZONAS.features.filter(function (f) {
-      var c = f.properties.cambios[id]; return c && c.cambio_total != null;
+      var c = f.properties.cambios[id]; return c && c.cambio_total != null && c.significativo !== false;
     }).sort(function (a, b) {
       return Math.abs(b.properties.cambios[id].cambio_total) - Math.abs(a.properties.cambios[id].cambio_total);
     }).slice(0, 5);
@@ -135,13 +138,15 @@
       r += '<ol class="top">';
       lista.forEach(function (f) {
         var c = f.properties.cambios[id];
-        r += '<li><strong>' + esc(f.properties.nombre) + '</strong>: ' + esc(signo(c.cambio_total, un)) + ' — ' + etiqueta(c.significativo)[0] + '</li>';
+        r += '<li><strong>' + esc(f.properties.nombre) + '</strong>' + prueba + ': ' + esc(signo(c.cambio_total, un)) + ' — ' + etiqueta(c.significativo)[0] + '</li>';
       });
       r += '</ol>';
     }
     r += '<p><a href="#ficha/' + esc(id) + '">Ver ficha de ' + esc(i.titulo.toLowerCase()) + '</a></p>';
     document.getElementById('resumen').innerHTML = r;
-    document.getElementById('fuente-mapa').textContent = 'Fuente: ' + RB.textoFuente(i) + '. Mapa base: © OpenStreetMap contributors.';
+    document.getElementById('fuente-mapa').textContent = (esPrueba ?
+      'Zonas: datos de prueba sintéticos, no son mediciones; el mapa por zona espera datos de MODIS. El dato real de La Paz está en la ficha.' :
+      'Fuente: ' + RB.textoFuente(i) + '.') + ' Mapa base: © OpenStreetMap contributors.';
   }
 
   /* ---------- Ficha ---------- */
