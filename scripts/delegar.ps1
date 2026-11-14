@@ -79,7 +79,9 @@ function Invocar($nombre) {
       }
       'opencode' {
         $a = @('run', '--standalone')
-        if ($mod) { $a += @('-m', $mod) }
+        # Por la restriccion de la NASA con entidades chinas (ver AGENTS.md) se fija un modelo gratuito no chino.
+        $mOc = if ($mod) { $mod } else { 'opencode/nemotron-3.5-super-vl-free' }
+        $a += @('-m', $mOc)
         if ($esc) { $a += '--auto' }
         $a += $tarea
         $todo = & opencode @a 2>&1

@@ -1,6 +1,6 @@
 # AGENTS.md — Radar BCS (equipo OptiPaz)
 
-Fuente única de reglas para cualquier agente (Claude Code, Codex, OpenCode, Crush, Gemini, Qwen…).
+Fuente única de reglas para cualquier agente (Claude Code, Codex, OpenCode, Crush, Gemini…).
 Léelo completo antes de trabajar. Responde y escribe documentación en español; la **entrega oficial va en inglés**.
 
 ## Qué es
@@ -52,6 +52,8 @@ Cada rol edita solo sus carpetas. Si necesitas tocar la de otro, abre un issue o
 8. **No repitas trabajo.** Si una tarea se va a hacer más de una vez, escribe un script en `scripts/` y úsalo. Guarda descargas en caché.
 9. Verifica antes de decir "listo": corre el código o la prueba y reporta el resultado real.
 
+10. **Sin servicios de empresas chinas hasta confirmar con el Local Lead.** La NASA revisa a los equipos por actividad bilateral con China o con entidades de propiedad china para la ronda global (`docs/referencia/guia-de-calificacion.md`). No uses DeepSeek, Qwen/Alibaba, Kimi, GLM/Zhipu, MiniMax, LongCat/Meituan ni MiMo/Xiaomi, ni sus modelos "gratis" dentro de OpenCode u OpenRouter. Modelos permitidos por ahora: Claude, Codex/OpenAI, Gemini, Ollama con Gemma o Llama, NVIDIA Nemotron. Si dudas de otra herramienta o fuente de datos, pregunta.
+
 ## Recursos en línea
 
 Tienes **permiso total** para descargar y usar recursos **CC0 o de dominio público** sin preguntar; anótalos en `docs/RECURSOS.md`. Otras licencias abiertas (CC-BY, MIT, Apache) también se permiten si cumples la atribución. Si no existe un recurso adecuado, dilo y créalo (Tripo3D para 3D, ElevenLabs para voz, Gemini Pro para imagen/texto), con marca de agua de IA.
@@ -81,4 +83,4 @@ Ver skill `equipo-sync`.
 ## Entrega (resumen; detalle en skill `entrega-space-apps`)
 
 Página del proyecto en inglés · resumen de 50–200 palabras · **un** enlace de demo público (máx. 7 diapositivas contando portada, o video ≤30 s con subtítulos en inglés) · enlace al proyecto · detalles · uso de IA · datos NASA con enlaces · otros recursos · licencia Apache-2.0. Borradores en `docs/entrega/`.
-Criterios globales (1–5): Impact, Creativity, Validity, Relevance, Presentation.
+Criterios (1–5, también en la evaluación local): Impact, Creativity, Validity, Relevance, Presentation. Detalle y premios en `docs/referencia/guia-de-calificacion.md`. Meta principal: **Local Impact Award**; también Best Use of Data y Best Use of Science. Presentación vale igual que los otros cuatro criterios.

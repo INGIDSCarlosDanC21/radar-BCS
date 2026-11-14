@@ -46,3 +46,7 @@ Pide que reporte lo que no pudo verificar.
 ## Ahorro
 - Pide resúmenes y rutas, no volcados completos. Guarda descargas en caché (`data/cache/`) y reutiliza.
 - Si algo se hará más de una vez, que el agente escriba un script en `scripts/`.
+
+## Restricción sobre modelos chinos
+
+No delegues a modelos de empresas chinas (DeepSeek, Qwen, Kimi, GLM, MiniMax, LongCat, MiMo), tampoco los "gratis" de OpenCode u OpenRouter, hasta que el Local Lead confirme que no afectan la elegibilidad (regla 10 de `AGENTS.md`). `scripts/delegar.ps1` ya fija un modelo no chino para OpenCode.

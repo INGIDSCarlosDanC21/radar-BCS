@@ -5,7 +5,7 @@
   Comprueba git/gh/node/uv, instala Python 3.12, markitdown, skillspector y agentes
   gratuitos (solo los que falten). Un paso opcional que falla avisa y sigue.
 .PARAMETER Extras
-  Instala tambien Gemini CLI, Qwen Code y Aider (no van por defecto).
+  Instala tambien Gemini CLI y Aider (no van por defecto).
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
 #>
@@ -137,7 +137,7 @@ Paso 'Ollama' {
 # ---------- 4. Extras opcionales ----------
 if ($Extras) {
   Paso 'Extras: Gemini CLI' { Instalar-Npm 'gemini' '@google/gemini-cli' }
-  Paso 'Extras: Qwen Code'  { Instalar-Npm 'qwen' '@qwen-code/qwen-code' }
+  # Qwen Code (Alibaba) no se instala: regla 10 de AGENTS.md (restriccion de la NASA con entidades chinas).
   Paso 'Extras: Aider' {
     if (Tiene 'aider') { Ok 'aider ya instalado' }
     elseif (Tiene 'uv') { uv tool install --python 3.12 aider-chat; if ($LASTEXITCODE -ne 0) { Aviso 'Fallo aider-chat' } }
