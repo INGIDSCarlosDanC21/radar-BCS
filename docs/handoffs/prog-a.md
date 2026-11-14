@@ -6,7 +6,8 @@
 - `data/salida/indicadores.json` con calor y lluvia reales de La Paz, 2001-2025 (sin revisar por Investigación):
   - Calor (temperatura del aire, T2M): +1.465 °C, significativo (Mann-Kendall estacional + Sen).
   - Lluvia: 0.0 mm/año, no significativa (p = 0.18).
-- Vegetación y agua salen como `null` (pendientes).
+- Vegetación: NDVI MODIS de 6 zonas, −0.019 (significativo). Agua sale `null`.
+- Aviso a Carlos: LST MODIS no muestra tendencia en la ciudad (p=0.11), el aire POWER sí; ver `analisis/PLAN.md`.
 
 ## En curso
 
