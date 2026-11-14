@@ -144,6 +144,15 @@ if ($Extras) {
   }
 }
 
+# ---------- 4b. Plugin superpowers para Claude Code ----------
+Paso 'Plugin superpowers (Claude Code)' {
+  if (Tiene 'claude') {
+    claude plugin install superpowers@claude-plugins-official --scope project 2>&1 | Out-Null
+    if ($LASTEXITCODE -eq 0) { Ok 'superpowers instalado (o ya estaba)' }
+    else { Aviso 'No se instalo superpowers; dentro de Claude Code ejecuta: /plugin install superpowers@claude-plugins-official' }
+  } else { Info 'Claude Code no encontrado; omito superpowers.' }
+}
+
 # ---------- 5. .env ----------
 Paso '.env' {
   $env1 = Join-Path $raiz '.env'
@@ -174,8 +183,9 @@ if (Tiene 'codex') {
   if ($LASTEXITCODE -ne 0) { Aviso 'codex sin sesion -> codex login' } else { Ok 'codex con sesion' }
 }
 if (Tiene 'gemini') {
-  if (-not ((Test-Path "$env:USERPROFILE\.gemini\oauth_creds.json") -or $env:GEMINI_API_KEY)) { Aviso 'gemini sin sesion -> ejecuta gemini y elige login con Google' }
-  else { Ok 'gemini con credenciales' }
+  # Google retiro el nivel gratuito individual de Gemini CLI (IneligibleTierError): solo sirve con GEMINI_API_KEY.
+  if ($env:GEMINI_API_KEY) { Ok 'gemini con GEMINI_API_KEY' }
+  else { Aviso 'gemini NO funciona con cuenta Google gratuita; solo con GEMINI_API_KEY en .env (delegar.ps1 lo salta si falla)' }
 }
 if (Tiene 'opencode') { Write-Host '[..] opencode: si pide proveedor, usa opencode auth login (o modelos gratuitos incluidos).' }
 Write-Host ''
