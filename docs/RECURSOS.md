@@ -6,7 +6,7 @@ Todo recurso externo (código, texto, imágenes, datos, audio, modelos 3D) se an
 
 | Dataset | URL | Uso |
 |---|---|---|
-| NASA POWER, datos mensuales (MERRA-2), comunidad AG, API v2.10.0 | <https://power.larc.nasa.gov/docs/services/api/temporal/monthly/> | **Usado** (prototipo, issue #5): temperatura del aire a 2 m y lluvia, La Paz, 2001-2025 |
+| NASA POWER, datos mensuales (MERRA-2), comunidad AG, API v2.10.0 | <https://power.larc.nasa.gov/docs/services/api/temporal/monthly/> | **Usado** (pipeline `analisis/`, issues #5 y #7; descargado el 2026-11-14): temperatura del aire a 2 m (T2M) y lluvia (PRECTOTCORR), La Paz (24.14 N, -110.31 O), 2001-2025; salida `data/salida/indicadores.json` |
 | MODIS MOD11A2 V061 (temperatura de superficie, 1 km) | <https://lpdaac.usgs.gov/products/mod11a2v061/> | Previsto; sin usar todavía |
 | MODIS MOD13Q1 V061 (NDVI, 250 m) | <https://lpdaac.usgs.gov/products/mod13q1v061/> | Previsto; sin usar todavía |
 | GRACE-FO / GLDAS (agua subterránea, regional) | <https://gracefo.jpl.nasa.gov/> y <https://ldas.gsfc.nasa.gov/gldas> | Previsto; sin usar todavía |
@@ -30,9 +30,10 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | Teselas de OpenStreetMap | <https://www.openstreetmap.org/copyright> | ODbL; atribución "© OpenStreetMap contributors" en el mapa | `web/` (mapa base) |
 | CDC, *Heat and Health* | <https://www.cdc.gov/heat-health/> | Sitio oficial; solo se cita | `web/` (pantalla Acciones) |
 | EPA, *WaterSense* | <https://www.epa.gov/watersense> | Sitio oficial; solo se cita | `web/` (pantalla Acciones) |
-| `pymannkendall` 1.4.3 (Hussain y Mahmud, 2019, DOI 10.21105/joss.01556) | <https://github.com/mmhs013/pyMannKendall> | MIT (PyPI, 2026-11-14) | `analisis/prototipo_power.py`: pruebas Mann-Kendall estacionales y pendiente de Sen |
-| NumPy | <https://numpy.org/> | BSD-3-Clause (PyPI, 2026-11-14) | `analisis/prototipo_power.py` |
-| Requests | <https://requests.readthedocs.io/> | Apache-2.0 (PyPI, 2026-11-14) | `analisis/prototipo_power.py`: descarga de NASA POWER |
+| `pymannkendall` 1.4.3 (Hussain y Mahmud, 2019, DOI 10.21105/joss.01556) | <https://github.com/mmhs013/pyMannKendall> | MIT (PyPI, 2026-11-14) | `analisis/tendencias.py` (y el prototipo `analisis/prototipo_power.py`): pruebas Mann-Kendall estacionales y pendiente de Sen |
+| NumPy | <https://numpy.org/> | BSD-3-Clause (PyPI, 2026-11-14) | `analisis/tendencias.py` y `analisis/exportar.py` (y el prototipo) |
+| Requests | <https://requests.readthedocs.io/> | Apache-2.0 (PyPI, 2026-11-14) | `analisis/descargar.py`: descarga de NASA POWER (y el prototipo) |
+| pytest | <https://docs.pytest.org/> | MIT (PyPI) | `analisis/tests/`: pruebas del pipeline (solo desarrollo) |
 
 ## Uso de IA
 
@@ -41,6 +42,7 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | Claude Code | Configuración del repositorio, documentación y código | Todo el repositorio | Usado |
 | Claude Code (subagentes haiku y sonnet), 2026-11-14 | Búsqueda de fuentes del contexto local y de referencias del método; redacción del borrador de entrega en inglés; revisado por el Líder | `docs/investigacion/contexto-local.md`, `docs/investigacion/metodo.md`, `docs/entrega/`, `docs/decisiones.md`, `docs/bitacora.md` | Usado |
 | Claude Code (subagente sonnet), 2026-11-14 | Código de la web (HTML/CSS/JS) y datos sintéticos de prueba marcados "DATOS DE PRUEBA"; revisado por Diego | `web/` | Usado |
+| Claude Code (Sonnet 5.5), 2026-11-14 | Código del pipeline de tendencias y sus pruebas; datos calculados por ese código (`data/salida/indicadores.json`, campo `generado_con`); pendiente de revisión por Luca e Investigación | `analisis/`, `data/salida/` | Usado |
 | Codex | Tareas delegadas | — | **No usado** (confirmado por el equipo el 2026-11-14) |
 | Tripo3D | Modelo 3D (relieve) | — | **No usado** (confirmado el 2026-11-14) |
 | ElevenLabs | Voz/narración del video | — | **No usado** (confirmado el 2026-11-14); la narración es humana |
