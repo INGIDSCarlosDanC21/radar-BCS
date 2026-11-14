@@ -15,7 +15,7 @@
 
 ## Falta
 
-- Hora límite: el Local Lead confirmó de palabra que es **12:00** (sin documento escrito). Meta: enviar antes de las 11:00 del domingo.
+- Hora límite: según Carlos es **14:00** (antes se dijo 12:00; sin documento escrito). Meta: enviar a más tardar a las 13:00 del domingo; borrador completo a las 11:00.
 - **Mañana, después de enviar el proyecto:** limpiar el nombre del integrante menor de 18 del historial de git (reescribir historia y `force push`, coordinado con el equipo: todos deben clonar de nuevo) y pedir a GitHub Support que purgue las referencias de los PR. Decidido por Carlos el 2026-11-14: no influye en la entrega, así que se hace después. Hoy el nombre ya no está en el árbol de `main` ni de `dev`.
 - IA: solo Claude (confirmado). Si se agrega voz o imagen generada, declararla en `docs/entrega/05-use-of-ai.md` con marca de agua.
 - Pegar el enlace único de la demo en `docs/entrega/02-demo-link.md` cuando exista, y probarlo sin sesión iniciada.
@@ -24,11 +24,11 @@
 
 ## Bloqueos
 
-- Ninguno técnico. La hora límite 12:00 solo está confirmada de palabra.
+- Ninguno técnico. La hora límite 14:00 solo es palabra de Carlos; falta respaldo escrito.
 
 ## Para otros roles
 
-- **Todos:** congelamiento de funciones hoy sáb 14 nov a las 22:00; el domingo solo bugs y entrega. El límite que rige es 12:00 (confirmado de palabra por el Local Lead); planeen entregar antes de las 11:00.
+- **Todos:** congelamiento de funciones hoy sáb 14 nov a las 22:00; el domingo solo bugs y entrega. El límite que rige es 14:00 (según Carlos); planeen entregar antes de las 13:00.
 - **Prog. A (Luca):** avisar cuando MODIS esté analizado y qué datasets se usaron de verdad (`docs/entrega/06-nasa-data.md`, `docs/RECURSOS.md`).
 - **Prog. B (Diego):** cuando la web esté lista, avisar para volver a probar la URL pública (`docs/entrega/03-project-link.md`).
 - **UI/UX (Ehileen):** las cifras locales que se pueden usar en la web y con qué matiz están en `docs/investigacion/contexto-local.md`.
