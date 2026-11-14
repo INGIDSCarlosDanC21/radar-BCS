@@ -29,7 +29,7 @@ Recuerda siempre:
 ## Primeras tareas (cronograma del sábado 14 de noviembre)
 
 - 07:00-08:00 Inauguración: preguntar la rúbrica local y la hora límite de entrega (hoy ambas están PENDIENTES).
-- 08:00-09:00 Tablero de tareas; confirmar las 4 preguntas del reto en la página oficial de Space Apps (el texto literal sigue pendiente) y revisar que el método (Mann-Kendall estacional con Hirsch-Slack y pendiente de Sen) las responde.
+- 08:00-09:00 Tablero de tareas; confirmar las 4 preguntas del reto en la página oficial de Space Apps (el texto literal sigue pendiente) y revisar que el método (Mann-Kendall estacional y pendiente de Sen; no lo llames Hirsch-Slack, ver `docs/investigacion/metodo.md`) las responde.
 - 09:00-14:00 Verificar las fuentes de `docs/investigacion/contexto-local.md` (cada cifra está marcada por verificar); empezar el borrador de `docs/entrega/` en inglés solo con lo que ya exista.
 - 14:00-15:00 Checkpoint del equipo.
 - 15:00-20:00 Apoyar la conexión de datos; mantener `docs/RECURSOS.md` al día.
