@@ -15,7 +15,14 @@ Fuente común de las cuatro filas: Forest Trends, *Resultados del taller: Lidera
 | El acuífero se extrae por encima de su recarga | misma frase | **VERIFICADA** (leída) |
 | Escaso entendimiento público del sistema hídrico | "…la pérdida de biodiversidad y el escaso entendimiento público del sistema hídrico" (desafíos reconocidos por los participantes del taller) | **VERIFICADA** (leída) |
 
-**Nota sobre el déficit.** El reporte es una fuente secundaria: recoge lo que reconocieron los participantes y remite a una nota al pie que no se revisó. La fuente primaria (CONAGUA, acuífero La Paz 0324; acuerdo de disponibilidad en el DOF del 17/08/2023) **no se pudo leer**: el sitio del DOF no abrió y el PDF de CONAGUA no tiene texto extraíble. En resultados de búsqueda aparecen valores de déficit distintos entre sí, ninguno confirmado. **PENDIENTE:** leer el acuerdo del DOF <https://dof.gob.mx/nota_detalle.php?codigo=5698953&fecha=17/08/2023> y anotar recarga, extracción y déficit oficiales. Mientras tanto, citar siempre "según Forest Trends (2024)".
+**Nota sobre el déficit: la cifra oficial es distinta.** El reporte de Forest Trends es una fuente secundaria. El 2026-11-14 se leyó la **fuente primaria**: *ACUERDO por el que se actualiza la disponibilidad media anual de las aguas nacionales subterráneas del acuífero La Paz, clave 0324* (CONAGUA, Diario Oficial de la Federación, 17 de agosto de 2023), <https://dof.gob.mx/nota_detalle.php?codigo=5698953&fecha=17/08/2023>. Citas literales:
+
+- "la recarga total media anual que recibe el acuífero La Paz, clave 0324, es de 21.0 millones de metros cúbicos anuales".
+- "La salida del acuífero únicamente está integrada por el bombeo, estimado en 37.0 millones de metros cúbicos anuales, que supera la recarga que recibe el acuífero, por lo que el cambio de almacenamiento en el acuífero es de -16.0 millones de metros cúbicos anuales".
+- "el acuífero La Paz, clave 0324, presenta un déficit de 27.827320 millones de metros cúbicos anuales, por lo que no existe volumen disponible para otorgar nuevas concesiones".
+- De la recarga, 12.3 millones de m³ son "recarga incidental por infiltración a partir de excedentes de riego y fugas en las redes de distribución de agua potable y del sistema de alcantarillado".
+
+**Cómo usarlo:** el "13 millones de m³" de Forest Trends **no coincide** con ninguna cifra del acuerdo oficial (−16.0 de cambio de almacenamiento; 27.8 de déficit de disponibilidad, que es una cuenta administrativa que incluye volúmenes concesionados y programados). **Preferir la cifra oficial**: "el acuífero de La Paz recibe 21 millones de m³ al año y se le extraen 37 (CONAGUA, DOF, 2023)". Si se cita el 13, decir "según Forest Trends (2024)". No mezclar las dos fuentes en una misma frase.
 
 ## Calor
 
@@ -24,7 +31,7 @@ Fuente común de las cuatro filas: Forest Trends, *Resultados del taller: Lidera
 | +41.8 % enfermedades por calor en BCS (2026 respecto a 2025) | El Congresista, 27 oct 2026, "Aumentan un 41.8% enfermedades por calor en Baja California Sur": "aumentan un 41.8% en lo que va del año, respecto a 2025". <https://elcongresista.mx/politica/baja-california-sur/aumento-enfermedades-calor-bcs> | **VERIFICADA** (leída). Es el total **estatal**, con corte a mediados de octubre de 2026; no es de La Paz |
 | Siete muertes en la temporada de calor | Zeta, 27 oct 2026: "se han registrado siete defunciones por las temperaturas extremas en Baja California Sur". <https://zetatijuana.com/2026/10/incrementan-enfermedades-y-muertes-por-calor-en-bcs/> | **VERIFICADA** (leída). Cifra **estatal**, 2026 |
 
-Respaldo adicional reportado por el subagente (no releído por el Líder): HoyBCS, 13 oct 2026, <https://hoybcs.com/bcs-acumula-siete-defunciones-por-temperaturas-extremas-en-2026/>. **PENDIENTE:** la fuente primaria de ambas cifras es el informe semanal de Temperaturas Naturales Extremas de la Secretaría de Salud federal; no se localizó la URL del informe.
+Respaldo adicional reportado por el subagente (no releído por el Líder): HoyBCS, 13 oct 2026, <https://hoybcs.com/bcs-acumula-siete-defunciones-por-temperaturas-extremas-en-2026/>. **Fuente primaria NO ENCONTRADA:** las notas citan el "Informe Semanal Daños a la Salud por Temperaturas Naturales Extremas" de la Secretaría de Salud federal (semana epidemiológica 40 de 2026). Se buscó dos veces (2026-11-14) y no se localizó el documento. Las cifras se citan como "según Zeta / El Congresista, con datos de la Secretaría de Salud".
 
 ## Fugas
 
@@ -38,7 +45,7 @@ Matices obligatorios: es una **estimación** del Ayuntamiento, no una medición 
 
 | Cifra | Fuente y cita literal | Estado |
 |---|---|---|
-| 29,825 habitantes expuestos a peligros climáticos | Estudio de vulnerabilidad de La Paz publicado por FMCN (Fondo Mexicano para la Conservación de la Naturaleza); autor que aparece en el documento: Pierre Mokondoko Delgadillo. PDF (19 MB): <https://desarrollo.fmcn.org/wp-content/uploads/2025/07/Estudio_Vulnerabilidad_LaPaz.pdf> | **VERIFICADA** (leída). Título exacto y fecha de publicación: **PENDIENTE** (la URL sugiere julio de 2025) |
+| 29,825 habitantes expuestos a peligros climáticos | Angón Rodríguez, S. A., García Coll, I., et al. (2025). *Estudios de vulnerabilidad socioambiental ante el cambio climático. La Paz (Baja California Sur)*. Fondo Mexicano para la Conservación de la Naturaleza A.C. y Fundación Gonzalo Río Arronte, I.A.P. (así pide citarlo el propio documento). PDF (19 MB): <https://desarrollo.fmcn.org/wp-content/uploads/2025/07/Estudio_Vulnerabilidad_LaPaz.pdf> | **VERIFICADA** (leída; título, autores y año tomados de la página legal del documento) |
 
 Citas: resumen, "Actualmente, 29,825 habitantes distribuidos en 394 manzanas están expuestos a peligros relacionados con el clima, especialmente en colonias como Miramar, Chametla, La Esperanza y Fraccionamiento Juárez"; cuerpo, "un total de 29,825 personas expuestas distribuidas en 1322 manzanas que coinciden total o parcialmente con alguno de los peligros acumulados… 394 manzanas se identifican con una afectación total y en ella habitan 12,248 personas".
 
@@ -49,7 +56,7 @@ Citas: resumen, "Actualmente, 29,825 habitantes distribuidos en 394 manzanas est
 | Iniciativa | Resultado | Estado |
 |---|---|---|
 | URSA del BID | Existe: "Urban Reporting based on Satellite Analysis", código en <https://github.com/EL-BID/URSA>, licencia GPL-3.0, para ciudades de América Latina y el Caribe | **ENCONTRADA**, pero no hay evidencia de un visualizador para La Paz. **NO USAR** la frase "visualizador de islas de calor de La Paz" (reportado por subagente, no releído) |
-| Tesis de la UABCS sobre colonias e islas de calor | No apareció en dos búsquedas | **NO ENCONTRADA**. PENDIENTE: buscar en biblio.uabcs.mx o preguntar en la UABCS |
+| Tesis de la UABCS sobre colonias e islas de calor | No apareció en cuatro búsquedas (repositorios de UABCS, CIBNOR, CICIMAR, SciELO, Redalyc) | **NO ENCONTRADA. NO USAR** en la web ni en la entrega. Solo se puede recuperar preguntando en la UABCS |
 | Estudio de vulnerabilidad | Es el estudio de FMCN de la sección anterior | **ENCONTRADA** |
 
 ## Cómo se verificó
