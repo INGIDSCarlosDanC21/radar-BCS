@@ -29,7 +29,7 @@ Recuerda siempre:
 ## Primeras tareas (cronograma del sábado 14 de noviembre)
 
 - 08:00-09:00 Compilar el proyecto; confirmar paleta de colores y estilo y bocetos de las 4 pantallas (Inicio, Mapa, Ficha, Acciones) en `diseno/`.
-- 09:00-14:00 Diseño de la interfaz y logotipo; entregar assets a Luca en `web/assets/` con licencia registrada en `docs/RECURSOS.md`.
+- 09:00-14:00 Diseño de la interfaz y logotipo; entregar assets a Diego en `web/assets/` con licencia registrada en `docs/RECURSOS.md`.
 - Recordar: marca de agua visible "AI-generated" en imágenes generadas; prohibido usar o modificar logos o marca de la NASA; sin menores de 18 en demo o proyecto.
 - 15:00-20:00 Ajustes de interfaz mientras se conectan datos reales; revisar legibilidad en celular.
 - 20:00 Meta: las 4 pantallas funcionando con datos reales.

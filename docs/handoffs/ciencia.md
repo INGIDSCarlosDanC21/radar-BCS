@@ -25,7 +25,7 @@
 
 ## Para otros roles
 
-- **Prog. A (Diego):** acordar α, manejo de huecos, mínimo de datos, zonas y filtro de calidad (lista en `metodo.md`); revisar juntos `correlated_seasonal_test`.
+- **Prog. A (Luca):** acordar α, manejo de huecos, mínimo de datos, zonas y filtro de calidad (lista en `metodo.md`); revisar juntos `correlated_seasonal_test`.
 - **UI/UX y Prog. B:** las cifras de calor son **estatales**, no de La Paz; la de fugas es una **estimación de 2023**; la de 29,825 habitantes no es de calor. No citar el número de manzanas.
 
 ---

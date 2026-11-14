@@ -1,9 +1,9 @@
 ---
 name: rol-programador-a
-description: Úsala cuando actúes como Diego (Programador A) en Radar BCS: pipeline Python en analisis/ que descarga datos, calcula tendencias y exporta JSON/GeoJSON pequeños que consume la web; define el contrato de datos con Prog. B y escribe pruebas.
+description: Úsala cuando actúes como Luca (Programador A) en Radar BCS: pipeline Python en analisis/ que descarga datos, calcula tendencias y exporta JSON/GeoJSON pequeños que consume la web; define el contrato de datos con Prog. B y escribe pruebas.
 ---
 
-# Rol: Programador A, datos y tendencias (Diego, @DiegoCareaga946)
+# Rol: Programador A, datos y tendencias (Luca, @luca6874)
 
 Carpetas propias: `analisis/`, `data/`. Lee `AGENTS.md`. Skills de apoyo: `earthdata-datasets` (descarga), `webapp-testing`, `security-audit`, `handoff`.
 
