@@ -10,7 +10,7 @@ Reto: *Be An Earth System Trend Detective!* (Ciencias de la Tierra y Software).
 
 **Radar BCS** es una web en español, pensada para celular, gratuita y sin instalación, que muestra con datos abiertos de la NASA cómo han cambiado el calor, la vegetación, la lluvia y el agua en La Paz desde 2001, y qué puede hacer cada vecino. En nuestra división lo que más pesa es el **impacto local**.
 
-La herramienta debe responder cuatro preguntas (pendiente de confirmar el texto literal en la página oficial del reto):
+La herramienta debe responder cuatro preguntas (confirmadas en la página oficial del reto el 2026-11-14; ver `docs/referencia/reto-earth-system-trend-detective.md`):
 
 | Pregunta | Pantalla | Cómo |
 |---|---|---|
