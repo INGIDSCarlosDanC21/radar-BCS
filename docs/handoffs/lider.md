@@ -13,17 +13,18 @@
 
 ## Falta
 
-- Confirmar si "12 pm" es mediodía o medianoche y aprobar el calendario adelantado (propuesta en `docs/decisiones.md`); después actualizar `AGENTS.md` y la skill `rol-lider`.
+- Actualizar `AGENTS.md` y la skill `rol-lider` con el calendario adelantado ya aprobado (congelar sáb 22:00, borrador dom 09:00, enviar dom 11:00, cierre dom 12:00; ver `docs/decisiones.md`).
+- Confirmar con la sede la hora de la evaluación del jurado.
 - Issue #3: decidir formato de demo (7 diapositivas o video de 30 s) y responsable.
 - Avisar al equipo del nuevo límite en el checkpoint de las 14:00.
 
 ## Bloqueos
 
-- Ninguno técnico. El calendario depende de la confirmación de la hora límite.
+- Ninguno.
 
 ## Para otros roles
 
-- **Todos:** la entrega podría cerrar el domingo a mediodía, no a las 23:59. Planeen terminar funciones hoy.
+- **Todos:** la entrega cierra el **domingo a mediodía**, no a las 23:59. Se congelan funciones **hoy a las 22:00**; el domingo solo bugs y entrega.
 - **Prog. A (Diego):** pasar los enlaces exactos de los datasets usados para `docs/entrega/06-nasa-data.md` y `docs/RECURSOS.md`.
 - **Prog. B (Luca):** pasar la URL pública del sitio en cuanto exista (`docs/entrega/03-project-link.md`).
 - **UI/UX (Ehileen):** las cifras locales que se pueden usar en la web y con qué matiz están en `docs/investigacion/contexto-local.md`.
