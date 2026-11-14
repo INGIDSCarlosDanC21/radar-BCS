@@ -49,6 +49,14 @@ def tendencia_estacional(mat, alfa=ALFA):
             "significativo": bool(r.h), "tau": float(r.Tau)}
 
 
+def tendencia_anual(serie, alfa=ALFA):
+    """MK simple y Sen sobre una serie ANUAL (para lluvia: los ceros mensuales anulan el Sen estacional)."""
+    v = np.asarray(serie, dtype=float)
+    r = mk.original_test(v[~np.isnan(v)], alpha=alfa)
+    return {"pendiente_por_anio": float(r.slope), "p_valor": float(r.p),
+            "significativo": bool(r.h), "tau": float(r.Tau)}
+
+
 def cambio_total(pendiente_por_anio, inicio, fin):
     """Estimación lineal: pendiente por año x intervalos anuales (no es una medición)."""
     return pendiente_por_anio * (fin - inicio)
