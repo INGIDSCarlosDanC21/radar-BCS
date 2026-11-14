@@ -10,19 +10,19 @@
 
 ## En curso
 
-- Esperando revisión del PR #37 y aprobación del contrato v0.1.
+- PR #37 fusionado; PR #38 (lluvia anual) fusionado en `prog-a/tendencias`.
+- Tareas MODIS enviadas a AppEEARS (MOD11A2 `processing`, MOD13Q1 `pending`). Estado completo en `analisis/PLAN.md`.
 
 ## Falta
 
-- Cuenta de NASA Earthdata para MODIS MOD11A2 (temperatura de superficie) y MOD13Q1 (NDVI).
+- Procesar MODIS cuando terminen las tareas (`python -m analisis.appeears descargar`).
 - Agua: GRACE/GLDAS (tendencia regional).
 - `zonas.geojson` para el mapa (definir qué es una zona).
 - Copiar la salida a `web/data/` (decidir con Diego si es script o PR).
-- Registrar NASA POWER y la declaración de IA en `docs/RECURSOS.md`.
 
 ## Bloqueos
 
-- Earthdata: la cuenta la crea el humano; sin ella MODIS no se descarga.
+- Cola de AppEEARS (sin fecha estimada).
 
 ## Para otros roles
 
