@@ -36,10 +36,10 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 |---|---|---|---|
 | Claude Code | Configuración del repositorio, documentación y código | Todo el repositorio | Usado |
 | Claude Code (subagentes haiku y sonnet), 2026-11-14 | Búsqueda de fuentes del contexto local y de referencias del método; redacción del borrador de entrega en inglés; revisado por el Líder | `docs/investigacion/contexto-local.md`, `docs/investigacion/metodo.md`, `docs/entrega/`, `docs/decisiones.md`, `docs/bitacora.md` | Usado |
-| Codex | Por definir (tareas delegadas) | Por definir | Previsto |
-| Tripo3D | Modelo 3D (relieve) | Por definir | Previsto |
-| ElevenLabs | Voz/narración del video | Por definir | Previsto |
-| Gemini | Imagen/texto | Por definir | Previsto |
+| Codex | Tareas delegadas | — | **No usado** (confirmado por el equipo el 2026-11-14) |
+| Tripo3D | Modelo 3D (relieve) | — | **No usado** (confirmado el 2026-11-14) |
+| ElevenLabs | Voz/narración del video | — | **No usado** (confirmado el 2026-11-14); la narración es humana |
+| Gemini | Imagen/texto | — | **No usado** (confirmado el 2026-11-14) |
 | Skills y plugins de terceros | Ver [`docs/skills-terceros.md`](skills-terceros.md) | Herramientas de desarrollo | Ver archivo |
 
 Recordatorio: imágenes y video generados llevan marca de agua visible "AI-generated"; prohibido usar o modificar logos de la NASA; sin menores de 18.
