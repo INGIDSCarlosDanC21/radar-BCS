@@ -1,0 +1,35 @@
+# Secretos (el repo es público)
+.env
+.env.*
+!.env.example
+
+# Caché y datos pesados (van en Drive, ver docs/DRIVE.md)
+data/cache/
+*.tif
+*.nc
+*.hdf
+*.h5
+*.mp4
+*.glb
+*.wav
+
+# Dependencias y entornos
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# Salidas de scripts/delegar
+.agentes/
+
+# Basura de sistema y editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# Configuración local de Claude Code
+.claude/settings.local.json
