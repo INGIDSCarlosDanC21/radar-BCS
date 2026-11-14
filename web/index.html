@@ -3,10 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Radar BCS: cómo han cambiado el calor, la vegetación, la lluvia y el agua en La Paz, B.C.S. desde 2001, con datos abiertos de la NASA.">
 <title>Radar BCS</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-<h1>Radar BCS</h1>
-<p>En construcción. Equipo OptiPaz, NASA Space Apps Challenge 2026, La Paz.</p>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div id="franja" class="franja" hidden>DATOS DE PRUEBA — no son mediciones reales</div>
+<header class="cabecera"><span class="marca">Radar BCS</span><span class="sub">La Paz, B.C.S.</span></header>
+<main id="contenido" tabindex="-1" aria-live="polite">
+  <p class="cargando">Cargando datos…</p>
+</main>
+<footer class="pie">Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0</footer>
+<nav class="barra" aria-label="Secciones">
+  <a href="#inicio" data-nav="inicio"><span aria-hidden="true">●</span>Inicio</a>
+  <a href="#mapa" data-nav="mapa"><span aria-hidden="true">◧</span>Mapa</a>
+  <a href="#ficha/calor" data-nav="ficha"><span aria-hidden="true">≈</span>Ficha</a>
+  <a href="#acciones" data-nav="acciones"><span aria-hidden="true">✓</span>Acciones</a>
+</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

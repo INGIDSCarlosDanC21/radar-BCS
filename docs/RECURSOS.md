@@ -26,6 +26,10 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | Zeta, 27 oct 2026, nota sobre enfermedades y muertes por calor en BCS | <https://zetatijuana.com/2026/10/incrementan-enfermedades-y-muertes-por-calor-en-bcs/> | Derechos del medio; solo se cita | `docs/investigacion/contexto-local.md` |
 | Zeta, 30 may 2023, nota sobre fugas en La Paz | <https://zetatijuana.com/2023/05/veto-de-conagua-a-la-paz-por-desvio-de-recursos/> | Derechos del medio; solo se cita | `docs/investigacion/contexto-local.md` |
 | NASA Space Apps, *2026 Judging & Awards Guide* | <https://www.spaceappschallenge.org/resources/judging-awards-guide/> | Sitio oficial; solo se cita | `docs/decisiones.md` (rúbrica) |
+| Leaflet 1.9.4 | <https://leafletjs.com/> (cargado desde <https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/>) | BSD-2-Clause | `web/` (mapa) |
+| Teselas de OpenStreetMap | <https://www.openstreetmap.org/copyright> | ODbL; atribución "© OpenStreetMap contributors" en el mapa | `web/` (mapa base) |
+| CDC, *Heat and Health* | <https://www.cdc.gov/heat-health/> | Sitio oficial; solo se cita | `web/` (pantalla Acciones) |
+| EPA, *WaterSense* | <https://www.epa.gov/watersense> | Sitio oficial; solo se cita | `web/` (pantalla Acciones) |
 | `pymannkendall` 1.4.3 (Hussain y Mahmud, 2019, DOI 10.21105/joss.01556) | <https://github.com/mmhs013/pyMannKendall> | MIT (PyPI, 2026-11-14) | `analisis/prototipo_power.py`: pruebas Mann-Kendall estacionales y pendiente de Sen |
 | NumPy | <https://numpy.org/> | BSD-3-Clause (PyPI, 2026-11-14) | `analisis/prototipo_power.py` |
 | Requests | <https://requests.readthedocs.io/> | Apache-2.0 (PyPI, 2026-11-14) | `analisis/prototipo_power.py`: descarga de NASA POWER |
@@ -36,6 +40,7 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 |---|---|---|---|
 | Claude Code | Configuración del repositorio, documentación y código | Todo el repositorio | Usado |
 | Claude Code (subagentes haiku y sonnet), 2026-11-14 | Búsqueda de fuentes del contexto local y de referencias del método; redacción del borrador de entrega en inglés; revisado por el Líder | `docs/investigacion/contexto-local.md`, `docs/investigacion/metodo.md`, `docs/entrega/`, `docs/decisiones.md`, `docs/bitacora.md` | Usado |
+| Claude Code (subagente sonnet), 2026-11-14 | Código de la web (HTML/CSS/JS) y datos sintéticos de prueba marcados "DATOS DE PRUEBA"; revisado por Diego | `web/` | Usado |
 | Codex | Tareas delegadas | — | **No usado** (confirmado por el equipo el 2026-11-14) |
 | Tripo3D | Modelo 3D (relieve) | — | **No usado** (confirmado el 2026-11-14) |
 | ElevenLabs | Voz/narración del video | — | **No usado** (confirmado el 2026-11-14); la narración es humana |
