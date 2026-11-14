@@ -29,7 +29,7 @@ Recuerda siempre:
 ## Primeras tareas (cronograma del sábado 14 de noviembre)
 
 - 08:00-09:00 Compilar el proyecto y confirmar acceso a NASA Earthdata y a los datos de La Paz (MODIS temperatura MOD11A2 y NDVI MOD13Q1, 2001 a la fecha); si aún no hay cuenta, empezar con NASA POWER (sin cuenta).
-- 09:00-14:00 Calcular tendencias con datos reales: Mann-Kendall estacional con corrección Hirsch-Slack y pendiente de Sen; cambio total desde 2001 y por década (°C, %).
+- 09:00-14:00 Calcular tendencias con datos reales: Mann-Kendall estacional y pendiente de Sen (el PR #20 trae un prototipo con `pymannkendall` en `analisis/prototipo_power.py`; no lo llames Hirsch-Slack); cambio total desde 2001 y por década (°C, %).
 - Definir con Luca el formato de salida en `docs/contrato-datos.md`.
 - 15:00-20:00 Entregar a la web los datos reales en `data/` (lo pesado, a Drive).
 - Registrar cada dataset en `docs/RECURSOS.md` y marcar datos/código generados con IA en metadatos.

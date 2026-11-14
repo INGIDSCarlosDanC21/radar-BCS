@@ -10,7 +10,7 @@ Requirement (literal, from "Components of Project"):
 - What tools, coding languages, hardware, or software did you use to develop your project?"
 -->
 
-<!-- Nota interna: este borrador no usa cifras locales. Desde el 2026-11-14 varias ya tienen fuente leida (docs/investigacion/contexto-local.md); si se agregan, respetar los matices de ese archivo y citar la fuente. La frase "Hirsch-Slack correction" esta pendiente de confirmar contra el codigo (docs/investigacion/metodo.md). Todo lo que dependa de resultados queda TODO. -->
+<!-- Nota interna: este borrador no usa cifras locales. Desde el 2026-11-14 varias ya tienen fuente leida (docs/investigacion/contexto-local.md); si se agregan, respetar los matices de ese archivo y citar la fuente. La frase "Hirsch-Slack correction" se retiro el 2026-11-14 porque pymannkendall.seasonal_test no implementa Hirsch-Slack completo (docs/investigacion/metodo.md); no volver a ponerla. Todo lo que dependa de resultados queda TODO. -->
 
 ## What exactly does it do?
 
@@ -21,7 +21,7 @@ Radar BCS is a free website for phones, with no installation, written in Spanish
 | What is changing? | 1. Home | Four cards: heat, vegetation, rainfall and water. The user picks a variable. |
 | Where is it changing? | 2. Map | Zones of La Paz with the most change. |
 | How much is it changing? | 3. Fact sheet | Total change since 2001 and change by decade. |
-| Is the change statistically significant? | 3. Fact sheet | Seasonal Mann-Kendall test (Hirsch-Slack correction) and Sen's slope. |
+| Is the change statistically significant? | 3. Fact sheet | Seasonal Mann-Kendall test and Sen's slope. |
 | (Extra) What can I do? | 4. Actions | Tips to protect yourself from heat and to save water. |
 
 Every number on the site shows its data source. The site shows what changed, not why. A trend does not prove its cause, and we do not claim one.
@@ -37,7 +37,7 @@ Results to fill in once the analysis is done:
 1. We take long time series of NASA data for La Paz (see the NASA Data section). The planned datasets are MODIS land surface temperature and vegetation index (NDVI), NASA POWER rainfall and air temperature, and GRACE/GLDAS groundwater.
 2. We turn them into monthly or seasonal series for the region and for zones of the city, and plot them.
 3. We measure the rate of change with Sen's slope.
-4. We test significance with the seasonal Mann-Kendall test with the Hirsch-Slack correction. This test looks for a steady upward or downward trend while taking the yearly seasonal cycle into account.
+4. We test significance with the seasonal Mann-Kendall test. This test looks for a steady upward or downward trend while taking the yearly seasonal cycle into account.
 5. The website shows the result in plain language, including when a trend is not significant. A trend that is not significant is still reported honestly, without exaggeration.
 
 Limits we state on the site:

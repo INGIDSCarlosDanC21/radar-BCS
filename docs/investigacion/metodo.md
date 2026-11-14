@@ -19,7 +19,7 @@ Límite que hay que decir en la web: "dónde" depende de la resolución de cada 
 
 1. Serie mensual por variable y por zona.
 2. Prueba **Mann-Kendall estacional**: compara cada mes solo con el mismo mes de otros años, así el ciclo anual no se confunde con tendencia.
-3. **Corrección de Hirsch y Slack** para la dependencia entre meses consecutivos.
+3. **Dependencia entre meses consecutivos:** verificación con `correlated_seasonal_test` (Hipel y McLeod, 1994). La corrección completa de Hirsch y Slack NO está implementada en la librería; no la afirmes (ver el hallazgo más abajo).
 4. **Pendiente de Sen estacional** como magnitud del cambio.
 5. Reportar: pendiente, p, nivel de significancia usado y años con datos.
 

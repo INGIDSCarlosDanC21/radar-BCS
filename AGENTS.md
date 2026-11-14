@@ -17,7 +17,7 @@ La herramienta debe responder cuatro preguntas (confirmadas en la página oficia
 | ¿Qué cambia? | 1. Inicio | 4 tarjetas: calor, vegetación, lluvia, agua |
 | ¿Dónde? | 2. Mapa | Zonas de La Paz con más cambio |
 | ¿Cuánto? | 3. Ficha | Cambio total desde 2001 y por década |
-| ¿Es estadísticamente significativo? | 3. Ficha | Mann-Kendall estacional (corrección Hirsch-Slack) + pendiente de Sen |
+| ¿Es estadísticamente significativo? | 3. Ficha | Mann-Kendall estacional + pendiente de Sen (no llamarlo Hirsch-Slack; ver `docs/investigacion/metodo.md`) |
 | (extra) ¿Qué hago? | 4. Acciones | Consejos contra el calor y para ahorrar agua |
 
 Detalle completo: `docs/referencia/` (documentos del evento convertidos a Markdown).

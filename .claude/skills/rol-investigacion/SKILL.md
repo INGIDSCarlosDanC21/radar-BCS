@@ -1,6 +1,6 @@
 ---
 name: rol-investigacion
-description: Úsala para el trabajo científico de Radar BCS: obtener y validar datos NASA, aplicar el método estadístico (Mann-Kendall estacional con corrección Hirsch-Slack y pendiente de Sen), redactar con fuente y revisar que la web no afirme causalidad. Entregables en docs/investigacion/.
+description: Úsala para el trabajo científico de Radar BCS: obtener y validar datos NASA, aplicar el método estadístico (Mann-Kendall estacional y pendiente de Sen), redactar con fuente y revisar que la web no afirme causalidad. Entregables en docs/investigacion/.
 ---
 
 # Rol: Investigación / ciencia (Carlos)
@@ -16,7 +16,7 @@ Entregables en `docs/investigacion/`. Colabora con Prog. A (ejecuta el análisis
 1. **Ficha de dataset** en `docs/investigacion/datasets.md`: nombre, short_name y versión, resolución, cobertura temporal, unidades, factor de escala, banderas de calidad y límites (ECOSTRESS es foto, no tendencia; GRACE/GLDAS solo tendencia regional).
 2. **Validar** lo que entrega Prog. A: rango físico plausible, valores de relleno, nubes y calidad, huecos y escala (MOD11A2 llega en Kelvin con factor de escala; confirmarlo en la ficha del producto).
 3. **Método** (documentar en `docs/investigacion/metodo.md` con referencias):
-   - Series mensuales por zona; prueba **Mann-Kendall estacional** con corrección de Hirsch y Slack por correlación serial entre estaciones.
+   - Series mensuales por zona; prueba **Mann-Kendall estacional** (`pymannkendall.seasonal_test`), verificada con `correlated_seasonal_test` (Hipel y McLeod, 1994). No la llames "Hirsch-Slack": la librería no implementa esa corrección completa.
    - **Pendiente de Sen** (estacional) como magnitud del cambio: unidad por año, cambio total desde 2001 y por década.
    - Definir y registrar el nivel de significancia (p. ej. 0.05) y reportar p y años con datos.
    - Decidir y documentar manejo de huecos, mínimo de datos por estación y agregación espacial.

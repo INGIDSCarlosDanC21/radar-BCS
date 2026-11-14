@@ -31,7 +31,7 @@ Documento `docs/contrato-datos.md`, **acordado antes de exportar** y versionado:
 Publica pronto un ejemplo con datos de prueba para que Prog. B no espere.
 
 ## Método
-Lo define Investigación (`rol-investigacion`): Mann-Kendall estacional con corrección Hirsch-Slack y pendiente de Sen. No improvises; si falta una decisión, abre issue `rol:ciencia`.
+Lo define Investigación (`rol-investigacion`): Mann-Kendall estacional (`seasonal_test`, verificada con `correlated_seasonal_test`) y pendiente de Sen; no la llames Hirsch-Slack. No improvises; si falta una decisión, abre issue `rol:ciencia`.
 
 ## Pruebas (mínimo)
 - Series sintéticas con tendencia conocida: pendiente y significancia deben coincidir.
