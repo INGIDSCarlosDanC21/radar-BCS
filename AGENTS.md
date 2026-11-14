@@ -25,9 +25,11 @@ Detalle completo: `docs/referencia/` (documentos del evento convertidos a Markdo
 ## Fechas (hora local de La Paz)
 
 - Sáb 14 nov 20:00 — las 4 pantallas con datos reales.
-- Dom 15 nov 12:00 — congelar funciones; solo bugs.
-- **Dom 15 nov 17:00 — evaluación del jurado.**
-- **Dom 15 nov 23:59 — cierre de entrega en la plataforma** ("Submit for Judging"). Sin excepciones.
+- **Sáb 14 nov 22:00 — congelar funciones**; después solo bugs, textos y entrega.
+- Dom 15 nov 09:00 — entrega completa en borrador (`docs/entrega/`), demo lista y `main` actualizado.
+- **Dom 15 nov 11:00 — pulsar "Submit for Judging"** (una hora de margen).
+- **Dom 15 nov 12:00 — cierre de entregas de la sede** (dato dado por Carlos, sin documento escrito de la sede; ver `docs/decisiones.md`). La plataforma global cierra a las 23:59, pero se trabaja con el límite de la sede.
+- Hora de la evaluación del jurado: POR CONFIRMAR con el Local Lead (el plan decía dom 17:00).
 
 ## Equipo y roles
 
