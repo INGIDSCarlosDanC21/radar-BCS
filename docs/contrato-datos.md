@@ -2,7 +2,7 @@
 
 Formato acordado entre `analisis/` (Prog. A, produce) y `web/` (Prog. B, consume). Se llena con los dos antes de conectar datos reales.
 
-> **Estado: PROPUESTA v0.1 de Diego (Prog. B), 2026-11-14. PENDIENTE de aprobar por Luca (Prog. A).**
+> **Estado: ACORDADO, versión 0.1 (confirmado por Carlos, Líder, el 2026-11-14).** Propuesta original de Diego (Prog. B). Luca (Prog. A): lee el **Anexo de Investigación** al final antes de exportar datos reales.
 > La web ya lee este formato con datos de prueba (`web/data/*.json`, marcados `"datos_de_prueba": true`).
 > Si Luca necesita cambiar algo, se cambia aquí primero y se sube `version_contrato`.
 
@@ -108,4 +108,17 @@ Obligatorio en cada indicador: `fuente.dataset` (con versión), `fuente.url` (DO
 
 | Versión | Fecha | Cambio | Quién |
 |---|---|---|---|
-| 0.1 | 2026-11-14 | Propuesta inicial | Diego (Prog. B); pendiente de Luca |
+| 0.1 | 2026-11-14 | Propuesta inicial | Diego (Prog. B) |
+| 0.1 (acordado) | 2026-11-14 | Confirmado por Carlos; se agrega el Anexo de Investigación (no cambia el esquema) | Carlos (Líder) |
+
+## Anexo de Investigación (2026-11-14): reglas para los datos reales
+
+Salen de la validación con NASA POWER (`docs/investigacion/metodo.md` y `hallazgos.md`). No cambian el esquema; dicen cómo llenarlo.
+
+1. **Nombre del método.** `significancia.metodo` = `"Mann-Kendall estacional + pendiente de Sen"`. **No** escribir "Hirsch-Slack": la librería no lo implementa completo. Se recomienda contrastar con `correlated_seasonal_test`.
+2. **Lluvia: no usar la pendiente de Sen estacional mensual.** Da 0.0 porque en POWER 87 de 300 meses valen 0 y la lluvia se concentra en agosto a octubre. Calcular con el **total anual** (suma de los 12 meses, mm/año; o solo jun-oct) con Mann-Kendall simple y pendiente de Sen. Unidades: `mm/año`, como dice este contrato.
+3. **Lluvia sin cambio claro: sin cifra.** Si no es significativa, `cambio_total` y `tendencia_por_decada` van en `null`, `significativo: false`, `p_valor` con el valor real y `cambio_total_nota`: `"No se detecta un cambio claro; por eso no se muestra una cifra de cambio."`. La web mostrará esa frase en lugar de "sin datos".
+4. **`p_valor` real.** Guardar el valor verdadero (por ejemplo 5.1e-5), nunca `0.0`. La web muestra `p < 0.001`.
+5. **Calor mientras no haya MODIS.** El indicador `calor` puede salir de NASA POWER (T2M, temperatura del aire) con `variable` y `limitacion` honestas: reanálisis de ~50 km, un solo punto, no distingue zonas. El mapa queda "sin datos" hasta tener MODIS. Referencia con los números ya validados: `docs/investigacion/hallazgos.md`.
+6. **Zonas de prueba.** Mientras `zonas.geojson` no venga de datos reales, debe llevar en la raíz `"datos_de_prueba": true` (propuesta, por confirmar con Diego para que la web muestre la franja también en el mapa). Nunca presentar celdas sintéticas como medición.
+7. **Punto de partida.** El prototipo de NASA POWER (rama `lider/prototipo-power`, PR #20) reproduce estos números: temperatura +0.061 °C por año, significativa; lluvia sin cambio claro. Se puede reutilizar.
