@@ -15,10 +15,10 @@
 
 ## Falta
 
-- **Confirmar con el Local Lead la hora límite real en la plataforma (12:00 o 23:59).** Mientras tanto se mantiene la meta de enviar antes de las 11:00 del domingo.
-- Quitar de `docs/entrega/08-demo-draft.md` (diapositiva 1) el nombre del integrante menor de 18 y revisar que no figure en ningún otro texto; la demo no puede nombrarlo, mostrarlo ni usar su voz. Ver `docs/decisiones.md`.
+- Hora límite: el Local Lead confirmó de palabra que es **12:00** (sin documento escrito). Meta: enviar antes de las 11:00 del domingo.
+- Decidir si se tacha al integrante menor de 18 en `docs/referencia/plan-radar-paceno.md` (aparece por nombre de pila y con la tarea de narrar el video, que no puede hacer). Ver `docs/decisiones.md`.
 - Pedir la Web Filter Classification del sitio (recomendada para sitios nuevos) y marcarla en `docs/entrega/03-project-link.md`.
-- Confirmar qué herramientas de IA se usaron de verdad (Codex, Tripo3D, ElevenLabs, Gemini) antes de marcarlas en `docs/entrega/05-use-of-ai.md`; la voz sintética, si se usa en el video, se declara ahí.
+- IA: solo Claude (confirmado). Si se agrega voz o imagen generada, declararla en `docs/entrega/05-use-of-ai.md` con marca de agua.
 - Pegar el enlace único de la demo en `docs/entrega/02-demo-link.md` cuando exista, y probarlo sin sesión iniciada.
 - Actualizar resultados de `docs/entrega/04-project-details.md` y `06-nasa-data.md` cuando lleguen MODIS y el pipeline final.
 - Avisar al equipo en el checkpoint de las 14:00: congelar funciones hoy a las 22:00.
