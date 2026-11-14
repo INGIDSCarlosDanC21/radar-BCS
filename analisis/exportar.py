@@ -21,20 +21,22 @@ def _r(x, n=3):
 
 
 def _indicador(id_, titulo, variable, unidades, mat_anual_fn, mat, datos, fecha, inicio, fin,
-               factor_pendiente, fuente_extra, limitacion):
+               fuente_extra, limitacion, anual_simple=False):
     """Arma un indicador a partir de una matriz mensual (años x 12)."""
     anios = list(range(inicio, fin + 1))
     anual = mat_anual_fn(mat)
-    est = t.tendencia_estacional(mat)
-    pend = est["pendiente_por_anio"] * factor_pendiente
+    est = t.tendencia_anual(anual) if anual_simple else t.tendencia_estacional(mat)
+    pend = est["pendiente_por_anio"]
+    claro = est["significativo"] or not anual_simple  # lluvia sin cambio claro: sin cifra (contrato, anexo 3)
     return {
         "id": id_, "titulo": titulo, "variable": variable, "unidades": unidades,
-        "cambio_total": _r(t.cambio_total(pend, inicio, fin)),
-        "cambio_total_nota": f"pendiente de Sen por año × {fin - inicio} intervalos anuales ({inicio}-{fin}); estimación, no medición",
-        "tendencia_por_decada": _r(pend * 10),
+        "cambio_total": _r(t.cambio_total(pend, inicio, fin)) if claro else None,
+        "cambio_total_nota": (f"pendiente de Sen por año × {fin - inicio} intervalos anuales ({inicio}-{fin}); estimación, no medición"
+                              if claro else "No se detecta un cambio claro; por eso no se muestra una cifra de cambio."),
+        "tendencia_por_decada": _r(pend * 10) if claro else None,
         "por_decada": [{"decada": d["decada"], "media": _r(d["media"])}
                        for d in t.por_decada(anios, anual, inicio, fin)],
-        "significancia": {"metodo": "Mann-Kendall estacional + pendiente de Sen", "p_valor": float(f"{est['p_valor']:.4g}"),
+        "significancia": {"metodo": ("Mann-Kendall sobre el total anual + pendiente de Sen" if anual_simple else "Mann-Kendall estacional + pendiente de Sen"), "p_valor": float(f"{est['p_valor']:.4g}"),
                           "alfa": t.ALFA, "significativo": est["significativo"]},
         "serie_anual": [{"anio": a, "valor": _r(v)} for a, v in zip(anios, anual)],
         "fuente": {**fuente_extra, "periodo": f"{inicio}-{fin}", "fecha_descarga": fecha},
@@ -56,14 +58,14 @@ def construir(datos, fecha, inicio=descargar.INICIO, fin=None):
     lluvia = t.mm_por_mes(t.matriz_mensual(datos, "PRECTOTCORR", inicio, fin), inicio)
     calor = _indicador(
         "calor", "Calor", "Temperatura del aire a 2 m (NASA POWER T2M)", "°C", t.promedio_anual, t2m, datos, fecha,
-        inicio, fin, 1, {**fuente_power, "dataset": "NASA POWER Monthly (MERRA-2), parámetro T2M, community AG"},
+        inicio, fin, {**fuente_power, "dataset": "NASA POWER Monthly (MERRA-2), parámetro T2M, community AG"},
         "Es temperatura del aire, no de la superficie (LST). Pendiente: MODIS MOD11A2 (requiere cuenta Earthdata).")
     rain = _indicador(
         "lluvia", "Lluvia", "Precipitación corregida (NASA POWER PRECTOTCORR), total anual", "mm/año", t.suma_anual,
-        lluvia, datos, fecha, inicio, fin, 12,
+        lluvia, datos, fecha, inicio, fin,
         {**fuente_power, "dataset": "NASA POWER Monthly (MERRA-2), parámetro PRECTOTCORR, community AG"},
-        "Lluvia concentrada en pocos meses y con muchos ceros; la pendiente de Sen puede quedar cerca de 0. "
-        "Dato de reanálisis, no de pluviómetro. Pendiente de la serie mensual (mm/mes) x 12 = mm/año.")
+        "Lluvia concentrada en pocos meses y muy variable de un año a otro; la tendencia se calcula con el total anual. "
+        "Dato de reanálisis (~50 km), no de pluviómetro.", anual_simple=True)
     return {
         "version_contrato": VERSION_CONTRATO, "datos_de_prueba": False, "generado": dt.date.today().isoformat(),
         "generado_con": GENERADO_CON, "periodo": {"inicio": inicio, "fin": fin},
