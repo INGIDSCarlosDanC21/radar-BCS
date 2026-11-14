@@ -32,3 +32,16 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **POR CONFIRMAR:** que "12 pm" es **mediodía** y no medianoche. Mientras no se confirme, se asume mediodía (la opción más restrictiva).
 - **Consecuencia (propuesta, pendiente de aprobar por el Líder):** el calendario de `AGENTS.md` y de la skill `rol-lider` queda desfasado. Propuesta: congelar funciones el **sábado a las 22:00**, entrega completa en borrador el **domingo a las 09:00**, y pulsar "Submit for Judging" a más tardar a las **11:00**.
 - **Quién decidió:** la sede (informado por Carlos).
+
+### 2026-11-14 — Calendario adelantado por el cierre a mediodía
+
+- **Contexto:** Carlos confirmó que "12 pm" es **mediodía** del domingo 15 de noviembre. El calendario de `AGENTS.md` (congelar dom 12:00, jurado 17:00, cierre 23:59) ya no sirve. Esta entrada reemplaza los "POR CONFIRMAR" y la propuesta de la entrada anterior.
+- **Decisión:** nuevo calendario, hora de La Paz:
+  - **Sáb 14 nov 20:00** — las 4 pantallas con datos reales (sin cambio).
+  - **Sáb 14 nov 22:00** — congelar funciones; después solo bugs, textos y entrega.
+  - **Dom 15 nov 09:00** — entrega completa en borrador (`docs/entrega/`), demo lista y `main` actualizado.
+  - **Dom 15 nov 11:00** — "Submit for Judging" pulsado, con una hora de margen.
+  - **Dom 15 nov 12:00** — cierre de entregas de la sede. Sin excepciones.
+- **Pendiente:** actualizar `AGENTS.md` y la skill `rol-lider` con estas horas (issue abierto). La hora de la evaluación del jurado con el nuevo cierre no se ha confirmado.
+- **Alternativas descartadas:** mantener el calendario original (dejaba el congelamiento a la misma hora del cierre).
+- **Quién decidió:** Carlos (Líder).
