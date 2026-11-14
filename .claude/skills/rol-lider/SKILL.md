@@ -47,10 +47,10 @@ Antes: abrir la URL pública sin sesión iniciada y comprobar las 4 pantallas en
 - [ ] `docs/entrega/` completo en inglés; demo final (diapositivas ≤7 o video ≤30 s con subtítulos en inglés) lista.
 - [ ] `main` actualizado y probado sin sesión iniciada; celular de demo cargado y plan B (capturas o video).
 
-**Dom 15 nov 13:00. "Submit for Judging"**
+**Dom 15 nov 13:00. "Submit for Judging" (meta interna, para practicar)**
 - [ ] Formulario completo en la plataforma, **Lock** activado y "Submit for Judging" pulsado con una hora de margen.
 - [ ] Banner de confirmación visto; enlaces verificados sin sesión iniciada.
 
-**Dom 15 nov 14:00. Cierre de entregas de la sede. Sin excepciones**
-(Hora de la sede: dato dado por Carlos, sin documento escrito; la plataforma global cierra a las 23:59. La hora de la evaluación del jurado está POR CONFIRMAR.)
+**Dom 15 nov 23:59. Hora límite oficial de entrega**
+(Confirmada por Carlos como límite oficial. La evaluación del jurado es a las 17:00, por eso se entrega antes.)
 - [ ] No editar ni reenviar después del cierre.

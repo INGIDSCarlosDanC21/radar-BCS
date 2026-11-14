@@ -15,3 +15,4 @@ Fecha y hora (La Paz), decisión o hecho, quién, por qué. Las decisiones forma
 - **Tarde — Entrega en inglés completada** (issue #2) con enlaces de datasets comprobados, URL del sitio, resultados preliminares, IA realmente usada y librerías con licencia. Redactó y verificó Claude; los TODO que quedan dependen de otras personas.
 - **Observación.** `docs/referencia/plan-radar-paceno.md` trae un equipo y una sede distintos a los de `AGENTS.md` (reportado por subagente). Vale `AGENTS.md`; no usar esos datos del plan en la entrega.
 - **Noche — Hora límite 14:00.** Carlos aclaró que la hora de subir es 14:00 para que el equipo tenga tiempo de practicar. Calendario: borrador dom 11:00, envío a más tardar 13:00. Ver `docs/decisiones.md`.
+- **Noche — Hora límite oficial 23:59.** Carlos aclaró que el límite oficial es el domingo 23:59 (como la diapositiva). Meta interna: enviar a más tardar 13:00 para practicar. Ver `docs/decisiones.md`.
