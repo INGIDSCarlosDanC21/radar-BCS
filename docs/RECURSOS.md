@@ -28,8 +28,8 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | NASA Space Apps, *2026 Judging & Awards Guide* | <https://www.spaceappschallenge.org/resources/judging-awards-guide/> | Sitio oficial; solo se cita | `docs/decisiones.md` (rúbrica) |
 | Leaflet 1.9.4 | <https://leafletjs.com/> (cargado desde <https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/>) | BSD-2-Clause | `web/` (mapa) |
 | Teselas de OpenStreetMap | <https://www.openstreetmap.org/copyright> | ODbL; atribución "© OpenStreetMap contributors" en el mapa | `web/` (mapa base) |
-| CDC, *Heat and Health* | <https://www.cdc.gov/heat-health/> | Sitio oficial; solo se cita | `web/` (pantalla Acciones) |
-| EPA, *WaterSense* | <https://www.epa.gov/watersense> | Sitio oficial; solo se cita | `web/` (pantalla Acciones) |
+| CDC, *Five Steps to help your patients stay safe on hot days* (Heat Action Plan) | <https://www.cdc.gov/heat-health/media/pdfs/2025/09/Five-Heat-Steps-factsheet-508.pdf> | Sitio oficial; solo se cita | `web/` (pantalla Acciones) |
+| EPA WaterSense, *Start Saving* | <https://www.epa.gov/watersense/start-saving> | Sitio oficial; solo se cita | `web/` (pantalla Acciones) |
 | `pymannkendall` 1.4.3 (Hussain y Mahmud, 2019, DOI 10.21105/joss.01556) | <https://github.com/mmhs013/pyMannKendall> | MIT (PyPI, 2026-11-14) | `analisis/tendencias.py` (y el prototipo `analisis/prototipo_power.py`): pruebas Mann-Kendall estacionales y pendiente de Sen |
 | NumPy | <https://numpy.org/> | BSD-3-Clause (PyPI, 2026-11-14) | `analisis/tendencias.py` y `analisis/exportar.py` (y el prototipo) |
 | Requests | <https://requests.readthedocs.io/> | Apache-2.0 (PyPI, 2026-11-14) | `analisis/descargar.py`: descarga de NASA POWER (y el prototipo) |

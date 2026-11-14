@@ -77,3 +77,18 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Decisión:** esa persona **no se nombra ni se muestra ni se oye** en el video, las diapositivas, las capturas, la página del proyecto ni los textos de entrega. Puede seguir registrada en la pestaña *Members* de la plataforma, que es un requisito de elegibilidad. Por privacidad **no se anota aquí quién es**.
 - **Hecho:** el nombre se quitó de la lista de integrantes de `docs/entrega/08-demo-draft.md` (diapositiva 1) el 2026-11-14. **Hecho también (2026-11-14, por indicación de Carlos):** se tacharon las dos menciones de esa persona en `docs/referencia/plan-radar-paceno.md` (documento original del equipo, repositorio público), donde figuraba por su nombre de pila con tareas de diseño y de video y narración. Quitarlo no borra el nombre del historial de git. **Hecho:** el `.docx` original se borró del repositorio (`main` y `dev`) el 2026-11-14 por indicación de Carlos, y se corrigieron las dos referencias que apuntaban a él. **Pendiente, decidido por Carlos para mañana, después de la entrega:** quitar el nombre del historial de git (reescribir la historia y `force push`, con todo el equipo avisado) y pedir a GitHub Support que purgue las referencias de los PR; no afecta a la entrega.
 - **Quién decidió:** Carlos (Líder).
+
+### 2026-11-14 — Hora límite de subida: 14:00 (reemplaza las 12:00)
+
+- **Contexto:** Carlos informó que "la hora de subir es a las 2 pm realmente, ya que el equipo necesita tiempo para practicar". Antes se había dicho 12:00 (confirmación verbal del Local Lead); la diapositiva oficial dice 23:59 y el jurado evalúa a las 17:00. Sigue sin haber documento escrito de la sede.
+- **Decisión:** el límite que rige es **dom 15 nov 14:00**. Se mantiene una hora de margen, así que "Submit for Judging" se pulsa **a más tardar a las 13:00**, y el borrador completo queda a las **11:00**. El congelamiento de funciones (sáb 22:00) no cambia. Se conserva el margen porque la hora sigue sin respaldo escrito.
+- **Pendiente:** pedir al Local Lead la hora por escrito (o ver si la plataforma muestra el cierre). Si Carlos aclara que las 14:00 es solo una meta interna del equipo y no un cambio de la sede, el límite sigue siendo 12:00 y el envío debe ser antes de las 11:00.
+- **Alternativas descartadas:** volver a 11:00 por precaución; Carlos prefirió dar tiempo de práctica.
+- **Quién decidió:** Carlos (Líder).
+
+### 2026-11-14 — Hora límite oficial: domingo 23:59 (reemplaza 12:00 y 14:00)
+
+- **Contexto:** se habían dicho de palabra las 12:00 y luego las 14:00. Carlos aclaró que la hora límite **oficial** es el domingo 15 de noviembre a las **23:59**, lo que coincide con la diapositiva oficial de horarios y con la guía global.
+- **Decisión:** el límite oficial es **23:59**. Se conserva como **meta interna** pulsar "Submit for Judging" a más tardar a las **13:00** (borrador completo a las 11:00), para que el equipo practique antes de la evaluación del jurado (17:00). El congelamiento de funciones (sáb 22:00) no cambia.
+- **Cierra el pendiente** de conseguir la hora por escrito: ya hay documento (diapositiva oficial). Reemplaza las entradas "12:00" y "14:00".
+- **Quién decidió:** Carlos (Líder).
