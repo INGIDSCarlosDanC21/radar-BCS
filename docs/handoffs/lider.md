@@ -16,7 +16,7 @@
 ## Falta
 
 - Hora límite: el Local Lead confirmó de palabra que es **12:00** (sin documento escrito). Meta: enviar antes de las 11:00 del domingo.
-- Decidir si se tacha al integrante menor de 18 en `docs/referencia/plan-radar-paceno.md` (aparece por nombre de pila y con la tarea de narrar el video, que no puede hacer). Ver `docs/decisiones.md`.
+- Revisar el docx original `docs/referencia/originales/Radar_Paceno_Space_Apps_La_Paz.docx`: el plan ya se tachó, pero el original sigue siendo público en el repo y podría nombrar al integrante menor de 18. Decidir si se quita del repo.
 - Pedir la Web Filter Classification del sitio (recomendada para sitios nuevos) y marcarla en `docs/entrega/03-project-link.md`.
 - IA: solo Claude (confirmado). Si se agrega voz o imagen generada, declararla en `docs/entrega/05-use-of-ai.md` con marca de agua.
 - Pegar el enlace único de la demo en `docs/entrega/02-demo-link.md` cuando exista, y probarlo sin sesión iniciada.
