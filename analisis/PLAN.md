@@ -29,3 +29,9 @@ Código generado con IA (Claude); revisar antes de citar cifras.
 - Registrar MODIS/AppEEARS como "Usado" solo tras descargar.
 
 Probar: `python -m analisis.appeears descargar` y luego `python -m analisis.exportar`.
+
+## Verificación cruzada con el punto de la tarea del pipeline (24.14 N, -110.31 O)
+Es otro píxel que los de las 6 zonas, así que no se compara valor por valor; solo la señal. Informativo, no entra a `indicadores.json`.
+- LST: -0.030 °C/año, -0.72 °C en 2001-2025, p = 0.0235, significativa (1142 lecturas válidas).
+- NDVI: -0.0009/año, -0.023 en total, p = 0.00017, significativa, pero solo 188 de 576 lecturas pasan el filtro (150 meses sin dato): poco fiable.
+- Conclusión: el signo coincide con las zonas (la temperatura de superficie MODIS no sube y el NDVI baja); sigue sin coincidir con el aire de POWER.
