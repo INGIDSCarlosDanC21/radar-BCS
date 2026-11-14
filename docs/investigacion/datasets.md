@@ -1,6 +1,6 @@
 # Datasets NASA previstos
 
-Fuente: documento del equipo "Radar Paceño" (`docs/referencia/originales/Radar_Paceno_Space_Apps_La_Paz.docx`), sección "Datos NASA". Según el documento, todos son abiertos y gratuitos y se descargan con NASA Earthdata (AppEEARS) o Google Earth Engine. URLs exactas: PENDIENTE (el documento no las trae).
+Fuente: documento del equipo "Radar Paceño" (original del equipo, no publicado en el repositorio), sección "Datos NASA". Según el documento, todos son abiertos y gratuitos y se descargan con NASA Earthdata (AppEEARS) o Google Earth Engine. URLs exactas: PENDIENTE (el documento no las trae).
 
 | Variable | Dataset | Resolución | Límite |
 |---|---|---|---|
