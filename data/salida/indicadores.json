@@ -1,0 +1,328 @@
+{
+ "version_contrato": "0.1",
+ "datos_de_prueba": false,
+ "generado": "2026-11-14",
+ "generado_con": "analisis/exportar.py (código generado con IA: sí, Claude)",
+ "periodo": {
+  "inicio": 2001,
+  "fin": 2025
+ },
+ "indicadores": [
+  {
+   "id": "calor",
+   "titulo": "Calor",
+   "variable": "Temperatura del aire a 2 m (NASA POWER T2M)",
+   "unidades": "°C",
+   "cambio_total": 1.465,
+   "cambio_total_nota": "pendiente de Sen por año × 24 intervalos anuales (2001-2025); estimación, no medición",
+   "tendencia_por_decada": 0.611,
+   "por_decada": [
+    {
+     "decada": "2001-2010",
+     "media": 24.239
+    },
+    {
+     "decada": "2011-2020",
+     "media": 25.13
+    },
+    {
+     "decada": "2021-2025",
+     "media": 25.194
+    }
+   ],
+   "significancia": {
+    "metodo": "Mann-Kendall estacional + pendiente de Sen",
+    "p_valor": 0.0,
+    "alfa": 0.05,
+    "significativo": true
+   },
+   "serie_anual": [
+    {
+     "anio": 2001,
+     "valor": 23.897
+    },
+    {
+     "anio": 2002,
+     "valor": 24.143
+    },
+    {
+     "anio": 2003,
+     "valor": 24.237
+    },
+    {
+     "anio": 2004,
+     "valor": 24.033
+    },
+    {
+     "anio": 2005,
+     "valor": 24.138
+    },
+    {
+     "anio": 2006,
+     "valor": 24.647
+    },
+    {
+     "anio": 2007,
+     "valor": 24.109
+    },
+    {
+     "anio": 2008,
+     "valor": 24.298
+    },
+    {
+     "anio": 2009,
+     "valor": 24.694
+    },
+    {
+     "anio": 2010,
+     "valor": 24.198
+    },
+    {
+     "anio": 2011,
+     "valor": 24.578
+    },
+    {
+     "anio": 2012,
+     "valor": 24.626
+    },
+    {
+     "anio": 2013,
+     "valor": 24.621
+    },
+    {
+     "anio": 2014,
+     "valor": 25.613
+    },
+    {
+     "anio": 2015,
+     "valor": 25.577
+    },
+    {
+     "anio": 2016,
+     "valor": 25.493
+    },
+    {
+     "anio": 2017,
+     "valor": 25.354
+    },
+    {
+     "anio": 2018,
+     "valor": 25.335
+    },
+    {
+     "anio": 2019,
+     "valor": 24.872
+    },
+    {
+     "anio": 2020,
+     "valor": 25.231
+    },
+    {
+     "anio": 2021,
+     "valor": 25.195
+    },
+    {
+     "anio": 2022,
+     "valor": 24.799
+    },
+    {
+     "anio": 2023,
+     "valor": 25.186
+    },
+    {
+     "anio": 2024,
+     "valor": 25.383
+    },
+    {
+     "anio": 2025,
+     "valor": 25.407
+    }
+   ],
+   "fuente": {
+    "url": "https://power.larc.nasa.gov/docs/services/api/temporal/monthly/",
+    "resolucion": "reanálisis MERRA-2, ~50 km (no es medición local)",
+    "dataset": "NASA POWER Monthly (MERRA-2), parámetro T2M, community AG",
+    "periodo": "2001-2025",
+    "fecha_descarga": "2026-11-14"
+   },
+   "limitacion": "Es temperatura del aire, no de la superficie (LST). Pendiente: MODIS MOD11A2 (requiere cuenta Earthdata)."
+  },
+  {
+   "id": "vegetacion",
+   "titulo": "Vegetación",
+   "variable": null,
+   "unidades": null,
+   "cambio_total": null,
+   "cambio_total_nota": null,
+   "tendencia_por_decada": null,
+   "por_decada": [],
+   "significancia": {
+    "metodo": null,
+    "p_valor": null,
+    "alfa": null,
+    "significativo": null
+   },
+   "serie_anual": [],
+   "fuente": null,
+   "limitacion": "Pendiente: MODIS MOD13Q1 (NDVI, requiere cuenta Earthdata)."
+  },
+  {
+   "id": "lluvia",
+   "titulo": "Lluvia",
+   "variable": "Precipitación corregida (NASA POWER PRECTOTCORR), total anual",
+   "unidades": "mm/año",
+   "cambio_total": 0.0,
+   "cambio_total_nota": "pendiente de Sen por año × 24 intervalos anuales (2001-2025); estimación, no medición",
+   "tendencia_por_decada": 0.0,
+   "por_decada": [
+    {
+     "decada": "2001-2010",
+     "media": 221.232
+    },
+    {
+     "decada": "2011-2020",
+     "media": 304.071
+    },
+    {
+     "decada": "2021-2025",
+     "media": 332.366
+    }
+   ],
+   "significancia": {
+    "metodo": "Mann-Kendall estacional + pendiente de Sen",
+    "p_valor": 0.1782,
+    "alfa": 0.05,
+    "significativo": false
+   },
+   "serie_anual": [
+    {
+     "anio": 2001,
+     "valor": 329.89
+    },
+    {
+     "anio": 2002,
+     "valor": 136.88
+    },
+    {
+     "anio": 2003,
+     "valor": 335.65
+    },
+    {
+     "anio": 2004,
+     "valor": 261.64
+    },
+    {
+     "anio": 2005,
+     "valor": 166.04
+    },
+    {
+     "anio": 2006,
+     "valor": 254.97
+    },
+    {
+     "anio": 2007,
+     "valor": 192.69
+    },
+    {
+     "anio": 2008,
+     "valor": 168.66
+    },
+    {
+     "anio": 2009,
+     "valor": 251.12
+    },
+    {
+     "anio": 2010,
+     "valor": 114.78
+    },
+    {
+     "anio": 2011,
+     "valor": 103.68
+    },
+    {
+     "anio": 2012,
+     "valor": 322.03
+    },
+    {
+     "anio": 2013,
+     "valor": 229.12
+    },
+    {
+     "anio": 2014,
+     "valor": 452.64
+    },
+    {
+     "anio": 2015,
+     "valor": 301.28
+    },
+    {
+     "anio": 2016,
+     "valor": 295.42
+    },
+    {
+     "anio": 2017,
+     "valor": 272.44
+    },
+    {
+     "anio": 2018,
+     "valor": 438.33
+    },
+    {
+     "anio": 2019,
+     "valor": 501.75
+    },
+    {
+     "anio": 2020,
+     "valor": 124.02
+    },
+    {
+     "anio": 2021,
+     "valor": 372.05
+    },
+    {
+     "anio": 2022,
+     "valor": 320.37
+    },
+    {
+     "anio": 2023,
+     "valor": 471.84
+    },
+    {
+     "anio": 2024,
+     "valor": 155.88
+    },
+    {
+     "anio": 2025,
+     "valor": 341.69
+    }
+   ],
+   "fuente": {
+    "url": "https://power.larc.nasa.gov/docs/services/api/temporal/monthly/",
+    "resolucion": "reanálisis MERRA-2, ~50 km (no es medición local)",
+    "dataset": "NASA POWER Monthly (MERRA-2), parámetro PRECTOTCORR, community AG",
+    "periodo": "2001-2025",
+    "fecha_descarga": "2026-11-14"
+   },
+   "limitacion": "Lluvia concentrada en pocos meses y con muchos ceros; la pendiente de Sen puede quedar cerca de 0. Dato de reanálisis, no de pluviómetro. Pendiente de la serie mensual (mm/mes) x 12 = mm/año."
+  },
+  {
+   "id": "agua",
+   "titulo": "Agua",
+   "variable": null,
+   "unidades": null,
+   "cambio_total": null,
+   "cambio_total_nota": null,
+   "tendencia_por_decada": null,
+   "por_decada": [],
+   "significancia": {
+    "metodo": null,
+    "p_valor": null,
+    "alfa": null,
+    "significativo": null
+   },
+   "serie_anual": [],
+   "fuente": null,
+   "limitacion": "Pendiente: GRACE/GLDAS (tendencia regional)."
+  }
+ ]
+}
