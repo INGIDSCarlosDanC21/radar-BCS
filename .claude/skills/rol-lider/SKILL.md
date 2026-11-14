@@ -43,14 +43,14 @@ Antes: abrir la URL pública sin sesión iniciada y comprobar las 4 pantallas en
 - [ ] Textos de la web revisados: lenguaje sencillo, sin causalidad (con Investigación y UI/UX).
 - [ ] Guion del demo definido (`docs/entrega/08-demo-draft.md`); grabación en marcha.
 
-**Dom 15 nov 09:00. Entrega en borrador**
+**Dom 15 nov 11:00. Entrega en borrador**
 - [ ] `docs/entrega/` completo en inglés; demo final (diapositivas ≤7 o video ≤30 s con subtítulos en inglés) lista.
 - [ ] `main` actualizado y probado sin sesión iniciada; celular de demo cargado y plan B (capturas o video).
 
-**Dom 15 nov 11:00. "Submit for Judging"**
+**Dom 15 nov 13:00. "Submit for Judging"**
 - [ ] Formulario completo en la plataforma, **Lock** activado y "Submit for Judging" pulsado con una hora de margen.
 - [ ] Banner de confirmación visto; enlaces verificados sin sesión iniciada.
 
-**Dom 15 nov 12:00. Cierre de entregas de la sede. Sin excepciones**
+**Dom 15 nov 14:00. Cierre de entregas de la sede. Sin excepciones**
 (Hora de la sede: dato dado por Carlos, sin documento escrito; la plataforma global cierra a las 23:59. La hora de la evaluación del jurado está POR CONFIRMAR.)
 - [ ] No editar ni reenviar después del cierre.
