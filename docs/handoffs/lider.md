@@ -16,7 +16,7 @@
 ## Falta
 
 - Hora límite: el Local Lead confirmó de palabra que es **12:00** (sin documento escrito). Meta: enviar antes de las 11:00 del domingo.
-- Historial de git: el nombre del integrante menor de 18 sigue en commits anteriores (el `.docx` ya se borró de `main` y `dev`). Limpiarlo exige reescribir historia y `force push`; Carlos decide cuándo, coordinando con el equipo. Ver `docs/decisiones.md`.
+- **Mañana, después de enviar el proyecto:** limpiar el nombre del integrante menor de 18 del historial de git (reescribir historia y `force push`, coordinado con el equipo: todos deben clonar de nuevo) y pedir a GitHub Support que purgue las referencias de los PR. Decidido por Carlos el 2026-11-14: no influye en la entrega, así que se hace después. Hoy el nombre ya no está en el árbol de `main` ni de `dev`.
 - Pedir la Web Filter Classification del sitio (recomendada para sitios nuevos) y marcarla en `docs/entrega/03-project-link.md`.
 - IA: solo Claude (confirmado). Si se agrega voz o imagen generada, declararla en `docs/entrega/05-use-of-ai.md` con marca de agua.
 - Pegar el enlace único de la demo en `docs/entrega/02-demo-link.md` cuando exista, y probarlo sin sesión iniciada.
