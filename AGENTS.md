@@ -17,7 +17,7 @@ La herramienta debe responder cuatro preguntas (confirmadas en la página oficia
 | ¿Qué cambia? | 1. Inicio | 4 tarjetas: calor, vegetación, lluvia, agua |
 | ¿Dónde? | 2. Mapa | Zonas de La Paz con más cambio |
 | ¿Cuánto? | 3. Ficha | Cambio total desde 2001 y por década |
-| ¿Es estadísticamente significativo? | 3. Ficha | Mann-Kendall estacional (corrección Hirsch-Slack) + pendiente de Sen |
+| ¿Es estadísticamente significativo? | 3. Ficha | Mann-Kendall estacional + pendiente de Sen (no llamarlo Hirsch-Slack; ver `docs/investigacion/metodo.md`) |
 | (extra) ¿Qué hago? | 4. Acciones | Consejos contra el calor y para ahorrar agua |
 
 Detalle completo: `docs/referencia/` (documentos del evento convertidos a Markdown).
@@ -36,8 +36,8 @@ Detalle completo: `docs/referencia/` (documentos del evento convertidos a Markdo
 | Persona | GitHub | Rol | Skill | Carpetas propias |
 |---|---|---|---|---|
 | Carlos | INGIDSCarlosDanC21 | Líder + Investigación/ciencia | `rol-lider`, `rol-investigacion` | `docs/`, `equipo/` |
-| Diego | DiegoCareaga946 | Programador A: datos y tendencias (Python) | `rol-programador-a` | `analisis/`, `data/` |
-| Luca | luca6874 | Programador B: web, mapa, fichas, GitHub Pages | `rol-programador-b` | `web/` |
+| Luca | luca6874 | Programador A: datos y tendencias (Python) | `rol-programador-a` | `analisis/`, `data/` |
+| Diego | DiegoCareaga946 | Programador B: web, mapa, fichas, GitHub Pages | `rol-programador-b` | `web/` |
 | Ehileen | Ehileen22 | UI/UX: interfaz, logotipo, assets | `rol-ui-ux` | `web/assets/`, `diseno/` |
 
 Cada rol edita solo sus carpetas. Si necesitas tocar la de otro, abre un issue o PR y avisa.

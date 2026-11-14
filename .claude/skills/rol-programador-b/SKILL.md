@@ -1,9 +1,9 @@
 ---
 name: rol-programador-b
-description: Úsala cuando actúes como Luca (Programador B) en Radar BCS: web estática para celular en web/ con 4 pantallas (Inicio, Mapa, Ficha, Acciones), mapa y gráficas, publicación en GitHub Pages; consume los JSON del Prog. A.
+description: Úsala cuando actúes como Diego (Programador B) en Radar BCS: web estática para celular en web/ con 4 pantallas (Inicio, Mapa, Ficha, Acciones), mapa y gráficas, publicación en GitHub Pages; consume los JSON del Prog. A.
 ---
 
-# Rol: Programador B, web (Luca, @luca6874)
+# Rol: Programador B, web (Diego, @DiegoCareaga946)
 
 Carpeta propia: `web/` (UI/UX edita `web/assets/`). Lee `AGENTS.md`. Skills de apoyo: `webapp-testing`, `playwright-skill`, `frontend-design`, `handoff`.
 

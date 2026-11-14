@@ -11,8 +11,8 @@ Proyecto del **NASA Space Apps Challenge 2026, sede La Paz, México**. Reto: *Be
 | Persona | GitHub | Rol |
 |---|---|---|
 | Carlos | [@INGIDSCarlosDanC21](https://github.com/INGIDSCarlosDanC21) | Líder + investigación/ciencia |
-| Diego | [@DiegoCareaga946](https://github.com/DiegoCareaga946) | Programador A: datos y tendencias (Python) |
-| Luca | [@luca6874](https://github.com/luca6874) | Programador B: web, mapa, fichas, GitHub Pages |
+| Luca | [@luca6874](https://github.com/luca6874) | Programador A: datos y tendencias (Python) |
+| Diego | [@DiegoCareaga946](https://github.com/DiegoCareaga946) | Programador B: web, mapa, fichas, GitHub Pages |
 | Ehileen | [@Ehileen22](https://github.com/Ehileen22) | UI/UX: interfaz, logotipo, assets |
 
 ## Cómo empezar
@@ -34,9 +34,9 @@ Las claves van en `.env` (copia de `.env.example`), que nunca se sube.
 
 | Carpeta | Contenido | Dueño |
 |---|---|---|
-| `web/` | Sitio (4 pantallas) y `web/assets/` | Luca / Ehileen |
-| `analisis/` | Scripts de datos y estadística (Mann-Kendall, Sen) | Diego |
-| `data/` | Datos procesados pequeños; lo pesado va en Drive | Diego |
+| `web/` | Sitio (4 pantallas) y `web/assets/` | Diego / Ehileen |
+| `analisis/` | Scripts de datos y estadística (Mann-Kendall, Sen) | Luca |
+| `data/` | Datos procesados pequeños; lo pesado va en Drive | Luca |
 | `diseno/` | Paleta, bocetos, logotipo | Ehileen |
 | `docs/` | Documentación, handoffs, borradores de entrega, investigación | Carlos |
 | `equipo/` | Mensajes de inicio por persona | Carlos |

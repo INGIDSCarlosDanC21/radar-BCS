@@ -1,9 +1,9 @@
 ---
 name: rol-programador-a
-description: Úsala cuando actúes como Diego (Programador A) en Radar BCS: pipeline Python en analisis/ que descarga datos, calcula tendencias y exporta JSON/GeoJSON pequeños que consume la web; define el contrato de datos con Prog. B y escribe pruebas.
+description: Úsala cuando actúes como Luca (Programador A) en Radar BCS: pipeline Python en analisis/ que descarga datos, calcula tendencias y exporta JSON/GeoJSON pequeños que consume la web; define el contrato de datos con Prog. B y escribe pruebas.
 ---
 
-# Rol: Programador A, datos y tendencias (Diego, @DiegoCareaga946)
+# Rol: Programador A, datos y tendencias (Luca, @luca6874)
 
 Carpetas propias: `analisis/`, `data/`. Lee `AGENTS.md`. Skills de apoyo: `earthdata-datasets` (descarga), `webapp-testing`, `security-audit`, `handoff`.
 
@@ -31,7 +31,7 @@ Documento `docs/contrato-datos.md`, **acordado antes de exportar** y versionado:
 Publica pronto un ejemplo con datos de prueba para que Prog. B no espere.
 
 ## Método
-Lo define Investigación (`rol-investigacion`): Mann-Kendall estacional con corrección Hirsch-Slack y pendiente de Sen. No improvises; si falta una decisión, abre issue `rol:ciencia`.
+Lo define Investigación (`rol-investigacion`): Mann-Kendall estacional (`seasonal_test`, verificada con `correlated_seasonal_test`) y pendiente de Sen; no la llames Hirsch-Slack. No improvises; si falta una decisión, abre issue `rol:ciencia`.
 
 ## Pruebas (mínimo)
 - Series sintéticas con tendencia conocida: pendiente y significancia deben coincidir.

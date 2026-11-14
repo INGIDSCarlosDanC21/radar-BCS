@@ -3,30 +3,34 @@
 ## Hecho
 
 - Rúbrica confirmada: es la guía global (5 criterios, 1 a 5). Ver `docs/decisiones.md`.
-- Hora límite de la sede anotada: domingo 15 nov, 12 pm. Ver `docs/decisiones.md`.
-- Borrador de entrega en inglés en `docs/entrega/01` a `07` (resumen de 138 palabras; resultados en TODO).
-- `docs/bitacora.md` creada; `docs/RECURSOS.md` con fuentes y uso de IA de hoy.
+- Horarios oficiales del domingo anotados: evaluación del jurado **17:00**; la diapositiva oficial dice **23:59** para subir el proyecto, contradice el "mediodía" que confirmó de palabra el Local Lead (sin documento escrito; rige 12:00).
+- Formato de demo decidido: **video de 30 s con subtítulos en inglés**.
+- Entrega en inglés `docs/entrega/01` a `07` completada con lo verificado: enlaces de datasets comprobados, URL del sitio, resultados preliminares de NASA POWER, uso de IA real y librerías con licencia.
+- `docs/bitacora.md`, `docs/RECURSOS.md`, `docs/investigacion/hallazgos.md` y `metodo.md` al día.
 
 ## En curso
 
-- Issue #2 (entrega): faltan enlaces de datasets, demo, sitio publicado y resultados.
+- Demo (video): la desarrolla el equipo; guion en `docs/entrega/08-demo-draft.md`.
+- Issue #2: quedan solo los TODO que dependen de otros (ver abajo).
 
 ## Falta
 
-- ~~Actualizar `AGENTS.md` y la skill `rol-lider` con el calendario adelantado~~ (hecho).
-- Confirmar con la sede la hora de la evaluación del jurado.
-- Issue #3: decidir formato de demo (7 diapositivas o video de 30 s) y responsable.
-- Avisar al equipo del nuevo límite en el checkpoint de las 14:00.
+- Hora límite: el Local Lead confirmó de palabra que es **12:00** (sin documento escrito). Meta: enviar antes de las 11:00 del domingo.
+- **Mañana, después de enviar el proyecto:** limpiar el nombre del integrante menor de 18 del historial de git (reescribir historia y `force push`, coordinado con el equipo: todos deben clonar de nuevo) y pedir a GitHub Support que purgue las referencias de los PR. Decidido por Carlos el 2026-11-14: no influye en la entrega, así que se hace después. Hoy el nombre ya no está en el árbol de `main` ni de `dev`.
+- IA: solo Claude (confirmado). Si se agrega voz o imagen generada, declararla en `docs/entrega/05-use-of-ai.md` con marca de agua.
+- Pegar el enlace único de la demo en `docs/entrega/02-demo-link.md` cuando exista, y probarlo sin sesión iniciada.
+- Actualizar resultados de `docs/entrega/04-project-details.md` y `06-nasa-data.md` cuando lleguen MODIS y el pipeline final.
+- Avisar al equipo en el checkpoint de las 14:00: congelar funciones hoy a las 22:00.
 
 ## Bloqueos
 
-- Ninguno.
+- Ninguno técnico. La hora límite 12:00 solo está confirmada de palabra.
 
 ## Para otros roles
 
-- **Todos:** la entrega cierra el **domingo a mediodía**, no a las 23:59. Se congelan funciones el **sáb 14 nov a las 22:00**; el domingo solo bugs y entrega.
-- **Prog. A (Diego):** pasar los enlaces exactos de los datasets usados para `docs/entrega/06-nasa-data.md` y `docs/RECURSOS.md`.
-- **Prog. B (Luca):** pasar la URL pública del sitio en cuanto exista (`docs/entrega/03-project-link.md`).
+- **Todos:** congelamiento de funciones hoy sáb 14 nov a las 22:00; el domingo solo bugs y entrega. El límite que rige es 12:00 (confirmado de palabra por el Local Lead); planeen entregar antes de las 11:00.
+- **Prog. A (Luca):** avisar cuando MODIS esté analizado y qué datasets se usaron de verdad (`docs/entrega/06-nasa-data.md`, `docs/RECURSOS.md`).
+- **Prog. B (Diego):** cuando la web esté lista, avisar para volver a probar la URL pública (`docs/entrega/03-project-link.md`).
 - **UI/UX (Ehileen):** las cifras locales que se pueden usar en la web y con qué matiz están en `docs/investigacion/contexto-local.md`.
 
 Cómo revisar: `git diff --stat dev` debe mostrar solo `docs/`.
@@ -37,3 +41,4 @@ Cómo revisar: `git diff --stat dev` debe mostrar solo `docs/`.
 
 - Entorno del repo configurado.
 - Bloque 09:00-14:00: rúbrica, hora límite, fuentes verificadas, borrador de entrega, bitácora.
+- Tarde: horarios oficiales, formato de demo, entrega completada (issue #2), validación del método (issue #5).
