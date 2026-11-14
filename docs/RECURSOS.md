@@ -7,12 +7,12 @@ Todo recurso externo (código, texto, imágenes, datos, audio, modelos 3D) se an
 | Dataset | URL | Uso |
 |---|---|---|
 | NASA POWER, datos mensuales (MERRA-2), comunidad AG, API v2.10.0 | <https://power.larc.nasa.gov/docs/services/api/temporal/monthly/> | **Usado** (pipeline `analisis/`, issues #5 y #7; descargado el 2026-11-14): temperatura del aire a 2 m (T2M) y lluvia (PRECTOTCORR), La Paz (24.14 N, -110.31 O), 2001-2025; salida `data/salida/indicadores.json` |
-| MODIS MOD11A2 V061 (temperatura de superficie, 1 km) | <https://lpdaac.usgs.gov/products/mod11a2v061/> | Previsto; sin usar todavía |
-| MODIS MOD13Q1 V061 (NDVI, 250 m) | <https://lpdaac.usgs.gov/products/mod13q1v061/> | Previsto; sin usar todavía |
+| MODIS MOD11A2 V061 (temperatura de superficie, 1 km) | <https://lpdaac.usgs.gov/products/mod11a2v061/> | **Usado** (2026-11-14): LST de 6 zonas de La Paz 2001-2025 vía AppEEARS; filtros y resultado en `analisis/modis.py` |
+| MODIS MOD13Q1 V061 (NDVI, 250 m) | <https://lpdaac.usgs.gov/products/mod13q1v061/> | **Usado** (2026-11-14): NDVI de 6 zonas 2001-2025 vía AppEEARS; indicador `vegetacion` |
 | GRACE-FO / GLDAS (agua subterránea, regional) | <https://gracefo.jpl.nasa.gov/> y <https://ldas.gsfc.nasa.gov/gldas> | Previsto; sin usar todavía |
 | ECOSTRESS (70 m) | <https://ecostress.jpl.nasa.gov/> | Previsto; sin usar todavía |
 | NASADEM (relieve, 30 m) | <https://lpdaac.usgs.gov/products/nasadem_hgtv001/> | Previsto; sin usar todavía |
-| NASA Earthdata AppEEARS (herramienta de descarga) | <https://appeears.earthdatacloud.nasa.gov/> | Previsto; sin usar todavía |
+| NASA Earthdata AppEEARS (herramienta de descarga) | <https://appeears.earthdatacloud.nasa.gov/> | **Usado** (2026-11-14): extracción de puntos MODIS (`analisis/appeears.py`) |
 
 Enlaces comprobados el 2026-11-14 (responden y el título coincide con el producto).
 
