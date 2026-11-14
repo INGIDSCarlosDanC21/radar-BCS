@@ -171,9 +171,9 @@
    "titulo": "Lluvia",
    "variable": "Precipitación corregida (NASA POWER PRECTOTCORR), total anual",
    "unidades": "mm/año",
-   "cambio_total": 0.0,
-   "cambio_total_nota": "pendiente de Sen por año × 24 intervalos anuales (2001-2025); estimación, no medición",
-   "tendencia_por_decada": 0.0,
+   "cambio_total": null,
+   "cambio_total_nota": "No se detecta un cambio claro; por eso no se muestra una cifra de cambio.",
+   "tendencia_por_decada": null,
    "por_decada": [
     {
      "decada": "2001-2010",
@@ -189,8 +189,8 @@
     }
    ],
    "significancia": {
-    "metodo": "Mann-Kendall estacional + pendiente de Sen",
-    "p_valor": 0.1782,
+    "metodo": "Mann-Kendall sobre el total anual + pendiente de Sen",
+    "p_valor": 0.129,
     "alfa": 0.05,
     "significativo": false
    },
@@ -303,7 +303,7 @@
     "periodo": "2001-2025",
     "fecha_descarga": "2026-11-14"
    },
-   "limitacion": "Lluvia concentrada en pocos meses y con muchos ceros; la pendiente de Sen puede quedar cerca de 0. Dato de reanálisis, no de pluviómetro. Pendiente de la serie mensual (mm/mes) x 12 = mm/año."
+   "limitacion": "Lluvia concentrada en pocos meses y muy variable de un año a otro; la tendencia se calcula con el total anual. Dato de reanálisis (~50 km), no de pluviómetro."
   },
   {
    "id": "agua",
