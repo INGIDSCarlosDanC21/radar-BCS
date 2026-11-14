@@ -15,7 +15,7 @@ Pitch line (use in both options): **"Radar BCS turns NASA satellite data into an
 - Radar BCS: what is changing in La Paz, told with NASA data
 - Team OptiPaz · NASA Space Apps Challenge 2026 · La Paz, Mexico
 - Challenge: *Be An Earth System Trend Detective!*
-- Team members: Diego Careaga Celis, Carlos Daniel Castro Ochoa, Luca Alexander Reinaga Genesta, Ehileen Rocha Garcia, Nevid Septien Berrones, Roberto Vega Hernandez *(confirm everyone is registered in the platform and appears on the Members tab)*
+- Team members: Diego Careaga Celis, Carlos Daniel Castro Ochoa, Luca Alexander Reinaga Genesta, Ehileen Rocha Garcia, Roberto Vega Hernandez *(confirm everyone is registered in the platform and appears on the Members tab)*
 - Visual: Radar BCS logo.
 
 **Slide 2 — The local problem**
