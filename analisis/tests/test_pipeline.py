@@ -33,6 +33,14 @@ def test_sin_tendencia_no_es_significativa():
     assert abs(r["pendiente_por_anio"]) < 0.05
 
 
+def test_tendencia_anual_recupera_pendiente_y_sin_tendencia():
+    r = t.tendencia_anual(np.arange(ANIOS) * 2.0 + 100)
+    assert r["pendiente_por_anio"] == pytest.approx(2.0) and r["significativo"] is True
+    rng = np.random.default_rng(5)
+    assert t.tendencia_anual(rng.normal(100, 10, ANIOS))["significativo"] is False
+    assert t.tendencia_anual([1.0, np.nan, 2.0, 3.0, 4.0, 5.0, 6.0])["pendiente_por_anio"] == pytest.approx(1.0)
+
+
 def test_cambio_total_usa_intervalos():
     assert t.cambio_total(0.05, 2001, 2025) == pytest.approx(1.2)
 

@@ -3,7 +3,7 @@
 ## Hecho
 
 - Rúbrica confirmada: es la guía global (5 criterios, 1 a 5). Ver `docs/decisiones.md`.
-- Horarios oficiales del domingo anotados: evaluación del jurado **17:00**; la diapositiva oficial dice **23:59** para subir el proyecto, contradice el "mediodía" que confirmó de palabra el Local Lead (sin documento escrito; rige 12:00).
+- Horarios oficiales del domingo: evaluación del jurado **17:00**; hora límite oficial para subir el proyecto **23:59** (confirmada por Carlos).
 - Formato de demo decidido: **video de 30 s con subtítulos en inglés**.
 - Entrega en inglés `docs/entrega/01` a `07` completada con lo verificado: enlaces de datasets comprobados, URL del sitio, resultados preliminares de NASA POWER, uso de IA real y librerías con licencia.
 - `docs/bitacora.md`, `docs/RECURSOS.md`, `docs/investigacion/hallazgos.md` y `metodo.md` al día.
@@ -15,7 +15,7 @@
 
 ## Falta
 
-- Hora límite: según Carlos es **14:00** (antes se dijo 12:00; sin documento escrito). Meta: enviar a más tardar a las 13:00 del domingo; borrador completo a las 11:00.
+- Hora límite oficial: **domingo 23:59**. Meta interna: borrador completo a las 11:00 y enviar a más tardar a las 13:00, para practicar antes del jurado de las 17:00.
 - **Mañana, después de enviar el proyecto:** limpiar el nombre del integrante menor de 18 del historial de git (reescribir historia y `force push`, coordinado con el equipo: todos deben clonar de nuevo) y pedir a GitHub Support que purgue las referencias de los PR. Decidido por Carlos el 2026-11-14: no influye en la entrega, así que se hace después. Hoy el nombre ya no está en el árbol de `main` ni de `dev`.
 - IA: solo Claude (confirmado). Si se agrega voz o imagen generada, declararla en `docs/entrega/05-use-of-ai.md` con marca de agua.
 - Pegar el enlace único de la demo en `docs/entrega/02-demo-link.md` cuando exista, y probarlo sin sesión iniciada.
@@ -24,11 +24,11 @@
 
 ## Bloqueos
 
-- Ninguno técnico. La hora límite 14:00 solo es palabra de Carlos; falta respaldo escrito.
+- Ninguno técnico.
 
 ## Para otros roles
 
-- **Todos:** congelamiento de funciones hoy sáb 14 nov a las 22:00; el domingo solo bugs y entrega. El límite que rige es 14:00 (según Carlos); planeen entregar antes de las 13:00.
+- **Todos:** congelamiento de funciones hoy sáb 14 nov a las 22:00; el domingo solo bugs y entrega. Límite oficial 23:59; la meta del equipo es entregar antes de las 13:00.
 - **Prog. A (Luca):** avisar cuando MODIS esté analizado y qué datasets se usaron de verdad (`docs/entrega/06-nasa-data.md`, `docs/RECURSOS.md`).
 - **Prog. B (Diego):** cuando la web esté lista, avisar para volver a probar la URL pública (`docs/entrega/03-project-link.md`).
 - **UI/UX (Ehileen):** las cifras locales que se pueden usar en la web y con qué matiz están en `docs/investigacion/contexto-local.md`.

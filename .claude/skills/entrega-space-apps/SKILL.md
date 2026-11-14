@@ -8,8 +8,8 @@ description: Úsala al preparar o revisar la entrega oficial del NASA Space Apps
 Fuente: PDFs en `docs/referencia/originales/` ("Components of Project" y "Project Submission"). **Todo lo que se entrega va en inglés** (página del proyecto, enlace final, demo). Borradores en `docs/entrega/`; el Líder los pega en la plataforma.
 
 ## Fechas
-- Ventana: abre sáb 14 nov 09:00. La plataforma y la guía global dicen **23:59** (hora local), pero según Carlos **la sede cierra dom 15 nov a las 14:00** (antes se había dicho 12:00) (sin documento escrito; ver `docs/decisiones.md`). Rige 14:00.
-- Hay que pulsar **Submit for Judging a más tardar a las 13:00**. Lo guardado o enviado después no entra a juicio global; no hay excepciones ni ediciones tras el cierre. La marca de tiempo debe ser anterior al cierre.
+- Ventana: abre sáb 14 nov 09:00; **cierra dom 15 nov 23:59** (hora local). Confirmado por Carlos el 2026-11-14 como límite oficial; coincide con la plataforma y la diapositiva de horarios.
+- Hay que pulsar **Submit for Judging antes de las 23:59**; la meta interna del equipo es **13:00** para tener la tarde de práctica (el jurado evalúa a las 17:00). Lo guardado o enviado después del cierre no entra a juicio global; no hay excepciones ni ediciones tras el cierre.
 - Meta interna: entregar con margen; la evaluación del jurado es a las 17:00.
 
 ## Antes de enviar
