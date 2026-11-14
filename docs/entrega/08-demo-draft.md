@@ -3,7 +3,7 @@
 <!--
 Nota interna (español): borrador de la demo. Se elige UNA opción: diapositivas (máx. 7, la portada cuenta) o video (máx. 30 s, subtítulos en inglés). Solo un enlace público en la entrega.
 Reglas de la guía: la demo es de lo primero que ven los jueces globales. Debe incluir nombre del equipo, integrantes y reto; una imagen del proyecto; la experiencia del usuario; y cómo los datos abiertos y la tecnología de agencias espaciales hacen posible la solución.
-Todo lo marcado [FILL] depende de resultados reales que Diego/Luca aún no entregan: NO inventes números. Completa solo con salidas verificadas de `analisis/`.
+Todo lo marcado [FILL] depende de resultados reales que Luca/Diego aún no entregan: NO inventes números. Completa solo con salidas verificadas de `analisis/`.
 IA: imágenes o video generados llevan marca de agua visible "AI-generated"; la voz generada (ElevenLabs) se declara en docs/entrega/05-use-of-ai.md. Sin logos ni marca de la NASA. Sin menores de 18.
 -->
 

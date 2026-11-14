@@ -25,8 +25,8 @@
 ## Para otros roles
 
 - **Todos:** la entrega cierra el **domingo a mediodía**, no a las 23:59. Se congelan funciones el **sáb 14 nov a las 22:00**; el domingo solo bugs y entrega.
-- **Prog. A (Diego):** pasar los enlaces exactos de los datasets usados para `docs/entrega/06-nasa-data.md` y `docs/RECURSOS.md`.
-- **Prog. B (Luca):** pasar la URL pública del sitio en cuanto exista (`docs/entrega/03-project-link.md`).
+- **Prog. A (Luca):** pasar los enlaces exactos de los datasets usados para `docs/entrega/06-nasa-data.md` y `docs/RECURSOS.md`.
+- **Prog. B (Diego):** pasar la URL pública del sitio en cuanto exista (`docs/entrega/03-project-link.md`).
 - **UI/UX (Ehileen):** las cifras locales que se pueden usar en la web y con qué matiz están en `docs/investigacion/contexto-local.md`.
 
 Cómo revisar: `git diff --stat dev` debe mostrar solo `docs/`.

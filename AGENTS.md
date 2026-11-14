@@ -36,8 +36,8 @@ Detalle completo: `docs/referencia/` (documentos del evento convertidos a Markdo
 | Persona | GitHub | Rol | Skill | Carpetas propias |
 |---|---|---|---|---|
 | Carlos | INGIDSCarlosDanC21 | Líder + Investigación/ciencia | `rol-lider`, `rol-investigacion` | `docs/`, `equipo/` |
-| Diego | DiegoCareaga946 | Programador A: datos y tendencias (Python) | `rol-programador-a` | `analisis/`, `data/` |
-| Luca | luca6874 | Programador B: web, mapa, fichas, GitHub Pages | `rol-programador-b` | `web/` |
+| Luca | luca6874 | Programador A: datos y tendencias (Python) | `rol-programador-a` | `analisis/`, `data/` |
+| Diego | DiegoCareaga946 | Programador B: web, mapa, fichas, GitHub Pages | `rol-programador-b` | `web/` |
 | Ehileen | Ehileen22 | UI/UX: interfaz, logotipo, assets | `rol-ui-ux` | `web/assets/`, `diseno/` |
 
 Cada rol edita solo sus carpetas. Si necesitas tocar la de otro, abre un issue o PR y avisa.

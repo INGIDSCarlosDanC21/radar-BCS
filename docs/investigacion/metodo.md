@@ -1,6 +1,6 @@
 # Método estadístico
 
-Estado: **borrador del 2026-11-14**. Las decisiones marcadas PENDIENTE se acuerdan con Prog. A (Diego) antes de publicar cifras.
+Estado: **borrador del 2026-11-14**. Las decisiones marcadas PENDIENTE se acuerdan con Prog. A (Luca) antes de publicar cifras.
 
 ## ¿El método responde las 4 preguntas del reto?
 
@@ -39,7 +39,7 @@ Reportado por subagente a partir del README del repositorio (no releído por el 
 - Artículo: Hussain, M. M. y Mahmud, I. (2019). pyMannKendall: a python package for non parametric Mann Kendall family of trend tests. *Journal of Open Source Software*, 4(39), 1556. DOI 10.21105/joss.01556
 - Funciones: `seasonal_test` (cita a Hirsch, Slack y Smith, 1982), `correlated_seasonal_test` y `seasonal_sens_slope`.
 
-**Hallazgo que hay que resolver.** El README atribuye `correlated_seasonal_test` y `seasonal_sens_slope` a **Hipel y McLeod (1994)**, no a Hirsch y Slack (1984). Además hay issues abiertos en el repositorio sobre esa función (#23, sobre la varianza; #36, sobre `alpha`). Por lo tanto, **no escribir todavía "corrección de Hirsch-Slack" como hecho sobre nuestro código**. PENDIENTE (Carlos + Diego): leer el código de `correlated_seasonal_test` y confirmar que calcula la covarianza entre estaciones de Hirsch y Slack; si no se puede confirmar, la web y la entrega dirán "prueba Mann-Kendall estacional corregida por correlación serial (`pymannkendall.correlated_seasonal_test`)" y se citará lo que cite el paquete.
+**Hallazgo que hay que resolver.** El README atribuye `correlated_seasonal_test` y `seasonal_sens_slope` a **Hipel y McLeod (1994)**, no a Hirsch y Slack (1984). Además hay issues abiertos en el repositorio sobre esa función (#23, sobre la varianza; #36, sobre `alpha`). Por lo tanto, **no escribir todavía "corrección de Hirsch-Slack" como hecho sobre nuestro código**. PENDIENTE (Carlos + Luca): leer el código de `correlated_seasonal_test` y confirmar que calcula la covarianza entre estaciones de Hirsch y Slack; si no se puede confirmar, la web y la entrega dirán "prueba Mann-Kendall estacional corregida por correlación serial (`pymannkendall.correlated_seasonal_test`)" y se citará lo que cite el paquete.
 
 ## Decisiones PENDIENTES
 
