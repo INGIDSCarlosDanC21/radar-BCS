@@ -26,11 +26,14 @@ Radar BCS is a free website for phones, with no installation, written in Spanish
 
 Every number on the site shows its data source. The site shows what changed, not why. A trend does not prove its cause, and we do not claim one.
 
-Results to fill in once the analysis is done:
+<!-- Nota interna: resultados PRELIMINARES de NASA POWER, reproducidos por el Lider (docs/investigacion/hallazgos.md, issue #5). Actualizar con el pipeline final de Luca antes de enviar; si algun numero cambia, cambiarlo aqui. -->
 
-- Size of the change in temperature, vegetation, rainfall and water: TODO
-- Which changes are statistically significant, and which are not: TODO
-- Zones of La Paz with the most change: TODO
+Results so far (preliminary, NASA POWER monthly data, one point of about 50 km around La Paz, 2001-2025):
+
+- **Air temperature:** rose by about 0.06 °C per year, roughly 1.5 °C in total (a linear estimate, not a measurement). The change is statistically significant (p < 0.001).
+- **Rainfall:** varies a lot from year to year, and no clear change is detected (not statistically significant). Not detecting a change does not prove there is none.
+- Vegetation, land surface temperature and groundwater: TODO (waiting for the MODIS and GRACE/GLDAS analysis).
+- Zones of La Paz with the most change: TODO (needs the 1 km MODIS data; NASA POWER cannot tell zones apart).
 
 ## How does it work?
 
@@ -63,7 +66,7 @@ We hope residents of La Paz can see for themselves what has changed around them,
 ## Tools, coding languages, hardware and software
 
 - Data access: NASA Earthdata AppEEARS or Google Earth Engine; NASA POWER.
-- Analysis: Python (trend analysis).
+- Analysis: Python with the open-source libraries `pymannkendall` (trend tests), `numpy` and `requests`.
 - Website: web front end with a map and charts, published on GitHub Pages. TODO: list the exact libraries once the code is final.
 - Code and coordination: Git and GitHub. Large files (datasets, video, 3D, audio) are kept on Google Drive.
 - AI tools used during development: see the Use of AI section.
