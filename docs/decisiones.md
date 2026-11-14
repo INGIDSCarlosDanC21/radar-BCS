@@ -85,3 +85,10 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Pendiente:** pedir al Local Lead la hora por escrito (o ver si la plataforma muestra el cierre). Si Carlos aclara que las 14:00 es solo una meta interna del equipo y no un cambio de la sede, el límite sigue siendo 12:00 y el envío debe ser antes de las 11:00.
 - **Alternativas descartadas:** volver a 11:00 por precaución; Carlos prefirió dar tiempo de práctica.
 - **Quién decidió:** Carlos (Líder).
+
+### 2026-11-14 — Hora límite oficial: domingo 23:59 (reemplaza 12:00 y 14:00)
+
+- **Contexto:** se habían dicho de palabra las 12:00 y luego las 14:00. Carlos aclaró que la hora límite **oficial** es el domingo 15 de noviembre a las **23:59**, lo que coincide con la diapositiva oficial de horarios y con la guía global.
+- **Decisión:** el límite oficial es **23:59**. Se conserva como **meta interna** pulsar "Submit for Judging" a más tardar a las **13:00** (borrador completo a las 11:00), para que el equipo practique antes de la evaluación del jurado (17:00). El congelamiento de funciones (sáb 22:00) no cambia.
+- **Cierra el pendiente** de conseguir la hora por escrito: ya hay documento (diapositiva oficial). Reemplaza las entradas "12:00" y "14:00".
+- **Quién decidió:** Carlos (Líder).

@@ -15,7 +15,7 @@ Confirm it does not require a password, permission, or registration to access yo
 Also from "Project Submission": slide decks and projects must be in English; videos must be 30 seconds or less; slide decks 7 slides maximum; no images, video, audio or likeness of persons under 18.
 -->
 
-<!-- Nota interna: solo UN enlace. La demo se esta desarrollando (guion en 08-demo-draft.md, opcion B). Formato decidido el 2026-11-14: video. Horas: el Lider dijo de palabra que la sede cierra el dom 15 nov a las 12:00, pero la diapositiva oficial de horarios dice 23:59 para subir el proyecto y 17:00 para la evaluacion; POR CONFIRMAR con el Local Lead (docs/decisiones.md). Meta: enviar a más tardar a las 13:00 (limite 14:00 segun Carlos el 2026-11-14). Un integrante es menor de 18: no se nombra, no se ve y no se oye en el video (regla 7). -->
+<!-- Nota interna: solo UN enlace. La demo se esta desarrollando (guion en 08-demo-draft.md, opcion B). Formato decidido el 2026-11-14: video. Horas: limite oficial dom 15 nov 23:59 (confirmado por Carlos); evaluacion del jurado 17:00. Meta interna: enviar a mas tardar a las 13:00. Un integrante es menor de 18: no se nombra, no se ve y no se oye en el video (regla 7). -->
 
 **Format chosen (slides or video):** Video, 30 seconds or less, with English subtitles.
 

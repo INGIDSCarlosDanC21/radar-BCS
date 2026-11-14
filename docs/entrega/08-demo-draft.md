@@ -88,4 +88,4 @@ Production checklist for the video:
 1. Real results from `analisis/` and real screens from `web/` (issues #7, #9, #11).
 2. Decide slides or video (video is faster to watch for judges; slides are easier to edit).
 3. Verify every local statistic and cite it, or leave it out.
-4. Local site deadline: Carlos says local submissions close **Sunday 14:00** (earlier said 12:00), earlier than the platform's 11:59 p.m. Confirm and plan the recording for Saturday night or Sunday morning.
+4. Deadline: the official platform deadline is **Sunday 23:59** (confirmed by Carlos). The team aims to submit by 13:00 to leave time to practice before the 17:00 judging. Plan the recording for Saturday night or Sunday morning.
