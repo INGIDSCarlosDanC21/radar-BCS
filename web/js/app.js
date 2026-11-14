@@ -9,16 +9,7 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
-  function num(n, d) {
-    return n.toLocaleString('es-MX', { minimumFractionDigits: d, maximumFractionDigits: d });
-  }
-  function dec(n) { var a = Math.abs(n); return a >= 10 ? 1 : a >= 1 ? 2 : 3; }
-  function signo(n, un) {
-    if (n == null) return 'sin datos';
-    var t = (n > 0 ? '+' : n < 0 ? '−' : '') + num(Math.abs(n), dec(n));
-    return t + ' ' + un;
-  }
-  function clase(n) { return n > 0 ? 'sube' : n < 0 ? 'baja' : ''; }
+  var num = RB.num, dec = RB.dec, pTexto = RB.pTexto, signo = RB.signo, clase = RB.clase;
   function etiqueta(s) {
     if (s === true) return ['Tendencia clara (estadísticamente significativa)', 'si'];
     if (s === false) return ['Sin tendencia clara', ''];
@@ -36,22 +27,24 @@
       fetch('data/zonas.geojson').then(ok)
     ]).then(function (r) { DATOS = r[0]; ZONAS = r[1]; });
   }
-  function franja() {
-    document.getElementById('franja').hidden = !(DATOS && DATOS.datos_de_prueba === true);
+  function franja(sec) {
+    document.getElementById('franja').hidden = !RB.mostrarFranja(DATOS, ZONAS, sec);
   }
 
   /* ---------- Inicio ---------- */
   function inicio() {
     var h = '<h1>Radar BCS</h1><p class="lead">Cómo han cambiado el calor, la vegetación, la lluvia y el agua en La Paz desde 2001, con datos abiertos de la NASA.</p><div class="tarjetas">';
     DATOS.indicadores.forEach(function (i) {
-      var e = etiqueta(sig(i));
+      var e = etiqueta(sig(i)), t = RB.textoCambio(i);
       h += '<a class="tarjeta" href="#ficha/' + esc(i.id) + '"><h2>' + esc(i.titulo) + '</h2>' +
-        '<div class="cifra ' + clase(i.cambio_total) + '">' + esc(signo(i.cambio_total, i.unidades)) + '</div>' +
-        '<p class="fuente">Periodo: ' + esc(i.fuente && i.fuente.periodo) + '</p>' +
+        '<div class="cifra ' + t.clase + '">' + esc(t.texto) + '</div>' +
+        '<p class="fuente">Periodo: ' + esc((i.fuente && i.fuente.periodo) || 'pendiente') + '</p>' +
         '<span class="etiqueta ' + e[1] + '">' + e[0] + '</span>' +
-        '<p class="fuente">Fuente: ' + esc(i.fuente && i.fuente.dataset) + '</p></a>';
+        '<p class="fuente">Fuente: ' + esc(RB.textoFuente(i)) + '</p>' +
+        (t.tipo === 'sin-datos' && i.limitacion ? '<p class="fuente">' + esc(i.limitacion) + '</p>' : '') + '</a>';
     });
-    main.innerHTML = h + '</div><p class="aviso">Mostramos qué cambió, no por qué. Una tendencia no prueba la causa.</p>';
+    main.innerHTML = h + '</div><p class="aviso">Mostramos qué cambió, no por qué. Una tendencia no prueba la causa.</p>' +
+      (DATOS.generado ? '<p class="fuente">Datos generados el ' + esc(DATOS.generado) + '</p>' : '');
   }
 
   /* ---------- Mapa ---------- */
@@ -148,7 +141,7 @@
     }
     r += '<p><a href="#ficha/' + esc(id) + '">Ver ficha de ' + esc(i.titulo.toLowerCase()) + '</a></p>';
     document.getElementById('resumen').innerHTML = r;
-    document.getElementById('fuente-mapa').textContent = 'Fuente: ' + (i.fuente && i.fuente.dataset) + '. Mapa base: © OpenStreetMap contributors.';
+    document.getElementById('fuente-mapa').textContent = 'Fuente: ' + RB.textoFuente(i) + '. Mapa base: © OpenStreetMap contributors.';
   }
 
   /* ---------- Ficha ---------- */
@@ -178,7 +171,6 @@
       '<p class="fuente">' + esc(desc) + '</p>';
   }
 
-  function pTexto(p, d) { return p < 0.001 ? '< 0.001' : num(p, d); }
   function conclusion(i) {
     var g = i.significancia || {}, p = g.p_valor, a = g.alfa;
     if (g.significativo === true && p != null && a != null) return 'Sí. La tendencia es clara: con p ' + (p < 0.001 ? '< 0.001' : '= ' + num(p, 2)) + ' (menor que alfa = ' + num(a, 2) + ') es poco probable que se deba solo al azar.';
@@ -188,15 +180,16 @@
 
   function ficha(id) {
     var i = ind(id) || ind('calor');
-    var f = i.fuente || {};
+    var f = i.fuente || {}, tc = RB.textoCambio(i);
     var h = '<a class="volver" href="#inicio">← Inicio</a><div class="pestanas" role="group" aria-label="Indicador">';
     IDS.forEach(function (k) {
       h += '<a class="chip" style="display:inline-flex;align-items:center;text-decoration:none" href="#ficha/' + k + '"' + (k === i.id ? ' aria-current="page"' : '') + '>' + esc(ind(k).titulo) + '</a>';
     });
     h += '</div><h1>' + esc(i.titulo) + '</h1><p class="fuente">' + esc(i.variable) + '</p>';
-    h += '<div class="bloque"><h2>Cambio total desde 2001</h2><div class="grande ' + clase(i.cambio_total) + '">' + esc(signo(i.cambio_total, i.unidades)) + '</div>' +
-      (i.cambio_total_nota ? '<p class="fuente">' + esc(i.cambio_total_nota) + '</p>' : '') +
-      '<p>Tendencia por década: <strong>' + esc(signo(i.tendencia_por_decada, i.unidades)) + '</strong></p></div>';
+    h += '<div class="bloque"><h2>Cambio total desde 2001</h2><div class="grande ' + tc.clase + '">' + esc(tc.texto) + '</div>' +
+      (tc.tipo === 'sin-cambio' ? '<p class="fuente">No se detecta un cambio claro; por eso no se muestra una cifra de cambio.</p>' :
+        i.cambio_total_nota ? '<p class="fuente">' + esc(i.cambio_total_nota) + '</p>' : '') +
+      '<p>Tendencia por década: <strong>' + esc(tc.tipo === 'sin-cambio' ? 'Sin cambio claro' : signo(i.tendencia_por_decada, i.unidades)) + '</strong></p></div>';
     h += '<div class="bloque"><h2>Media por década</h2>';
     var dd = i.por_decada || [], mx = 0;
     dd.forEach(function (x) { if (x.media != null) mx = Math.max(mx, Math.abs(x.media)); });
@@ -214,7 +207,7 @@
       '<p>Método: ' + esc(g.metodo || 'sin calcular') + '. Compara cada mes del año con los mismos meses de otros años y ve si el dato sube o baja de forma consistente; la pendiente de Sen estima cuánto cambia por año.</p>' +
       '<p>p-valor: ' + (g.p_valor != null ? esc(pTexto(g.p_valor, 3)) : 'sin calcular') + ' · alfa: ' + (g.alfa != null ? esc(num(g.alfa, 2)) : 'sin dato') +
       '. Si p es menor que alfa, la tendencia se considera clara.</p></div>';
-    h += '<div class="bloque"><h2>Fuente</h2><p><strong>' + esc(f.dataset) + '</strong></p><p>' +
+    h += '<div class="bloque"><h2>Fuente</h2><p><strong>' + esc(RB.textoFuente(i)) + '</strong></p><p>' +
       (f.url ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.url) + '</a><br>' : '') +
       'Resolución: ' + esc(f.resolucion || 'sin dato') + '<br>Periodo: ' + esc(f.periodo || 'sin dato') + '<br>Fecha de descarga: ' + esc(f.fecha_descarga || 'sin dato') + '</p>' +
       (i.limitacion ? '<p><strong>Limitación:</strong> ' + esc(i.limitacion) + '</p>' : '') + '</div>';
@@ -255,6 +248,7 @@
       if (a.getAttribute('data-nav') === sec) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     if (!DATOS) return;
+    franja(sec);
     if (sec === 'inicio') inicio();
     else if (sec === 'mapa') mapaVista();
     else if (sec === 'ficha') ficha(h[1]);
@@ -263,7 +257,7 @@
   }
   var prev = null;
   window.addEventListener('hashchange', function () { ruta(); window.scrollTo(0, 0); });
-  cargar().then(function () { franja(); ruta(); }).catch(function (e) {
+  cargar().then(function () { ruta(); }).catch(function (e) {
     main.innerHTML = '<div class="error" role="alert"><h2>No se pudieron cargar los datos</h2><p>Detalle: ' + esc(e.message) +
       '.</p><p>Si abriste el archivo con doble clic (file://), no funciona: usa un servidor local, por ejemplo <code>python -m http.server -d web 8000</code> y abre http://localhost:8000.</p></div>';
   });
