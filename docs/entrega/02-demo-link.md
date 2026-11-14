@@ -15,9 +15,11 @@ Confirm it does not require a password, permission, or registration to access yo
 Also from "Project Submission": slide decks and projects must be in English; videos must be 30 seconds or less; slide decks 7 slides maximum; no images, video, audio or likeness of persons under 18.
 -->
 
-**Format chosen (slides or video):** TODO
+<!-- Nota interna: solo UN enlace. Aun no existe demo en el repo. Plan: video de 30 s o menos con subtitulos en ingles, o max. 7 diapositivas (la portada cuenta). Recordatorio: la sede local cierra entregas el dom 15 nov a las 12:00 (hora local), confirmado por el Lider; la plataforma cierra a las 23:59. Sin menores de 18. -->
 
-**Public link (ONE only):** TODO
+**Format chosen (slides or video):** TODO: choose one (slides, max 7 including title slide, or video, 30 seconds or less with English subtitles)
+
+**Public link (ONE only):** TODO: upload the demo and paste one public link
 
 - [ ] Opens without password, permission or registration (tested while logged out)
 - [ ] No names, voices or likenesses of anyone under 18

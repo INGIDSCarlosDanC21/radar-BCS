@@ -10,18 +10,28 @@ This question is required and will be used for data-collection purposes only; yo
 Also from "Project Submission": images and videos that are generated content need a visible watermark indicating they are SI-generated. Generated code and data must acknowledge generation in descriptive text and metadata.
 -->
 
-Source of truth while drafting: `docs/RECURSOS.md`, section "Uso de IA". Fill this file only with what was actually used.
+<!-- Nota interna: segun docs/RECURSOS.md, solo Claude Code figura como "Usado". Codex, Tripo3D, ElevenLabs y Gemini figuran como "Previsto": confirmar antes de seleccionarlos en el menu. El plan menciona Claude, Codex, Tripo3D y ElevenLabs; RECURSOS.md agrega Gemini. Imagen/video generados llevan marca visible "AI-generated". -->
 
 ## Tools selected in the drop-down menu
 
-TODO
+- Claude Code (used).
+- TODO: Codex (planned, for delegated tasks): confirm whether it was used.
+- TODO: Tripo3D (planned, 3D terrain model): confirm whether it was used.
+- TODO: ElevenLabs (planned, voice for the video): confirm whether it was used.
+- TODO: Gemini (planned, images and text): confirm whether it was used.
 
 ## Where and how each tool was used
 
-TODO
+- Claude Code: repository setup, documentation and code. Used across the whole repository.
+- Codex: planned for delegated tasks. TODO: where it was actually used.
+- Tripo3D: planned for a 3D model (terrain). TODO: where it was actually used.
+- ElevenLabs: planned for voice or narration of the demo video. TODO: where it was actually used.
+- Gemini: planned for images and text. TODO: where it was actually used.
+- Third-party skills and plugins used as development tools: listed in docs/skills-terceros.md. TODO: summarize if needed.
 
 ## Watermarks / metadata indicators in the project
 
-TODO
+- Generated images and video carry a visible "AI-generated" watermark. TODO: confirm once the assets exist.
+- Generated code and data are acknowledged in descriptive text and metadata. TODO: confirm the exact wording in the repository and data files.
 
 - [ ] No NASA logos, flags or mission identifiers in generated content

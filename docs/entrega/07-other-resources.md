@@ -10,14 +10,16 @@ Provide links for all of the data and resources used in your project.
 Resources should include any code, text, and images (even if they are open source or freely available) that you used when creating your project."
 -->
 
-Source of truth while drafting: `docs/RECURSOS.md`, section "Otros datos y recursos".
+<!-- Nota interna: docs/RECURSOS.md (Otros datos y recursos) esta vacio. No hay recursos externos registrados todavia; no inventar. Agregar aqui todo codigo, texto, imagen, audio y modelo 3D externo conforme se use, aunque sea libre. La rubrica es la guia global de jurado https://www.spaceappschallenge.org/resources/judging-awards-guide/ (solo interno, no va en la plataforma). -->
 
 ## Space Agency Partner data (optional)
 
-TODO
+TODO: none planned in the repository. Add only if partner agency data is used.
 
 ## Other references: code, text, images, data, audio, 3D
 
 | Name | Link | License | Where used |
 |---|---|---|---|
-| TODO | TODO | TODO | TODO |
+| Radar BCS source code (our own work) | https://github.com/INGIDSCarlosDanC21/radar-BCS | Apache-2.0 | Whole project |
+| TODO: libraries for analysis and the website | TODO | TODO | TODO |
+| TODO: icons, images, fonts, audio, 3D models | TODO | TODO | TODO |
