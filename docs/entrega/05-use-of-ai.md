@@ -22,7 +22,7 @@ Also from "Project Submission": images and videos that are generated content nee
 
 ## Where and how each tool was used
 
-- Claude Code: repository setup, documentation and code. Used across the whole repository.
+- Claude Code (Anthropic's AI coding assistant, including smaller Claude models as helpers): repository setup; searching and checking sources for the local context; drafting documentation and the English submission drafts; and writing the trend-analysis prototype code (`analisis/prototipo_power.py`). A team member reviewed the results, reproduced the numbers independently, and checked the sources by opening them.
 - Codex: planned for delegated tasks. TODO: where it was actually used.
 - Tripo3D: planned for a 3D model (terrain). TODO: where it was actually used.
 - ElevenLabs: planned for voice or narration of the demo video. TODO: where it was actually used.

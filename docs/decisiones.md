@@ -45,3 +45,27 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Hecho:** `AGENTS.md` y la skill `rol-lider` ya tienen estas horas. La hora de la evaluación del jurado con el nuevo cierre no se ha confirmado.
 - **Alternativas descartadas:** mantener el calendario original (dejaba el congelamiento a la misma hora del cierre).
 - **Quién decidió:** Carlos (Líder).
+
+### 2026-11-14 — Horarios oficiales del domingo: contradicen el cierre a mediodía
+
+- **Contexto:** Carlos compartió la diapositiva oficial "Horarios del evento, domingo 15 de noviembre" de NASA International Space Apps Challenge La Paz 2026 (sede: Comunidad Educativa Juan Pablo II). Dice: 06:00 permisos para abandonar o reincorporarse al recinto; **17:00 evaluación del jurado**; 21:00 cierre del recinto; **23:59 hora límite para subir el proyecto a la plataforma**.
+- **Decisión:**
+  - La **evaluación del jurado es el domingo a las 17:00** (ya con documento).
+  - La hora límite en la plataforma que muestra el documento es **23:59**, no las 12:00 que se dijo de palabra. **Las dos fuentes se contradicen y está POR CONFIRMAR con el Local Lead cuál rige.**
+  - Mientras no se aclare, **se mantiene el calendario adelantado**: pulsar "Submit for Judging" a más tardar el domingo a las 11:00. Cumple con cualquiera de las dos horas y deja el proyecto entregado seis horas antes de que evalúe el jurado.
+- **Alternativas descartadas:** volver al calendario original de golpe, porque la hora de las 12:00 podría ser real; y quedarse solo con las 12:00, porque el documento escrito dice otra cosa.
+- **Quién decidió:** Carlos (Líder) aportó el documento; la decisión de mantener la entrega a las 11:00 es del Líder asistido por Claude, por reversible y prudente.
+
+### 2026-11-14 — La demo será un video de 30 segundos
+
+- **Contexto:** issues #3 y #13 pedían elegir entre diapositivas (máx. 7) y video (máx. 30 s con subtítulos en inglés).
+- **Decisión:** **video de 30 s o menos, con subtítulos en inglés.** La demo la está desarrollando el equipo; el guion de la opción B está en `docs/entrega/08-demo-draft.md`.
+- **Alternativas descartadas:** diapositivas. Ventaja perdida: se editan hasta el último minuto. Riesgo del video: un error de subtítulos obliga a regrabar; por eso se graba con margen antes de las 09:00 del domingo.
+- **Quién decidió:** Carlos (Líder).
+
+### 2026-11-14 — Un integrante es menor de edad: no aparece en la demo ni en el proyecto
+
+- **Contexto:** el requisito oficial de la demo dice: "Do NOT include names, voices, or likenesses of anyone under the age of 18" (`docs/referencia/envio-del-proyecto.md`; regla 7 de `AGENTS.md`). Carlos informó que **un integrante es menor de edad** y que el resto son mayores.
+- **Decisión:** esa persona **no se nombra ni se muestra ni se oye** en el video, las diapositivas, las capturas, la página del proyecto ni los textos de entrega. Puede seguir registrada en la pestaña *Members* de la plataforma, que es un requisito de elegibilidad. Por privacidad **no se anota aquí quién es**.
+- **Pendiente:** quitar su nombre de la lista de integrantes de `docs/entrega/08-demo-draft.md` (diapositiva 1) y revisar que no figure en ningún otro texto. Carlos dirá a quién se refiere o hará el cambio, porque ese borrador lo está editando él.
+- **Quién decidió:** Carlos (Líder).
