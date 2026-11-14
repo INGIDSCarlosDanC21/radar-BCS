@@ -29,7 +29,7 @@ La guía insiste: dedica tiempo a la **presentación** igual que a los otros cua
 
 La NASA revisa a los equipos para detectar **actividad bilateral prohibida con China o con entidades de propiedad china** (gobierno, empresas, universidades constituidas en China, incluidos Hong Kong y Macao) para decidir la elegibilidad en la ronda global. La NASA decide a su discreción con la información que declare el equipo. El texto remite a los Participant Terms and Conditions sobre cómo la afiliación china afecta ser Global Winner.
 
-No sabemos si usar herramientas de IA de empresas chinas cuenta como actividad bilateral. **Hasta confirmarlo con el Local Lead, el equipo no usa servicios de empresas chinas** (DeepSeek, Qwen/Alibaba, Kimi, GLM/Zhipu, MiniMax, LongCat/Meituan, MiMo/Xiaomi). Ver regla 10 de `AGENTS.md`. También conviene revisar si alguna fuente de datos o herramienta de terceros es de entidades chinas.
+No sabemos si usar herramientas de IA de empresas chinas cuenta como actividad bilateral, y no está confirmado con la sede. El Líder decidió permitirlas (regla 10 de `AGENTS.md`), con la condición de **declararlas siempre**: la revisión de la NASA se basa en la información que da el equipo y ocultar una herramienta sería declarar en falso. También conviene revisar si alguna fuente de datos o herramienta de terceros es de entidades chinas.
 
 ## Fases y fechas
 
