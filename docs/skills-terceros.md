@@ -15,7 +15,7 @@ Escaneo = SkillSpector 2.12.0, modo estatico (`--no-llm`). Puntuacion 0-100 (mas
 | handoff | mattpocock/skills (`skills/productivity/handoff`) | 5863806 | MIT | todos | 0 LOW, sin hallazgos |
 | frontend-design | anthropics/skills | 1780c5e | Apache-2.0 | UI-UX | 13 LOW, 1 FP |
 | webapp-testing | anthropics/skills | 1780c5e | Apache-2.0 | Prog A-B / UI-UX | 49 MEDIUM, FP (nota 6) |
-| ui-ux-pro-max | nextlevelbuilder/ui-ux-pro-max-skill (`.claude/skills/ui-ux-pro-max`) | d643997 | MIT | UI-UX | Escaneo SkillSpector **sin terminar** tras >1 h (muchos CSV grandes; tambien se probo una copia reducida sin `data/`). Revision manual: los 20 `.py` no usan red, `subprocess`, `eval/exec` ni `base64`; solo leen `COLORTERM`. Sin hallazgos manuales |
+| ui-ux-pro-max | nextlevelbuilder/ui-ux-pro-max-skill (`.claude/skills/ui-ux-pro-max`) | d643997 | MIT | UI-UX | 94 CRITICAL, 13 hallazgos, todos FP: escaneo de copia sin `data/` (el escaneo completo no termino por los CSV grandes); los 2 HIGH estan en tests unitarios (`dict(os.environ)` para quitar una clave en un test, "overwrite rule" en un comentario). Revision manual: los scripts no usan red, `subprocess`, `eval/exec` ni `base64` |
 | impeccable | pbakaus/impeccable (`.claude/skills/impeccable`) | 1995764 | Apache-2.0 | UI-UX | 100 CRITICAL, 52 hallazgos, todos FP (nota 1) |
 | design-taste-frontend | Leonxlnx/taste-skill (`skills/taste-skill`) | f6b7657 | MIT | UI-UX | 96 CRITICAL, 27 hallazgos, todos FP (nota 2) |
 | animate | emilkowalski/skills | 0f2e23b | MIT | UI-UX | 0 LOW |
