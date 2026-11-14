@@ -8,7 +8,9 @@ Confirm it does not require a password, permission, or registration to access yo
 Also from "Project Submission": the final project link must be in written English.
 -->
 
-**Project link (public site / repository):** TODO
+<!-- Nota interna: el sitio publicado (GitHub Pages) aun no tiene URL registrada en el repo. -->
+
+**Project link (public site / repository):** TODO: URL of the published website
 
 **Repository:** https://github.com/INGIDSCarlosDanC21/radar-BCS
 
