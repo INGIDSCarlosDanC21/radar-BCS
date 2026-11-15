@@ -23,6 +23,10 @@ TODO: none planned in the repository. Add only if partner agency data is used.
 | Radar BCS source code (our own work) | https://github.com/INGIDSCarlosDanC21/radar-BCS | Apache-2.0 | Whole project |
 | pyMannKendall (Hussain and Mahmud, 2019, Journal of Open Source Software, DOI 10.21105/joss.01556) | https://github.com/mmhs013/pyMannKendall | MIT | Seasonal Mann-Kendall tests and Sen's slope in the analysis |
 | NumPy | https://numpy.org/ | BSD-3-Clause | Numerical work in the analysis |
-| Requests | https://requests.readthedocs.io/ | Apache-2.0 | Downloading NASA POWER data |
-| TODO: libraries for the website | TODO | TODO | TODO |
+| Requests | https://requests.readthedocs.io/ | Apache-2.0 | Downloading NASA POWER data and MODIS data through the AppEEARS API |
+| Leaflet 1.9.4 | https://leafletjs.com/ | BSD-2-Clause | Interactive map on the website |
+| OpenStreetMap tiles | https://www.openstreetmap.org/copyright | ODbL (attribution "© OpenStreetMap contributors" shown on the map) | Map background |
+| CDC, *Five Steps to help your patients stay safe on hot days* | https://www.cdc.gov/heat-health/media/pdfs/2025/09/Five-Heat-Steps-factsheet-508.pdf | Official site; cited only | Heat tips on the Actions screen |
+| EPA WaterSense, *Start Saving* | https://www.epa.gov/watersense/start-saving | Official site; cited only | Water-saving tips on the Actions screen |
+| pytest | https://docs.pytest.org/ | MIT | Tests of the analysis code (development only) |
 | TODO: icons, images, fonts, audio, 3D models | TODO | TODO | TODO |

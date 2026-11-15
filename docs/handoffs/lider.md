@@ -42,3 +42,8 @@ Cómo revisar: `git diff --stat dev` debe mostrar solo `docs/`.
 - Entorno del repo configurado.
 - Bloque 09:00-14:00: rúbrica, hora límite, fuentes verificadas, borrador de entrega, bitácora.
 - Tarde: horarios oficiales, formato de demo, entrega completada (issue #2), validación del método (issue #5).
+
+## Pedidos del Líder tras revisar MODIS (2026-11-14)
+
+- **Luca (Prog. A):** sube a Drive (`datasets/`) los CSV de AppEEARS de las 6 zonas, para que Investigación reproduzca las cifras. Revisa por qué la superficie baja en El Centenario y Sur (calidad 0b01, hora de paso) antes de que se cite.
+- **Diego (Prog. B):** la tarjeta y la ficha de Calor deben mostrar la `limitacion` junto a la cifra (aire sube, superficie sin cambio claro, no sabemos por qué). Frases en `docs/investigacion/hallazgos.md`. Copia la salida nueva de `data/salida/` a `web/data/` cuando lo revises.

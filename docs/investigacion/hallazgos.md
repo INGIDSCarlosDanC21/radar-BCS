@@ -26,9 +26,38 @@ Fuente de todo lo de esta página: NASA POWER, datos mensuales (MERRA-2), comuni
 - **Límites:** reanálisis de ~50 km; con 25 años y esta variación, un cambio pequeño no se detectaría; no capta eventos extremos.
 - **Frase para la web:** "La lluvia en La Paz cambia mucho de un año a otro. Entre 2001 y 2025 no se detecta un cambio claro (no es estadísticamente significativo). Esto describe qué cambió, no por qué. Fuente: NASA POWER."
 
+## MODIS por zona: revisión de Investigación (2026-11-14)
+
+Origen: `data/salida/indicadores.json` y `zonas_tendencias.json` (Luca, PR #50), 6 puntos de La Paz (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), 2001-2025, Mann-Kendall estacional + Sen. **Investigación no reprodujo estas cifras:** los CSV de AppEEARS están fuera de git (`data/cache/`); se revisó el código (`analisis/modis.py`) y las salidas. Pendiente: que Luca comparta los CSV (Drive) o que alguien corra `python -m analisis.exportar` con ellos.
+
+### Resultados (como salen del pipeline)
+
+| Indicador | Cambio 2001-2025 | p | Significativo | Meses sin dato |
+|---|---|---|---|---|
+| Calor, aire (POWER T2M) | +1.465 °C | < 0.001 | Sí | 0 |
+| Calor, superficie de día (MODIS LST, promedio de 6 puntos) | -0.02 °C por año (≈ -0.5 °C) | 0.11 | No | 0 |
+| Vegetación (MODIS NDVI, promedio de 6 puntos) | -0.019 | < 0.001 | Sí | varía (ver abajo) |
+| Lluvia (POWER, total anual) | sin cifra | 0.129 | No | 0 |
+
+Por punto: el NDVI baja de forma significativa en Centro (-0.034), Chametla (-0.034), El Centenario (-0.047) y Surponiente (-0.050), y no cambia de forma clara en Oriente y Sur. La temperatura de superficie baja de forma significativa en El Centenario (-1.30 °C) y Sur (-1.26 °C) y no cambia de forma clara en los otros cuatro.
+
+### Lo que hay que decir con honestidad
+
+1. **El aire y la superficie no coinciden.** El aire sube de forma clara; la superficie vista por el satélite no. Son mediciones distintas (el aire a 2 m es un reanálisis de ~50 km; la superficie es una lectura de día de 1 km en un instante). **No elegir la que "cuenta mejor la historia":** la web muestra las dos juntas y dice que no sabemos por qué difieren.
+2. **No interpretar todavía la baja de -1.3 °C en El Centenario y Sur.** Es un resultado inesperado y puede ser un efecto de los datos (esos puntos solo tienen calidad MODLAND 0b01; el filtro de calidad cambia con el tiempo; la hora de paso del satélite). No es evidencia de que esas zonas "se enfríen". Hay que revisarlo antes de citarlo en la demo.
+3. **El NDVI urbano pierde muchos meses al filtrar** (167 de 300 en Centro, 30 en Surponiente). Al promediar los 6 puntos, la composición cambia con los meses sin dato y eso puede sesgar la tendencia. Que sea significativo no quiere decir que sea preciso.
+4. **Son 6 puntos, no zonas.** Las celdas del mapa siguen siendo sintéticas. Nada de esto responde "¿dónde?" para toda la ciudad.
+5. **Causa:** nada de esto dice por qué cambió la vegetación o el calor.
+
+### Frases propuestas para la web (sin causalidad)
+
+- **Calor:** "El aire en La Paz se calentó cerca de 1.5 °C entre 2001 y 2025 (cambio estadísticamente significativo; reanálisis de NASA POWER, ~50 km). La temperatura de la superficie que mide el satélite MODIS no muestra un cambio claro en el mismo periodo. Son dos mediciones distintas y no sabemos por qué no coinciden. Esto describe qué cambió, no por qué."
+- **Vegetación:** "El índice de vegetación (NDVI) bajó un poco entre 2001 y 2025 en seis puntos de la ciudad, y el cambio es estadísticamente significativo. Algunos meses no tienen lectura válida en zonas urbanas, así que es un panorama aproximado. Esto describe qué cambió, no por qué. Fuente: MODIS (NASA)."
+
 ---
 
-## Pendiente (no hay datos todavía)
+## Pendiente
 
-- Temperatura de superficie y vegetación por zona (MODIS): responderán "¿dónde?".
-- Agua subterránea (GRACE/GLDAS): solo tendencia regional.
+- Reproducir las cifras de MODIS con los CSV de AppEEARS (Luca los comparte por Drive).
+- Revisar por qué la superficie baja en El Centenario y Sur.
+- Agua subterránea (GRACE/GLDAS): solo tendencia regional; no empezada.
