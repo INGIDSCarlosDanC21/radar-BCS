@@ -72,3 +72,16 @@ test('reglas en inglés: sin cambio, unidades y método', () => {
   T.setLang('es');
   assert.equal(RB.signo(1.5, 'mm/año'), '+1.50 mm/año');
 });
+
+test('calor por zona (opción B): nota de Aqua visible, orientativo y sin "tendencia clara"', () => {
+  for (const l of ['es', 'en']) {
+    const d = T.DIC[l];
+    assert.match(d['mapa.calor.nota'], /Aqua/, l + ': la nota nombra Aqua');
+    assert.match(d['mapa.calor.nota'], /2001-2021/, l + ': la nota da el periodo de Terra');
+    assert.match(d['mapa.calor.tit'], l === 'es' ? /orientativo/ : /indicative/);
+    assert.match(d['mapa.calor.que'], l === 'es' ? /aire/ : /air/, l + ': aclara que la ficha es el aire');
+  }
+  const app = readFileSync(new URL('../js/app.js', import.meta.url), 'utf8');
+  assert.match(app, /calor: \{[^}]*orientativo: true[^}]*periodoZonas: true/, 'la capa de calor es orientativa y usa el periodo de las zonas');
+  assert.ok(!/cfg\.nota\) r \+= '<p class="nota-limite">'[\s\S]{0,40}<\/ol>/.test(app), 'la nota no queda escondida tras la lista');
+});
