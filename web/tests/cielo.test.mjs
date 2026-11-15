@@ -135,3 +135,12 @@ test('tarjetas, pines e imagen se vuelven a pedir juntos cada 10 minutos', async
     globalThis.setTimeout = real; globalThis.clearTimeout = realClear;
   }
 });
+
+test('la imagen GOES-West pide un cuadro con TIME (sin TIME, GIBS devuelve uno viejo: de noche aunque sea de día)', () => {
+  const ahora = Date.UTC(2026, 10, 15, 15, 43, 20);
+  assert.equal(CL.tiempoGoes(ahora, 0), '2026-11-15T15:00:00Z', 'ahora menos 40 min, redondeado a 10');
+  assert.equal(CL.tiempoGoes(ahora, 2), '2026-11-15T14:40:00Z', 'cada intento retrocede 10 min');
+  assert.equal(CL.tiempoGoes(Date.UTC(2026, 10, 15, 0, 20), 0), '2026-11-14T23:40:00Z', 'cruza la medianoche UTC');
+  assert.match(CL.urlGoes(ahora, 0), /GOES-West_ABI_GeoColor_v0_NRT[\s\S]*&TIME=2026-11-15T15:00:00Z$/);
+  assert.match(CL.marcoMapa('alt'), /src="[^"]*&TIME=\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:00Z"/, 'la imagen inicial ya lleva TIME');
+});

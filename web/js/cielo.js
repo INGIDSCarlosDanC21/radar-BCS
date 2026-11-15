@@ -37,6 +37,14 @@
   var GOES = 'https://gibs.earthdata.nasa.gov/wms/epsg4326/nrt/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0' +
     '&LAYERS=GOES-West_ABI_GeoColor_v0_NRT&STYLES=&CRS=EPSG:4326&BBOX=22.8,-115.3,28.1,-109.3&WIDTH=1200&HEIGHT=1060&FORMAT=image/jpeg';
   var VIEJO_MIN = 60;
+  /* GIBS sin TIME devuelve un cuadro viejo (de noche aunque sea de día; visto el 2026-11-15). Se pide el último cuadro publicado:
+     ahora menos 40 min (retraso medido de GOES-West), redondeado a 10 min, y hacia atrás si ese cuadro no existe. */
+  function tiempoGoes(ahoraMs, atras) {
+    var q = 10 * 60000, d = new Date(Math.floor((ahoraMs - 40 * 60000) / q) * q - (atras || 0) * q);
+    function p(n) { return (n < 10 ? '0' : '') + n; }
+    return d.getUTCFullYear() + '-' + p(d.getUTCMonth() + 1) + '-' + p(d.getUTCDate()) + 'T' + p(d.getUTCHours()) + ':' + p(d.getUTCMinutes()) + ':00Z';
+  }
+  function urlGoes(ahoraMs, atras) { return GOES + '&TIME=' + tiempoGoes(ahoraMs, atras); }
 
   /* Código WMO de Open-Meteo -> ícono y texto (web/assets/iconos/cielo/README.md). */
   var ESTADOS = {
@@ -166,7 +174,7 @@
       '<div class="hm-sec-cab"><h2 id="hm-cielo-h">' + t('cielo.h2') + '</h2></div><p class="cl-estado">' + t('cielo.cargando') + '</p></section>';
   }
   function marcoMapa(altMODIS) {
-    return '<div class="cl-lienzo"><img class="cl-img" src="' + GOES + '" width="1200" height="1060" alt="' + esc(t('cielo.altGoes')) + '" ' +
+    return '<div class="cl-lienzo"><img class="cl-img" src="' + urlGoes(Date.now(), 0) + '" width="1200" height="1060" alt="' + esc(t('cielo.altGoes')) + '" ' +
       'data-respaldo="img/bcs-modis-2025-04-20.jpg" data-alt-respaldo="' + esc(altMODIS) + '">' +
       '<div class="cl-pines" id="hm-cielo-pines"></div></div>' +
       '<div class="cl-leyenda" id="hm-cielo-leyenda">' + leyenda() + '</div>';
@@ -183,7 +191,7 @@
       var sec = raiz.querySelector('#hm-cielo');
       if (!sec || (sec.isConnected === false)) return; // ya se salió de Inicio
       var img = raiz.querySelector('.cl-img');
-      if (img && img.src.indexOf('gibs') >= 0) img.src = GOES + '&_=' + Math.floor(Date.now() / (CADA_MIN * 60000));
+      if (img && img.src.indexOf('gibs') >= 0) img.src = urlGoes(Date.now(), 0) + '&_=' + Math.floor(Date.now() / (CADA_MIN * 60000));
       cargar(raiz, opciones);
     }, ms);
   }
@@ -204,7 +212,9 @@
     opciones = opciones || {};
     if (!raiz || typeof raiz.querySelector !== 'function') return Promise.resolve(false);
     var sec = raiz.querySelector('#hm-cielo'), pin = raiz.querySelector('#hm-cielo-pines'), img = raiz.querySelector('.cl-img');
-    if (img) img.onerror = function () { // si GIBS no responde, la imagen MODIS fija
+    var atras = 0;
+    if (img) img.onerror = function () { // si el cuadro no existe, uno anterior (hasta 4); si GIBS no responde, la imagen MODIS fija
+      if (atras < 4 && img.src.indexOf('gibs') >= 0) { atras++; img.src = urlGoes(Date.now(), atras); return; }
       img.onerror = null; img.src = img.getAttribute('data-respaldo'); img.alt = img.getAttribute('data-alt-respaldo');
       var ins = raiz.querySelector('.hm-insignia'); if (ins) ins.lastChild.nodeValue = t('home.insignia');
       var cr = raiz.querySelector('.hm-cred'); if (cr) cr.textContent = t('home.cred');
@@ -229,7 +239,7 @@
 
   var RBCielo = { LUGARES: LUGARES, ESTADOS: ESTADOS, grupo: grupo, estado: estado, url: url, posicion: posicion, unir: unir,
     minutosDesde: minutosDesde, seccion: seccion, pines: pines, leyenda: leyenda, marcoSeccion: marcoSeccion, marcoMapa: marcoMapa,
-    cargar: cargar, datos: datos, uvCat: uvCat, rumbo: rumbo, num: num, icono: icono, GOES: GOES, CADA_MIN: CADA_MIN };
+    cargar: cargar, datos: datos, uvCat: uvCat, rumbo: rumbo, num: num, icono: icono, GOES: GOES, urlGoes: urlGoes, tiempoGoes: tiempoGoes, CADA_MIN: CADA_MIN };
   if (typeof window !== 'undefined') window.RBCielo = RBCielo;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBCielo;
 })();
