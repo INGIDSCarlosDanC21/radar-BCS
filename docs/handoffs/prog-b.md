@@ -42,6 +42,14 @@
   - **Datos nuevos copiados una sola vez** (punto 4 de la cola de `docs/PLAN-CIERRE.md`): `web/data/{indicadores.json,zonas.geojson,zonas_tendencias.json}` son copia exacta de `data/salida/` (una prueba nueva lo exige). Calor +0.935 °C 2001-2021 (p < 0.001); vegetación −0.013 NDVI 2001-2026 (p = 0.004).
   - **Calor por zona con cifra:** se quitó el "sin cifra"; 4 zonas con tendencia clara (Chametla +1.50, Oriente +1.10, Centro +1.09, Surponiente +0.897 °C) y 2 sin cambio claro (Sur, El Centenario), con nota del corte en 2021.
   - **Arreglos:** el pie del mapa toma el periodo de cada capa (vegetación decía 2001–2021, que es el de calor); la conclusión de la ficha mostraba "p = 0.00" en vegetación por redondear a 2 decimales, ahora usa 3 como el resto; la Home dice "p < 0.001" en vez de "p = < 0.001".
+- **Issue #93, versión en inglés** (rama `prog-b/ingles`):
+  - `web/js/textos.js`: diccionario ES/EN en un solo archivo. `RBT.t(clave)` da los textos de la interfaz y `RBT.d(obj, campo)` usa `campo_en` de los datos de Luca. Lo usan `app.js`, `home.js` y `reglas.js`; los textos fijos de `index.html` llevan `data-t`.
+  - **Cómo se elige el idioma:** `?lang=en` abre en inglés; sin parámetro, en español. El idioma del navegador no cuenta. `<html lang>` cambia. El botón "English / Español" de la cabecera conserva la pantalla (el hash).
+  - **Probado a 360 px con `?lang=en`:** Inicio, Mapa, las 4 fichas y Acciones, sin líneas en español, sin scroll horizontal y sin null. Pruebas en `web/tests/textos.test.mjs`.
+  - **Arreglo de paso:** la barra inferior tenía 4 columnas para 5 enlaces y "Acciones" caía a otra fila; ahora tiene 5.
+  - **Mapa Agrícola en inglés:** `agricola.js` tiene su propio diccionario y lee los campos `*_en` que ahora escribe `armar_agricola.py`. Al JSON solo se le agregaron campos `_en` (comprobado quitándolos y comparando con `dev`); lo tradujo un subagente Sonnet y lo revisé.
+  - **Resumen de la ficha Clima corregido:** decía calor "sin cambio claro" y vegetación −0.019 (2001-2025), con los datos de antes. Ahora sale de `indicadores.json` vigente (+0.94 °C 2001-2021; −0.013 NDVI 2001-2026), con la función `dictamen_indicadores` y una prueba que lo exige.
+  - **Falta:** que Ehileen y Roberto revisen el inglés (#93) y probar el login en inglés cuando entre el #77.
 
 ## En curso
 

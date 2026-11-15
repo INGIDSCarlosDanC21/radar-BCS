@@ -15,21 +15,22 @@
 <link rel="stylesheet" href="css/agricola.css">
 </head>
 <body>
-<a class="saltar" href="#contenido">Saltar al contenido</a>
+<a class="saltar" href="#contenido" data-t="html.saltar">Saltar al contenido</a>
 <div id="franja" class="franja" hidden></div>
-<header class="cabecera"><span class="marca">Radar BCS</span><span class="sub">La Paz, B.C.S.</span></header>
+<header class="cabecera"><span class="marca">Radar BCS</span><span class="sub">La Paz, B.C.S.</span><a id="idioma" class="idioma" href="?lang=en" lang="en" hreflang="en">English</a></header>
 <main id="contenido" tabindex="-1" aria-live="polite">
-  <p class="cargando">Cargando datos…</p>
+  <p class="cargando" data-t="html.cargando">Cargando datos…</p>
 </main>
-<footer class="pie">Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0<br><span class="pie-ia">Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch.</span></footer>
-<nav class="barra" aria-label="Secciones">
-  <a href="#inicio" data-nav="inicio"><span aria-hidden="true">●</span>Inicio</a>
-  <a href="#mapa" data-nav="mapa"><span aria-hidden="true">◧</span>Mapa</a>
-  <a href="#ficha/calor" data-nav="ficha"><span aria-hidden="true">≈</span>Ficha</a>
-  <a href="#agricola" data-nav="agricola"><span aria-hidden="true">❦</span>Agro</a>
-  <a href="#acciones" data-nav="acciones"><span aria-hidden="true">✓</span>Acciones</a>
+<footer class="pie"><span data-t="html.pie">Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0</span><br><span class="pie-ia" data-t="html.ia">Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch.</span></footer>
+<nav class="barra" aria-label="Secciones" data-t-aria="html.secciones">
+  <a href="#inicio" data-nav="inicio"><span aria-hidden="true">●</span><span data-t="nav.inicio">Inicio</span></a>
+  <a href="#mapa" data-nav="mapa"><span aria-hidden="true">◧</span><span data-t="nav.mapa">Mapa</span></a>
+  <a href="#ficha/calor" data-nav="ficha"><span aria-hidden="true">≈</span><span data-t="nav.ficha">Ficha</span></a>
+  <a href="#agricola" data-nav="agricola"><span aria-hidden="true">❦</span><span data-t="nav.agricola">Agro</span></a>
+  <a href="#acciones" data-nav="acciones"><span aria-hidden="true">✓</span><span data-t="nav.acciones">Acciones</span></a>
 </nav>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
+<script src="js/textos.js"></script>
 <script src="js/reglas.js"></script>
 <script src="js/home.js"></script>
 <script src="js/agricola.js"></script>
