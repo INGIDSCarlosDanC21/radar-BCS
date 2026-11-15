@@ -200,18 +200,18 @@ export const LUGARES = 38;
 // "desde" = segundo del clip donde empieza a usarse.
 export type Clip = { archivo: string; desde: number };
 export const CLIPS = {
-  barra: { archivo: 'clips/barra.mp4', desde: 4.2 },
+  barra: { archivo: 'clips/barra.mp4', desde: 0.6 },
   cielo: { archivo: 'clips/inicio-cielo.mp4', desde: 0.3 },
-  calorSim: { archivo: 'clips/calor-simulacion.mp4', desde: 2.2 },
+  calorSim: { archivo: 'clips/calor-simulacion.mp4', desde: 3 },
   calorFicha: { archivo: 'clips/calor-ficha.mp4', desde: 0.5 },
-  lluvia: { archivo: 'clips/lluvia-ficha.mp4', desde: 2.0 },
-  lugares: { archivo: 'clips/lugares.mp4', desde: 2.0 },
-  satelite: { archivo: 'clips/clima-satelite.mp4', desde: 4.0 },
-  imerg: { archivo: 'clips/clima-satelite.mp4', desde: 11.0 },
-  simSat: { archivo: 'clips/sim-satelite.mp4', desde: 9.8 },
+  lluvia: { archivo: 'clips/lluvia-ficha.mp4', desde: 3 },
+  lugares: { archivo: 'clips/lugares.mp4', desde: 3 },
+  satelite: { archivo: 'clips/clima-satelite.mp4', desde: 4 },
+  imerg: { archivo: 'clips/clima-satelite.mp4', desde: 11.5 },
+  simSat: { archivo: 'clips/sim-satelite.mp4', desde: 10 },
   capas: { archivo: 'clips/lugares.mp4', desde: 7.0 },
-  agricola: { archivo: 'clips/agricola.mp4', desde: 1.0 },
-  avisos: { archivo: 'clips/avisos.mp4', desde: 5.0 },
+  agricola: { archivo: 'clips/agricola.mp4', desde: 2 },
+  avisos: { archivo: 'clips/avisos.mp4', desde: 5 },
   // Escritorio (1440 x 900, DPR 2) para el laptop
   escInicio: { archivo: 'clips/esc-inicio.mp4', desde: 0.5 },
   escSatelite: { archivo: 'clips/esc-satelite.mp4', desde: 5.0 },

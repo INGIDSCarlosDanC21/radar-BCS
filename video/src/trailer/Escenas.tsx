@@ -433,11 +433,12 @@ export const Mapa: React.FC = () => {
 // ─── 6. FUNCIONES (frase 6): montaje rápido de la app real + "Not official warnings." ───────
 // Un corte cada 0.5 s (MONTAJE_FUNCIONES en guion.ts); cada plano con otro ángulo de cámara.
 const ANGULOS = [
-  { x: 1180, y: 560, ancho: 470, rotY: -22, rotX: 10, rotZ: -4 },
-  { x: 760, y: 540, ancho: 520, rotY: 20, rotX: 6, rotZ: 3 },
-  { x: 1240, y: 600, ancho: 600, rotY: -12, rotX: 18, rotZ: -7 },
-  { x: 860, y: 520, ancho: 450, rotY: 28, rotX: -4, rotZ: 4 },
-  { x: 1160, y: 560, ancho: 520, rotY: -30, rotX: 8, rotZ: 0 },
+  // teléfonos del montaje: altos de ~830 px para que no toquen el rótulo de arriba ni el subtítulo
+  { x: 1100, y: 600, ancho: 380, rotY: -22, rotX: 10, rotZ: -4 },
+  { x: 820, y: 600, ancho: 390, rotY: 20, rotX: 6, rotZ: 3 },
+  { x: 1120, y: 610, ancho: 380, rotY: -12, rotX: 18, rotZ: -7 },
+  { x: 860, y: 600, ancho: 380, rotY: 28, rotX: -4, rotZ: 4 },
+  { x: 1100, y: 600, ancho: 390, rotY: -30, rotX: 8, rotZ: 0 },
 ];
 export const Funciones: React.FC = () => {
   const t = useSeg();
@@ -463,9 +464,9 @@ export const Funciones: React.FC = () => {
             <Laptop
               key={plano.clip + idx}
               clip={CLIPS[plano.clip]}
-              ancho={1000}
+              ancho={860}
               x={960 + d.x + tp * (idx % 4 ? -70 : 70)}
-              y={idx === 0 ? 760 : idx === 2 ? 700 : 720}
+              y={idx === 0 ? 800 : idx === 2 ? 770 : 785}
               rotX={idx === 0 ? -6 : idx === 2 ? 30 : 12}
               rotY={(idx === 2 ? 14 : -12) + tp * (idx === 2 ? -10 : 10)}
               rotZ={idx === 4 ? 2 : 0}
@@ -484,7 +485,7 @@ export const Funciones: React.FC = () => {
               escala={interpolate(tp, [0, 0.12, 0.5], [1.12, 1.0, 1.04], CL)}
             />
           )}
-          <Chyron texto={plano.etiqueta} mono={FUENTE_MONO} color="#7ff5e0" style={{ position: 'absolute', left: idx % 2 ? 1240 : 110, top: 150, fontSize: 28 }} />
+          <Chyron texto={plano.etiqueta} mono={FUENTE_MONO} color="#7ff5e0" style={{ position: 'absolute', left: idx % 2 ? 1300 : 90, top: 132, fontSize: 26 }} />
         </>
       ) : (
         <>
@@ -541,10 +542,10 @@ export const Cierre: React.FC<{ url: string; fuentes: string }> = ({ url, fuente
         rotX={14}
         rotY={interpolate(t, [lg, fin], [-10, -4], CL)}
         desenfoque={3}
-        opacidad={interpolate(t, [lg - 0.3, lg + 0.3], [0, 0.6], CL)}
+        opacidad={interpolate(t, [lg - 0.3, lg + 0.3], [0, 0.45], CL)}
       />
       <Telefono clip={CLIPS.lugares} ancho={250} x={1460} y={interpolate(t, [lg - 0.1, lg + 0.9], [1400, 720], { ...CL, easing: SUAVE })} rotY={-20} rotX={6} desenfoque={3} sombra={false} />
-      <AbsoluteFill style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 45%, rgba(11,7,16,0.55), rgba(11,7,16,0))' }} />
+      <AbsoluteFill style={{ background: 'radial-gradient(ellipse 55% 45% at 50% 55%, rgba(11,7,16,0.85), rgba(11,7,16,0))' }} />
       <AbsoluteFill style={{ alignItems: 'center', transformOrigin: 'top center', top: interpolate(sube, [0, 1], [330, 150]), scale: `${interpolate(sube, [0, 1], [1, 0.62])}` }}>
         <div style={{ display: 'flex', gap: 34 }}>
           <Sube t={t} en={k(M.cierreFrase1)} dur={0.4}>
