@@ -125,8 +125,10 @@ Lista de revisión:
 
 ## 7. Declaración de IA del logotipo
 
-El logo fue generado con una herramienta de IA (cuál: **POR CONFIRMAR**; anotarla en `docs/RECURSOS.md`, sección IA). Regla del proyecto: marca visible "AI-generated" o mención en el texto del sitio.
-Instrucción: en el footer agregar el texto **"Logotipo generado con IA (AI-generated)"** (y el nombre de la herramienta cuando se confirme). Sin logos ni marca de la NASA en ningún lado; las fuentes se citan con texto.
+El logo fue generado con **Gemini** (Google), confirmado por Ehileen el 2026-11-14 y registrado en `docs/RECURSOS.md`, sección IA. Regla del proyecto: marca visible "AI-generated" o mención en el texto del sitio.
+Instrucción: en el footer agregar el texto **"Logotipo generado con IA (Gemini) · AI-generated"**.
+
+**Atribución de íconos (Flaticon):** parte de los íconos de `web/assets/iconos/` viene de Flaticon (el resto, de las maquetas de Stitch). La licencia gratuita de Flaticon exige, en la página donde se ve el ícono o en el pie, una línea por autor: *"Icon made by [autor] from www.flaticon.com"* ([guía de Flaticon](https://support.flaticon.com/s/article/Attribution-How-when-and-where-FI?language=en_US)). Qué íconos y qué autores: POR CONFIRMAR por UI/UX; no publicar los íconos sin esa línea. Sin logos ni marca de la NASA en ningún lado; las fuentes se citan con texto.
 
 ## 8. Qué NO hacer
 

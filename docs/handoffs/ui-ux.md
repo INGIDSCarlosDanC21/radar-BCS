@@ -18,8 +18,8 @@
 ## Falta
 
 - Revisión en celular real (#71).
-- Confirmar la herramienta de IA que generó el logotipo.
-- Confirmar origen y licencia de los íconos.
+- Logotipo: hecho con Gemini (confirmado 2026-11-14); falta revisar los términos de uso de Gemini.
+- Íconos: vienen de Stitch y de Flaticon (confirmado 2026-11-14). Falta decir qué ícono viene de Flaticon y su autor, para la línea de atribución obligatoria en la web ("Icon made by [autor] from www.flaticon.com").
 - Modo oscuro de los tokens.
 - Revisar las pantallas Ficha y Acciones a 360 px.
 
