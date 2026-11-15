@@ -32,7 +32,9 @@
       agricola: 'Mapa Agrícola',
       copy: '© 2026 Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0',
       noMapa: 'No se pudo mostrar el mapa.', noLoc: 'No encontramos esa localidad en el mapa.',
-      acercar: 'Acercar', alejar: 'Alejar', coord: 'Coordenadas: '
+      acercar: 'Acercar', alejar: 'Alejar', coord: 'Coordenadas: ',
+      capaMapa: 'Mapa', capaSat: 'Satélite (NASA)', capaNdvi: 'Vegetación NDVI (NASA)',
+      ptCalor: 'Calor del aire', ptLluvia: 'Lluvia', ptSinCambio: 'sin cambio claro', ptFuente: 'NASA POWER, 2001-2025 (celda de ~50 km, reanálisis)', ptMas: 'Otros lugares de BCS: toca un punto'
     },
     en: {
       cerrar: 'Close', mas: 'More data', notas: 'Notes and limits', fuentes: 'Sources', fuenteDos: 'Source: ', motivo: 'Reason:', consultado: 'Accessed: ',
@@ -49,7 +51,9 @@
       agricola: 'Farming Map',
       copy: '© 2026 Team OptiPaz · NASA Space Apps Challenge 2026 · Apache-2.0 License',
       noMapa: 'The map could not be displayed.', noLoc: 'We could not find that locality on the map.',
-      acercar: 'Zoom in', alejar: 'Zoom out', coord: 'Coordinates: '
+      acercar: 'Zoom in', alejar: 'Zoom out', coord: 'Coordinates: ',
+      capaMapa: 'Map', capaSat: 'Satellite (NASA)', capaNdvi: 'Vegetation NDVI (NASA)',
+      ptCalor: 'Air heat', ptLluvia: 'Rainfall', ptSinCambio: 'no clear change', ptFuente: 'NASA POWER, 2001-2025 (~50 km cell, reanalysis)', ptMas: 'Other places in BCS: tap a dot'
     }
   };
   function rbt() { return typeof window !== 'undefined' && window.RBT ? window.RBT : null; }
@@ -409,9 +413,14 @@
     try {
       var mapa = L.map(el, { zoomControl: false, scrollWheelZoom: false }).setView(m.centro || [0, 0], m.zoom || 9);
       L.control.zoom({ position: 'bottomright', zoomInTitle: tx('acercar'), zoomOutTitle: tx('alejar') }).addTo(mapa);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18, attribution: '© OpenStreetMap contributors'
-      }).addTo(mapa);
+      var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '© OpenStreetMap contributors' }).addTo(mapa);
+      /* Capas de NASA GIBS (WMTS, la imagen más reciente): foto de satélite y vegetación (NDVI de 8 días). */
+      var GIBS = 'https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/';
+      var sat = L.tileLayer(GIBS + 'MODIS_Terra_CorrectedReflectance_TrueColor/default/' + new Date(Date.now() - 36 * 3600000).toISOString().slice(0, 10) + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpeg', { maxNativeZoom: 9, maxZoom: 18, attribution: 'NASA EOSDIS GIBS / MODIS Terra' });
+      var ndvi = L.tileLayer(GIBS + 'MODIS_Terra_NDVI_8Day/default/GoogleMapsCompatible_Level9/{z}/{y}/{x}.png', { maxNativeZoom: 9, maxZoom: 18, opacity: 0.8, attribution: 'NASA EOSDIS GIBS / MODIS NDVI' });
+      var bases = {}; bases[tx('capaMapa')] = osm; bases[tx('capaSat')] = sat;
+      var sobre = {}; sobre[tx('capaNdvi')] = ndvi;
+      L.control.layers(bases, sobre, { position: 'topleft', collapsed: true }).addTo(mapa);
       var mx = maxAbs(zonas);
       if (zonas && zonas.features) {
         L.geoJSON(zonas, {
@@ -453,6 +462,19 @@
           (l.fuente_coord ? '<br><small>' + tx('coord') + esc(D(l, 'fuente_coord')) + '</small>' : ''));
         est.marcas[l.id] = mk;
       });
+      /* Más lugares de BCS (los 38 de Clima): punto chico con el cambio de calor del aire y de lluvia de NASA POWER en el popup. */
+      var yaPin = {};
+      arr(m.localidades).forEach(function (l) { yaPin[norm(l.nombre)] = true; });
+      function cif(c, un) {
+        if (!c || c.cambio_total == null || !c.significativo) return tx('ptSinCambio');
+        var v = Math.abs(c.cambio_total).toFixed(un === '°C' ? 2 : 0);
+        return (c.cambio_total > 0 ? '+' : '−') + v + ' ' + un;
+      }
+      arr(est.locs && est.locs.localidades).forEach(function (x) {
+        if (yaPin[norm(x.nombre)] || typeof x.lat !== 'number') return;
+        var pt = L.marker([x.lat, x.lon], { icon: L.divIcon({ className: 'ag-pt-icon', html: '<span class="ag-pt" role="img" aria-label="' + esc(x.nombre) + '"></span>', iconSize: [16, 16], iconAnchor: [8, 8] }), title: x.nombre, keyboard: true, zIndexOffset: -100 }).addTo(mapa);
+        pt.bindPopup('<strong>' + esc(x.nombre) + '</strong> · ' + esc(x.municipio) + '<br>' + esc(tx('ptCalor')) + ': ' + esc(cif(x.calor, '°C')) + '<br>' + esc(tx('ptLluvia')) + ': ' + esc(cif(x.lluvia, 'mm')) + '<br><small>' + esc(tx('ptFuente')) + '</small>');
+      });
       est.mapa = mapa;
       setTimeout(function () { if (est.mapa) est.mapa.invalidateSize(); }, 200);
     } catch (e) {
@@ -470,7 +492,7 @@
     ESTADO = null;
   }
 
-  function render(main, datos, zonas, abierta) {
+  function render(main, datos, zonas, abierta, locs) {
     if (abierta === undefined) abierta = idDeHash();
     if (abierta && !existe(datos, abierta)) abierta = null;
     // Ya pintada: solo sincroniza la ficha, sin recrear el mapa.
@@ -480,7 +502,7 @@
     }
     destruye();
     main.innerHTML = html(datos, zonas, abierta);
-    var est = ESTADO = { main: main, datos: datos, abierta: abierta, mapa: null, marcas: {}, cajas: {} };
+    var est = ESTADO = { main: main, datos: datos, locs: locs || null, abierta: abierta, mapa: null, marcas: {}, cajas: {} };
 
     main.addEventListener('click', function (e) {
       if (ESTADO !== est) return;

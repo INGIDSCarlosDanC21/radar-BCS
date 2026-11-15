@@ -270,3 +270,15 @@ body[data-vista=agricola] main{max-width:none;margin:0;padding:0}
 .ag-notas-pl summary::before{content:"\25B8";font-size:14px}
 .ag-notas-pl[open] summary::before{content:"\25BE"}
 .ag-notas-pl .ag-notas{margin-top:8px}
+
+/* Pedido de Carlos (2026-11-15): etiquetas cortas (solo el nombre; el dato va en el popup) para que no se tapen, más lugares y capas de NASA. */
+.ag-pin-dato{display:none}
+.ag-pin{padding:4px 10px;font-size:12px;line-height:16px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.ag-pin .ag-dot{margin-right:5px}
+.ag-pt-icon{background:transparent;border:0}
+.ag-pt{display:block;width:14px;height:14px;border-radius:50%;background:#1f5f99;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.45)}
+.ag-pt::after{content:"";position:absolute;left:50%;top:50%;width:44px;height:44px;transform:translate(-50%,-50%)}
+.ag-mapa-caja .leaflet-control-layers{border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.ag-mapa-caja .leaflet-control-layers-toggle{width:44px;height:44px}
+.ag-mapa-caja .leaflet-control-layers-expanded{padding:8px 12px;font:600 13px 'Manrope',system-ui,sans-serif}
+.ag-mapa-caja .leaflet-control-layers label{display:flex;align-items:center;gap:6px;min-height:36px}

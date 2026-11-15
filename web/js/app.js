@@ -440,7 +440,7 @@
   /* ---------- Mapa Agrícola (datos en data/agricola.json) ---------- */
   var AGRO = null;
   function agricolaVista(abierta) {
-    var pintar = function () { main.removeAttribute('aria-busy'); window.RBAgricola.render(main, AGRO, ZONAS, abierta); };
+    var pintar = function () { main.removeAttribute('aria-busy'); window.RBAgricola.render(main, AGRO, ZONAS, abierta, LOCS); };
     if (AGRO) return pintar();
     main.setAttribute('aria-busy', 'true');
     main.innerHTML = window.RBEsq ? window.RBEsq.html('agricola', t('agro.cargando')) : '<p class="cargando">' + t('agro.cargando') + '</p>';
