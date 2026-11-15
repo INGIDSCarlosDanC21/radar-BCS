@@ -22,8 +22,7 @@
 .cl-peques{grid-template-columns:1fr 1fr}
 .cl-peque .hm-cifra{margin-top:4px}
 .cl-peque .hm-t-peq{font-size:16px;line-height:22px}
-.hm .cl-fuente{margin-top:16px;text-transform:none;letter-spacing:0;font-size:12px;line-height:18px}
-.hm .cl-fuente a{color:#006d3d;text-decoration:underline}
+.hm .cl-act a{color:#006d3d;text-decoration:underline}
 
 /* Mapa: imagen GOES-West con el mismo recuadro que la MODIS; los pines usan % del lienzo. */
 .cl-fig{display:flex;flex-direction:column;background:#000d21}

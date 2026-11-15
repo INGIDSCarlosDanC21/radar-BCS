@@ -30,9 +30,11 @@ test('sin null/undefined/NaN ni textos de radar', () => {
 
 test('contenido obligatorio', () => {
   const h = RBHome.html(datos);
-  assert.ok(h.includes('Mostramos qué cambió, no por qué. Una tendencia no prueba la causa.'));
-  assert.ok(h.includes('Tendencias 2001–2026 · datos de la NASA'));
-  assert.ok(h.includes('Datos generados el ' + datos.generado), 'la fecha sale de indicadores.json, no fija');
+  // Desde #144 (pedido de UI/UX) Inicio muestra solo el título "¿Qué cambia?": sin kicker, sin fecha y sin el aviso
+  // de causa, que sigue en cada Ficha. Cada tarjeta conserva su "Fuente:".
+  assert.ok(h.includes('¿Qué cambia?'));
+  assert.ok(!h.includes('Tendencias 2001–2026'));
+  assert.equal((h.match(/Fuente: /g) || []).length >= 4, true, 'cada tarjeta muestra su fuente');
   assert.ok(h.includes('Licencia Apache-2.0'));
 });
 

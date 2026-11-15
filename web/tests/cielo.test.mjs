@@ -50,7 +50,6 @@ test('la sección se arma con los datos reales: sin null/undefined/NaN, con atri
   const h = CL.seccion(filas, new Date('2026-11-15T09:10:00Z'));
   for (const bad of ['null', 'undefined', 'NaN']) assert.ok(!h.includes(bad), bad);
   assert.ok(h.includes('href="https://open-meteo.com/"'), 'falta el enlace de atribución (CC BY 4.0)');
-  assert.ok(h.includes('no son'), 'debe decir que no son estaciones');
   assert.ok(h.includes('Actualizado 02:00 · hora de La Paz'));
   assert.ok(h.includes('aria-label="La Paz: Despejado, 22 °C"'));
   assert.equal((h.match(/class="hm-peque cl-peque"/g) || []).length, 6, '6 tarjetas como en Figma');
@@ -68,7 +67,6 @@ test('aviso cuando el dato tiene más de 1 hora, y textos en inglés', () => {
   const h = CL.seccion(CL.unir(resp), new Date('2026-11-15T09:10:00Z'));
   assert.ok(h.includes('The sky now in BCS'));
   assert.ok(h.includes('Clear'));
-  assert.ok(h.includes('not weather station'));
   T.setLang('es');
 });
 

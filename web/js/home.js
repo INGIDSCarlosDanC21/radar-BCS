@@ -48,19 +48,6 @@
   function cortoFuente(i) {
     return cortoDataset(i).split(/\s*[(,]|\s+(Monthly|Mascon)\b/)[0];
   }
-  /* Rango de años real, desde fuente.periodo de todos los indicadores. */
-  function rango(datos) {
-    var min = null, max = null;
-    ((datos && datos.indicadores) || []).forEach(function (i) {
-      var m = /(\d{4})\D+(\d{4})/.exec((i.fuente && i.fuente.periodo) || '');
-      if (!m) return;
-      var a = +m[1], b = +m[2];
-      if (min === null || a < min) min = a;
-      if (max === null || b > max) max = b;
-    });
-    return min !== null ? min + '–' + max : '';
-  }
-
   function etq(i) {
     var e = etiqueta(i);
     return '<span class="hm-etq hm-etq-' + e[1] + '">' + esc(e[0]) + '</span>';
@@ -105,7 +92,6 @@
   }
 
   function html(datos) {
-    var r = rango(datos);
     var calor = ind(datos, 'calor');
     var h = '<div class="hm">' +
       '<section class="hm-hero" aria-labelledby="hm-h1">' +
@@ -116,18 +102,16 @@
           '<div class="hm-botones"><a class="hm-btn hm-btn-claro" href="#mapa">' + t('home.btnMapa') + '</a>' +
           '<a class="hm-btn hm-btn-oscuro" href="#acciones">' + t('home.btnAcc') + '</a></div>' +
         '</div></section>' +
-      '<section class="hm-sec" aria-labelledby="hm-h2"><div class="hm-sec-cab"><div>' +
-        '<p class="hm-mono hm-eti"><i class="hm-punto"></i>' + (r ? esc(t('home.tend', { r: r })) : t('home.tendSin')) + '</p>' +
-        '<h2 id="hm-h2">' + t('home.h2') + '</h2></div>' +
-        (datos && datos.generado ? '<p class="hm-mono hm-pildora">' + esc(t('gen.fecha', { f: datos.generado })) + '</p>' : '') +
-      '</div><div class="hm-rejilla">' +
+      // Solo el título, a pedido de UI/UX (Ehileen, 2026-11-15). La fuente sigue en cada tarjeta.
+      '<section class="hm-sec" aria-labelledby="hm-h2"><div class="hm-sec-cab"><h2 id="hm-h2">' + t('home.h2') + '</h2></div>' +
+      '<div class="hm-rejilla">' +
       (calor ? principal(calor) : '') + '<div class="hm-peques">';
     ['vegetacion', 'lluvia', 'agua'].forEach(function (id) {
       var i = ind(datos, id);
       if (i) h += pequena(i);
     });
     h += '</div></div>' +
-      '<p class="aviso hm-aviso">' + t('aviso.causa') + '</p></section>' +
+      '</section>' +
       (CL ? CL.marcoSeccion() : '') +
       '<section class="hm-sec hm-sec-mapa" aria-labelledby="hm-h3"><div class="hm-marco">' +
         '<div class="hm-marco-cab"><h2 id="hm-h3">' + t('home.hMapa') + '</h2>' +
