@@ -14,6 +14,53 @@
   }
   function url(u) { return /^https?:\/\//i.test(String(u || '')) ? esc(u) : '#'; }
   function arr(a) { return Object.prototype.toString.call(a) === '[object Array]' ? a : []; }
+  /* ---------- Idioma (issue #93) ----------
+     window.RBT (js/textos.js) decide el idioma. Si no existe, todo queda en español (como en las pruebas). */
+  var TX = {
+    es: {
+      cerrar: 'Cerrar', fuentes: 'Fuentes', fuenteDos: 'Fuente: ', motivo: 'Motivo:', consultado: 'Consultado: ',
+      abierta: ': ficha abierta', sinDatos: 'No se pudieron cargar los datos agrícolas.',
+      titulo: 'Mapa Agrícola',
+      sub: 'Vocación de suelos y condiciones agroclimáticas de los valles agrícolas del municipio de La Paz, con datos abiertos oficiales.',
+      buscarLoc: 'Buscar localidad', placeholder: 'Buscar localidad (Los Planes, El Carrizal…)',
+      rastrear: 'Rastrear Terreno', mapaAria: 'Mapa de localidades y cambio de vegetación', mapaInt: 'Mapa interactivo',
+      eti: 'ANÁLISIS AGROCLIMÁTICO', h2: 'Diagnóstico Agroclimático &amp; Sanidad de Suelos',
+      secSub: 'Selecciona una dimensión para ver el detalle con datos oficiales y su fuente.',
+      zona: 'Zona: ', fuentesPie: 'Fuentes: ',
+      pieDesc: 'Tendencias ambientales de La Paz, B.C.S., con datos abiertos de la NASA.',
+      pieNav: 'Pie de página', pantallas: 'Pantallas', inicio: 'Inicio', mapa: 'Mapa', fichas: 'Fichas', acciones: 'Acciones',
+      agricola: 'Mapa Agrícola',
+      copy: '© 2026 Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0<br>Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch.',
+      noMapa: 'No se pudo mostrar el mapa.', noLoc: 'No encontramos esa localidad en el mapa.',
+      acercar: 'Acercar', alejar: 'Alejar', coord: 'Coordenadas: '
+    },
+    en: {
+      cerrar: 'Close', fuentes: 'Sources', fuenteDos: 'Source: ', motivo: 'Reason:', consultado: 'Accessed: ',
+      abierta: ': details open', sinDatos: 'The farming data could not be loaded.',
+      titulo: 'Farming Map',
+      sub: 'Soil suitability and agroclimatic conditions of the farming valleys of the municipality of La Paz, using official open data.',
+      buscarLoc: 'Search locality', placeholder: 'Search locality (Los Planes, El Carrizal…)',
+      rastrear: 'Track Terrain', mapaAria: 'Map of localities and vegetation change', mapaInt: 'Interactive map',
+      eti: 'AGROCLIMATIC ANALYSIS', h2: 'Agroclimatic Diagnosis &amp; Soil Health',
+      secSub: 'Select a dimension to see the detail with official data and its source.',
+      zona: 'Zone: ', fuentesPie: 'Sources: ',
+      pieDesc: 'Environmental trends in La Paz, B.C.S., with NASA open data.',
+      pieNav: 'Page footer', pantallas: 'Screens', inicio: 'Home', mapa: 'Map', fichas: 'Details', acciones: 'Actions',
+      agricola: 'Farming Map',
+      copy: '© 2026 Team OptiPaz · NASA Space Apps Challenge 2026 · Apache-2.0 License<br>Code and analysis written with AI assistance (Claude Code); interface designed with help from Google Stitch.',
+      noMapa: 'The map could not be displayed.', noLoc: 'We could not find that locality on the map.',
+      acercar: 'Zoom in', alejar: 'Zoom out', coord: 'Coordinates: '
+    }
+  };
+  function rbt() { return typeof window !== 'undefined' && window.RBT ? window.RBT : null; }
+  function idioma() { var r = rbt(); return r && r.lang && r.lang() === 'en' ? 'en' : 'es'; }
+  function tx(k) { var v = TX[idioma()][k]; return v != null ? v : TX.es[k]; }
+  /* Texto de los datos: campo_en en inglés si existe; si no, el campo en español. */
+  function D(o, campo) {
+    var r = rbt();
+    if (r && r.d) return r.d(o, campo);
+    return o ? o[campo] : o;
+  }
   function norm(s) {
     var t = String(s || '').toLowerCase();
     if (t.normalize) t = t.normalize('NFD').replace(/[̀-ͯ]/g, '');
@@ -54,11 +101,11 @@
       '<button type="button" class="ag-ficha-btn" aria-expanded="false" aria-controls="ag-det-' + esc(id) + '">' +
         '<span class="ag-ficha-cab">' +
           '<span class="ag-ficha-icono">' + ico(ICO_FICHA[id] || 'planta', '', 24) + '</span>' +
-          '<span class="ag-ficha-txt"><span class="ag-ficha-tit">' + esc(f.titulo) + '</span>' +
-          '<span class="ag-ficha-sub">' + esc(f.subtitulo) + '</span></span>' +
-          (f.chip ? '<span class="ag-ficha-chip">' + esc(f.chip) + '</span>' : '') +
+          '<span class="ag-ficha-txt"><span class="ag-ficha-tit">' + esc(D(f, 'titulo')) + '</span>' +
+          '<span class="ag-ficha-sub">' + esc(D(f, 'subtitulo')) + '</span></span>' +
+          (f.chip ? '<span class="ag-ficha-chip">' + esc(D(f, 'chip')) + '</span>' : '') +
         '</span>' +
-        '<span class="ag-ficha-pie"><span class="ag-ficha-enlace">' + esc(f.enlace) + '</span>' + ico('flecha', '', 16) + '</span>' +
+        '<span class="ag-ficha-pie"><span class="ag-ficha-enlace">' + esc(D(f, 'enlace')) + '</span>' + ico('flecha', '', 16) + '</span>' +
       '</button>' +
       '<div id="ag-det-' + esc(id) + '" hidden></div>' +
       '</article>';
@@ -67,23 +114,23 @@
   /* ---------- Detalle (mismo molde para las 4) ---------- */
   function tarjeta(t, alerta) {
     var h = '<article class="ag-tj' + (alerta ? ' ag-tj-alerta' : '') + '">';
-    if (t.chip) h += '<p class="ag-tj-chip">' + esc(t.chip) + '</p>';
-    h += '<h4 class="ag-tj-tit">' + esc(t.titulo) + '</h4>';
-    if (t.texto) h += '<p class="ag-tj-txt">' + esc(t.texto) + '</p>';
-    var fl = arr(t.filas);
+    if (t.chip) h += '<p class="ag-tj-chip">' + esc(D(t, 'chip')) + '</p>';
+    h += '<h4 class="ag-tj-tit">' + esc(D(t, 'titulo')) + '</h4>';
+    if (t.texto) h += '<p class="ag-tj-txt">' + esc(D(t, 'texto')) + '</p>';
+    var fl = arr(D(t, 'filas'));
     if (fl.length) {
       h += '<dl class="ag-tj-filas">';
       fl.forEach(function (r) { h += '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>'; });
       h += '</dl>';
     }
-    if (alerta && t.motivo) h += '<p class="ag-tj-motivo"><b>Motivo:</b> ' + esc(t.motivo) + '</p>';
-    if (t.fuente) h += '<p class="ag-tj-fuente">Fuente: ' + esc(t.fuente) + '</p>';
+    if (alerta && t.motivo) h += '<p class="ag-tj-motivo"><b>' + tx('motivo') + '</b> ' + esc(D(t, 'motivo')) + '</p>';
+    if (t.fuente) h += '<p class="ag-tj-fuente">' + tx('fuenteDos') + esc(D(t, 'fuente')) + '</p>';
     return h + '</article>';
   }
 
   function detalle(f) {
     var d = f.detalle || {}, id = f.id, h = '';
-    var chips = arr(d.chips);
+    var chips = arr(D(d, 'chips'));
     h += '<div class="ag-det-cab"><div class="ag-det-cab-izq">' +
       '<span class="ag-ficha-icono">' + ico(ICO_FICHA[id] || 'planta', '', 24) + '</span><div class="ag-det-cab-txt">';
     if (chips.length) {
@@ -91,29 +138,29 @@
       chips.forEach(function (c, k) { h += '<span class="ag-det-chip' + (k === 0 ? ' ag-det-chip-1' : '') + '">' + esc(c) + '</span>'; });
       h += '</div>';
     }
-    h += '<h3 class="ag-det-tit" id="ag-tit-' + esc(id) + '" tabindex="-1">' + esc(d.titulo_largo || f.titulo) + '</h3>';
-    if (d.descripcion) h += '<p class="ag-det-desc">' + esc(d.descripcion) + '</p>';
+    h += '<h3 class="ag-det-tit" id="ag-tit-' + esc(id) + '" tabindex="-1">' + esc(D(d, 'titulo_largo') || D(f, 'titulo')) + '</h3>';
+    if (d.descripcion) h += '<p class="ag-det-desc">' + esc(D(d, 'descripcion')) + '</p>';
     h += '</div></div><div class="ag-det-cab-der">';
     if (d.veredicto) {
-      h += '<div class="ag-veredicto"><span class="ag-veredicto-e">' + esc(d.veredicto.etiqueta) + '</span>' +
-        '<span class="ag-veredicto-v">' + esc(d.veredicto.valor) + '</span></div>';
+      h += '<div class="ag-veredicto"><span class="ag-veredicto-e">' + esc(D(d.veredicto, 'etiqueta')) + '</span>' +
+        '<span class="ag-veredicto-v">' + esc(D(d.veredicto, 'valor')) + '</span></div>';
     }
-    h += '<button type="button" class="ag-cerrar" data-cerrar="1">' + ico('x', '', 14) + 'Cerrar</button></div></div>';
+    h += '<button type="button" class="ag-cerrar" data-cerrar="1">' + ico('x', '', 14) + esc(tx('cerrar')) + '</button></div></div>';
 
     if (d.dictamen) {
-      h += '<section class="ag-dictamen" aria-label="' + esc(d.dictamen.titulo) + '"><p class="ag-mono ag-dictamen-t">' + ico('check', '', 14) + esc(d.dictamen.titulo) + '</p>' +
-        '<p class="ag-dictamen-txt">' + esc(d.dictamen.texto) + '</p></section>';
+      h += '<section class="ag-dictamen" aria-label="' + esc(D(d.dictamen, 'titulo')) + '"><p class="ag-mono ag-dictamen-t">' + ico('check', '', 14) + esc(D(d.dictamen, 'titulo')) + '</p>' +
+        '<p class="ag-dictamen-txt">' + esc(D(d.dictamen, 'texto')) + '</p></section>';
     }
     if (d.grupo) {
-      h += '<section class="ag-grupo"><div class="ag-grupo-cab"><h4 class="ag-grupo-tit">' + ico('hoja', 'ag-verde', 18) + esc(d.grupo.titulo) + '</h4>' +
-        (d.grupo.nota ? '<p class="ag-mono ag-grupo-nota">' + esc(d.grupo.nota) + '</p>' : '') + '</div><div class="ag-tjs">';
+      h += '<section class="ag-grupo"><div class="ag-grupo-cab"><h4 class="ag-grupo-tit">' + ico('hoja', 'ag-verde', 18) + esc(D(d.grupo, 'titulo')) + '</h4>' +
+        (d.grupo.nota ? '<p class="ag-mono ag-grupo-nota">' + esc(D(d.grupo, 'nota')) + '</p>' : '') + '</div><div class="ag-tjs">';
       arr(d.grupo.tarjetas).forEach(function (t) { h += tarjeta(t, false); });
       h += '</div></section>';
     }
     var ga = d.grupo_alerta;
     if (ga) {
-      h += '<section class="ag-grupo"><div class="ag-grupo-cab"><h4 class="ag-grupo-tit">' + ico('escudo', 'ag-rojo', 18) + esc(ga.titulo) + '</h4>' +
-        (ga.nota ? '<p class="ag-mono ag-pil-rojo">' + esc(ga.nota) + '</p>' : '') + '</div><div class="ag-tjs">';
+      h += '<section class="ag-grupo"><div class="ag-grupo-cab"><h4 class="ag-grupo-tit">' + ico('escudo', 'ag-rojo', 18) + esc(D(ga, 'titulo')) + '</h4>' +
+        (ga.nota ? '<p class="ag-mono ag-pil-rojo">' + esc(D(ga, 'nota')) + '</p>' : '') + '</div><div class="ag-tjs">';
       arr(ga.tarjetas).forEach(function (t) { h += tarjeta(t, ga.tono !== 'neutro'); });
       h += '</div></section>';
     }
@@ -121,17 +168,17 @@
     if (notas.length) {
       h += '<div class="ag-notas">';
       notas.forEach(function (n) {
-        h += '<article class="ag-nota"><p class="ag-mono ag-nota-t">' + ico('nota', 'ag-verde', 14) + esc(n.titulo) + '</p><p class="ag-nota-txt">' + esc(n.texto) + '</p></article>';
+        h += '<article class="ag-nota"><p class="ag-mono ag-nota-t">' + ico('nota', 'ag-verde', 14) + esc(D(n, 'titulo')) + '</p><p class="ag-nota-txt">' + esc(D(n, 'texto')) + '</p></article>';
       });
       h += '</div>';
     }
     var fu = arr(d.fuentes);
     if (fu.length) {
-      h += '<section class="ag-fuentes"><h4 class="ag-mono ag-fuentes-t">Fuentes</h4><ul>';
+      h += '<section class="ag-fuentes"><h4 class="ag-mono ag-fuentes-t">' + esc(tx('fuentes')) + '</h4><ul>';
       fu.forEach(function (s) {
-        h += '<li><a href="' + url(s.url) + '" target="_blank" rel="noopener">' + esc(s.nombre) + '</a>' +
-          (s.licencia ? ' · <span>' + esc(s.licencia) + '</span>' : '') +
-          (s.consultado ? ' · <span>Consultado: ' + esc(s.consultado) + '</span>' : '') + '</li>';
+        h += '<li><a href="' + url(s.url) + '" target="_blank" rel="noopener">' + esc(D(s, 'nombre')) + '</a>' +
+          (s.licencia ? ' · <span>' + esc(D(s, 'licencia')) + '</span>' : '') +
+          (s.consultado ? ' · <span>' + tx('consultado') + esc(s.consultado) + '</span>' : '') + '</li>';
       });
       h += '</ul></section>';
     }
@@ -141,9 +188,9 @@
   function cta(d) {
     var c = d && d.cta;
     if (!c) return '';
-    return '<aside class="ag-cta"><div><p class="ag-mono ag-cta-e">' + ico('ext', '', 12) + esc(c.etiqueta) + '</p>' +
-      '<h4 class="ag-cta-t">' + esc(c.titulo) + '</h4><p class="ag-cta-txt">' + esc(c.texto) + '</p></div>' +
-      '<a class="ag-cta-btn" href="' + url(c.url) + '" target="_blank" rel="noopener">' + esc(c.boton) + '</a></aside>';
+    return '<aside class="ag-cta"><div><p class="ag-mono ag-cta-e">' + ico('ext', '', 12) + esc(D(c, 'etiqueta')) + '</p>' +
+      '<h4 class="ag-cta-t">' + esc(D(c, 'titulo')) + '</h4><p class="ag-cta-txt">' + esc(D(c, 'texto')) + '</p></div>' +
+      '<a class="ag-cta-btn" href="' + url(c.url) + '" target="_blank" rel="noopener">' + esc(D(c, 'boton')) + '</a></aside>';
   }
 
   function fichaAbierta(f) {
@@ -151,7 +198,7 @@
     return '<article class="ag-ficha ag-abierta ag-t-' + esc(TONO[id] || 'verde') + '" data-ficha="' + esc(id) + '">' +
       '<span class="ag-ficha-borde" aria-hidden="true"></span>' +
       '<div class="ag-ficha-resumen">' +
-      '<button type="button" class="ag-ficha-btn ag-sr" aria-expanded="true" aria-controls="ag-det-' + esc(id) + '">' + esc(f.titulo) + ': ficha abierta</button></div>' +
+      '<button type="button" class="ag-ficha-btn ag-sr" aria-expanded="true" aria-controls="ag-det-' + esc(id) + '">' + esc(D(f, 'titulo')) + esc(tx('abierta')) + '</button></div>' +
       '<div id="ag-det-' + esc(id) + '" class="ag-detalle" role="region" aria-labelledby="ag-tit-' + esc(id) + '">' + detalle(f) + '</div>' +
       '</article>';
   }
@@ -193,51 +240,52 @@
   /* ---------- HTML completo ---------- */
   function html(datos, zonas, abierta) {
     if (!datos || !arr(datos.fichas).length) {
-      return '<div class="ag"><p class="ag-error" role="alert">No se pudieron cargar los datos agrícolas.</p></div>';
+      return '<div class="ag"><p class="ag-error" role="alert">' + tx('sinDatos') + '</p></div>';
     }
     var m = datos.mapa || {}, ley = m.leyenda || {}, info = m.info || {}, locs = arr(m.localidades);
     var h = '<div class="ag">' +
       '<div class="ag-cont">' +
       '<div class="ag-estado">' +
-        '<p class="ag-mono ag-estado-izq"><i class="ag-dot"></i>' + esc(datos.estado_linea) + '</p>' +
-        '<p class="ag-mono ag-estado-der">' + esc(datos.consulta_linea) + '</p></div>' +
-      '<header class="ag-cab"><h1>Mapa Agrícola</h1>' +
-      '<p class="ag-sub">Vocación de suelos y condiciones agroclimáticas de los valles agrícolas del municipio de La Paz, con datos abiertos oficiales.</p></header>' +
+        '<p class="ag-mono ag-estado-izq"><i class="ag-dot"></i>' + esc(D(datos, 'estado_linea')) + '</p>' +
+        '<p class="ag-mono ag-estado-der">' + esc(D(datos, 'consulta_linea')) + '</p></div>' +
+      '<header class="ag-cab"><h1>' + esc(tx('titulo')) + '</h1>' +
+      '<p class="ag-sub">' + esc(tx('sub')) + '</p></header>' +
       '<form class="ag-busca" role="search" novalidate>' +
-        '<label class="ag-busca-campo">' + ico('lupa', '', 16) + '<span class="ag-sr">Buscar localidad</span>' +
-        '<input type="text" id="ag-q" list="ag-locs" autocomplete="off" placeholder="Buscar localidad (Los Planes, El Carrizal…)"></label>' +
+        '<label class="ag-busca-campo">' + ico('lupa', '', 16) + '<span class="ag-sr">' + esc(tx('buscarLoc')) + '</span>' +
+        '<input type="text" id="ag-q" list="ag-locs" autocomplete="off" placeholder="' + esc(tx('placeholder')) + '"></label>' +
         '<datalist id="ag-locs">';
     locs.forEach(function (l) { h += '<option value="' + esc(l.nombre) + '"></option>'; });
-    h += '</datalist><button type="submit" class="ag-rastrear">Rastrear Terreno' + ico('diana', '', 16) + '</button></form>' +
+    h += '</datalist><button type="submit" class="ag-rastrear">' + esc(tx('rastrear')) + ico('diana', '', 16) + '</button></form>' +
       '<p class="ag-msg" id="ag-msg" role="status" aria-live="polite"></p>' +
-      '<section class="ag-mapa" aria-label="Mapa de localidades y cambio de vegetación">' +
-        '<div class="ag-mapa-caja"><div id="ag-mapa" class="ag-mapa-lf" role="application" aria-label="Mapa interactivo"></div>';
+      '<section class="ag-mapa" aria-label="' + esc(tx('mapaAria')) + '">' +
+        '<div class="ag-mapa-caja"><div id="ag-mapa" class="ag-mapa-lf" role="application" aria-label="' + esc(tx('mapaInt')) + '"></div>';
     if (info.titulo || info.texto) {
-      h += '<div class="ag-info">' + ico('pin', '', 20) + '<div><p class="ag-info-t">' + esc(info.titulo) + '</p><p class="ag-info-s">' + esc(info.texto) + '</p></div></div>';
+      h += '<div class="ag-info">' + ico('pin', '', 20) + '<div><p class="ag-info-t">' + esc(D(info, 'titulo')) + '</p><p class="ag-info-s">' + esc(D(info, 'texto')) + '</p></div></div>';
     }
     if (ley.titulo) {
-      h += '<div class="ag-ley"><div class="ag-ley-cab"><p class="ag-mono ag-ley-t">' + esc(ley.titulo) + '</p>' +
-        (ley.etiqueta ? '<span class="ag-ley-pil">' + esc(ley.etiqueta) + '</span>' : '') + '</div>' +
+      h += '<div class="ag-ley"><div class="ag-ley-cab"><p class="ag-mono ag-ley-t">' + esc(D(ley, 'titulo')) + '</p>' +
+        (ley.etiqueta ? '<span class="ag-ley-pil">' + esc(D(ley, 'etiqueta')) + '</span>' : '') + '</div>' +
         '<div class="ag-ley-barra" aria-hidden="true"></div>' +
-        '<p class="ag-mono ag-ley-mm"><span>' + esc(ley.min) + '</span><span>' + esc(ley.max) + '</span></p>' +
-        (ley.nota ? '<p class="ag-ley-nota">' + esc(ley.nota) + '</p>' : '') + '</div>';
+        '<p class="ag-mono ag-ley-mm"><span>' + esc(D(ley, 'min')) + '</span><span>' + esc(D(ley, 'max')) + '</span></p>' +
+        (ley.nota ? '<p class="ag-ley-nota">' + esc(D(ley, 'nota')) + '</p>' : '') + '</div>';
     }
     h += '</div><div class="ag-mapa-pie"><ul class="ag-mono ag-mapa-pie-l">';
-    arr(m.pie).forEach(function (p, k) { h += '<li><i class="ag-dot ag-dot-' + (k % 2 ? 'cian' : 'verde') + '"></i>' + esc(p) + '</li>'; });
-    h += '</ul>' + (m.fuentes_pie ? '<p class="ag-mono ag-mapa-pie-r">Fuentes: <b>' + esc(m.fuentes_pie) + '</b></p>' : '') + '</div></section>' +
+    arr(D(m, 'pie')).forEach(function (p, k) { h += '<li><i class="ag-dot ag-dot-' + (k % 2 ? 'cian' : 'verde') + '"></i>' + esc(p) + '</li>'; });
+    h += '</ul>' + (m.fuentes_pie ? '<p class="ag-mono ag-mapa-pie-r">' + tx('fuentesPie') + '<b>' + esc(D(m, 'fuentes_pie')) + '</b></p>' : '') + '</div></section>' +
       '<section class="ag-fichas-sec" id="ag-fichas-sec" aria-labelledby="ag-h2">' +
-        '<div class="ag-sec-cab"><div><p class="ag-mono ag-sec-eti">' + ico('analisis', 'ag-verde', 14) + 'ANÁLISIS AGROCLIMÁTICO</p>' +
-        '<h2 id="ag-h2">Diagnóstico Agroclimático &amp; Sanidad de Suelos</h2>' +
-        '<p class="ag-sec-sub">Selecciona una dimensión para ver el detalle con datos oficiales y su fuente.</p></div>' +
-        (datos.zona ? '<p class="ag-mono ag-zona">' + ico('pin', '', 12) + 'Zona: <b>' + esc(datos.zona) + '</b></p>' : '') + '</div>' +
+        '<div class="ag-sec-cab"><div><p class="ag-mono ag-sec-eti">' + ico('analisis', 'ag-verde', 14) + tx('eti') + '</p>' +
+        '<h2 id="ag-h2">' + tx('h2') + '</h2>' +
+        '<p class="ag-sec-sub">' + esc(tx('secSub')) + '</p></div>' +
+        (datos.zona ? '<p class="ag-mono ag-zona">' + ico('pin', '', 12) + tx('zona') + '<b>' + esc(D(datos, 'zona')) + '</b></p>' : '') + '</div>' +
         '<div class="ag-fichas' + (abierta ? ' ag-fichas-abierta' : '') + '" id="ag-fichas">' + fichasHtml(datos, abierta) + '</div>' +
         '<div id="ag-cta">' + ctaDe(datos, abierta) + '</div>' +
       '</section></div>' +
       '<footer class="ag-pie"><div class="ag-pie-grid"><div><p class="ag-marca"><i class="ag-dot"></i>RADAR BCS</p>' +
-        '<p class="ag-pie-desc">Tendencias ambientales de La Paz, B.C.S., con datos abiertos de la NASA.</p></div>' +
-        '<nav aria-label="Pie de página"><p class="ag-mono ag-negro">Pantallas</p>' +
-        '<a href="#inicio">Inicio</a><a href="#mapa">Mapa</a><a href="#ficha/calor">Fichas</a><a href="#acciones">Acciones</a><a href="#agricola">Mapa Agrícola</a></nav></div>' +
-        '<p class="ag-mono ag-copy">© 2026 Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0<br>Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch.</p></footer>' +
+        '<p class="ag-pie-desc">' + esc(tx('pieDesc')) + '</p></div>' +
+        '<nav aria-label="' + esc(tx('pieNav')) + '"><p class="ag-mono ag-negro">' + esc(tx('pantallas')) + '</p>' +
+        '<a href="#inicio">' + esc(tx('inicio')) + '</a><a href="#mapa">' + esc(tx('mapa')) + '</a><a href="#ficha/calor">' + esc(tx('fichas')) +
+        '</a><a href="#acciones">' + esc(tx('acciones')) + '</a><a href="#agricola">' + esc(tx('agricola')) + '</a></nav></div>' +
+        '<p class="ag-mono ag-copy">' + tx('copy') + '</p></footer>' +
       '</div>';
     return h;
   }
@@ -348,12 +396,12 @@
   function montaMapa(est, zonas) {
     var el = est.main.querySelector('#ag-mapa'), m = est.datos.mapa || {};
     if (!el || typeof L === 'undefined') {
-      if (el) el.innerHTML = '<p class="ag-error">No se pudo mostrar el mapa.</p>';
+      if (el) el.innerHTML = '<p class="ag-error">' + tx('noMapa') + '</p>';
       return;
     }
     try {
       var mapa = L.map(el, { zoomControl: false, scrollWheelZoom: false }).setView(m.centro || [0, 0], m.zoom || 9);
-      L.control.zoom({ position: 'bottomright', zoomInTitle: 'Acercar', zoomOutTitle: 'Alejar' }).addTo(mapa);
+      L.control.zoom({ position: 'bottomright', zoomInTitle: tx('acercar'), zoomOutTitle: tx('alejar') }).addTo(mapa);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18, attribution: '© OpenStreetMap contributors'
       }).addTo(mapa);
@@ -377,18 +425,18 @@
         if (typeof l.lat !== 'number' || typeof l.lon !== 'number') return;
         var icon = L.divIcon({
           className: 'ag-pin-icon',
-          html: '<span class="ag-pin"><i class="ag-dot ag-dot-' + (k % 2 ? 'cian' : 'verde') + '"></i>' + esc(l.etiqueta || l.nombre) + '</span>',
+          html: '<span class="ag-pin"><i class="ag-dot ag-dot-' + (k % 2 ? 'cian' : 'verde') + '"></i>' + esc(D(l, 'etiqueta') || l.nombre) + '</span>',
           iconSize: null
         });
         var mk = L.marker([l.lat, l.lon], { icon: icon, title: l.nombre, keyboard: true }).addTo(mapa);
-        mk.bindPopup('<strong>' + esc(l.nombre) + '</strong>' + (l.etiqueta ? '<br>' + esc(l.etiqueta) : '') +
-          (l.fuente_coord ? '<br><small>Coordenadas: ' + esc(l.fuente_coord) + '</small>' : ''));
+        mk.bindPopup('<strong>' + esc(l.nombre) + '</strong>' + (l.etiqueta ? '<br>' + esc(D(l, 'etiqueta')) : '') +
+          (l.fuente_coord ? '<br><small>' + tx('coord') + esc(D(l, 'fuente_coord')) + '</small>' : ''));
         est.marcas[l.id] = mk;
       });
       est.mapa = mapa;
       setTimeout(function () { if (est.mapa) est.mapa.invalidateSize(); }, 200);
     } catch (e) {
-      el.innerHTML = '<p class="ag-error">No se pudo mostrar el mapa.</p>';
+      el.innerHTML = '<p class="ag-error">' + tx('noMapa') + '</p>';
     }
   }
 
@@ -432,7 +480,7 @@
       e.preventDefault();
       var q = main.querySelector('#ag-q').value, msg = main.querySelector('#ag-msg');
       var l = buscarLoc(datos, q);
-      if (!l) { msg.textContent = 'No encontramos esa localidad en el mapa.'; msg.className = 'ag-msg ag-msg-on'; return; }
+      if (!l) { msg.textContent = tx('noLoc'); msg.className = 'ag-msg ag-msg-on'; return; }
       msg.textContent = ''; msg.className = 'ag-msg';
       if (est.mapa) {
         if (reducido()) est.mapa.setView([l.lat, l.lon], 12); else est.mapa.flyTo([l.lat, l.lon], 12);

@@ -51,3 +51,15 @@ test('el dictamen de cultivos contiene el total sembrado 3,879.6', () => {
   const c = datos.fichas.find((f) => f.id === 'cultivos');
   assert.ok(c.detalle.dictamen.texto.includes('3,879.6'));
 });
+
+test('el resumen de la ficha Clima coincide con indicadores.json (no se queda viejo)', async () => {
+  const { readFileSync } = await import('node:fs')
+  const agro = JSON.parse(readFileSync(new URL('../data/agricola.json', import.meta.url), 'utf8'))
+  const ind = JSON.parse(readFileSync(new URL('../data/indicadores.json', import.meta.url), 'utf8'))
+  const texto = agro.fichas.find((f) => f.id === 'clima').detalle.dictamen.texto
+  for (const i of ind.indicadores) {
+    const p = i.significancia.p_valor < 0.001 ? 'p < 0.001' : 'p = ' + i.significancia.p_valor.toFixed(3)
+    assert.ok(texto.includes(p), `${i.id}: falta ${p}`)
+    if (i.cambio_total !== null) assert.ok(texto.includes(i.fuente.periodo), `${i.id}: falta ${i.fuente.periodo}`)
+  }
+})
