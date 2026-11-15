@@ -17,7 +17,7 @@ Also from "Project Submission": images and videos that are generated content nee
 - Claude Code (used).
 - Google Stitch (used; Google's AI interface design tool). Confirmed by the team on 2026-11-14. If "Google Stitch" is not in the drop-down menu, select "Other" and write it.
 - Gemini (used; Google): generated the "Radar BCS" logo. Confirmed by the UI/UX member on 2026-11-14. TODO: re-check before submitting; if anything else is used later (for example a generated image), add it here.
-- ElevenLabs (planned; confirm it was really used before submitting): synthetic voice for the narration of the 30-second demo video. If the voice is not used in the end, remove this line and the matching row in `docs/RECURSOS.md`.
+- ElevenLabs (used; decided by the team lead on 2026-11-15): synthetic voice for the narration of the 30-second demo video. If the voice is not used in the end, remove this line and the matching row in `docs/RECURSOS.md`.
 
 ## Where and how each tool was used
 
@@ -26,7 +26,7 @@ Also from "Project Submission": images and videos that are generated content nee
 - AI-generated logo: the "Radar BCS" logo (radar rings, cactus and water drop) was generated with Gemini (Google). It was not made with Google Stitch. On the website it appears in the header of every screen **as `web/assets/logo-radar-bcs-ai-generated.png`, with the "AI-generated" watermark built into the image** (the official submission guide requires a visible watermark on generated images; the separate text label next to the logo was removed on 2026-11-15 to save space, see `docs/FUENTES-Y-IA.md`). The footer of every screen also says "AI-generated logo (Gemini)" and the home footer shows an "AI-generated" label next to its logo. In Figma, the header component also carries the label, and `web/assets/logo-radar-bcs-ai-generated.png` is the logo with the label built in.
 - Claude Code (UI/UX): used to polish the Figma design files (unified header and footer components, active tabs, colors), export the screen references and icon/logo assets, and write the design specification and its checks (`diseno/`, `web/assets/`).
 - Google Stitch: the reference screens (imported into Figma as mockups) came from Stitch; the final Figma screens are the team's own work, partly based on those mockups. Terms of use for the Stitch-generated designs reviewed on 2026-11-14 (see above); no personal data or keys were entered into Stitch.
-- ElevenLabs (planned): generates the English narration of the demo video from our own script (`docs/entrega/08b-video-shotlist.md`). Only the voice is generated; the screen footage is a recording of our own website. The video shows the text "AI-generated voice (ElevenLabs)" and says so in its description.
+- ElevenLabs (used): generates the English narration of the demo video from our own script (`docs/entrega/08b-video-shotlist.md`). Only the voice is generated; the screen footage is a recording of our own website. The video shows the text "AI-generated voice (ElevenLabs)" and says so in its description.
 - No other AI tools were used (no video or 3D generation; no generated image besides the logo).
 - Third-party skills and plugins used as development tools: listed in docs/skills-terceros.md. TODO: summarize if needed.
 
