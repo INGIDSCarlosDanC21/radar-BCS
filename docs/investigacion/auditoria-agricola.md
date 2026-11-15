@@ -2,7 +2,22 @@
 
 Auditor: Luca (Prog. A), con ayuda de Claude (IA). Fecha: 2026-11-15. Condición de Carlos para que el Mapa Agrícola entre a `main` (`docs/decisiones.md`, 2026-11-14), PR #88 y PR #85.
 
-**Veredicto: NO PASA todavía.** Todo lo que pude abrir coincide con su fuente. Quedan 3 correcciones en la web y 2 fuentes sin comprobar (SIAP y SEPADA: sus servidores no respondieron desde mi conexión). Cuando Diego corrija y el SIAP se confirme, el veredicto pasa a "pasa".
+**Veredicto de la segunda pasada (2026-11-15, sobre `dev` en `635ac80`): PASA CON RESERVA.** Las correcciones 1 a 3 ya están en `dev` (#130 y #137). Todo lo que pude abrir coincide con su fuente y la puerta de calidad está en verde (pytest 62, node web 45 y diseño 33, `web/data` = `data/salida`, sin archivos de más de 5 MB). **La reserva:** las cifras del SIAP (ficha Factibilidad y Cultivos) y la cita de SEPADA no se pudieron comprobar contra su fuente porque los dos servidores no respondieron (SIAP: sin respuesta tras 25 s y tras 500 s, también hoy; SEPADA igual). Esas cifras solo se comprobaron por su aritmética interna. Decisión para Carlos: aceptar la reserva o dejar fuera de `main` solo esa ficha y la tarjeta de SEPADA. Yo cambio a "pasa" en cuanto el SIAP responda y coincida.
+
+## Segunda pasada (después de #130 y #137)
+
+| Corrección pedida | Estado en `dev` |
+|---|---|
+| 1. Resumen de Clima con el calor del aire | Hecho: «+1.47 °C en 2001-2025 … p < 0.001» y «la temperatura de la superficie vista por satélite no es concluyente» (ES y EN); coincide con `indicadores.json` |
+| 2. Leyenda del NDVI 2001–2026 | Hecho (ES y EN) |
+| 3. Etiqueta «extracción» | Hecho: ahora dice «volumen de extracción total» (13.49, 12.94 y 34.49) |
+| 4. Fecha de consulta | Sigue «14 nov 2026», que es la fecha real de la consulta; no se volvió a descargar el SIAP |
+| 5. Prueba de `home` con fecha fija | Resuelto: `web/tests` pasa 45 de 45 |
+| Opcional: cortes de fecha en la nota del acuífero 0324 | Pendiente, menor: la nota aún no cita los cortes (30-dic-2022 y 30-sep-2021) |
+
+Lo que sigue sin verificar: SIAP 2025 (todas las cifras de Cultivos), SEPADA, El Carrizal en SoilGrids, población de Chametla (INEGI) y la licencia de SoilGrids. Ninguna es una cifra que contradiga su fuente: son cifras que no pude abrir.
+
+Lo que sigue de la primera pasada queda abajo, sin cambios.
 
 ## Cómo se verificó
 
