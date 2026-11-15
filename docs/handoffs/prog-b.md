@@ -9,7 +9,7 @@
 - Probado a 360×740 claro y oscuro: 7 vistas sin errores de consola, sin "null" y sin scroll horizontal.
 
 - PR #54 (fusionado): vegetación real (−0.019 NDVI, MODIS MOD13Q1) y nota de límite bajo la cifra de calor.
-- Issue #9: la pantalla Mapa muestra arriba "Por punto de La Paz (datos reales)" con las tendencias de Luca (`web/data/zonas_tendencias.json`, copia sin BOM de `data/salida/`): temperatura de superficie (MOD11A2) y NDVI (MOD13Q1) en 6 puntos, primero los de tendencia clara. La franja del mapa ahora dice "MAPA DE PRUEBA — las zonas dibujadas no son mediciones".
+- Issue #9: mapa real. `web/data/zonas.geojson` es copia sin BOM de `data/salida/zonas.geojson` (Luca): 6 píxeles MODIS de 1 km (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), `datos_de_prueba: false`, así que ya no sale la franja. Vegetación muestra cifra y color en las 4 zonas con tendencia clara. Calor (superficie) muestra "Sin cambio claro" sin cifra en todas, por decisión de Investigación (`docs/investigacion/hallazgos.md`: la baja por zona depende de la prueba). Lluvia y agua: escala regional.
 
 ## En curso
 
@@ -18,7 +18,7 @@
 ## Falta
 
 - Que Carlos fusione `dev` → `main`; luego comprobar la URL pública sin sesión.
-- Coordenadas de los 6 puntos (están en los CSV de AppEEARS de Luca, fuera de git) para dibujarlos en el mapa; hasta entonces las zonas dibujadas son de prueba.
+- Si Investigación cambia la prueba para la superficie por zona, quitar `sinCifra` de `CAPA_ZONA.calor` en `web/js/app.js`.
 - `p_valor: 0.0` en NDVI de Chametla (regla 4 del Anexo); la web muestra "p < 0.001".
 - Caso no cubierto: `significativo: null` con `cambio_total` con valor mostraría la cifra con "Sin calcular" (hoy no ocurre en los datos).
 
