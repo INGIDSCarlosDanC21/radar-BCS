@@ -53,7 +53,7 @@ Se abrió Edit Details como dueño del equipo y solo se leyó. Estado de la pág
 
 ## Estado (se actualiza aquí; última revisión 2026-11-15, 05:20)
 
-- [x] 01 resumen (181 palabras, 1093 caracteres; incluye el contexto en vivo)
+- [x] 01 resumen (193 palabras, 1168 caracteres; incluye los 3 problemas locales y el contexto en vivo)
 - [ ] 02 enlace de la demo: **video por grabar** (guion en `08b-video-shotlist.md`); debe subirse y probarse sin sesión antes de las 23:59
 - [x] 03 enlace del proyecto: sitio público probado sin sesión el 2026-11-15, en español y en inglés (`?lang=en`), sin errores de consola
 - [x] 04 detalles al día con la web final (Mapa Meteorológico, Clima, Pesca, Avisos); falta anotar el celular real si se prueba (#71) y confirmar equipos
