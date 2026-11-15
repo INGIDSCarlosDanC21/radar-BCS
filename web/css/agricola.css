@@ -30,7 +30,7 @@ body[data-vista=agricola] main{max-width:none;margin:0;padding:0}
 .ag-sub{margin-top:4px;font-size:16px;line-height:26px;color:#44474d;max-width:896px}
 .ag-busca{display:flex;flex-direction:column;gap:8px;background:#fff;border-radius:12px;padding:8px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .ag-busca-campo{display:flex;align-items:center;gap:12px;flex:1;min-height:44px;background:#f2f4f7;border-radius:8px;padding:0 16px;color:#000d21}
-.ag-busca-campo input{flex:1;min-width:0;height:40px;border:0;background:transparent;font:inherit;font-size:14px;color:#000d21}
+.ag-busca-campo input{flex:1;min-width:0;height:44px;border:0;background:transparent;font:inherit;font-size:14px;color:#000d21}
 .ag-busca-campo input:focus-visible{outline:none}
 .ag-busca-campo:focus-within{outline:3px solid #006d3d;outline-offset:2px}
 .ag-rastrear{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:0 24px;border:0;border-radius:8px;background:#000d21;color:#fff;cursor:pointer;
@@ -216,3 +216,7 @@ body[data-vista=agricola] main{max-width:none;margin:0;padding:0}
   .ag *{transition:none!important}
 }
 .ag-fuentes a{display:inline-block;min-height:44px;padding-block:12px}
+/* #119 D1: el botón solo para lectores de pantalla no ocupa caja visible; los marcadores tienen 44 px de área táctil */
+.ag-ficha-btn.ag-sr{width:1px;height:1px;padding:0}
+.ag-pin{position:relative}.ag-pin::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
+.ag-ficha-btn.ag-sr:focus-visible{position:static;width:100%;height:auto;min-height:44px;clip:auto;padding:12px 24px;outline:3px solid #006d3d}

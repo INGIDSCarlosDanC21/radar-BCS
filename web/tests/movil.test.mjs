@@ -23,3 +23,10 @@ test('botones del mapa y enlaces de fuente miden al menos 44 px', () => {
   assert.match(css, /\.ag-mapa \.leaflet-control-zoom a\{width:44px;height:44px/);
   assert.match(css, /a\.enlace-fuente\{[^}]*min-height:44px/);
 });
+
+test('Mapa Agrícola: buscador de 44 px, marcadores con área táctil de 44 px y botón oculto visible al enfocarlo', () => {
+  const css = leer('../css/agricola.css');
+  assert.match(css, /\.ag-busca-campo input\{[^}]*height:44px/);
+  assert.match(css, /\.ag-pin::after\{[^}]*height:44px/);
+  assert.match(css, /\.ag-ficha-btn\.ag-sr:focus-visible\{[^}]*min-height:44px/);
+});
