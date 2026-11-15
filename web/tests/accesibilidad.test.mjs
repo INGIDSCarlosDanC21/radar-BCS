@@ -22,6 +22,7 @@ test('foco visible en enlaces, botones, campos, tabindex y el mapa', () => {
   assert.match(css, /input:focus-visible,select:focus-visible,summary:focus-visible,\[tabindex\]:not\(\[tabindex="-1"\]\):focus-visible,\.leaflet-container:focus-visible\{outline:3px solid/);
 });
 
-test('Inicio y Mapa Agrícola (claros también en modo oscuro) usan colores claros en la cabecera', () => {
-  assert.match(css, /body\[data-vista=inicio\] \.cabecera,body\[data-vista=agricola\] \.cabecera[^{]*\{\s*--texto:#1b1f23;--suave:#4a525a/);
+test('la cabecera usa las mismas variables claras en todas las pantallas (sin parche por pantalla)', () => {
+  assert.doesNotMatch(css, /body\[data-vista=(inicio|agricola)\] \.cabecera[^{]*\{[^}]*--texto:/);
+  assert.match(css, /--texto:#000d21;--suave:#44474d/);
 });
