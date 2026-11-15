@@ -168,6 +168,42 @@ for (const [nombre, fg, bg] of pares) {
   });
 }
 
+// Modo oscuro: lee los valores del bloque @media (prefers-color-scheme: dark) de tokens.css.
+function tokensOscuros() {
+  const css = fs.readFileSync(R('web', 'assets', 'tokens.css'), 'utf8');
+  const i = css.indexOf('@media (prefers-color-scheme: dark)');
+  assert.ok(i > 0, 'tokens.css no tiene bloque de modo oscuro');
+  const t = {};
+  for (const m of css.slice(i).matchAll(/(--rb-[a-z0-9-]+):\s*(#[0-9a-f]{6})/gi)) t[m[1]] = m[2].toLowerCase();
+  return t;
+}
+const paresOscuros = [
+  ['tinta sobre fondo', '--rb-tinta', '--rb-fondo-pagina'],
+  ['tinta sobre tarjeta', '--rb-tinta', '--rb-fondo-tarjeta'],
+  ['texto suave sobre fondo', '--rb-texto-suave', '--rb-fondo-pagina'],
+  ['texto suave sobre tarjeta', '--rb-texto-suave', '--rb-fondo-tarjeta'],
+  ['texto suave sobre gris 140', '--rb-texto-suave', '--rb-gris-140'],
+  ['gris medio sobre tarjeta', '--rb-gris-medio', '--rb-fondo-tarjeta'],
+  ['verde vivo sobre tarjeta', '--rb-verde-vivo', '--rb-fondo-tarjeta'],
+  ['pildora de estado', '--rb-pildora-texto', '--rb-pildora-fondo'],
+  ['cian sobre tarjeta', '--rb-cian-oscuro', '--rb-fondo-tarjeta'],
+  ['error sobre su fondo', '--rb-error', '--rb-error-fondo'],
+  ['azul info sobre tarjeta', '--rb-azul-info', '--rb-fondo-tarjeta'],
+];
+for (const [nombre, fg, bg] of paresOscuros) {
+  test(`modo oscuro, contraste >= 4.5: ${nombre} (${fg} sobre ${bg})`, () => {
+    const t = tokensOscuros();
+    assert.ok(t[fg] && t[bg], `falta ${fg} o ${bg} en el bloque oscuro`);
+    const r = contraste(t[fg], t[bg]);
+    console.log(`  oscuro ${nombre}: ${r.toFixed(2)}:1`);
+    assert.ok(r >= 4.5, `${r.toFixed(2)} < 4.5`);
+  });
+}
+test('modo oscuro: blanco sobre pestana activa >= 4.5', () => {
+  const r = contraste('#ffffff', tokensOscuros()['--rb-marino']);
+  assert.ok(r >= 4.5, `${r.toFixed(2)} < 4.5`);
+});
+
 // ---------- (f) logo ----------
 test('logo existe y es proporcional a 156x44 (exportado a 3x)', () => {
   const png = leerPNG(R('web', 'assets', 'logo-radar-bcs.png'));

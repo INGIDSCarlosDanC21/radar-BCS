@@ -1,5 +1,27 @@
 # Revisión a 360 px del sitio real (issue #98)
 
+## Actualización: segunda pasada sobre `dev` (2026-11-14, noche)
+
+Medición automática con `diseno/tools/revisar-360.js` (viewport 360x800) sobre `origin/dev` en d86cc87, ya con el Mapa Agrícola (#88) y la versión en inglés (`?lang=en`). Rutas: `#inicio`, `#mapa`, `#ficha/{calor|vegetacion|lluvia|agua}`, `#agricola`, `#acciones`, en español e inglés (los resultados coinciden).
+
+| Hallazgo | Estado | Dato medido |
+|---|---|---|
+| **P0** Scroll horizontal en Ficha de lluvia | **Sigue** | La página mide 492 px (desborde de 132 px) por el enlace `https://power.larc.nasa.gov/docs/service...` de 459 px |
+| **P1 nuevo** Mapa Agrícola: etiquetas de los pines cortadas | **Nuevo** | El mapa va de x=16 a x=344; las 4 etiquetas se salen: "Los Planes…" llega a 523, "El Carrizal…" a 476, "Chametla…" a 387, "El Centenario…" a 366. Sugerencia: a 360 px mostrar solo el nombre del lugar y el resto en el popup, o `max-width: 160px; white-space: normal` |
+| P1 Mapa Agrícola: letra pequeña | Nuevo | 17 textos de 10 px (`.ag-mono`, `.ag-pin`) y 5 de 11 px (lista de acuíferos, fuentes). Mínimo 12 px |
+| P1 Mapa Agrícola: enlace "Leaflet" | Nuevo | 45x14 px. Los botones de zoom sí miden 40x40 (casi 44) |
+| P1 Leyenda del mapa: "sin datos" frente a "Sin cambio claro" | **Sigue** | En inglés la leyenda dice "no data" y la lista "No clear change" para Sur y El Centenario |
+| P1 Zoom del mapa principal | **Sigue** | 30x30 px (en Agrícola ya son 40x40) |
+| P1 Letra de 10 px en Inicio | **Sigue** | 8 textos (`.hm-mono`, `.hm-dato-k`) |
+| P1 Ejes de las fichas en 11 px | **Sigue** | 5 textos por ficha |
+| P1 Enlaces de fuente de 17–21 px de alto | **Sigue** | En las 4 fichas y en Acciones |
+| P1 Marca "AI-generated" y logo en la cabecera | **Sigue** | La cabecera solo tiene el texto "Radar BCS"; no hay `<img>` del logo ni la marca |
+| `#agricola` no existía | **Resuelto** | Ya existe (PR #88) |
+| **P1 nuevo** Modo oscuro roto en Inicio y Agrícola | **Nuevo** | Con el sistema en oscuro, `home.css` y `agricola.css` dejan el fondo claro `#f7f9fc` y la cabecera y el pie usan texto claro: "La Paz, B.C.S." y el pie a 1.80:1, "English" a 1.96:1. Mapa, Ficha y Acciones pasan. En modo claro las 5 rutas pasan 4.5:1. Arreglo: usar los tokens `--rb-*` (ya traen bloque oscuro) en vez de hex fijos |
+
+Sin scroll horizontal en las demás rutas (también en inglés). La cabecera ya tiene el enlace "English".
+
+
 Fecha: 2026-11-14. Rama `ui-ux/cierre-98`. Sitio servido de `web/` en local; medición en viewport emulado 360x800 (script en página: desbordes, texto "null/undefined/NaN", fuentes <12 px, áreas táctiles <44 px) y capturas con Edge headless (iframe de 360 px, recortadas a 360 de ancho; tema oscuro del sistema).
 Rutas: `#inicio`, `#mapa`, `#ficha/{calor|vegetacion|lluvia|agua}`, `#acciones`. **`#agricola` no existe** en la web: cae en Inicio (no hay Mapa Agrícola que revisar).
 
