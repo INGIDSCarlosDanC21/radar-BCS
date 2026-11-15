@@ -23,6 +23,19 @@
   - Se quitaron los textos "DATOS DE PRUEBA" de `web/README.md` y del HTML. La franja la escribe el JS y solo sale si `datos_de_prueba` es true.
   - En el mapa, el título dice "Zonas:" en lugar de "Zonas con más cambio:" cuando ninguna zona tiene una tendencia clara (pasa con calor).
   - Revisión a 360 px: Inicio, las 4 fichas, Mapa (6 polígonos) y Acciones, sin null, sin scroll horizontal, sin errores de consola y sin franja. Calor aparece como "Sin cambio claro" y agua aparece como regional.
+- **Mapa Agrícola** (rama `prog-b/mapa-agricola`, ruta `#agricola`): diseño de Figma con 4 fichas (Factibilidad y Cultivos, Clima y Agua, Salud del Suelo, Riesgos y Sanidad). Al hacer clic, la ficha se expande y oculta las demás; "✕ Cerrar", Esc o el botón atrás la regresan a la lista de fichas.
+  - **Datos:** `web/data/agricola.json` lo arma `web/tools/armar_agricola.py`, con caché en `data/cache/agricola/`. Fuentes y cifras:
+    - SIAP, cierre agrícola 2025, municipio de La Paz: 3,879.6 ha, 100 % riego.
+    - CONAGUA, DOF 09/11/2023: disponibilidad de 4 acuíferos.
+    - NASA POWER: clima.
+    - ISRIC SoilGrids (CC BY 4.0): suelo.
+    - SMN: Monitor de Sequía.
+    - DOF 2018: zona libre de moscas de la fruta.
+    - Perfil Estatal de Riesgos BCS 2025: ciclones.
+    - GeoNames (CC BY 4.0): coordenadas.
+  - **Quitado de Figma por no ser verificable:** "Viabilidad %", "ÓPTIMO", temperaturas en vivo, "Iniciar simulación", flujo de viento, PDF y calendarios de siembra.
+  - **Discrepancia sin resolver:** para el acuífero La Paz 0324, el DOF 09/11/2023 da −13.49 hm³/año y el DOF del 17/08/2023 da un déficit de 27.83 hm³/año. No se sabe cuál rige y la ficha lo dice.
+  - **Fuentes registradas** en `docs/RECURSOS.md` y `docs/entrega/07` (SIAP, CONAGUA/DOF, NASA POWER, SoilGrids, GeoNames, SMN, SEPADA, Salud BCS). Las licencias de los datos del gobierno de México quedan "por confirmar; solo se citan".
 - **Issue #78, auditoría de Carlos** (rama `prog-b/issue-78`, PR #89):
   - **Método por ficha:** cada ficha explica su propio método según `significancia.metodo`. Calor y vegetación usan la prueba estacional; lluvia, el total anual; agua, la corrección por autocorrelación. La función es `RB.explicaMetodo` en `reglas.js` y tiene prueba.
   - **Aviso de IA:** está en el pie general y en el pie de la Home: "Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch". Ambas herramientas están declaradas en `docs/RECURSOS.md`.

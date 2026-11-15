@@ -284,7 +284,7 @@
   function ruta() {
     if (mapa) { try { mapa.remove(); } catch (e) {} mapa = null; }
     var h = (location.hash || '#inicio').slice(1).split('/');
-    var sec = ['inicio', 'mapa', 'ficha', 'acciones'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
+    var sec = ['inicio', 'mapa', 'ficha', 'acciones', 'agricola'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
     document.querySelectorAll('[data-nav]').forEach(function (a) {
       if (a.getAttribute('data-nav') === sec) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
@@ -294,11 +294,28 @@
     if (sec === 'inicio') { if (window.RBHome) window.RBHome.render(main, DATOS); else inicio(); }
     else if (sec === 'mapa') mapaVista();
     else if (sec === 'ficha') ficha(h[1]);
+    else if (sec === 'agricola') { agricolaVista(h[1] || null); document.title = 'Radar BCS — Mapa Agrícola'; return; }
     else acciones();
     document.title = 'Radar BCS — ' + sec.charAt(0).toUpperCase() + sec.slice(1);
   }
+
+  /* ---------- Mapa Agrícola (datos en data/agricola.json) ---------- */
+  var AGRO = null;
+  function agricolaVista(abierta) {
+    var pintar = function () { window.RBAgricola.render(main, AGRO, ZONAS, abierta); };
+    if (AGRO) return pintar();
+    main.innerHTML = '<p class="cargando">Cargando datos agrícolas…</p>';
+    fetch('data/agricola.json').then(ok).then(function (d) { AGRO = d; pintar(); }).catch(function (e) {
+      main.innerHTML = '<div class="error" role="alert"><h2>No se pudieron cargar los datos agrícolas</h2><p>Detalle: ' + esc(e.message) + '.</p></div>';
+    });
+  }
   var prev = null;
-  window.addEventListener('hashchange', function () { ruta(); window.scrollTo(0, 0); });
+  window.addEventListener('hashchange', function (ev) {
+    // Dentro del Mapa Agrícola (abrir/cerrar ficha) no se sube al inicio: agricola.js maneja el scroll.
+    var deAgro = /#agricola(\/|$)/.test(ev.oldURL || ''), aAgro = /^#agricola(\/|$)/.test(location.hash);
+    ruta();
+    if (!(deAgro && aAgro)) window.scrollTo(0, 0);
+  });
   cargar().then(function () { ruta(); }).catch(function (e) {
     main.innerHTML = '<div class="error" role="alert"><h2>No se pudieron cargar los datos</h2><p>Detalle: ' + esc(e.message) +
       '.</p><p>Si abriste el archivo con doble clic (file://), no funciona: usa un servidor local, por ejemplo <code>python -m http.server -d web 8000</code> y abre http://localhost:8000.</p></div>';
