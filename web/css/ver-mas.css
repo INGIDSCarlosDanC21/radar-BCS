@@ -53,6 +53,11 @@
   cursor: pointer;
 }
 .vm-subir[hidden] { display: none; }
+/* En celular solo la flecha (44 x 44 px): tapa menos la leyenda y los datos; el nombre sigue en aria-label. */
+@media (max-width: 639px) {
+  .vm-subir { right: 8px; bottom: calc(70px + env(safe-area-inset-bottom)); padding: 0; justify-content: center; width: 44px; opacity: .92; }
+  .vm-subir-t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
 @media (min-width: 1024px) {
   .vm-subir { bottom: 20px; right: 20px; }
 }
