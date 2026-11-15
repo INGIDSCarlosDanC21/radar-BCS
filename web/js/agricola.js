@@ -237,7 +237,7 @@
         '<p class="ag-pie-desc">Tendencias ambientales de La Paz, B.C.S., con datos abiertos de la NASA.</p></div>' +
         '<nav aria-label="Pie de página"><p class="ag-mono ag-negro">Pantallas</p>' +
         '<a href="#inicio">Inicio</a><a href="#mapa">Mapa</a><a href="#ficha/calor">Fichas</a><a href="#acciones">Acciones</a><a href="#agricola">Mapa Agrícola</a></nav></div>' +
-        '<p class="ag-mono ag-copy">© 2026 Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0</p></footer>' +
+        '<p class="ag-mono ag-copy">© 2026 Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0<br>Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch.</p></footer>' +
       '</div>';
     return h;
   }
