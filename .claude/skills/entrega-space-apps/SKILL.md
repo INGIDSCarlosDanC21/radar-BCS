@@ -35,7 +35,7 @@ Fuente: PDFs en `docs/referencia/originales/` ("Components of Project" y "Projec
 1. Guardar con **Save Progress** seguido (se puede escribir antes en un documento aparte y pegar).
 2. Activar **Lock** (ON) para evitar que otro integrante edite a la vez; se puede quitar si hay que corregir.
 3. Pulsar **Submit for Judging**. Si faltan secciones obligatorias, no deja continuar.
-4. Ver la confirmación que muestra la plataforma (su texto exacto no está en los documentos de la sede); se puede reeditar y reenviar hasta el cierre. **Reenviar tras cada cambio**.
+4. Ver el banner de confirmación: según el PDF oficial (diapositiva 21) aparece "un banner arriba de la pantalla con un mensaje de confirmación" y el panel pasa a "Project Submitted for Judging" con "Last Saved" y "Last Submitted"; se puede reeditar y reenviar hasta el cierre. **Reenviar tras cada cambio**.
 
 ## Verificación final (sin sesión iniciada)
 - [ ] Abrir demo y proyecto en ventana privada, sin cuenta: sin contraseña, permiso ni registro.
@@ -43,7 +43,7 @@ Fuente: PDFs en `docs/referencia/originales/` ("Components of Project" y "Projec
 - [ ] Idioma inglés en página, enlace final y demo; subtítulos en inglés si hay video.
 - [ ] Marcas de agua de IA presentes; ningún logo NASA.
 - [ ] Datos NASA con enlace; recursos completos.
-- [ ] Captura de la confirmación de envío (y de la pestaña Project ya enviada) guardada en `docs/entrega/`.
+- [ ] Captura del banner de confirmación y del panel "Project Submitted for Judging" (con "Last Submitted" anterior al cierre) guardada en `docs/entrega/`.
 
 ## Criterios globales (de `AGENTS.md`, 1 a 5)
 Impact, Creativity, Validity, Relevance, Presentation. La rúbrica local y la hora límite de la sede están pendientes de confirmar.
