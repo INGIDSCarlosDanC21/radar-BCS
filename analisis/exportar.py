@@ -22,11 +22,11 @@ def _r(x, n=3):
 
 
 def _indicador(id_, titulo, variable, unidades, mat_anual_fn, mat, datos, fecha, inicio, fin,
-               fuente_extra, limitacion, anual_simple=False):
+               fuente_extra, limitacion, anual_simple=False, prueba=None, metodo=None):
     """Arma un indicador a partir de una matriz mensual (años x 12)."""
     anios = list(range(inicio, fin + 1))
     anual = mat_anual_fn(mat)
-    est = t.tendencia_anual(anual) if anual_simple else t.tendencia_estacional(mat)
+    est = prueba(mat) if prueba else (t.tendencia_anual(anual) if anual_simple else t.tendencia_estacional(mat))
     pend = est["pendiente_por_anio"]
     claro = est["significativo"]  # sin cambio claro: sin cifra (contrato, anexo 3, aplicado a todos los indicadores)
     return {
@@ -37,7 +37,7 @@ def _indicador(id_, titulo, variable, unidades, mat_anual_fn, mat, datos, fecha,
         "tendencia_por_decada": _r(pend * 10) if claro else None,
         "por_decada": [{"decada": d["decada"], "media": _r(d["media"])}
                        for d in t.por_decada(anios, anual, inicio, fin)],
-        "significancia": {"metodo": ("Mann-Kendall sobre el total anual + pendiente de Sen" if anual_simple else "Mann-Kendall estacional + pendiente de Sen"), "p_valor": float(f"{est['p_valor']:.4g}"),
+        "significancia": {"metodo": metodo or ("Mann-Kendall sobre el total anual + pendiente de Sen" if anual_simple else "Mann-Kendall estacional + pendiente de Sen"), "p_valor": float(f"{est['p_valor']:.4g}"),
                           "alfa": t.ALFA, "significativo": est["significativo"]},
         "serie_anual": [{"anio": a, "valor": _r(v)} for a, v in zip(anios, anual)],
         "fuente": {**fuente_extra, "periodo": f"{inicio}-{fin}", "fecha_descarga": fecha},
@@ -66,7 +66,6 @@ def _vegetacion(ndvi_zonas, fecha, inicio, fin):
 
 
 def _agua(mat, fecha, fin):
-    c = t.tendencia_estacional_correlacionada(mat)
     return _indicador(
         "agua", "Agua", "Anomalía de agua total almacenada (GRACE/GRACE-FO, JPL Mascon CRI RL06.3Mv04), celda de La Paz",
         "cm", agua.promedio_anual_minimo, mat, None, fecha, agua.INICIO, fin,
@@ -76,7 +75,10 @@ def _agua(mat, fecha, fin):
         "Es una anomalía respecto a un promedio de referencia, en cm de agua equivalente. El periodo va de 2002 al último mes publicado "
         f"(el año {fin} es parcial: entra a la prueba de tendencia mensual, no al promedio anual); "
         "faltan meses (hueco entre GRACE y GRACE-FO) y se promedian solo los años con al menos 9 meses. "
-        f"Con la prueba que corrige la autocorrelación, p = {c['p_valor']:.2g} ({'significativa' if c['significativo'] else 'no significativa'}). No indica la causa.")
+        "El p-valor corrige la autocorrelación entre meses (la prueba estacional simple da uno mucho menor, demasiado optimista). "
+        "No indica la causa.",
+        prueba=t.tendencia_estacional_correlacionada,
+        metodo="Mann-Kendall estacional con corrección por autocorrelación + pendiente de Sen")
 
 
 def zonas(lst, ndvi, inicio, fin):

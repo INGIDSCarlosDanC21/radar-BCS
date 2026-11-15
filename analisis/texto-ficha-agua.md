@@ -11,7 +11,7 @@ Cifras de `data/salida/indicadores.json` (indicador `agua`), calculadas por cód
 | Cambio total | +1.36 cm (estimación lineal con la pendiente de Sen; no es una medición) |
 | Por década | +0.57 cm |
 | Promedio 2002-2011 / 2012-2021 / 2022-2025 | -0.09 / +0.74 / +0.67 cm (2026 no entra al promedio por estar incompleto) |
-| Significancia | Mann-Kendall estacional + Sen: significativa (p ≈ 1e-17). Con la prueba que corrige la autocorrelación mensual también lo es (con datos hasta 2025, p = 0.0094) |
+| Significancia | Mann-Kendall estacional con corrección por autocorrelación + Sen: significativa, p = 0.0094. (La prueba estacional simple da p ≈ 1e-17, demasiado optimista porque trata los meses como independientes; no se publica.) |
 | Resolución | Malla de 0.5°, interpolada de mascones de 3°; la señal representa cientos de km |
 
 ## Texto sugerido para la web (español)

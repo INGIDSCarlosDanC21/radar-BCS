@@ -448,8 +448,8 @@
     }
    ],
    "significancia": {
-    "metodo": "Mann-Kendall estacional + pendiente de Sen",
-    "p_valor": 9.913e-18,
+    "metodo": "Mann-Kendall estacional con corrección por autocorrelación + pendiente de Sen",
+    "p_valor": 0.009435,
     "alfa": 0.05,
     "significativo": true
    },
@@ -562,7 +562,7 @@
     "periodo": "2002-2026",
     "fecha_descarga": "2026-11-14"
    },
-   "limitacion": "Tendencia REGIONAL del agua total almacenada (suelo, agua subterránea y superficial), no del acuífero de La Paz. Es una anomalía respecto a un promedio de referencia, en cm de agua equivalente. El periodo va de 2002 al último mes publicado (el año 2026 es parcial: entra a la prueba de tendencia mensual, no al promedio anual); faltan meses (hueco entre GRACE y GRACE-FO) y se promedian solo los años con al menos 9 meses. Con la prueba que corrige la autocorrelación, p = 0.0094 (significativa). No indica la causa."
+   "limitacion": "Tendencia REGIONAL del agua total almacenada (suelo, agua subterránea y superficial), no del acuífero de La Paz. Es una anomalía respecto a un promedio de referencia, en cm de agua equivalente. El periodo va de 2002 al último mes publicado (el año 2026 es parcial: entra a la prueba de tendencia mensual, no al promedio anual); faltan meses (hueco entre GRACE y GRACE-FO) y se promedian solo los años con al menos 9 meses. El p-valor corrige la autocorrelación entre meses (la prueba estacional simple da uno mucho menor, demasiado optimista). No indica la causa."
   }
  ]
 }

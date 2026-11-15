@@ -67,3 +67,6 @@ Es otro píxel que los de las 6 zonas, así que no se compara valor por valor; s
 - **Agua = lo más actual hasta 2026**: el periodo va de 2002 a 2026 (último mes publicado: septiembre de 2026). Resultado: +1.362 cm, p = 9.9e-18 (MK estacional; con autocorrelación sigue significativa). 2026 es parcial: entra a la prueba mensual, no al promedio anual ni a las décadas (`2022-2026` promedia solo 2022-2025).
 - `p_valor` ya no sale `0.0` (regla 4 del anexo): se recalcula desde z cuando la librería lo redondea. Prueba nueva.
 - Vegetación, lluvia y calor siguen en 2001-2025 (los CSV de MODIS bajados llegan a 2025); no se ha extendido a 2026.
+
+## Corrección del p-valor del agua (2026-11-14)
+El indicador `agua` publicaba p = 9.9e-18 (Mann-Kendall estacional simple), demasiado optimista: GRACE tiene fuerte autocorrelación entre meses. Ahora `significancia` usa la prueba con corrección por autocorrelación (`tendencia_estacional_correlacionada`): **p = 0.0094, significativa**, con la misma pendiente de Sen (+0.057 cm/año, +1.362 cm en 2002-2026). El método se rotula "Mann-Kendall estacional con corrección por autocorrelación + pendiente de Sen". Prueba nueva (23 en total). Calor y vegetación siguen con la prueba estacional simple y coinciden con la correlacionada en significancia (calor sin cambio claro: p = 0.11 y 0.38; vegetación: p = 1.3e-5 y 0.022).
