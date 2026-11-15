@@ -5,8 +5,10 @@ Las tareas enviadas se guardan en data/cache/appeears/tareas.json para no reenvi
 
   python -m analisis.appeears login       # solo comprueba las credenciales
   python -m analisis.appeears enviar      # envía las tareas que falten
+  python -m analisis.appeears enviar2026  # las 6 zonas solo para 2026
   python -m analisis.appeears descargar   # baja los CSV de las tareas terminadas
 """
+import csv
 import json
 import os
 import sys
@@ -72,6 +74,56 @@ def enviar(h):
         print(f"{producto}: tarea enviada ({tareas[producto]})")
 
 
+def _puntos_zonas():
+    """Las 6 zonas (nombre, id, lat, lon) tal como están en el CSV de usuario de 2001-2025."""
+    ruta = next((CACHE / "usuario").glob("*MOD11A2*results.csv"))
+    vistos = {}
+    with open(ruta, encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            vistos[(r["Category"], r["ID"])] = (float(r["Latitude"]), float(r["Longitude"]))
+    return [{"id": i, "category": c, "latitude": la, "longitude": lo} for (c, i), (la, lo) in sorted(vistos.items())]
+
+
+def enviar_zonas_2026(h, anio=2026):
+    """Tarea de las 6 zonas solo para `anio` (complementa los CSV de usuario 2001-2025)."""
+    tareas = _tareas()
+    puntos = _puntos_zonas()
+    for producto, capas in PRODUCTOS.items():
+        clave = f"{producto}-zonas-{anio}"
+        if clave in tareas:
+            print(f"{clave}: ya enviada ({tareas[clave]})")
+            continue
+        cuerpo = {"task_type": "point", "task_name": f"radar-bcs-{clave}",
+                  "params": {"dates": [{"startDate": f"01-01-{anio}", "endDate": f"12-31-{anio}"}],
+                             "layers": [{"product": producto, "layer": c} for c in capas],
+                             "coordinates": puntos}}
+        r = requests.post(f"{API}/task", json=cuerpo, headers=h, timeout=60)
+        if r.status_code not in (200, 202):
+            sys.exit(f"{clave}: HTTP {r.status_code} {r.text[:300]}")
+        tareas[clave] = r.json()["task_id"]
+        TAREAS.write_text(json.dumps(tareas, indent=1), encoding="utf-8")
+        print(f"{clave}: tarea enviada ({tareas[clave]}), {len(puntos)} puntos")
+
+
+def enviar_hora_paso(h):
+    """Hora local de observación (Day_view_time) de MOD11A2 en las 6 zonas, 2001 al año actual: sirve para ver si el paso de Terra se movió."""
+    clave = "MOD11A2.061-hora-de-paso"
+    tareas = _tareas()
+    if clave in tareas:
+        print(f"{clave}: ya enviada ({tareas[clave]})")
+        return
+    cuerpo = {"task_type": "point", "task_name": f"radar-bcs-{clave}",
+              "params": {"dates": [{"startDate": "01-01-2001", "endDate": "12-31-2026"}],
+                         "layers": [{"product": "MOD11A2.061", "layer": "Day_view_time"}],
+                         "coordinates": _puntos_zonas()}}
+    r = requests.post(f"{API}/task", json=cuerpo, headers=h, timeout=60)
+    if r.status_code not in (200, 202):
+        sys.exit(f"{clave}: HTTP {r.status_code} {r.text[:300]}")
+    tareas[clave] = r.json()["task_id"]
+    TAREAS.write_text(json.dumps(tareas, indent=1), encoding="utf-8")
+    print(f"{clave}: tarea enviada ({tareas[clave]})")
+
+
 def descargar_tareas(h):
     for producto, tid in _tareas().items():
         est = requests.get(f"{API}/status/{tid}", headers=h, timeout=60).json()
@@ -98,5 +150,9 @@ if __name__ == "__main__":
     print("Login AppEEARS correcto")
     if orden == "enviar":
         enviar(cabeceras)
+    elif orden == "enviar2026":
+        enviar_zonas_2026(cabeceras)
+    elif orden == "enviarhora":
+        enviar_hora_paso(cabeceras)
     elif orden == "descargar":
         descargar_tareas(cabeceras)

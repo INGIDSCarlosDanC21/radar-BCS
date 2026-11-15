@@ -33,3 +33,11 @@ def test_ciudad_ignora_nan():
     a[0, 0] = 3.0
     c = modis.ciudad({"a": a, "b": b})
     assert c[0, 0] == 2.0 and c[0, 1] == 1.0
+
+
+def test_leer_varios_csv_cuenta_una_vez_la_composicion_repetida(tmp_path):
+    a, b = tmp_path / "a.csv", tmp_path / "b.csv"
+    _csv(a, [("A", "2025-12-27", 300.15, "0b00")])
+    _csv(b, [("A", "2025-12-27", 300.15, "0b00"), ("A", "2026-01-01", 290.15, "0b00")])
+    z = modis.leer([a, b], modis.LST, lambda k: k - 273.15, lambda v: v > 0)
+    assert [(x, m) for x, m, _ in z["A"]] == [(2025, 12), (2026, 1)]
