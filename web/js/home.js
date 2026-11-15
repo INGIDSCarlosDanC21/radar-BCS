@@ -24,7 +24,9 @@
   }
   function pTxt(i) {
     var g = i.significancia;
-    return g && g.p_valor != null ? 'p = ' + RB.pTexto(g.p_valor, 3) : '';
+    if (!g || g.p_valor == null) return '';
+    var t = RB.pTexto(g.p_valor, 3);
+    return t.charAt(0) === '<' ? 'p ' + t : 'p = ' + t;
   }
   function cortoDataset(i) {
     return String(RB.textoFuente(i)).split(' vía ')[0];

@@ -17,26 +17,32 @@
   - **Home** (`web/js/home.js`, `web/css/home.css`): reemplaza Inicio con el diseño de Figma y solo datos de `indicadores.json`. Se quitaron las temperaturas en vivo, el radar dBZ, GOES-18 y los avisos, que eran ficticios.
   - **Imagen:** MODIS Terra de NASA GIBS (CC0), en `web/img/` con su `FUENTES.md`.
   - **Earth Engine:** script `web/tools/gee_imagen_bcs.py` para un compuesto MCD43A4. Requiere cuenta y no se ha corrido.
-- **Login y Register:** por el issue #73, se sacaron del PR #69 y pasaron a la rama `prog-b/login`, con su PR aparte a `dev`. Corte: domingo 15 nov, 09:00.
-- **Issue #78** (rama `prog-b/issue-78`), atendiendo la auditoría de Carlos:
+- **Login y Register:** por el issue #73, se sacaron del PR #69 y pasaron a la rama `prog-b/login` (PR #77, en borrador). Corte: domingo 15 nov, 09:00.
+- PR #69 (Home e imagen NASA) fusionado en `dev`.
+- **Issue #78** (rama `prog-b/sin-datos-prueba`):
+  - Se quitaron los textos "DATOS DE PRUEBA" de `web/README.md` y del HTML. La franja la escribe el JS y solo sale si `datos_de_prueba` es true.
+  - En el mapa, el título dice "Zonas:" en lugar de "Zonas con más cambio:" cuando ninguna zona tiene una tendencia clara (pasa con calor).
+  - Revisión a 360 px: Inicio, las 4 fichas, Mapa (6 polígonos) y Acciones, sin null, sin scroll horizontal, sin errores de consola y sin franja. Calor aparece como "Sin cambio claro" y agua aparece como regional.
+- **Issue #78, auditoría de Carlos** (rama `prog-b/issue-78`, PR #89):
   - **Método por ficha:** cada ficha explica su propio método según `significancia.metodo`. Calor y vegetación usan la prueba estacional; lluvia, el total anual; agua, la corrección por autocorrelación. La función es `RB.explicaMetodo` en `reglas.js` y tiene prueba.
   - **Aviso de IA:** está en el pie general y en el pie de la Home: "Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch". Ambas herramientas están declaradas en `docs/RECURSOS.md`.
-- **Datos de vegetación 2001-2026:** todavía no se copian a `web/data/`. Se copian una sola vez, cuando Luca suba la frase nueva de Calor; al 15 nov 00:00 aún no está en `dev`.
+  - **Datos nuevos copiados una sola vez** (punto 4 de la cola de `docs/PLAN-CIERRE.md`): `web/data/{indicadores.json,zonas.geojson,zonas_tendencias.json}` son copia exacta de `data/salida/` (una prueba nueva lo exige). Calor +0.935 °C 2001-2021 (p < 0.001); vegetación −0.013 NDVI 2001-2026 (p = 0.004).
+  - **Calor por zona con cifra:** se quitó el "sin cifra"; 4 zonas con tendencia clara (Chametla +1.50, Oriente +1.10, Centro +1.09, Surponiente +0.897 °C) y 2 sin cambio claro (Sur, El Centenario), con nota del corte en 2021.
+  - **Arreglos:** el pie del mapa toma el periodo de cada capa (vegetación decía 2001–2021, que es el de calor); la conclusión de la ficha mostraba "p = 0.00" en vegetación por redondear a 2 decimales, ahora usa 3 como el resto; la Home dice "p < 0.001" en vez de "p = < 0.001".
 
 ## En curso
 
-- PR #69 (`prog-b/figma-pantallas` → `dev`): Home e imagen NASA, sin login.
-- Rama `prog-b/login`: ajustar el login a las condiciones del #73.
+- PR #77 (`prog-b/login`): faltan el propósito de la cuenta, el proyecto de Supabase, el canal de borrado y la prueba en celular.
 
 ## Falta
 
+- **#78-1:** integrar las 2 pantallas de UI/UX cuando Ehileen y Roberto las entreguen (#11 no tiene entregas todavía).
+- **#78-4 y #71:** probar en un celular real con Carlos y Roberto.
 - **Login (#73):**
   - Definir para qué sirve la cuenta.
   - Crear el proyecto de Supabase con confirmación de correo y límites de tasa.
   - Definir un canal para pedir el borrado de una cuenta.
-  - Probarlo en un celular real (#71).
 - **Textos de relleno de Register** y logotipo: Ehileen (#11, #12).
-- **Registrar en `docs/RECURSOS.md`:** la imagen GIBS y Space Grotesk, Manrope y JetBrains Mono (OFL).
 
 - Que Carlos fusione `dev` → `main`; luego comprobar la URL pública sin sesión.
 - Si Investigación cambia la prueba para la superficie por zona, quitar `sinCifra` de `CAPA_ZONA.calor` en `web/js/app.js`.

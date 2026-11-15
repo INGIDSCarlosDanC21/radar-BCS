@@ -72,3 +72,11 @@ test('datos_de_prueba de zonas es true si hay celdas de prueba y no son indicado
     }
   }
 })
+
+test('web/data es copia exacta de data/salida (puerta de calidad, PLAN-CIERRE)', () => {
+  for (const nombre of ['indicadores.json', 'zonas.geojson', 'zonas_tendencias.json']) {
+    const web = readFileSync(new URL('../data/' + nombre, import.meta.url), 'utf8').replace(/\r\n/g, '\n')
+    const salida = readFileSync(new URL('../../data/salida/' + nombre, import.meta.url), 'utf8').replace(/\r\n/g, '\n')
+    assert.strictEqual(web, salida, nombre + ' difiere de data/salida')
+  }
+})

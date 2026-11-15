@@ -86,25 +86,29 @@
     pintar();
   }
 
-  /* Qué mide cada capa por zona (MODIS vía AppEEARS). sinCifra: decisión de Investigación
-     (docs/investigacion/hallazgos.md): la baja de superficie por zona depende de la prueba; no se cita cifra. */
+  /* Qué mide cada capa por zona (MODIS vía AppEEARS). nota: aviso bajo la lista de zonas.
+     Calor por zona usa 2001-2021, igual que la ficha (corte por la deriva de Terra, decisiones.md 2026-11-14). */
   var CAPA_ZONA = {
     calor: { que: 'Temperatura de la superficie (satélite MODIS), no la del aire.',
       fuente: 'MODIS MOD11A2.061 (temperatura de superficie, 1 km) vía NASA AppEEARS',
-      sinCifra: 'En El Centenario y Sur una prueba estadística marca una baja de la temperatura de superficie, pero con otra prueba no es significativa y viene de 2022-2025; no la interpretamos todavía.' },
+      nota: 'El periodo termina en 2021: desde 2022 el satélite Terra pasa cada vez más temprano y la superficie se mide antes de calentarse. Más detalle en la ficha de calor.' },
     vegetacion: { que: 'Índice de vegetación (NDVI). Algunos meses no tienen lectura válida en la ciudad: es un panorama aproximado.',
       fuente: 'MODIS MOD13Q1.061 (NDVI, 250 m) vía NASA AppEEARS' }
   };
+
+  /* Periodo de la capa: cada producto llega a su propio año (calor 2001-2021, NDVI 2001-2026);
+     el periodo global de zonas.geojson es el de calor, así que se toma el de la ficha. */
+  function periodoCapa(i) {
+    var p = i.fuente && i.fuente.periodo;
+    if (p) return p.replace('-', '–');
+    return ZONAS.periodo ? ZONAS.periodo.inicio + '–' + ZONAS.periodo.fin : 'periodo pendiente';
+  }
 
   function pintar() {
     var id = indMapa, i = ind(id), un = i.unidades;
     var esPrueba = ZONAS.datos_de_prueba === true, prueba = esPrueba ? ' (dato de prueba)' : '';
     var cfg = esPrueba ? null : CAPA_ZONA[id];
-    function cz(f) {
-      var c = f.properties.cambios[id];
-      if (c && cfg && cfg.sinCifra && c.cambio_total != null) return { cambio_total: c.cambio_total, significativo: false };
-      return c;
-    }
+    function cz(f) { return f.properties.cambios[id]; }
     var m = 0;
     ZONAS.features.forEach(function (f) { var c = cz(f); if (c && c.cambio_total != null && c.significativo !== false) m = Math.max(m, Math.abs(c.cambio_total)); });
     function zonaTexto(c) { return c.significativo === false ? 'Sin cambio claro' : signo(c.cambio_total, un); }
@@ -156,7 +160,8 @@
       if (sa !== sb) return sa ? 1 : -1;
       return Math.abs(cb.cambio_total) - Math.abs(ca.cambio_total);
     }).slice(0, esPrueba ? 5 : undefined);
-    var r = '<h2>' + (esPrueba ? 'Zonas de prueba del mapa (no son mediciones): ' : 'Zonas con más cambio: ') + esc(i.titulo) + '</h2>';
+    var hayClaro = lista.some(function (f) { return cz(f).significativo === true; });
+    var r = '<h2>' + (esPrueba ? 'Zonas de prueba del mapa (no son mediciones): ' : hayClaro ? 'Zonas con más cambio: ' : 'Zonas: ') + esc(i.titulo) + '</h2>';
     if (cfg) r += '<p>' + esc(cfg.que) + '</p>';
     if (!lista.length) {
       r += '<p class="aviso">Este indicador se mide a escala regional, no por zona; por eso el mapa no tiene datos para ' + esc(i.titulo.toLowerCase()) + '. Mira la ficha para ver el cambio en La Paz.</p>';
@@ -168,14 +173,14 @@
           (c.significativo === false ? esc(t) : '<span class="' + clase(c.cambio_total) + '">' + esc(t) + '</span> — ' + etiqueta(c.significativo)[0]) + '</li>';
       });
       r += '</ol>';
-      if (cfg && cfg.sinCifra) r += '<p class="nota-limite">' + esc(cfg.sinCifra) + '</p>';
+      if (cfg && cfg.nota) r += '<p class="nota-limite">' + esc(cfg.nota) + '</p>';
     }
     r += '<p><a href="#ficha/' + esc(id) + '">Ver ficha de ' + esc(i.titulo.toLowerCase()) + '</a></p>';
     document.getElementById('resumen').innerHTML = r;
     var nota = ZONAS.features[0] && ZONAS.features[0].properties.nota;
     document.getElementById('fuente-mapa').textContent = (esPrueba ?
       'Zonas: datos de prueba sintéticos, no son mediciones; el mapa por zona espera datos de MODIS. El dato real de La Paz está en la ficha.' :
-      cfg ? 'Fuente: ' + cfg.fuente + ', ' + (ZONAS.periodo ? ZONAS.periodo.inicio + '–' + ZONAS.periodo.fin : 'periodo pendiente') +
+      cfg ? 'Fuente: ' + cfg.fuente + ', ' + periodoCapa(i) +
         '; Mann-Kendall estacional y pendiente de Sen. Son puntos, no zonas completas: cada uno se dibuja como el píxel de 1 km que lo contiene.' : '') +
       ' Mapa base: © OpenStreetMap contributors.';
   }
@@ -209,8 +214,8 @@
 
   function conclusion(i) {
     var g = i.significancia || {}, p = g.p_valor, a = g.alfa;
-    if (g.significativo === true && p != null && a != null) return 'Sí. La tendencia es clara: con p ' + (p < 0.001 ? '< 0.001' : '= ' + num(p, 2)) + ' (menor que alfa = ' + num(a, 2) + ') es poco probable que se deba solo al azar.';
-    if (g.significativo === false && p != null && a != null) return 'No se detecta un cambio claro. Con p = ' + num(p, 2) + ' (no menor que alfa = ' + num(a, 2) + ') lo que vemos cabe dentro de la variación normal de un año a otro. Que no se detecte un cambio no prueba que no exista.';
+    if (g.significativo === true && p != null && a != null) return 'Sí. La tendencia es clara: con p ' + (p < 0.001 ? '< 0.001' : '= ' + pTexto(p, 3)) + ' (menor que alfa = ' + num(a, 2) + ') es poco probable que se deba solo al azar.';
+    if (g.significativo === false && p != null && a != null) return 'No se detecta un cambio claro. Con p = ' + pTexto(p, 3) + ' (no menor que alfa = ' + num(a, 2) + ') lo que vemos cabe dentro de la variación normal de un año a otro. Que no se detecte un cambio no prueba que no exista.';
     return 'Todavía no se calcula para este indicador, así que no podemos decir si la tendencia es clara.';
   }
 
