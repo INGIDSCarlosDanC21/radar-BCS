@@ -9,7 +9,7 @@ pip install -r analisis/requirements.txt
 python -m analisis.exportar --calor-hasta 2021   # escribe indicadores.json y zonas_tendencias.json
 python -m analisis.zonas --calor-hasta 2021      # escribe zonas.geojson
 python -m analisis.validar                       # contrato de datos + campos *_en
-python -m pytest analisis                        # 56 funciones test_
+python -m pytest analisis                        # 62 funciones test_
 python -m analisis.correlacion                   # Spearman lluvia-agua
 python -m analisis.hora_paso                     # hora local de paso de Terra
 python -m analisis.contraste_aqua                # Terra contra Aqua
@@ -63,4 +63,4 @@ Pendiente de verificar contra la fuente: los valores de NDVI y de POWER T2M (no 
 
 - Ninguna cifra contra la fuente original (portal NASA, PO.DAAC o AppEEARS) en esta revisión.
 - La reproducción completa con `exportar` y la comparación contra los portales las hace el revisor humano; las comprobaciones 1 a 3 se hicieron contra la caché local.
-- `analisis/appeears.py` (sin pruebas).
+- `analisis/appeears.py`: hay pruebas sin red (carga de .env, envío sin repetir, descarga); el flujo real contra AppEEARS no se probó aquí.
