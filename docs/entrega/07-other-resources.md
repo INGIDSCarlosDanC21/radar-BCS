@@ -32,5 +32,7 @@ None. We did not use Space Agency Partner data.
 | EPA WaterSense, *Start Saving* | https://www.epa.gov/watersense/start-saving | Official site; cited only | Water-saving tips on the Actions screen |
 | pytest | https://docs.pytest.org/ | MIT | Tests of the analysis code (development only) |
 | True-color image of Baja California Sur, NASA GIBS, MODIS Terra Corrected Reflectance, 20 April 2025 (no edits other than JPEG recompression; no NASA logos) | https://gibs.earthdata.nasa.gov/ (exact request URL in `web/img/FUENTES.md` of the repository) | CC0, per the NASA Earthdata data use policy: https://www.earthdata.nasa.gov/learn/use-data/data-use-policy | Home screen image |
-| Fonts Space Grotesk, Manrope and JetBrains Mono (loaded from Google Fonts) | https://github.com/google/fonts/tree/main/ofl/ | SIL Open Font License 1.1 | Website typography |
-| TODO: audio, 3D models, icons and the logo (UI/UX, issue #12), and Supabase if the optional login ships | TODO | TODO | TODO |
+| Fonts Space Grotesk, Manrope and JetBrains Mono (loaded from Google Fonts) | https://github.com/google/fonts/tree/main/ofl/ (OFL.txt of each family; checked 2026-11-14) | SIL Open Font License 1.1 | Website typography (Figma design and `web/`) |
+| Radar BCS logo ("Radar BCS": radar rings, cactus and water drop), exported from our Figma file "Radar paceño" | Own repository file: `web/assets/logo-radar-bcs.png` (no external link) | TO BE CONFIRMED (generated with an AI tool; the tool's terms of use and license are TO BE CONFIRMED). Contains no NASA marks | Header of all website screens. Disclosed on the site as "AI-generated logo" |
+| 12 section icons (climate, agriculture, fishing), `web/assets/iconos/*.svg` | TO BE CONFIRMED (original source of the icons not yet verified) | TO BE CONFIRMED (not declared until the source and license are verified) | Section screens of `web/` |
+| TODO: audio, 3D models, and Supabase if the optional login ships | TODO | TODO | TODO |

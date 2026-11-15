@@ -2,11 +2,30 @@
 
 ## Hecho
 
+- **2026-11-14**: pulido de las 17 pantallas en Figma "Radar paceño" (id `ae9KMSMZUexeV0dBhDkNR1`):
+  - Encabezado con el logo como componente y pestaña activa por sección; pie y botón de simulación como componentes.
+  - Cabeceras de subpantallas iguales a su pantalla maestra.
+  - Acentos de color por subsección.
+  - Fuentes de respaldo reemplazadas por Space Grotesk, Manrope y JetBrains Mono.
+  - Marcos renombrados.
+- Exportados: `diseno/pantallas/` y `diseno/componentes/`; `web/assets/` (logo `logo-radar-bcs.png`, íconos `iconos/*.svg`, `tokens.css`).
+- Especificación: `diseno/ESPECIFICACION.md`.
+- Pruebas: `powershell -File diseno/tools/verificar-diseno.ps1`.
+- PR: #PR_PENDIENTE
+
 ## En curso
 
 ## Falta
 
+- Revisión en celular real (#71).
+- Confirmar la herramienta de IA que generó el logotipo.
+- Confirmar origen y licencia de los íconos.
+- Modo oscuro de los tokens.
+- Revisar las pantallas Ficha y Acciones a 360 px.
+
 ## Bloqueos
+
+- Nada.
 
 ## Para otros roles
 
