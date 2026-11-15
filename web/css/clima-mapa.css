@@ -102,3 +102,7 @@
 
 /* La ficha abierta queda justo debajo de la fila de su tarjeta, a todo el ancho de la cuadrícula. */
 .cm-tarjetas>.cm-ficha{grid-column:1/-1;margin:0}
+/* Rótulo sobre el mapa: qué día y qué lugar se están viendo. */
+.cm-mapa-rot{margin:0;padding:8px 12px;background:#000d21;color:#fff;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;line-height:16px}
+.cm-mapa-rot[hidden]{display:none}
+@media (min-width:1024px){.cm-mapa-rot{position:absolute;left:12px;bottom:30px;z-index:600;max-width:calc(100% - 260px);border-radius:9999px;box-shadow:0 1px 3px rgba(0,0,0,.3)}}

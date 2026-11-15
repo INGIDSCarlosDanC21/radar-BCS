@@ -193,3 +193,16 @@ test('la ficha abierta se coloca justo después de la fila de su tarjeta', () =>
   delete global.getComputedStyle;
   assert.match(leer('css/clima-mapa.css'), /\.cm-tarjetas>\.cm-ficha\{grid-column:1\/-1/);
 });
+
+test('el mapa refleja el filtro: globo con las condiciones del lugar (ahora o del día) y rótulo sobre el mapa', () => {
+  T.setLang('es');
+  const hoy = CM.popupHtml(CL.unir(resp).find((f) => f.lugar.id === 'loscabos'));
+  assert.match(hoy, /<strong>Los Cabos<\/strong><br>Ahora · /);
+  assert.match(hoy, /°C \(sensación -?\d+ °C\) · UV máx\. \d+ · viento \d+ km\/h · lluvia \d+ %/);
+  const dia = CM.popupHtml(CM.unirDia(diaResp, '2026-09-15').find((f) => f.lugar.id === 'loscabos'));
+  assert.ok(dia.includes('15 de septiembre de 2026 · ') && dia.includes('Máx. 34 °C · mín. 25 °C · UV máx. 8 · rachas 32 km/h · lluvia 44 % (4.2 mm)'), dia);
+  assert.match(CM.html(), /<p class="cm-mapa-rot" id="cm-mapa-rot" role="status" hidden><\/p>/);
+  const js = leer('js/clima-mapa.js');
+  assert.match(js, /OPC = opciones; enlazar\(raiz\);/, 'el buscador se activa aunque falle la carga de ahora');
+  assert.ok(js.includes("e.message === '429' ? 'cm.limite'"), 'avisa cuando Open-Meteo llega a su límite diario');
+});

@@ -43,6 +43,10 @@
       'cm.d.lluvia': 'Lluvia del día', 'cm.d.prob': 'Probabilidad de lluvia (máxima)', 'cm.d.hum': 'Humedad media', 'cm.d.cielo': 'Cielo',
       'cm.d.consejos': 'Qué puedes hacer', 'cm.d.cdc': 'CDC, Five Steps (Heat Action Plan)', 'cm.d.fuente': 'Fuente',
       'cm.d.mar': 'El oleaje y las corrientes del modelo marino solo están para hoy: míralos en el Mapa Pesquero.', 'cm.d.pesca': 'Ver el Mapa Pesquero',
+      'cm.pAhora': 'Ahora', 'cm.pHoy': '{v} °C (sensación {s} °C) · UV máx. {u} · viento {k} km/h · lluvia {l} %',
+      'cm.pDia': 'Máx. {x} °C · mín. {m} °C · UV máx. {u} · rachas {r} km/h · lluvia {l} % ({mm} mm)',
+      'cm.rotHoy': 'Ahora · {z}', 'cm.rotDia': '{f} · {z} · valores del día',
+      'cm.limite': 'El servicio del clima (Open-Meteo) llegó a su límite de consultas por hoy desde esta red. Intenta más tarde o desde otra conexión.',
       'cm.d.nota': 'Valores del día del modelo Open-Meteo para este lugar: no son estaciones ni avisos oficiales. Datos del tiempo: Open-Meteo.com (CC BY 4.0).'
     },
     en: {
@@ -70,6 +74,10 @@
       'cm.d.lluvia': 'Rain that day', 'cm.d.prob': 'Chance of rain (highest)', 'cm.d.hum': 'Average humidity', 'cm.d.cielo': 'Sky',
       'cm.d.consejos': 'What you can do', 'cm.d.cdc': 'CDC, Five Steps (Heat Action Plan)', 'cm.d.fuente': 'Source',
       'cm.d.mar': 'Waves and currents from the marine model are only available for today: see them on the Fishing Map.', 'cm.d.pesca': 'See the Fishing Map',
+      'cm.pAhora': 'Now', 'cm.pHoy': '{v} °C (feels like {s} °C) · UV peak {u} · wind {k} km/h · rain {l} %',
+      'cm.pDia': 'High {x} °C · low {m} °C · UV peak {u} · gusts {r} km/h · rain {l} % ({mm} mm)',
+      'cm.rotHoy': 'Now · {z}', 'cm.rotDia': '{f} · {z} · daily values',
+      'cm.limite': 'The weather service (Open-Meteo) reached its request limit for today from this network. Try again later or from another connection.',
       'cm.d.nota': "Daily values from the Open-Meteo model for this place: not weather stations or official warnings. Weather data: Open-Meteo.com (CC BY 4.0)."
     }
   };
@@ -206,7 +214,7 @@
   function html() {
     S.lugar = 'lapaz'; S.fecha = null; FICHA = null;
     return '<section class="cm" aria-labelledby="cm-h1"><h1 id="cm-h1">' + t('cm.h1') + '</h1><p class="lead">' + t('cm.lead') + '</p>' + buscadorHtml() +
-      '<div class="cm-marco"><div id="cm-mapa" class="cm-mapa" role="region" aria-label="' + esc(t('cm.region')) + '"></div>' +
+      '<div class="cm-marco"><p class="cm-mapa-rot" id="cm-mapa-rot" role="status" hidden></p><div id="cm-mapa" class="cm-mapa" role="region" aria-label="' + esc(t('cm.region')) + '"></div>' +
       '<div class="cl-leyenda cm-leyenda" id="cm-leyenda">' + CL.leyenda() + '</div></div>' +
       '<p class="cm-estado" id="cm-estado">' + t('cm.cargando') + '</p>' +
       '<div class="cm-diag-cab"><h2>' + t('cm.diag') + '</h2><p id="cm-diag-sub">' + t('cm.diagSub', { z: 'La Paz' }) + '</p></div>' +
@@ -346,9 +354,9 @@
     if (lugar) S.lugar = lugar.id;
     var nueva = fecha === r.hoy ? null : fecha, cambia = nueva !== S.fecha;
     S.fecha = nueva;
-    var listo = cambia ? (nueva ? cargarDia(raiz) : cargar(raiz, OPC || {})) : Promise.resolve(elegir(raiz, S.lugar));
+    var listo = cambia ? (nueva ? cargarDia(raiz) : cargar(raiz, OPC || {})) : Promise.resolve((elegir(raiz, S.lugar), true));
     return listo.then(function (ok) {
-      if (lugar && MAPA) { try { MAPA.setView([lugar.lat, lugar.lon], Math.max(MAPA.getZoom(), 8)); } catch (e) { /* sin mapa */ } }
+      if (ok !== false) mostrarEnMapa(raiz, S.lugar);
       return ok;
     });
   }
@@ -362,10 +370,10 @@
       elegir(raiz, S.lugar);
       if (FICHA) pintarFicha(raiz, false);
       if (est) est.textContent = t('cm.estadoDia', { f: fechaTexto(fecha) });
-      pintarMapa(raiz, filas);
+      pintarMapa(raiz, filas); rotuloMapa(raiz, filaDe(S.lugar));
       return true;
-    }).catch(function () {
-      if (est) { est.textContent = t('cm.errorDia'); est.className = 'cm-estado cl-error'; }
+    }).catch(function (e) {
+      if (est) { est.textContent = t(e && e.message === '429' ? 'cm.limite' : 'cm.errorDia'); est.className = 'cm-estado cl-error'; }
       return false;
     });
   }
@@ -383,7 +391,7 @@
     if (typeof raiz.querySelectorAll === 'function') raiz.querySelectorAll('.cm-pin[data-lugar]').forEach(function (e) { e.classList.toggle('cm-pin-sel', e.getAttribute('data-lugar') === id); });
   }
 
-  var MAPA = null, CAPA = null, reloj = null;
+  var MAPA = null, CAPA = null, reloj = null, MARCAS = {};
   function pintarMapa(raiz, filas) {
     var caja = raiz.querySelector('#cm-mapa');
     if (!caja || typeof L === 'undefined') return;
@@ -405,30 +413,55 @@
       MAPA.on('zoomend', lejos); lejos();
     }
     if (CAPA) CAPA.remove();
+    MARCAS = {};
     CAPA = L.layerGroup(filas.map(function (f) {
       // En celular el pin es compacto (ícono y temperatura); al tocarlo se ve el nombre y el estado del cielo.
-      return L.marker([f.lugar.lat, f.lugar.lon], { icon: L.divIcon({ className: 'cm-pin-wrap', html: pinHtml(f), iconSize: [0, 0], iconAnchor: [0, 0] }), keyboard: false, zIndexOffset: f.lugar.principal ? 1000 : 0 })
-        .on('click', function () { elegir(raiz, f.lugar.id); })
-        .bindPopup(esc(f.lugar.es) + ': ' + num(f.c.temperature_2m) + ' °C, ' + esc(f.e.texto));
+      var m = L.marker([f.lugar.lat, f.lugar.lon], { icon: L.divIcon({ className: 'cm-pin-wrap', html: pinHtml(f), iconSize: [0, 0], iconAnchor: [0, 0] }), keyboard: false, zIndexOffset: f.lugar.principal ? 1000 : 0 })
+        .on('click', function () { elegir(raiz, f.lugar.id); rotuloMapa(raiz, f); })
+        .bindPopup(popupHtml(f), { maxWidth: 260, autoPanPaddingTopLeft: [12, 12], autoPanPaddingBottomRight: [12, 64] });
+      MARCAS[f.lugar.id] = m;
+      return m;
     })).addTo(MAPA);
+  }
+  /* Condiciones del lugar en el globo del mapa: las de ahora o las del día elegido. */
+  function popupHtml(f) {
+    var cab = '<strong>' + esc(nombreDe(f.lugar)) + '</strong><br>' + esc(f.dia ? fechaTexto(f.dia.fecha) : t('cm.pAhora')) + ' · ' + esc(f.e.texto) + '<br>';
+    if (f.dia) {
+      return cab + esc(t('cm.pDia', { x: num(f.max), m: num(f.min), u: num(f.uvMax), r: num(f.rachas), l: num(f.lluvia), mm: num(f.dia.precipitation_sum, 1) }));
+    }
+    return cab + esc(t('cm.pHoy', { v: num(f.c.temperature_2m), s: num(f.c.apparent_temperature), u: num(f.uvMax), k: num(f.c.wind_speed_10m), l: num(f.lluvia) }));
+  }
+  /* Rótulo sobre el mapa: qué se está viendo (ahora o el día elegido) y dónde. */
+  function rotuloMapa(raiz, f) {
+    var r = raiz.querySelector('#cm-mapa-rot'); if (!r || !f) return;
+    r.textContent = S.fecha ? t('cm.rotDia', { f: fechaTexto(S.fecha), z: nombreDe(f.lugar) }) : t('cm.rotHoy', { z: nombreDe(f.lugar) });
+    r.hidden = false;
+  }
+  /* Centra el mapa en el lugar y abre su globo con las condiciones. */
+  function mostrarEnMapa(raiz, id) {
+    var l = null; CL.LUGARES.forEach(function (x) { if (x.id === id) l = x; });
+    if (!MAPA || !l) return;
+    try { MAPA.setView([l.lat, l.lon], Math.max(MAPA.getZoom(), 8), { animate: false }); } catch (e) { /* sin mapa */ }
+    if (MARCAS[id] && MARCAS[id].openPopup) MARCAS[id].openPopup();
+    rotuloMapa(raiz, filaDe(id));
   }
 
   var OPC = null;
   function cargar(raiz, opciones) {
     opciones = opciones || {};
     if (!raiz || typeof raiz.querySelector !== 'function' || !raiz.querySelector('#cm-tarjetas')) return Promise.resolve(false);
-    OPC = opciones;
+    OPC = opciones; enlazar(raiz);   // el buscador funciona aunque falle la carga de ahora
     if (reloj) { clearTimeout(reloj); reloj = null; }
     if (S.fecha) return cargarDia(raiz);
     return CL.datos(opciones).then(function (filas) {
       if (S.fecha) return false;   // mientras cargaba se eligió otra fecha
       FILAS = filas;
       if (opciones.lugar && !opciones._lugar) { opciones._lugar = true; S.lugar = filaDe(opciones.lugar).lugar.id; }
-      var lp = filaDe(S.lugar); enlazar(raiz);
+      var lp = filaDe(S.lugar);
       elegir(raiz, lp.lugar.id);
       var est = raiz.querySelector('#cm-estado');
       if (est) est.textContent = t('cielo.sincro', { h: (lp.c.time || '').slice(11, 16) });
-      pintarMapa(raiz, filas);
+      pintarMapa(raiz, filas); rotuloMapa(raiz, lp);
       programar(raiz, opciones);
       if (opciones.abrir && !opciones._abierta && FICHAS.indexOf(opciones.abrir) >= 0) { opciones._abierta = true; abrirFicha(raiz, opciones.abrir); }
       return true;
@@ -452,7 +485,7 @@
   }
 
   var RBClimaMapa = { abrirFicha: abrirFicha, cerrarFicha: cerrarFicha, elegir: elegir, html: html, tarjetas: tarjetas, pinHtml: pinHtml, cargar: cargar, TARJETAS: TARJETAS, TX: TX,
-    buscar: buscar, buscarLugar: buscarLugar, rangoFechas: rangoFechas, urlDia: urlDia, unirDia: unirDia, detalleDia: detalleDia, colocarFicha: colocarFicha, fechaTexto: fechaTexto };
+    buscar: buscar, buscarLugar: buscarLugar, rangoFechas: rangoFechas, urlDia: urlDia, unirDia: unirDia, detalleDia: detalleDia, colocarFicha: colocarFicha, fechaTexto: fechaTexto, popupHtml: popupHtml };
   if (typeof window !== 'undefined') window.RBClimaMapa = RBClimaMapa;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBClimaMapa;
 })();
