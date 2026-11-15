@@ -30,3 +30,15 @@ test('el login sigue conectado tras traer dev: rutas, scripts y hueco de cuenta'
   assert.ok(app.includes('RBAcceso.render'), 'app.js no llama a RBAcceso.render')
   for (const s of ['js/config.js', 'js/acceso.js', 'css/acceso.css', 'id="cuenta"']) assert.ok(html.includes(s), 'falta ' + s + ' en index.html')
 })
+
+test('config.js: si tiene clave, es publishable y la URL es solo el dominio de Supabase', () => {
+  const m = /supabaseUrl:\s*'([^']*)',\s*supabaseKey:\s*'([^']*)'/.exec(config)
+  assert.ok(m, 'config.js sin el formato esperado')
+  const [, url, clave] = m
+  if (!url && !clave) return
+  assert.ok(clave.startsWith('sb_publishable_'), 'la clave no es publishable')
+  assert.ok(!/sb_secret_|service_role/.test(config), 'config.js no puede llevar una clave secreta')
+  const u = new URL(url)
+  assert.ok(u.protocol === 'https:' && u.hostname.endsWith('.supabase.co'), 'URL no es de Supabase')
+  assert.strictEqual(url, u.origin, 'la URL debe ser solo https://<proyecto>.supabase.co, sin /rest/v1/')
+})

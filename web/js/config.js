@@ -1,3 +1,2 @@
-/* Solo la URL del proyecto y la clave publishable/anon (protegida por RLS).
-   NUNCA pongas aquí la clave secreta del servidor. Se puede generar con tools/generar-config.ps1. */
-window.RB_CONFIG = { supabaseUrl: '', supabaseKey: '' };
+// Generado por tools/generar-config.ps1. Solo URL y clave publishable/anon. No editar a mano.
+window.RB_CONFIG = { supabaseUrl: 'https://ibxknfgobkcfreekumjs.supabase.co', supabaseKey: 'sb_publishable_XecQNzbZPfYEJbQNeSf9QQ_cS-5K3vp' };

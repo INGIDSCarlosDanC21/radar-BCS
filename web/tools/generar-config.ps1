@@ -29,6 +29,8 @@ if ($clave -match 'service_role' -or $clave.StartsWith('sb_secret_')) {
   exit 1
 }
 if ($url -notmatch '^https://') { Write-Host 'SUPABASE_URL debe empezar con https://'; exit 1 }
+# supabase-js arma las rutas como URL + /auth/v1: se deja solo https://<proyecto>.supabase.co (sin /rest/v1/ ni otra ruta).
+$url = ([Uri]$url).GetLeftPart([UriPartial]::Authority)
 
 $esc = { param($s) $s.Replace('\', '\').Replace("'", "\'") }
 $salida = Join-Path $PSScriptRoot '..\js\config.js'

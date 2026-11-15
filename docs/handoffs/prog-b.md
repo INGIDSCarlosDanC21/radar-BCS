@@ -26,7 +26,7 @@
 
 ## En curso
 
-- PR #77 (`prog-b/login`, borrador): al día con `dev` el 15 nov (se volvieron a agregar `acceso.js`, `acceso.css` y `generar-config.ps1`). Falta: la URL y la clave publishable del proyecto en `web/js/config.js` (las pone Carlos; nunca la secreta), la revisión de seguridad de Luca (#81) y la prueba en celular. Corte: domingo 15 nov, 09:00.
+- PR #77 (`prog-b/login`, borrador): al día con `dev` el 15 nov (se volvieron a agregar `acceso.js`, `acceso.css` y `generar-config.ps1`). El 15 nov se conectó el proyecto de Supabase que creó Diego: `web/js/config.js` lleva la URL y la clave publishable (generadas con `tools/generar-config.ps1` desde `.env`; el script ahora deja solo el dominio). Ajustes comprobados: solo correo y confirmación obligatoria. Falta la revisión de seguridad de Luca (#81) y la prueba en celular. Corte: domingo 15 nov, 09:00.
 
 ## Falta
 
