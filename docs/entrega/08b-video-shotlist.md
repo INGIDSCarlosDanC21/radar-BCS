@@ -4,6 +4,20 @@ Reemplaza la versión de la mañana. **Decisión de Carlos (2026-11-15): pantall
 
 **Una sola historia:** el problema local → qué cambió (con honestidad sobre lo que no sabemos) → dónde → qué es de hoy y qué no → cierre. Responde las 4 preguntas del reto (qué, dónde, cuánto, ¿significativo?) sin enseñar todas las pantallas.
 
+## Tráiler 16:9 de 28 s (versión principal, 2026-11-15, noche)
+
+Mismo guion y misma voz; nuevo montaje horizontal 1920 × 1080 en Remotion (`video/`, composición `RadarBCSTrailer`). Cortes en la rejilla de 120 BPM. Tiempos editables en `video/src/guion.ts` (`TRAILER_ESCENAS`, `SENALES`).
+
+| Tiempo | Voz | Plano |
+|---|---|---|
+| 0.0–3.0 | "In La Paz, heat, water and the sea touch everyone." | De negro (barras que se abren) a la foto MODIS/GIBS de BCS con empuje hacia La Paz, calima, bruma en parallax, fuga de luz; HEAT (1.0 s), WATER (1.5 s), SEA (2.0 s) entran con desenfoque y salen en zoom-through |
+| 3.0–6.0 | "Radar BCS turns NASA data into answers." | Golpe + destello: logo en tarjeta blanca con glitch y aberración cromática, barrido de luz; teléfono 3D sube y gira mostrando Inicio, segundo teléfono desenfocado al fondo |
+| 6.0–12.0 | "Air temperature rose about 1.5 degrees since 2001, a statistically significant change." | Gradación cálida; teléfono con la ficha de Calor en órbita; contador hasta +1.47 °C; gráfica anual real 2001–2025 que se dibuja; sello "p < 0.001" con marcador "statistically significant"; salida en whip pan |
+| 12.0–15.5 | "Where we are unsure, we say it: rainfall shows no clear change." | Gradación fría; barras anuales reales de lluvia; "No clear change" y "p = 0.129 · not statistically significant"; teléfono con la ficha de Lluvia que se desenfoca (rack focus) |
+| 15.5–18.5 | "The map shows where, across 38 places." | La misma foto satelital inclinada en perspectiva; 38 pines en 4 oleadas (16.0, 16.5, 17.0, 17.5 s) con contador 00→38 y etiqueta La Paz |
+| 18.5–22.0 | "Today's sea and weather are model estimates, not official warnings." | Cortes cada 0.5 s: Clima (picado holandés), close-up de tarjeta, Pesca; luego "Model estimates." / "Not official warnings." con marcador cian sobre el diagnóstico del mar desenfocado |
+| 22.0–28.0 | "What changed, not why. Radar BCS." | Golpe: "What changed, not why." en tipografía grande; logo con destello radial y chispas (23.5 s); URL y "Data: NASA POWER · MODIS · GRACE · GIBS"; fundido a negro 27.5–28 s |
+
 **Línea de apertura de la entrega:** "Radar BCS turns NASA open data into answers for every resident of La Paz."
 
 ## Guion (64 palabras en inglés, unos 25 s a ritmo calmado, 5 s de margen)

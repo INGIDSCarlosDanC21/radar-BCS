@@ -1,4 +1,28 @@
-# Video de 30 s de Radar BCS (Remotion)
+# Video de Radar BCS (Remotion)
+
+## Tráiler horizontal de 28 s (`RadarBCSTrailer`) — versión principal desde el 2026-11-15
+
+**1920 × 1080, 30 fps, 28 s (840 fotogramas)**, para que el jurado lo vea en pantalla de escritorio; los teléfonos aparecen en 3D con perspectiva. Música a 120 BPM: todos los cortes caen en múltiplos de 0.5 s. Misma voz y mismos subtítulos que el video vertical (`SUBTITULOS` en `src/guion.ts`), rediseñados al estilo cine (tercio inferior, fundido, sombra). Sin etiquetas de IA en pantalla, sin logos de la NASA, sin personas.
+
+Escenas (tiempos en `TRAILER_ESCENAS` de `src/guion.ts`): 0–3 apertura con la foto MODIS/GIBS, calima y "HEAT · WATER · SEA"; 3–6 logo con glitch y teléfono que sube (Inicio); 6–12 contador +1.47 °C, gráfica anual real y sello p < 0.001; 12–15.5 barras de lluvia reales y "No clear change" (p = 0.129); 15.5–18.5 la foto satelital inclinada con los 38 lugares en cascada; 18.5–22 cortes rápidos (Clima, Pesca) y "Not official warnings."; 22–28 "What changed, not why.", logo, URL y fuentes, fundido a negro.
+
+Pasos (desde `video/`):
+
+1. `npm install` (si el disco C: está lleno, pon `node_modules` en otro disco con una unión: `mklink /J node_modules D:\...\node_modules`; la carpeta destino debe llamarse `node_modules`).
+2. Capturas: `node ../scripts/capturar-video.mjs` (de día en La Paz; 1080 px de ancho ≈ DPR 2.77). Quedan en `public/tomas/`.
+3. Voz: copia la narración a `public/narracion.mp3` (no se sube).
+4. Audio: `public/audio/*.mp3` (lecho `bed-120bpm-28s` y efectos de la rama `lider/trailer-audio`). La composición detecta qué archivos existen y solo coloca esos; las señales están en `SENALES` de `src/guion.ts`. El lecho baja (ducking) mientras habla la voz.
+5. Previsualizar: `npm run dev` y abre la composición `RadarBCSTrailer`.
+6. Renderizar: `npx remotion render RadarBCSTrailer out/trailer-radar-bcs-28s.mp4 --codec=h264 --crf=18 --audio-bitrate=192k` (con poca RAM, añade `--concurrency=3`).
+7. Verificar: `ffprobe` (1920x1080, 30 fps, ≤ 30 s) y `ffmpeg -i out/trailer-radar-bcs-28s.mp4 -af ebur128=peak=true -f null -` (≤ −14 LUFS, pico ≤ −1 dBTP).
+
+Código del tráiler en `src/trailer/`: `Trailer.tsx` (capas, subtítulos, audio), `Escenas.tsx` (las 7 escenas), `Telefono.tsx` (teléfono 3D con transformaciones CSS y la captura real como pantalla), `comun.tsx` (grano, viñeta, destellos, fugas de luz, gradación, aberración cromática), `datos.ts` (lee la serie anual real de `web/data/indicadores.json` y las coordenadas de `web/data/localidades_tendencias.json`). Los efectos se hicieron con CSS/SVG (no con `@remotion/effects` ni Three.js) para que se vean igual en el render sin GPU y para no depender de paquetes con licencia no declarada (`@remotion/effects` dice `"license": "UNLICENSED"` en su `package.json`).
+
+La composición vertical anterior (`RadarBCS30s`, abajo) se conserva como respaldo.
+
+---
+
+# Video vertical de 30 s (`RadarBCS30s`, respaldo)
 
 Video vertical 1080 × 1920, 30 fps, 27 s, para el campo de demo de la entrega. Guion y reglas: [`docs/entrega/08b-video-shotlist.md`](../docs/entrega/08b-video-shotlist.md) y [`08c-brief-video.md`](../docs/entrega/08c-brief-video.md).
 
