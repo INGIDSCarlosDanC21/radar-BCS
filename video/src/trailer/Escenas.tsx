@@ -26,6 +26,19 @@ const Sube: React.FC<{ t: number; en: number; children: React.ReactNode; dur?: n
   );
 };
 
+
+// Logo oficial (fondo blanco opaco) sobre una tarjeta blanca con brillo cian y barrido de luz.
+const TarjetaLogo: React.FC<{ ancho: number; barrido: number }> = ({ ancho, barrido }) => {
+  const pad = ancho * 0.045;
+  const alto = (ancho - pad * 2) * (132 / 470) + pad * 2;
+  return (
+    <div style={{ position: "relative", width: ancho, height: alto, padding: pad, background: "#fff", borderRadius: ancho * 0.05, overflow: "hidden", boxShadow: "0 30px 80px rgba(0,0,0,0.55), 0 0 70px rgba(81,216,232,0.45)" }}>
+      <Img src={staticFile("logo-radar-bcs.png")} style={{ width: ancho - pad * 2, display: "block" }} />
+      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(110deg, transparent ${barrido - 10}%, rgba(81,216,232,0.55) ${barrido}%, transparent ${barrido + 10}%)`, mixBlendMode: "multiply" }} />
+    </div>
+  );
+};
+
 // Salida/entrada en "látigo" (whip pan): desplazamiento horizontal con desenfoque de movimiento.
 const latigo = (t: number, durEscena: number, entra: boolean, sale: boolean) => {
   let x = 0;
@@ -153,25 +166,14 @@ export const Titulo: React.FC = () => {
         rotX={interpolate(t, [1, 3], [22, 6], CL)}
         rotZ={interpolate(t, [1, 3], [-6, -2], CL)}
       />
-      <div style={{ position: 'absolute', left: logoX - 450, top: logoY - 126, width: 900, height: 253, scale: `${logoEscala}`, translate: `${glitch}px 0px` }}>
-        <div style={{ position: 'absolute', inset: 0, clipPath: cortes ? `inset(${cortes[0] * 0.5}% 0 ${cortes[1] * 0.4}% 0)` : undefined }}>
+      <div style={{ position: "absolute", left: logoX - 450, top: logoY - 126, width: 900, scale: `${logoEscala}`, translate: `${glitch}px 0px` }}>
+        <div style={{ clipPath: cortes ? `inset(${cortes[0] * 0.5}% 0 ${cortes[1] * 0.4}% 0)` : undefined }}>
           <Cromatica px={glitch * 0.6}>
-            <Img src={staticFile('logo-radar-bcs.png')} style={{ width: 900, height: 253, filter: 'brightness(0) invert(1) drop-shadow(0 0 24px rgba(81,216,232,0.55))' }} />
+            <TarjetaLogo ancho={900} barrido={barrido} />
           </Cromatica>
         </div>
-        {/* barrido de luz sobre el logo (máscara con el propio logo) */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            WebkitMaskImage: `url(${staticFile('logo-radar-bcs.png')})`,
-            WebkitMaskSize: '100% 100%',
-            background: `linear-gradient(110deg, transparent ${barrido - 12}%, rgba(255,255,255,0.95) ${barrido}%, transparent ${barrido + 12}%)`,
-            mixBlendMode: 'screen',
-          }}
-        />
       </div>
-      <div style={{ position: 'absolute', left: 96, top: 640, width: 840, opacity: interpolate(t, [1.4, 1.8], [0, 1], CL) }}>
+      <div style={{ position: "absolute", left: 96, top: 640, width: 840, opacity: interpolate(t, [1.4, 1.8], [0, 1], CL) }}>
         <Sube t={t} en={1.5}>
           <div style={{ fontFamily: FUENTE_TITULO, fontSize: 64, color: '#fff', lineHeight: 1.05 }}>
             NASA data <span style={{ color: COLOR.cian }}>→</span> answers
@@ -480,7 +482,7 @@ export const Cierre: React.FC<{ url: string; fuentes: string }> = ({ url, fuente
   return (
     <AbsoluteFill style={{ background: FONDO, overflow: 'hidden' }}>
       <Img src={staticFile('bcs-modis.jpg')} style={{ position: 'absolute', left: -100, top: -200, width: 2200, opacity: 0.16, filter: 'blur(10px) saturate(0.5)', scale: `${1 + t * 0.015}` }} />
-      <AbsoluteFill style={{ alignItems: 'center', top: interpolate(sube, [0, 1], [330, 150]), scale: `${interpolate(sube, [0, 1], [1, 0.62])}` }}>
+      <AbsoluteFill style={{ alignItems: 'center', transformOrigin: 'top center', top: interpolate(sube, [0, 1], [330, 150]), scale: `${interpolate(sube, [0, 1], [1, 0.62])}` }}>
         <div style={{ display: 'flex', gap: 34 }}>
           <Sube t={t} en={0.0} dur={0.4}>
             <div style={{ fontFamily: FUENTE_TITULO, fontSize: 150, color: '#fff' }}>What changed,</div>
@@ -498,17 +500,8 @@ export const Cierre: React.FC<{ url: string; fuentes: string }> = ({ url, fuente
           ))}
         </svg>
       </AbsoluteFill>
-      <div style={{ position: 'absolute', left: 960 - 520, top: 430, width: 1040, height: 292, opacity: logo, scale: `${interpolate(logo, [0, 1], [0.7, 1]) + t * 0.006}` }}>
-        <Img src={staticFile('logo-radar-bcs.png')} style={{ width: 1040, height: 292, filter: 'brightness(0) invert(1) drop-shadow(0 0 30px rgba(81,216,232,0.6))' }} />
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            WebkitMaskImage: `url(${staticFile('logo-radar-bcs.png')})`,
-            WebkitMaskSize: '100% 100%',
-            background: `linear-gradient(110deg, transparent ${barrido - 12}%, rgba(255,255,255,1) ${barrido}%, transparent ${barrido + 12}%)`,
-          }}
-        />
+      <div style={{ position: "absolute", left: 960 - 430, top: 400, width: 860, opacity: logo, scale: `${interpolate(logo, [0, 1], [0.7, 1]) + t * 0.006}` }}>
+        <TarjetaLogo ancho={860} barrido={barrido} />
       </div>
       {/* chispas */}
       {Array.from({ length: 14 }).map((_, i) => {
