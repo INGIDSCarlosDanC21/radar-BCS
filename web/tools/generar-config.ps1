@@ -1,4 +1,4 @@
-# Genera web/js/config.local.js a partir del .env de la raíz del repo.
+# Genera web/js/config.js a partir del .env de la raíz del repo.
 # Variables: SUPABASE_URL y SUPABASE_PUBLISHABLE_KEY. No imprime valores.
 $ErrorActionPreference = 'Stop'
 $raiz = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
@@ -31,8 +31,8 @@ if ($clave -match 'service_role' -or $clave.StartsWith('sb_secret_')) {
 if ($url -notmatch '^https://') { Write-Host 'SUPABASE_URL debe empezar con https://'; exit 1 }
 
 $esc = { param($s) $s.Replace('\', '\').Replace("'", "\'") }
-$salida = Join-Path $PSScriptRoot '..\js\config.local.js'
-$cuerpo = "// Generado por tools/generar-config.ps1. Ignorado por git. No editar a mano.`r`n" +
+$salida = Join-Path $PSScriptRoot '..\js\config.js'
+$cuerpo = "// Generado por tools/generar-config.ps1. Solo URL y clave publishable/anon. No editar a mano.`r`n" +
   "window.RB_CONFIG = { supabaseUrl: '" + (& $esc $url) + "', supabaseKey: '" + (& $esc $clave) + "' };`r`n"
 [System.IO.File]::WriteAllText([System.IO.Path]::GetFullPath($salida), $cuerpo, (New-Object System.Text.UTF8Encoding($false)))
-Write-Host 'ok: web/js/config.local.js generado.'
+Write-Host 'ok: web/js/config.js generado.'

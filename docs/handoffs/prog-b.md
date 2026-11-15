@@ -15,24 +15,24 @@
 - PR #57 fusionado y `dev` → `main` (PR #64).
 - Pantallas de Figma (rama `prog-b/figma-pantallas`). Plan en `docs/handoffs/prog-b-plan-figma-2026-11-14.md`.
   - **Home** (`web/js/home.js`, `web/css/home.css`): reemplaza Inicio con el diseño de Figma y solo datos de `indicadores.json`. Se quitaron las temperaturas en vivo, el radar dBZ, GOES-18 y los avisos, que eran ficticios.
-  - **Login y Register** (`web/js/acceso.js`, `web/css/acceso.css`): usan Supabase Auth.
-    - **Configuración:** la clave publishable va en `web/js/config.local.js`, que git ignora; se genera desde `.env` con `web/tools/generar-config.ps1`. Sin configuración, los formularios no envían nada y muestran un aviso.
-    - **Base de datos:** `web/tools/supabase.sql` crea la tabla `perfiles` con RLS y un trigger.
   - **Imagen:** MODIS Terra de NASA GIBS (CC0), en `web/img/` con su `FUENTES.md`.
   - **Earth Engine:** script `web/tools/gee_imagen_bcs.py` para un compuesto MCD43A4. Requiere cuenta y no se ha corrido.
+- **Login y Register:** por el issue #73, se sacaron del PR #69 y pasaron a la rama `prog-b/login`, con su PR aparte a `dev`. Corte: domingo 15 nov, 09:00.
 
 ## En curso
 
-- PR `prog-b/figma-pantallas` → `dev`.
+- PR #69 (`prog-b/figma-pantallas` → `dev`): Home e imagen NASA, sin login.
+- Rama `prog-b/login`: ajustar el login a las condiciones del #73.
 
 ## Falta
 
-- **Supabase:**
-  - Crear el proyecto y correr `web/tools/supabase.sql`.
-  - Poner `SUPABASE_URL` y `SUPABASE_PUBLISHABLE_KEY` en `.env` y en `.env.example` (sin valores; ese archivo es de Carlos).
-  - Decidir cómo llega la clave publishable a Pages: subir `config.local.js` o generarlo con un secreto de Actions. Mientras no se decida, cada página registra un 404 de `config.local.js` en la consola.
+- **Login (#73):**
+  - Definir para qué sirve la cuenta.
+  - Crear el proyecto de Supabase con confirmación de correo y límites de tasa.
+  - Definir un canal para pedir el borrado de una cuenta.
+  - Probarlo en un celular real (#71).
 - **Textos de relleno de Register** y logotipo: Ehileen (#11, #12).
-- **Registrar en `docs/RECURSOS.md`:** la imagen GIBS, Space Grotesk, Manrope y JetBrains Mono (OFL) y supabase-js 2.118.0 (MIT).
+- **Registrar en `docs/RECURSOS.md`:** la imagen GIBS y Space Grotesk, Manrope y JetBrains Mono (OFL).
 
 - Que Carlos fusione `dev` → `main`; luego comprobar la URL pública sin sesión.
 - Si Investigación cambia la prueba para la superficie por zona, quitar `sinCifra` de `CAPA_ZONA.calor` en `web/js/app.js`.

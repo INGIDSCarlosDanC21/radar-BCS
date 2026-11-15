@@ -79,6 +79,14 @@ body[data-vista=login] .barra, body[data-vista=registro] .barra { display: none;
 .acc-msg.acc-info { background: #eff6ff; color: #0c2340; border: 1px solid #bfdbfe; }
 .acc-msg a { color: inherit; font-weight: 700; }
 
+.acc-aviso { margin: 16px 0 0; font-size: 12px; line-height: 16px; color: #64748b; }
+.acc-aviso strong { font-weight: 700; color: #334155; }
+.acc-reg .acc-aviso { margin-top: 24px; padding-top: 16px; border-top: 1px solid #f1f5f9; }
+.acc-check { display: flex; align-items: center; gap: 8px; }
+.acc-check input { width: 18px; height: 18px; margin: 0; accent-color: #0c2340; flex: none; }
+.acc-check label { font: 400 12px/16px 'Space Grotesk', system-ui, sans-serif; color: #64748b; }
+.acc-check input:focus-visible { outline: 2px solid #0c2340; outline-offset: 2px; }
+
 /* Cuenta en el encabezado */
 .cuenta { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 13px; min-width: 0; }
 .cuenta a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }

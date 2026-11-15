@@ -1,5 +1,8 @@
 /* Login, Registro y cuenta en el encabezado (Supabase Auth).
    Sin build, sin módulos. Nunca guarda ni registra contraseñas. */
+// PENDIENTE (#73): canal para pedir el borrado; lo define el Líder
+var CONTACTO_BORRADO = '';
+
 (function () {
   'use strict';
 
@@ -26,10 +29,10 @@
     });
   }
 
-  /* Carga config.local.js y el SDK una sola vez. Resuelve al cliente o a null. */
+  /* Lee window.RB_CONFIG (js/config.js) y carga el SDK una sola vez. Resuelve al cliente o a null. */
   function iniciar() {
     if (promesa) return promesa;
-    promesa = cargarScript('js/config.local.js').catch(function () {}).then(function () {
+    promesa = Promise.resolve().then(function () {
       var c = window.RB_CONFIG;
       if (!c || !c.supabaseUrl || !c.supabaseKey) return null;
       return cargarScript(SDK_URL, SDK_SRI).then(function () {
@@ -53,9 +56,7 @@
     var cont = document.getElementById('cuenta');
     if (!cont) return;
     if (cliente && sesion && sesion.user) {
-      var u = sesion.user;
-      var nombre = (u.user_metadata && u.user_metadata.nombre_completo) || u.email || '';
-      cont.innerHTML = '<span class="cuenta-nombre">Hola, ' + esc(nombre) + '</span>' +
+      cont.innerHTML = '<span class="cuenta-nombre">Sesión iniciada</span>' +
         '<button type="button" id="cuenta-salir">Cerrar sesión</button>';
       document.getElementById('cuenta-salir').addEventListener('click', function () {
         cliente.auth.signOut().then(function () { sesion = null; pintarCuenta(); });
@@ -106,6 +107,14 @@
       '</div></div>';
   }
 
+  function avisoHtml() {
+    var contacto = CONTACTO_BORRADO ? esc(CONTACTO_BORRADO) + '.' : 'escribe al equipo OptiPaz (canal por confirmar).';
+    return '<p class="acc-aviso"><strong>Qué guardamos:</strong> solo tu correo electrónico, para que puedas iniciar sesión. ' +
+      'La contraseña la guarda cifrada Supabase Auth; el equipo no la ve. ' +
+      'Radar BCS se puede usar completo sin cuenta. Las cuentas son solo para mayores de 18 años. ' +
+      'Para borrar tu cuenta: ' + contacto + '</p>';
+  }
+
   var SUB = 'Plataforma de Monitoreo Ambiental y Costero de Baja California Sur. Accede a tu cuenta para continuar.';
 
   function htmlLogin() {
@@ -119,7 +128,7 @@
         '<button type="button" class="acc-olvido" id="acc-olvido">¿Olvidaste tu contraseña?</button>') +
       '<p class="acc-msg" id="acc-msg" hidden></p>' +
       '<button type="submit" class="acc-btn">Iniciar sesión</button></form>' +
-      '<p class="acc-cambio">¿No tienes cuenta? <a href="#registro">Regístrate</a></p></div>' +
+      '<p class="acc-cambio">¿No tienes cuenta? <a href="#registro">Regístrate</a></p>' + avisoHtml() + '</div>' +
       '<p class="acc-legal">Sistema de Acceso Seguro © 2026 Radar BCS. Todos los derechos reservados.</p>' +
       '</section></div></div>';
   }
@@ -132,15 +141,14 @@
       // TEXTO PENDIENTE UI/UX (#11): el diseño trae "Ingresa texto"; se usa el subtítulo del Login.
       '<p class="acc-sub">' + SUB + '</p>' +
       '<form class="acc-form" id="acc-form" novalidate>' +
-      campo('acc-nombre', 'Nombre completo', 'text', 'name', 'Ej. Armando Castro') +
       campo('acc-correo', 'Correo electrónico', 'email', 'email', 'tu@email.com') +
       campo('acc-clave', 'Contraseña', 'password', 'new-password', '••••••••') +
       campo('acc-clave2', 'Confirmar contraseña', 'password', 'new-password', '••••••••') +
+      '<div class="acc-check"><input type="checkbox" id="acc-edad" name="acc-edad" required><label for="acc-edad">Tengo 18 años o más</label></div>' +
       '<p class="acc-msg" id="acc-msg" hidden></p>' +
       '<button type="submit" class="acc-btn">Registrarse</button></form>' +
       '<p class="acc-cambio">¿Ya tienes cuenta? <a href="#login">Inicia sesión</a></p></div></div>' +
-      // TEXTO PENDIENTE UI/UX (#11): las páginas de Términos y Privacidad no existen; van sin enlace.
-      '<p class="acc-legal">Al registrarte, aceptas nuestros Términos de Servicio y Política de Privacidad.</p>' +
+      avisoHtml() +
       '</section></div></div>';
   }
 
@@ -184,18 +192,19 @@
   }
 
   function enviarRegistro(btn) {
-    var nombre = valor('acc-nombre').trim(), correo = valor('acc-correo').trim();
+    var correo = valor('acc-correo').trim();
     var clave = valor('acc-clave'), clave2 = valor('acc-clave2');
-    if (!nombre) { mostrar('err', 'Escribe tu nombre completo.'); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) { mostrar('err', 'Escribe un correo válido.'); return; }
     if (clave.length < 8) { mostrar('err', 'La contraseña debe tener al menos 8 caracteres.'); return; }
     if (clave !== clave2) { mostrar('err', 'Las contraseñas no coinciden.'); return; }
+    var edad = document.getElementById('acc-edad');
+    if (!edad || !edad.checked) { mostrar('err', 'Las cuentas son solo para mayores de 18 años.'); return; }
     ocupado(btn, true);
     iniciar().then(function (c) {
       if (!c) { mostrar('info', AVISO_SIN_CONFIG); return; }
       return c.auth.signUp({
         email: correo, password: clave,
-        options: { data: { nombre_completo: nombre }, emailRedirectTo: location.origin + location.pathname + '#login' }
+        options: { emailRedirectTo: location.origin + location.pathname + '#login' }
       }).then(function (r) {
         if (r.error) { mostrar('err', esc(traducir(r.error))); return; }
         if (r.data && r.data.session) { location.hash = '#inicio'; return; }
