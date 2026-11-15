@@ -106,3 +106,11 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Decisión:** el equipo trabaja hasta que ya no pueda. La prioridad es que las 4 pantallas muestren datos reales. El agua (issue #7) se hace si llega; si no, se declara "sin datos". Sigue la meta interna de enviar a las 13:00 del domingo y el límite oficial de las 23:59. Lo que sí se mantiene: probar antes de pasar a `main` (regla 9).
 - **Reemplaza** el congelamiento de las entradas anteriores sobre el calendario.
 - **Quién decidió:** Carlos (Líder).
+
+### 2026-11-14 — Calor: el número principal es la superficie (MODIS); el aire va en la nota
+
+- **Contexto:** el PR #63 de Luca (ya en `main` desde el PR #65) cambió Calor a la temperatura de superficie de MODIS, y lo anotó como "decisión de Carlos". Carlos aclaró que **no la había tomado**; dijo que debe ser lo más conveniente y que la anotación fue un error suyo.
+- **Decisión:** se acepta lo que quedó, porque es lo más coherente con las reglas 1 y 2: la tarjeta de Calor muestra la superficie MODIS ("sin cambio claro", p = 0.11, sin cifra) y su nota dice que el aire de NASA POWER sí sube +1.47 °C y que las dos medidas no coinciden. No se esconde ninguna de las dos. En el mapa, calor por zona dice "Sin cambio claro" con la nota de que la baja de El Centenario y Sur depende de la prueba y de 2022-2025.
+- **Reemplaza** la entrada anterior ("la web muestra el aire y la superficie juntos") solo en cuál es el número principal; sigue valiendo que las dos mediciones se ven y que se dice que no coinciden.
+- **Cómo se revierte:** si Carlos prefiere al aire como número principal, es un cambio en `analisis/exportar.py` (indicador `calor`) y en `web/data/indicadores.json`.
+- **Quién decidió:** Carlos (Líder) la acepta el 2026-11-14 sin haberla propuesto; propuesta original de Luca, revisada por Claude e Investigación.
