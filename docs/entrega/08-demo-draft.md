@@ -56,6 +56,8 @@ Pitch line (use in both options): **"Radar BCS turns NASA open data into answers
 
 ## Option B — 30-second video (English subtitles required)
 
+> **Actualizado el 2026-11-15:** el guion vigente (con Mapa Meteorológico, "Mira La Paz desde el espacio", Pesca y Avisos) está en [`08b-video-shotlist.md`](08b-video-shotlist.md). La tabla de abajo es la versión anterior.
+
 About 60 spoken words (about 24 s at a calm pace, 6 s of margin). Narrated in Spanish with burned-in English subtitles, or narrated in English to avoid the risk. Use only these numbers (all from `data/salida/indicadores.json` or `docs/investigacion/hallazgos.md`); say what changed and how sure we are, never why.
 
 | Time | On screen | Narration (ES) | Subtitle (EN) |

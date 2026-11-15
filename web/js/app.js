@@ -75,7 +75,9 @@
   }
 
   function mapaVista() {
-    var h = '<h1>' + t('titulo.mapa') + '</h1><p class="lead">' + t('mapa.lead') + '</p><div class="chips" role="group" aria-label="' + t('mapa.grupo') + '">';
+    // Arriba, el "Mapa Meteorológico" y el "Diagnóstico Climático Territorial" de Figma (clima-mapa.js); abajo, las tendencias por zona.
+    var CM = window.RBClimaMapa;
+    var h = (CM ? CM.html() : '<h1>' + t('titulo.mapa') + '</h1>') + '<p class="lead">' + t('mapa.lead') + '</p><div class="chips" role="group" aria-label="' + t('mapa.grupo') + '">';
     IDS.forEach(function (id) {
       h += '<button type="button" class="chip" data-ind="' + id + '" aria-pressed="' + (id === indMapa) + '">' + esc(tit(ind(id))) + '</button>';
     });
@@ -88,6 +90,7 @@
     });
     pintar();
     if (window.RBSim) window.RBSim.sateliteActivar(main);
+    if (CM) CM.cargar(main);
   }
 
   /* Qué mide cada capa por zona (MODIS vía AppEEARS). nota: aviso junto al mapa y la lista.
@@ -185,7 +188,6 @@
       });
       r += '</ol>';
     }
-    r += '<p><a href="#ficha/' + esc(id) + '">' + esc(t('mapa.verFicha', { t: tit(i).toLowerCase() })) + '</a></p>';
     document.getElementById('resumen').innerHTML = r;
     var nota = ZONAS.features[0] && ZONAS.features[0].properties.nota;
     document.getElementById('fuente-mapa').textContent = (esPrueba ?
@@ -231,11 +233,9 @@
   function ficha(id) {
     var i = ind(id) || ind('calor');
     var f = i.fuente || {}, tc = RB.textoCambio(i);
-    var h = '<a class="volver" href="#inicio">' + t('fic.volver') + '</a><div class="pestanas" role="group" aria-label="' + t('mapa.grupo') + '">';
-    IDS.forEach(function (k) {
-      h += '<a class="chip" style="display:inline-flex;align-items:center;text-decoration:none" href="#ficha/' + k + '"' + (k === i.id ? ' aria-current="page"' : '') + '>' + esc(tit(ind(k))) + '</a>';
-    });
-    h += '</div><h1>' + RB.icono(i.id) + esc(tit(i)) + '</h1><p class="lead">' + esc(t('fic.sub.' + i.id)) + '</p><p class="fuente">' + esc(D(i, 'variable')) + '</p>';
+    // Sin chips de indicador: cada ficha se abre desde su tarjeta de Inicio. El botón regresa a "¿Qué cambia?".
+    var h = '<a class="volver" href="#inicio/que-cambia">' + t('fic.volver') + '</a>';
+    h += '<h1>' + RB.icono(i.id) + esc(tit(i)) + '</h1><p class="lead">' + esc(t('fic.sub.' + i.id)) + '</p><p class="fuente">' + esc(D(i, 'variable')) + '</p>';
     h += '<div class="bloque"><h2>' + esc(t('fic.desde', { a: ((i.fuente && i.fuente.periodo) || '2001').slice(0, 4) })) + '</h2><div class="grande ' + tc.clase + '">' + esc(tc.texto) + '</div>' +
       (tc.tipo === 'sin-cambio' ? '<p class="fuente">' + t('fic.sinCifra') + '</p>' :
         i.cambio_total_nota ? '<p class="fuente">' + esc(D(i, 'cambio_total_nota')) + '</p>' : '') +
@@ -258,9 +258,11 @@
       '<details class="detalles"><summary>' + t('fic.detalles') + '</summary>' +
       '<p>' + esc(t('fic.metodo', { m: D(g, 'metodo') || t('fic.sinCalcular') })) + (RB.explicaMetodo(g.metodo) ? ' ' + esc(RB.explicaMetodo(g.metodo)) : '') + '</p>' +
       '<p>' + esc(t('fic.pAlfa', { p: g.p_valor != null ? pTexto(g.p_valor, 3) : t('fic.sinCalcular'), a: g.alfa != null ? num(g.alfa, 2) : t('fic.sinDato') })) + '</p></details></div>';
-    h += '<div class="bloque"><h2>' + t('fic.fuente') + '</h2><p><strong>' + esc(RB.textoFuente(i)) + '</strong></p><p>' +
+    // Menos scroll: enlace, resolución, periodo y descarga quedan en "Sobre los datos"; la fuente y la limitación siguen a la vista.
+    h += '<div class="bloque"><h2>' + t('fic.fuente') + '</h2><p><strong>' + esc(RB.textoFuente(i)) + '</strong></p>' +
+      '<details class="detalles"><summary>' + t('fic.sobre') + '</summary><p>' +
       (f.url ? '<a class="enlace-fuente" href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(t('fic.abrir', { h: String(f.url).replace(/^https?:\/\//, '').split('/')[0] })) + '</a><br>' : '') +
-      t('fic.resol') + ' ' + esc(D(f, 'resolucion') || t('fic.sinDato')) + '<br>' + t('fic.periodo') + ' ' + esc(f.periodo || t('fic.sinDato')) + '<br>' + t('fic.descarga') + ' ' + esc(f.fecha_descarga || t('fic.sinDato')) + '</p>' +
+      t('fic.resol') + ' ' + esc(D(f, 'resolucion') || t('fic.sinDato')) + '<br>' + t('fic.periodo') + ' ' + esc(f.periodo || t('fic.sinDato')) + '<br>' + t('fic.descarga') + ' ' + esc(f.fecha_descarga || t('fic.sinDato')) + '</p></details>' +
       (i.limitacion ? '<p><strong>' + t('fic.limitacion') + '</strong> ' + esc(D(i, 'limitacion')) + '</p>' : '') + '</div>';
     h += '<p class="aviso">' + t('aviso.causa') + '</p>';
     main.innerHTML = h;
@@ -289,7 +291,7 @@
     var h = (location.hash || '#inicio').slice(1).split('/');
     var sec = ['inicio', 'mapa', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
     document.querySelectorAll('[data-nav]').forEach(function (a) {
-      if (a.getAttribute('data-nav') === sec) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      if (a.getAttribute('data-nav') === (sec === 'ficha' ? 'inicio' : sec)) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     document.body.setAttribute('data-vista', sec);
     // Pesca y Avisos traen sus propios datos en vivo y no esperan a indicadores.json.
@@ -307,6 +309,7 @@
     franja(sec);
     if (sec === 'inicio') {
       if (window.RBHome) window.RBHome.render(main, DATOS); else inicio();
+      if (h[1] === 'que-cambia') irAQueCambia();
     }
     else if (sec === 'mapa') mapaVista();
     else if (sec === 'ficha') ficha(h[1]);
@@ -328,6 +331,15 @@
     });
   }
   var prev = null;
+  /* Botón de la ficha "← Volver a las tendencias de Inicio" (#inicio/que-cambia): baja hasta "¿Qué cambia?" y le pasa el foco. */
+  function irAQueCambia() {
+    var q = document.getElementById('hm-h2');
+    if (!q) return false;
+    q.setAttribute('tabindex', '-1');
+    q.scrollIntoView({ block: 'start' });
+    if (q.focus) q.focus({ preventScroll: true });
+    return true;
+  }
   /* Accesibilidad (#119 D6). "Saltar al contenido" no cambia el hash: el enrutador lo leía como pantalla
      desconocida y mandaba a Inicio. Al cambiar de pantalla se anuncia el título y el foco va a <main>. */
   var saltar = document.querySelector('.saltar');
@@ -340,6 +352,7 @@
     // Dentro del Mapa Agrícola (abrir/cerrar ficha) no se sube al inicio: agricola.js maneja el scroll.
     var deAgro = /#agricola(\/|$)/.test(ev.oldURL || ''), aAgro = /^#agricola(\/|$)/.test(location.hash);
     ruta();
+    if (location.hash === '#inicio/que-cambia' && irAQueCambia()) { anunciar(); return; }
     if (!(deAgro && aAgro)) { window.scrollTo(0, 0); anunciar(); if (main.focus) main.focus({ preventScroll: true }); }
   });
   T.aplicar(document);

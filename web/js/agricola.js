@@ -18,7 +18,7 @@
      window.RBT (js/textos.js) decide el idioma. Si no existe, todo queda en español (como en las pruebas). */
   var TX = {
     es: {
-      cerrar: 'Cerrar', mas: 'Más datos', fuentes: 'Fuentes', fuenteDos: 'Fuente: ', motivo: 'Motivo:', consultado: 'Consultado: ',
+      cerrar: 'Cerrar', mas: 'Más datos', notas: 'Notas y límites', fuentes: 'Fuentes', fuenteDos: 'Fuente: ', motivo: 'Motivo:', consultado: 'Consultado: ',
       abierta: ': ficha abierta', sinDatos: 'No se pudieron cargar los datos agrícolas.',
       titulo: 'Mapa Agrícola',
       sub: 'Vocación de suelos y condiciones agroclimáticas de los valles agrícolas del municipio de La Paz, con datos abiertos oficiales.',
@@ -35,7 +35,7 @@
       acercar: 'Acercar', alejar: 'Alejar', coord: 'Coordenadas: '
     },
     en: {
-      cerrar: 'Close', mas: 'More data', fuentes: 'Sources', fuenteDos: 'Source: ', motivo: 'Reason:', consultado: 'Accessed: ',
+      cerrar: 'Close', mas: 'More data', notas: 'Notes and limits', fuentes: 'Sources', fuenteDos: 'Source: ', motivo: 'Reason:', consultado: 'Accessed: ',
       abierta: ': details open', sinDatos: 'The farming data could not be loaded.',
       titulo: 'Farming Map',
       sub: 'Soil suitability and agroclimatic conditions of the farming valleys of the municipality of La Paz, using official open data.',
@@ -172,11 +172,12 @@
     }
     var notas = arr(d.notas).slice(0, 3);
     if (notas.length) {
-      h += '<div class="ag-notas">';
+      // Menos scroll: las notas quedan plegadas bajo una etiqueta de una línea (un toque las abre).
+      h += '<details class="ag-notas-pl"><summary class="ag-mono">' + esc(tx('notas')) + ' (' + notas.length + ')</summary><div class="ag-notas">';
       notas.forEach(function (n) {
         h += '<article class="ag-nota"><p class="ag-mono ag-nota-t">' + ico('nota', 'ag-verde', 14) + esc(D(n, 'titulo')) + '</p><p class="ag-nota-txt">' + esc(D(n, 'texto')) + '</p></article>';
       });
-      h += '</div>';
+      h += '</div></details>';
     }
     var fu = arr(d.fuentes);
     if (fu.length) {
@@ -292,8 +293,7 @@
       '<footer class="ag-pie"><div class="ag-pie-grid"><div><p class="ag-marca"><i class="ag-dot"></i>RADAR BCS</p>' +
         '<p class="ag-pie-desc">' + esc(tx('pieDesc')) + '</p></div>' +
         '<nav aria-label="' + esc(tx('pieNav')) + '"><p class="ag-mono ag-negro">' + esc(tx('pantallas')) + '</p>' +
-        '<a href="#inicio">' + esc(tx('inicio')) + '</a><a href="#mapa">' + esc(tx('mapa')) + '</a><a href="#ficha/calor">' + esc(tx('fichas')) +
-        '</a><a href="#acciones">' + esc(tx('acciones')) + '</a><a href="#agricola">' + esc(tx('agricola')) + '</a></nav></div>' +
+        '<a href="#inicio">' + esc(tx('inicio')) + '</a><a href="#mapa">' + esc(tx('mapa')) + '</a><a href="#acciones">' + esc(tx('acciones')) + '</a><a href="#agricola">' + esc(tx('agricola')) + '</a></nav></div>' +
         '<p class="ag-mono ag-copy">' + tx('copy') + '</p></footer>' +
       '</div>';
     return h;

@@ -262,3 +262,11 @@ body[data-vista=agricola] main{max-width:none;margin:0;padding:0}
   .ag-cerrar-pie .ag-cerrar{width:auto;padding:0 16px}
   .ag-cerrar-pie .ag-cerrar-t{position:static;width:auto;height:auto;clip:auto;margin-left:8px}
 }
+
+/* Notas del Mapa Agrícola plegadas (menos scroll, 2026-11-15): etiqueta de una línea de 44 px que abre las notas. */
+.ag-notas-pl{margin-top:20px}
+.ag-notas-pl summary{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;list-style:none;font-size:12px;font-weight:700;color:var(--ct)}
+.ag-notas-pl summary::-webkit-details-marker{display:none}
+.ag-notas-pl summary::before{content:"\25B8";font-size:14px}
+.ag-notas-pl[open] summary::before{content:"\25BE"}
+.ag-notas-pl .ag-notas{margin-top:8px}

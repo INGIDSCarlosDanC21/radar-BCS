@@ -33,6 +33,7 @@ body[data-vista=inicio] main{max-width:none;margin:0;padding:0}
 .hm-sec-cab{display:flex;flex-direction:column;gap:12px;align-items:flex-start;margin-bottom:24px}
 .hm-eti{display:flex;align-items:center;margin-bottom:4px}
 .hm-sec h2{font-size:28px;line-height:36px;letter-spacing:-.7px}
+#hm-h2{scroll-margin-top:16px}
 .hm-pildora{background:#f2f4f7;border-radius:9999px;padding:6px 16px;font-size:12px;line-height:16px;text-transform:none;letter-spacing:0}
 .hm-rejilla{display:grid;gap:24px;grid-template-columns:1fr}
 .hm-peques{display:grid;gap:8px;grid-template-columns:1fr}

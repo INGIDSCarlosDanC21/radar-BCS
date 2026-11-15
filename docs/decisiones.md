@@ -198,3 +198,14 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Avisos:** automáticos del modelo (rotulados "Modelo", no oficiales), los dos avisos agrícolas ya auditados y enlaces oficiales (SMN, NHC, CENAPRED, SEMAR, CONAPESCA). Si no hay ninguno, la pantalla lo dice.
 - **Menú (indicación de Carlos):** superior de texto en escritorio (>= 1024 px) e inferior con iconos en celular, con "Más" (Ficha, Agro, Acciones) para no pasar de 5.
 - **Límites declarados:** la rejilla marina de ~9 km no distingue dentro de las bahías; depende de Open-Meteo y NASA GIBS (sin conexión avisa y el resto de la web no cambia).
+
+## Fuentes e IA documentadas, no repetidas en pantalla (Carlos, 2026-11-15)
+
+- **Regla (la indicó Carlos en el chat; el texto oficial está por citar):** toda fuente de información y toda IA se documentan en `docs/` o en GitHub; no hace falta repetirlas en cada pantalla. Documento central: `docs/FUENTES-Y-IA.md`.
+- **Qué se quitó:** la etiqueta "AI-generated" junto al logo del encabezado, las líneas "Fuente: …" de las tarjetas de Inicio y del Mapa Agrícola, y dos créditos de imagen repetidos. **Qué se queda:** atribución de OpenStreetMap y de Open-Meteo (sus licencias la exigen), rótulos de seguridad, limitaciones, pie con licencia y línea de IA. Ahorro medido en celular: Inicio 4399 → 3945 px, Agro Clima 6210 → 5836 px.
+- **Riesgo declarado (actualizado 2026-11-15, 04:50):** se leyó el texto oficial (Guía de envío y Preguntas frecuentes, 13 nov 2026): piden una descripción del uso de IA, y **la guía sigue exigiendo marca de agua visible en imágenes y videos generados**. El logo (única imagen generada) conserva la declaración en el pie de cada pantalla, la etiqueta del pie de Inicio, `docs/entrega/05` y `docs/RECURSOS.md`, pero ya no tiene etiqueta en el encabezado. Hay un PR listo y sin fusionar (#176) que la pone dentro de la imagen del logo sin ocupar espacio. Decisión de Carlos.
+
+## "Ver más" y decisiones delegadas por Carlos (2026-11-15, 04:30)
+
+- Carlos pidió que el asistente eligiera lo mejor para el proyecto en todas las decisiones abiertas. **Se aplicó lo recomendado:** "Ver más" a 3 líneas para textos de más de 4 (sin plegar seguridad, atribución, licencia ni IA), Inicio incluido, botón "Subir"; **#159 fusionado** a `dev`; **Clima entra** con alcance acotado y corte a las 09:30 (`docs/PLAN-CLIMA.md`, issue #166), usando los 8 puertos de `RBVivo.PUERTOS` (no los 7 de Inicio) para no sumar llamadas a Open-Meteo.
+- **No hecho aún:** extras de plegar grupos del Agro y "Sobre los datos" en Ficha (esperan el PR de Clima porque tocan `agricola.js` y `app.js`).

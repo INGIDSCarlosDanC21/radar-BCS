@@ -65,7 +65,8 @@ th,td{border:1px solid var(--borde);padding:8px;text-align:left}
 svg.grafica{width:100%;max-width:720px;height:auto;display:block}
 svg.grafica text{fill:var(--suave);font-size:12px}
 .pestanas{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
-.volver{display:inline-block;min-height:44px;line-height:44px}
+.volver{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;margin:8px 0 4px;border:1px solid #c4c6ce;border-radius:8px;background:#fff;color:#0c2340;font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:15px;text-decoration:none}
+.volver:hover{background:#f2f4f7}
 .barras{display:grid;gap:6px;margin:8px 0}
 .barras div{display:grid;grid-template-columns:90px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:.9rem}
 .barras .b{height:14px;background:var(--acento);border-radius:3px;min-width:2px}
