@@ -1,0 +1,112 @@
+/* Login y Registro (diseño Figma). Medidas del marco 1440x1024. */
+body[data-vista=login] .barra, body[data-vista=registro] .barra { display: none; }
+
+.acc-pagina { font-family: 'Space Grotesk', system-ui, sans-serif; background: #f1f5f9; padding: 40px; min-height: calc(100vh - 120px); display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.acc-pagina.acc-reg { background: linear-gradient(180deg, #ffffff, #e8ecf2); padding: 32px; }
+.acc-pagina *, .acc-pagina *::before, .acc-pagina *::after { box-sizing: border-box; }
+
+.acc-tarjeta { display: flex; width: 100%; max-width: 1152px; min-height: 642px; background: #fff; border: 1px solid rgba(226, 232, 240, .8); border-radius: 24px; box-shadow: 0 25px 50px rgba(0, 0, 0, .25); overflow: hidden; }
+.acc-reg .acc-tarjeta { max-width: 1140px; min-height: 755px; border-radius: 32px; border-color: rgba(255, 255, 255, .6); box-shadow: 0 25px 50px rgba(203, 213, 225, .6); }
+
+/* Panel de imagen */
+.acc-img { position: relative; flex: 0 0 50%; background: #0f172a url('../img/bcs-modis-2025-04-20.jpg') center / cover no-repeat; display: flex; flex-direction: column; justify-content: space-between; color: #fff; min-height: 640px; }
+.acc-img::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2, 6, 23, .9), rgba(15, 23, 42, .4) 50%, rgba(15, 23, 42, 0)); }
+.acc-reg .acc-img::before { background: linear-gradient(180deg, rgba(12, 35, 64, .15), rgba(12, 35, 64, .45) 45%, rgba(8, 23, 41, .95)); }
+.acc-img > * { position: relative; }
+.acc-etq-caja { padding: 32px; }
+.acc-reg .acc-etq-caja { padding: 48px 48px 0; }
+.acc-etq { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(0, 0, 0, .4); border: 1px solid rgba(34, 211, 238, .2); border-radius: 9999px; color: #67e8f9; font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: .3px; text-transform: uppercase; -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+.acc-etq::before { content: ''; width: 8px; height: 8px; border-radius: 9999px; background: #22d3ee; }
+.acc-reg .acc-etq { gap: 8px; padding: 6px 14px; background: rgba(15, 23, 42, .6); border-color: rgba(255, 255, 255, .2); color: #fff; letter-spacing: .6px; box-shadow: 0 1px 2px rgba(0, 0, 0, .05); }
+.acc-reg .acc-etq::before { background: #34d399; }
+.acc-pie-img { padding: 40px; }
+.acc-reg .acc-pie-img { padding: 0 48px 48px; }
+.acc-bienv { margin: 0 0 4px; font-weight: 700; font-size: 30px; line-height: 36px; letter-spacing: -.75px; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .05); }
+.acc-reg .acc-bienv { font-size: 36px; line-height: 40px; letter-spacing: -.9px; margin-bottom: 12px; }
+.acc-bajada { margin: 0; font-size: 16px; line-height: 24px; color: #e2e8f0; max-width: 448px; }
+.acc-reg .acc-bajada { color: rgba(226, 232, 240, .9); }
+.acc-barras { display: flex; gap: 8px; margin-top: 20px; }
+.acc-reg .acc-barras { gap: 10px; }
+.acc-barras i { flex: 1; height: 6px; border-radius: 9999px; background: rgba(255, 255, 255, .4); }
+.acc-reg .acc-barras i { background: rgba(255, 255, 255, .3); }
+.acc-barras i:first-child { background: #fff; }
+.acc-credito { margin: 12px 0 0; font-size: 11px; line-height: 14px; color: rgba(226, 232, 240, .8); }
+
+/* Panel del formulario */
+.acc-form-caja { flex: 1 1 50%; background: #fbfcfd; padding: 56px; display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.acc-reg .acc-form-caja { background: #fff; padding: 48px 56px; }
+.acc-barra { display: flex; justify-content: space-between; align-items: center; padding-bottom: 24px; }
+.acc-reg .acc-barra { padding-bottom: 16px; min-height: 56px; }
+.acc-volver { display: inline-flex; width: 40px; height: 40px; align-items: center; justify-content: center; border: 1px solid #cbd5e1; border-radius: 9999px; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .05); color: #334155; text-decoration: none; }
+.acc-reg .acc-volver { border-color: #e2e8f0; background: transparent; box-shadow: none; color: #475569; }
+.acc-volver svg { width: 20px; height: 20px; }
+.acc-reg .acc-volver svg { width: 16px; height: 16px; }
+.acc-logo { font-weight: 700; font-size: 18px; letter-spacing: -.3px; color: #0c2340; text-transform: uppercase; }
+.acc-centro { width: 100%; max-width: 384px; margin: 0 auto; padding: 16px 0; flex: 1; }
+.acc-reg .acc-centro { max-width: none; margin: 0; padding: 8px 0 0; }
+.acc-h1 { margin: 0; font-weight: 700; font-size: 30px; line-height: 36px; letter-spacing: -.75px; color: #0f172a; }
+.acc-reg .acc-h1 { color: #0c2340; }
+.acc-sub { margin: 7px 0 32px; font-size: 14px; line-height: 22.75px; color: #64748b; }
+.acc-reg .acc-sub { margin: 6px 0 24px; }
+.acc-form { display: flex; flex-direction: column; gap: 20px; }
+.acc-reg .acc-form { gap: 16px; }
+.acc-campo { display: flex; flex-direction: column; gap: 6px; }
+.acc-fila { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.acc-campo label { font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: .6px; text-transform: uppercase; color: #334155; }
+.acc-olvido { background: none; border: 0; padding: 0; font: 500 12px/16px 'Space Grotesk', system-ui, sans-serif; color: #0c2340; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.acc-entrada { position: relative; }
+.acc-entrada input { width: 100%; height: 46px; padding: 13px 16px; background: #fff; border: 1px solid #cbd5e1; border-radius: 8px; box-shadow: 0 1px 2px rgba(0, 0, 0, .05); font: 400 14px/18px 'Space Grotesk', system-ui, sans-serif; color: #0f172a; }
+.acc-reg .acc-entrada input { height: 42px; padding: 11px 16px; border-color: #e2e8f0; border-radius: 12px; box-shadow: none; }
+.acc-entrada input::placeholder { color: #94a3b8; opacity: 1; }
+.acc-entrada.acc-pw input { padding-right: 44px; }
+.acc-ojo { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; padding: 4px; border: 0; background: none; color: #94a3b8; cursor: pointer; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+.acc-reg .acc-ojo { right: 12px; width: 20px; height: 20px; padding: 0; }
+.acc-ojo svg { width: 20px; height: 20px; }
+.acc-ojo:hover { color: #475569; }
+.acc-btn { height: 48px; width: 100%; padding: 14px 16px; background: #0c2340; color: #fff; border: 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 4px 6px rgba(0, 0, 0, .1); font: 700 14px/20px 'Space Grotesk', system-ui, sans-serif; cursor: pointer; }
+.acc-reg .acc-btn { padding: 14px 24px; border-radius: 12px; font-weight: 500; box-shadow: 0 4px 6px rgba(12, 35, 64, .15), 0 10px 15px rgba(12, 35, 64, .15); }
+.acc-btn:disabled { opacity: .6; cursor: default; }
+.acc-cambio { margin: 12px 0 0; text-align: center; font-size: 14px; line-height: 20px; color: #64748b; }
+.acc-reg .acc-cambio { color: #475569; padding-top: 8px; margin-top: 0; }
+.acc-cambio a { color: #0c2340; font-weight: 700; }
+.acc-legal { margin: 0; padding-top: 16px; font-size: 12px; line-height: 16px; text-align: center; color: #94a3b8; }
+.acc-reg .acc-legal { line-height: 18px; margin-top: 32px; border-top: 1px solid #f1f5f9; }
+.acc-form-caja a:focus-visible, .acc-form-caja button:focus-visible, .acc-entrada input:focus-visible { outline: 2px solid #0c2340; outline-offset: 2px; }
+.acc-entrada input:focus-visible { border-color: #0c2340; }
+.acc-msg { margin: 0; padding: 10px 12px; border-radius: 8px; font-size: 13px; line-height: 18px; }
+.acc-msg[hidden] { display: none; }
+.acc-msg.acc-err { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.acc-msg.acc-info { background: #eff6ff; color: #0c2340; border: 1px solid #bfdbfe; }
+.acc-msg a { color: inherit; font-weight: 700; }
+
+/* Cuenta en el encabezado */
+.cuenta { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size: 13px; min-width: 0; }
+.cuenta a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+.cuenta .cuenta-nombre { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 120px; }
+.cuenta button { font: inherit; font-size: 12px; padding: 4px 8px; border: 1px solid currentColor; border-radius: 6px; background: none; color: inherit; cursor: pointer; white-space: nowrap; }
+.cuenta a:focus-visible, .cuenta button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+@media (max-width: 767px) {
+  .acc-pagina, .acc-pagina.acc-reg { padding: 0; align-items: stretch; min-height: 0; }
+  .acc-tarjeta, .acc-reg .acc-tarjeta { flex-direction: column; border-radius: 0; border-width: 0; box-shadow: none; min-height: 0; }
+  .acc-img, .acc-reg .acc-img { flex: none; min-height: 210px; height: 210px; }
+  .acc-etq-caja, .acc-reg .acc-etq-caja { padding: 12px 16px 0; }
+  .acc-pie-img, .acc-reg .acc-pie-img { padding: 0 16px 12px; }
+  .acc-bienv, .acc-reg .acc-bienv { font-size: 22px; line-height: 26px; margin-bottom: 0; }
+  .acc-bajada, .acc-barras { display: none; }
+  .acc-credito { margin-top: 6px; }
+  .acc-form-caja, .acc-reg .acc-form-caja { padding: 24px 20px; }
+  .acc-h1 { font-size: 26px; line-height: 32px; }
+  .cuenta .cuenta-nombre { max-width: 70px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .acc-pagina * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* Vistas de acceso a ancho completo (el marco de Figma mide 1440 px; la tarjeta, 1152 px). */
+body[data-vista=login]{background:#f1f5f9;color:#0f172a}
+body[data-vista=registro]{background:#e8ecf2;color:#0f172a}
+body[data-vista=login] main,body[data-vista=registro] main{max-width:none}
+body[data-vista=login],body[data-vista=registro]{padding-bottom:0}
+body[data-vista=login] .cabecera,body[data-vista=registro] .cabecera,
+body[data-vista=login] .pie,body[data-vista=registro] .pie{max-width:1152px}
