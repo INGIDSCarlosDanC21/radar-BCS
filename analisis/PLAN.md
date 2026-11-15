@@ -35,3 +35,22 @@ Es otro píxel que los de las 6 zonas, así que no se compara valor por valor; s
 - LST: -0.030 °C/año, -0.72 °C en 2001-2025, p = 0.0235, significativa (1142 lecturas válidas).
 - NDVI: -0.0009/año, -0.023 en total, p = 0.00017, significativa, pero solo 188 de 576 lecturas pasan el filtro (150 meses sin dato): poco fiable.
 - Conclusión: el signo coincide con las zonas (la temperatura de superficie MODIS no sube y el NDVI baja); sigue sin coincidir con el aire de POWER.
+
+## Pendientes 1-7 (actualización)
+1. **PR a `dev`**: abierto (PR #52). Su título quedó con el texto del último commit; conviene cambiarlo desde la web.
+2. **Calor, decisión de Carlos/Investigación** (no la toma el código). Cifras, todas con Mann-Kendall estacional + Sen, 2001-2025:
+
+   | Serie | Pendiente | Significativa |
+   |---|---|---|
+   | Aire, NASA POWER T2M (~50 km) | +0.061 °C/año (+1.465 °C) | sí, p = 5e-5 (prueba correlacionada también) |
+   | Superficie, MODIS LST, promedio de 6 zonas | -0.020 °C/año | no, p = 0.11 (correlacionada: p = 0.38) |
+   | Superficie, MODIS LST, solo El Centenario / Sur | -0.054 / -0.053 °C/año | sí |
+
+   Opciones: (a) mostrar el aire de POWER como hoy, con la limitación visible; (b) mostrar MODIS (el contrato original pedía LST) y "sin cambio claro"; (c) mostrar ambos y explicar que miden cosas distintas (aire vs. superficie). Recomendación del código: (c). No se explica la causa del desacuerdo.
+3. **`zonas.geojson`**: generado en `data/salida/zonas.geojson` (`python -m analisis.zonas`). Zona = píxel MODIS de 1 km donde se midió (6 zonas); `calor` y `vegetacion` reales, `lluvia` y `agua` en `null`, `datos_de_prueba: false`. Los polígonos salen de la rejilla sinusoidal de MODIS y su centro cae a menos de 0.65 km del punto pedido. No se ha copiado a `web/`.
+4. **Copia a `web/data/`**: `analisis/publicar.py`, **sin ejecutar** (la carpeta es de Diego). Falta acordar con Diego que se hará en un PR aparte; `web/data/zonas.geojson` sigue siendo el sintético hasta entonces.
+5. **Agua**: no se pudo avanzar. GLDAS y GRACE no están en el catálogo de AppEEARS (revisado el 2026-11-14: solo hay SMAP, 2015 en adelante, que no sirve para una tendencia desde 2001). Requiere otra vía (GES DISC / PO.DAAC), el producto y el DOI siguen **POR CONFIRMAR** en `docs/investigacion/datasets.md`, y GRACE solo da agua regional. `agua` sigue en `null`.
+6. **Calidad**:
+   - LST Oriente y Sur: todas las lecturas son "LST producida, otra calidad, revisar QA" (MODLAND 0b01); el indicador de calidad de datos es "bueno" y el error de LST es ≤ 2 K en la mayoría. El filtro las conserva; no es evidencia de datos malos.
+   - NDVI: la máscara de tierra/agua marca "costa o lago" en 568 de 576 fechas de Centro (y casi todas en Surponiente, El Centenario y Chametla). En Centro 405 de 576 fechas salen "probablemente nublado". Es compatible con un píxel costero que mezcla agua; no se confirmó. Las zonas Oriente y Sur son mayormente tierra.
+7. **Mejoras**: contraste con `correlated_seasonal_test` hecho (misma señal en las tres series, ver tabla); pruebas nuevas para `zonas.py` y `appeears.py` (17 en total); licencia de pytest verificada en PyPI (MIT, 9.2.0). Sin hacer: validación con un esquema JSON formal.

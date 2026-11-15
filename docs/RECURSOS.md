@@ -33,7 +33,7 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | `pymannkendall` 1.4.3 (Hussain y Mahmud, 2019, DOI 10.21105/joss.01556) | <https://github.com/mmhs013/pyMannKendall> | MIT (PyPI, 2026-11-14) | `analisis/tendencias.py` (y el prototipo `analisis/prototipo_power.py`): pruebas Mann-Kendall estacionales y pendiente de Sen |
 | NumPy | <https://numpy.org/> | BSD-3-Clause (PyPI, 2026-11-14) | `analisis/tendencias.py` y `analisis/exportar.py` (y el prototipo) |
 | Requests | <https://requests.readthedocs.io/> | Apache-2.0 (PyPI, 2026-11-14) | `analisis/descargar.py`: descarga de NASA POWER (y el prototipo) |
-| pytest | <https://docs.pytest.org/> | MIT (PyPI) | `analisis/tests/`: pruebas del pipeline (solo desarrollo) |
+| pytest | <https://docs.pytest.org/> | MIT (PyPI, versión 9.2.0, verificado el 2026-11-14) | `analisis/tests/`: pruebas del pipeline (solo desarrollo) |
 
 ## Uso de IA
 
