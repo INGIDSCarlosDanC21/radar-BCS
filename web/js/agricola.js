@@ -426,11 +426,24 @@
         }).addTo(mapa);
       }
       est.marcas = {};
+      /* #128: la etiqueta es "Nombre: dato". A menos de 480 px el CSS oculta el dato (no cabe en el mapa
+         y se salía por los lados); el dato completo sigue en el popup del marcador. */
+      /* #128: dos localidades a menos de 0.1° (El Centenario y Chametla, ~4 km) se enciman con el zoom inicial:
+         la del oeste sube su etiqueta y la otra la baja. */
+      function vecino(l) {
+        var v = arr(m.localidades).filter(function (o) { return o !== l && Math.abs(o.lat - l.lat) < 0.1 && Math.abs(o.lon - l.lon) < 0.1; })[0];
+        return v ? (l.lon < v.lon ? ' ag-pin-arriba' : ' ag-pin-abajo') : '';
+      }
+      function pinTexto(l) {
+        var e = D(l, 'etiqueta') || l.nombre, pre = l.nombre + ': ';
+        if (e.indexOf(pre) !== 0) return esc(e);
+        return '<span class="ag-pin-nom">' + esc(l.nombre) + '</span><span class="ag-pin-dato">: ' + esc(e.slice(pre.length)) + '</span>';
+      }
       arr(m.localidades).forEach(function (l, k) {
         if (typeof l.lat !== 'number' || typeof l.lon !== 'number') return;
         var icon = L.divIcon({
           className: 'ag-pin-icon',
-          html: '<span class="ag-pin"><i class="ag-dot ag-dot-' + (k % 2 ? 'cian' : 'verde') + '"></i>' + esc(D(l, 'etiqueta') || l.nombre) + '</span>',
+          html: '<span class="ag-pin' + vecino(l) + '"><i class="ag-dot ag-dot-' + (k % 2 ? 'cian' : 'verde') + '"></i>' + pinTexto(l) + '</span>',
           iconSize: null
         });
         var mk = L.marker([l.lat, l.lon], { icon: icon, title: l.nombre, keyboard: true }).addTo(mapa);

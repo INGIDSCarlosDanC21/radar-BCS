@@ -178,6 +178,18 @@ body[data-vista=agricola] main{max-width:none;margin:0;padding:0}
 .ag .ag-negro{color:#000d21;font-weight:700;text-transform:uppercase}
 .ag-copy{max-width:1216px;margin:32px auto 0;background:rgba(255,255,255,.5);border-radius:8px;padding:16px;font-size:12px;line-height:16px}
 
+/* #128: Mapa Agrícola en pantallas angostas. A menos de 480 px, marcadores solo con el nombre (el dato va en el popup); la leyenda
+   pasa debajo del mapa (tapaba a El Carrizal y la tocaban los botones de zoom); el chip de estado de dos
+   líneas no queda como óvalo. */
+.ag-pin.ag-pin-arriba{transform:translate(-50%,-110%)}.ag-pin.ag-pin-abajo{transform:translate(-50%,10%)}
+@media (max-width:479px){.ag-pin-dato{display:none}}
+/* Hasta 1023 px la leyenda tapaba a El Carrizal (también a 768); a 1280, como en Figma, no choca y sigue encima. */
+@media (max-width:1023px){
+  .ag-mapa-caja{height:auto}
+  .ag-mapa .ag-mapa-lf{position:relative;inset:auto;height:320px}
+  .ag-mapa .ag-ley{position:static;width:auto;max-width:none;border-radius:0;box-shadow:none;border-top:1px solid #e0e3e6}
+}
+@media (max-width:639px){.ag-estado-izq{border-radius:8px}}
 @media (min-width:640px){
   .ag-estado{flex-direction:row;justify-content:space-between;align-items:center;padding:6px 16px}
   .ag-busca{flex-direction:row}
