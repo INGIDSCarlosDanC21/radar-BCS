@@ -16,7 +16,7 @@ Also from "Project Submission": images and videos that are generated content nee
 
 - Claude Code (used).
 - Google Stitch (used; Google's AI interface design tool). Confirmed by the team on 2026-11-14. If "Google Stitch" is not in the drop-down menu, select "Other" and write it.
-- Gemini (used; Google): generated the "Radar BCS" logo. Confirmed by the UI/UX member on 2026-11-14. TODO: re-check before submitting; if anything else is used later (for example a generated image), add it here.
+- Gemini (used; Google): generated the "Radar BCS" logo. Confirmed by the UI/UX member on 2026-11-14. Re-checked on 2026-11-15: no other generated image is used.
 - ElevenLabs (used; decided by the team lead on 2026-11-15): synthetic voice for the narration of the 30-second demo video. If the voice is not used in the end, remove this line and the matching row in `docs/RECURSOS.md`.
 
 ## Where and how each tool was used
@@ -29,7 +29,7 @@ Also from "Project Submission": images and videos that are generated content nee
 - ElevenLabs (used): generates the English narration of the demo video from our own script (voice: "Tamsin" from the ElevenLabs voice library, model Eleven v4) (`docs/entrega/08b-video-shotlist.md`). Only the voice is generated; the screen footage is a recording of our own website. The video description says so ("Narration is an AI-generated voice (ElevenLabs)"); there is no on-screen label (see the demo video note below).
 - Demo video note: the voice of the 30-second demo video is synthetic (ElevenLabs). The video itself was assembled with Remotion (open-source video tool) from screen recordings of our own website; no video was AI-generated. By decision of the team leader (2026-11-15) the video shows no on-screen AI label; the disclosure is made here, in the video description ("Narration is an AI-generated voice (ElevenLabs)") and in the "Use of SI" field of the platform. The Gemini-generated logo also appears in the video without an on-screen label; it is disclosed in this file and in `docs/RECURSOS.md`.
 - No other AI tools were used (no video or 3D generation; no generated image besides the logo).
-- Third-party skills and plugins used as development tools: listed in docs/skills-terceros.md. TODO: summarize if needed.
+- Third-party skills and plugins used as development tools: listed in docs/skills-terceros.md. They are free-licensed development helpers; none generates content that appears on the site.
 
 ## Watermarks / metadata indicators in the project
 
