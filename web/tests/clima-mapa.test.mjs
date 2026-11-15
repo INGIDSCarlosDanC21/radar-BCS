@@ -119,3 +119,77 @@ test('fichas: cada lugar del mapa con ficha tiene un pueblo real en RBVivo.PUERT
   }
   assert.ok(!mapa.includes('comondu') && leer('js/clima-mapa.js').includes('cm.sinFicha'));
 });
+
+// Buscador de lugar y fecha (pedido de UI/UX, 2026-11-15) y ficha debajo de su tarjeta.
+const diaResp = CL.LUGARES.map((l, k) => ({ daily: { time: ['2026-09-15'], weather_code: [k === 1 ? 61 : 2], temperature_2m_max: [34.1], temperature_2m_min: [25.2],
+  apparent_temperature_max: [39.4], apparent_temperature_min: [28.0], uv_index_max: [8.4], sunshine_duration: [39600], sunrise: ['2026-09-15T06:10'], sunset: ['2026-09-15T18:30'],
+  wind_speed_10m_max: [13.2], wind_gusts_10m_max: [31.7], wind_direction_10m_dominant: [225], precipitation_sum: [4.2], precipitation_probability_max: [44], relative_humidity_2m_mean: [74] } }));
+
+test('buscador: formulario con lugar y fecha, y búsqueda tolerante a acentos y nombres cortos', () => {
+  T.setLang('es');
+  const h = CM.html();
+  assert.match(h, /<form class="cm-busca" id="cm-busca" role="search"/);
+  assert.match(h, /<label for="cm-q">Lugar<\/label><input id="cm-q" type="search" list="cm-lista"/);
+  assert.match(h, /<label for="cm-f">Fecha<\/label><input id="cm-f" type="date" min="\d{4}-\d{2}-\d{2}" max="\d{4}-\d{2}-\d{2}" value="\d{4}-\d{2}-\d{2}"/);
+  assert.equal(CM.buscarLugar('los cabos').id, 'loscabos');
+  assert.equal(CM.buscarLugar('COMONDU').id, 'comondu');
+  assert.equal(CM.buscarLugar('Guerrero Negro').id, 'guerreronegro');
+  assert.equal(CM.buscarLugar('mulegé').id, 'mulege');
+  assert.equal(CM.buscarLugar('xyz'), null);
+  assert.equal(CM.buscarLugar('San'), null, 'ambiguo: San José del Cabo y San Juan de la Costa');
+});
+
+test('fechas: de hoy − 92 a hoy + 15 días (rango que acepta Open-Meteo) y URL diaria de los 20 lugares', () => {
+  const r = CM.rangoFechas(new Date('2026-11-15T18:00:00Z'));
+  assert.deepEqual(r, { min: '2026-08-15', max: '2026-11-30', hoy: '2026-11-15' });
+  const u = CM.urlDia('2026-09-15');
+  assert.match(u, /start_date=2026-09-15&end_date=2026-09-15/);
+  assert.match(u, /timezone=America%2FMazatlan/);
+  assert.equal(u.split('latitude=')[1].split('&')[0].split(',').length, 20);
+  for (const v of ['temperature_2m_max', 'apparent_temperature_max', 'uv_index_max', 'wind_gusts_10m_max', 'precipitation_probability_max', 'relative_humidity_2m_mean']) assert.ok(u.includes(v), v);
+});
+
+test('día elegido: tarjetas y ficha con los valores de ese día, sin NaN, en ES y EN', () => {
+  T.setLang('es');
+  const filas = CM.unirDia(diaResp, '2026-09-15');
+  const cabos = filas.find((f) => f.lugar.id === 'loscabos');
+  const h = CM.tarjetas(cabos);
+  for (const s of ['Máx 34 °C', 'Sensación máxima: 39 °C', 'Índice 8', 'Máximo del día: Muy alto', '13 km/h SO', 'Ráfagas de hasta 32 km/h', '44 % lluvia', 'Humedad media: 74 %']) assert.ok(h.includes(s), s);
+  assert.ok(h.includes('href="#clima/calor/loscabos"'));
+  const d = CM.detalleDia(cabos, 'lluvia');
+  assert.ok(d.includes('Humedad y Lluvia en Los Cabos · 15 de septiembre de 2026'), d.slice(0, 200));
+  for (const s of ['4.2 mm', '44 %', '74 %', 'data-cerrar', 'no son estaciones']) assert.ok(d.includes(s), s);
+  const com = CM.detalleDia(filas.find((f) => f.lugar.id === 'comondu'), 'viento');
+  assert.ok(com.includes('Mapa Pesquero') && com.includes('31.7') === false && com.includes('32 km/h'), 'Comondú tiene ficha del día');
+  for (const id of ['calor', 'uv', 'viento', 'lluvia']) assert.ok(!/NaN|undefined|null/.test(CM.detalleDia(cabos, id)), id);
+  const vacia = CM.unirDia([{}], '2026-09-15')[0];
+  assert.ok(!/NaN|undefined/.test(CM.tarjetas(vacia) + CM.detalleDia(vacia, 'calor')));
+  T.setLang('en');
+  const en = CM.tarjetas(cabos) + CM.detalleDia(cabos, 'uv');
+  T.setLang('es');
+  for (const s of ['Highest feels-like: 39 °C', "Day's peak", 'Gusts up to 32 km/h', 'Average humidity: 74 %', 'September 15, 2026', 'Hours of sun']) assert.ok(en.includes(s.replace(/'/g, '&#39;')), s);
+});
+
+test('la ficha abierta se coloca justo después de la fila de su tarjeta', () => {
+  CM.html(); // reinicia el estado
+  const hijos = [];
+  const mk = (cls) => ({ className: cls, parentNode: null });
+  const grid = { id: 'cm-tarjetas', parentNode: { insertBefore: () => {} },
+    querySelectorAll: () => hijos.filter((x) => x.className.startsWith('cm-tarjeta')),
+    querySelector: (q) => hijos.find((x) => q.endsWith((x.id ? x.id : x.className.split(' ')[1]))) || null,
+    insertBefore: (n, ref) => { const i = hijos.indexOf(n); if (i >= 0) hijos.splice(i, 1); const j = ref ? hijos.indexOf(ref) : hijos.length; hijos.splice(j, 0, n); n.parentNode = grid; } };
+  ['calor', 'uv', 'viento', 'lluvia'].forEach((id) => { const c = mk('cm-tarjeta cm-' + id); c.parentNode = grid; hijos.push(c); });
+  hijos.forEach((c, i) => { c.nextSibling = undefined; Object.defineProperty(c, 'nextSibling', { get: () => hijos[hijos.indexOf(c) + 1] || null }); });
+  const ficha = { id: 'cm-ficha', className: 'cl-det cm-ficha', parentNode: null, hidden: true, innerHTML: '', querySelector: () => null };
+  const raiz = { querySelector: (q) => (q === '#cm-ficha' ? ficha : q === '#cm-tarjetas' ? grid : null) };
+  global.getComputedStyle = () => ({ gridTemplateColumns: '300px 300px' });
+  CM.abrirFicha(raiz, 'calor');
+  assert.deepEqual(hijos.map((x) => x.id || x.className.split(' ')[1]), ['cm-calor', 'cm-uv', 'cm-ficha', 'cm-viento', 'cm-lluvia'], 'escritorio: después de la fila 1');
+  CM.abrirFicha(raiz, 'lluvia');
+  assert.equal(hijos.at(-1), ficha, 'escritorio: fila 2, al final');
+  global.getComputedStyle = () => ({ gridTemplateColumns: '360px' });
+  CM.abrirFicha(raiz, 'uv');
+  assert.deepEqual(hijos.map((x) => x.id || x.className.split(' ')[1]), ['cm-calor', 'cm-uv', 'cm-ficha', 'cm-viento', 'cm-lluvia'], 'celular: justo debajo de su tarjeta');
+  delete global.getComputedStyle;
+  assert.match(leer('css/clima-mapa.css'), /\.cm-tarjetas>\.cm-ficha\{grid-column:1\/-1/);
+});
