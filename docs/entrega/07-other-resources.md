@@ -14,7 +14,7 @@ Resources should include any code, text, and images (even if they are open sourc
 
 ## Space Agency Partner data (optional)
 
-TODO: none planned in the repository. Add only if partner agency data is used.
+None. We did not use Space Agency Partner data.
 
 ## Other references: code, text, images, data, audio, 3D
 
@@ -23,7 +23,9 @@ TODO: none planned in the repository. Add only if partner agency data is used.
 | Radar BCS source code (our own work) | https://github.com/INGIDSCarlosDanC21/radar-BCS | Apache-2.0 | Whole project |
 | pyMannKendall (Hussain and Mahmud, 2019, Journal of Open Source Software, DOI 10.21105/joss.01556) | https://github.com/mmhs013/pyMannKendall | MIT | Seasonal Mann-Kendall tests and Sen's slope in the analysis |
 | NumPy | https://numpy.org/ | BSD-3-Clause | Numerical work in the analysis |
-| Requests | https://requests.readthedocs.io/ | Apache-2.0 | Downloading NASA POWER data and MODIS data through the AppEEARS API |
+| Requests | https://requests.readthedocs.io/ | Apache-2.0 | Downloading NASA POWER, MODIS (AppEEARS API) and GRACE (NASA Earthdata) data |
+| netCDF4 (Python) | https://unidata.github.io/netcdf4-python/ | MIT | Reading the GRACE netCDF file |
+| SciPy | https://scipy.org/ | BSD-3-Clause | Spearman correlation check between rainfall and water (analysis only) |
 | Leaflet 1.9.4 | https://leafletjs.com/ | BSD-2-Clause | Interactive map on the website |
 | OpenStreetMap tiles | https://www.openstreetmap.org/copyright | ODbL (attribution "© OpenStreetMap contributors" shown on the map) | Map background |
 | CDC, *Five Steps to help your patients stay safe on hot days* | https://www.cdc.gov/heat-health/media/pdfs/2025/09/Five-Heat-Steps-factsheet-508.pdf | Official site; cited only | Heat tips on the Actions screen |

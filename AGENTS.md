@@ -67,7 +67,7 @@ El modelo principal de la sesión **solo orquesta**: planea, reparte, revisa e i
 
 - Lectura, búsqueda, redacción y código rutinario → subagentes con modelo pequeño (haiku; sonnet si hace falta razonar).
 - Trabajo en volumen → agentes externos gratuitos con `scripts/delegar.ps1 "<tarea>"` (Codex, OpenCode, Gemini CLI, Ollama; usa el primero disponible y guarda la respuesta en un archivo).
-- No hay datos sensibles en este proyecto, así que se puede mandar contexto a agentes externos. **Nunca** claves ni datos personales.
+- No hay datos sensibles en el análisis ni en el código, así que se puede mandar contexto a agentes externos. **Nunca** claves ni datos personales; si sale el login opcional con Supabase, los correos de las cuentas nunca se copian al repo, a los chats ni a agentes externos.
 - Revisa siempre lo que devuelve un agente antes de integrarlo.
 
 Ver skill `orquestar-barato`.
