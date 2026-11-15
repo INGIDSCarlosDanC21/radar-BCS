@@ -8,14 +8,19 @@
 - Reglas de presentación en `web/js/reglas.js`; pruebas con `node --test "web/tests/*.test.mjs"` (12 pass), incluido un validador del contrato.
 - Probado a 360×740 claro y oscuro: 7 vistas sin errores de consola, sin "null" y sin scroll horizontal.
 
+- PR #54 (fusionado): vegetación real (−0.019 NDVI, MODIS MOD13Q1) y nota de límite bajo la cifra de calor.
+- Issue #9: mapa real. `web/data/zonas.geojson` es copia sin BOM de `data/salida/zonas.geojson` (Luca): 6 píxeles MODIS de 1 km (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), `datos_de_prueba: false`, así que ya no sale la franja. Vegetación muestra cifra y color en las 4 zonas con tendencia clara. Calor (superficie) muestra "Sin cambio claro" sin cifra en todas, por decisión de Investigación (`docs/investigacion/hallazgos.md`: la baja por zona depende de la prueba). Lluvia y agua: escala regional. Con la nota de Carlos (revisión del PR #57) bajo la lista de calor.
+- Salida nueva de Luca copiada a `web/data/indicadores.json`: calor = superficie MODIS "Sin cambio claro" (p = 0.11) con nota que dice que el aire sí sube +1.47 °C; agua real GRACE +1.36 cm (2002-2026, tendencia clara, regional). La ficha dice "Cambio total desde" el primer año del periodo.
+
 ## En curso
 
-- PR `prog-b/datos-reales` → `dev`.
+- PR `prog-b/mapa-zonas` → `dev` (issue #9).
 
 ## Falta
 
 - Que Carlos fusione `dev` → `main`; luego comprobar la URL pública sin sesión.
-- Datos por zona (MODIS) para el mapa; hasta entonces el mapa es de prueba.
+- Si Investigación cambia la prueba para la superficie por zona, quitar `sinCifra` de `CAPA_ZONA.calor` en `web/js/app.js`.
+- `p_valor: 0.0` en NDVI de Chametla (regla 4 del Anexo); la web muestra "p < 0.001".
 - Caso no cubierto: `significativo: null` con `cambio_total` con valor mostraría la cifra con "Sin calcular" (hoy no ocurre en los datos).
 
 ## Bloqueos
@@ -43,3 +48,4 @@ node --test "web/tests/*.test.mjs"
 - Entorno del repo configurado.
 - Web base con 4 pantallas y datos de prueba; contrato de datos propuesto.
 - Tarde: datos reales de NASA POWER conectados e issue #36 resuelto.
+- Noche: vegetación real (PR #54) y tendencias reales por punto en el Mapa (issue #9).

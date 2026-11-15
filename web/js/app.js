@@ -28,7 +28,10 @@
     ]).then(function (r) { DATOS = r[0]; ZONAS = r[1]; });
   }
   function franja(sec) {
-    document.getElementById('franja').hidden = !RB.mostrarFranja(DATOS, ZONAS, sec);
+    var f = document.getElementById('franja');
+    f.hidden = !RB.mostrarFranja(DATOS, ZONAS, sec);
+    f.textContent = (DATOS && DATOS.datos_de_prueba === true) ? 'DATOS DE PRUEBA — no son mediciones reales'
+      : 'MAPA DE PRUEBA — las zonas dibujadas no son mediciones';
   }
 
   /* ---------- Inicio ---------- */
@@ -38,7 +41,7 @@
       var e = etiqueta(sig(i)), t = RB.textoCambio(i);
       h += '<a class="tarjeta" href="#ficha/' + esc(i.id) + '"><h2>' + esc(i.titulo) + '</h2>' +
         '<div class="cifra ' + t.clase + '">' + esc(t.texto) + '</div>' +
-        (i.id === 'calor' && t.tipo === 'cifra' && i.limitacion ? '<p class="nota-limite"><strong>Límite:</strong> ' + esc(i.limitacion) + '</p>' : '') +
+        ((i.id === 'calor' || i.id === 'agua') && t.tipo !== 'sin-datos' && i.limitacion ? '<p class="nota-limite"><strong>Límite:</strong> ' + esc(i.id === 'agua' ? i.limitacion.split('. ')[0] + '.' : i.limitacion) + '</p>' : '') +
         '<p class="fuente">Periodo: ' + esc((i.fuente && i.fuente.periodo) || 'pendiente') + '</p>' +
         '<span class="etiqueta ' + e[1] + '">' + e[0] + '</span>' +
         '<p class="fuente">Fuente: ' + esc(RB.textoFuente(i)) + '</p>' +
@@ -83,9 +86,27 @@
     pintar();
   }
 
+  /* Qué mide cada capa por zona (MODIS vía AppEEARS). sinCifra: decisión de Investigación
+     (docs/investigacion/hallazgos.md): la baja de superficie por zona depende de la prueba; no se cita cifra. */
+  var CAPA_ZONA = {
+    calor: { que: 'Temperatura de la superficie (satélite MODIS), no la del aire.',
+      fuente: 'MODIS MOD11A2.061 (temperatura de superficie, 1 km) vía NASA AppEEARS',
+      sinCifra: 'En El Centenario y Sur una prueba estadística marca una baja de la temperatura de superficie, pero con otra prueba no es significativa y viene de 2022-2025; no la interpretamos todavía.' },
+    vegetacion: { que: 'Índice de vegetación (NDVI). Algunos meses no tienen lectura válida en la ciudad: es un panorama aproximado.',
+      fuente: 'MODIS MOD13Q1.061 (NDVI, 250 m) vía NASA AppEEARS' }
+  };
+
   function pintar() {
-    var id = indMapa, i = ind(id), m = maxAbs(id), un = i.unidades;
+    var id = indMapa, i = ind(id), un = i.unidades;
     var esPrueba = ZONAS.datos_de_prueba === true, prueba = esPrueba ? ' (dato de prueba)' : '';
+    var cfg = esPrueba ? null : CAPA_ZONA[id];
+    function cz(f) {
+      var c = f.properties.cambios[id];
+      if (c && cfg && cfg.sinCifra && c.cambio_total != null) return { cambio_total: c.cambio_total, significativo: false };
+      return c;
+    }
+    var m = 0;
+    ZONAS.features.forEach(function (f) { var c = cz(f); if (c && c.cambio_total != null && c.significativo !== false) m = Math.max(m, Math.abs(c.cambio_total)); });
     function zonaTexto(c) { return c.significativo === false ? 'Sin cambio claro' : signo(c.cambio_total, un); }
     var caja = document.getElementById('mapa-caja');
     if (typeof L === 'undefined') {
@@ -99,13 +120,13 @@
         }).addTo(mapa);
         var capa = L.geoJSON(ZONAS, {
           style: function (f) {
-            var c = f.properties.cambios[id];
+            var c = cz(f);
             var v = c ? c.cambio_total : null;
             var fill = (c && c.significativo === false && v != null) ? mezcla(PAL.mid, PAL.mid, 0) : color(v, m);
             return { color: '#333', weight: 1, fillOpacity: 0.75, fillColor: fill, dashArray: v == null ? '4 3' : null };
           },
           onEachFeature: function (f, l) {
-            var c = f.properties.cambios[id] || {};
+            var c = cz(f) || {};
             var e = etiqueta(c.significativo === undefined ? null : c.significativo);
             l.bindPopup('<strong>' + esc(f.properties.nombre) + '</strong>' + prueba + '<br>' + esc(i.titulo) + ': ' +
               esc(zonaTexto(c)) + '<br>' + e[0]);
@@ -127,27 +148,36 @@
     ley += '<span><i class="sindatos"></i>sin datos</span>';
     document.getElementById('leyenda').innerHTML = ley;
 
+    // Real: todas las zonas con dato, primero las de tendencia clara. Prueba: top 5 con cifra.
     var lista = ZONAS.features.filter(function (f) {
-      var c = f.properties.cambios[id]; return c && c.cambio_total != null && c.significativo !== false;
+      var c = cz(f); return c && c.cambio_total != null && (!esPrueba || c.significativo !== false);
     }).sort(function (a, b) {
-      return Math.abs(b.properties.cambios[id].cambio_total) - Math.abs(a.properties.cambios[id].cambio_total);
-    }).slice(0, 5);
-    var r = '<h2>Zonas con más cambio: ' + esc(i.titulo) + '</h2>';
+      var ca = cz(a), cb = cz(b), sa = ca.significativo === false, sb = cb.significativo === false;
+      if (sa !== sb) return sa ? 1 : -1;
+      return Math.abs(cb.cambio_total) - Math.abs(ca.cambio_total);
+    }).slice(0, esPrueba ? 5 : undefined);
+    var r = '<h2>' + (esPrueba ? 'Zonas de prueba del mapa (no son mediciones): ' : 'Zonas con más cambio: ') + esc(i.titulo) + '</h2>';
+    if (cfg) r += '<p>' + esc(cfg.que) + '</p>';
     if (!lista.length) {
       r += '<p class="aviso">Este indicador se mide a escala regional, no por zona; por eso el mapa no tiene datos para ' + esc(i.titulo.toLowerCase()) + '. Mira la ficha para ver el cambio en La Paz.</p>';
     } else {
       r += '<ol class="top">';
       lista.forEach(function (f) {
-        var c = f.properties.cambios[id];
-        r += '<li><strong>' + esc(f.properties.nombre) + '</strong>' + prueba + ': ' + esc(signo(c.cambio_total, un)) + ' — ' + etiqueta(c.significativo)[0] + '</li>';
+        var c = cz(f), t = zonaTexto(c);
+        r += '<li><strong>' + esc(f.properties.nombre) + '</strong>' + prueba + ': ' +
+          (c.significativo === false ? esc(t) : '<span class="' + clase(c.cambio_total) + '">' + esc(t) + '</span> — ' + etiqueta(c.significativo)[0]) + '</li>';
       });
       r += '</ol>';
+      if (cfg && cfg.sinCifra) r += '<p class="nota-limite">' + esc(cfg.sinCifra) + '</p>';
     }
     r += '<p><a href="#ficha/' + esc(id) + '">Ver ficha de ' + esc(i.titulo.toLowerCase()) + '</a></p>';
     document.getElementById('resumen').innerHTML = r;
+    var nota = ZONAS.features[0] && ZONAS.features[0].properties.nota;
     document.getElementById('fuente-mapa').textContent = (esPrueba ?
       'Zonas: datos de prueba sintéticos, no son mediciones; el mapa por zona espera datos de MODIS. El dato real de La Paz está en la ficha.' :
-      'Fuente: ' + RB.textoFuente(i) + '.') + ' Mapa base: © OpenStreetMap contributors.';
+      cfg ? 'Fuente: ' + cfg.fuente + ', ' + (ZONAS.periodo ? ZONAS.periodo.inicio + '–' + ZONAS.periodo.fin : 'periodo pendiente') +
+        '; Mann-Kendall estacional y pendiente de Sen. Son puntos, no zonas completas: cada uno se dibuja como el píxel de 1 km que lo contiene.' : '') +
+      ' Mapa base: © OpenStreetMap contributors.';
   }
 
   /* ---------- Ficha ---------- */
@@ -192,7 +222,7 @@
       h += '<a class="chip" style="display:inline-flex;align-items:center;text-decoration:none" href="#ficha/' + k + '"' + (k === i.id ? ' aria-current="page"' : '') + '>' + esc(ind(k).titulo) + '</a>';
     });
     h += '</div><h1>' + esc(i.titulo) + '</h1><p class="fuente">' + esc(i.variable) + '</p>';
-    h += '<div class="bloque"><h2>Cambio total desde 2001</h2><div class="grande ' + tc.clase + '">' + esc(tc.texto) + '</div>' +
+    h += '<div class="bloque"><h2>Cambio total desde ' + esc(((i.fuente && i.fuente.periodo) || '2001').slice(0, 4)) + '</h2><div class="grande ' + tc.clase + '">' + esc(tc.texto) + '</div>' +
       (tc.tipo === 'sin-cambio' ? '<p class="fuente">No se detecta un cambio claro; por eso no se muestra una cifra de cambio.</p>' :
         i.cambio_total_nota ? '<p class="fuente">' + esc(i.cambio_total_nota) + '</p>' : '') +
       '<p>Tendencia por década: <strong>' + esc(tc.tipo === 'sin-cambio' ? 'Sin cambio claro' : signo(i.tendencia_por_decada, i.unidades)) + '</strong></p></div>';
