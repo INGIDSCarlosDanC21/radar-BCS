@@ -11,7 +11,8 @@ Pasos (desde `video/`):
 1. `npm install` (si el disco C: está lleno, pon `node_modules` en otro disco con una unión: `mklink /J node_modules D:\...\node_modules`; la carpeta destino debe llamarse `node_modules`).
 2. Capturas: `node ../scripts/capturar-video.mjs` (de día en La Paz; 1080 px de ancho ≈ DPR 2.77). Quedan en `public/tomas/`.
 3. Voz: copia la narración a `public/narracion.mp3` (no se sube).
-4. Audio: `public/audio/*.mp3` (lecho `bed-120bpm-28s` y efectos de la rama `lider/trailer-audio`). La composición detecta qué archivos existen y solo coloca esos; las señales están en `SENALES` de `src/guion.ts`. El lecho baja (ducking) mientras habla la voz.
+4. Audio: `public/audio/` (lecho `bed-120bpm-28s.mp3` y efectos `.wav`, muestras CC0 procesadas; fuentes en `public/audio/LICENCIAS.md`, hoja de señales en `docs/entrega/09-audio-trailer.md`). La composición detecta qué archivos existen y solo coloca esos; las señales están en `LECHO` y `SENALES` de `src/guion.ts`. El lecho va a 0.20 mientras habla la voz y sube a 1.0 entre 25.4 y 26.4 s.
+   Después del render se normaliza la sonoridad sin tocar el video: `ffmpeg -i out/v.mp4 -c:v copy -af "loudnorm=I=-15:TP=-1.5:LRA=7,aresample=48000" -c:a aac -b:a 192k out/trailer-radar-bcs-28s.mp4`.
 5. Previsualizar: `npm run dev` y abre la composición `RadarBCSTrailer`.
 6. Renderizar: `npx remotion render RadarBCSTrailer out/trailer-radar-bcs-28s.mp4 --codec=h264 --crf=18 --audio-bitrate=192k` (con poca RAM, añade `--concurrency=3`).
 7. Verificar: `ffprobe` (1920x1080, 30 fps, ≤ 30 s) y `ffmpeg -i out/trailer-radar-bcs-28s.mp4 -af ebur128=peak=true -f null -` (≤ −14 LUFS, pico ≤ −1 dBTP).

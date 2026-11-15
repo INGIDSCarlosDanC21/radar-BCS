@@ -3,7 +3,7 @@
 import { Audio } from '@remotion/media';
 import { AbsoluteFill, interpolate, Sequence, staticFile, Track, useCurrentFrame, useVideoConfig } from 'remotion';
 import { FUENTE_CUERPO } from '../estilo';
-import { FUENTES_DATOS, SENALES, SUBTITULOS, TRAILER_ESCENAS as E, URL_WEB } from '../guion';
+import { FUENTES_DATOS, LECHO, SENALES, SUBTITULOS, TRAILER_ESCENAS as E, URL_WEB } from '../guion';
 import { CL, Destello, FugaLuz, Gradacion, Grano, Vineta } from './comun';
 import { Apertura, Avisos, Calor, Cierre, Lluvia, Mapa, Titulo } from './Escenas';
 
@@ -44,11 +44,12 @@ const BandaInferior: React.FC = () => (
 );
 
 // Lecho musical con "ducking": baja mientras habla la voz.
+// Volúmenes de docs/entrega/09-audio-trailer.md: 0.20 mientras habla la voz (0–25.4 s), rampa a 1.0
+// entre 25.4 y 26.4 s, y fundido a 0 en 27.5–28 s junto con la imagen.
 const volumenLecho = (f: number, fps: number) => {
   const t = f / fps;
-  const habla = SUBTITULOS.some((s) => t >= s.desde - 0.15 && t <= s.hasta + 0.15);
-  const base = habla ? 0.14 : 0.32;
-  return t > 27 ? base * interpolate(t, [27, 28], [1, 0], CL) : base;
+  const sube = interpolate(t, [25.4, 26.4], [0.2, 1], CL);
+  return sube * interpolate(t, [27.5, 28], [1, 0], CL);
 };
 
 export const TrailerRadarBCS: React.FC<PropsTrailer> = ({ audios, hayNarracion }) => {
@@ -98,10 +99,10 @@ export const TrailerRadarBCS: React.FC<PropsTrailer> = ({ audios, hayNarracion }
         <SubtitulosCine />
       </Track>
       {hayNarracion ? <Audio name="Narración" src={staticFile('narracion.mp3')} volume={1} /> : null}
-      {hay('bed-120bpm-28s') ? <Audio name="Lecho 120 BPM" src={staticFile('audio/bed-120bpm-28s.mp3')} volume={(fr) => volumenLecho(fr, fps)} /> : null}
+      {hay(LECHO) ? <Audio name="Lecho 120 BPM" src={staticFile(LECHO)} volume={(fr) => volumenLecho(fr, fps)} /> : null}
       {SENALES.filter((s) => hay(s.archivo)).map((s, i) => (
-        <Sequence key={i} name={`SFX ${s.archivo}`} from={f(s.archivo.startsWith('riser') ? s.en : s.en)} layout="none">
-          <Audio src={staticFile(`audio/${s.archivo}.mp3`)} volume={s.volumen * 0.6} />
+        <Sequence key={i} name={`SFX ${s.archivo}`} from={f(s.en)} layout="none">
+          <Audio src={staticFile(s.archivo)} volume={s.volumen} />
         </Sequence>
       ))}
     </AbsoluteFill>

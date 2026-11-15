@@ -102,38 +102,42 @@ export const P_CALOR = 'p < 0.001';
 export const P_LLUVIA = 'p = 0.129';
 export const LUGARES = 38;
 
-// Efectos de sonido (archivos de la rama lider/trailer-audio en public/audio/).
-// "en" = segundo del golpe; los risers terminan EXACTO en el corte (empiezan en en - duración).
+// Efectos de sonido: archivos CC0 de la rama lider/trailer-audio en public/audio/ (fuentes en
+// public/audio/LICENCIAS.md). Volúmenes de docs/entrega/09-audio-trailer.md (narración = 1.0),
+// con las señales movidas a los cortes de este tráiler (3.0, 6.0, 12.0, 15.5, 18.5, 22.0 s).
+// "en" = segundo en que EMPIEZA el archivo: los risers y el reverse terminan justo en el corte;
+// los whoosh-short empiezan 0.35 s antes del corte (su pico está en 0.35 s).
 export type Senal = { archivo: string; en: number; volumen: number };
+export const LECHO = "audio/bed-120bpm-28s.mp3"; // trae riser 6-12 s e impactos en 12.0 y 24.0 s
 export const SENALES: Senal[] = [
-  { archivo: 'riser-3s', en: 0, volumen: 0.5 }, // culmina en 3.0 (corte al título)
-  { archivo: 'hit-soft', en: 1.0, volumen: 0.5 },
-  { archivo: 'hit-soft', en: 1.5, volumen: 0.5 },
-  { archivo: 'hit-soft', en: 2.0, volumen: 0.5 },
-  { archivo: 'hit-impact', en: 3.0, volumen: 0.8 },
-  { archivo: 'glitch', en: 3.0, volumen: 0.45 },
-  { archivo: 'whoosh-long', en: 4.0, volumen: 0.5 },
-  { archivo: 'whoosh-short', en: 5.9, volumen: 0.5 },
-  { archivo: 'hit-impact', en: 6.0, volumen: 0.6 },
-  { archivo: 'counter-tick', en: 6.5, volumen: 0.4 },
-  { archivo: 'ui-pop', en: 10.0, volumen: 0.6 },
-  { archivo: 'whoosh-short', en: 11.8, volumen: 0.6 },
-  { archivo: 'hit-soft', en: 12.0, volumen: 0.5 },
-  { archivo: 'reverse-swell', en: 12.5, volumen: 0.4 },
-  { archivo: 'ui-tick', en: 13.5, volumen: 0.5 },
-  { archivo: 'whoosh-long', en: 15.2, volumen: 0.5 },
-  { archivo: 'hit-impact', en: 15.5, volumen: 0.55 },
-  { archivo: 'ui-pop', en: 16.0, volumen: 0.45 },
-  { archivo: 'ui-pop', en: 16.5, volumen: 0.45 },
-  { archivo: 'ui-pop', en: 17.0, volumen: 0.45 },
-  { archivo: 'ui-pop', en: 17.5, volumen: 0.45 },
-  { archivo: 'whoosh-short', en: 18.4, volumen: 0.5 },
-  { archivo: 'ui-tick', en: 19.0, volumen: 0.5 },
-  { archivo: 'ui-tick', en: 19.5, volumen: 0.5 },
-  { archivo: 'glitch', en: 20.0, volumen: 0.4 },
-  { archivo: 'riser-3s', en: 19.0, volumen: 0.45 }, // culmina en 22.0 (corte al cierre)
-  { archivo: 'hit-impact', en: 22.0, volumen: 0.75 },
-  { archivo: 'sparkle-reveal', en: 23.5, volumen: 0.6 },
-  { archivo: 'hit-soft', en: 23.5, volumen: 0.5 },
-  { archivo: 'tail-outro', en: 24.0, volumen: 0.6 },
+  { archivo: "audio/riser-3s.wav", en: 0.0, volumen: 0.07 }, // culmina en 3.0 (logo)
+  { archivo: "audio/ui-tick.wav", en: 1.0, volumen: 0.15 }, // HEAT
+  { archivo: "audio/ui-tick.wav", en: 1.5, volumen: 0.15 }, // WATER
+  { archivo: "audio/ui-tick.wav", en: 2.0, volumen: 0.15 }, // SEA
+  { archivo: "audio/whoosh-short.wav", en: 2.65, volumen: 0.18 },
+  { archivo: "audio/hit-soft.wav", en: 3.0, volumen: 0.14 },
+  { archivo: "audio/glitch.wav", en: 3.0, volumen: 0.18 },
+  { archivo: "audio/whoosh-long.wav", en: 4.0, volumen: 0.15 }, // sube el teléfono
+  { archivo: "audio/whoosh-short.wav", en: 5.65, volumen: 0.18 },
+  { archivo: "audio/riser-6s.wav", en: 6.0, volumen: 0.07 }, // culmina en 12.0
+  ...[6.5, 6.75, 7.0, 7.25, 7.5, 7.75, 8.0, 8.25, 8.5].map((en, k) => ({ archivo: "audio/counter-tick.wav", en, volumen: 0.125 + k * 0.007 })),
+  { archivo: "audio/ui-pop.wav", en: 10.0, volumen: 0.2 }, // sello p < 0.001
+  { archivo: "audio/reverse-swell.wav", en: 10.0, volumen: 0.15 }, // culmina en 12.0
+  { archivo: "audio/whoosh-short.wav", en: 11.65, volumen: 0.18 }, // whip pan
+  { archivo: "audio/hit-impact.wav", en: 12.0, volumen: 0.15 }, // refuerza el del lecho
+  { archivo: "audio/ui-tick.wav", en: 13.5, volumen: 0.15 }, // "No clear change"
+  { archivo: "audio/riser-3s.wav", en: 12.5, volumen: 0.07 }, // culmina en 15.5
+  { archivo: "audio/whoosh-short.wav", en: 15.15, volumen: 0.18 },
+  { archivo: "audio/hit-soft.wav", en: 15.5, volumen: 0.125 },
+  ...[16.0, 16.5, 17.0, 17.5].map((en) => ({ archivo: "audio/ui-pop.wav", en, volumen: 0.2 })), // oleadas de pines
+  { archivo: "audio/whoosh-short.wav", en: 18.15, volumen: 0.18 },
+  { archivo: "audio/ui-tick.wav", en: 19.0, volumen: 0.15 },
+  { archivo: "audio/ui-tick.wav", en: 19.5, volumen: 0.15 },
+  { archivo: "audio/glitch.wav", en: 19.85, volumen: 0.18 }, // salto a "not official warnings"
+  { archivo: "audio/ui-pop.wav", en: 20.5, volumen: 0.2 }, // marcador cian
+  { archivo: "audio/riser-3s.wav", en: 19.0, volumen: 0.07 }, // culmina en 22.0
+  { archivo: "audio/whoosh-short.wav", en: 21.65, volumen: 0.18 },
+  { archivo: "audio/hit-soft.wav", en: 22.0, volumen: 0.15 },
+  { archivo: "audio/sparkle-reveal.wav", en: 23.5, volumen: 0.175 }, // logo
+  { archivo: "audio/tail-outro.wav", en: 24.0, volumen: 0.175 },
 ];

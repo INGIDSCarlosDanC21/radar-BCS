@@ -13,3 +13,6 @@ public/*.wav
 
 # Capturas generadas por scripts/capturar-video.mjs (pesan más de 3 MB): se regeneran
 public/tomas/
+
+# Audio del trailer (efectos WAV sin recompresion para conservar el inicio exacto): sí se suben
+!public/audio/*.wav
