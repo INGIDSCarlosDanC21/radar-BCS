@@ -110,3 +110,27 @@ def test_zonas_geometria_y_tipo(zon):
     z["features"][0]["geometry"] = None
     e = v.validar_zonas(z)
     assert _hay(e, "FeatureCollection") and _hay(e, "geometry")
+
+
+@pytest.mark.parametrize("campo", ["titulo_en", "variable_en", "cambio_total_nota_en", "limitacion_en"])
+def test_indicador_sin_texto_en_ingles(ind, campo):
+    del ind["indicadores"][0][campo]
+    assert _hay(v.validar_indicadores(ind), f"{campo}: falta el texto en inglés")
+
+
+def test_metodo_y_fuente_en_ingles(ind):
+    ind["indicadores"][0]["significancia"]["metodo_en"] = " "
+    del ind["indicadores"][0]["fuente"]["dataset_en"]
+    err = v.validar_indicadores(ind)
+    assert _hay(err, "metodo_en") and _hay(err, "dataset_en")
+
+
+def test_zona_sin_texto_en_ingles(zon):
+    del zon["features"][0]["properties"]["nota_en"]
+    assert _hay(v.validar_zonas(zon), "nota_en: falta el texto en inglés")
+
+
+def test_salida_en_ingles_no_repite_el_espanol(ind):
+    """Un texto en inglés copiado del español sería un error de la traducción."""
+    for i in ind["indicadores"]:
+        assert i["limitacion_en"] != i["limitacion"] and i["titulo_en"] != i["titulo"]
