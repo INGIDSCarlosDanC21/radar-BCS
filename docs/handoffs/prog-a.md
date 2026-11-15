@@ -62,3 +62,7 @@ Probar: `pip install -r analisis/requirements.txt`, `python -m analisis.exportar
 ## 2026-11-14
 
 - Entorno del repo configurado.
+
+## Problemas de impacto local (2026-11-15, prog-a/problemas-locales)
+- Qué hice: acomodé los 3 problemas en `docs/decisiones.md`, entrega 01, 04 y 06, `RECURSOS.md` y `datasets.md`. Lo no usado quedó "previsto" sin cifras.
+- Falta: URL de TROPOMI/Sentinel (ESA, no respondió), DOI y resolución de los previstos, y decidir si se agrega alguno con datos.

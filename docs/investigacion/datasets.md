@@ -23,5 +23,10 @@ Datos tomados de las páginas oficiales de cada producto (las URL están en `doc
 | ECOSTRESS ECO_L2T_LSTE v002 (temperatura de superficie, 70 m) | Kelvin | — | POR CONFIRMAR | Desde 2018-07-09 (fechas irregulares: foto, no tendencia) |
 | NASA POWER mensual | Reanálisis MERRA-2, malla de ½° × ⅝° (~50 km) | POR CONFIRMAR | — | POR CONFIRMAR (el prototipo usó 2001-2025) |
 | GLDAS y GRACE-FO | Variables y DOI POR CONFIRMAR | POR CONFIRMAR | POR CONFIRMAR | POR CONFIRMAR |
+| GPM IMERG (lluvia satelital) | POR CONFIRMAR | POR CONFIRMAR | POR CONFIRMAR | Previsto; sin usar |
+| SMAP (humedad del suelo) | POR CONFIRMAR | POR CONFIRMAR | POR CONFIRMAR | Previsto; sin usar |
+| OMI / TROPOMI (aerosoles, PM2.5 y polvo) | POR CONFIRMAR | POR CONFIRMAR | POR CONFIRMAR | Previsto; sin usar |
+| Landsat / Sentinel (línea de costa, temperatura urbana) | POR CONFIRMAR | POR CONFIRMAR | POR CONFIRMAR | Previsto; sin usar |
+| MODIS Aqua/Terra, temperatura superficial del mar | POR CONFIRMAR | POR CONFIRMAR | POR CONFIRMAR | Previsto; la TSM de la web es del modelo marino de Open-Meteo |
 
 Consecuencias para el análisis (ver `metodo.md`): los valores de relleno **no son datos** y deben pasar a vacío (`null`) antes de promediar; MOD11A2 y MOD13Q1 necesitan filtro de calidad antes de usarse; ECOSTRESS no sirve para tendencias.
