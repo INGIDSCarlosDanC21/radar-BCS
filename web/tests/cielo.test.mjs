@@ -24,10 +24,11 @@ test('cada código WMO tiene estado e ícono existente, igual que la tabla del R
   assert.equal(CL.estado(undefined, 1).icono, 'cloud');
 });
 
-test('una sola llamada a Open-Meteo con las 7 localidades de las tarjetas, sin clave y en hora de La Paz', () => {
+test('una sola llamada a Open-Meteo con los 20 lugares (7 de las tarjetas y 13 solo del mapa de Clima), sin clave y en hora de La Paz', () => {
   const u = CL.url();
   assert.match(u, /^https:\/\/api\.open-meteo\.com\/v1\/forecast\?/);
-  assert.equal(u.split('latitude=')[1].split('&')[0].split(',').length, 7);
+  assert.equal(u.split('latitude=')[1].split('&')[0].split(',').length, 20);
+  assert.equal(CL.LUGARES.filter((l) => !l.extra).length, 7, 'las tarjetas y los pines de Inicio siguen siendo 7');
   assert.match(u, /weather_code/); assert.match(u, /is_day/); assert.match(u, /timezone=America%2FMazatlan/);
   assert.doesNotMatch(u, /apikey|key=/i);
 });
@@ -57,7 +58,7 @@ test('la sección se arma con los datos reales: sin null/undefined/NaN, con atri
   const p = CL.pines(filas);
   assert.equal((p.match(/class="cl-pin/g) || []).length, 7, 'un pin por tarjeta');
   // Mismos lugares, mismo nombre y misma temperatura en tarjeta y pin (sincronizados).
-  for (const f of filas) {
+  for (const f of filas.filter((x) => !x.lugar.extra)) {
     const temp = Math.round(f.c.temperature_2m) + '°C';
     assert.ok(h.includes('<h3 class="hm-t-' + (f.lugar.principal ? 'prin' : 'peq') + '">' + f.lugar.es + '</h3>'), 'tarjeta ' + f.lugar.es);
     assert.ok(p.includes('>' + f.lugar.es + ' ' + temp + '<'), 'pin ' + f.lugar.es + ' ' + temp);
@@ -143,4 +144,19 @@ test('la imagen GOES-West pide un cuadro con TIME (sin TIME, GIBS devuelve uno v
   assert.equal(CL.tiempoGoes(Date.UTC(2026, 10, 15, 0, 20), 0), '2026-11-14T23:40:00Z', 'cruza la medianoche UTC');
   assert.match(CL.urlGoes(ahora, 0), /GOES-West_ABI_GeoColor_v0_NRT[\s\S]*&TIME=2026-11-15T15:00:00Z$/);
   assert.match(CL.marcoMapa('alt'), /src="[^"]*&TIME=\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:00Z"/, 'la imagen inicial ya lleva TIME');
+});
+
+test('la imagen de Inicio se anima con las últimas 2 horas de GOES-West: 12 cuadros de 10 min, solo imágenes de GIBS, con pausa y sin romper la actualización', () => {
+  assert.equal(CL.ANIM.cuadros, 12);
+  assert.equal(typeof CL.animar, 'function');
+  const ahora = Date.UTC(2026, 10, 15, 15, 43, 20);
+  const urls = Array.from({ length: CL.ANIM.cuadros }, (_, k) => CL.urlGoes(ahora, k));
+  assert.equal(new Set(urls).size, 12, 'cada cuadro es una hora distinta');
+  for (const u of urls) assert.match(u, /^https:\/\/gibs\.earthdata\.nasa\.gov\/wms\/epsg4326\/nrt\/wms\.cgi\?[\s\S]*&TIME=\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:00Z$/);
+  assert.match(urls[11], /TIME=2026-11-15T13:10:00Z$/, 'el más viejo está 110 min antes del más nuevo (15:00)');
+  for (const l of ['es', 'en']) { T.setLang(l); for (const k of ['cielo.play', 'cielo.pausa', 'cielo.animAria']) assert.ok(T.t(k) && T.t(k) !== k, l + ' ' + k); }
+  T.setLang('es');
+  const src = fs.readFileSync(new URL('../js/cielo.js', import.meta.url), 'utf8');
+  assert.match(src, /prefers-reduced-motion: reduce/, 'respeta "menos movimiento"');
+  assert.match(src, /data-anim/, 'la actualización de 10 min no pisa la animación');
 });

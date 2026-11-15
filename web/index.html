@@ -32,6 +32,7 @@
 <link rel="stylesheet" href="css/simulaciones.css">
 <link rel="stylesheet" href="css/animacion-satelite.css">
 <link rel="stylesheet" href="css/lugares.css">
+<link rel="stylesheet" href="css/acciones.css">
 <link rel="stylesheet" href="css/menu.css">
 <link rel="stylesheet" href="css/pesca.css">
 <link rel="stylesheet" href="css/avisos.css">
@@ -42,17 +43,17 @@
 <body>
 <a class="saltar" href="#contenido" data-t="html.saltar">Saltar al contenido</a>
 <div id="franja" class="franja" hidden></div>
-<header class="cabecera"><a class="marca" href="#inicio"><img src="assets/logo-radar-bcs.png" width="470" height="132" alt="Radar BCS, inicio" data-t-alt="html.logo"></a><span class="sub">La Paz, B.C.S.</span><nav class="menu-sup" aria-label="Secciones" data-t-aria="html.secciones"><a href="#inicio" data-nav="inicio" data-t="nav.inicio">Inicio</a><a href="#clima" data-nav="clima" data-t="nav.clima">Clima</a><a href="#agricola" data-nav="agricola" data-t="nav.agricola">Agro</a><a href="#pesca" data-nav="pesca" data-t="nav.pesca">Pesca</a><a href="#avisos" data-nav="avisos" data-t="nav.avisos">Avisos</a><a href="#acciones" data-nav="acciones" data-t="nav.acciones">Acciones</a></nav><a id="idioma" class="idioma" href="?lang=en" lang="en" hreflang="en">English</a></header>
+<header class="cabecera"><a class="marca" href="#inicio"><img src="assets/logo-radar-bcs.png" width="470" height="132" alt="Radar BCS, inicio" data-t-alt="html.logo"></a><span class="sub">La Paz, B.C.S.</span><nav class="menu-sup" aria-label="Secciones" data-t-aria="html.secciones"><a href="#clima" data-nav="clima"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/thermostat.svg);mask-image:url(assets/iconos/mapa/thermostat.svg)" aria-hidden="true"></span><span data-t="nav.clima">Clima</span></a><a href="#pesca" data-nav="pesca"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/sailing.svg);mask-image:url(assets/iconos/mapa/sailing.svg)" aria-hidden="true"></span><span data-t="nav.pesca">Pesca</span></a><a href="#inicio" data-nav="inicio"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/home.svg);mask-image:url(assets/iconos/mapa/home.svg)" aria-hidden="true"></span><span data-t="nav.inicio">Inicio</span></a><a href="#agricola" data-nav="agricola"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/agriculture.svg);mask-image:url(assets/iconos/mapa/agriculture.svg)" aria-hidden="true"></span><span data-t="nav.agricola">Agro</span></a><a href="#avisos" data-nav="avisos"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/notifications.svg);mask-image:url(assets/iconos/mapa/notifications.svg)" aria-hidden="true"></span><span data-t="nav.avisos">Avisos</span></a></nav><a id="idioma" class="idioma" href="?lang=en" lang="en" hreflang="en">English</a></header>
 <main id="contenido" tabindex="-1" aria-live="polite">
   <p class="cargando" data-t="html.cargando">Cargando datos…</p>
 </main>
 <footer class="pie"><span data-t="html.pie">Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0</span></footer>
-<div id="mas" class="mas" hidden><a href="#avisos" data-nav="avisos"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/notifications.svg);mask-image:url(assets/iconos/mapa/notifications.svg)" aria-hidden="true"></span><span data-t="nav.avisos">Avisos</span></a><a href="#agricola" data-nav="agricola"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/agriculture.svg);mask-image:url(assets/iconos/mapa/agriculture.svg)" aria-hidden="true"></span><span data-t="nav.agricola">Agro</span></a><a href="#acciones" data-nav="acciones"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/checklist.svg);mask-image:url(assets/iconos/mapa/checklist.svg)" aria-hidden="true"></span><span data-t="nav.acciones">Acciones</span></a></div>
 <nav class="barra" aria-label="Secciones principales" data-t-aria="menu.secMovil">
-  <a href="#inicio" data-nav="inicio"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/home.svg);mask-image:url(assets/iconos/mapa/home.svg)" aria-hidden="true"></span><span data-t="nav.inicio">Inicio</span></a>
   <a href="#clima" data-nav="clima"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/thermostat.svg);mask-image:url(assets/iconos/mapa/thermostat.svg)" aria-hidden="true"></span><span data-t="nav.clima">Clima</span></a>
   <a href="#pesca" data-nav="pesca"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/sailing.svg);mask-image:url(assets/iconos/mapa/sailing.svg)" aria-hidden="true"></span><span data-t="nav.pesca">Pesca</span></a>
-  <button type="button" id="mas-btn" aria-expanded="false" aria-controls="mas" aria-label="Más secciones" data-t-aria="menu.masAria"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/more_horiz.svg);mask-image:url(assets/iconos/mapa/more_horiz.svg)" aria-hidden="true"></span><span data-t="nav.mas">Más</span></button>
+  <a href="#inicio" data-nav="inicio" class="barra-centro"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/home.svg);mask-image:url(assets/iconos/mapa/home.svg)" aria-hidden="true"></span><span data-t="nav.inicio">Inicio</span></a>
+  <a href="#agricola" data-nav="agricola"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/agriculture.svg);mask-image:url(assets/iconos/mapa/agriculture.svg)" aria-hidden="true"></span><span data-t="nav.agricola">Agro</span></a>
+  <a href="#avisos" data-nav="avisos"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/notifications.svg);mask-image:url(assets/iconos/mapa/notifications.svg)" aria-hidden="true"></span><span data-t="nav.avisos">Avisos</span></a>
 </nav>
 <p id="anuncio" class="sr" aria-live="polite"></p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha384-NElt3Op+9NBMCYaef5HxeJmU4Xeard/Lku8ek6hoPTvYkQPh3zLIrJP7KiRocsxO" crossorigin="anonymous"></script>
@@ -62,6 +63,7 @@
 <script src="js/clima-mapa.js"></script>
 <script src="js/zonas-busqueda.js"></script>
 <script src="js/lugares.js"></script>
+<script src="js/acciones.js"></script>
 <script src="js/home.js"></script>
 <script src="js/agricola.js"></script>
 <script src="js/esqueleto.js"></script>

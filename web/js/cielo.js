@@ -29,7 +29,21 @@
     { id: 'comondu', es: 'Comondú', lat: 25.0321, lon: -111.66256, geonames: 4013723, tarjeta: true, lado: 'der', v: 'arriba' },
     { id: 'mulege', es: 'Mulegé', lat: 26.89141, lon: -111.9826, geonames: 3995236, tarjeta: true, lado: 'der' },
     { id: 'guerreronegro', es: 'Gmo. Negro', lat: 27.96005, lon: -114.05589, geonames: 4021858, tarjeta: true, lado: 'der', v: 'abajo' },
-    { id: 'bahiamagdalena', es: 'Bahía Magd.', lat: 24.78874, lon: -112.10504, geonames: 3987485, tarjeta: true, lado: 'izq', v: 'abajo' }
+    { id: 'bahiamagdalena', es: 'Bahía Magd.', lat: 24.78874, lon: -112.10504, geonames: 3987485, tarjeta: true, lado: 'izq', v: 'abajo' },
+    /* Más lugares solo para el mapa de Clima (2026-11-15; pines chicos, sin tarjeta en Inicio ni pin sobre la imagen de Inicio). Coordenadas: GeoNames (CC BY 4.0). */
+    { id: 'todossantos', es: 'Todos Santos', lat: 23.44688, lon: -110.22308, extra: true },
+    { id: 'santarosalia', es: 'Santa Rosalía', lat: 27.34035, lon: -112.26706, extra: true },
+    { id: 'sanjosedelcabo', es: 'San José del Cabo', lat: 23.05406, lon: -109.70367, extra: true },
+    { id: 'cabopulmo', es: 'Cabo Pulmo', lat: 23.43718, lon: -109.42924, extra: true },
+    { id: 'laribera', es: 'La Ribera', lat: 23.59581, lon: -109.58586, extra: true },
+    { id: 'losbarriles', es: 'Los Barriles', lat: 23.68273, lon: -109.69953, extra: true },
+    { id: 'laventana', es: 'La Ventana', lat: 24.05178, lon: -109.98918, extra: true },
+    { id: 'sanjuandelacosta', es: 'San Juan de la Costa', lat: 24.37364, lon: -110.68983, extra: true },
+    { id: 'puertochale', es: 'Puerto Chale', lat: 24.42463, lon: -111.55287, extra: true },
+    { id: 'puertolopezmateos', es: 'Puerto López Mateos', lat: 25.19241, lon: -112.1104, extra: true },
+    { id: 'puntaabreojos', es: 'Punta Abreojos', lat: 26.71541, lon: -113.57451, extra: true },
+    { id: 'bahiaasuncion', es: 'Bahía Asunción', lat: 27.14231, lon: -114.29582, extra: true },
+    { id: 'bahiatortugas', es: 'Bahía Tortugas', lat: 27.69132, lon: -114.8948, extra: true }
   ];
   var CADA_MIN = 10; // tarjetas, pines e imagen se actualizan juntos (GOES-West también cambia cada 10 min)
   var CAJA = { latN: 28.1, latS: 22.8, lonO: -115.3, lonE: -109.3 };
@@ -153,7 +167,7 @@
   }
   /* Un pin por tarjeta, con el mismo nombre, ícono y temperatura que su tarjeta. */
   function pines(filas) {
-    return filas.map(function (f) {
+    return filas.filter(function (f) { return !f.lugar.extra; }).map(function (f) {
       var l = f.lugar, p = posicion(l), oscuro = l.principal;
       var clase = (oscuro ? ' cl-pin-oscuro' : '') + (l.lado === 'izq' ? ' cl-pin-izq' : '') + (l.v ? ' cl-pin-' + l.v : '');
       return '<span class="cl-pin' + clase + '" data-lugar="' + esc(l.id) + '" style="left:' + p.x.toFixed(2) + '%;top:' + p.y.toFixed(2) + '%" role="img" aria-label="' +
@@ -191,9 +205,53 @@
       var sec = raiz.querySelector('#hm-cielo');
       if (!sec || (sec.isConnected === false)) return; // ya se salió de Inicio
       var img = raiz.querySelector('.cl-img');
-      if (img && img.src.indexOf('gibs') >= 0) img.src = urlGoes(Date.now(), 0) + '&_=' + Math.floor(Date.now() / (CADA_MIN * 60000));
+      if (img && img.src.indexOf('gibs') >= 0 && !(img.getAttribute && img.getAttribute('data-anim'))) img.src = urlGoes(Date.now(), 0) + '&_=' + Math.floor(Date.now() / (CADA_MIN * 60000));
       cargar(raiz, opciones);
     }, ms);
+  }
+  /* Animación de la imagen de Inicio (Carlos, 2026-11-15): las últimas 2 horas de cuadros de GOES-West (12 cuadros, cada 10 min) en bucle, con pausa.
+     Solo imágenes reales de GIBS que existen (se precargan y se descartan las que fallan). No arranca sola si la persona pide menos movimiento. */
+  var ANIM = { cuadros: 12, pausaMs: 600, finMs: 1400 };
+  function horaCuadro(iso) {
+    try { return new Date(Date.parse(iso)).toLocaleTimeString(T.locale ? T.locale() : 'es-MX', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Mazatlan' }); } catch (e) { return iso.slice(11, 16); }
+  }
+  function animar(raiz) {
+    var img = raiz.querySelector && raiz.querySelector('.cl-img');
+    if (!img || !img.parentNode || (img.getAttribute && img.getAttribute('data-anim')) || String(img.src).indexOf('gibs') < 0 || typeof Image === 'undefined') return;
+    var lienzo = img.parentNode, ahora = Date.now(), ok = [], pend = ANIM.cuadros;
+    function fin() {
+      if (--pend) return;
+      ok.sort(function (a, b) { return b.k - a.k; });   // del más viejo al más nuevo
+      if (ok.length < 4 || !img.isConnected) return;
+      img.setAttribute('data-anim', '1');
+      var caja = document.createElement('div'); caja.className = 'cl-anim';
+      var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'cl-anim-btn';
+      var hora = document.createElement('span'); hora.className = 'cl-anim-hora'; hora.setAttribute('aria-live', 'off');
+      caja.appendChild(btn); caja.appendChild(hora); lienzo.appendChild(caja);
+      var i = ok.length - 1, timer = null;
+      function ver(n) { i = n; img.src = ok[n].u; hora.textContent = horaCuadro(ok[n].iso); }
+      function rotulo(on) { btn.textContent = on ? '⏸ ' + t('cielo.pausa') : '▶ ' + t('cielo.play'); btn.setAttribute('aria-label', t('cielo.animAria')); }
+      function parar() { if (timer) { clearTimeout(timer); timer = null; } rotulo(false); }
+      function paso() {
+        timer = setTimeout(function () {
+          if (!img.isConnected) { timer = null; return; }
+          if (i >= ok.length - 1) { timer = setTimeout(function () { ver(0); paso(); }, ANIM.finMs); return; }
+          ver(i + 1); paso();
+        }, ANIM.pausaMs);
+      }
+      function jugar() { rotulo(true); if (i >= ok.length - 1) ver(0); paso(); }
+      btn.addEventListener('click', function () { if (timer) parar(); else jugar(); });
+      ver(ok.length - 1); rotulo(false);
+      var quieto = false;
+      try { quieto = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) { quieto = false; }
+      if (!quieto) jugar();
+    }
+    for (var k = ANIM.cuadros - 1; k >= 0; k--) (function (k) {
+      var u = urlGoes(ahora, k), im = new Image();
+      im.onload = function () { ok.push({ k: k, u: u, iso: tiempoGoes(ahora, k) }); fin(); };
+      im.onerror = fin;
+      im.src = u;
+    })(k);
   }
   /* Una sola respuesta compartida por Inicio y la pestaña Mapa durante CADA_MIN minutos: las dos pantallas muestran
      siempre las mismas cifras. opciones.fetch permite probar sin red. */
@@ -228,6 +286,7 @@
       var nota = raiz.querySelector('#hm-cielo-leyenda .cl-ley-n');
       if (nota) nota.textContent = t('cielo.sincro', { h: (filas[0].c.time || '').slice(11, 16) });
       programar(raiz, opciones);
+      if (!opciones.fetch) animar(raiz);
       return true;
     }).catch(function () {
       if (sec.innerHTML.indexOf('cl-estado') >= 0) sec.innerHTML = sec.innerHTML.replace(/<p class="cl-estado">[\s\S]*<\/p>/, '<p class="cl-estado cl-error">' + t('cielo.error') + '</p>');
@@ -239,7 +298,7 @@
 
   var RBCielo = { LUGARES: LUGARES, ESTADOS: ESTADOS, grupo: grupo, estado: estado, url: url, posicion: posicion, unir: unir,
     minutosDesde: minutosDesde, seccion: seccion, pines: pines, leyenda: leyenda, marcoSeccion: marcoSeccion, marcoMapa: marcoMapa,
-    cargar: cargar, datos: datos, uvCat: uvCat, rumbo: rumbo, num: num, icono: icono, GOES: GOES, urlGoes: urlGoes, tiempoGoes: tiempoGoes, CADA_MIN: CADA_MIN };
+    cargar: cargar, datos: datos, uvCat: uvCat, rumbo: rumbo, num: num, icono: icono, GOES: GOES, ANIM: ANIM, animar: animar, urlGoes: urlGoes, tiempoGoes: tiempoGoes, CADA_MIN: CADA_MIN };
   if (typeof window !== 'undefined') window.RBCielo = RBCielo;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBCielo;
 })();

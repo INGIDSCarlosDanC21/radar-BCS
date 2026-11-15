@@ -88,7 +88,7 @@
           '<h1 id="hm-h1">' + t('home.h1') + '</h1>' +
           '<p class="hm-sub">' + t('home.sub') + '</p>' +
           '<div class="hm-botones"><a class="hm-btn hm-btn-claro" href="#clima/zonas">' + t('home.btnMapa') + '</a>' +
-          '<a class="hm-btn hm-btn-oscuro" href="#acciones">' + t('home.btnAcc') + '</a></div>' +
+          '<a class="hm-btn hm-btn-oscuro" href="#clima/acciones">' + t('home.btnAcc') + '</a></div>' +
         '</div></section>' +
       // Solo el título, a pedido de UI/UX (Ehileen, 2026-11-15). La fuente sigue en cada tarjeta.
       '<section class="hm-sec" aria-labelledby="hm-h2"><div class="hm-sec-cab"><h2 id="hm-h2">' + t('home.h2') + '</h2></div>' +
