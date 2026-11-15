@@ -24,10 +24,11 @@ test('cada código WMO tiene estado e ícono existente, igual que la tabla del R
   assert.equal(CL.estado(undefined, 1).icono, 'cloud');
 });
 
-test('una sola llamada a Open-Meteo con las 7 localidades de las tarjetas, sin clave y en hora de La Paz', () => {
+test('una sola llamada a Open-Meteo con los 20 lugares (7 de las tarjetas y 13 solo del mapa de Clima), sin clave y en hora de La Paz', () => {
   const u = CL.url();
   assert.match(u, /^https:\/\/api\.open-meteo\.com\/v1\/forecast\?/);
-  assert.equal(u.split('latitude=')[1].split('&')[0].split(',').length, 7);
+  assert.equal(u.split('latitude=')[1].split('&')[0].split(',').length, 20);
+  assert.equal(CL.LUGARES.filter((l) => !l.extra).length, 7, 'las tarjetas y los pines de Inicio siguen siendo 7');
   assert.match(u, /weather_code/); assert.match(u, /is_day/); assert.match(u, /timezone=America%2FMazatlan/);
   assert.doesNotMatch(u, /apikey|key=/i);
 });
@@ -57,7 +58,7 @@ test('la sección se arma con los datos reales: sin null/undefined/NaN, con atri
   const p = CL.pines(filas);
   assert.equal((p.match(/class="cl-pin/g) || []).length, 7, 'un pin por tarjeta');
   // Mismos lugares, mismo nombre y misma temperatura en tarjeta y pin (sincronizados).
-  for (const f of filas) {
+  for (const f of filas.filter((x) => !x.lugar.extra)) {
     const temp = Math.round(f.c.temperature_2m) + '°C';
     assert.ok(h.includes('<h3 class="hm-t-' + (f.lugar.principal ? 'prin' : 'peq') + '">' + f.lugar.es + '</h3>'), 'tarjeta ' + f.lugar.es);
     assert.ok(p.includes('>' + f.lugar.es + ' ' + temp + '<'), 'pin ' + f.lugar.es + ' ' + temp);

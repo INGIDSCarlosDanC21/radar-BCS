@@ -87,3 +87,9 @@
 .pe-curva{display:block;width:100%;height:auto;max-height:96px;color:var(--ct);margin:2px 0 4px}
 .pe-enl{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:4px 16px}
 .pe-enl a{display:inline-flex;align-items:center;min-height:44px;color:var(--ct);font:600 13px 'JetBrains Mono',monospace}
+
+/* 19 puertos: en celular los botones van en una sola fila que se desliza hacia los lados (antes ocupaban 7 filas y empujaban el mapa). */
+@media (max-width:1023px){
+  .pe-puertos{flex-wrap:nowrap;overflow-x:auto;gap:8px;padding-bottom:6px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .pe-puertos .pe-chip{flex:none;scroll-snap-align:start}
+}

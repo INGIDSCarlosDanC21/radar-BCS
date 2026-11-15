@@ -236,6 +236,13 @@ Regla: no decir que la lluvia es de GPM ni que la TSM es de MODIS; hoy son POWER
 - **Resultado:** el aire subió en las 38 (+0.62 a +1.47 °C, todas significativas); la lluvia solo muestra aumento claro en 8 lugares de Los Cabos (3 celdas) y sin cambio claro en el resto. No se explica por qué.
 - **Pendiente:** NDVI y superficie MODIS para las nuevas localidades (requiere AppEEARS por punto); lluvia con IMERG 0.1° (issue #188, Luca) podría afinar La Paz.
 
+## Más lugares en Pesca y Clima (Carlos, 2026-11-15)
+
+- **Pesca:** de 8 a **19 puertos** (11 nuevos: San José del Cabo, Cabo Pulmo, La Ribera, Los Barriles, La Ventana, San Juan de la Costa, Puerto Chale, Puerto López Mateos, Punta Abreojos, Bahía Asunción, Bahía Tortugas). Los puntos de mar se comprobaron con el modelo marino el mismo día (oleaje, temperatura y corriente en todos). En celular los 11 nuevos se ven al acercar el mapa; los botones de puerto van en una fila que se desliza.
+- **Clima (mapa del tiempo):** de 7 a **20 lugares**; los 13 nuevos son pines chicos (ícono, y temperatura con zoom) y abren las mismas 4 fichas. Inicio sigue con 7.
+- **Límite de Open-Meteo:** cada visita con caché fría pide unas 76 coordenadas (antes 32); el límite gratuito es 10 000 al día. Si hubiera mucho tráfico, el caché de 10 minutos del navegador ayuda; se declara como riesgo.
+- **Pruebas:** se regrabaron las 4 fixtures (`mar`, `clima`, `open-meteo`, `open-meteo-diario`) agregando solo los puntos nuevos con la misma petición real del 2026-11-15.
+
 ## Navegación, Acciones dentro de Clima y mapa Agro con capas (Carlos, 2026-11-15)
 
 - **Barra:** Clima · Pesca · **Inicio al centro** (botón redondo) · Agro · Avisos, todos con ícono (también en el menú de escritorio). Se quita la hoja "Más".

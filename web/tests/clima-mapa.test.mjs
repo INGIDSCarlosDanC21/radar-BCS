@@ -41,15 +41,17 @@ test('las tarjetas usan cifras reales del modelo (sin las de ejemplo de la maque
   assert.ok(vacio.includes('Máx — °C') && !/NaN|undefined/.test(vacio));
 });
 
-test('los pines del mapa son los mismos 7 lugares, con el mismo nombre y la misma temperatura que en Inicio', () => {
+test('los pines del mapa son los 20 lugares; los 7 de Inicio llevan el mismo nombre y la misma temperatura, y los 13 extra son pines chicos', () => {
   T.setLang('es');
   const filas = CL.unir(resp);
   const inicio = CL.pines(filas);
-  assert.equal(filas.length, 7);
+  assert.equal(filas.length, 20);
+  assert.equal(filas.filter((f) => f.lugar.extra).length, 13);
   for (const f of filas) {
     const p = CM.pinHtml(f), temp = Math.round(f.c.temperature_2m) + '°C';
+    assert.equal(p.includes('cm-pin-mini'), !!f.lugar.extra, 'pin chico solo para los extra: ' + f.lugar.es);
     assert.ok(p.includes('aria-label="' + f.lugar.es + ': ' + f.e.texto + ', ' + Math.round(f.c.temperature_2m) + ' °C"'), f.lugar.es);
-    assert.ok(p.includes(temp) && inicio.includes('>' + f.lugar.es + ' ' + temp + '<'), 'mismo dato que Inicio: ' + f.lugar.es);
+    assert.ok(p.includes(temp) && (f.lugar.extra || inicio.includes('>' + f.lugar.es + ' ' + temp + '<')), 'mismo dato que Inicio: ' + f.lugar.es);
     assert.ok(p.includes('assets/iconos/cielo/' + f.e.icono + '.svg'), 'ícono del cielo de ' + f.lugar.es);
   }
 });

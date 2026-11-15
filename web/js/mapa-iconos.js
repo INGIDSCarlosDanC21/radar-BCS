@@ -31,6 +31,15 @@
       if (b && opc.alElegir) opc.alElegir(b.getAttribute('data-id'));
     }
     el.addEventListener('click', clic);
+    /* Pines "menores" (puertos extra): con poco zoom se ocultan para que no se encimen, salvo el elegido; con zoom opc.zoomMenores o más se ven todos. */
+    function filtrar() {
+      var lejos = opc.zoomMenores && mapa.getZoom() < opc.zoomMenores;
+      Object.keys(marcas).forEach(function (id) {
+        var m = marcas[id], el2 = m.getElement && m.getElement();
+        if (el2) el2.style.display = (lejos && m.options.menor && !m.options.activo) ? 'none' : '';
+      });
+    }
+    mapa.on('zoomend', filtrar);
     return {
       mapa: mapa,
       pines: function (lista) {
@@ -40,7 +49,9 @@
           var icon = L.divIcon({ className: 'mi-caja', iconSize: null, html: htmlPin(p) });
           if (marcas[p.id]) { marcas[p.id].setIcon(icon); marcas[p.id].setZIndexOffset(p.activo ? 1000 : 0); }
           else marcas[p.id] = L.marker([p.lat, p.lon], { icon: icon, keyboard: false, zIndexOffset: p.activo ? 1000 : 0 }).addTo(mapa);
+          marcas[p.id].options.menor = !!p.menor; marcas[p.id].options.activo = !!p.activo;
         });
+        filtrar();
         Object.keys(marcas).forEach(function (id) { if (!vivos[id]) { mapa.removeLayer(marcas[id]); delete marcas[id]; } });
       },
       capa: function (url, atribucion) {
