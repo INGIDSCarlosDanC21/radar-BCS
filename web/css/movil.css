@@ -1,0 +1,120 @@
+/* Celular compacto (pedido de Carlos, 2026-11-15: "todo más optimizado en cuanto espacio").
+   Solo aplica hasta 480 px: escritorio y tableta no cambian. No se quita información: se reducen rellenos,
+   márgenes, tamaños de título y alturas de mapas para que arriba del pliegue se vea contenido útil.
+   Sin unidades vh/dvh (la barra de dirección de Chrome móvil cambia el alto y haría saltar la página).
+   Las áreas táctiles siguen midiendo 44 px como mínimo. Se carga al final para ganar a las reglas de cada pantalla. */
+@media (max-width:480px){
+  /* Cabecera: mismo logo, menos aire arriba; a todo lo ancho como en la rama de UI/UX (ajustes-escritorio). */
+  .cabecera{max-width:none;margin:0;padding:4px 12px 0}
+  .cabecera .idioma{min-height:44px;padding:0 12px;font-size:.85rem}
+
+  /* Base: contenedor, títulos, tarjetas y bloques */
+  main{padding:4px 12px 12px}
+  h1{font-size:1.4rem;margin:.4em 0 .2em}
+  h2{font-size:1.1rem;margin:.9em 0 .3em}
+  .lead{font-size:.95rem;line-height:1.4}
+  .tarjetas{gap:8px;margin-top:10px}
+  .tarjeta{padding:12px 14px}
+  .bloque{padding:2px 14px 10px;margin:10px 0}
+  .bloque h2{margin-top:.6em}
+  .grande{font-size:2.2rem}
+  .cifra{font-size:1.75rem}
+  .volver{margin:4px 0 2px}
+  .aviso{margin:8px 0;padding:8px 10px}
+  #mapa-caja{height:280px}
+  .pie{margin-top:8px;padding:0 12px 10px}
+
+  /* Inicio: héroe (antes ~385 px de alto) */
+  .hm-hero-cont{padding:20px 12px 18px}
+  .hm-hero h1{font-size:26px;line-height:1.18;letter-spacing:-.5px}
+  .hm-resalte{text-underline-offset:4px}
+  .hm-sub{margin-top:8px;font-size:14px;line-height:20px}
+  .hm-botones{flex-direction:row;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .hm-btn{flex:1 1 130px;padding:10px 8px;font-size:13px;text-align:center}
+  /* Inicio: secciones y tarjetas */
+  .hm-sec{padding:18px 12px 4px}
+  .hm-sec-cab{gap:8px;margin-bottom:12px}
+  .hm-sec h2{font-size:22px;line-height:28px;letter-spacing:-.4px}
+  .hm-cuatro{gap:10px}
+  .hm-tarjeta{padding:16px 14px 6px}
+  .hm-tarjeta .hm-cifra{font-size:28px;line-height:34px}
+  .hm-principal{padding:18px 14px 14px}
+  .hm-peque{padding:12px}
+  .hm-t-peq{font-size:18px;line-height:24px}
+  .hm-datos{margin-top:10px;gap:6px}
+  .hm-datos-2{margin-top:8px}
+  .hm-dato{padding:6px 8px;gap:2px}
+  .hm-peq{margin-top:4px}
+  .hm .hm-fuente{margin-top:8px}
+  .hm .hm-aviso{margin:14px 0 6px}
+  .hm-ico-circ{width:44px;height:44px}
+  .hm-ico-circ img.ico{width:24px;height:24px}
+  /* Inicio: el cielo ahora y el bloque de satélite */
+  .cl-sec{padding-top:12px}
+  .cl-estado{padding:8px 0}
+  .cl-principal .hm-cifra-grande{font-size:44px;line-height:48px}
+  .cl-cond{font-size:18px;line-height:24px}
+  .hm-sec-mapa{padding-top:10px;padding-bottom:16px}
+  .hm-marco-cab{padding:10px 12px}
+  .hm-marco h2{font-size:18px;line-height:24px}
+  .hm-fig img{height:240px}
+  /* Pies (Inicio y Agro) */
+  .hm-pie,.ag-pie{padding:18px 12px 12px}
+  .hm-pie-grid,.ag-pie-grid{gap:14px}
+  .hm-pie-barra{margin-top:14px;padding:10px 12px;gap:6px}
+  .ag-copy{margin-top:14px;padding:10px 12px}
+
+  /* Clima: mapa meteorológico, diagnóstico, animación del cielo, lugares y acciones */
+  .cm h1{font-size:26px;line-height:32px;letter-spacing:-.5px;margin:6px 0 2px}
+  .cm .lead{font-size:14px;line-height:20px}
+  .cm-marco{margin-top:10px}
+  .cm-mapa{height:320px}
+  .cm-leyenda{margin:8px 10px}
+  .cm-diag-cab{margin:18px 0 10px;padding-bottom:6px}
+  .cm-diag-cab h2{font-size:21px;line-height:26px}
+  .cm-tarjetas{gap:10px}
+  .cm-tarjeta{gap:10px;padding:16px 14px 12px}
+  .cm-cab{gap:10px}
+  .cm-ico{width:40px;height:40px}
+  .cm-tit strong{font-size:18px;line-height:23px}
+  .cm-zonas-h{margin:20px 0 4px;font-size:20px;line-height:26px}
+  .ani-sum{padding:6px 0}
+  .ani-mapa{height:240px}
+  .sim-mapa{height:260px}
+  .lugares{padding-top:6px}
+  .lugares #mapa-caja{height:380px}
+  .ac{padding-top:8px}
+  .ac-lead{margin:0 0 8px}
+  .ac-grupo{margin:10px 0}
+  .ac-grupo h3{margin:0 0 6px}
+  .ac-lista{gap:8px}
+  .ac-card summary{min-height:48px;padding:4px 10px;gap:10px}
+  .ac-badge{width:36px;height:36px}
+  .ac-card p{padding:0 12px 12px 56px}
+
+  /* Pesca */
+  .pe h1{font-size:1.6rem;margin:.35em 0 .15em}
+  .pe-sub{margin:0 0 8px;font-size:.95rem;line-height:1.4}
+  .pe-mapa{height:360px}
+  .pe-sim{min-height:48px}
+
+  /* Agro */
+  .ag-cont{padding:10px 12px 20px}
+  .ag-cab{padding:10px 0 10px}
+  .ag-cab h1{font-size:26px;line-height:32px;letter-spacing:-.5px}
+  .ag-sub{font-size:14px;line-height:20px}
+  .ag-mapa{margin-top:10px}
+  .ag-mapa .ag-mapa-lf{height:280px}
+  .ag-mapa-pie{padding:10px 12px}
+  .ag-fichas-sec{padding-top:20px}
+  .ag-sec-cab{margin-bottom:12px;gap:8px}
+  .ag-sec-cab h2{font-size:22px;line-height:28px}
+  .ag-fichas{gap:12px}
+  .ag-ficha-btn{padding:16px 14px 0}
+
+  /* Avisos */
+  .av h1{font-size:1.6rem}
+  .av-sub{font-size:.95rem;line-height:1.4}
+  .av-barra{margin-top:8px}
+  .av-simb ul{padding:10px;gap:6px}
+}
