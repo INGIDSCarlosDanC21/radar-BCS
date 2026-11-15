@@ -63,10 +63,25 @@
       'pes.sinDato': 'sin dato', 'pes.sinDatoPuerto': 'Sin dato para esta hora',
       'pes.r0': 'norte', 'pes.r1': 'noreste', 'pes.r2': 'este', 'pes.r3': 'sureste', 'pes.r4': 'sur', 'pes.r5': 'suroeste', 'pes.r6': 'oeste', 'pes.r7': 'noroeste',
       'pes.pinOla': '{n}: oleaje {v}, {e}', 'pes.pinViento': '{n}: viento {v}, {e}', 'pes.pinSst': '{n}: temperatura del mar {v}',
-      'pes.busca': 'Buscar un puerto', 'pes.bLugar': 'Buscar puerto', 'pes.bPh': 'Ej.: Loreto',
+      'pes.busca': 'Buscar puerto y fecha', 'pes.bLugar': 'Puerto o ciudad', 'pes.bPh': 'Ej.: Loreto', 'pes.bFecha': 'Fecha', 'pes.bVer': 'Ver', 'pes.bHoy': 'Hoy',
       'pes.bVacio': 'No hay un puerto con ese nombre. Prueba con La Paz, Loreto o Bahía Tortugas.',
-      'pes.bVarios': 'Hay varios puertos con ese nombre ({n}). Escribe más letras o elige uno de la lista.',
-      'pes.bOk': 'Mostrando {n} en el mapa.'
+      'pes.bVarios': 'Hay varios puertos con ese nombre ({n}). Escribe el nombre completo.',
+      'pes.bFuera': 'Elige una fecha entre el {a} y el {b}.',
+      'pes.bAyuda': 'Del {a} al {b}. Días pasados: lo que calculó el modelo; días que vienen: pronóstico (oleaje y temperatura del mar, solo unos 8 días).', 'pes.kickerDia': 'Fecha elegida · modelo marino Open-Meteo (no son boyas)',
+      'pes.bOk': 'Mostrando {n} en el mapa.',
+      'pes.actDia': 'Modelo marino · {f}', 'pes.cargaDia': 'Cargando {n} del {f}…', 'pes.estadoDia': '{n} · {f} · modelo Open-Meteo{p}.',
+      'pes.pron': ' (pronóstico, puede cambiar)', 'pes.pasado': ' (lo que calculó el modelo, no son boyas)',
+      'pes.errorDia': 'No se pudieron cargar los datos de esa fecha (¿sin conexión?).',
+      'pes.limite': 'Open-Meteo llegó a su límite de consultas por hoy desde esta red. Intenta más tarde o desde otra conexión.',
+      'pes.guardado429': 'Open-Meteo llegó a su límite de consultas por hoy desde esta red: se muestra el dato guardado a las {h}.',
+      'pes.guardado': 'Open-Meteo no responde ahora: se muestra el dato guardado a las {h}.',
+      'pes.sinMarDia': 'Sin dato del modelo marino para esa fecha (oleaje, temperatura del mar, corriente y nivel).',
+      'pes.sinMarFut': ' El modelo marino solo pronostica unos 8 días.',
+      'pes.sinPronDia': 'Sin dato del pronóstico para esa fecha (viento, presión, lluvia y visibilidad).',
+      'pes.puntoDia': 'En una fecha elegida, el viento, la presión, la lluvia y la visibilidad son del mismo punto de mar del puerto.',
+      'pes.pinSinDia': '{n}: sin consultar para esta fecha. Tócalo para ver su dato.',
+      'pes.cloSinDia': 'No hay imagen de clorofila para el {f}: el satélite solo tiene días pasados.',
+      'pes.parcial429': 'Open-Meteo llegó a su límite de consultas desde esta red: no se pudo pedir {q}.', 'pes.parcial': 'No se pudo pedir {q} (¿sin conexión?).', 'pes.qPron': 'el pronóstico', 'pes.qMar': 'el modelo marino'
     },
     en: {
       'pes.kicker': 'Now · Open-Meteo marine model (not buoys)', 'pes.act': 'Marine model · La Paz time',
@@ -112,10 +127,25 @@
       'pes.sinDato': 'no data', 'pes.sinDatoPuerto': 'No data for this hour',
       'pes.r0': 'north', 'pes.r1': 'northeast', 'pes.r2': 'east', 'pes.r3': 'southeast', 'pes.r4': 'south', 'pes.r5': 'southwest', 'pes.r6': 'west', 'pes.r7': 'northwest',
       'pes.pinOla': '{n}: waves {v}, {e}', 'pes.pinViento': '{n}: wind {v}, {e}', 'pes.pinSst': '{n}: sea temperature {v}',
-      'pes.busca': 'Search for a port', 'pes.bLugar': 'Search port', 'pes.bPh': 'e.g. Loreto',
+      'pes.busca': 'Search by port and date', 'pes.bLugar': 'Port or town', 'pes.bPh': 'e.g. Loreto', 'pes.bFecha': 'Date', 'pes.bVer': 'Show', 'pes.bHoy': 'Today',
       'pes.bVacio': 'No port has that name. Try La Paz, Loreto or Bahía Tortugas.',
-      'pes.bVarios': 'Several ports match that name ({n}). Type more letters or pick one from the list.',
-      'pes.bOk': 'Showing {n} on the map.'
+      'pes.bVarios': 'Several ports match that name ({n}). Type the full name.',
+      'pes.bFuera': 'Pick a date between {a} and {b}.',
+      'pes.bAyuda': 'From {a} to {b}. Past days: what the model calculated; coming days: forecast (waves and sea temperature, only about 8 days).', 'pes.kickerDia': 'Chosen date · Open-Meteo marine model (not buoys)',
+      'pes.bOk': 'Showing {n} on the map.',
+      'pes.actDia': 'Marine model · {f}', 'pes.cargaDia': 'Loading {n} for {f}…', 'pes.estadoDia': '{n} · {f} · Open-Meteo model{p}.',
+      'pes.pron': ' (forecast, it may change)', 'pes.pasado': ' (what the model calculated, not buoys)',
+      'pes.errorDia': 'The data for that date could not be loaded (offline?).',
+      'pes.limite': 'Open-Meteo reached its request limit for today from this network. Try again later or from another connection.',
+      'pes.guardado429': 'Open-Meteo reached its request limit for today from this network: showing the data saved at {h}.',
+      'pes.guardado': 'Open-Meteo is not responding: showing the data saved at {h}.',
+      'pes.sinMarDia': 'No marine model data for that date (waves, sea temperature, current and level).',
+      'pes.sinMarFut': ' The marine model only forecasts about 8 days.',
+      'pes.sinPronDia': 'No forecast data for that date (wind, pressure, rain and visibility).',
+      'pes.puntoDia': 'On a chosen date, wind, pressure, rain and visibility come from the same sea point of the port.',
+      'pes.pinSinDia': '{n}: not checked for this date. Tap it to see its data.',
+      'pes.cloSinDia': 'There is no chlorophyll image for {f}: the satellite only has past days.',
+      'pes.parcial429': 'Open-Meteo reached its request limit from this network: {q} could not be requested.', 'pes.parcial': 'Could not request {q} (offline?).', 'pes.qPron': 'the forecast', 'pes.qMar': 'the marine model'
     }
   };
   ['es', 'en'].forEach(function (l) {
@@ -143,6 +173,10 @@
   function pines(datos, idx, v, activo) {
     return datos.puertos.map(function (p) {
       var e = estadoPuerto(p, idx), valor, icono, nivel, etq;
+      if (p.sinDia) {   // fecha elegida: este puerto no se ha consultado (no se piden los 19)
+        return { id: p.id, menor: !!p.menor, lat: p.mar[0], lon: p.mar[1], icono: v === 'viento' ? 'air' : v === 'sst' ? 'thermostat' : 'waves', valor: '—', tono: 'neutro',
+          etiqueta: t('pes.pinSinDia', { n: p.nombre }), activo: p.id === activo };
+      }
       if (v === 'viento') {
         valor = e.viento == null ? '—' : n0(e.viento) + ' kt'; icono = 'air'; nivel = M.nivelViento(e.viento);
         etq = t('pes.pinViento', { n: p.nombre, v: valor, e: M.textoViento(e.viento) });
@@ -166,12 +200,25 @@
     if (c.parciales.length > 1) return { i: -1, motivo: 'varios', varios: c.parciales.map(function (k) { return puertos[k].nombre; }) };
     return { i: -1, motivo: 'nada', varios: [] };
   }
-  /* Formulario del buscador (mismas clases de campo que el de Clima: cm-campo, 44 px y letra de 16 px). */
-  function buscadorHtml(puertos) {
-    return '<form class="pe-busca" id="pe-busca" role="search" aria-label="' + esc(t('pes.busca')) + '" novalidate>' +
-      '<div class="cm-campo"><label for="pe-q">' + esc(t('pes.bLugar')) + '</label><input id="pe-q" type="search" list="pe-lista" autocomplete="off" enterkeyhint="search" placeholder="' + esc(t('pes.bPh')) + '" aria-describedby="pe-q-msg">' +
-      '<datalist id="pe-lista">' + puertos.map(function (p) { return '<option value="' + esc(p.nombre) + '"></option>'; }).join('') + '</datalist></div>' +
-      '<p class="pe-busca-msg" id="pe-q-msg" role="status" aria-live="polite"></p></form>';
+  /* Formulario del buscador: el MISMO que el de Clima (cm-busca, cm-campo, cm-acc; 44 px y letra de 16 px), con puerto/ciudad
+     en texto libre (sin lista de sugerencias) y fecha (campo compartido RB.campoFecha, de hoy − 92 a hoy + 15). */
+  function buscadorHtml(r) {
+    r = r || RB.rangoFechas();
+    return '<form class="cm-busca pe-busca" id="pe-busca" role="search" aria-label="' + esc(t('pes.busca')) + '" novalidate>' +
+      '<div class="cm-campo cm-campo-l"><label for="pe-q">' + esc(t('pes.bLugar')) + '</label><input id="pe-q" type="search" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="search" placeholder="' + esc(t('pes.bPh')) + '" aria-describedby="pe-q-msg"></div>' +
+      RB.campoFecha('pe-f', t('pes.bFecha'), r) +
+      '<div class="cm-acc"><button type="submit" class="cm-btn">' + esc(t('pes.bVer')) + '</button><button type="button" class="cm-btn cm-btn-2" data-hoy>' + esc(t('pes.bHoy')) + '</button></div>' +
+      '<p class="cm-busca-msg" id="pe-q-msg" role="status" aria-live="polite" hidden></p>' +
+      '<p class="cm-busca-ayuda">' + esc(t('pes.bAyuda', { a: RB.fechaTexto(r.min), b: RB.fechaTexto(r.max) })) + '</p></form>';
+  }
+  /* Valida lo escrito antes de pedir nada: {ok, puerto (id o null = el de ahora), fecha (null = hoy), error}. Cero peticiones. */
+  function validar(puertos, texto, fecha, r) {
+    r = r || RB.rangoFechas();
+    var b = buscarPuerto(puertos, texto), f = fecha || r.hoy;
+    if (b.motivo === 'nada') return { ok: false, error: t('pes.bVacio') };
+    if (b.motivo === 'varios') return { ok: false, error: t('pes.bVarios', { n: b.varios.join(', ') }) };
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(f) || f < r.min || f > r.max) return { ok: false, error: t('pes.bFuera', { a: RB.fechaTexto(r.min), b: RB.fechaTexto(r.max) }) };
+    return { ok: true, puerto: b.i >= 0 ? puertos[b.i].id : null, fecha: f === r.hoy ? null : f };
   }
   /* Caja que contiene todos los puertos: [[lat mín, lon mín], [lat máx, lon máx]]. */
   function limitesPuertos(datos) {
@@ -251,7 +298,7 @@
     } else if (id === 'oc') {
       var mg = mareograma(p, idx);
       c.chip = mt(e.ola) + (e.per != null ? ' · ' + n0(e.per) + ' s' : ''); c.sub = t('pes.f.subOc'); c.ver = [t('pes.v.ola'), mt(e.ola)];
-      c.dict = t('pes.dMar', { d: rumbo(e.dir) || '—', s: n1(e.sst), c: n1(e.corr) });
+      c.dict = e.ola == null && e.sst == null && e.corr == null ? t('pes.sinDatoPuerto') : t('pes.dMar', { d: rumbo(e.dir) || '—', s: n1(e.sst), c: n1(e.corr) });
       if (mg) c.tjs.push(tarjeta(pilar(1, 'pes.f.mareograma'), t('pes.f.nivelMarT'), fila(t('pes.f.ahora'), mt(mg.ahora)) + fila(t('pes.f.maximo'), n1(mg.max) + ' m · ' + mg.hmax) + fila(t('pes.f.minimo'), n1(mg.min) + ' m · ' + mg.hmin), t('pes.f.nivelNota'), mg.svg));
       if (luna && luna.length) {
         var fl = luna.slice(0, 3).map(function (x) { return fila(t(x.fase), cuando(x.ms)); }).join('');
@@ -275,9 +322,11 @@
     } else {
       c.chip = t('pes.f.chipClo'); c.sub = t('pes.f.subClo'); c.ver = [t('pes.v.sst'), sd(e.sst, function (v) { return n1(v) + ' °C'; })];
       c.dict = t('pes.f.dictClo');
+      // Sin cloFecha (fecha elegida de hoy en adelante) no hay imagen: el satélite solo tiene días pasados (GIBS da 404 a días futuros).
       c.tjs.push('<article class="ag-tj"><p class="ag-tj-chip">' + esc(pilar(1, 'pes.m.clo')) + '</p><h4 class="ag-tj-tit">' + esc(t('pes.f.capa')) + '</h4>' +
-        '<p class="ag-tj-txt">' + esc(t('pes.cloFecha', { f: cloFecha })) + '</p>' +
-        '<button type="button" class="pe-btn" id="pe-clo" aria-pressed="' + (clo ? 'true' : 'false') + '">' + esc(t(clo ? 'pes.cloQuitar' : 'pes.cloVer')) + '</button></article>');
+        (cloFecha ? '<p class="ag-tj-txt">' + esc(t('pes.cloFecha', { f: cloFecha })) + '</p>' +
+          '<button type="button" class="pe-btn" id="pe-clo" aria-pressed="' + (clo ? 'true' : 'false') + '">' + esc(t(clo ? 'pes.cloQuitar' : 'pes.cloVer')) + '</button></article>'
+          : '<p class="ag-tj-txt">' + esc(t('pes.cloSinDia', { f: RB.fechaTexto(String(hora || '').slice(0, 10)) })) + '</p></article>'));
       c.tjs.push(tarjeta(pilar(2, 'pes.v.sst'), t('pes.f.mar'), fila(t('pes.f.temp'), sd(e.sst, function (v) { return n1(v) + ' °C'; }))));
       c.tjs.push('<article class="ag-tj"><p class="ag-tj-chip">' + esc(pilar(3, 'pes.f.vedasPil')) + '</p><h4 class="ag-tj-tit">' + esc(t('pes.vedas')) + '</h4>' +
         '<p class="ag-tj-txt">' + esc(t('pes.f.vedasT')) + '</p><ul class="pe-enl"><li><a href="' + URL_VEDAS + '" target="_blank" rel="noopener">gob.mx/conapesca</a></li></ul></article>');
@@ -338,6 +387,7 @@
     }).join('');
   }
   function nombreDia(datos, d) {
+    if (datos.fecha) { try { return new Date(datos.fecha + 'T12:00:00Z').toLocaleDateString(T.locale(), { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }); } catch (e) { return datos.fecha; } }
     if (d === 0) return t('pes.ayer');
     if (d === 1) return t('pes.hoy');
     if (d === 2) return t('pes.manana');
@@ -355,11 +405,21 @@
   function montar(main, datos) {
     var cuerpo = main.querySelector('#pe-cuerpo');
     var ahora = V.indiceAhora(datos.horas);
-    var S = { dia: Math.min(3, Math.floor(ahora / 24)), h: ahora % 24, puerto: 'lapaz', v: 'ola', clo: false, ficha: null, cajas: {}, luna: undefined, cerrando: false };
-    var porId = {}; datos.puertos.forEach(function (p) { porId[p.id] = p; });
-    var cloFecha = V.sumaDias(V.fechaDe(datos.horas[ahora]), -1);
+    var S = { dia: Math.min(3, Math.floor(ahora / 24)), h: ahora % 24, puerto: 'lapaz', v: 'ola', clo: false, ficha: null, cajas: {}, luna: undefined, cerrando: false, fecha: null };
+    var diaHoy = S.dia;
+    var cloHoy = V.sumaDias(V.fechaDe(datos.horas[ahora]), -1), cloFecha = cloHoy;
+    /* Fecha elegida (S.fecha): D = {fecha, horas (24), porId: puertos ya consultados para esa fecha, info}. Solo se pide el puerto elegido;
+       los demás pines quedan en "—" (sin consultar) hasta que los toquen. */
+    var D = null;
+    function vista() {
+      if (!S.fecha || !D) return datos;
+      return { fecha: D.fecha, horas: D.horas, puertos: datos.puertos.map(function (p) {
+        return D.porId[p.id] || { id: p.id, nombre: p.nombre, costa: p.costa, menor: p.menor, mar: p.mar, pueblo: p.pueblo, s: {}, sol: [], sinDia: true };
+      }) };
+    }
+    function puertoDe(vv, id) { var r = vv.puertos[0]; vv.puertos.forEach(function (p) { if (p.id === id) r = p; }); return r; }
 
-    cuerpo.innerHTML = buscadorHtml(datos.puertos) +
+    cuerpo.innerHTML = buscadorHtml() + '<p class="pe-dia-estado" id="pe-dia-estado" role="status" aria-live="polite" hidden></p>' +
       '<div class="chips pe-puertos" role="group" aria-label="' + esc(t('pes.puerto')) + '">' + datos.puertos.map(function (p) {
         return '<button type="button" class="pe-chip" data-puerto="' + esc(p.id) + '" aria-pressed="false">' + esc(p.nombre) + '</button>';
       }).join('') + '</div>' +
@@ -376,33 +436,116 @@
       '<button type="button" class="pe-sim" id="pe-sim"></button>' +
       '<div class="pe-diag"><h2>' + esc(t('pes.diag')) + '</h2><p class="pe-zona" id="pe-zona"></p></div>' +
       '<div class="ag-fichas pe-fichas" id="pe-mos"></div>' +
-      '<p class="fuente pe-nota">' + esc(t('pes.nota')) + ' <a href="' + URL_CAPITANIA + '" target="_blank" rel="noopener">SEMAR</a></p>';
+      '<p class="fuente pe-nota"><span id="pe-nota-dia"></span>' + esc(t('pes.nota')) + ' <a href="' + URL_CAPITANIA + '" target="_blank" rel="noopener">SEMAR</a></p>';
 
     var pill = main.querySelector('#pe-act'); if (pill) { pill.textContent = t('pes.act'); pill.hidden = false; }
     var ancho = cuerpo.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 360);
     est.mapa = MI.crear(cuerpo.querySelector('#pe-mapa'), {
       centro: ancho >= 640 ? [25.4, -111.9] : [25.3, -112.1], zoom: ancho >= 640 ? 7 : 6.5, minZoom: 6, maxZoom: 9, zoomMenores: ancho >= 640 ? 0 : 7.5, limites: [[21.5, -116.5], [29.5, -107.5]], ajustar: limitesPuertos(datos), margen: ancho >= 640 ? [70, 70] : [60, 56],
-      alElegir: function (id) { S.puerto = id; pintar(); },
+      alElegir: function (id) { elegirPuerto(id); },
       alError: function () { var a = cuerpo.querySelector('#pe-aviso'); a.textContent = t('pes.cloError'); a.hidden = false; }
     });
     var rng = cuerpo.querySelector('#pe-rng'), sim = cuerpo.querySelector('#pe-sim');
 
-    function idx() { return S.dia * 24 + S.h; }
+    function idx() { return S.fecha ? S.h : S.dia * 24 + S.h; }
     function rotuloSim() { sim.innerHTML = '<span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/' + (est.timer ? 'pause' : 'play_arrow') + '.svg);mask-image:url(assets/iconos/mapa/' + (est.timer ? 'pause' : 'play_arrow') + '.svg)" aria-hidden="true"></span>' + esc(t(est.timer ? 'pes.simPausa' : 'pes.sim')); }
     function pintar() {
-      var i = idx(), p = porId[S.puerto];
+      var vv = vista(), i = idx(), p = puertoDe(vv, S.puerto), r = RB.rangoFechas();
       cuerpo.querySelectorAll('[data-puerto]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-puerto') === S.puerto)); });
       cuerpo.querySelectorAll('[data-var]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-var') === S.v)); });
       rng.value = S.h;
-      cuerpo.querySelector('#pe-sal').textContent = nombreDia(datos, S.dia) + ' · ' + (S.h < 10 ? '0' : '') + S.h + ':00';
-      rng.setAttribute('aria-valuetext', nombreDia(datos, S.dia) + ' ' + S.h + ':00');
-      cuerpo.querySelector('#pe-ant').disabled = S.dia <= 0; cuerpo.querySelector('#pe-sig').disabled = S.dia >= 3;
-      if (est.mapa) est.mapa.pines(pines(datos, i, S.v, S.puerto));
+      cuerpo.querySelector('#pe-sal').textContent = nombreDia(vv, S.dia) + ' · ' + (S.h < 10 ? '0' : '') + S.h + ':00';
+      rng.setAttribute('aria-valuetext', nombreDia(vv, S.dia) + ' ' + S.h + ':00');
+      // Con fecha elegida, las flechas mueven la fecha un día (dentro del rango) y piden solo ese puerto.
+      cuerpo.querySelector('#pe-ant').disabled = S.fecha ? S.fecha <= r.min : S.dia <= 0;
+      cuerpo.querySelector('#pe-sig').disabled = S.fecha ? S.fecha >= r.max : S.dia >= 3;
+      if (est.mapa) est.mapa.pines(pines(vv, i, S.v, S.puerto));
       cuerpo.querySelector('#pe-ley').innerHTML = leyenda(S.v, S.clo);
       cuerpo.querySelector('#pe-zona').textContent = t('pes.zona', { z: p.nombre });
       var mos = cuerpo.querySelector('#pe-mos'); mos.className = 'ag-fichas pe-fichas' + (S.ficha ? ' ag-fichas-abierta' : '');
-      mos.innerHTML = fichas(p, i, S.ficha, S.clo, cloFecha, datos.horas[i], S.luna);
+      mos.innerHTML = fichas(p, i, S.ficha, S.clo, cloFecha, vv.horas[i], S.luna);
       rotuloSim();
+    }
+    /* ---------- Buscador: puerto/ciudad + fecha (como Clima). Nada se pide al cargar ni al escribir: solo al aplicar. ---------- */
+    var q = cuerpo.querySelector('#pe-q'), fe = cuerpo.querySelector('#pe-f'), qmsg = cuerpo.querySelector('#pe-q-msg'), estado = cuerpo.querySelector('#pe-dia-estado');
+    var pill = main.querySelector('#pe-act'), kick = main.querySelector('#pe-kick');
+    function avisa(txt) { qmsg.textContent = txt || ''; qmsg.hidden = !txt; }
+    function ponEstado(txt, error) { estado.textContent = txt || ''; estado.hidden = !txt; estado.className = 'pe-dia-estado' + (error ? ' pe-dia-estado-err' : ''); }
+    function centrar(id) {
+      var p = null; datos.puertos.forEach(function (x) { if (x.id === id) p = x; });
+      var chip = cuerpo.querySelector('[data-puerto="' + id + '"]'), fila = chip && chip.parentNode;   // en celular la fila de puertos se desliza: se lleva el chip a la vista
+      if (fila && fila.scrollWidth > fila.clientWidth) fila.scrollLeft = Math.max(0, chip.offsetLeft - fila.offsetLeft - 16);
+      if (p && est.mapa && est.mapa.mapa) { try { est.mapa.mapa.panTo([p.mar[0], p.mar[1]], { animate: false }); } catch (x) { /* sin mapa */ } }
+    }
+    function rotulos() {
+      if (pill) pill.textContent = S.fecha ? t('pes.actDia', { f: RB.fechaTexto(S.fecha) }) : t('pes.act');
+      if (kick) kick.textContent = t(S.fecha ? 'pes.kickerDia' : 'pes.kicker');
+      var nota = cuerpo.querySelector('#pe-nota-dia'); if (nota) { nota.textContent = S.fecha ? t('pes.puntoDia') + ' ' : ''; }
+    }
+    function textoDia(id) {
+      var inf = D.info[id] || {}, f = RB.fechaTexto(D.fecha), n = puertoDe(vista(), id).nombre, hoy = RB.hoyISO();
+      if (inf.respaldo) return t(/429/.test(inf.motivo || '') ? 'pes.guardado429' : 'pes.guardado', { h: inf.hora });
+      var s = t('pes.estadoDia', { n: n, f: f, p: t(D.fecha > hoy ? 'pes.pron' : 'pes.pasado') });
+      if (inf.parcial) s += ' ' + t(/429/.test(inf.motivo || '') ? 'pes.parcial429' : 'pes.parcial', { q: t(inf.parcial === 'pron' ? 'pes.qPron' : 'pes.qMar') });
+      if (inf.sinMar && inf.parcial !== 'mar') s += ' ' + t('pes.sinMarDia') + (D.fecha > RB.sumarDias(hoy, 8) ? t('pes.sinMarFut') : '');
+      if (inf.sinPron && inf.parcial !== 'pron') s += ' ' + t('pes.sinPronDia');
+      return s;
+    }
+    /* Pide (o toma de la caché) un puerto en una fecha: 1 coordenada marina + 1 de pronóstico. */
+    function cargarPuerto(id, fecha) {
+      parar();
+      var antes = { fecha: S.fecha, D: D };
+      if (!D || D.fecha !== fecha) { D = { fecha: fecha, horas: null, porId: {}, info: {} }; S.luna = undefined; }
+      var nombre = puertoDe(datos, id).nombre;
+      ponEstado(t('pes.cargaDia', { n: nombre, f: RB.fechaTexto(fecha) }));
+      return V.cargarDia(id, fecha).then(function (res) {
+        if (D.fecha !== fecha) return false;
+        if (!D.horas) D.horas = res.dia.horas;
+        D.porId[id] = res.dia.puerto;
+        D.info[id] = { sinMar: res.dia.sinMar, sinPron: res.dia.sinPron, respaldo: !!res.respaldo, motivo: res.motivo, parcial: res.parcial,
+          hora: res.respaldo ? new Date(Date.now() - res.edadMs).toLocaleTimeString(T.locale(), { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: V.ZONA }) : '' };
+        S.fecha = fecha; S.puerto = id; S.dia = 0;
+        cloFecha = fecha < RB.hoyISO() ? fecha : null;
+        if (!cloFecha && S.clo) { S.clo = false; capaClo(); } else if (S.clo) capaClo();
+        fe.value = fecha; rotulos(); pintar(); centrar(id);
+        ponEstado(textoDia(id), !!(D.info[id].respaldo || D.info[id].parcial));
+        return true;
+      }, function (e) {
+        if (!D.horas) { D = antes.D; S.fecha = antes.fecha; }   // sin nada que mostrar para esa fecha: se queda lo de antes
+        ponEstado(t(/429/.test(e && e.message || '') ? 'pes.limite' : 'pes.errorDia'), true);
+        if (S.fecha) fe.value = S.fecha; else fe.value = RB.rangoFechas().hoy;
+        return false;
+      });
+    }
+    function volverAHoy(id) {
+      parar(); S.fecha = null; D = null; S.dia = diaHoy; S.luna = undefined; cloFecha = cloHoy;
+      if (id) S.puerto = id;
+      if (S.clo) capaClo();
+      fe.value = RB.rangoFechas().hoy; rotulos(); pintar(); centrar(S.puerto);
+      ponEstado(t('pes.bOk', { n: puertoDe(datos, S.puerto).nombre }));
+      return Promise.resolve(true);
+    }
+    /* Tocar un puerto (botón o pin): con fecha elegida y sin consultar, se pide solo ese puerto. */
+    function elegirPuerto(id) {
+      if (S.fecha && D && !D.porId[id]) { S.puerto = id; pintar(); return cargarPuerto(id, S.fecha); }
+      S.puerto = id; pintar();
+      if (S.fecha && D) ponEstado(textoDia(id), !!(D.info[id] || {}).respaldo);
+      return Promise.resolve(true);
+    }
+    function aplicar() {
+      var r = RB.rangoFechas(), v = validar(datos.puertos, q.value, fe.value, r);
+      if (!v.ok) { avisa(v.error); return Promise.resolve(false); }
+      avisa('');
+      var id = v.puerto || S.puerto;
+      if (!v.fecha) return volverAHoy(id);
+      if (D && D.fecha === v.fecha && D.porId[id]) { S.puerto = id; pintar(); centrar(id); ponEstado(textoDia(id), !!(D.info[id] || {}).respaldo); return Promise.resolve(true); }
+      return cargarPuerto(id, v.fecha);
+    }
+    function moverFecha(n) {
+      var r = RB.rangoFechas(), f = RB.sumarDias(S.fecha, n);
+      if (f < r.min || f > r.max) return;
+      if (f === r.hoy) { volverAHoy(); return; }
+      cargarPuerto(S.puerto, f);
     }
     function capaClo() {
       var a = cuerpo.querySelector('#pe-aviso'); a.hidden = true;
@@ -412,11 +555,12 @@
       var b = ev.target.closest ? ev.target.closest('button') : null; if (!b) return;
       if (b.hasAttribute('data-cerrar')) { cerrarFicha(); return; }
       if (b.classList.contains('ag-ficha-btn')) { var art = b.closest('[data-ficha]'); if (art) abrirFicha(art.getAttribute('data-ficha')); return; }
-      if (b.hasAttribute('data-puerto')) { S.puerto = b.getAttribute('data-puerto'); pintar(); }
+      if (b.hasAttribute('data-hoy')) { fe.value = RB.rangoFechas().hoy; aplicar(); }
+      else if (b.hasAttribute('data-puerto')) elegirPuerto(b.getAttribute('data-puerto'));
       else if (b.hasAttribute('data-var')) { S.v = b.getAttribute('data-var'); pintar(); }
       else if (b.id === 'pe-clo') { S.clo = !S.clo; capaClo(); pintar(); }
-      else if (b.id === 'pe-ant') { parar(); S.dia = Math.max(0, S.dia - 1); pintar(); }
-      else if (b.id === 'pe-sig') { parar(); S.dia = Math.min(3, S.dia + 1); pintar(); }
+      else if (b.id === 'pe-ant') { parar(); if (S.fecha) moverFecha(-1); else { S.dia = Math.max(0, S.dia - 1); pintar(); } }
+      else if (b.id === 'pe-sig') { parar(); if (S.fecha) moverFecha(1); else { S.dia = Math.min(3, S.dia + 1); pintar(); } }
       else if (b.id === 'pe-sim') {
         if (est.timer) { parar(); pintar(); return; }
         if (S.h >= 23) S.h = -1;
@@ -440,7 +584,7 @@
       irAFichas(); enfocaTitulo();
       if (id === 'oc' && S.luna === undefined) {
         S.luna = null;
-        pedirLuna(V.fechaDe(datos.horas[idx()])).then(function (l) {
+        pedirLuna(V.fechaDe(vista().horas[idx()])).then(function (l) {
           S.luna = l;
           if (S.ficha === 'oc') { var tenia = cuerpo.contains(document.activeElement) && document.activeElement !== cuerpo; pintar(); if (tenia) enfocaTitulo(); }
         }, function () { S.luna = false; });
@@ -460,34 +604,19 @@
     est.onKey = function (ev) { if (S.ficha && (ev.key === 'Escape' || ev.key === 'Esc')) cerrarFicha(); };
     document.addEventListener('keydown', est.onKey);
     rng.addEventListener('input', function () { parar(); S.h = +rng.value; pintar(); });
-    /* Buscador: al escribir, si un solo puerto coincide se elige como si lo tocaran (chip, pin, diagnóstico) y el mapa se centra en él
-       sin cambiar el zoom. Solo usa los datos ya cargados: no pide nada a Open-Meteo. */
-    var q = cuerpo.querySelector('#pe-q'), qmsg = cuerpo.querySelector('#pe-q-msg');
-    function aplicarBusqueda(final) {
-      var r = buscarPuerto(datos.puertos, q.value), txt = '';
-      if (r.i >= 0) {
-        var p = datos.puertos[r.i];
-        if (S.puerto !== p.id || final) {
-          S.puerto = p.id; pintar();
-          var chip = cuerpo.querySelector('[data-puerto="' + p.id + '"]'), fila = chip && chip.parentNode;   // en celular la fila de puertos se desliza: se lleva el chip a la vista
-          if (fila && fila.scrollWidth > fila.clientWidth) fila.scrollLeft = Math.max(0, chip.offsetLeft - fila.offsetLeft - 16);
-          if (est.mapa && est.mapa.mapa) { try { est.mapa.mapa.panTo([p.mar[0], p.mar[1]], { animate: false }); } catch (x) { /* sin mapa */ } }
-        }
-        txt = t('pes.bOk', { n: p.nombre });
-      } else if (r.motivo === 'nada') txt = t('pes.bVacio');
-      else if (r.motivo === 'varios' && final) txt = t('pes.bVarios', { n: r.varios.join(', ') });
-      if (qmsg.textContent !== txt) qmsg.textContent = txt;
-      qmsg.className = 'pe-busca-msg' + (r.i < 0 && txt ? ' pe-busca-err' : '');
-    }
-    q.addEventListener('input', function () { aplicarBusqueda(false); });
-    cuerpo.querySelector('#pe-busca').addEventListener('submit', function (ev) { ev.preventDefault(); aplicarBusqueda(true); if (q.blur) q.blur(); });
+    /* Como en Clima: "Ver" (o Enter) aplica; elegir una fecha o salir del campo con un nombre que coincide también aplica.
+       Escribir no aplica nada ni pide nada. Hoy = los datos ya cargados (cero peticiones); otra fecha = solo el puerto elegido. */
+    cuerpo.querySelector('#pe-busca').addEventListener('submit', function (ev) { ev.preventDefault(); aplicar(); if (q.blur) q.blur(); });
+    fe.addEventListener('change', function () { if (fe.value) aplicar(); });
+    q.addEventListener('change', function () { if (buscarPuerto(datos.puertos, q.value).i >= 0) aplicar(); });
+    q.addEventListener('input', function () { if (!qmsg.hidden) avisa(''); });
     pintar();
   }
 
   function render(main) {
     limpiar();
     var mi = est.ficha;
-    main.innerHTML = '<section class="pe" aria-labelledby="pe-h1"><div class="pe-cab"><p class="hm-mono pe-ins"><i class="hm-punto" aria-hidden="true"></i>' + esc(t('pes.kicker')) + '</p>' +
+    main.innerHTML = '<section class="pe" aria-labelledby="pe-h1"><div class="pe-cab"><p class="hm-mono pe-ins"><i class="hm-punto" aria-hidden="true"></i><span id="pe-kick">' + esc(t('pes.kicker')) + '</span></p>' +
       '<p class="hm-mono hm-pildora pe-act" id="pe-act" hidden></p></div><h1 id="pe-h1">' + esc(t('titulo.pesca')) + '</h1><p class="pe-sub">' + esc(t('pes.sub')) + '</p>' +
       '<div id="pe-cuerpo"><p class="pe-carga">' + esc(t('pes.cargando')) + '</p></div></section>';
     return V.cargar().then(function (r) {
@@ -502,7 +631,7 @@
     });
   }
 
-  var RBPesca = { render: render, limpiar: limpiar, pines: pines, fichas: fichas, fasesLunares: fasesLunares, urlLuna: urlLuna, pedirLuna: pedirLuna, mareograma: mareograma, leyenda: leyenda, estadoPuerto: estadoPuerto, montar: montar, buscarPuerto: buscarPuerto, buscadorHtml: buscadorHtml, TX: TX };
+  var RBPesca = { render: render, limpiar: limpiar, pines: pines, fichas: fichas, fasesLunares: fasesLunares, urlLuna: urlLuna, pedirLuna: pedirLuna, mareograma: mareograma, leyenda: leyenda, estadoPuerto: estadoPuerto, montar: montar, buscarPuerto: buscarPuerto, buscadorHtml: buscadorHtml, validar: validar, TX: TX };
   if (typeof window !== 'undefined') window.RBPesca = RBPesca;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBPesca;
 })();

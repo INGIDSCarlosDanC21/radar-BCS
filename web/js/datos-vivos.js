@@ -185,7 +185,87 @@
   }
   var enVuelo = {};
 
+  /* ---------- Un puerto en una fecha elegida (buscador de Pesca, 2026-11-15) ----------
+     Solo el puerto elegido: 1 coordenada marina + 1 de pronóstico (el mismo punto de mar), 24 horas de ese día. Nunca los 19.
+     Límites medidos el 2026-11-15 (docs/decisiones.md): el modelo marino responde del pasado (completo desde 2023 en La Paz)
+     y hasta hoy + 8 días (hoy + 9 parcial; después, null); el pronóstico, de hoy − 93 a hoy + 15. Lo que falta queda en null. */
+  var CACHE_DIA = 'rb-vivo-dia-v1', RESPALDO_DIA_MAX = 12, memDia = {};
+  function puertoPorId(id) { var r = null; PUERTOS.forEach(function (p) { if (p.id === id) r = p; }); return r; }
+  function urlMarDia(p, fecha) {
+    return MAR + '?latitude=' + p.mar[0] + '&longitude=' + p.mar[1] + '&hourly=' + VAR_MAR + '&start_date=' + fecha + '&end_date=' + fecha + '&timezone=' + encodeURIComponent(ZONA);
+  }
+  function urlPronDia(p, fecha) {
+    return PRON + '?latitude=' + p.mar[0] + '&longitude=' + p.mar[1] + '&hourly=' + VAR_PRON + '&daily=sunrise,sunset&wind_speed_unit=kn&start_date=' + fecha + '&end_date=' + fecha + '&timezone=' + encodeURIComponent(ZONA);
+  }
+  /* {horas (24), puerto:{...mismas series que unir()}, sinMar, sinPron} o null si la respuesta no cuadra. */
+  function unirDia(mar, pron, p) {
+    mar = arr(mar)[0]; pron = arr(pron)[0];
+    var horas = (mar && mar.hourly && mar.hourly.time) || (pron && pron.hourly && pron.hourly.time);
+    if (!horas || !horas.length) return null;
+    var H = horas.length, m = mar && mar.hourly, u = pron && pron.hourly;
+    var s = {
+      ola: serie(m, 'wave_height', H), per: serie(m, 'wave_period', H), dir: serie(m, 'wave_direction', H), swell: serie(m, 'swell_wave_height', H),
+      sst: serie(m, 'sea_surface_temperature', H), corr: serie(m, 'ocean_current_velocity', H), cdir: serie(m, 'ocean_current_direction', H),
+      viento: serie(u, 'wind_speed_10m', H), rachas: serie(u, 'wind_gusts_10m', H), vdir: serie(u, 'wind_direction_10m', H),
+      codigo: serie(u, 'weather_code', H), uv: serie(u, 'uv_index', H),
+      olaV: serie(m, 'wind_wave_height', H), perV: serie(m, 'wind_wave_period', H), dirV: serie(m, 'wind_wave_direction', H),
+      perS: serie(m, 'swell_wave_period', H), dirS: serie(m, 'swell_wave_direction', H), nivel: serie(m, 'sea_level_height_msl', H),
+      pres: serie(u, 'pressure_msl', H), vis: serie(u, 'visibility', H), pll: serie(u, 'precipitation_probability', H), cape: serie(u, 'cape', H), rocio: serie(u, 'dew_point_2m', H)
+    };
+    function vacia(k) { return !s[k] || !s[k].some(function (x) { return x != null; }); }
+    return { horas: horas, puerto: { id: p.id, nombre: p.nombre, costa: p.costa, menor: !!p.menor, mar: p.mar, pueblo: p.pueblo, s: s, dias: [], sol: dias(pron && pron.daily) },
+      sinMar: vacia('ola') && vacia('sst') && vacia('nivel'), sinPron: vacia('viento') && vacia('pres') };
+  }
+  function leerJSON(st, k) { try { return st ? JSON.parse(st.getItem(k) || 'null') : null; } catch (e) { return null; } }
+  function guardarJSON(st, k, v) { try { if (st) st.setItem(k, JSON.stringify(v)); } catch (e) { /* cuota llena */ } }
+  /* cargarDia(id, fecha, {fetch, storage, respaldo, ahoraMs, hoy}) -> Promise({dia, cache, edadMs, respaldo?}).
+     Caché por (puerto, fecha) en memoria y sessionStorage (días pasados: 24 h; hoy y futuros: 10 min) y respaldo de las últimas
+     12 consultas en localStorage, igual que cargar(): si Open-Meteo falla (p. ej. 429) se usa lo último guardado de las últimas 24 h. */
+  function cargarDia(id, fecha, opc) {
+    opc = opc || {};
+    var p = puertoPorId(id);
+    if (!p || !/^\d{4}-\d{2}-\d{2}$/.test(String(fecha))) return Promise.reject(new Error('puerto o fecha no válidos'));
+    var f = opc.fetch || (typeof fetch !== 'undefined' ? fetch.bind(typeof window !== 'undefined' ? window : undefined) : null);
+    var st = opc.storage !== undefined ? opc.storage : (typeof sessionStorage !== 'undefined' ? sessionStorage : null);
+    var lt = opc.respaldo !== undefined ? opc.respaldo : (opc.fetch ? null : (function () { try { return typeof localStorage !== 'undefined' ? localStorage : null; } catch (e) { return null; } })());
+    var ahora = opc.ahoraMs != null ? opc.ahoraMs : Date.now();
+    var hoy = opc.hoy || String(ahoraLocal() || '').slice(0, 10);
+    var vida = fecha < hoy ? 24 * 3600000 : CACHE_MS, clave = id + ':' + fecha, mem = opc.fetch ? null : memDia;
+    var c = (mem && mem[clave]) || (leerJSON(st, CACHE_DIA) || {})[clave];
+    if (c && c.t && ahora - c.t < vida && c.dia && c.dia.horas) return Promise.resolve({ dia: c.dia, cache: true, edadMs: ahora - c.t });
+    if (!f) return Promise.reject(new Error('sin fetch'));
+    // Si solo una de las dos falla (p. ej. 429 del pronóstico), se muestra la otra y lo que falta queda en null (sin guardar en caché).
+    var fallos = [];
+    function intenta(u) { return pedir(u, f, ESPERA_MS).then(null, function (e) { fallos.push(e); return null; }); }
+    return Promise.all([intenta(urlMarDia(p, fecha)), intenta(urlPronDia(p, fecha))]).then(function (r) {
+      if (!r[0] && !r[1]) throw fallos[0] || new Error('sin respuesta');
+      var dia = unirDia(r[0], r[1], p);
+      if (!dia) throw new Error('respuesta incompleta');
+      if (fallos.length) {
+        var gp = (leerJSON(lt, CACHE_DIA + '-respaldo') || {})[clave];
+        if (gp && gp.t && ahora - gp.t < 24 * 3600000 && gp.dia && gp.dia.horas) return { dia: gp.dia, cache: true, edadMs: ahora - gp.t, respaldo: true, motivo: fallos[0] && fallos[0].message };
+        return { dia: dia, cache: false, edadMs: 0, parcial: r[0] ? 'pron' : 'mar', motivo: fallos[0] && fallos[0].message };
+      }
+      var e = { t: ahora, dia: dia };
+      if (mem) mem[clave] = e;
+      var todo = leerJSON(st, CACHE_DIA) || {}; todo[clave] = e;
+      // sessionStorage: solo las últimas consultas, para no llenar la cuota.
+      var ks = Object.keys(todo).sort(function (a, b) { return todo[b].t - todo[a].t; });
+      ks.slice(RESPALDO_DIA_MAX).forEach(function (k) { delete todo[k]; });
+      guardarJSON(st, CACHE_DIA, todo);
+      if (lt) { var g = leerJSON(lt, CACHE_DIA + '-respaldo') || {}; g[clave] = e;
+        Object.keys(g).sort(function (a, b) { return g[b].t - g[a].t; }).slice(RESPALDO_DIA_MAX).forEach(function (k) { delete g[k]; });
+        guardarJSON(lt, CACHE_DIA + '-respaldo', g); }
+      return { dia: dia, cache: false, edadMs: 0 };
+    }).catch(function (e) {
+      var g = (leerJSON(lt, CACHE_DIA + '-respaldo') || {})[clave];
+      if (g && g.t && ahora - g.t < 24 * 3600000 && g.dia && g.dia.horas) return { dia: g.dia, cache: true, edadMs: ahora - g.t, respaldo: true, motivo: e && e.message };
+      throw e;
+    });
+  }
+
   var RBVivo = { PUERTOS: PUERTOS, ZONA: ZONA, urlMar: urlMar, urlPron: urlPron, urlClima: urlClima, unir: unir, cargar: cargar, indiceAhora: indiceAhora, ahoraLocal: ahoraLocal,
+    urlMarDia: urlMarDia, urlPronDia: urlPronDia, unirDia: unirDia, cargarDia: cargarDia, CACHE_DIA: CACHE_DIA,
     fechaDe: fechaDe, horaDe: horaDe, sumaDias: sumaDias, CACHE_CLAVE: CACHE_CLAVE, CACHE_CLAVE_CLIMA: CACHE_CLAVE_CLIMA, CACHE_MS: CACHE_MS };
   if (typeof window !== 'undefined') window.RBVivo = RBVivo;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBVivo;

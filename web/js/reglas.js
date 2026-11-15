@@ -62,9 +62,32 @@
     var r = coincidencias(lista, texto, nombres);
     return r.exacto >= 0 ? r.exacto : r.parciales.length === 1 ? r.parciales[0] : -1;
   }
+  /* Campo de fecha compartido (Clima y Pesca), hora de La Paz. Open-Meteo Forecast acepta de ~3 meses atrás a 16 días
+     adelante (medido el 2026-11-15: "allowed range from 2026-08-14 to 2026-11-30"); se ofrece de hoy − 92 a hoy + 15. */
+  var DIAS_ATRAS = 92, DIAS_ADELANTE = 15;
+  function hoyISO(ahora) {
+    var d = ahora || new Date();
+    try { return d.toLocaleDateString('en-CA', { timeZone: 'America/Mazatlan' }); } catch (e) { return d.toISOString().slice(0, 10); }
+  }
+  function sumarDias(iso, n) {
+    var p = String(iso).split('-'), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n, 12));
+    return d.toISOString().slice(0, 10);
+  }
+  function rangoFechas(ahora) { var h = hoyISO(ahora); return { min: sumarDias(h, -DIAS_ATRAS), max: sumarDias(h, DIAS_ADELANTE), hoy: h }; }
+  function fechaTexto(iso) {
+    var p = String(iso).split('-');
+    try { return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2], 12)).toLocaleDateString(T.locale ? T.locale() : 'es-MX', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }); }
+    catch (e) { return iso; }
+  }
+  /* <div class="cm-campo"> con su <label> y un <input type="date"> limitado al rango (mismo estilo en Clima y Pesca). */
+  function campoFecha(id, etiqueta, r, valor) {
+    var e = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+    return '<div class="cm-campo"><label for="' + e(id) + '">' + e(etiqueta) + '</label><input id="' + e(id) + '" type="date" min="' + r.min + '" max="' + r.max + '" value="' + (valor || r.hoy) + '"></div>';
+  }
   var RB = { icono: icono, num: num, dec: dec, pTexto: pTexto, signo: signo, clase: clase,
     textoCambio: textoCambio, textoFuente: textoFuente, mostrarFranja: mostrarFranja, explicaMetodo: explicaMetodo,
-    sinAcentos: sinAcentos, coincidencias: coincidencias, buscarNombre: buscarNombre };
+    sinAcentos: sinAcentos, coincidencias: coincidencias, buscarNombre: buscarNombre,
+    DIAS_ATRAS: DIAS_ATRAS, DIAS_ADELANTE: DIAS_ADELANTE, hoyISO: hoyISO, sumarDias: sumarDias, rangoFechas: rangoFechas, fechaTexto: fechaTexto, campoFecha: campoFecha };
   if (typeof window !== 'undefined') window.RB = RB;
   if (typeof module !== 'undefined' && module.exports) module.exports = RB;
 })();

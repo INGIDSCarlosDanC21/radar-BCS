@@ -93,8 +93,15 @@
   .pe-puertos{flex-wrap:nowrap;overflow-x:auto;gap:8px;padding-bottom:6px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
   .pe-puertos .pe-chip{flex:none;scroll-snap-align:start}
 }
-/* Buscador de puertos (mismo campo que el de Clima: .cm-campo, 44 px de alto y letra de 16 px para que el celular no haga zoom). */
-.pe-busca{margin:4px 0 0;max-width:420px}
-.pe-busca-msg{margin:4px 0 0;font-size:14px;line-height:1.35;color:var(--suave)}
-.pe-busca-msg:empty{margin:0}
-.pe-busca-msg.pe-busca-err{color:#b91c1c}
+/* Buscador de puerto y fecha: el MISMO formulario que Clima (.cm-busca, .cm-campo, .cm-acc: campos y botones de 44 px, letra de 16 px
+   para que el celular no haga zoom). En celular va compacto: el puerto a todo lo ancho y, debajo, la fecha con Ver y Hoy en una sola fila. */
+.pe-busca{margin:4px 0 0}
+@media (max-width:639px){
+  .pe-busca{grid-template-columns:minmax(0,1fr) auto;gap:10px 8px;padding:12px}
+  .pe-busca .cm-campo-l,.pe-busca .cm-busca-msg,.pe-busca .cm-busca-ayuda{grid-column:1/-1}
+  .pe-busca .cm-btn{padding:0 14px}
+  .pe-busca .cm-busca-ayuda{font-size:12px;line-height:16px}
+}
+.pe-dia-estado{margin:8px 0 0;font-size:14px;line-height:1.4;color:var(--suave)}
+.pe-dia-estado[hidden]{display:none}
+.pe-dia-estado.pe-dia-estado-err{color:#b91c1c}
