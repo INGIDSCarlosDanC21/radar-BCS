@@ -42,6 +42,7 @@ p{margin:.4em 0}
 .aviso{background:var(--aviso);border:1px solid var(--borde);border-radius:10px;padding:10px 12px;margin:12px 0;font-size:.95rem}
 .leyenda{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.85rem;margin:8px 0}
 .leyenda i{display:inline-block;width:16px;height:16px;vertical-align:-3px;border:1px solid var(--borde);margin-right:4px}
+.sincambio{background:rgb(242,240,235)}.leyenda i.sincambio{border-color:#333}
 .sindatos{background:repeating-linear-gradient(45deg,#9aa0a6,#9aa0a6 3px,#d5d8db 3px,#d5d8db 6px)}
 ol.top{padding-left:1.3em}ol.top li{margin:6px 0}
 table{border-collapse:collapse;width:100%;background:var(--tarjeta)}
