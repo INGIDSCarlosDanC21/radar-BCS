@@ -35,6 +35,10 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | Requests | <https://requests.readthedocs.io/> | Apache-2.0 (PyPI, 2026-11-14) | `analisis/descargar.py`: descarga de NASA POWER (y el prototipo) |
 | netCDF4 (Python) 1.7.5 | <https://unidata.github.io/netcdf4-python/> | MIT (PyPI, 2026-11-14) | `analisis/agua.py`: lectura del netCDF de GRACE |
 | pytest | <https://docs.pytest.org/> | MIT (PyPI, versión 9.2.0, verificado el 2026-11-14) | `analisis/tests/`: pruebas del pipeline (solo desarrollo) |
+| Imagen de Baja California Sur: NASA GIBS, MODIS Terra Corrected Reflectance, 2025-04-20 | <https://gibs.earthdata.nasa.gov/> (URL exacta en `web/img/FUENTES.md`) | CC0 según la política de datos de NASA Earthdata (<https://www.earthdata.nasa.gov/learn/use-data/data-use-policy>); sin logos de NASA; crédito en pantalla | `web/img/` (Inicio y Login/Registro). **Previsto: PR #69 en revisión** |
+| Fuentes Space Grotesk, Manrope y JetBrains Mono | <https://github.com/google/fonts/tree/main/ofl/> (cargadas desde Google Fonts) | SIL Open Font License 1.1 (según Diego; verificar al integrar). Aviso: cargarlas desde Google envía la IP del visitante a Google | `web/` (interfaz de Figma). **Previsto: PR #69 en revisión** |
+| supabase-js 2.118.0 | <https://github.com/supabase/supabase-js> (cargado desde jsDelivr con SRI) | MIT (según Diego; verificar al integrar) | `web/js/acceso.js` (login opcional). **Previsto: PR #69 en revisión** |
+| Supabase Auth (servicio, plan gratuito) | <https://supabase.com/> | Términos del servicio de Supabase: POR CONFIRMAR por Programación B. Guarda solo correo y contraseña (cifrada) de quien se registre | Login opcional (issue #73). El proyecto aún no existe; entra a `main` solo si pasa la hora de corte del domingo 09:00 |
 
 ## Uso de IA
 
