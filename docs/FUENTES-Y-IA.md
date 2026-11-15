@@ -2,7 +2,12 @@
 
 Decisión de Carlos (Líder), 2026-11-15: **toda fuente de información y todo uso de IA debe estar documentado, pero no hace falta repetirlo en cada pantalla**: basta con la documentación del repositorio (GitHub). Así la web tiene menos texto repetido y menos scroll.
 
-> **Nota de honestidad.** El texto oficial de esta regla nueva no está citado en el repositorio: Carlos la indicó en el chat. Los documentos oficiales que tenemos en `docs/referencia/` son la versión anterior (la diapositiva de envío pide "una marca de agua visible" en las imágenes y videos generados; la página de Componentes dice "marca de agua o descripción del proyecto"). Cuando Carlos tenga el texto de la regla nueva, pegarlo en `docs/referencia/` y citarlo aquí. Todo lo que se documenta abajo cumple las dos versiones, salvo la marca junto al logo del encabezado, que quitamos por esta regla.
+> **Texto oficial** (leído el 2026-11-15 en spaceappschallenge.org; las dos páginas están fechadas el 13 de noviembre de 2026):
+>
+> - La [Guía de envío](https://www.spaceappschallenge.org/resources/project-submission-guide/) exige indicar dónde y cómo se usó SI (la IA, en su vocabulario): las **imágenes y videos** generados deben llevar una "visible watermark" (marca de agua visible); el **audio, el código y los datos** se reconocen en texto descriptivo y metadatos. Los jueces ven esas marcas y evalúan la originalidad y la ejecución de lo asistido por SI.
+> - Las [Preguntas frecuentes](https://www.spaceappschallenge.org/resources/participant-faqs/) piden que el envío incluya una **descripción de cómo se usó SI**. Lo que se contesta en la lista desplegable de la plataforma no lo ven los jueces.
+>
+> **Cómo encaja la regla de Carlos** (documentar todo, sin repetirlo en cada pantalla): cumple lo de la descripción, el audio, el código y los datos. **No sustituye la marca de agua visible en imágenes y videos que pide la guía**; ese punto sigue vigente en el texto oficial. El único material de ese tipo es el logo (Gemini): se quitó la etiqueta junto al logo del encabezado por decisión de Carlos y el logo sigue declarado en el pie de cada pantalla (con la etiqueta del pie de Inicio), en `docs/entrega/05` y en `docs/RECURSOS.md`. La sección 4 dice qué decidir.
 
 ## 1. Dónde está documentado cada cosa
 
@@ -48,5 +53,5 @@ Medido antes y después con el navegador (incluye también los cambios de Ehilee
 
 - ~~Borrar el `<span class="marca-ia">` de `web/index.html`~~: hecho el 2026-11-15 tras fusionar #159. Para volver a mostrar la etiqueta hay que poner de nuevo el `span` en el encabezado.
 - `diseno/ESPECIFICACION.md` (§7) y el Figma todavía piden la marca junto al logo del encabezado: es referencia de diseño; Ehileen decide si lo actualiza.
-- Pegar aquí el texto oficial de la regla nueva (ver la nota del principio).
+- **Decisión de Carlos sobre la marca de agua del logo.** El texto oficial la exige en imágenes generadas. Hay un PR **listo y sin fusionar** (#176) que la pone dentro de la propia imagen del logo, sin ocupar más espacio en el encabezado (204 × 36 px en celular, encabezado de 56 px). Si no se fusiona, el riesgo queda asumido por el Líder.
 - Posible siguiente recorte (no hecho): plegar el bloque "Fuente, resolución, periodo y descarga" de cada Ficha como "Sobre los datos" (ver `docs/PLAN-VER-MAS.md`, sección 7).

@@ -25,7 +25,7 @@ Marcado con quién bloquea y a qué hora conviene tenerlo.
 | 2 | Decidir si se fusiona el **#159** de Ehileen (quita la pestaña Ficha y los chips de arriba) | Toca `index.html`, `app.js`, `menu.js`, `agricola.js`; mientras esté abierto otros cambios pueden chocar | cuanto antes |
 | 3 | Contestar las 4 decisiones de **"Ver más"** (`PLAN-VER-MAS.md`, sección 8) | Sin ellas no se programa; son unas 2 h | 05:00 para que alcance |
 | 4 | Pegar el **texto oficial de la regla nueva** de fuentes e IA | Hoy solo lo tenemos por ti; los documentos oficiales del repo dicen otra cosa (ver `FUENTES-Y-IA.md`) | antes de enviar |
-| 5 | **Grabar el video de 30 s** (o decidir diapositivas) | Es el campo `02`; sin demo no hay envío completo | 09:00 a 11:00 |
+| 5 | **Grabar el video de 30 s** (o decidir diapositivas) | Es el campo `02`; sin demo no hay envío completo. Carlos dijo "mañana" a las 04:40: **si es hoy domingo, entra; si fuera el lunes, ya no** (la plataforma cierra el domingo a las 23:59) | hoy, antes de las 23:59 |
 | 6 | **Pasos de la plataforma**: Lock en ON, llenar los 7 campos, 2 casillas finales, Submit | Solo tú tienes la sesión; el envío es final | 11:00 a 13:00 |
 | 7 | Confirmar con el Local Lead la **hora de la evaluación** | AGENTS dice "por confirmar" | hoy |
 | 8 | Confirmar que **todos están en Members** de la plataforma y sin lista de espera | Regla que descalifica; no se puede arreglar después del cierre | antes de enviar |
