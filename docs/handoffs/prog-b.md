@@ -8,14 +8,18 @@
 - Reglas de presentación en `web/js/reglas.js`; pruebas con `node --test "web/tests/*.test.mjs"` (12 pass), incluido un validador del contrato.
 - Probado a 360×740 claro y oscuro: 7 vistas sin errores de consola, sin "null" y sin scroll horizontal.
 
+- PR #54 (fusionado): vegetación real (−0.019 NDVI, MODIS MOD13Q1) y nota de límite bajo la cifra de calor.
+- Issue #9: la pantalla Mapa muestra arriba "Por punto de La Paz (datos reales)" con las tendencias de Luca (`web/data/zonas_tendencias.json`, copia sin BOM de `data/salida/`): temperatura de superficie (MOD11A2) y NDVI (MOD13Q1) en 6 puntos, primero los de tendencia clara. La franja del mapa ahora dice "MAPA DE PRUEBA — las zonas dibujadas no son mediciones".
+
 ## En curso
 
-- PR `prog-b/datos-reales` → `dev`.
+- PR `prog-b/mapa-zonas` → `dev` (issue #9).
 
 ## Falta
 
 - Que Carlos fusione `dev` → `main`; luego comprobar la URL pública sin sesión.
-- Datos por zona (MODIS) para el mapa; hasta entonces el mapa es de prueba.
+- Coordenadas de los 6 puntos (están en los CSV de AppEEARS de Luca, fuera de git) para dibujarlos en el mapa; hasta entonces las zonas dibujadas son de prueba.
+- `p_valor: 0.0` en NDVI de Chametla (regla 4 del Anexo); la web muestra "p < 0.001".
 - Caso no cubierto: `significativo: null` con `cambio_total` con valor mostraría la cifra con "Sin calcular" (hoy no ocurre en los datos).
 
 ## Bloqueos
@@ -43,3 +47,4 @@ node --test "web/tests/*.test.mjs"
 - Entorno del repo configurado.
 - Web base con 4 pantallas y datos de prueba; contrato de datos propuesto.
 - Tarde: datos reales de NASA POWER conectados e issue #36 resuelto.
+- Noche: vegetación real (PR #54) y tendencias reales por punto en el Mapa (issue #9).
