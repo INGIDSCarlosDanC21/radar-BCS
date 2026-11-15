@@ -41,7 +41,7 @@
       var e = etiqueta(sig(i)), t = RB.textoCambio(i);
       h += '<a class="tarjeta" href="#ficha/' + esc(i.id) + '"><h2>' + esc(i.titulo) + '</h2>' +
         '<div class="cifra ' + t.clase + '">' + esc(t.texto) + '</div>' +
-        (i.id === 'calor' && t.tipo === 'cifra' && i.limitacion ? '<p class="nota-limite"><strong>Límite:</strong> ' + esc(i.limitacion) + '</p>' : '') +
+        ((i.id === 'calor' || i.id === 'agua') && t.tipo !== 'sin-datos' && i.limitacion ? '<p class="nota-limite"><strong>Límite:</strong> ' + esc(i.id === 'agua' ? i.limitacion.split('. ')[0] + '.' : i.limitacion) + '</p>' : '') +
         '<p class="fuente">Periodo: ' + esc((i.fuente && i.fuente.periodo) || 'pendiente') + '</p>' +
         '<span class="etiqueta ' + e[1] + '">' + e[0] + '</span>' +
         '<p class="fuente">Fuente: ' + esc(RB.textoFuente(i)) + '</p>' +
@@ -89,9 +89,9 @@
   /* Qué mide cada capa por zona (MODIS vía AppEEARS). sinCifra: decisión de Investigación
      (docs/investigacion/hallazgos.md): la baja de superficie por zona depende de la prueba; no se cita cifra. */
   var CAPA_ZONA = {
-    calor: { que: 'Temperatura de la superficie (satélite MODIS), no la del aire de la tarjeta de Inicio.',
+    calor: { que: 'Temperatura de la superficie (satélite MODIS), no la del aire.',
       fuente: 'MODIS MOD11A2.061 (temperatura de superficie, 1 km) vía NASA AppEEARS',
-      sinCifra: 'Por zona, el resultado cambia según la prueba estadística y depende sobre todo de los últimos años, así que no mostramos una cifra.' },
+      sinCifra: 'En El Centenario y Sur una prueba estadística marca una baja de la temperatura de superficie, pero con otra prueba no es significativa y viene de 2022-2025; no la interpretamos todavía.' },
     vegetacion: { que: 'Índice de vegetación (NDVI). Algunos meses no tienen lectura válida en la ciudad: es un panorama aproximado.',
       fuente: 'MODIS MOD13Q1.061 (NDVI, 250 m) vía NASA AppEEARS' }
   };
@@ -157,7 +157,7 @@
       return Math.abs(cb.cambio_total) - Math.abs(ca.cambio_total);
     }).slice(0, esPrueba ? 5 : undefined);
     var r = '<h2>' + (esPrueba ? 'Zonas de prueba del mapa (no son mediciones): ' : 'Zonas con más cambio: ') + esc(i.titulo) + '</h2>';
-    if (cfg) r += '<p>' + esc(cfg.que) + (cfg.sinCifra ? ' ' + esc(cfg.sinCifra) : '') + '</p>';
+    if (cfg) r += '<p>' + esc(cfg.que) + '</p>';
     if (!lista.length) {
       r += '<p class="aviso">Este indicador se mide a escala regional, no por zona; por eso el mapa no tiene datos para ' + esc(i.titulo.toLowerCase()) + '. Mira la ficha para ver el cambio en La Paz.</p>';
     } else {
@@ -168,6 +168,7 @@
           (c.significativo === false ? esc(t) : '<span class="' + clase(c.cambio_total) + '">' + esc(t) + '</span> — ' + etiqueta(c.significativo)[0]) + '</li>';
       });
       r += '</ol>';
+      if (cfg && cfg.sinCifra) r += '<p class="nota-limite">' + esc(cfg.sinCifra) + '</p>';
     }
     r += '<p><a href="#ficha/' + esc(id) + '">Ver ficha de ' + esc(i.titulo.toLowerCase()) + '</a></p>';
     document.getElementById('resumen').innerHTML = r;
@@ -175,7 +176,7 @@
     document.getElementById('fuente-mapa').textContent = (esPrueba ?
       'Zonas: datos de prueba sintéticos, no son mediciones; el mapa por zona espera datos de MODIS. El dato real de La Paz está en la ficha.' :
       cfg ? 'Fuente: ' + cfg.fuente + ', ' + (ZONAS.periodo ? ZONAS.periodo.inicio + '–' + ZONAS.periodo.fin : 'periodo pendiente') +
-        '; Mann-Kendall estacional y pendiente de Sen. Cada zona es un píxel de 1 km alrededor de un punto de muestra, no un barrio completo.' : '') +
+        '; Mann-Kendall estacional y pendiente de Sen. Son puntos, no zonas completas: cada uno se dibuja como el píxel de 1 km que lo contiene.' : '') +
       ' Mapa base: © OpenStreetMap contributors.';
   }
 
@@ -221,7 +222,7 @@
       h += '<a class="chip" style="display:inline-flex;align-items:center;text-decoration:none" href="#ficha/' + k + '"' + (k === i.id ? ' aria-current="page"' : '') + '>' + esc(ind(k).titulo) + '</a>';
     });
     h += '</div><h1>' + esc(i.titulo) + '</h1><p class="fuente">' + esc(i.variable) + '</p>';
-    h += '<div class="bloque"><h2>Cambio total desde 2001</h2><div class="grande ' + tc.clase + '">' + esc(tc.texto) + '</div>' +
+    h += '<div class="bloque"><h2>Cambio total desde ' + esc(((i.fuente && i.fuente.periodo) || '2001').slice(0, 4)) + '</h2><div class="grande ' + tc.clase + '">' + esc(tc.texto) + '</div>' +
       (tc.tipo === 'sin-cambio' ? '<p class="fuente">No se detecta un cambio claro; por eso no se muestra una cifra de cambio.</p>' :
         i.cambio_total_nota ? '<p class="fuente">' + esc(i.cambio_total_nota) + '</p>' : '') +
       '<p>Tendencia por década: <strong>' + esc(tc.tipo === 'sin-cambio' ? 'Sin cambio claro' : signo(i.tendencia_por_decada, i.unidades)) + '</strong></p></div>';
