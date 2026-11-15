@@ -1,39 +1,57 @@
 # Video de Radar BCS (Remotion)
 
-## Tráiler horizontal de 28 s (`RadarBCSTrailer`) — versión principal desde el 2026-11-15
+## Tráiler horizontal de 28 s (`RadarBCSTrailer`), versión principal desde el 2026-11-15
 
-**1920 × 1080, 30 fps, 28 s (840 fotogramas)**, para que el jurado lo vea en pantalla de escritorio; los teléfonos aparecen en 3D con perspectiva. Música a 120 BPM: todos los cortes caen en múltiplos de 0.5 s. Misma voz y mismos subtítulos que el video vertical (`SUBTITULOS` en `src/guion.ts`), rediseñados al estilo cine (tercio inferior, fundido, sombra). Sin etiquetas de IA en pantalla, sin logos de la NASA, sin personas.
+**1920 × 1080, 30 fps, 28 s (840 fotogramas)**, para que el jurado lo vea en pantalla de escritorio; el producto es móvil, así que los teléfonos aparecen en 3D con perspectiva y en su pantalla corre **la app real en movimiento** (clips grabados de la web pública). Música a 120 BPM: los cortes caen en múltiplos de 0.5 s. Voz "Katie" de ElevenLabs (`public/narracion-katie.mp3`, 26.69 s). Subtítulos en inglés cinéticos, palabra por palabra, con color en las palabras clave. Sin etiquetas de IA en pantalla, sin logos de la NASA, sin personas.
 
-Escenas (tiempos en `TRAILER_ESCENAS` de `src/guion.ts`): 0–3 apertura con la foto MODIS/GIBS, calima y "HEAT · WATER · SEA"; 3–6 logo con glitch y teléfono que sube (Inicio); 6–12 contador +1.47 °C, gráfica anual real y sello p < 0.001; 12–15.5 barras de lluvia reales y "No clear change" (p = 0.129); 15.5–18.5 la foto satelital inclinada con los 38 lugares en cascada; 18.5–22 cortes rápidos (Clima, Pesca) y "Not official warnings."; 22–28 "What changed, not why.", logo, URL y fuentes, fundido a negro.
+Escenas (`TRAILER_ESCENAS` en `src/guion.ts`), cada una con fondo propio (`FondoVivo`: foto GIBS/MODIS con parallax, manchas de color animadas, luz volumétrica y partículas):
 
-Pasos (desde `video/`):
+| Tiempo | Voz | Plano |
+|---|---|---|
+| 0–3.5 | frase 1 | Foto MODIS/GIBS con empuje hacia La Paz, calima, fuga de luz; HEAT · WATER · SEA cuando la voz los dice |
+| 3.5–6.5 | frase 2 | Logo con glitch y barrido; teléfono con la **barra inferior cambiando de pantalla** (Agro, Avisos, Inicio) y otro con Inicio desenfocado; fondo cian de marca |
+| 6.5–12.5 | frase 3 | Ámbar con brasas: contador +1.47 °C, gráfica anual real, sello p < 0.001; el teléfono corre la **simulación "Travel through time"** |
+| 12.5–16.5 | frase 4 | Cian con lluvia: barras reales, "No clear change", p = 0.129; teléfono con la **simulación de lluvia** año por año |
+| 16.5–19 | frase 5 | Esmeralda: foto satelital inclinada con los 38 pines en oleadas y contador; teléfono con el **mapa real de 38 lugares** |
+| 19–23 | frase 6 | Verde-azulado: montaje cada 0.5 s de **GOES-West (2 h), lluvia IMERG, capas del mapa del tiempo, mapa agrícola con NDVI y calor del suelo desde el espacio**; luego "Model estimates. / Not official warnings." sobre Avisos |
+| 23–28 | frase 7 | Cálido de marca: "What changed, not why.", logo con destellos, URL y fuentes; fundido a negro |
 
-1. `npm install` (si el disco C: está lleno, pon `node_modules` en otro disco con una unión: `mklink /J node_modules D:\...\node_modules`; la carpeta destino debe llamarse `node_modules`).
-2. Capturas: `node ../scripts/capturar-video.mjs` (de día en La Paz; 1080 px de ancho ≈ DPR 2.77). Quedan en `public/tomas/`.
-3. Voz: copia la narración a `public/narracion.mp3` (no se sube).
-4. Audio: `public/audio/` (lecho `bed-120bpm-28s.mp3` y efectos `.wav`, muestras CC0 procesadas; fuentes en `public/audio/LICENCIAS.md`, hoja de señales en `docs/entrega/09-audio-trailer.md`). La composición detecta qué archivos existen y solo coloca esos; las señales están en `LECHO` y `SENALES` de `src/guion.ts`. El lecho va a 0.20 mientras habla la voz y sube a 1.0 entre 25.4 y 26.4 s.
-   Después del render se normaliza la sonoridad sin tocar el video: `ffmpeg -i out/v.mp4 -c:v copy -af "loudnorm=I=-15:TP=-1.5:LRA=7,aresample=48000" -c:a aac -b:a 192k out/trailer-radar-bcs-28s.mp4`.
-5. Previsualizar: `npm run dev` y abre la composición `RadarBCSTrailer`.
-6. Renderizar: `npx remotion render RadarBCSTrailer out/trailer-radar-bcs-28s.mp4 --codec=h264 --crf=18 --audio-bitrate=192k` (con poca RAM, añade `--concurrency=3`).
-7. Verificar: `ffprobe` (1920x1080, 30 fps, ≤ 30 s) y `ffmpeg -i out/trailer-radar-bcs-28s.mp4 -af ebur128=peak=true -f null -` (≤ −14 LUFS, pico ≤ −1 dBTP).
+### Pasos (desde `video/`)
 
-Código del tráiler en `src/trailer/`: `Trailer.tsx` (capas, subtítulos, audio), `Escenas.tsx` (las 7 escenas), `Telefono.tsx` (teléfono 3D con transformaciones CSS y la captura real como pantalla), `comun.tsx` (grano, viñeta, destellos, fugas de luz, gradación, aberración cromática), `datos.ts` (lee la serie anual real de `web/data/indicadores.json` y las coordenadas de `web/data/localidades_tendencias.json`). Los efectos se hicieron con CSS/SVG (no con `@remotion/effects` ni Three.js) para que se vean igual en el render sin GPU y para no depender de paquetes con licencia no declarada (`@remotion/effects` dice `"license": "UNLICENSED"` en su `package.json`).
+1. `npm install`. Si el disco C: está lleno, pon `node_modules` en otro disco con una unión: `mklink /J node_modules D:\...\node_modules` (la carpeta destino debe llamarse `node_modules`).
+2. **Clips de la app en movimiento** (desde la raíz del repo, de día en La Paz): `node scripts/grabar-clips.mjs video/public/clips`. Graba con Chrome sin ventana (CDP `Page.startScreencast`, celular 390 × 844 a DPR 2) mientras desplaza, arrastra y acerca mapas, toca chips, pines y la barra inferior (cada toque deja un círculo visible), y arma MP4 H.264 de 30 fps (crf 18) por clip. Pesan ~25 MB: conviene que `public/clips` sea una unión a otro disco. `--solo=id1,id2` repite solo algunos; `--explorar` imprime mapas, botones y secciones de cada pantalla. Revisa los clips: si una pantalla salió con "could not be loaded", repítela más tarde.
+3. Capturas fijas (solo para el video vertical de respaldo): `node scripts/capturar-video.mjs`.
+4. Voz: copia `narracion-katie.mp3` a `public/` (no se sube). El nombre está en `VOZ` de `src/guion.ts`.
+5. Audio: `public/audio/` (lecho y efectos CC0; fuentes en `public/audio/LICENCIAS.md`, hoja de señales en `docs/entrega/09-audio-trailer.md`). Las señales salen de `SENALES` en `src/guion.ts`. El lecho va a 0.20 mientras habla la voz, 0.28 en los huecos, y sube a 1.0 al terminar la voz.
+6. Previsualizar: `npm run dev` y abre `RadarBCSTrailer`.
+7. Renderizar: `npx remotion render RadarBCSTrailer out/v.mp4 --codec=h264 --crf=18 --audio-bitrate=192k --concurrency=4`.
+8. Normalizar la sonoridad sin recodificar la imagen: `ffmpeg -i out/v.mp4 -c:v copy -af "loudnorm=I=-15:TP=-1.5:LRA=7,aresample=48000" -c:a aac -b:a 192k out/trailer-radar-bcs-28s.mp4`.
+9. Verificar: `ffprobe` (1920x1080, 30 fps, ≤ 30 s) y `ffmpeg -i out/trailer-radar-bcs-28s.mp4 -af ebur128=peak=true -f null -` (≤ −14 LUFS, pico ≤ −1 dB).
+
+Código del tráiler en `src/trailer/`:
+- `Trailer.tsx`: capas, subtítulos cinéticos y audio.
+- `Escenas.tsx`: las 7 escenas.
+- `Telefono.tsx`: teléfono 3D en CSS con un clip real (`<Video>` de `@remotion/media`) o una captura como pantalla.
+- `comun.tsx`: `FondoVivo`, grano, viñeta, destellos, fugas de luz, gradación y aberración cromática.
+- `datos.ts`: lee la serie anual real de `web/data/indicadores.json` y las coordenadas de `web/data/localidades_tendencias.json`.
+
+Los efectos son CSS/SVG propios (no `@remotion/effects` ni Three.js): se ven igual en el render sin GPU, y `@remotion/effects` dice `"license": "UNLICENSED"` en su `package.json`.
 
 ### Re-tiempo cuando cambie la voz (solo se edita `src/guion.ts`)
 
-Ningún componente tiene tiempos de voz escritos a mano: todo sale de `src/guion.ts`.
+Ningún componente tiene tiempos de voz escritos a mano.
 
-1. Copia la voz nueva a `public/narracion.mp3` y mide su duración: `npx remotion ffprobe -v error -show_entries format=duration -of csv=p=0 public/narracion.mp3` (máximo ~27 s para que quepa el cierre; el video sigue en 28 s, `TRAILER_DURACION_S`).
-2. Mide cuándo empieza cada frase. Opción rápida (pausas): `ffmpeg -i public/narracion.mp3 -af silencedetect=n=-35dB:d=0.08 -f null - 2>&1 | findstr silence_end` (cada `silence_end` es el inicio de un tramo de voz). Opción por palabra: Whisper con marcas de tiempo, p. ej. `npx remotion add @remotion/install-whisper-cpp` y su `transcribe()` con `tokenLevelTimestamps`, o la alineación forzada de ElevenLabs (como se hizo el 2026-11-15).
-3. En `src/guion.ts` actualiza, en este orden:
-   - `SUBTITULOS`: `desde`/`hasta` de cada frase (y el texto si cambió; el último `hasta` también mueve la subida del lecho al final).
-   - `PALABRAS_APERTURA`: segundo en que se oye HEAT, WATER y SEA.
-   - `MOMENTOS`: contador (`contadorDesde`/`contadorHasta`), gráfica, `sello` (p < 0.001), `noClearChange`, `pLluvia`, `pinesDesde`/`pinesPaso` (38 pines en 4 oleadas), `laPaz`, `modelEstimates`, `notOfficial`, frases del cierre, `logo`, `url`, `fuentes`.
-   - `TRAILER_ESCENAS`: los cortes (múltiplos de 0.5 s, sin huecos). Mueve un corte solo si la frase de esa escena ya no cabe.
-   - `SENALES` se recalcula solo a partir de escenas y momentos; solo cambia sus volúmenes si hace falta.
-4. Revisa en Studio (`npm run dev` → `RadarBCSTrailer`) y renderiza como en los pasos 6 y 7 (render + normalización de sonoridad + `ebur128`).
+1. Copia la voz nueva a `public/`, pon su nombre en `VOZ` y mide la duración: `npx remotion ffprobe -v error -show_entries format=duration -of csv=p=0 public/<voz>.mp3` (máximo ~27 s para que quepa el cierre en 28 s).
+2. Mide los tramos de voz entre pausas: `ffmpeg -i public/<voz>.mp3 -af silencedetect=n=-35dB:d=0.07 -f null - 2>&1 | findstr silence_` (cada `silence_end` es el inicio de un tramo y cada `silence_start` su fin). Para tiempos por palabra exactos se puede usar Whisper (`npx remotion add @remotion/install-whisper-cpp` y `transcribe()` con `tokenLevelTimestamps`) o la alineación forzada de ElevenLabs.
+3. En `src/guion.ts` actualiza `TRAMOS_VOZ`: texto y `desde`/`hasta` de cada tramo. De ahí salen solos:
+   - `SUBTITULOS`, que agrupa tramos con `LINEAS`;
+   - `PALABRAS`, el tiempo de cada palabra repartido por sílabas;
+   - `PALABRAS_APERTURA` y `MOMENTOS` (contador, gráfica, sello, no clear change, pines, La Paz, model estimates, not official, cierre, logo);
+   - `SENALES` y el ducking del lecho.
+4. Si una frase ya no cabe en su escena, mueve los cortes de `TRAILER_ESCENAS` (múltiplos de 0.5 s, sin huecos).
+5. Revisa en Studio y renderiza como en los pasos 7 a 9.
 
-La composición vertical anterior (`RadarBCS30s`, abajo) se conserva como respaldo.
+La composición vertical anterior (`RadarBCS30s`, abajo) se conserva como respaldo; usa las mismas `SUBTITULOS`, pero sus escenas no se re-tiempan solas.
 
 ---
 

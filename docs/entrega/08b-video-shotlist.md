@@ -6,6 +6,8 @@ Reemplaza la versión de la mañana. **Decisión de Carlos (2026-11-15): pantall
 
 ## Tráiler 16:9 de 28 s (versión principal, 2026-11-15, noche)
 
+> **Actualización:** voz nueva "Katie" (26.69 s) y cortes en 3.5, 6.5, 12.5, 16.5, 19 y 23 s. Los teléfonos muestran **clips reales de la app en movimiento**, y entre 19 y 21.5 s hay un montaje de funciones (GOES-West, IMERG, capas, Agro/NDVI, calor del suelo). Cada escena tiene su propio fondo vivo, y los subtítulos son cinéticos y de color. Tabla vigente en `video/README.md`; la tabla de abajo es la versión anterior.
+
 Mismo guion y misma voz; nuevo montaje horizontal 1920 × 1080 en Remotion (`video/`, composición `RadarBCSTrailer`). Cortes en la rejilla de 120 BPM. Tiempos editables en `video/src/guion.ts` (`TRAILER_ESCENAS`, `SENALES`).
 
 | Tiempo | Voz | Plano |
