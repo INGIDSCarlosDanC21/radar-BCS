@@ -4,6 +4,7 @@ Un solo comando:  python -m analisis.exportar        (desde la raíz del repo)
 """
 import datetime as dt
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -147,7 +148,7 @@ def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, 
 def main():
     datos, fecha = descargar.descargar_power()
     inicio, fin = descargar.INICIO, descargar.ultimo_anio_completo()
-    fin_lst, fin_ndvi = modis.anio_final("MOD11A2"), modis.anio_final("MOD13Q1")
+    fin_lst, fin_ndvi = modis.anio_final("MOD11A2", modis.tope_calor(sys.argv)), modis.anio_final("MOD13Q1")
     lst, ndvi = modis.cargar(inicio, fin_lst, fin_ndvi)
     ruta, fecha_grace = agua.descargar_grace()
     lecturas = agua.leer(ruta)

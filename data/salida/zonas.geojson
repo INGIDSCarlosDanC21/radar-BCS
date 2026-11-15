@@ -45,7 +45,7 @@
       "significativo": false
      },
      "vegetacion": {
-      "cambio_total": -0.034,
+      "cambio_total": -0.03,
       "significativo": true
      },
      "lluvia": {
@@ -98,7 +98,7 @@
       "significativo": false
      },
      "vegetacion": {
-      "cambio_total": -0.034,
+      "cambio_total": -0.033,
       "significativo": true
      },
      "lluvia": {
@@ -151,7 +151,7 @@
       "significativo": true
      },
      "vegetacion": {
-      "cambio_total": -0.047,
+      "cambio_total": -0.046,
       "significativo": true
      },
      "lluvia": {
@@ -204,8 +204,8 @@
       "significativo": false
      },
      "vegetacion": {
-      "cambio_total": 0.004,
-      "significativo": false
+      "cambio_total": 0.008,
+      "significativo": true
      },
      "lluvia": {
       "cambio_total": null,
@@ -257,8 +257,8 @@
       "significativo": true
      },
      "vegetacion": {
-      "cambio_total": 0.013,
-      "significativo": false
+      "cambio_total": 0.024,
+      "significativo": true
      },
      "lluvia": {
       "cambio_total": null,
@@ -310,7 +310,7 @@
       "significativo": false
      },
      "vegetacion": {
-      "cambio_total": -0.05,
+      "cambio_total": -0.042,
       "significativo": true
      },
      "lluvia": {

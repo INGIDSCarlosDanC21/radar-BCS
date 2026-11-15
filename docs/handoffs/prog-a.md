@@ -19,6 +19,8 @@
 
 ## Falta
 
+- Extensión a 2026 (rama `prog-a/extender-2026`): vegetación sale a 2001-2026 (parcial; -0.013, p = 0.0036). Calor queda en 2001-2025 (`python -m analisis.exportar --calor-hasta 2025`) hasta revisar la deriva de Terra con la hora de paso (`python -m analisis.appeears enviarhora`): con 2026 sale -1.06 °C significativo y baja pareja en las 6 zonas desde 2022, sospechoso.
+
 - Copiar la salida a `web/data/` con `python -m analisis.publicar`, en un PR acordado con Diego (su PR #57 de mapa pide las coordenadas de los 6 puntos: están en `zonas.geojson`).
 - Agua: contraste con GLDAS-2.2 CLSM (GWS); opcional.
 - Revisión humana de cifras y código por Luca e Investigación.

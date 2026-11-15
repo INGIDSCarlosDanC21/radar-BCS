@@ -74,11 +74,17 @@ def rutas_csv(producto):
     return [ruta_csv(producto)] + extra
 
 
-def anio_final(producto):
-    """Último año con alguna lectura válida de ese producto."""
+def tope_calor(argv):
+    """Valor de `--calor-hasta AAAA` en la línea de comandos (None si no se pide); congela calor mientras se revisa la deriva de Terra."""
+    return int(argv[argv.index("--calor-hasta") + 1]) if "--calor-hasta" in argv else None
+
+
+def anio_final(producto, tope=None):
+    """Último año con alguna lectura válida de ese producto (limitado por `tope` si se da)."""
     capa, conv, ok = ((LST, lambda k: k - 273.15, lambda v: v > 0) if producto == "MOD11A2"
                       else (NDVI, lambda v: v, lambda v: v > -2000))
-    return max(a for z in leer(rutas_csv(producto), capa, conv, ok).values() for a, _, _ in z)
+    ultimo = max(a for z in leer(rutas_csv(producto), capa, conv, ok).values() for a, _, _ in z)
+    return min(ultimo, tope) if tope else ultimo
 
 
 def cargar(inicio, fin, fin_ndvi=None):
