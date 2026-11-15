@@ -19,3 +19,13 @@ test('los íconos de sección existen en web/assets/iconos', async () => {
   assert.equal(nombres.length, 4);
   for (const n of nombres) assert.ok(existsSync(new URL('../assets/iconos/' + n + '.svg', import.meta.url)), n);
 });
+
+test('las 4 fichas del Mapa Agrícola usan sus íconos de web/assets/iconos', async () => {
+  const { existsSync } = await import('node:fs');
+  const js = leer('../js/agricola.js');
+  for (const n of ['agricultura-factibilidad-y-cultivos', 'agricultura-clima-y-agua', 'agricultura-salud-del-suelo', 'agricultura-riesgos-y-sanidad']) {
+    assert.ok(js.includes("'" + n + "'"), n);
+    assert.ok(existsSync(new URL('../assets/iconos/' + n + '.svg', import.meta.url)), n);
+  }
+  assert.ok(!/pesca-/.test(js + leer('../js/reglas.js') + leer('../js/app.js')), 'sin íconos de pesca: no hay pantalla de pesca');
+});
