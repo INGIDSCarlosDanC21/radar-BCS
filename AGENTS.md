@@ -55,7 +55,6 @@ Cada rol edita solo sus carpetas. Si necesitas tocar la de otro, abre un issue o
 8. **No repitas trabajo.** Si una tarea se va a hacer más de una vez, escribe un script en `scripts/` y úsalo. Guarda descargas en caché.
 9. Verifica antes de decir "listo": corre el código o la prueba y reporta el resultado real.
 
-10. **Modelos de empresas chinas: permitidos, pero siempre declarados.** Si el equipo usa herramientas de IA de empresas chinas (DeepSeek, Qwen, Kimi, GLM, MiniMax, etc.), se registran en `docs/RECURSOS.md` (sección IA) igual que cualquier otra herramienta, y se informa con veracidad si la NASA o la sede lo preguntan. La NASA revisa vínculos con entidades chinas según lo que el equipo declara (`docs/referencia/guia-de-calificacion.md`); **nunca se omite ni se oculta el uso de una herramienta de IA**. Decisión y riesgo asumidos por el Líder; no está confirmado con la sede si esto afecta la elegibilidad.
 
 ## Recursos en línea
 
