@@ -232,3 +232,33 @@ body[data-vista=agricola] main{max-width:none;margin:0;padding:0}
 .ag-ficha-btn.ag-sr{width:1px;height:1px;padding:0}
 .ag-pin{position:relative}.ag-pin::after{content:"";position:absolute;left:0;right:0;top:50%;height:44px;transform:translateY(-50%)}
 .ag-ficha-btn.ag-sr:focus-visible{position:static;width:100%;height:auto;min-height:44px;clip:auto;padding:12px 24px;outline:3px solid #006d3d}
+
+/* Limpieza del Mapa Agrícola (Carlos, 2026-11-15): menos scroll y menos estorbo en celular.
+   - El bloque de estado va al final de la página.
+   - Ficha abierta: encabezado compacto (título corto, X solo con ícono, sin chips ni descripción larga arriba; la X se repite al final).
+   - Fuentes plegadas y datos secundarios de cada tarjeta en "Más datos". */
+.ag-estado-pie{margin-top:24px}
+.ag-tit-c{display:none}
+.ag-cerrar-pie{margin:20px 0 0;display:flex;justify-content:flex-end}
+.ag-fuentes summary{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;list-style:none}
+.ag-fuentes summary::-webkit-details-marker{display:none}
+.ag-fuentes summary::before{content:"\25B8";font-size:14px}
+.ag-fuentes[open] summary::before{content:"\25BE"}
+.ag-fuentes-chips{margin:0 0 8px;font-size:12px;line-height:16px;color:#44474d}
+.ag-tj-mas{margin-top:4px}
+.ag-tj-mas summary{display:flex;align-items:center;min-height:44px;cursor:pointer;color:var(--ct);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700}
+.ag-tj-mas .ag-tj-filas{margin-top:0}
+@media (max-width:639px){
+  .ag-det-cab{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"izq cer" "ver ver";gap:6px 12px;align-items:center}
+  .ag-det-cab-izq{grid-area:izq;gap:10px;align-items:center}
+  .ag-det-cab-der{display:contents}
+  .ag-cerrar{grid-area:cer;width:44px;padding:0;justify-content:center}
+  .ag-cerrar-t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .ag-veredicto{grid-area:ver;flex-direction:row;align-items:baseline;gap:8px}
+  .ag-veredicto-v{font-size:20px;line-height:24px}
+  .ag-tit-l,.ag-det-desc{display:none}
+  .ag-tit-c{display:inline}
+  .ag-det-tit{font-size:20px;line-height:26px}
+  .ag-cerrar-pie .ag-cerrar{width:auto;padding:0 16px}
+  .ag-cerrar-pie .ag-cerrar-t{position:static;width:auto;height:auto;clip:auto;margin-left:8px}
+}

@@ -18,7 +18,7 @@
      window.RBT (js/textos.js) decide el idioma. Si no existe, todo queda en español (como en las pruebas). */
   var TX = {
     es: {
-      cerrar: 'Cerrar', fuentes: 'Fuentes', fuenteDos: 'Fuente: ', motivo: 'Motivo:', consultado: 'Consultado: ',
+      cerrar: 'Cerrar', mas: 'Más datos', fuentes: 'Fuentes', fuenteDos: 'Fuente: ', motivo: 'Motivo:', consultado: 'Consultado: ',
       abierta: ': ficha abierta', sinDatos: 'No se pudieron cargar los datos agrícolas.',
       titulo: 'Mapa Agrícola',
       sub: 'Vocación de suelos y condiciones agroclimáticas de los valles agrícolas del municipio de La Paz, con datos abiertos oficiales.',
@@ -35,7 +35,7 @@
       acercar: 'Acercar', alejar: 'Alejar', coord: 'Coordenadas: '
     },
     en: {
-      cerrar: 'Close', fuentes: 'Sources', fuenteDos: 'Source: ', motivo: 'Reason:', consultado: 'Accessed: ',
+      cerrar: 'Close', mas: 'More data', fuentes: 'Sources', fuenteDos: 'Source: ', motivo: 'Reason:', consultado: 'Accessed: ',
       abierta: ': details open', sinDatos: 'The farming data could not be loaded.',
       titulo: 'Farming Map',
       sub: 'Soil suitability and agroclimatic conditions of the farming valleys of the municipality of La Paz, using official open data.',
@@ -123,34 +123,35 @@
     h += '<h4 class="ag-tj-tit">' + esc(D(t, 'titulo')) + '</h4>';
     if (t.texto) h += '<p class="ag-tj-txt">' + esc(D(t, 'texto')) + '</p>';
     var fl = arr(D(t, 'filas'));
-    if (fl.length) {
-      h += '<dl class="ag-tj-filas">';
-      fl.forEach(function (r) { h += '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>'; });
-      h += '</dl>';
+    // Menos scroll: con más de 3 filas se muestran 2; el resto y la fuente quedan en "Más datos" (un toque).
+    var plegar = !alerta && fl.length > 3, vista = plegar ? fl.slice(0, 2) : fl, resto = plegar ? fl.slice(2) : [];
+    function filas(lista) {
+      var s = '<dl class="ag-tj-filas">';
+      lista.forEach(function (r) { s += '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>'; });
+      return s + '</dl>';
     }
+    var fuente = t.fuente ? '<p class="ag-tj-fuente">' + tx('fuenteDos') + esc(D(t, 'fuente')) + '</p>' : '';
+    if (vista.length) h += filas(vista);
     if (alerta && t.motivo) h += '<p class="ag-tj-motivo"><b>' + tx('motivo') + '</b> ' + esc(D(t, 'motivo')) + '</p>';
-    if (t.fuente) h += '<p class="ag-tj-fuente">' + tx('fuenteDos') + esc(D(t, 'fuente')) + '</p>';
+    if (plegar) h += '<details class="ag-tj-mas"><summary>' + esc(tx('mas')) + '</summary>' + filas(resto) + fuente + '</details>';
+    else h += fuente;
     return h + '</article>';
   }
 
   function detalle(f) {
     var d = f.detalle || {}, id = f.id, h = '';
     var chips = arr(D(d, 'chips'));
+    var largo = D(d, 'titulo_largo') || D(f, 'titulo'), corto = D(f, 'titulo');
     h += '<div class="ag-det-cab"><div class="ag-det-cab-izq">' +
       '<span class="ag-ficha-icono">' + icoFicha(id) + '</span><div class="ag-det-cab-txt">';
-    if (chips.length) {
-      h += '<div class="ag-det-chips">';
-      chips.forEach(function (c, k) { h += '<span class="ag-det-chip' + (k === 0 ? ' ag-det-chip-1' : '') + '">' + esc(c) + '</span>'; });
-      h += '</div>';
-    }
-    h += '<h3 class="ag-det-tit" id="ag-tit-' + esc(id) + '" tabindex="-1">' + esc(D(d, 'titulo_largo') || D(f, 'titulo')) + '</h3>';
+    h += '<h3 class="ag-det-tit" id="ag-tit-' + esc(id) + '" tabindex="-1"><span class="ag-tit-l">' + esc(largo) + '</span><span class="ag-tit-c">' + esc(corto) + '</span></h3>';
     if (d.descripcion) h += '<p class="ag-det-desc">' + esc(D(d, 'descripcion')) + '</p>';
     h += '</div></div><div class="ag-det-cab-der">';
     if (d.veredicto) {
       h += '<div class="ag-veredicto"><span class="ag-veredicto-e">' + esc(D(d.veredicto, 'etiqueta')) + '</span>' +
         '<span class="ag-veredicto-v">' + esc(D(d.veredicto, 'valor')) + '</span></div>';
     }
-    h += '<button type="button" class="ag-cerrar" data-cerrar="1">' + ico('x', '', 14) + esc(tx('cerrar')) + '</button></div></div>';
+    h += '<button type="button" class="ag-cerrar" data-cerrar="1">' + ico('x', '', 14) + '<span class="ag-cerrar-t">' + esc(tx('cerrar')) + '</span></button></div></div>';
 
     if (d.dictamen) {
       h += '<section class="ag-dictamen" aria-label="' + esc(D(d.dictamen, 'titulo')) + '"><p class="ag-mono ag-dictamen-t">' + ico('check', '', 14) + esc(D(d.dictamen, 'titulo')) + '</p>' +
@@ -179,14 +180,16 @@
     }
     var fu = arr(d.fuentes);
     if (fu.length) {
-      h += '<section class="ag-fuentes"><h4 class="ag-mono ag-fuentes-t">' + esc(tx('fuentes')) + '</h4><ul>';
+      h += '<details class="ag-fuentes"><summary class="ag-mono ag-fuentes-t">' + esc(tx('fuentes')) + ' (' + fu.length + ')</summary>' +
+        (chips.length ? '<p class="ag-mono ag-fuentes-chips">' + esc(chips.join(' · ')) + '</p>' : '') + '<ul>';
       fu.forEach(function (s) {
         h += '<li><a href="' + url(s.url) + '" target="_blank" rel="noopener">' + esc(D(s, 'nombre')) + '</a>' +
           (s.licencia ? ' · <span>' + esc(D(s, 'licencia')) + '</span>' : '') +
           (s.consultado ? ' · <span>' + tx('consultado') + esc(s.consultado) + '</span>' : '') + '</li>';
       });
-      h += '</ul></section>';
+      h += '</ul></details>';
     }
+    h += '<p class="ag-cerrar-pie"><button type="button" class="ag-cerrar" data-cerrar="1">' + ico('x', '', 14) + '<span class="ag-cerrar-t">' + esc(tx('cerrar')) + '</span></button></p>';
     return h;
   }
 
@@ -248,11 +251,12 @@
       return '<div class="ag"><p class="ag-error" role="alert">' + tx('sinDatos') + '</p></div>';
     }
     var m = datos.mapa || {}, ley = m.leyenda || {}, info = m.info || {}, locs = arr(m.localidades);
+    // Antes iba arriba y confundía; ahora cierra la página (la fecha de consulta y las fuentes siguen visibles, al final).
+    var estadoPie = '<div class="ag-estado ag-estado-pie">' +
+        '<p class="ag-mono ag-estado-izq"><i class="ag-dot"></i>' + esc(D(datos, 'estado_linea')) + '</p>' +
+        '<p class="ag-mono ag-estado-der">' + esc(D(datos, 'consulta_linea')) + '</p></div>';
     var h = '<div class="ag">' +
       '<div class="ag-cont">' +
-      '<div class="ag-estado">' +
-        '<p class="ag-mono ag-estado-izq"><i class="ag-dot"></i>' + esc(D(datos, 'estado_linea')) + '</p>' +
-        '<p class="ag-mono ag-estado-der">' + esc(D(datos, 'consulta_linea')) + '</p></div>' +
       '<header class="ag-cab"><h1>' + esc(tx('titulo')) + '</h1>' +
       '<p class="ag-sub">' + esc(tx('sub')) + '</p></header>' +
       '<form class="ag-busca" role="search" novalidate>' +
@@ -284,7 +288,7 @@
         (datos.zona ? '<p class="ag-mono ag-zona">' + ico('pin', '', 12) + tx('zona') + '<b>' + esc(D(datos, 'zona')) + '</b></p>' : '') + '</div>' +
         '<div class="ag-fichas' + (abierta ? ' ag-fichas-abierta' : '') + '" id="ag-fichas">' + fichasHtml(datos, abierta) + '</div>' +
         '<div id="ag-cta">' + ctaDe(datos, abierta) + '</div>' +
-      '</section></div>' +
+      '</section>' + estadoPie + '</div>' +
       '<footer class="ag-pie"><div class="ag-pie-grid"><div><p class="ag-marca"><i class="ag-dot"></i>RADAR BCS</p>' +
         '<p class="ag-pie-desc">' + esc(tx('pieDesc')) + '</p></div>' +
         '<nav aria-label="' + esc(tx('pieNav')) + '"><p class="ag-mono ag-negro">' + esc(tx('pantallas')) + '</p>' +

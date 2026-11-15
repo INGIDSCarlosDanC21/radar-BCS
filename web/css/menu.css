@@ -1,0 +1,37 @@
+/* Menú: SUPERIOR de texto en escritorio (>= 1024 px) e INFERIOR con iconos en celular (< 1024 px), con "Más" (hoja) para no pasar de 5. */
+.mi-ic{display:inline-block;flex:none;width:24px;height:24px;background:currentColor;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain}
+
+/* Celular: barra inferior con iconos */
+.menu-sup{display:none}
+.barra a,.barra button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;text-decoration:none;color:var(--suave);font:inherit;font-size:.8rem;font-weight:600;background:none;border:0;cursor:pointer;touch-action:manipulation}
+.barra a[aria-current=page],.barra button[aria-current=page]{color:var(--acento);box-shadow:inset 0 3px 0 var(--acento)}
+.barra button:focus-visible{outline:3px solid var(--acento);outline-offset:-3px}
+.mas{position:fixed;right:8px;bottom:calc(64px + env(safe-area-inset-bottom));z-index:1001;display:grid;min-width:210px;padding:8px;background:var(--tarjeta);border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.22)}
+.mas[hidden]{display:none}
+.mas a{display:flex;align-items:center;gap:12px;min-height:48px;padding:0 16px;border-radius:8px;color:var(--texto);font-weight:600;text-decoration:none}
+.mas a[aria-current=page]{background:var(--gris-120);color:var(--acento)}
+
+/* Escritorio: menú superior de texto, como el Figma (Manrope 14, relleno 4px 16px, radio 8, activa en azul marino) */
+@media (min-width:1024px){
+  .cabecera{gap:16px}
+  .cabecera .sub{display:none}
+  .menu-sup{display:flex;flex-wrap:wrap;gap:4px;margin:0 auto}
+  .menu-sup a{display:inline-flex;align-items:center;min-height:44px;padding:4px 16px;border-radius:8px;font:500 14px var(--f-cuerpo);color:var(--suave);text-decoration:none}
+  .menu-sup a:hover{background:var(--gris-120)}
+  .menu-sup a[aria-current=page]{background:var(--acento);color:var(--acento-t);font-weight:700}
+  .menu-sup a:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+  .barra,.mas{display:none}
+  body{padding-bottom:0}
+}
+
+/* Marca "AI-generated" (requisito de la entrega: marca visible junto a lo generado con IA; la ven los jueces). No se puede quitar.
+   Para que estorbe menos: sin recuadro, texto discreto y, en celular, debajo del logo en vez de competir con el botón de idioma. */
+.marca-ia{border:0;border-radius:0;padding:0;background:none}
+@media (max-width:1023px){
+  .cabecera{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"marca idioma" "ia idioma";align-items:center;column-gap:8px;row-gap:0}
+  .cabecera .marca{grid-area:marca;justify-self:start;min-height:36px}
+  .cabecera .marca img{height:36px}
+  .cabecera .marca-ia{grid-area:ia;justify-self:start;margin:0;line-height:14px}
+  .cabecera .sub{display:none}
+  .cabecera .idioma{grid-area:idioma}
+}
