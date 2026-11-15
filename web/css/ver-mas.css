@@ -1,0 +1,62 @@
+/* "Ver más" y botón "Subir" (web/js/ver-mas.js, docs/PLAN-VER-MAS.md). */
+
+/* Recorte por líneas: el texto completo sigue en la página (buscable y legible por lector de pantalla). */
+.vm-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--vm-lineas, 3);
+  line-clamp: var(--vm-lineas, 3);
+  overflow: hidden;
+}
+
+/* Botón: toma el color del texto que lo rodea (sirve en fondo claro y oscuro), 44 px de alto, foco visible. */
+.vm-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0 0 4px;
+  padding: 0 4px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.vm-btn[hidden] { display: none; }
+.vm-btn::after { content: "\25BE"; margin-left: 6px; font-size: .85em; text-decoration: none; }
+.vm-btn[aria-expanded="true"]::after { content: "\25B4"; }
+.vm-btn:focus-visible, .vm-subir:focus-visible { outline: 3px solid #1a73e8; outline-offset: 2px; }
+
+/* "Subir": aparece después de bajar más de dos pantallas; en celular queda sobre la barra inferior (64 px). */
+.vm-subir {
+  position: fixed;
+  right: 12px;
+  bottom: calc(76px + env(safe-area-inset-bottom));
+  z-index: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 14px;
+  background: #0c2340;
+  color: #fff;
+  border: 0;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.vm-subir[hidden] { display: none; }
+@media (min-width: 1024px) {
+  .vm-subir { bottom: 20px; right: 20px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .vm-subir { transition: opacity .15s; }
+}
+@media print { .vm-subir, .vm-btn { display: none; } .vm-clamp { display: block; overflow: visible; } }

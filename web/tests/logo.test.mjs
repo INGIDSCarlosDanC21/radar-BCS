@@ -4,9 +4,10 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 const leer = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
 
-test('logo en la cabecera con la marca "AI-generated" legible al lado y alt en ES/EN', () => {
+test('logo en la cabecera (sin etiqueta al lado, por la regla del 2026-11-15) y alt en ES/EN', () => {
   const html = leer('../index.html');
-  assert.match(html, /<a class="marca" href="#inicio"><img src="assets\/logo-radar-bcs\.png"[^>]*data-t-alt="html\.logo"><\/a><span class="marca-ia"[^>]*>AI-generated<\/span>/);
+  assert.match(html, /<a class="marca" href="#inicio"><img src="assets\/logo-radar-bcs\.png"[^>]*data-t-alt="html\.logo"><\/a><span class="sub"/);
+  assert.ok(!html.includes('marca-ia'), 'la etiqueta del encabezado se quitó (docs/FUENTES-Y-IA.md)');
   const T = leer('../js/textos.js');
   assert.match(T, /'html\.logo': 'Radar BCS, inicio'/);
   assert.match(T, /'html\.logo': 'Radar BCS, home'/);

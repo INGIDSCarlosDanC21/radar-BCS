@@ -46,7 +46,7 @@ Medido antes y después con el navegador (incluye también los cambios de Ehilee
 
 ## 4. Pendientes
 
-- Borrar el `<span class="marca-ia">` de `web/index.html` cuando se fusione el PR #159 de Ehileen (toca esa misma línea); hoy solo está oculto con CSS.
+- ~~Borrar el `<span class="marca-ia">` de `web/index.html`~~: hecho el 2026-11-15 tras fusionar #159. Para volver a mostrar la etiqueta hay que poner de nuevo el `span` en el encabezado.
 - `diseno/ESPECIFICACION.md` (§7) y el Figma todavía piden la marca junto al logo del encabezado: es referencia de diseño; Ehileen decide si lo actualiza.
 - Pegar aquí el texto oficial de la regla nueva (ver la nota del principio).
 - Posible siguiente recorte (no hecho): plegar el bloque "Fuente, resolución, periodo y descarga" de cada Ficha como "Sobre los datos" (ver `docs/PLAN-VER-MAS.md`, sección 7).

@@ -51,7 +51,8 @@ Marcado con quién bloquea y a qué hora conviene tenerlo.
 ### 3.1 Web
 - [ ] **Clima** (`PLAN-CLIMA.md`): Luca datos y reglas, Diego pantalla; corte 09:30, si no está verde se envía sin Clima. Decisión de Carlos: elegir lo mejor para el proyecto.
 - [x] **#159** fusionado a `dev` (2026-11-15 04:00).
-- [ ] Borrar el `<span class="marca-ia">` oculto de `index.html` y medir de nuevo las fichas (tras #159).
+- [x] Borrado el `<span class="marca-ia">` de `index.html` (tras #159).
+- [x] **"Ver más"** implementado (`PLAN-VER-MAS.md`): 19 textos plegados, botón "Subir"; faltan los extras de Agro y Ficha (después del PR de Clima de Diego).
 - [ ] **"Ver más"** (`PLAN-VER-MAS.md`): esperando decisiones.
 - [ ] **Prueba con sol real** de pines e íconos (la de día fue simulada).
 - [ ] **Agro a 360 px** (issue #128, Diego): revisar pines cortados y chip de estado; se midió contraste, no esto.
