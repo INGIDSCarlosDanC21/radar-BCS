@@ -162,12 +162,19 @@ def dictamen_indicadores(inds):
         return (f"{x['titulo']}: cambio estimado de {cifra} {unidad} "
                 f"en {x['fuente']['periodo']}, {'estadísticamente significativo' if sig['significativo'] else 'no significativo'} ({p}).")
 
+    # Opción B (docs/decisiones.md, 2026-11-15): si el calor ya es el aire (NASA POWER T2M), el límite lo dice
+    # y avisa que la superficie no es concluyente; si sigue siendo MODIS, se conserva el aviso de superficie.
+    aire = "T2M" in inds["calor"].get("variable", "")
+    lim_calor = ("el calor es temperatura del aire de un reanálisis de ~50 km; la temperatura de la superficie vista "
+                 "por satélite no es concluyente" if aire else "el calor es temperatura de la superficie, no del aire")
+    lim_calor_en = ("heat is air temperature from a ~50 km reanalysis; land surface temperature seen by satellite "
+                    "is inconclusive" if aire else "heat is surface temperature, not air temperature")
     dictamen_clima = (" ".join(linea_ind(i) for i in ("calor", "vegetacion", "lluvia", "agua")) +
-                      " Límites: el calor es temperatura de la superficie, no del aire; la lluvia es de reanálisis "
+                      f" Límites: {lim_calor}; la lluvia es de reanálisis "
                       "(~50 km), no de pluviómetro; el agua es una señal regional, no del acuífero de La Paz. "
                       "Mostramos qué cambió, no por qué.")
     dictamen_clima_en = (" ".join(linea_ind(i, True) for i in ("calor", "vegetacion", "lluvia", "agua")) +
-                         " Limits: heat is surface temperature, not air temperature; rainfall comes from a reanalysis "
+                         f" Limits: {lim_calor_en}; rainfall comes from a reanalysis "
                          "(~50 km), not from a rain gauge; water is a regional signal, not from the La Paz aquifer. "
                          "We show what changed, not why.")
     return dictamen_clima, dictamen_clima_en
@@ -481,14 +488,14 @@ def construir():
         a = acu(cod)
         dma = dec(a["DMA"])
         return (f"Recarga {fmt(a['R'], 1)} hm³/año · descarga natural comprometida {fmt(a['DNC'], 1)} · "
-                f"extracción {fmt(a['VEAS'], 2)} · disponibilidad media anual (DMA) {fmt_signo(dma, 2)} hm³/año "
+                f"volumen de extracción total {fmt(a['VEAS'], 2)} · disponibilidad media anual (DMA) {fmt_signo(dma, 2)} hm³/año "
                 f"({'déficit' if dma < 0 else 'volumen disponible'}).")
 
     def cifras_acu_en(cod):
         a = acu(cod)
         dma = dec(a["DMA"])
         return (f"Recharge {fmt(a['R'], 1)} hm³/year · committed natural discharge {fmt(a['DNC'], 1)} · "
-                f"extraction {fmt(a['VEAS'], 2)} · mean annual availability (DMA) {fmt_signo(dma, 2)} hm³/year "
+                f"total extraction volume {fmt(a['VEAS'], 2)} · mean annual availability (DMA) {fmt_signo(dma, 2)} hm³/year "
                 f"({'deficit' if dma < 0 else 'available volume'}).")
 
     corte = "DOF 09/11/2023 (corte 30-dic-2022)"
@@ -877,7 +884,9 @@ def construir():
         "chametla": f"Chametla: {fmt(POBLACION_CHAMETLA, 0)} habitantes (INEGI 2020)",
     }
     n_zonas = len(leer_json(ZONAS)["features"])
-    periodo = ind["periodo"]
+    # Periodo de la vegetación (NDVI llega a 2026, parcial), no el global de indicadores (auditoría de Luca, corrección 2)
+    pv = inds["vegetacion"]["fuente"]["periodo"].split("-")
+    periodo = {"inicio": pv[0], "fin": pv[1]}
     mapa = {
         "centro": [24.0, -110.2], "zoom": 9,
         "info": {"titulo": "Municipio de La Paz", "titulo_en": "Municipality of La Paz",
