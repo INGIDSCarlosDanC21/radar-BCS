@@ -19,7 +19,7 @@
 
 - Revisión en celular real (#71).
 - Logotipo: hecho con Gemini (confirmado 2026-11-14); falta revisar los términos de uso de Gemini.
-- Íconos: vienen de Stitch y de Flaticon (confirmado 2026-11-14). Falta decir qué ícono viene de Flaticon y su autor, para la línea de atribución obligatoria en la web ("Icon made by [autor] from www.flaticon.com").
+- Íconos: los 12 exportados son Google Material Symbols (Apache 2.0, verificado el 2026-11-14; ver `web/assets/iconos/README.md`). Si en otra pantalla se usó un ícono de Flaticon, falta identificarlo y poner su atribución.
 - Modo oscuro de los tokens.
 - Revisar las pantallas Ficha y Acciones a 360 px.
 

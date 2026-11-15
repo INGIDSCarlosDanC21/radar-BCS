@@ -175,3 +175,13 @@ test('logo existe y es proporcional a 156x44 (exportado a 3x)', () => {
   assert.ok(Math.abs(png.ancho / png.alto - 156 / 44) < 0.03, `${png.ancho}x${png.alto}`);
   assert.ok(Math.abs(png.ancho - 468) <= 4, `ancho ${png.ancho}`);
 });
+
+test('iconos: licencia Apache de Material Symbols y cada SVG documentado en el README', () => {
+  const dir = R('web', 'assets', 'iconos');
+  const licencia = fs.readFileSync(path.join(dir, 'LICENSE-material-symbols.txt'), 'utf8');
+  assert.match(licencia, /Apache License\s+Version 2\.0/);
+  const readme = fs.readFileSync(path.join(dir, 'README.md'), 'utf8');
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.svg'))) {
+    assert.ok(readme.includes('`' + f + '`'), `${f} no aparece en iconos/README.md`);
+  }
+});
