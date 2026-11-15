@@ -14,10 +14,10 @@
 
   /* Secciones que viven dentro de "Más" en celular. */
   /* Las fichas ya no tienen pestaña: se abren desde las tarjetas de Inicio (pedido de UI/UX, 2026-11-15). */
-  var EN_MAS = ['agricola', 'acciones', 'avisos'];
+  var EN_MAS = [];   // ya no hay hoja "Más": las 5 secciones caben en la barra (Clima, Pesca, Inicio al centro, Agro, Avisos)
   function seccionDe(hash) {
     var h = String(hash || '#inicio').slice(1).split('/')[0];
-    return ['inicio', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h) >= 0 ? h : 'inicio';
+    return ['inicio', 'ficha', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h) >= 0 ? h : 'inicio';
   }
   function enMas(sec) { return EN_MAS.indexOf(sec) >= 0; }
 

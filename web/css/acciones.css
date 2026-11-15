@@ -1,0 +1,26 @@
+/* "¿Qué puedo hacer?" dentro de Clima (acciones.js): una tarjeta por consejo, con ícono. */
+.ac{padding-top:14px}
+.ac-kicker{margin:0 0 4px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--acento)}
+.ac h2{margin:0 0 6px}
+.ac-lead{margin:0 0 14px;color:var(--suave)}
+.ac-grupo{margin:16px 0}
+.ac-grupo h3{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-size:1.05rem}
+.ac-lista{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:640px){.ac-lista{grid-template-columns:1fr 1fr}}
+@media (min-width:1024px){.ac-lista{grid-template-columns:repeat(3,1fr)}}
+.ac-card{border-radius:14px;border:1px solid transparent;overflow:hidden}
+.ac-calor{background:#fdeed7;border-color:#f3d3a0;--ac-c:#8a4b00}
+.ac-agua{background:#e3f0fb;border-color:#b9d6ee;--ac-c:#1f5f99}
+.ac-card details{margin:0}
+.ac-card summary{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 12px;cursor:pointer;list-style:none;color:#14211c}
+.ac-card summary::-webkit-details-marker{display:none}
+.ac-card summary::after{content:"+";margin-left:auto;font-size:1.4rem;line-height:1;color:var(--ac-c)}
+.ac-card details[open] summary::after{content:"\2013"}
+.ac-card summary:focus-visible{outline:3px solid var(--ac-c);outline-offset:-3px}
+.ac-t{font-weight:700;line-height:1.25}
+.ac-card p{margin:0;padding:0 14px 14px 68px;line-height:1.45;color:#14211c}
+.ac-badge{display:inline-flex;flex:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:#fff;color:var(--ac-c,var(--acento))}
+.ac-g-calor{--ac-c:#8a4b00}
+.ac-g-agua{--ac-c:#1f5f99}
+.ac-badge-g{width:36px;height:36px;background:var(--ac-c);color:#fff}
+.ac-ic{display:inline-block;width:24px;height:24px;background:currentColor;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain}

@@ -71,7 +71,7 @@ test('Inicio y Mapa piden la misma URL y comparten la respuesta (una sola llamad
   const app = leer('js/app.js'), html = leer('index.html');
   assert.ok(!/<h1>' \+ t\('titulo\.mapa'\)/.test(app), 'la pestaña Mapa ya no existe: su contenido vive dentro de Clima');
   assert.ok(!/CM\.html\(\)/.test(app.slice(app.indexOf('function mapaVista'), app.indexOf('function buscadorHtml'))));
-  assert.match(app, /window\.RBClimaMapa\.cargar\(main, \{ abrir: h\[1\] === 'zonas' \? null : \(h\[1\] \|\| null\), lugar: h\[2\] \|\| null \}\)/, 'la pestaña Clima lo carga');
+  assert.match(app, /window\.RBClimaMapa\.cargar\(main, \{ abrir: \(h\[1\] === 'zonas' \|\| h\[1\] === 'acciones'\) \? null : \(h\[1\] \|\| null\), lugar: h\[2\] \|\| null \}\)/, 'la pestaña Clima lo carga');
   const i = (s) => html.indexOf(s);
   assert.ok(i('js/cielo.js') < i('js/clima-mapa.js') && i('js/clima-mapa.js') < i('js/app.js'), 'orden de scripts');
   assert.ok(html.includes('css/clima-mapa.css'));
