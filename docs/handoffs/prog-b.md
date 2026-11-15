@@ -176,3 +176,13 @@ Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agric
 - **Diferencia con Agrícola:** la ficha abierta no cambia la URL (`#pesca/<id>`), para no recrear el mapa con el router.
 - **Lluvia y agua por zona:** #189 (Luca) sigue abierto y no exporta nada a `data/`; la tabla de zonas no cambia hasta que haya dato por zona.
 - **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro de las fichas.
+- **Actualización (datos de #190 integrados en #191):** `datos-vivos.js` pide también mar de viento, nivel del mar con marea (modelo), presión, visibilidad, probabilidad de lluvia, CAPE, punto de rocío y amanecer/atardecer. La ficha de condiciones muestra mar de viento y nivel del mar (rotulado "no es la tabla oficial"); la de clima costero, presión con cambio en 3 h, lluvia y CAPE, visibilidad y rocío, y sol. Lo que falta sigue como "Pendiente". Verificado en navegador a 360 y 1280 px; 162 pruebas.
+
+## 2026-11-15: fichas de pesca con los datos confirmados de #190 (rama `prog-b/pesca-datos-final`)
+
+- **Integrado (solo verificado):** mar de fondo y de viento con altura, periodo y dirección; nivel del mar con marea (modelo) como mareograma del día con máximo y mínimo; fase lunar (USNO, hora de La Paz); corriente; presión con cambio en 3 h; lluvia y CAPE; visibilidad y rocío; amanecer y atardecer; temperatura del mar; enlaces a SEMAR, SMN, NHC y CONAPESCA.
+- **Excluido (sin fuente verificada):** mareas oficiales, anomalía de SST, tallas, fechas de vedas, áreas protegidas, avisos oficiales como dato, clorofila numérica (necesita script y no tiene CORS). Ya no hay textos "Pendiente" en las fichas.
+- **Formato:** 4 pilares por ficha como en el Figma ("Pilar N · …"), con las clases del Mapa Agrícola.
+- **Animación:** igual que Agrícola: la ficha crece desde su tarjeta, al cerrar vuelve a ella, scroll suave, sin animar con `prefers-reduced-motion`.
+- **Nota:** el commit con las variables nuevas de `datos-vivos.js` no había llegado a `dev` (se fusionó #191 antes); va en esta rama.
+- **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro, fluidez medida en un equipo lento.

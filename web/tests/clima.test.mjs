@@ -58,7 +58,7 @@ test('unir sin clima no cambia lo anterior; con clima incompleto rechaza', () =>
 
 test('cargar({clima:true}): 3 llamadas con su propia caché de 10 min; cargar() sigue en 2 y sin clima', async () => {
   let llamadas = 0;
-  const f = async (u) => { llamadas++; return { ok: true, json: async () => (u.includes('marine') ? fx.mar : u.includes('daily') ? fx.clima : fx.pron) }; };
+  const f = async (u) => { llamadas++; return { ok: true, json: async () => (u.includes('marine') ? fx.mar : u.includes('uv_index_max') ? fx.clima : fx.pron) }; };
   const mem = {}; const st = { getItem: (k) => (k in mem ? mem[k] : null), setItem: (k, v) => { mem[k] = v; } };
   const a = await V.cargar({ fetch: f, storage: st, ahoraMs: 1000, clima: true });
   assert.equal(llamadas, 3); assert.equal(a.cache, false); assert.equal(a.datos.puertos[0].s.temp.length, 96);
@@ -67,7 +67,7 @@ test('cargar({clima:true}): 3 llamadas con su propia caché de 10 min; cargar() 
   const c = await V.cargar({ fetch: f, storage: st, ahoraMs: 2000 });
   assert.equal(c.cache, false, 'la caché de Pesca y Avisos es otra'); assert.equal(llamadas, 5);
   assert.equal(c.datos.puertos[0].s.temp, undefined);
-  await assert.rejects(V.cargar({ fetch: async (u) => (u.includes('daily') ? { ok: false, status: 429 } : { ok: true, json: async () => (u.includes('marine') ? fx.mar : fx.pron) }), storage: null, clima: true }), /HTTP 429/);
+  await assert.rejects(V.cargar({ fetch: async (u) => (u.includes('uv_index_max') ? { ok: false, status: 429 } : { ok: true, json: async () => (u.includes('marine') ? fx.mar : fx.pron) }), storage: null, clima: true }), /HTTP 429/);
 });
 
 test('resumenPuerto: cifras iguales a la respuesta cruda (La Paz, 15 nov 10:00)', () => {

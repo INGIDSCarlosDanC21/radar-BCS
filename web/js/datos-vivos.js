@@ -23,8 +23,8 @@
     { id: 'santarosalia', nombre: 'Santa Rosalía', costa: 'golfo', mar: [27.34, -112.15], pueblo: [27.340, -112.267] }
   ];
 
-  var VAR_MAR = 'wave_height,wave_period,wave_direction,swell_wave_height,sea_surface_temperature,ocean_current_velocity,ocean_current_direction';
-  var VAR_PRON = 'wind_speed_10m,wind_gusts_10m,wind_direction_10m,weather_code,uv_index';
+  var VAR_MAR = 'wave_height,wave_period,wave_direction,swell_wave_height,sea_surface_temperature,ocean_current_velocity,ocean_current_direction,wind_wave_height,wind_wave_period,wind_wave_direction,swell_wave_period,swell_wave_direction,sea_level_height_msl';
+  var VAR_PRON = 'wind_speed_10m,wind_gusts_10m,wind_direction_10m,weather_code,uv_index,pressure_msl,visibility,precipitation_probability,cape,dew_point_2m';
   /* Clima (docs/PLAN-CLIMA.md): solo los 8 pueblos, en una petición aparte y solo si se pide con cargar({clima:true}),
      para que Pesca y Avisos no paguen las variables nuevas. */
   var VAR_CLIMA = 'temperature_2m,apparent_temperature,relative_humidity_2m,precipitation_probability,precipitation,shortwave_radiation';
@@ -40,7 +40,7 @@
     var la = coords(function (p) { return p.mar[0]; }).concat(coords(function (p) { return p.pueblo[0]; }));
     var lo = coords(function (p) { return p.mar[1]; }).concat(coords(function (p) { return p.pueblo[1]; }));
     return PRON + '?latitude=' + la.join(',') + '&longitude=' + lo.join(',') + '&hourly=' + VAR_PRON +
-      '&wind_speed_unit=kn&past_days=1&forecast_days=3&timezone=' + encodeURIComponent(ZONA);
+      '&daily=sunrise,sunset&wind_speed_unit=kn&past_days=1&forecast_days=3&timezone=' + encodeURIComponent(ZONA);
   }
 
   function urlClima() {
@@ -83,9 +83,12 @@
         ola: serie(m, 'wave_height', H), per: serie(m, 'wave_period', H), dir: serie(m, 'wave_direction', H), swell: serie(m, 'swell_wave_height', H),
         sst: serie(m, 'sea_surface_temperature', H), corr: serie(m, 'ocean_current_velocity', H), cdir: serie(m, 'ocean_current_direction', H),
         viento: serie(v, 'wind_speed_10m', H), rachas: serie(v, 'wind_gusts_10m', H), vdir: serie(v, 'wind_direction_10m', H),
-        codigo: serie(u, 'weather_code', H), uv: serie(u, 'uv_index', H)
+        codigo: serie(u, 'weather_code', H), uv: serie(u, 'uv_index', H),
+        olaV: serie(m, 'wind_wave_height', H), perV: serie(m, 'wind_wave_period', H), dirV: serie(m, 'wind_wave_direction', H),
+        perS: serie(m, 'swell_wave_period', H), dirS: serie(m, 'swell_wave_direction', H), nivel: serie(m, 'sea_level_height_msl', H),
+        pres: serie(u, 'pressure_msl', H), vis: serie(u, 'visibility', H), pll: serie(u, 'precipitation_probability', H), cape: serie(u, 'cape', H), rocio: serie(u, 'dew_point_2m', H)
       };
-      var r = { id: p.id, nombre: p.nombre, costa: p.costa, mar: p.mar, pueblo: p.pueblo, s: s, dias: [] };
+      var r = { id: p.id, nombre: p.nombre, costa: p.costa, mar: p.mar, pueblo: p.pueblo, s: s, dias: [], sol: dias(pron[n + k] && pron[n + k].daily) };
       if (clima) {
         var c = clima[k] && clima[k].hourly;
         s.temp = serie(c, 'temperature_2m', H); s.sens = serie(c, 'apparent_temperature', H); s.hum = serie(c, 'relative_humidity_2m', H);
