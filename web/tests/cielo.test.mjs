@@ -24,10 +24,10 @@ test('cada código WMO tiene estado e ícono existente, igual que la tabla del R
   assert.equal(CL.estado(undefined, 1).icono, 'cloud');
 });
 
-test('una sola llamada a Open-Meteo con las 8 localidades, sin clave y en hora de La Paz', () => {
+test('una sola llamada a Open-Meteo con las 7 localidades de las tarjetas, sin clave y en hora de La Paz', () => {
   const u = CL.url();
   assert.match(u, /^https:\/\/api\.open-meteo\.com\/v1\/forecast\?/);
-  assert.equal(u.split('latitude=')[1].split('&')[0].split(',').length, 8);
+  assert.equal(u.split('latitude=')[1].split('&')[0].split(',').length, 7);
   assert.match(u, /weather_code/); assert.match(u, /is_day/); assert.match(u, /timezone=America%2FMazatlan/);
   assert.doesNotMatch(u, /apikey|key=/i);
 });
@@ -55,7 +55,14 @@ test('la sección se arma con los datos reales: sin null/undefined/NaN, con atri
   assert.equal((h.match(/class="hm-peque cl-peque"/g) || []).length, 6, '6 tarjetas como en Figma');
   assert.ok(!h.includes('cl-viejo'), 'dato de hace 10 min no es viejo');
   const p = CL.pines(filas);
-  assert.equal((p.match(/class="cl-pin/g) || []).length, 5, '5 pines como en Figma');
+  assert.equal((p.match(/class="cl-pin/g) || []).length, 7, 'un pin por tarjeta');
+  // Mismos lugares, mismo nombre y misma temperatura en tarjeta y pin (sincronizados).
+  for (const f of filas) {
+    const temp = Math.round(f.c.temperature_2m) + '°C';
+    assert.ok(h.includes('<h3 class="hm-t-' + (f.lugar.principal ? 'prin' : 'peq') + '">' + f.lugar.es + '</h3>'), 'tarjeta ' + f.lugar.es);
+    assert.ok(p.includes('>' + f.lugar.es + ' ' + temp + '<'), 'pin ' + f.lugar.es + ' ' + temp);
+  }
+  assert.ok(!p.includes('Santa Rosalía') && !p.includes('Cabo San Lucas'), 'el mapa no muestra lugares que no están en las tarjetas');
   assert.ok(p.includes('role="img"'));
 });
 
@@ -74,7 +81,7 @@ test('sin red: cargar() deja el mensaje de error y no rompe Inicio', async () =>
   T.setLang('es');
   const sec = { innerHTML: CL.marcoSeccion(), removeAttribute() {} };
   const raiz = { querySelector: (q) => (q === '#hm-cielo' ? sec : null) };
-  const ok = await CL.cargar(raiz, { fetch: () => Promise.reject(new Error('sin red')) });
+  const ok = await CL.cargar(raiz, { fetch: () => Promise.reject(new Error('sin red')), intervalo: 0 });
   assert.equal(ok, false);
   assert.ok(sec.innerHTML.includes('Las tendencias siguen disponibles'));
 });
@@ -84,10 +91,13 @@ test('con datos: cargar() llena la sección y los pines', async () => {
   const sec = { innerHTML: CL.marcoSeccion(), removeAttribute() {} };
   const pines = { innerHTML: '' };
   const raiz = { querySelector: (q) => (q === '#hm-cielo' ? sec : q === '#hm-cielo-pines' ? pines : null) };
-  const ok = await CL.cargar(raiz, { fetch: () => Promise.resolve({ ok: true, json: () => resp }), ahora: new Date('2026-11-15T09:10:00Z') });
+  const nota = { textContent: '' };
+  raiz.querySelector = ((q0) => (q) => (q === '#hm-cielo-leyenda .cl-ley-n' ? nota : q0(q)))(raiz.querySelector);
+  const ok = await CL.cargar(raiz, { fetch: () => Promise.resolve({ ok: true, json: () => resp }), ahora: new Date('2026-11-15T09:10:00Z'), intervalo: 0 });
   assert.equal(ok, true);
   assert.ok(sec.innerHTML.includes('El cielo ahora en BCS'));
-  assert.ok(pines.innerHTML.includes('Santa Rosalía'));
+  assert.ok(pines.innerHTML.includes('Comondú') && pines.innerHTML.includes('Gmo. Negro'));
+  assert.equal(nota.textContent, 'Mismos datos que las tarjetas · 02:00', 'la leyenda dice la hora de los mismos datos');
 });
 
 test('índice UV por categorías de la OMS y rumbo del viento', () => {
@@ -96,4 +106,32 @@ test('índice UV por categorías de la OMS y rumbo del viento', () => {
   assert.equal(CL.uvCat(8), 'Muy alto'); assert.equal(CL.uvCat(11), 'Extremo');
   assert.equal(CL.rumbo(225), 'SO'); assert.equal(CL.rumbo(0), 'N'); assert.equal(CL.rumbo(359), 'N');
   T.setLang('en'); assert.equal(CL.rumbo(225), 'SW'); T.setLang('es');
+});
+
+test('tarjetas, pines e imagen se vuelven a pedir juntos cada 10 minutos', async () => {
+  T.setLang('es');
+  assert.equal(CL.CADA_MIN, 10);
+  let llamadas = 0, reloj = null;
+  const real = globalThis.setTimeout, realClear = globalThis.clearTimeout;
+  globalThis.setTimeout = (fn, ms) => { reloj = { fn, ms }; return 1; };
+  globalThis.clearTimeout = () => { reloj = null; };
+  try {
+    const sec = { innerHTML: CL.marcoSeccion(), removeAttribute() {}, isConnected: true };
+    const pines = { innerHTML: '' };
+    const img = { src: CL.GOES };
+    const raiz = { querySelector: (q) => (q === '#hm-cielo' ? sec : q === '#hm-cielo-pines' ? pines : q === '.cl-img' ? img : null) };
+    const fetch = () => { llamadas++; return Promise.resolve({ ok: true, json: () => resp }); };
+    await CL.cargar(raiz, { fetch });
+    assert.equal(llamadas, 1);
+    assert.equal(reloj.ms, 10 * 60000, 'próxima actualización en 10 min');
+    reloj.fn();
+    await new Promise((r) => real(r, 0));
+    assert.equal(llamadas, 2, 'vuelve a pedir los datos');
+    assert.match(img.src, /GOES-West_ABI_GeoColor_v0_NRT[\s\S]*&_=\d+$/, 'y la imagen más reciente');
+    sec.isConnected = false; reloj.fn();
+    await new Promise((r) => real(r, 0));
+    assert.equal(llamadas, 2, 'si ya no está Inicio, deja de pedir');
+  } finally {
+    globalThis.setTimeout = real; globalThis.clearTimeout = realClear;
+  }
 });

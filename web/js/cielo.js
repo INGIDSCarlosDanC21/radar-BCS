@@ -19,17 +19,19 @@
     });
   }
 
-  /* Localidades. principal: tarjeta grande; tarjeta: mini-tarjeta; pin: pin del mapa (como en Figma). */
+  /* Localidades: las MISMAS en las tarjetas y en los pines del mapa (mismo nombre, misma lectura de la misma llamada).
+     principal: tarjeta grande. lado: hacia dónde crece la etiqueta del pin (izq o der) y v: si queda arriba o abajo del
+     punto, para que no se encimen (Comondú y Bahía Magdalena están a unos 50 km) ni se salgan de la imagen. */
   var LUGARES = [
-    { id: 'lapaz', es: 'La Paz', lat: 24.14231, lon: -110.31316, geonames: 4000900, principal: true, pin: 'La Paz' },
-    { id: 'loscabos', es: 'Los Cabos', lat: 22.89088, lon: -109.91238, geonames: 3985710, tarjeta: true, pin: 'Cabo San Lucas' },
-    { id: 'loreto', es: 'Loreto', lat: 26.01217, lon: -111.34888, geonames: 3998287, tarjeta: true, pin: 'Loreto' },
-    { id: 'comondu', es: 'Comondú', lat: 25.0321, lon: -111.66256, geonames: 4013723, tarjeta: true },
-    { id: 'mulege', es: 'Mulegé', lat: 26.89141, lon: -111.9826, geonames: 3995236, tarjeta: true },
-    { id: 'guerreronegro', es: 'Gmo. Negro', lat: 27.96005, lon: -114.05589, geonames: 4021858, tarjeta: true },
-    { id: 'bahiamagdalena', es: 'Bahía Magd.', lat: 24.78874, lon: -112.10504, geonames: 3987485, tarjeta: true, pin: 'Bahía Magd.' },
-    { id: 'santarosalia', es: 'Santa Rosalía', lat: 27.34035, lon: -112.26706, geonames: 3983805, pin: 'Santa Rosalía' }
+    { id: 'lapaz', es: 'La Paz', lat: 24.14231, lon: -110.31316, geonames: 4000900, principal: true, lado: 'izq' },
+    { id: 'loscabos', es: 'Los Cabos', lat: 22.89088, lon: -109.91238, geonames: 3985710, tarjeta: true, lado: 'izq', v: 'arriba' },
+    { id: 'loreto', es: 'Loreto', lat: 26.01217, lon: -111.34888, geonames: 3998287, tarjeta: true, lado: 'der' },
+    { id: 'comondu', es: 'Comondú', lat: 25.0321, lon: -111.66256, geonames: 4013723, tarjeta: true, lado: 'der', v: 'arriba' },
+    { id: 'mulege', es: 'Mulegé', lat: 26.89141, lon: -111.9826, geonames: 3995236, tarjeta: true, lado: 'der' },
+    { id: 'guerreronegro', es: 'Gmo. Negro', lat: 27.96005, lon: -114.05589, geonames: 4021858, tarjeta: true, lado: 'der', v: 'abajo' },
+    { id: 'bahiamagdalena', es: 'Bahía Magd.', lat: 24.78874, lon: -112.10504, geonames: 3987485, tarjeta: true, lado: 'izq', v: 'abajo' }
   ];
+  var CADA_MIN = 10; // tarjetas, pines e imagen se actualizan juntos (GOES-West también cambia cada 10 min)
   var CAJA = { latN: 28.1, latS: 22.8, lonO: -115.3, lonE: -109.3 };
   var API = 'https://api.open-meteo.com/v1/forecast';
   var GOES = 'https://gibs.earthdata.nasa.gov/wms/epsg4326/nrt/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0' +
@@ -139,14 +141,14 @@
   function dato(k, v) {
     return '<div class="hm-dato"><span class="hm-dato-k">' + esc(k) + '</span><span class="hm-dato-v">' + esc(v) + '</span></div>';
   }
+  /* Un pin por tarjeta, con el mismo nombre, ícono y temperatura que su tarjeta. */
   function pines(filas) {
-    return filas.filter(function (f) { return f.lugar.pin; }).map(function (f) {
-      var p = posicion(f.lugar), oscuro = f.lugar.principal;
-      // Los pines del lado este crecen hacia la izquierda y los del borde sur hacia arriba, para no salirse de la imagen.
-      var clase = (oscuro ? ' cl-pin-oscuro' : '') + (p.x > 55 ? ' cl-pin-izq' : '') + (p.y > 88 ? ' cl-pin-arriba' : '');
-      return '<span class="cl-pin' + clase + '" style="left:' + p.x.toFixed(2) + '%;top:' + p.y.toFixed(2) + '%" role="img" aria-label="' +
-        esc(f.lugar.pin + ': ' + f.e.texto + ', ' + num(f.c.temperature_2m) + ' °C') + '">' + icono(f.e, oscuro ? 'cl-blanco' : '') +
-        '<span aria-hidden="true">' + esc(f.lugar.pin + ' ' + num(f.c.temperature_2m) + '°C') + '</span></span>';
+    return filas.map(function (f) {
+      var l = f.lugar, p = posicion(l), oscuro = l.principal;
+      var clase = (oscuro ? ' cl-pin-oscuro' : '') + (l.lado === 'izq' ? ' cl-pin-izq' : '') + (l.v ? ' cl-pin-' + l.v : '');
+      return '<span class="cl-pin' + clase + '" data-lugar="' + esc(l.id) + '" style="left:' + p.x.toFixed(2) + '%;top:' + p.y.toFixed(2) + '%" role="img" aria-label="' +
+        esc(l.es + ': ' + f.e.texto + ', ' + num(f.c.temperature_2m) + ' °C') + '">' + icono(f.e, oscuro ? 'cl-blanco' : '') +
+        '<span aria-hidden="true">' + esc(l.es + ' ' + num(f.c.temperature_2m) + '°C') + '</span></span>';
     }).join('');
   }
   function leyenda() {
@@ -168,6 +170,21 @@
       '<div class="cl-leyenda" id="hm-cielo-leyenda">' + leyenda() + '</div>';
   }
 
+  var reloj = null;
+  /* Vuelve a pedir los datos y la imagen cada CADA_MIN minutos mientras Inicio siga en pantalla. */
+  function programar(raiz, opciones) {
+    if (reloj) clearTimeout(reloj);
+    var ms = opciones.intervalo == null ? CADA_MIN * 60000 : opciones.intervalo;
+    if (!ms || typeof setTimeout === 'undefined') return;
+    reloj = setTimeout(function () {
+      reloj = null;
+      var sec = raiz.querySelector('#hm-cielo');
+      if (!sec || (sec.isConnected === false)) return; // ya se salió de Inicio
+      var img = raiz.querySelector('.cl-img');
+      if (img && img.src.indexOf('gibs') >= 0) img.src = GOES + '&_=' + Math.floor(Date.now() / (CADA_MIN * 60000));
+      cargar(raiz, opciones);
+    }, ms);
+  }
   function cargar(raiz, opciones) {
     opciones = opciones || {};
     if (!raiz || typeof raiz.querySelector !== 'function') return Promise.resolve(false);
@@ -180,21 +197,26 @@
     var pedir = opciones.fetch || (typeof fetch !== 'undefined' ? fetch : null);
     if (!sec || !pedir) return Promise.resolve(false);
     return pedir(url()).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (resp) {
+      // Una sola respuesta pinta las tarjetas, los pines y la hora de la leyenda: siempre coinciden.
       var filas = unir(resp);
       sec.innerHTML = seccion(filas, opciones.ahora);
       sec.removeAttribute('aria-busy');
       if (pin) pin.innerHTML = pines(filas);
+      var nota = raiz.querySelector('#hm-cielo-leyenda .cl-ley-n');
+      if (nota) nota.textContent = t('cielo.sincro', { h: (filas[0].c.time || '').slice(11, 16) });
+      programar(raiz, opciones);
       return true;
     }).catch(function () {
-      sec.innerHTML = sec.innerHTML.replace(/<p class="cl-estado">[\s\S]*<\/p>/, '<p class="cl-estado cl-error">' + t('cielo.error') + '</p>');
+      if (sec.innerHTML.indexOf('cl-estado') >= 0) sec.innerHTML = sec.innerHTML.replace(/<p class="cl-estado">[\s\S]*<\/p>/, '<p class="cl-estado cl-error">' + t('cielo.error') + '</p>');
       sec.removeAttribute('aria-busy');
+      programar(raiz, opciones);
       return false;
     });
   }
 
   var RBCielo = { LUGARES: LUGARES, ESTADOS: ESTADOS, grupo: grupo, estado: estado, url: url, posicion: posicion, unir: unir,
     minutosDesde: minutosDesde, seccion: seccion, pines: pines, leyenda: leyenda, marcoSeccion: marcoSeccion, marcoMapa: marcoMapa,
-    cargar: cargar, uvCat: uvCat, rumbo: rumbo, GOES: GOES };
+    cargar: cargar, uvCat: uvCat, rumbo: rumbo, GOES: GOES, CADA_MIN: CADA_MIN };
   if (typeof window !== 'undefined') window.RBCielo = RBCielo;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBCielo;
 })();
