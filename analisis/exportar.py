@@ -60,7 +60,17 @@ def _parcial(mat, fin):
     return (f" El año {fin} es parcial: entra a la prueba de tendencia mensual, pero no al promedio anual ni a la media por década.")
 
 
-FUENTE_MODIS = {"url": "https://appeears.earthdatacloud.nasa.gov/", "resolucion": "MODIS, 6 puntos de La Paz (promedio de zonas)"}
+def _deriva(fin_lst, fin):
+    """Nota cuando el calor se corta antes del último año: Terra pasa cada vez más temprano desde 2022."""
+    if fin_lst >= fin:
+        return ""
+    return (f" El periodo termina en {fin_lst} a propósito: desde 2022 el satélite Terra pasa cada vez más temprano "
+            "(hora local media de 10.8 h a 9.2 h en 2026, según el campo Day_view_time de MOD11A2), la superficie "
+            "se mide antes de calentarse y la serie baja de forma artificial. Es lo más probable, no está probado que lo explique todo. "
+            "El cambio del aire se calcula con todo el periodo de POWER.")
+
+
+FUENTE_MODIS ={"url": "https://appeears.earthdatacloud.nasa.gov/", "resolucion": "MODIS, 6 puntos de La Paz (promedio de zonas)"}
 
 
 def _vegetacion(ndvi_zonas, fecha, inicio, fin):
@@ -119,7 +129,7 @@ def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, 
             {**FUENTE_MODIS, "dataset": "MODIS MOD11A2.061 (LST_Day_1km) vía NASA AppEEARS", "resolucion": "1 km, 6 puntos de La Paz (promedio de zonas)"},
             "Temperatura de la superficie (suelo y techos), no del aire. Se descartan lecturas de relleno y nubes. "
             f"La temperatura del aire (NASA POWER, reanálisis ~50 km) sí sube: {est_aire['pendiente_por_anio'] * (fin - inicio):+.2f} °C en {inicio}-{fin}; "
-            "miden cosas distintas y no se explica la diferencia." + _parcial(lst_mat, fin_lst))
+            "miden cosas distintas y no se explica la diferencia." + _parcial(lst_mat, fin_lst) + _deriva(fin_lst, fin))
     else:
         calor = _indicador(
             "calor", "Calor", "Temperatura del aire a 2 m (NASA POWER T2M)", "°C", t.promedio_anual, t2m, datos, fecha,
