@@ -44,13 +44,20 @@
   .cabecera .idioma{justify-self:end}
 }
 
-/* Inicio en el centro de la barra y con ícono más grande (pedido de Carlos, 2026-11-15); el menú superior también lleva íconos. */
-.barra a.barra-centro{position:relative;color:var(--acento);font-weight:700}
-.barra a.barra-centro::before{content:"";position:absolute;top:-24px;left:50%;width:58px;height:58px;margin-left:-29px;border-radius:50%;background:var(--acento);box-shadow:0 3px 10px rgba(0,0,0,.28);border:4px solid var(--tarjeta);box-sizing:border-box}
-.barra a.barra-centro .mi-ic{position:relative;z-index:1;color:var(--acento-t);transform:translateY(-15px)}
-.barra a.barra-centro span:last-child{margin-top:6px;position:relative;z-index:1}
-.barra a.barra-centro[aria-current=page]{box-shadow:none}
-.barra a.barra-centro[aria-current=page]::before{box-shadow:0 0 0 3px var(--acento-t),0 0 0 6px var(--acento),0 3px 10px rgba(0,0,0,.28)}
+/* Barra inferior (pedido de Carlos, 2026-11-15): 5 botones iguales, Inicio exactamente al centro (columna 3 de 5).
+   Nada sobresale ni tapa texto: ícono y etiqueta siempre visibles, sin transform ni pseudo-elementos encima.
+   Inicio se destaca con una píldora de contorno azul marino; la sección activa (sea cual sea) se rellena de azul marino
+   y lleva una raya abajo (no solo color), así nunca hay dos botones rellenos a la vez.
+   Alto fijo en px (52 + 4 + 4 + borde = 61 <= 64 del padding de body): no depende de vh, así que no salta
+   cuando Chrome móvil muestra u oculta su barra de dirección. */
+.barra{gap:2px;padding:4px 4px calc(4px + env(safe-area-inset-bottom));transform:translateZ(0)}
+.barra a{position:relative;min-width:0;min-height:52px;padding:4px 2px 7px;border-radius:14px;gap:2px;font-size:12px;line-height:16px;white-space:nowrap}
+.barra a>span:last-child{display:block;max-width:100%}
+.barra a.barra-centro{background:#e6ebf2;color:var(--acento);font-weight:700;box-shadow:inset 0 0 0 2px var(--acento)}
+.barra a[aria-current=page],.barra a.barra-centro[aria-current=page]{background:var(--acento);color:var(--acento-t);font-weight:800;box-shadow:none}
+.barra a[aria-current=page]::after{content:"";position:absolute;left:50%;bottom:2px;width:20px;height:3px;margin-left:-10px;border-radius:2px;background:currentColor}
+.barra a:focus-visible{outline:3px solid var(--acento);outline-offset:-3px}
+.barra a[aria-current=page]:focus-visible{outline-color:#51d8e8}
 @media (min-width:1024px){
   .menu-sup a{gap:8px}
   .menu-sup .mi-ic{width:20px;height:20px}
