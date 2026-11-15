@@ -2,7 +2,7 @@
 
 Pedido de Carlos (chat, 2026-11-15): agregar las pestañas **Pesca** y **Avisos y Alertas**, fieles al Figma con ajustes de proporciones; el mapa es de **iconos**; **sin gráficas, sin tablas y sin descripciones largas**; iconos CC0 o libres; bien integradas. Esto **reabre** la regla 1 de `docs/PLAN-CIERRE.md` ("Pesca no se construye"), con la condición de siempre: **ninguna cifra ni aviso inventado** (regla 1 de `AGENTS.md`).
 
-Este plan es una propuesta de ejecución. Las decisiones que necesitan el OK de Carlos están en la sección 8.
+**Estado (2026-11-15):** construido. Se aplicaron las recomendaciones de la sección 8 (Carlos pidió terminar lo que faltaba): menú superior de texto / inferior con iconos, "Estado del mar (modelo)" y avisos del modelo más enlaces oficiales. Resultados de F0 en `docs/investigacion/umbrales-mar.md`; decisión en `docs/decisiones.md`. Las secciones de abajo se conservan como registro del plan.
 
 ## 1. Qué se conserva del Figma y qué se quita
 
