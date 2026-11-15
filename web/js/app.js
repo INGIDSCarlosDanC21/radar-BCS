@@ -284,6 +284,7 @@
   function ruta() {
     if (mapa) { try { mapa.remove(); } catch (e) {} mapa = null; }
     if (window.RBSim) window.RBSim.limpiar();
+    if (window.RBCielo) window.RBCielo.limpiar();
     var h = (location.hash || '#inicio').slice(1).split('/');
     var sec = ['inicio', 'mapa', 'ficha', 'acciones', 'agricola'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
     document.querySelectorAll('[data-nav]').forEach(function (a) {
@@ -294,7 +295,9 @@
     if (!DATOS) { main.setAttribute('aria-busy', 'true'); if (window.RBEsq) main.innerHTML = window.RBEsq.html(sec, t('html.cargando')); return; }
     main.removeAttribute('aria-busy');
     franja(sec);
-    if (sec === 'inicio') { if (window.RBHome) window.RBHome.render(main, DATOS); else inicio(); }
+    if (sec === 'inicio') {
+      if (window.RBHome) { window.RBHome.render(main, DATOS); if (window.RBCielo) window.RBCielo.activar(main); } else inicio();
+    }
     else if (sec === 'mapa') mapaVista();
     else if (sec === 'ficha') ficha(h[1]);
     else if (sec === 'agricola') { agricolaVista(h[1] || null); document.title = 'Radar BCS — ' + t('titulo.agricola'); return; }

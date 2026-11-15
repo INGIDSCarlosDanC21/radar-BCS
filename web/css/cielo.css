@@ -1,0 +1,39 @@
+/* "El cielo ahora en BCS" (Inicio). Usa las variables de estilos.css y el marco de las secciones de home.css (.hm-sec). */
+.cielo-rej{display:grid;gap:16px;margin-top:16px}
+@media (min-width:1024px){.cielo-rej{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}}
+.cielo-cap,.cielo-c{background:var(--tarjeta);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.05);padding:16px}
+.cielo-cap{border-top:4px solid var(--acento)}
+.cielo-peqs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (min-width:640px){.cielo-peqs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cielo-fila{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.cielo-nom{margin:0;font-family:var(--f-titulo);font-weight:700;font-size:1.05rem}
+.cielo-nom-g{font-size:1.5rem}
+.cielo-eti2{margin:0 0 2px;font-family:var(--f-datos);font-size:12px;color:var(--suave);text-transform:uppercase}
+.cielo-temp{margin:6px 0 0;font-family:var(--f-titulo);font-weight:800;font-size:1.8rem;line-height:1.1}
+.cielo-temp-g{font-size:3.4rem;margin:8px 0 4px}
+.cielo-min{margin:0;align-self:flex-end;font-family:var(--f-datos);font-size:12px;color:var(--suave)}
+.cielo-est{margin:4px 0 0;color:var(--suave);font-size:.95rem}
+.cielo-est-g{font-size:1.05rem}
+.cielo-datos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.cielo-dato{background:var(--fondo);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:2px}
+.cielo-rot{font-family:var(--f-datos);font-size:12px;color:var(--suave)}
+.cielo-val{font-family:var(--f-titulo);font-weight:700;font-size:1.05rem}
+.cielo-h3{font-family:var(--f-titulo);font-size:1.2rem;margin:24px 0 8px}
+.cielo-nota{margin-top:12px}
+.cielo-cargando{color:var(--suave);margin:16px 0}
+
+/* Íconos: máscara del SVG de Material Symbols; el color lo pone la web (sol ámbar, nubes gris, agua azul). */
+.cielo-ic{display:inline-block;flex:none;width:32px;height:32px;background:currentColor;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain}
+.cielo-ic-g{width:56px;height:56px}
+.cielo-ic-p{width:22px;height:22px}
+.cielo-sol{color:#b45309}
+.cielo-nube{color:#44474d}
+.cielo-agua{color:#1f5f99}
+
+.cielo-mapa{height:360px;border-radius:12px;overflow:hidden;background:#0c2340;box-shadow:0 2px 4px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.1)}
+@media (min-width:640px){.cielo-mapa{height:560px}}
+.cielo-pin-caja{background:none;border:0}
+/* En celular los pines solo llevan ícono y temperatura (los nombres se encimarían); el nombre está en las tarjetas. */
+@media (max-width:639px){.cielo-pin-n{display:none}}
+.cielo-pin{display:inline-flex;align-items:center;gap:4px;transform:translate(-12px,-50%);white-space:nowrap;background:var(--tarjeta);color:var(--texto);border-radius:999px;padding:3px 10px 3px 6px;font:700 12px var(--f-cuerpo);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.cielo-pin.cielo-pin-izq{flex-direction:row-reverse;padding:3px 6px 3px 10px;transform:translate(calc(-100% + 12px),-50%)}
