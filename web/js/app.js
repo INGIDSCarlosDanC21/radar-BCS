@@ -252,7 +252,7 @@
       '<p>' + esc(t('fic.metodo', { m: D(g, 'metodo') || t('fic.sinCalcular') })) + (RB.explicaMetodo(g.metodo) ? ' ' + esc(RB.explicaMetodo(g.metodo)) : '') + '</p>' +
       '<p>' + esc(t('fic.pAlfa', { p: g.p_valor != null ? pTexto(g.p_valor, 3) : t('fic.sinCalcular'), a: g.alfa != null ? num(g.alfa, 2) : t('fic.sinDato') })) + '</p></div>';
     h += '<div class="bloque"><h2>' + t('fic.fuente') + '</h2><p><strong>' + esc(RB.textoFuente(i)) + '</strong></p><p>' +
-      (f.url ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.url) + '</a><br>' : '') +
+      (f.url ? '<a class="enlace-fuente" href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(t('fic.abrir', { h: String(f.url).replace(/^https?:\/\//, '').split('/')[0] })) + '</a><br>' : '') +
       t('fic.resol') + ' ' + esc(D(f, 'resolucion') || t('fic.sinDato')) + '<br>' + t('fic.periodo') + ' ' + esc(f.periodo || t('fic.sinDato')) + '<br>' + t('fic.descarga') + ' ' + esc(f.fecha_descarga || t('fic.sinDato')) + '</p>' +
       (i.limitacion ? '<p><strong>' + t('fic.limitacion') + '</strong> ' + esc(D(i, 'limitacion')) + '</p>' : '') + '</div>';
     h += '<p class="aviso">' + t('aviso.causa') + '</p>';

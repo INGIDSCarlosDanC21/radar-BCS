@@ -48,7 +48,7 @@
       'mapa.pieMetodo': '; Mann-Kendall estacional y pendiente de Sen. Son puntos, no zonas completas: cada uno se dibuja como el píxel de 1 km que lo contiene.',
       'mapa.pieBase': ' Mapa base: © OpenStreetMap contributors.',
 
-      'fic.volver': '← Inicio', 'fic.desde': 'Cambio total desde {a}',
+      'fic.abrir': 'Abrir la fuente ({h})', 'fic.volver': '← Inicio', 'fic.desde': 'Cambio total desde {a}',
       'fic.sinCifra': 'No se detecta un cambio claro; por eso no se muestra una cifra de cambio.',
       'fic.porDecada': 'Tendencia por década:', 'fic.media': 'Media por década', 'fic.serie': 'Serie por año',
       'fic.sinSerie': 'Sin datos suficientes para la gráfica.',
@@ -135,7 +135,7 @@
       'mapa.pieMetodo': "; seasonal Mann-Kendall and Sen's slope. These are points, not whole zones: each one is drawn as the 1 km pixel that contains it.",
       'mapa.pieBase': ' Base map: © OpenStreetMap contributors.',
 
-      'fic.volver': '← Home', 'fic.desde': 'Total change since {a}',
+      'fic.abrir': 'Open the source ({h})', 'fic.volver': '← Home', 'fic.desde': 'Total change since {a}',
       'fic.sinCifra': 'No clear change is detected, so no change figure is shown.',
       'fic.porDecada': 'Trend per decade:', 'fic.media': 'Average per decade', 'fic.serie': 'Year by year',
       'fic.sinSerie': 'Not enough data for the chart.',
