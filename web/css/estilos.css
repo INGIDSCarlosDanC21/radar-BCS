@@ -3,10 +3,7 @@
   --acento:#0b5cad;--acento-t:#fff;--franja:#ffd400;--franja-t:#1b1f23;
   --sube:#b4380f;--baja:#1f5f99;--nulo:#8a9096;--aviso:#fff4d6;
 }
-@media (prefers-color-scheme:dark){
-  :root{--fondo:#12161a;--tarjeta:#1d2329;--texto:#f0f2f4;--suave:#b6bdc4;--borde:#3a434b;
-  --acento:#7db8ff;--acento-t:#0a1722;--sube:#ff9a73;--baja:#8cc2ff;--nulo:#9aa1a8;--aviso:#3a3317}
-}
+/* La web es siempre clara (Figma solo tiene modo claro): no sigue el modo oscuro del sistema. */
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--fondo);color:var(--texto);font:1rem/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:calc(64px + env(safe-area-inset-bottom))}
@@ -23,7 +20,6 @@ a{color:var(--acento)}
 @media (max-width:399px){.cabecera .sub{display:none}.cabecera .marca-ia{margin-right:auto}}
 @media (min-width:400px){.marca img{height:44px}}
 img.ico{display:inline-block;height:1em;width:auto;vertical-align:-.12em;margin-right:.35em}
-@media (prefers-color-scheme:dark){.marca img{background:#fff;border-radius:6px;padding:2px 6px;box-sizing:content-box}}
 .idioma{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--acento);border-radius:999px;color:var(--acento);font-weight:700;font-size:.9rem;text-decoration:none;white-space:nowrap}
 .idioma:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
 main{max-width:720px;margin:0 auto;padding:8px 16px 16px;outline:none}
