@@ -14,6 +14,7 @@
 - PR: #99 (fusionado en `dev`).
 - **2026-11-14 (cierre, #98):** íconos identificados como Google Material Symbols (Apache 2.0, licencia en `web/assets/iconos/`); marca "AI-generated" junto al logo en el componente de encabezado y `web/assets/logo-radar-bcs-ai-generated.png`; términos de Gemini registrados (Stitch: sin página pública, NO VERIFICADO); revisión de personas/menores: ninguna en imágenes, se quitaron 2 nombres reales de ejemplo de las maquetas ("Ramón Bareño", "Armando Castro"); revisión de la web a 360 px en `diseno/revision-360/REPORTE.md`. PR: #104
 - **2026-11-14 (noche, bloque A):** segunda revisión a 360 px sobre `dev` con Agrícola e inglés (script `diseno/tools/revisar-360.js`; resultados al inicio de `diseno/revision-360/REPORTE.md`). Nuevos: etiquetas de los pines de Agrícola cortadas y modo oscuro roto en Inicio y Agrícola (contraste 1.80:1). Tokens de modo oscuro en `tokens.css` con 12 pruebas de contraste (45/45 en verde). Spec §5 actualizada a la barra inferior. PR: #104
+- **2026-11-15 (plan autónomo #117, issue #120, Ehileen):** U1 inglés de `textos.js` → PR #123; lista de `*_en` para Luca en #118. U3 revisión visual contra Figma → tabla en #120 e issues #127 (P0 modo oscuro), #128 y #129. U4 textos alternativos y microtextos → comentario en #119. U5 uso de IA → PR #126 (Líder; se apoya en #124). U7 revisión de #116, #121, #122 y #125: "Revisado: pruebas en verde", sin fusionar. Los commits que no entraron en #104 van en PR #124 (Líder).
 
 ## En curso
 
@@ -24,7 +25,9 @@
 - Íconos: los 12 exportados son Google Material Symbols (Apache 2.0, verificado el 2026-11-14; ver `web/assets/iconos/README.md`). Si en otra pantalla se usó un ícono de Flaticon, falta identificarlo y poner su atribución.
 - ~~Modo oscuro de los tokens~~ Hecho (propuesta, sin Figma).
 - Que Diego corrija lo de `diseno/revision-360/REPORTE.md` (P0: scroll horizontal en Ficha de lluvia, sigue; P1: pines de Agrícola, modo oscuro, logo con marca de IA en la cabecera).
-- Inglés (#93): revisión hecha el 2026-11-15 en `diseno/revision-ingles/REVISION.md` (6 P1 y 15 P2 para Diego y Luca). Falta el visto bueno de Roberto.
+- Inglés (#93): `textos.js` en PR #123; falta que Luca aplique la lista de #118, que Diego aplique lo de #119 y que Roberto revise `agricola.json` (U1).
+- Decisión del Líder: ¿las PNG de maquetas de `diseno/` necesitan la etiqueta "AI-generated" en la imagen? (PR #126).
+- ~~Lista de pantallas de Stitch~~ Hecho el 2026-11-15: todas siguieron el mismo flujo (prototipo de media fidelidad del equipo → ajuste en Stitch → edición final a mano en Figma).
 
 ## Bloqueos
 
