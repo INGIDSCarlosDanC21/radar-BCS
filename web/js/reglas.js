@@ -37,7 +37,13 @@
     if (m.indexOf('estacional') >= 0) return T.t('met.estacional') + sen;
     return '';
   }
-  var RB = { num: num, dec: dec, pTexto: pTexto, signo: signo, clase: clase,
+  /* Íconos de sección (Material Symbols, Apache-2.0; web/assets/iconos/README.md). Decorativos: alt vacío. */
+  var ICONOS = { calor: 'clima-calor-y-sensacion-termica', vegetacion: 'agricultura-factibilidad-y-cultivos',
+    lluvia: 'clima-humedad-y-lluvia', agua: 'agricultura-clima-y-agua' };
+  function icono(id) {
+    return ICONOS[id] ? '<img class="ico" src="assets/iconos/' + ICONOS[id] + '.svg" alt="" aria-hidden="true" height="20">' : '';
+  }
+  var RB = { icono: icono, num: num, dec: dec, pTexto: pTexto, signo: signo, clase: clase,
     textoCambio: textoCambio, textoFuente: textoFuente, mostrarFranja: mostrarFranja, explicaMetodo: explicaMetodo };
   if (typeof window !== 'undefined') window.RB = RB;
   if (typeof module !== 'undefined' && module.exports) module.exports = RB;

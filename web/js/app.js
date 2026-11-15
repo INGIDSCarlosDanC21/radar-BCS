@@ -230,7 +230,7 @@
     IDS.forEach(function (k) {
       h += '<a class="chip" style="display:inline-flex;align-items:center;text-decoration:none" href="#ficha/' + k + '"' + (k === i.id ? ' aria-current="page"' : '') + '>' + esc(tit(ind(k))) + '</a>';
     });
-    h += '</div><h1>' + esc(tit(i)) + '</h1><p class="fuente">' + esc(D(i, 'variable')) + '</p>';
+    h += '</div><h1>' + RB.icono(i.id) + esc(tit(i)) + '</h1><p class="fuente">' + esc(D(i, 'variable')) + '</p>';
     h += '<div class="bloque"><h2>' + esc(t('fic.desde', { a: ((i.fuente && i.fuente.periodo) || '2001').slice(0, 4) })) + '</h2><div class="grande ' + tc.clase + '">' + esc(tc.texto) + '</div>' +
       (tc.tipo === 'sin-cambio' ? '<p class="fuente">' + t('fic.sinCifra') + '</p>' :
         i.cambio_total_nota ? '<p class="fuente">' + esc(D(i, 'cambio_total_nota')) + '</p>' : '') +

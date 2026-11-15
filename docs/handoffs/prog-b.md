@@ -111,3 +111,36 @@ Carlos pidió dejar esto por escrito. El detalle completo y la lista de condicio
 ## 2026-11-15: decisión sobre el login (Carlos, por el asistente del Líder)
 
 El PR #77 se cerró sin fusionar: el login con Supabase **no entra a la entrega**. Tu rama `prog-b/login` y el proyecto de Supabase se conservan para después del evento. Motivos en `docs/decisiones.md` (2026-11-15). Tu tiempo ahora: 1) versión en inglés (#93), 2) correcciones a 360 px, 3) integrar logo e íconos. No borres la rama.
+
+## 2026-11-15: issue #96 (cierre de la noche)
+
+Hecho, un PR por tarea, todos hacia `dev`:
+- **#115, calor por zona orientativo (opción B):** la nota de Carlos (Aqua no confirma) va arriba de la lista, junto al mapa; título "Zonas: superficie, Terra (orientativo)"; ninguna zona dice "tendencia clara"; el periodo del mapa sale de `zonas.geojson` (2001-2021). La leyenda separa "sin cambio claro" de "sin datos". ES y EN. Conviene fusionarlo junto con el PR de Luca que pasa la ficha de calor al aire.
+- **#116, 360 px (reporte de Ehileen):** se quitó el scroll de la ficha de lluvia (la URL cruda pasa a "Abrir la fuente (dominio)"). Letra mínima de 12 px y toques de 44 px (zoom de los dos mapas, enlaces de fuente, "Saltar"). La unidad de "Media por década" ya no se parte.
+- **#121, logo e íconos:** logo en la cabecera con la marca "AI-generated" como texto legible al lado, `alt` en ES/EN y aviso de IA en el pie. Íconos Material Symbols en las tarjetas de Inicio y en el título de la ficha.
+
+- **#122, esqueleto de carga:** bloques con el alto de cada pantalla mientras llegan los JSON (también `agricola.json`); `aria-hidden` en los bloques y `role=status` con el texto de carga; quieto con `prefers-reduced-motion`; el error de carga lo sigue reemplazando.
+
+Los cuatro se fusionan sin choques entre sí (comprobado con `git merge-tree`). Pruebas de `web/tests` en verde en cada rama. `verificar-todo.ps1`: pasa todo menos el pytest de `analisis`, porque pytest no está instalado en mi máquina (no toqué `analisis/`).
+
+Falta:
+- Que Carlos actualice la fila del logo en `docs/entrega/07`: la marca es texto junto al logo, no el PNG con la etiqueta.
+- Teléfono real (#71) y contraste medido con herramienta.
+- P2 del reporte que no hice: chips de la ficha en una fila y `<details>` para el método.
+
+## 2026-11-15: bloque autónomo #119 (reglas del #117)
+
+| Tarea | PR | Estado |
+|---|---|---|
+| D1 360 px | #116 (actualizado) | Abierto. Sin scroll a 360 px en ES/EN (5 pantallas y 4 fichas de Agro); toques de 44 px, también el buscador y los marcadores de Agro |
+| D2 logo e íconos | #121 (actualizado) | Abierto. Logo de 44 px desde 400 px; las 4 fichas de Agro con sus íconos `agricultura-*`; lista de archivos usados en el PR para `docs/entrega/07` y `05` |
+| D3 idioma y vista previa | #125 | Abierto. `description` y `og:*` en ES/EN; la vista previa real sale en español porque los rastreadores no corren JS |
+| D4 auditoría de Luca | #130 | **Listo para revisión del Líder** (toca `web/data/agricola.json`). Correcciones 2, 3 y 5 aplicadas; la 1 sale sola al regenerar cuando entre el calor del aire |
+| D5 esqueleto | #122 (actualizado) | Abierto. `aria-busy` en `<main>` y prueba del estado de error con el `app.js` real |
+| D6 accesibilidad | #131 | Abierto. "Saltar al contenido" mandaba a Inicio (arreglado); anuncio de pantalla; foco visible; contraste AA en modo claro y oscuro |
+| D7 matriz | comentario en #85, issue #132 | `dev` falla solo en lluvia a 360 y 390 px (lo arregla #116); la suma de mis PRs pasa |
+| D8 revisión | #123 (Ehileen) | Revisado y en verde; **no lo fusioné**, mi sesión no tiene permiso |
+
+Los 6 PRs se fusionan entre sí sin choques (62 pruebas en la suma). `verificar-todo.ps1` pasa completo en cada rama, con un `uv venv` en `.venv` (ignorado por git).
+
+Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agricola.json` cuando entre el calor del aire de Luca, teléfono real (#71), lector de pantalla real y vista previa al compartir.

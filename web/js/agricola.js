@@ -89,6 +89,11 @@
       '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + P[n] + '</svg>';
   }
   var ICO_FICHA = { cultivos: 'planta', clima: 'gota', suelo: 'capas', riesgos: 'escudo' };
+  /* Íconos de las 4 fichas: web/assets/iconos (Material Symbols, Apache-2.0). Decorativos: alt vacío. #119 D2 */
+  var SVG_FICHA = { cultivos: 'agricultura-factibilidad-y-cultivos', clima: 'agricultura-clima-y-agua', suelo: 'agricultura-salud-del-suelo', riesgos: 'agricultura-riesgos-y-sanidad' };
+  function icoFicha(id) {
+    return SVG_FICHA[id] ? '<img class="ag-ico-svg" src="assets/iconos/' + SVG_FICHA[id] + '.svg" alt="" aria-hidden="true" width="24" height="24">' : ico(ICO_FICHA[id] || 'planta', '', 24);
+  }
   var TONO = { cultivos: 'verde', clima: 'cian', suelo: 'claro', riesgos: 'ambar' };
 
   /* ---------- Ficha cerrada ---------- */
@@ -100,7 +105,7 @@
       '<span class="ag-ficha-borde" aria-hidden="true"></span>' +
       '<button type="button" class="ag-ficha-btn" aria-expanded="false" aria-controls="ag-det-' + esc(id) + '">' +
         '<span class="ag-ficha-cab">' +
-          '<span class="ag-ficha-icono">' + ico(ICO_FICHA[id] || 'planta', '', 24) + '</span>' +
+          '<span class="ag-ficha-icono">' + icoFicha(id) + '</span>' +
           '<span class="ag-ficha-txt"><span class="ag-ficha-tit">' + esc(D(f, 'titulo')) + '</span>' +
           '<span class="ag-ficha-sub">' + esc(D(f, 'subtitulo')) + '</span></span>' +
           (f.chip ? '<span class="ag-ficha-chip">' + esc(D(f, 'chip')) + '</span>' : '') +
@@ -132,7 +137,7 @@
     var d = f.detalle || {}, id = f.id, h = '';
     var chips = arr(D(d, 'chips'));
     h += '<div class="ag-det-cab"><div class="ag-det-cab-izq">' +
-      '<span class="ag-ficha-icono">' + ico(ICO_FICHA[id] || 'planta', '', 24) + '</span><div class="ag-det-cab-txt">';
+      '<span class="ag-ficha-icono">' + icoFicha(id) + '</span><div class="ag-det-cab-txt">';
     if (chips.length) {
       h += '<div class="ag-det-chips">';
       chips.forEach(function (c, k) { h += '<span class="ag-det-chip' + (k === 0 ? ' ag-det-chip-1' : '') + '">' + esc(c) + '</span>'; });

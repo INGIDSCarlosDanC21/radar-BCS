@@ -10,7 +10,8 @@
       'html.saltar': 'Saltar al contenido',
       'html.cargando': 'Cargando datos…',
       'html.pie': 'Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0',
-      'html.ia': 'Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch.',
+      'html.ia': 'Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch; logotipo generado con IA (Gemini).',
+      'html.logo': 'Radar BCS, inicio', 'html.logoIA': 'Logotipo generado con IA',
       'html.secciones': 'Secciones',
       'nav.inicio': 'Inicio', 'nav.mapa': 'Mapa', 'nav.ficha': 'Ficha', 'nav.agricola': 'Agro', 'nav.acciones': 'Acciones',
       'titulo.inicio': 'Inicio', 'titulo.mapa': 'Mapa', 'titulo.ficha': 'Ficha', 'titulo.acciones': 'Acciones', 'titulo.agricola': 'Mapa Agrícola',
@@ -97,7 +98,8 @@
       'html.saltar': 'Skip to content',
       'html.cargando': 'Loading data…',
       'html.pie': 'Team OptiPaz · NASA Space Apps Challenge 2026 · Apache-2.0 License',
-      'html.ia': 'Code and analysis written with AI assistance (Claude Code); interface designed with help from Google Stitch.',
+      'html.ia': 'Code and analysis written with AI assistance (Claude Code); interface designed with help from Google Stitch; AI-generated logo (Gemini).',
+      'html.logo': 'Radar BCS, home', 'html.logoIA': 'AI-generated logo',
       'html.secciones': 'Sections',
       'nav.inicio': 'Home', 'nav.mapa': 'Map', 'nav.ficha': 'Details', 'nav.agricola': 'Farming', 'nav.acciones': 'Actions',
       'titulo.inicio': 'Home', 'titulo.mapa': 'Map', 'titulo.ficha': 'Details', 'titulo.acciones': 'Actions', 'titulo.agricola': 'Farming Map',
@@ -212,6 +214,8 @@
   function aplicar(doc) {
     doc.documentElement.lang = lang;
     doc.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = t(el.getAttribute('data-t')); });
+    doc.querySelectorAll('[data-t-alt]').forEach(function (el) { el.setAttribute('alt', t(el.getAttribute('data-t-alt'))); });
+    doc.querySelectorAll('[data-t-title]').forEach(function (el) { el.setAttribute('title', t(el.getAttribute('data-t-title'))); });
     doc.querySelectorAll('[data-t-aria]').forEach(function (el) { el.setAttribute('aria-label', t(el.getAttribute('data-t-aria'))); });
     var b = doc.getElementById('idioma');
     if (b) {
