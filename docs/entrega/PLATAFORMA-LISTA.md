@@ -46,6 +46,7 @@ Preparado el 2026-11-15 por el asistente del Líder. **Todo el contenido de la p
 | Open-Meteo Marine API | https://open-meteo.com/en/docs/marine-weather-api |
 | Leaflet 1.9.4 (map library, BSD-2-Clause) | https://leafletjs.com/ |
 | OpenStreetMap tiles (ODbL) | https://www.openstreetmap.org/copyright |
+| Nominatim place search (OpenStreetMap, ODbL) | https://nominatim.org/release-docs/latest/api/Search/ |
 | Google Material Symbols (icons, Apache-2.0) | https://fonts.google.com/icons |
 | Google Fonts: Space Grotesk, Manrope, JetBrains Mono (OFL 1.1) | https://github.com/google/fonts/tree/main/ofl/ |
 | pyMannKendall (MIT) | https://github.com/mmhs013/pyMannKendall |

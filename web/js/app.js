@@ -2,6 +2,7 @@
   'use strict';
   var main = document.getElementById('contenido');
   var DATOS = null, ZONAS = null, mapa = null, indMapa = 'calor';
+  var capasZona = {}, capaZonas = null, pinBusqueda = null, enfocarFn = null; // marcadores y búsqueda del mapa de zonas
   var IDS = ['calor', 'vegetacion', 'lluvia', 'agua'];
 
   function esc(s) {
@@ -81,7 +82,7 @@
     IDS.forEach(function (id) {
       h += '<button type="button" class="chip" data-ind="' + id + '" aria-pressed="' + (id === indMapa) + '">' + esc(tit(ind(id))) + '</button>';
     });
-    h += '</div><div id="aviso-mapa"></div><div id="mapa-caja" role="region" aria-label="' + t('mapa.region') + '"></div>' +
+    h += '</div>' + buscadorHtml() + '<div id="aviso-mapa"></div><div id="mapa-caja" role="region" aria-label="' + t('mapa.region') + '"></div>' +
       '<div id="leyenda" class="leyenda"></div>' + (window.RBSim ? window.RBSim.sateliteHtml() : '') + '<div id="resumen"></div>' +
       '<p class="fuente" id="fuente-mapa"></p>';
     main.innerHTML = h;
@@ -89,8 +90,72 @@
       b.addEventListener('click', function () { indMapa = b.getAttribute('data-ind'); ruta(); });
     });
     pintar();
+    bindBusqueda();
     if (window.RBSim) window.RBSim.sateliteActivar(main);
     if (CM) CM.cargar(main);
+  }
+
+  /* Búsqueda de un lugar sobre el mapa de zonas (zonas-busqueda.js). */
+  function buscadorHtml() {
+    if (!window.RBZonas) return '';
+    return '<form class="zb-form" id="zb-form" role="search"><label class="sr" for="zb-q">' + esc(t('zb.etiqueta')) + '</label>' +
+      '<input id="zb-q" type="search" autocomplete="off" placeholder="' + esc(t('zb.ph')) + '">' +
+      '<button type="submit" class="zb-ir">' + t('zb.buscar') + '</button>' +
+      (navigator.geolocation ? '<button type="button" class="zb-loc" id="zb-loc"><img src="assets/iconos/mapa/my_location.svg" alt="" width="20" height="20"> ' + t('zb.loc') + '</button>' : '') +
+      '</form><p class="fuente zb-priv">' + t('zb.privacidad') + '</p><ul id="zb-res" class="zb-res" hidden></ul><p id="zb-msg" class="zb-msg" role="status" aria-live="polite"></p>' +
+      '<div id="zb-tarjeta" class="zb-tarjeta" hidden></div>';
+  }
+  function bindBusqueda() {
+    var form = document.getElementById('zb-form');
+    if (!form || !window.RBZonas) return;
+    var q = document.getElementById('zb-q'), res = document.getElementById('zb-res'), msg = document.getElementById('zb-msg'), card = document.getElementById('zb-tarjeta');
+    var lista = [];
+    function elegir(it) {
+      res.hidden = true; q.value = it.etiqueta; msg.textContent = '';
+      if (enfocarFn) enfocarFn(it.lat, it.lon, it.nombre || it.etiqueta, it.zona);
+    }
+    function mostrar(l) {
+      lista = l;
+      res.innerHTML = l.map(function (x, k) { return '<li><button type="button" class="zb-op" data-k="' + k + '">' + esc(x.etiqueta) + '</button></li>'; }).join('');
+      res.hidden = !l.length;
+      msg.textContent = l.length === 1 ? t('zb.res1') : t('zb.resN', { n: l.length });
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = q.value.trim();
+      if (!v) return;
+      var locales = RBZonas.zonasPorNombre(ZONAS, v, function (f) { return D(f.properties, 'nombre'); }).map(function (f) {
+        var cen = RBZonas.centroide(f.geometry.coordinates[0]);
+        return { etiqueta: t('zb.zona', { z: D(f.properties, 'nombre') }), lat: cen[0], lon: cen[1], zona: f };
+      });
+      msg.textContent = t('zb.cargando'); res.hidden = true;
+      RBZonas.buscar(v).then(function (r) {
+        var l = locales.concat(r.map(function (x) { return { etiqueta: x.nombre, lat: x.lat, lon: x.lon }; }));
+        if (!l.length) { msg.textContent = t('zb.sinRes'); return; }
+        if (l.length === 1) elegir(l[0]); else mostrar(l);
+      }, function () {
+        if (locales.length) mostrar(locales); else msg.textContent = t('zb.error');
+      });
+    });
+    res.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('[data-k]') : null;
+      if (b) elegir(lista[+b.getAttribute('data-k')]);
+    });
+    card.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('[data-zb-x]')) {
+        card.hidden = true; card.innerHTML = '';
+        if (pinBusqueda) { pinBusqueda.remove(); pinBusqueda = null; }
+        q.focus();
+      }
+    });
+    var loc = document.getElementById('zb-loc');
+    if (loc) loc.addEventListener('click', function () {
+      msg.textContent = t('zb.cargando');
+      navigator.geolocation.getCurrentPosition(function (p) {
+        msg.textContent = '';
+        if (enfocarFn) enfocarFn(p.coords.latitude, p.coords.longitude, t('zb.tuUbic'), null);
+      }, function () { msg.textContent = t('zb.locError'); }, { timeout: 10000 });
+    });
   }
 
   /* Qué mide cada capa por zona (MODIS vía AppEEARS). nota: aviso junto al mapa y la lista.
@@ -140,6 +205,7 @@
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19, attribution: '© OpenStreetMap contributors'
         }).addTo(mapa);
+        capasZona = {}; pinBusqueda = null;
         var capa = L.geoJSON(ZONAS, {
           style: function (f) {
             var c = cz(f);
@@ -149,12 +215,24 @@
           },
           onEachFeature: function (f, l) {
             var c = cz(f) || {};
+            capasZona[f.properties.id] = l;
             l.bindPopup('<strong>' + esc(D(f.properties, 'nombre')) + '</strong>' + prueba + '<br>' + esc(tit(i)) + ': ' +
               esc(zonaTexto(c)) + '<br>' + esc(zonaEtiqueta(c)));
             if (puesto[f.properties.id]) l.bindTooltip(String(puesto[f.properties.id]), { permanent: true, direction: 'top', offset: [0, -14], className: 'etq-zona' });
           }
         }).addTo(mapa);
         mapa.fitBounds(capa.getBounds());
+        capaZonas = capa;
+        // Marcador con ícono en el centro de cada zona (el polígono sigue siendo la huella del píxel de 1 km).
+        if (window.RBZonas && ZONAS.features.some(function (f) { return RBZonas.estado(cz(f)) !== 'nodato'; })) {
+          ZONAS.features.forEach(function (f) {
+            var c = cz(f), est = RBZonas.estado(c), cen = RBZonas.centroide(f.geometry.coordinates[0]);
+            var col = (c && c.cambio_total != null && c.significativo !== false) ? color(c.cambio_total, m) : '#9aa0a6';
+            var etq = D(f.properties, 'nombre') + ': ' + t('zb.' + est) + (est === 'sube' || est === 'baja' ? ', ' + zonaTexto(c) : '');
+            L.marker(cen, { icon: L.divIcon({ className: 'zb-wrap', html: RBZonas.marcadorHtml(est, id, col, etq), iconSize: [32, 32], iconAnchor: [16, 16] }),
+              title: etq, keyboard: true, zIndexOffset: 500 }).addTo(mapa).on('click', function () { if (capasZona[f.properties.id]) capasZona[f.properties.id].openPopup(cen); });
+          });
+        }
       } catch (e) {
         document.getElementById('aviso-mapa').innerHTML = '<p class="aviso">' + t('mapa.errorMapa') + '</p>';
         caja.hidden = true;
@@ -170,7 +248,40 @@
     if (ZONAS.features.some(function (f) { var c = cz(f); return c && c.cambio_total != null && c.significativo === false; }))
       ley += '<span><i class="sincambio"></i>' + t('mapa.leySinCambio') + '</span>';
     ley += '<span><i class="sindatos"></i>' + t('mapa.leySinDatos') + '</span>';
+    if (window.RBZonas && ZONAS.features.some(function (f) { return RBZonas.estado(cz(f)) !== 'nodato'; })) {
+      ley += '<span class="zb-ley"><b>' + t('zb.leyenda') + ':</b></span>';
+      ['sube', 'baja', 'sin', 'nodato'].forEach(function (e) {
+        ley += '<span>' + RBZonas.marcadorHtml(e, id, e === 'sube' ? 'rgb(180,56,15)' : e === 'baja' ? 'rgb(31,95,153)' : '#9aa0a6', t('zb.' + e), true) + ' ' + t('zb.' + e) + '</span>';
+      });
+    }
     document.getElementById('leyenda').innerHTML = ley;
+
+    /* Búsqueda: pone el pin, acerca el mapa y dice en qué zona cae el lugar y cuánto cambió (cifra, periodo y fuente de la capa). */
+    enfocarFn = function (lat, lon, nombre, forzada) {
+      var f = forzada || (window.RBZonas ? RBZonas.zonaEn(ZONAS, lat, lon) : null), c = f ? cz(f) : null;
+      if (mapa && typeof L !== 'undefined') {
+        if (pinBusqueda) pinBusqueda.remove();
+        pinBusqueda = L.marker([lat, lon], { icon: L.divIcon({ className: 'zb-wrap', html: '<span class="zb-ubic" role="img" aria-label="' + esc(nombre) + '"></span>', iconSize: [28, 36], iconAnchor: [14, 36] }),
+          zIndexOffset: 1000, keyboard: false }).addTo(mapa);
+        if (forzada && capasZona[forzada.properties.id]) mapa.fitBounds(capasZona[forzada.properties.id].getBounds(), { maxZoom: 14, padding: [30, 30] });
+        else if (f) mapa.setView([lat, lon], 14);
+        else if (capaZonas) mapa.fitBounds(capaZonas.getBounds().extend([lat, lon]), { maxZoom: 14, padding: [30, 30] });
+      }
+      var h = '<button type="button" class="zb-x" data-zb-x="1">' + t('zb.cerrar') + '</button>';
+      if (!f) h += '<h3>' + esc(t('zb.fuera', { l: nombre })) + '</h3>';
+      else {
+        h += '<h3>' + esc(forzada ? nombre : t('zb.en', { l: nombre, z: D(f.properties, 'nombre') })) + '</h3>';
+        if (c && c.cambio_total != null) {
+          h += '<p class="zb-cifra">' + esc(tit(i)) + ': <span class="' + clase(c.cambio_total) + '">' + esc(zonaTexto(c)) + '</span> — ' + esc(zonaEtiqueta(c)) + '</p>' +
+            '<p class="fuente">' + esc(periodoCapa(i, cfg)) + (cfg ? ' · ' + esc(t('gen.fuente', { f: cfg.fuente })) : '') + '</p>';
+        } else h += '<p>' + esc(t('zb.sinDato')) + '</p>';
+      }
+      h += '<p class="fuente">' + esc(t('zb.limite')) + '</p>';
+      var card = document.getElementById('zb-tarjeta');
+      card.innerHTML = h; card.hidden = false;
+      var form = document.getElementById('zb-form');
+      if (form && form.scrollIntoView) form.scrollIntoView({ block: 'start' }); // deja a la vista la tarjeta y el mapa con el pin
+    };
 
     var hayClaro = lista.some(function (f) { return cz(f).significativo === true; });
     var r = '<h2>' + (cfg && cfg.titulo ? esc(cfg.titulo) : (esPrueba ? t('mapa.hPrueba') : hayClaro ? t('mapa.hMas') : t('mapa.hZonas')) + esc(tit(i))) + '</h2>';

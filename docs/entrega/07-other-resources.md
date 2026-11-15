@@ -28,6 +28,7 @@ None. We did not use Space Agency Partner data.
 | SciPy | https://scipy.org/ | BSD-3-Clause | Spearman correlation check between rainfall and water (analysis only) |
 | Leaflet 1.9.4 | https://leafletjs.com/ | BSD-2-Clause | Interactive map on the website |
 | OpenStreetMap tiles | https://www.openstreetmap.org/copyright | ODbL (attribution "© OpenStreetMap contributors" shown on the map) | Map background |
+| Nominatim place search (OpenStreetMap) | https://nominatim.org/release-docs/latest/api/Search/ | ODbL (© OpenStreetMap contributors). Usage policy followed: at most 1 request per second, no autocomplete, only when the person submits the search. What the person types is sent to Nominatim and the map says so on screen. No key or account | Place search on the zones map |
 | CDC, *Five Steps to help your patients stay safe on hot days* | https://www.cdc.gov/heat-health/media/pdfs/2025/09/Five-Heat-Steps-factsheet-508.pdf | Official site; cited only | Heat tips on the Actions screen |
 | EPA WaterSense, *Start Saving* | https://www.epa.gov/watersense/start-saving | Official site; cited only | Water-saving tips on the Actions screen |
 | SIAP, *Agricultural production closing by municipality 2025* (La Paz, BCS) | https://nube.agricultura.gob.mx/index.php?view=10AE434F-A2158368-A120BC5A-EDF4AFAA&ANIO=2025 | Official Mexican government data; license TO BE CONFIRMED; cited only (accessed 2026-11-14) | Agricultural Map screen (crops) |
