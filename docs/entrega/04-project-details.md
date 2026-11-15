@@ -26,6 +26,12 @@ Radar BCS is a free website for phones, with no installation, available in Spani
 
 Every number on the site shows its data source. The site shows what changed, not why. A trend does not prove its cause, and we do not claim one.
 
+To make the numbers easy to read, the site also has a few interactive aids. None of them adds a new result: they use the same series or NASA imagery.
+
+- **See La Paz from space (Map screen):** real MODIS Terra photos from NASA GIBS, one per year (2001-2026, taken in April), in true color or as ground heat, with a year slider and a Play button. It is one photo per year, not a trend.
+- **Travel through time (Details screen):** a year slider over the real yearly series of each indicator, with a plain-language sentence. For heat and vegetation, where the trend is clear, it can also extend the Sen's-slope line to 2035; this is shown with a dashed style, labeled "not a forecast", and it does not say why anything changes. Rainfall (no clear trend) and water (regional, not the aquifer) are not extended.
+- **The sky now in BCS (Home screen):** current sky conditions and temperature of eight places from the Open-Meteo weather model (not weather stations), next to a near-real-time NOAA GOES-West satellite image served by NASA GIBS. **This section is current context, not a trend.** It is not one of our results, it is not used to claim causes, and the trend results above do not depend on it.
+
 <!-- Nota interna: las metas de 'What do you hope to achieve' son una propuesta de Claude (tomadas de la diapositiva 7 de 08-demo-draft.md); Carlos confirma o cambia. Vegetacion con los numeros de data/salida/ en dev (PR #84, 2001-2026); web/data/ debe copiarse igual antes de enviar. Calor: Carlos eligio la opcion B el 2026-11-15 (principal = aire +1.47 C 2001-2025; superficie MODIS 2001-2021 como no concluyente porque Aqua no confirma a Terra; ver docs/decisiones.md). -->
 <!-- Nota interna: resultados del pipeline de Luca (data/salida/indicadores.json y zonas_tendencias.json, 2026-11-14), revisados por Investigacion en docs/investigacion/hallazgos.md. Si algun numero cambia, cambiarlo aqui. Investigacion reprodujo las salidas de MODIS con los CSV de Drive; la baja de la superficie en El Centenario y Sur depende de la prueba y de los ultimos anios (hallazgos.md), por eso no se interpreta. -->
 
@@ -52,6 +58,7 @@ Limits we state on the site:
 - GRACE water storage (hundreds of km) only gives a regional trend, not a trend by neighborhood, and it does not say how much water the La Paz aquifer holds.
 - NASA POWER (about 50 km) is coarse for a single city.
 - A trend shows what changed, not why.
+- "The sky now in BCS" is current context from a weather model, not a trend and not a measurement from weather stations; it is not used to answer the challenge's questions.
 - Rainfall and air temperature have 25 years of data (2001-2025). Urban NDVI points lose many months after quality filtering (up to 175 months at one point), which makes their trend less reliable.
 - Air temperature (2001-2025) is the main heat figure. MODIS surface temperature (2001-2021) is inconclusive: Terra and Aqua disagree and the pass time of both drifts. We report both and say so.
 

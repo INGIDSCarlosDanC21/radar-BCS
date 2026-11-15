@@ -5,7 +5,7 @@ Son glifos de **Google Material Symbols** (Outlined, 24 px), descargados el 2026
 
 - **Licencia:** Apache License 2.0, la misma de los otros íconos (copia en `../LICENSE-material-symbols.txt`). La atribución no es obligatoria.
 - **Uso:** en Inicio, en las tarjetas de "El cielo ahora en BCS", en los pines del mapa y en la leyenda "Estado del cielo". El color lo pone la web: ámbar para sol, gris para nubes y niebla, azul para lluvia, y blanco sobre los pines oscuros.
-- **Datos:** el código de estado del cielo es el `weather_code` (código WMO) de la API de Open-Meteo (<https://open-meteo.com/en/docs>). Es un modelo meteorológico, no estaciones. Datos bajo CC BY 4.0, sin clave; exige un enlace de atribución junto a los datos (verificado el 2026-11-15 en el README de github.com/open-meteo/open-meteo; registrado en `docs/RECURSOS.md`). Lo usa `web/js/cielo.js` (fase 2 de #144).
+- **Datos:** el código de estado del cielo es el `weather_code` (código WMO) de la API de Open-Meteo (<https://open-meteo.com/en/docs>). Es un modelo meteorológico, no estaciones. Datos bajo CC BY 4.0, sin clave; exige un enlace de atribución junto a los datos (verificado el 2026-11-15 en el README de github.com/open-meteo/open-meteo y en sus términos del API gratuito; registrado en `docs/RECURSOS.md`). Lo usa `web/js/cielo.js` (aprobado por Carlos el 2026-11-15, #144).
 - **Día y noche:** con `is_day = 0`, los códigos 0–1 usan `clear_night` y el código 2 usa `partly_cloudy_night`.
 
 | Códigos WMO | Estado (ES / EN) | Ícono de día | Ícono de noche |
