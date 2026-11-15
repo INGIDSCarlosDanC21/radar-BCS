@@ -72,3 +72,69 @@ export const DERIVA_PX_S = 14;
 export const LINEA_IA = 'AI-generated voice (ElevenLabs)';
 export const URL_WEB = 'ingidscarlosdanc21.github.io/radar-BCS';
 export const FUENTES_DATOS = 'Data: NASA POWER · MODIS · GRACE · GIBS';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TRÁILER horizontal (composición RadarBCSTrailer, 1920x1080, 30 fps, 28 s).
+// Rejilla musical: 120 BPM → negra = 0.5 s, compás = 2 s. Todo corte cae en múltiplo de 0.5 s.
+// La voz y los subtítulos son los mismos de arriba (SUBTITULOS); aquí solo van escenas y golpes.
+// ─────────────────────────────────────────────────────────────────────────────
+export const TRAILER_DURACION_S = 28;
+
+export const TRAILER_ESCENAS = {
+  apertura: { desde: 0, hasta: 3 }, // satélite + HEAT · WATER · SEA
+  titulo: { desde: 3, hasta: 6 }, // logo con glitch + teléfono que sube (Inicio)
+  calor: { desde: 6, hasta: 12 }, // +1.47 °C, gráfica anual real, p < 0.001
+  lluvia: { desde: 12, hasta: 15.5 }, // barras de lluvia reales, "No clear change"
+  mapa: { desde: 15.5, hasta: 18.5 }, // satélite inclinado + 38 pines
+  avisos: { desde: 18.5, hasta: 22 }, // cortes rápidos: Clima, Pesca, "not official warnings"
+  cierre: { desde: 22, hasta: TRAILER_DURACION_S }, // "What changed, not why." + logo + URL
+} as const;
+
+// Palabras clave de la apertura, en el instante en que la voz las dice (rejilla de 0.5 s).
+export const PALABRAS_APERTURA = [
+  { texto: 'HEAT', en: 1.0 },
+  { texto: 'WATER', en: 1.5 },
+  { texto: 'SEA', en: 2.0 },
+] as const;
+
+// Cifras: SOLO las de web/data/indicadores.json (copiadas tal cual; ver Trailer/datos.ts).
+export const CIFRA_CALOR = '+1.47 °C';
+export const P_CALOR = 'p < 0.001';
+export const P_LLUVIA = 'p = 0.129';
+export const LUGARES = 38;
+
+// Efectos de sonido (archivos de la rama lider/trailer-audio en public/audio/).
+// "en" = segundo del golpe; los risers terminan EXACTO en el corte (empiezan en en - duración).
+export type Senal = { archivo: string; en: number; volumen: number };
+export const SENALES: Senal[] = [
+  { archivo: 'riser-3s', en: 0, volumen: 0.5 }, // culmina en 3.0 (corte al título)
+  { archivo: 'hit-soft', en: 1.0, volumen: 0.5 },
+  { archivo: 'hit-soft', en: 1.5, volumen: 0.5 },
+  { archivo: 'hit-soft', en: 2.0, volumen: 0.5 },
+  { archivo: 'hit-impact', en: 3.0, volumen: 0.8 },
+  { archivo: 'glitch', en: 3.0, volumen: 0.45 },
+  { archivo: 'whoosh-long', en: 4.0, volumen: 0.5 },
+  { archivo: 'whoosh-short', en: 5.9, volumen: 0.5 },
+  { archivo: 'hit-impact', en: 6.0, volumen: 0.6 },
+  { archivo: 'counter-tick', en: 6.5, volumen: 0.4 },
+  { archivo: 'ui-pop', en: 10.0, volumen: 0.6 },
+  { archivo: 'whoosh-short', en: 11.8, volumen: 0.6 },
+  { archivo: 'hit-soft', en: 12.0, volumen: 0.5 },
+  { archivo: 'reverse-swell', en: 12.5, volumen: 0.4 },
+  { archivo: 'ui-tick', en: 13.5, volumen: 0.5 },
+  { archivo: 'whoosh-long', en: 15.2, volumen: 0.5 },
+  { archivo: 'hit-impact', en: 15.5, volumen: 0.55 },
+  { archivo: 'ui-pop', en: 16.0, volumen: 0.45 },
+  { archivo: 'ui-pop', en: 16.5, volumen: 0.45 },
+  { archivo: 'ui-pop', en: 17.0, volumen: 0.45 },
+  { archivo: 'ui-pop', en: 17.5, volumen: 0.45 },
+  { archivo: 'whoosh-short', en: 18.4, volumen: 0.5 },
+  { archivo: 'ui-tick', en: 19.0, volumen: 0.5 },
+  { archivo: 'ui-tick', en: 19.5, volumen: 0.5 },
+  { archivo: 'glitch', en: 20.0, volumen: 0.4 },
+  { archivo: 'riser-3s', en: 19.0, volumen: 0.45 }, // culmina en 22.0 (corte al cierre)
+  { archivo: 'hit-impact', en: 22.0, volumen: 0.75 },
+  { archivo: 'sparkle-reveal', en: 23.5, volumen: 0.6 },
+  { archivo: 'hit-soft', en: 23.5, volumen: 0.5 },
+  { archivo: 'tail-outro', en: 24.0, volumen: 0.6 },
+];
