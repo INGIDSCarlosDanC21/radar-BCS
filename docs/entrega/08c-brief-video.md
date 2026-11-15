@@ -2,7 +2,7 @@
 
 Todo lo que necesitas está aquí; no hace falta leer el resto del repositorio. Guion y reglas en [`08b-video-shotlist.md`](08b-video-shotlist.md).
 
-> **Formato nuevo (2026-11-15): tráiler horizontal 16:9, 1920 × 1080, 30 fps, 28 s**, composición `RadarBCSTrailer` en [`video/`](../../video/README.md). Misma voz y mismos subtítulos en inglés; música y efectos propios (sintetizados por script, sin música de terceros); cortes en la rejilla de 120 BPM (0.5 s); teléfonos en 3D con capturas reales de la web; **sin etiquetas visibles de IA**, sin logos de la NASA, sin personas. Lo de abajo describe el video vertical anterior (`RadarBCS30s`), que queda como respaldo.
+> **Formato nuevo (2026-11-15): tráiler horizontal 16:9, 1920 × 1080, 30 fps, 28 s**, composición `RadarBCSTrailer` en [`video/`](../../video/README.md). Misma voz y mismos subtítulos en inglés; música y efectos hechos con muestras CC0 de Freesound procesadas por script (ver `09-audio-trailer.md`; sin música con copyright); cortes en la rejilla de 120 BPM (0.5 s); teléfonos en 3D con capturas reales de la web; **sin etiquetas visibles de IA**, sin logos de la NASA, sin personas. Lo de abajo describe el video vertical anterior (`RadarBCS30s`), que queda como respaldo.
 
 ## Qué entregar
 
