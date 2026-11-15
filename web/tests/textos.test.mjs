@@ -50,16 +50,16 @@ test('Home en inglés: usa los textos _en y no deja textos de la interfaz en esp
   const h = RBHome.html(datos);
   T.setLang('es');
   for (const i of datos.indicadores) assert.ok(h.includes(i.titulo_en), 'falta ' + i.titulo_en);
-  for (const es of ['¿Qué cambia?', 'Ver ficha', 'Fuente:', 'Tendencia clara', 'Sin cambio claro', 'Mostramos qué cambió', 'Datos generados', 'Indicador principal', 'Licencia', 'ayuda de IA'])
+  for (const es of ['¿Qué cambia?', 'Ver ficha', 'Fuente:', 'Tendencia clara', 'Sin cambio claro', 'Indicador principal', 'Licencia', 'ayuda de IA'])
     assert.ok(!h.includes(es), 'queda en español: ' + es);
-  for (const en of ['What is changing?', 'Source:', 'We show what changed, not why', 'AI assistance'])
+  for (const en of ['What is changing?', 'Source:', 'AI assistance'])
     assert.ok(h.includes(en), 'falta en inglés: ' + en);
 });
 
 test('Home en español sigue igual que antes (textos clave)', () => {
   T.setLang('es');
   const h = RBHome.html(datos);
-  for (const es of ['¿Qué cambia?', 'Fuente:', 'Mostramos qué cambió, no por qué.', 'Licencia Apache-2.0', 'ayuda de IA'])
+  for (const es of ['¿Qué cambia?', 'Fuente:', 'Licencia Apache-2.0', 'ayuda de IA'])
     assert.ok(h.includes(es), 'falta: ' + es);
 });
 

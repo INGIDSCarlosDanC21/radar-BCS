@@ -110,9 +110,9 @@
 
   function seccion(filas, ahora) {
     var p = filas[0], c = p.c, hora = (c.time || '').slice(11, 16), viejo = minutosDesde(c.time, ahora);
-    var h = '<div class="hm-sec-cab"><div><p class="hm-mono hm-eti"><i class="hm-punto"></i>' + t('cielo.kicker') + '</p>' +
-      '<h2 id="hm-cielo-h">' + t('cielo.h2') + '</h2></div>' +
-      '<p class="hm-mono hm-pildora">' + esc(t('cielo.actualizado', { h: hora })) + '</p></div>' +
+    // Sin kicker ni párrafo de fuente (pedido de UI/UX). La atribución que exige CC BY 4.0 queda como enlace en la pastilla.
+    var h = '<div class="hm-sec-cab"><h2 id="hm-cielo-h">' + t('cielo.h2') + '</h2>' +
+      '<p class="hm-mono hm-pildora cl-act">' + esc(t('cielo.actualizado', { h: hora })) + ' · <a href="https://open-meteo.com/">Open-Meteo</a></p></div>' +
       (viejo != null && viejo > VIEJO_MIN ? '<p class="aviso cl-viejo">' + esc(t('cielo.viejo')) + '</p>' : '') +
       '<div class="hm-rejilla"><article class="hm-principal cl-principal" aria-label="' + esc(p.lugar.es + ': ' + p.e.texto + ', ' + num(c.temperature_2m) + ' °C') + '">' +
       '<div class="hm-barra" aria-hidden="true"></div>' +
@@ -133,7 +133,7 @@
         '<div class="hm-peq-val"><p class="hm-cifra">' + num(f.c.temperature_2m) + '°C</p>' +
         (f.min != null ? '<span class="hm-mono hm-p">' + esc(t('cielo.min', { v: num(f.min) })) + '</span>' : '') + '</div></article>';
     });
-    h += '</div></div><p class="hm-mono cl-fuente">' + t('cielo.fuente') + '</p>';
+    h += '</div></div>';
     return h;
   }
   function dato(k, v) {
@@ -159,8 +159,7 @@
   /* Marcado inicial (lo pone home.js): sección con "cargando" y mapa con la imagen GOES-West. */
   function marcoSeccion() {
     return '<section class="hm-sec cl-sec" id="hm-cielo" aria-labelledby="hm-cielo-h" aria-busy="true">' +
-      '<div class="hm-sec-cab"><div><p class="hm-mono hm-eti"><i class="hm-punto"></i>' + t('cielo.kicker') + '</p>' +
-      '<h2 id="hm-cielo-h">' + t('cielo.h2') + '</h2></div></div><p class="cl-estado">' + t('cielo.cargando') + '</p></section>';
+      '<div class="hm-sec-cab"><h2 id="hm-cielo-h">' + t('cielo.h2') + '</h2></div><p class="cl-estado">' + t('cielo.cargando') + '</p></section>';
   }
   function marcoMapa(altMODIS) {
     return '<div class="cl-lienzo"><img class="cl-img" src="' + GOES + '" width="1200" height="1060" alt="' + esc(t('cielo.altGoes')) + '" ' +
