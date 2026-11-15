@@ -74,3 +74,12 @@ test('index.html carga el estilo y el script', () => {
   assert.ok(h.includes('src="js/ver-mas.js"'));
   assert.ok(h.indexOf('js/ver-mas.js') > h.indexOf('js/textos.js'), 'ver-mas.js va después de textos.js');
 });
+
+test('consejos de CDC y EPA: el texto de cada desplegable se muestra completo, sin "Ver más" (pedido de UI/UX)', () => {
+  const js = lee('../js/acciones.js');
+  assert.match(js, /<li class="ac-card ac-' \+ \(tipo === 'c' \? 'calor' : 'agua'\) \+ '" data-vm="no">/);
+});
+
+test('el aviso médico de los consejos nunca se pliega', () => {
+  assert.ok(lee('../js/acciones.js').includes(`'<p class="aviso" data-vm="no">' + esc(t('acc.aviso'))`));
+});
