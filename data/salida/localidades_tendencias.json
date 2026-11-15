@@ -1,0 +1,1183 @@
+{
+  "generado": "2026-11-15",
+  "generado_con": "analisis/localidades.py (código generado con IA: sí, Claude)",
+  "periodo": {
+    "inicio": 2001,
+    "fin": 2025
+  },
+  "fecha_descarga": "2026-11-15",
+  "alfa": 0.05,
+  "fuente": {
+    "dataset": "NASA POWER Monthly (MERRA-2), parámetros T2M y PRECTOTCORR, community AG",
+    "url": "https://power.larc.nasa.gov/docs/services/api/temporal/monthly/",
+    "resolucion": "reanálisis MERRA-2, malla de 0.5° x 0.625° (~50 km): localidades cercanas comparten celda",
+    "coordenadas": "GeoNames (CC BY 4.0), https://www.geonames.org/"
+  },
+  "metodo": {
+    "calor": "Mann-Kendall estacional + pendiente de Sen (temperatura del aire a 2 m)",
+    "lluvia": "Mann-Kendall sobre el total anual + pendiente de Sen (PRECTOTCORR x días del mes)"
+  },
+  "nota": "No es una medición local: dato de reanálisis. Muestra qué cambió, no por qué. Vegetación y agua no se calculan por localidad.",
+  "localidades": [
+    {
+      "id": "lapaz",
+      "nombre": "La Paz",
+      "nombre_en": "La Paz",
+      "municipio": "La Paz",
+      "lat": 24.14,
+      "lon": -110.31,
+      "geonames": 4000900,
+      "celda": [
+        24.0,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.465,
+        "significativo": true,
+        "p_valor": 2.762e-17,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.129,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.79,
+      "lluvia_media_anual_mm": 277.0,
+      "comparte_celda_con": [
+        "elsargento"
+      ]
+    },
+    {
+      "id": "cabosanlucas",
+      "nombre": "Cabo San Lucas",
+      "nombre_en": "Cabo San Lucas",
+      "municipio": "Los Cabos",
+      "lat": 22.89088,
+      "lon": -109.91238,
+      "geonames": 3985710,
+      "celda": [
+        23.0,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.059,
+        "significativo": true,
+        "p_valor": 2.894e-10,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": 167.116,
+        "significativo": true,
+        "p_valor": 0.02985,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.45,
+      "lluvia_media_anual_mm": 268.0,
+      "comparte_celda_con": [
+        "sanjosedelcabo",
+        "coloniadelsol",
+        "laspalmas",
+        "lasveredas"
+      ]
+    },
+    {
+      "id": "sanjosedelcabo",
+      "nombre": "San José del Cabo",
+      "nombre_en": "San José del Cabo",
+      "municipio": "Los Cabos",
+      "lat": 23.05406,
+      "lon": -109.70367,
+      "geonames": 3986172,
+      "celda": [
+        23.0,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.059,
+        "significativo": true,
+        "p_valor": 2.894e-10,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": 167.116,
+        "significativo": true,
+        "p_valor": 0.02985,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.45,
+      "lluvia_media_anual_mm": 268.0,
+      "comparte_celda_con": [
+        "cabosanlucas",
+        "coloniadelsol",
+        "laspalmas",
+        "lasveredas"
+      ]
+    },
+    {
+      "id": "coloniadelsol",
+      "nombre": "Colonia del Sol",
+      "nombre_en": "Colonia del Sol",
+      "municipio": "Los Cabos",
+      "lat": 22.91273,
+      "lon": -109.92655,
+      "geonames": 11121204,
+      "celda": [
+        23.0,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.059,
+        "significativo": true,
+        "p_valor": 2.894e-10,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": 167.116,
+        "significativo": true,
+        "p_valor": 0.02985,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.45,
+      "lluvia_media_anual_mm": 268.0,
+      "comparte_celda_con": [
+        "cabosanlucas",
+        "sanjosedelcabo",
+        "laspalmas",
+        "lasveredas"
+      ]
+    },
+    {
+      "id": "ciudadconstitucion",
+      "nombre": "Ciudad Constitución",
+      "nombre_en": "Ciudad Constitución",
+      "municipio": "Comondú",
+      "lat": 25.0321,
+      "lon": -111.66256,
+      "geonames": 4013723,
+      "celda": [
+        25.0,
+        -111.875
+      ],
+      "calor": {
+        "cambio_total": 1.247,
+        "significativo": true,
+        "p_valor": 4.838e-11,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.6238,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 22.96,
+      "lluvia_media_anual_mm": 189.0,
+      "comparte_celda_con": [
+        "puertosancarlos",
+        "puertolopezmateos"
+      ]
+    },
+    {
+      "id": "loreto",
+      "nombre": "Loreto",
+      "nombre_en": "Loreto",
+      "municipio": "Loreto",
+      "lat": 26.01217,
+      "lon": -111.34888,
+      "geonames": 3998287,
+      "celda": [
+        26.0,
+        -111.25
+      ],
+      "calor": {
+        "cambio_total": 1.295,
+        "significativo": true,
+        "p_valor": 1.019e-13,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.6238,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.53,
+      "lluvia_media_anual_mm": 192.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "guerreronegro",
+      "nombre": "Guerrero Negro",
+      "nombre_en": "Guerrero Negro",
+      "municipio": "Mulegé",
+      "lat": 27.96005,
+      "lon": -114.05589,
+      "geonames": 4021858,
+      "celda": [
+        28.0,
+        -113.75
+      ],
+      "calor": {
+        "cambio_total": 0.828,
+        "significativo": true,
+        "p_valor": 0.0002315,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.3875,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 20.52,
+      "lluvia_media_anual_mm": 86.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "santarosalia",
+      "nombre": "Santa Rosalía",
+      "nombre_en": "Santa Rosalía",
+      "municipio": "Mulegé",
+      "lat": 27.34035,
+      "lon": -112.26706,
+      "geonames": 3983805,
+      "celda": [
+        27.5,
+        -112.5
+      ],
+      "calor": {
+        "cambio_total": 0.816,
+        "significativo": true,
+        "p_valor": 2.091e-05,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1543,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 23.09,
+      "lluvia_media_anual_mm": 133.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "laspalmas",
+      "nombre": "Las Palmas",
+      "nombre_en": "Las Palmas",
+      "municipio": "Los Cabos",
+      "lat": 22.93672,
+      "lon": -109.94235,
+      "geonames": 8858141,
+      "celda": [
+        23.0,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.059,
+        "significativo": true,
+        "p_valor": 2.894e-10,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": 167.116,
+        "significativo": true,
+        "p_valor": 0.02985,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.45,
+      "lluvia_media_anual_mm": 268.0,
+      "comparte_celda_con": [
+        "cabosanlucas",
+        "sanjosedelcabo",
+        "coloniadelsol",
+        "lasveredas"
+      ]
+    },
+    {
+      "id": "lasveredas",
+      "nombre": "Las Veredas",
+      "nombre_en": "Las Veredas",
+      "municipio": "Los Cabos",
+      "lat": 23.15028,
+      "lon": -109.70611,
+      "geonames": 8858156,
+      "celda": [
+        23.0,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.059,
+        "significativo": true,
+        "p_valor": 2.894e-10,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": 167.116,
+        "significativo": true,
+        "p_valor": 0.02985,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.45,
+      "lluvia_media_anual_mm": 268.0,
+      "comparte_celda_con": [
+        "cabosanlucas",
+        "sanjosedelcabo",
+        "coloniadelsol",
+        "laspalmas"
+      ]
+    },
+    {
+      "id": "ciudadinsurgentes",
+      "nombre": "Ciudad Insurgentes",
+      "nombre_en": "Ciudad Insurgentes",
+      "municipio": "Comondú",
+      "lat": 25.26345,
+      "lon": -111.77444,
+      "geonames": 4011574,
+      "celda": [
+        25.5,
+        -111.875
+      ],
+      "calor": {
+        "cambio_total": 1.209,
+        "significativo": true,
+        "p_valor": 4.797e-09,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.9814,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 23.11,
+      "lluvia_media_anual_mm": 206.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "villaalvaradoaramburo",
+      "nombre": "Villa Alberto Andrés Alvarado Arámburo",
+      "nombre_en": "Villa Alberto Andrés Alvarado Arámburo",
+      "municipio": "Mulegé",
+      "lat": 27.64444,
+      "lon": -113.38472,
+      "geonames": 8858204,
+      "celda": [
+        27.5,
+        -113.125
+      ],
+      "calor": {
+        "cambio_total": 0.836,
+        "significativo": true,
+        "p_valor": 0.0006134,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1682,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 22.3,
+      "lluvia_media_anual_mm": 102.0,
+      "comparte_celda_con": [
+        "elsilencio",
+        "sanignacio"
+      ]
+    },
+    {
+      "id": "puertosancarlos",
+      "nombre": "Puerto San Carlos",
+      "nombre_en": "Puerto San Carlos",
+      "municipio": "Comondú",
+      "lat": 24.78874,
+      "lon": -112.10504,
+      "geonames": 3987485,
+      "celda": [
+        25.0,
+        -111.875
+      ],
+      "calor": {
+        "cambio_total": 1.247,
+        "significativo": true,
+        "p_valor": 4.838e-11,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.6238,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 22.96,
+      "lluvia_media_anual_mm": 189.0,
+      "comparte_celda_con": [
+        "ciudadconstitucion",
+        "puertolopezmateos"
+      ]
+    },
+    {
+      "id": "todossantos",
+      "nombre": "Todos Santos",
+      "nombre_en": "Todos Santos",
+      "municipio": "La Paz",
+      "lat": 23.44688,
+      "lon": -110.22308,
+      "geonames": 3981432,
+      "celda": [
+        23.5,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.327,
+        "significativo": true,
+        "p_valor": 2.083e-13,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1543,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.37,
+      "lluvia_media_anual_mm": 272.0,
+      "comparte_celda_con": [
+        "elpescadero",
+        "miraflores",
+        "losbarriles",
+        "santiago",
+        "sanbartolo"
+      ]
+    },
+    {
+      "id": "elcentenario",
+      "nombre": "El Centenario",
+      "nombre_en": "El Centenario",
+      "municipio": "La Paz",
+      "lat": 24.1025,
+      "lon": -110.41444,
+      "geonames": 8858277,
+      "celda": [
+        24.0,
+        -110.625
+      ],
+      "calor": {
+        "cambio_total": 1.2,
+        "significativo": true,
+        "p_valor": 4.433e-11,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.3383,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 23.98,
+      "lluvia_media_anual_mm": 247.0,
+      "comparte_celda_con": [
+        "chametla"
+      ]
+    },
+    {
+      "id": "mulege",
+      "nombre": "Mulegé",
+      "nombre_en": "Mulegé",
+      "municipio": "Mulegé",
+      "lat": 26.89141,
+      "lon": -111.9826,
+      "geonames": 3995236,
+      "celda": [
+        27.0,
+        -111.875
+      ],
+      "calor": {
+        "cambio_total": 1.09,
+        "significativo": true,
+        "p_valor": 2.523e-10,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.2723,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.33,
+      "lluvia_media_anual_mm": 196.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "bahiatortugas",
+      "nombre": "Bahía Tortugas",
+      "nombre_en": "Bahía Tortugas",
+      "municipio": "Mulegé",
+      "lat": 27.69132,
+      "lon": -114.8948,
+      "geonames": 3991337,
+      "celda": [
+        27.5,
+        -115.0
+      ],
+      "calor": {
+        "cambio_total": 0.857,
+        "significativo": true,
+        "p_valor": 9.133e-06,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.6572,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 18.5,
+      "lluvia_media_anual_mm": 110.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "elpescadero",
+      "nombre": "El Pescadero",
+      "nombre_en": "El Pescadero",
+      "municipio": "La Paz",
+      "lat": 23.36417,
+      "lon": -110.16833,
+      "geonames": 4022368,
+      "celda": [
+        23.5,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.327,
+        "significativo": true,
+        "p_valor": 2.083e-13,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1543,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.37,
+      "lluvia_media_anual_mm": 272.0,
+      "comparte_celda_con": [
+        "todossantos",
+        "miraflores",
+        "losbarriles",
+        "santiago",
+        "sanbartolo"
+      ]
+    },
+    {
+      "id": "puertolopezmateos",
+      "nombre": "Puerto Adolfo López Mateos",
+      "nombre_en": "Puerto Adolfo López Mateos",
+      "municipio": "Comondú",
+      "lat": 25.19241,
+      "lon": -112.1104,
+      "geonames": 3999504,
+      "celda": [
+        25.0,
+        -111.875
+      ],
+      "calor": {
+        "cambio_total": 1.247,
+        "significativo": true,
+        "p_valor": 4.838e-11,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.6238,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 22.96,
+      "lluvia_media_anual_mm": 189.0,
+      "comparte_celda_con": [
+        "ciudadconstitucion",
+        "puertosancarlos"
+      ]
+    },
+    {
+      "id": "chametla",
+      "nombre": "Chametla",
+      "nombre_en": "Chametla",
+      "municipio": "La Paz",
+      "lat": 24.09926,
+      "lon": -110.37395,
+      "geonames": 4022333,
+      "celda": [
+        24.0,
+        -110.625
+      ],
+      "calor": {
+        "cambio_total": 1.2,
+        "significativo": true,
+        "p_valor": 4.433e-11,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.3383,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 23.98,
+      "lluvia_media_anual_mm": 247.0,
+      "comparte_celda_con": [
+        "elcentenario"
+      ]
+    },
+    {
+      "id": "laribera",
+      "nombre": "La Ribera",
+      "nombre_en": "La Ribera",
+      "municipio": "Los Cabos",
+      "lat": 23.59581,
+      "lon": -109.58586,
+      "geonames": 4000444,
+      "celda": [
+        23.5,
+        -109.375
+      ],
+      "calor": {
+        "cambio_total": 1.28,
+        "significativo": true,
+        "p_valor": 9.656e-18,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": 246.981,
+        "significativo": true,
+        "p_valor": 0.002217,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 25.36,
+      "lluvia_media_anual_mm": 308.0,
+      "comparte_celda_con": [
+        "cabopulmo"
+      ]
+    },
+    {
+      "id": "melitonalbanez",
+      "nombre": "Melitón Albáñez Domínguez",
+      "nombre_en": "Melitón Albáñez Domínguez",
+      "municipio": "La Paz",
+      "lat": 23.66139,
+      "lon": -110.42083,
+      "geonames": 8858983,
+      "celda": [
+        23.5,
+        -110.625
+      ],
+      "calor": {
+        "cambio_total": 0.823,
+        "significativo": true,
+        "p_valor": 4.235e-07,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.6238,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 22.99,
+      "lluvia_media_anual_mm": 253.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "bahiaasuncion",
+      "nombre": "Bahía Asunción",
+      "nombre_en": "Bahía Asunción",
+      "municipio": "Mulegé",
+      "lat": 27.14231,
+      "lon": -114.29582,
+      "geonames": 4021921,
+      "celda": [
+        27.0,
+        -114.375
+      ],
+      "calor": {
+        "cambio_total": 0.784,
+        "significativo": true,
+        "p_valor": 8.684e-05,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.3875,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 19.42,
+      "lluvia_media_anual_mm": 63.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "laplaya",
+      "nombre": "La Playa",
+      "nombre_en": "La Playa",
+      "municipio": "Los Cabos",
+      "lat": 23.06417,
+      "lon": -109.66833,
+      "geonames": 8859159,
+      "celda": [
+        23.0,
+        -109.375
+      ],
+      "calor": {
+        "cambio_total": 1.031,
+        "significativo": true,
+        "p_valor": 9.217e-13,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": 306.454,
+        "significativo": true,
+        "p_valor": 0.001895,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 25.27,
+      "lluvia_media_anual_mm": 309.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "miraflores",
+      "nombre": "Miraflores",
+      "nombre_en": "Miraflores",
+      "municipio": "Los Cabos",
+      "lat": 23.36975,
+      "lon": -109.77436,
+      "geonames": 3995741,
+      "celda": [
+        23.5,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.327,
+        "significativo": true,
+        "p_valor": 2.083e-13,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1543,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.37,
+      "lluvia_media_anual_mm": 272.0,
+      "comparte_celda_con": [
+        "todossantos",
+        "elpescadero",
+        "losbarriles",
+        "santiago",
+        "sanbartolo"
+      ]
+    },
+    {
+      "id": "elsilencio",
+      "nombre": "El Silencio",
+      "nombre_en": "El Silencio",
+      "municipio": "Mulegé",
+      "lat": 27.46801,
+      "lon": -113.29987,
+      "geonames": 8859501,
+      "celda": [
+        27.5,
+        -113.125
+      ],
+      "calor": {
+        "cambio_total": 0.836,
+        "significativo": true,
+        "p_valor": 0.0006134,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1682,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 22.3,
+      "lluvia_media_anual_mm": 102.0,
+      "comparte_celda_con": [
+        "villaalvaradoaramburo",
+        "sanignacio"
+      ]
+    },
+    {
+      "id": "losbarriles",
+      "nombre": "Los Barriles",
+      "nombre_en": "Los Barriles",
+      "municipio": "La Paz",
+      "lat": 23.68273,
+      "lon": -109.69953,
+      "geonames": 3998075,
+      "celda": [
+        23.5,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.327,
+        "significativo": true,
+        "p_valor": 2.083e-13,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1543,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.37,
+      "lluvia_media_anual_mm": 272.0,
+      "comparte_celda_con": [
+        "todossantos",
+        "elpescadero",
+        "miraflores",
+        "santiago",
+        "sanbartolo"
+      ]
+    },
+    {
+      "id": "santiago",
+      "nombre": "Santiago",
+      "nombre_en": "Santiago",
+      "municipio": "Los Cabos",
+      "lat": 23.47855,
+      "lon": -109.71515,
+      "geonames": 3983676,
+      "celda": [
+        23.5,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.327,
+        "significativo": true,
+        "p_valor": 2.083e-13,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1543,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.37,
+      "lluvia_media_anual_mm": 272.0,
+      "comparte_celda_con": [
+        "todossantos",
+        "elpescadero",
+        "miraflores",
+        "losbarriles",
+        "sanbartolo"
+      ]
+    },
+    {
+      "id": "sanignacio",
+      "nombre": "San Ignacio",
+      "nombre_en": "San Ignacio",
+      "municipio": "Mulegé",
+      "lat": 27.28232,
+      "lon": -112.89637,
+      "geonames": 3986837,
+      "celda": [
+        27.5,
+        -113.125
+      ],
+      "calor": {
+        "cambio_total": 0.836,
+        "significativo": true,
+        "p_valor": 0.0006134,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1682,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 22.3,
+      "lluvia_media_anual_mm": 102.0,
+      "comparte_celda_con": [
+        "villaalvaradoaramburo",
+        "elsilencio"
+      ]
+    },
+    {
+      "id": "puntaabreojos",
+      "nombre": "Punta Abreojos",
+      "nombre_en": "Punta Abreojos",
+      "municipio": "Mulegé",
+      "lat": 26.71541,
+      "lon": -113.57451,
+      "geonames": 8015082,
+      "celda": [
+        26.5,
+        -113.75
+      ],
+      "calor": {
+        "cambio_total": 0.624,
+        "significativo": true,
+        "p_valor": 0.001179,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.8335,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 19.88,
+      "lluvia_media_anual_mm": 59.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "elsargento",
+      "nombre": "El Sargento",
+      "nombre_en": "El Sargento",
+      "municipio": "La Paz",
+      "lat": 24.08352,
+      "lon": -109.99401,
+      "geonames": 4022397,
+      "celda": [
+        24.0,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.465,
+        "significativo": true,
+        "p_valor": 2.762e-17,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.129,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.79,
+      "lluvia_media_anual_mm": 277.0,
+      "comparte_celda_con": [
+        "lapaz"
+      ]
+    },
+    {
+      "id": "lapurisima",
+      "nombre": "La Purísima",
+      "nombre_en": "La Purísima",
+      "municipio": "Comondú",
+      "lat": 26.1865,
+      "lon": -112.07473,
+      "geonames": 4000564,
+      "celda": [
+        26.0,
+        -111.875
+      ],
+      "calor": {
+        "cambio_total": 1.246,
+        "significativo": true,
+        "p_valor": 4.519e-08,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.7973,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 22.64,
+      "lluvia_media_anual_mm": 183.0,
+      "comparte_celda_con": [
+        "sanjosedecomondu"
+      ]
+    },
+    {
+      "id": "sanjuandelacosta",
+      "nombre": "San Juan de la Costa",
+      "nombre_en": "San Juan de la Costa",
+      "municipio": "La Paz",
+      "lat": 24.37364,
+      "lon": -110.68983,
+      "geonames": 3985884,
+      "celda": [
+        24.5,
+        -110.625
+      ],
+      "calor": {
+        "cambio_total": 1.28,
+        "significativo": true,
+        "p_valor": 3.331e-15,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.3875,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.67,
+      "lluvia_media_anual_mm": 227.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "cabopulmo",
+      "nombre": "Cabo Pulmo",
+      "nombre_en": "Cabo Pulmo",
+      "municipio": "Los Cabos",
+      "lat": 23.43718,
+      "lon": -109.42924,
+      "geonames": 7302527,
+      "celda": [
+        23.5,
+        -109.375
+      ],
+      "calor": {
+        "cambio_total": 1.28,
+        "significativo": true,
+        "p_valor": 9.656e-18,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": 246.981,
+        "significativo": true,
+        "p_valor": 0.002217,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 25.36,
+      "lluvia_media_anual_mm": 308.0,
+      "comparte_celda_con": [
+        "laribera"
+      ]
+    },
+    {
+      "id": "sanjosedecomondu",
+      "nombre": "San José de Comondú",
+      "nombre_en": "San José de Comondú",
+      "municipio": "Comondú",
+      "lat": 26.05876,
+      "lon": -111.82416,
+      "geonames": 4013098,
+      "celda": [
+        26.0,
+        -111.875
+      ],
+      "calor": {
+        "cambio_total": 1.246,
+        "significativo": true,
+        "p_valor": 4.519e-08,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.7973,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 22.64,
+      "lluvia_media_anual_mm": 183.0,
+      "comparte_celda_con": [
+        "lapurisima"
+      ]
+    },
+    {
+      "id": "puertochale",
+      "nombre": "Puerto Chale",
+      "nombre_en": "Puerto Chale",
+      "municipio": "La Paz",
+      "lat": 24.42463,
+      "lon": -111.55287,
+      "geonames": 3991412,
+      "celda": [
+        24.5,
+        -111.25
+      ],
+      "calor": {
+        "cambio_total": 1.44,
+        "significativo": true,
+        "p_valor": 5.937e-13,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.907,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.13,
+      "lluvia_media_anual_mm": 206.0,
+      "comparte_celda_con": []
+    },
+    {
+      "id": "sanbartolo",
+      "nombre": "San Bartolo",
+      "nombre_en": "San Bartolo",
+      "municipio": "La Paz",
+      "lat": 23.73849,
+      "lon": -109.84658,
+      "geonames": 3987608,
+      "celda": [
+        23.5,
+        -110.0
+      ],
+      "calor": {
+        "cambio_total": 1.327,
+        "significativo": true,
+        "p_valor": 2.083e-13,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.1543,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 24.37,
+      "lluvia_media_anual_mm": 272.0,
+      "comparte_celda_con": [
+        "todossantos",
+        "elpescadero",
+        "miraflores",
+        "losbarriles",
+        "santiago"
+      ]
+    },
+    {
+      "id": "lasbarrancas",
+      "nombre": "Las Barrancas",
+      "nombre_en": "Las Barrancas",
+      "municipio": "Comondú",
+      "lat": 26.00148,
+      "lon": -112.19806,
+      "geonames": 4000215,
+      "celda": [
+        26.0,
+        -112.5
+      ],
+      "calor": {
+        "cambio_total": 0.728,
+        "significativo": true,
+        "p_valor": 7.973e-05,
+        "unidades": "°C"
+      },
+      "lluvia": {
+        "cambio_total": null,
+        "significativo": false,
+        "p_valor": 0.7614,
+        "unidades": "mm/año"
+      },
+      "calor_medio_c": 21.07,
+      "lluvia_media_anual_mm": 140.0,
+      "comparte_celda_con": []
+    }
+  ],
+  "celdas_distintas": 21
+}
