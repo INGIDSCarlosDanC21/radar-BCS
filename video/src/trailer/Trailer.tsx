@@ -42,7 +42,7 @@ const SubtitulosCineticos: React.FC = () => {
           const q = interpolate(t, [p.desde - 0.04, p.desde + 0.16], [0, 1], { ...CL, easing: Easing.out(Easing.cubic) });
           // "not" solo se marca en rojo cuando es "not official warnings"; en "not why." va en cian.
           const esNotWarnings = p.texto !== 'not' || palabras[i + 1]?.texto === 'official';
-          const acento = esNotWarnings ? ACENTOS[p.texto] : ACENTOS['why.'];
+          const acento = esNotWarnings ? ACENTOS[p.texto.toLowerCase()] : ACENTOS['why.'];
           const marcado = acento === '#ff6b6b';
           return (
             <span

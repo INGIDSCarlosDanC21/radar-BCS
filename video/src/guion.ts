@@ -7,7 +7,7 @@
 // - Regla: duración <= 30 s. Cifras solo las del guion (data/salida/indicadores.json).
 
 export const FPS = 30;
-export const DURACION_S = 27; // video vertical de respaldo (RadarBCS30s); voz Katie: 26.69 s
+export const DURACION_S = 28; // video vertical de respaldo (RadarBCS30s); voz Tamsin: 27.31 s
 
 // Escenas del video VERTICAL de respaldo (docs/entrega/08c-brief-video.md). Seguidas y sin huecos.
 export const ESCENAS = {
@@ -23,33 +23,35 @@ export const ESCENAS = {
 
 export type Subtitulo = { texto: string; desde: number; hasta: number };
 
-// VOZ: un solo archivo, un solo lugar. Voz "Katie" de ElevenLabs (2026-11-15), 26.69 s.
-export const VOZ = 'narracion-katie.mp3'; // en video/public/ (no se sube al repo)
+// VOZ: un solo archivo, un solo lugar. Voz "Tamsin" de ElevenLabs (Eleven v4, 1.08x), 27.31 s.
+export const VOZ = 'narracion-tamsin.mp3'; // en video/public/ (no se sube al repo)
 
 // Tramos de voz entre pausas, medidos con ffmpeg silencedetect (n=-35 dB, d=0.07 s) sobre
-// narracion-katie.mp3 y los cortes de frase de public/voz/tiempos-katie.json.
+// narracion-tamsin.mp3 y los cortes de frase de public/voz-tamsin/tiempos-tamsin.json.
+// En pantalla las cifras van en dígitos ("1.5", "38") aunque la voz las diga con palabras.
 export const TRAMOS_VOZ: Subtitulo[] = [
-  { texto: 'In La Paz, heat, water and the sea touch everyone.', desde: 0.0, hasta: 3.59 },
-  { texto: 'Radar BCS', desde: 3.75, hasta: 4.71 },
-  { texto: 'turns NASA data into answers.', desde: 4.79, hasta: 6.64 },
-  { texto: 'Air temperature rose about 1.5 degrees since 2001,', desde: 6.84, hasta: 10.04 },
-  { texto: 'a statistically significant change.', desde: 10.37, hasta: 12.2 },
-  { texto: 'Where we are unsure,', desde: 12.4, hasta: 13.53 },
-  { texto: 'we say it:', desde: 13.61, hasta: 14.19 },
-  { texto: 'rainfall shows no clear change.', desde: 14.53, hasta: 16.25 },
-  { texto: 'The map shows where,', desde: 16.4, hasta: 17.43 },
-  { texto: 'across', desde: 17.51, hasta: 17.89 },
-  { texto: '38 places.', desde: 17.99, hasta: 18.98 },
-  { texto: "Today's sea and weather are model estimates,", desde: 19.18, hasta: 21.4 },
-  { texto: 'not official warnings.', desde: 21.54, hasta: 22.76 },
-  { texto: 'What changed,', desde: 23.07, hasta: 23.32 },
-  { texto: 'not why.', desde: 23.39, hasta: 24.09 },
-  { texto: 'Radar', desde: 24.37, hasta: 25.07 },
-  { texto: 'BCS.', desde: 25.52, hasta: 26.69 },
+  { texto: 'In La Paz,', desde: 0.0, hasta: 0.81 },
+  { texto: 'heat, water and the sea', desde: 0.92, hasta: 3.03 },
+  { texto: 'touch everyone.', desde: 3.12, hasta: 3.78 },
+  { texto: 'Radar BCS', desde: 3.97, hasta: 5.1 },
+  { texto: 'turns NASA data into answers.', desde: 5.41, hasta: 7.44 },
+  { texto: 'Since 2001,', desde: 7.69, hasta: 8.95 },
+  { texto: 'air temperature rose about 1.5 degrees.', desde: 9.22, hasta: 11.85 },
+  { texto: 'Statistically significant.', desde: 12.25, hasta: 13.71 },
+  { texto: 'Rainfall?', desde: 13.94, hasta: 14.5 },
+  { texto: 'No clear change.', desde: 14.98, hasta: 15.99 },
+  { texto: 'The map shows WHERE:', desde: 16.18, hasta: 17.36 },
+  { texto: '38 places.', desde: 17.84, hasta: 19.1 },
+  { texto: 'Sea and weather today?', desde: 19.33, hasta: 20.37 },
+  { texto: 'Model estimates,', desde: 20.86, hasta: 21.86 },
+  { texto: 'not official warnings.', desde: 22.12, hasta: 23.45 },
+  { texto: 'What changed, not why.', desde: 23.8, hasta: 24.74 },
+  { texto: 'Radar', desde: 25.01, hasta: 25.69 },
+  { texto: 'BCS.', desde: 26.13, hasta: 27.31 },
 ];
 
 // Subtítulos: cada línea junta tramos (índices de TRAMOS_VOZ). Juntas dicen el guion exacto.
-const LINEAS: number[][] = [[0], [1, 2], [3], [4], [5, 6, 7], [8, 9, 10], [11], [12], [13, 14, 15, 16]];
+const LINEAS: number[][] = [[0, 1, 2], [3, 4], [5, 6], [7], [8, 9], [10, 11], [12, 13, 14], [15, 16, 17]];
 export const SUBTITULOS: Subtitulo[] = LINEAS.map((l) => ({
   texto: l.map((i) => TRAMOS_VOZ[i].texto).join(' '),
   desde: TRAMOS_VOZ[l[0]].desde,
@@ -90,17 +92,20 @@ export const ACENTOS: Record<string, string> = {
   'heat,': '#ff8a3d',
   water: CIAN,
   sea: MAR,
-  NASA: CIAN,
-  Radar: CIAN,
-  BCS: CIAN,
-  'BCS.': CIAN,
+  nasa: CIAN,
+  radar: CIAN,
+  bcs: CIAN,
+  'bcs.': CIAN,
+  '2001,': AMBAR,
   '1.5': AMBAR,
-  degrees: AMBAR,
+  'degrees.': AMBAR,
   statistically: AMBAR,
-  significant: AMBAR,
+  'significant.': AMBAR,
+  'rainfall?': CIAN,
   no: CIAN,
   clear: CIAN,
   'change.': CIAN,
+  'where:': ESMERALDA,
   '38': ESMERALDA,
   'places.': ESMERALDA,
   model: MAR,
@@ -144,17 +149,17 @@ export const DERIVA_PX_S = 14;
 // Rejilla musical: 120 BPM → negra = 0.5 s, compás = 2 s. Los CORTES caen en múltiplos de 0.5 s;
 // los momentos de la voz (palabras, cifras) salen de TRAMOS_VOZ y no se redondean.
 // ─────────────────────────────────────────────────────────────────────────────
-export const TRAILER_DURACION_S = 28;
+export const TRAILER_DURACION_S = 29; // la voz termina en 27.31 s; cola del logo y fundido hasta 29
 
 // Escenas (cortes en la rejilla, justo antes del inicio de cada frase de la voz).
 export const TRAILER_ESCENAS = {
-  apertura: { desde: 0, hasta: 3.5 }, // satélite + HEAT · WATER · SEA (frase 1)
-  titulo: { desde: 3.5, hasta: 6.5 }, // logo + teléfono con la app cambiando de pantalla (frase 2)
-  calor: { desde: 6.5, hasta: 12.5 }, // +1.47 °C, gráfica anual real, p < 0.001, simulación (frase 3)
-  lluvia: { desde: 12.5, hasta: 16.5 }, // barras de lluvia reales, "No clear change" (frase 4)
-  mapa: { desde: 16.5, hasta: 19 }, // satélite + 38 pines + mapa real de la app (frase 5)
-  funciones: { desde: 19, hasta: 23 }, // montaje rápido de funciones + "not official warnings" (frase 6)
-  cierre: { desde: 23, hasta: TRAILER_DURACION_S }, // "What changed, not why." + logo + URL (frase 7)
+  apertura: { desde: 0, hasta: 4 }, // satélite + HEAT · WATER · SEA (frase 1)
+  titulo: { desde: 4, hasta: 7.5 }, // logo + laptop que abre la tapa + teléfono (frase 2)
+  calor: { desde: 7.5, hasta: 14 }, // +1.47 °C, gráfica anual real, p < 0.001, simulación (frase 3)
+  lluvia: { desde: 14, hasta: 16 }, // barras de lluvia reales, "No clear change" (frase 4)
+  mapa: { desde: 16, hasta: 19.5 }, // 38 lugares: laptop de escritorio + teléfono (frase 5)
+  funciones: { desde: 19.5, hasta: 23.5 }, // montaje laptop/teléfono + "not official warnings" (frase 6)
+  cierre: { desde: 23.5, hasta: TRAILER_DURACION_S }, // "What changed, not why." + logo + URL (frase 7)
 } as const;
 
 // Palabras clave de la apertura: su instante sale de la voz.
@@ -167,13 +172,13 @@ export const PALABRAS_APERTURA = [
 // Momentos clave atados a la VOZ (segundos absolutos), derivados de TRAMOS_VOZ.
 export const MOMENTOS = {
   contadorDesde: inicioPalabra('temperature'),
-  contadorHasta: inicioPalabra('degrees') + 0.3,
+  contadorHasta: inicioPalabra('degrees.') + 0.3,
   graficaDesde: inicioPalabra('rose'),
-  graficaHasta: inicioPalabra('2001,'),
+  graficaHasta: inicioPalabra('degrees.') + 0.5,
   sello: inicioPalabra('statistically'),
   noClearChange: inicioPalabra('no'),
-  pLluvia: inicioPalabra('change.', 1),
-  pinesDesde: inicioPalabra('where,'),
+  pLluvia: inicioPalabra('change.') + 0.5,
+  pinesDesde: inicioPalabra('where:'),
   pinesPaso: 0.25, // separación entre las 4 oleadas de pines (semicorchea a 120 BPM)
   laPaz: inicioPalabra('places.'),
   modelEstimates: inicioPalabra('model'),
@@ -207,15 +212,21 @@ export const CLIPS = {
   capas: { archivo: 'clips/lugares.mp4', desde: 7.0 },
   agricola: { archivo: 'clips/agricola.mp4', desde: 1.0 },
   avisos: { archivo: 'clips/avisos.mp4', desde: 5.0 },
+  // Escritorio (1440 x 900, DPR 2) para el laptop
+  escInicio: { archivo: 'clips/esc-inicio.mp4', desde: 0.5 },
+  escSatelite: { archivo: 'clips/esc-satelite.mp4', desde: 5.0 },
+  escLugares: { archivo: 'clips/esc-lugares.mp4', desde: 3.0 },
+  escCalor: { archivo: 'clips/esc-calor.mp4', desde: 4.0 },
+  escAgro: { archivo: 'clips/esc-agro.mp4', desde: 4.0 },
 } satisfies Record<string, Clip>;
 
 // Montaje rápido de funciones (segundos absolutos; un corte cada 0.5 s en la escena "funciones").
-export const MONTAJE_FUNCIONES: { clip: keyof typeof CLIPS; etiqueta: string; desde: number }[] = [
-  { clip: 'satelite', etiqueta: 'GOES-WEST CLOUDS · LAST 2 HOURS', desde: 19.0 },
-  { clip: 'imerg', etiqueta: 'IMERG RAIN · NASA GPM', desde: 19.5 },
-  { clip: 'capas', etiqueta: 'WEATHER MAP · LAYERS', desde: 20.0 },
-  { clip: 'agricola', etiqueta: 'FARMING MAP · NDVI', desde: 20.5 },
+export const MONTAJE_FUNCIONES: { clip: keyof typeof CLIPS; etiqueta: string; desde: number; laptop?: boolean }[] = [
+  { clip: 'escSatelite', etiqueta: 'GOES-WEST CLOUDS · LAST 2 HOURS', desde: 19.5, laptop: true },
+  { clip: 'imerg', etiqueta: 'IMERG RAIN · NASA GPM', desde: 20.0 },
+  { clip: 'escAgro', etiqueta: 'FARMING MAP · NDVI', desde: 20.5, laptop: true },
   { clip: 'simSat', etiqueta: 'GROUND HEAT FROM SPACE', desde: 21.0 },
+  { clip: 'escCalor', etiqueta: 'TRAVEL THROUGH TIME', desde: 21.5, laptop: true },
 ];
 
 // Efectos de sonido: archivos CC0 de la rama lider/trailer-audio en public/audio/ (fuentes en
@@ -223,7 +234,9 @@ export const MONTAJE_FUNCIONES: { clip: keyof typeof CLIPS; etiqueta: string; de
 // "en" = segundo en que EMPIEZA el archivo: risers y reverse terminan justo en el corte;
 // los whoosh-short empiezan 0.35 s antes del corte (su pico está en 0.35 s).
 export type Senal = { archivo: string; en: number; volumen: number };
-export const LECHO = 'audio/bed-120bpm-28s.mp3'; // trae riser 6-12 s e impactos en 12.0 y 24.0 s
+// Lecho de 29 s: el de 28 s (rama lider/trailer-audio) con su final repetido en fundido cruzado
+// (ver video/README.md, "Lecho de 29 s"). Trae riser 6-12 s e impactos en 12.0 y 24.0 s.
+export const LECHO = 'audio/bed-120bpm-29s.mp3';
 const E = TRAILER_ESCENAS;
 const M = MOMENTOS;
 export const SENALES: Senal[] = [

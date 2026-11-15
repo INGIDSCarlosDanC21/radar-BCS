@@ -5,14 +5,14 @@
 //   SALIDA por defecto: video/public/clips  (pesa decenas de MB: conviene una unión a otro disco)
 //
 // Qué hace: abre Chrome sin ventana (CDP, sin dependencias de npm), emula un celular de 390 x 844
-// con devicePixelRatio 2, y para cada clip navega a la pantalla (en inglés), espera los datos y
+// con devicePixelRatio 2 (los clips "esc-" emulan un escritorio de 1440 x 900), y para cada clip navega a la pantalla (en inglés), espera los datos y
 // graba con Page.startScreencast mientras hace interacciones reales (desplazar, arrastrar y hacer
 // zoom en los mapas, tocar pines, chips y pestañas de la barra inferior, dejar correr las
 // animaciones satelitales y las simulaciones). Cada toque se marca con un círculo en la página.
 // Luego ffmpeg arma un MP4 H.264 de 30 fps (crf 18) por clip respetando los tiempos reales de
 // cada cuadro. Requisitos: Google Chrome y ffmpeg en el PATH. Correr de día en La Paz (> 07:00).
 import { spawn, spawnSync } from 'node:child_process';
-import { writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
+import { writeFileSync, readFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -59,6 +59,12 @@ const CLIPS = [
   { id: "calor-simulacion", hash: "#ficha/calor", espera: "#sim-play", pasos: [["esperar", 1500], ["desplazar", 560, 1200], ["esperar", 600], ["tocar", "#sim-play"], ["esperar", 7000]] },
   { id: "calor-ficha", hash: "#ficha/calor", espera: "main h2", pasos: [["esperar", 1500], ["desplazar", 1500, 3500], ["esperar", 1000]] },
   { id: "lluvia-ficha", hash: "#ficha/lluvia", espera: "main h2", pasos: [["esperar", 1500], ["desplazar", 560, 1200], ["tocar", "#sim-play"], ["esperar", 5000]] },
+  // ESCRITORIO (1440 x 900, DPR 2): para el laptop del tráiler. Sin pantallas que dependan de Open-Meteo.
+  { id: "esc-inicio", escritorio: true, hash: "#inicio", espera: ".hm-tarjeta", pasos: [["esperar", 1500], ["desplazar", 650, 2600], ["esperar", 1500]] },
+  { id: "esc-satelite", escritorio: true, hash: "#clima", espera: "#ani-mapa", pasos: [["esperar", 2500], ["ver", "#ani", "center"], ["esperar", 6000], ["tocar", "[data-ani=\"lluvia\"]"], ["esperar", 4500]] },
+  { id: "esc-lugares", escritorio: true, hash: "#clima/zonas", espera: "#mapa-caja", pasos: [["esperar", 1500], ["ver", "#mapa-caja", "center"], ["esperar", 2500], ["tocar", "[data-ind=\"lluvia\"]"], ["esperar", 1800], ["tocar", "[data-ind=\"calor\"]"], ["esperar", 1200], ["zoom", "#mapa-caja", 1], ["esperar", 1200], ["arrastrar", "#mapa-caja", -140, 60, 900], ["esperar", 800], ["tocar", "#mapa-caja .leaflet-marker-icon, #mapa-caja path.leaflet-interactive"], ["esperar", 2000]] },
+  { id: "esc-calor", escritorio: true, hash: "#ficha/calor", espera: "#sim-play", pasos: [["esperar", 1500], ["ver", "#sim-play", "center"], ["esperar", 800], ["tocar", "#sim-play"], ["esperar", 7000]] },
+  { id: "esc-agro", escritorio: true, hash: "#agricola", espera: "#ag-mapa", pasos: [["esperar", 3500], ["ver", "#ag-mapa", "center"], ["esperar", 800], ["arrastrar", "#ag-mapa", -120, -50, 900], ["esperar", 600], ["zoom", "#ag-mapa", 1], ["esperar", 2000], ["tocar", ".ag-ficha-btn"], ["esperar", 2500]] },
   // Avisos: filtros
   { id: "avisos", hash: "#avisos", espera: "main h2", pasos: [["esperar", 2000], ["tocar", ".av-chip:nth-of-type(3)"], ["esperar", 1500], ["desplazar", 500, 1500], ["esperar", 1500]] },
 ];
@@ -88,6 +94,13 @@ async function main() {
       const id = ++n;
       pendientes.set(id, res);
       ws.send(JSON.stringify({ id, method, params }));
+      // si Chrome no responde (pestaña ocupada), no se queda colgado: sigue a los 15 s
+      setTimeout(() => {
+        if (pendientes.has(id)) {
+          pendientes.delete(id);
+          res({});
+        }
+      }, 15000);
     });
   const ev = async (expr) => {
     const r = await cmd('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
@@ -163,6 +176,9 @@ async function main() {
     if (SOLO.length && !SOLO.includes(clip.id)) continue;
     for (let intento = 1; intento <= 3; intento++) {
       console.log(`clip ${clip.id} (intento ${intento})`);
+      const W = clip.escritorio ? 1440 : ANCHO;
+      const H = clip.escritorio ? 900 : ALTO;
+      await cmd('Emulation.setDeviceMetricsOverride', { width: W, height: H, deviceScaleFactor: DPR, mobile: !clip.escritorio });
       await cmd('Page.navigate', { url: 'about:blank' });
       await dormir(200);
       await cmd('Page.navigate', { url: BASE + '?lang=en' + clip.hash });
@@ -189,7 +205,7 @@ async function main() {
         cuadros.push({ archivo, t: p.metadata.timestamp });
         cmd('Page.screencastFrameAck', { sessionId: p.sessionId });
       };
-      await cmd('Page.startScreencast', { format: 'jpeg', quality: 90, maxWidth: ANCHO * DPR, maxHeight: ALTO * DPR, everyNthFrame: 1 });
+      await cmd('Page.startScreencast', { format: 'jpeg', quality: 90, maxWidth: W * DPR, maxHeight: H * DPR, everyNthFrame: 1 });
       const t0 = Date.now() / 1000;
       for (const [nombre, ...a] of clip.pasos) await acciones[nombre](...a);
       const t1 = Date.now() / 1000;
@@ -209,7 +225,7 @@ async function main() {
       lineas.push(`file '${cuadros[cuadros.length - 1].archivo.replace(/\\/g, '/')}'`);
       writeFileSync(join(dir, 'lista.txt'), lineas.join('\n'));
       const mp4 = join(SALIDA, clip.id + '.mp4');
-      const r = spawnSync('ffmpeg', ['-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', join(dir, 'lista.txt'), '-vf', `fps=30,scale=${ANCHO * DPR}:${ALTO * DPR}:force_original_aspect_ratio=decrease,pad=${ANCHO * DPR}:${ALTO * DPR}:(ow-iw)/2:0:color=white,format=yuv420p`, '-c:v', 'libx264', '-crf', '18', '-preset', 'medium', '-movflags', '+faststart', mp4], { stdio: 'inherit' });
+      const r = spawnSync('ffmpeg', ['-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', join(dir, 'lista.txt'), '-vf', `fps=30,scale=${W * DPR}:${H * DPR}:force_original_aspect_ratio=decrease,pad=${W * DPR}:${H * DPR}:(ow-iw)/2:0:color=white,format=yuv420p`, '-c:v', 'libx264', '-crf', '18', '-preset', 'medium', '-movflags', '+faststart', mp4], { stdio: 'inherit' });
       rmSync(dir, { recursive: true, force: true });
       if (r.status !== 0) {
         console.log('   ffmpeg falló');
@@ -220,7 +236,12 @@ async function main() {
       break;
     }
   }
-  writeFileSync(join(SALIDA, EXPLORAR ? 'explorar.json' : 'clips.json'), JSON.stringify({ generado: new Date().toISOString(), base: BASE, dpr: DPR, clips: informe }, null, 2));
+  const ruta = join(SALIDA, EXPLORAR ? 'explorar.json' : 'clips.json');
+  let previo = {};
+  try {
+    previo = JSON.parse(readFileSync(ruta, 'utf8')).clips || {};
+  } catch {}
+  writeFileSync(ruta, JSON.stringify({ generado: new Date().toISOString(), base: BASE, dpr: DPR, clips: { ...previo, ...informe } }, null, 2));
 }
 
 try {

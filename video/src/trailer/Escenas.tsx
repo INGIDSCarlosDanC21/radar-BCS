@@ -8,6 +8,7 @@ import { CIFRA_CALOR, CLIPS, LUGARES, MOMENTOS as M, MONTAJE_FUNCIONES, P_CALOR,
 const local = (abs: number, escena: { desde: number }) => abs - escena.desde;
 import { Barras, Chyron, CL, Cromatica, ENTRA, FondoVivo, SUAVE, useDeriva, useSeg } from './comun';
 import { aFoto, CAJA_FOTO, LUGARES_38, SERIE_CALOR, SERIE_LLUVIA } from './datos';
+import { Laptop } from './Laptop';
 import { Telefono } from './Telefono';
 
 const NARANJA = '#ff8a3d';
@@ -148,19 +149,28 @@ export const Titulo: React.FC = () => {
   const cortes = t < 0.35 ? [((t * 977) % 1) * 100, ((t * 541) % 1) * 100] : null;
   const sube = interpolate(t, [1.0, 2.0], [0, 1], { ...CL, easing: SUAVE });
   const logoEscala = interpolate(t, [0, 0.3, 1.0, 1.8], [1.35, 1.0, 1.0, 0.55], { ...CL, easing: SUAVE });
-  const logoX = interpolate(t, [1.0, 1.8], [960, 520], { ...CL, easing: SUAVE });
-  const logoY = interpolate(t, [1.0, 1.8], [520, 470], { ...CL, easing: SUAVE });
+  const logoX = interpolate(t, [1.0, 1.8], [960, 380], { ...CL, easing: SUAVE });
+  const logoY = interpolate(t, [1.0, 1.8], [520, 400], { ...CL, easing: SUAVE });
   const barrido = interpolate(t, [0.45, 1.1], [-40, 140], CL);
   return (
     <AbsoluteFill style={{ overflow: 'hidden' }}>
       <FondoVivo tono="marca" />
-      {/* segundo teléfono al fondo, desenfocado (profundidad) */}
-      <Telefono clip={CLIPS.cielo} ancho={330} x={1590 + d.x} y={interpolate(sube, [0, 1], [1500, 600])} rotY={-30} rotX={10} rotZ={6} desenfoque={7} sombra={false} />
+      {/* laptop: la tapa se abre y revela la app de escritorio */}
+      <Laptop
+        clip={CLIPS.escInicio}
+        ancho={interpolate(t, [0.6, 3.5], [700, 760], CL)}
+        x={1130 + d.x}
+        y={interpolate(t, [0.6, 1.6], [900, 700], { ...CL, easing: SUAVE }) + d.y}
+        apertura={interpolate(t, [0.8, 2.0], [0, 1], { ...CL, easing: Easing.inOut(Easing.cubic) })}
+        rotX={interpolate(t, [0.6, 3.5], [30, 12], CL)}
+        rotY={interpolate(t, [0.6, 3.5], [-22, -10], CL)}
+        opacidad={interpolate(t, [0.5, 0.8], [0, 1], CL)}
+      />
       <Telefono
         clip={CLIPS.barra}
-        ancho={400}
-        x={1230 + d.x}
-        y={interpolate(sube, [0, 1], [1700, 560]) + d.y}
+        ancho={290}
+        x={1640 + d.x}
+        y={interpolate(sube, [0, 1], [1700, 640]) + d.y}
         rotY={interpolate(t, [1, 3], [-34, -14], CL)}
         rotX={interpolate(t, [1, 3], [22, 6], CL)}
         rotZ={interpolate(t, [1, 3], [-6, -2], CL)}
@@ -172,7 +182,7 @@ export const Titulo: React.FC = () => {
           </Cromatica>
         </div>
       </div>
-      <div style={{ position: "absolute", left: 96, top: 640, width: 840, opacity: interpolate(t, [1.4, 1.8], [0, 1], CL) }}>
+      <div style={{ position: "absolute", left: 96, top: 560, width: 760, opacity: interpolate(t, [1.4, 1.8], [0, 1], CL) }}>
         <Sube t={t} en={1.5}>
           <div style={{ fontFamily: FUENTE_TITULO, fontSize: 64, color: '#fff', lineHeight: 1.05 }}>
             NASA data <span style={{ color: COLOR.cian }}>→</span> answers
@@ -357,6 +367,8 @@ export const Mapa: React.FC = () => {
           width: CAJA_FOTO.ancho * escala,
           height: CAJA_FOTO.alto * escala,
           transform: `perspective(1800px) rotateX(${interpolate(t, [0, dur], [12, 44], { ...CL, easing: Easing.inOut(Easing.sin) })}deg) rotateZ(${interpolate(t, [0, dur], [-4, -16])}deg) scale(${interpolate(t, [0, dur], [1.3, 0.98], { ...CL, easing: SUAVE })})`,
+          filter: `blur(${interpolate(t, [0.9, 1.5], [0, 3], CL)}px)`,
+          opacity: interpolate(t, [0.9, 1.5], [1, 0.75], CL),
         }}
       >
         <Img src={staticFile('bcs-modis.jpg')} style={{ width: '100%', height: '100%', filter: 'saturate(0.5) brightness(0.75) contrast(1.15)' }} />
@@ -390,7 +402,16 @@ export const Mapa: React.FC = () => {
         </div>
       </div>
       <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(1,14,10,0.92) 0%, rgba(1,14,10,0.55) 30%, rgba(1,14,10,0) 55%)' }} />
-      <Telefono clip={CLIPS.lugares} ancho={330} x={1640} y={interpolate(t, [0, dur], [560, 520])} rotY={interpolate(t, [0, dur], [-26, -16])} rotX={6} rotZ={2} escala={interpolate(t, [0, 0.4], [0.8, 1], { ...CL, easing: SUAVE })} />
+      {/* la misma app en computadora y en celular */}
+      <Laptop
+        clip={CLIPS.escLugares}
+        ancho={interpolate(t, [0.6, dur], [800, 860], CL)}
+        x={1080}
+        y={interpolate(t, [0.6, 1.3], [1250, 690], { ...CL, easing: SUAVE })}
+        rotX={interpolate(t, [0.6, dur], [16, 8], CL)}
+        rotY={interpolate(t, [0.6, dur], [-14, -6], CL)}
+      />
+      <Telefono clip={CLIPS.lugares} ancho={290} x={1690} y={interpolate(t, [0.8, 1.5], [1400, 620], { ...CL, easing: SUAVE })} rotY={interpolate(t, [0, dur], [-26, -16])} rotX={6} rotZ={2} />
       <div style={{ position: 'absolute', left: 110, top: 200 }}>
         <Chyron texto="WHERE · BAJA CALIFORNIA SUR" mono={FUENTE_MONO} />
         <div style={{ fontFamily: FUENTE_TITULO, fontSize: 260, color: '#fff', lineHeight: 1, marginTop: 20, fontVariantNumeric: 'tabular-nums', textShadow: '0 0 40px rgba(81,216,232,0.5)' }}>
@@ -437,18 +458,33 @@ export const Funciones: React.FC = () => {
       <FondoVivo tono="mar" />
       {plano ? (
         <>
-          <Telefono
-            key={plano.clip + idx}
-            clip={{ ...CLIPS[plano.clip], desde: CLIPS[plano.clip].desde }}
-            ancho={a.ancho}
-            x={a.x + d.x + tp * (idx % 2 ? -60 : 60)}
-            y={a.y + d.y}
-            rotY={a.rotY + tp * (idx % 2 ? -8 : 8)}
-            rotX={a.rotX}
-            rotZ={a.rotZ}
-            escala={interpolate(tp, [0, 0.12, 0.5], [1.12, 1.0, 1.04], CL)}
-          />
-          <Chyron texto={plano.etiqueta} mono={FUENTE_MONO} color="#7ff5e0" style={{ position: 'absolute', left: idx % 2 ? 1180 : 110, top: 140, fontSize: 30 }} />
+          {plano.laptop ? (
+            // planos de laptop: contrapicado (rotX < 0), dolly (escala) o picado (rotX > 0)
+            <Laptop
+              key={plano.clip + idx}
+              clip={CLIPS[plano.clip]}
+              ancho={1000}
+              x={960 + d.x + tp * (idx % 4 ? -70 : 70)}
+              y={idx === 0 ? 760 : idx === 2 ? 700 : 720}
+              rotX={idx === 0 ? -6 : idx === 2 ? 30 : 12}
+              rotY={(idx === 2 ? 14 : -12) + tp * (idx === 2 ? -10 : 10)}
+              rotZ={idx === 4 ? 2 : 0}
+              escala={idx === 4 ? interpolate(tp, [0, 0.5], [0.9, 1.08], CL) : interpolate(tp, [0, 0.12, 0.5], [1.1, 1.0, 1.03], CL)}
+            />
+          ) : (
+            <Telefono
+              key={plano.clip + idx}
+              clip={CLIPS[plano.clip]}
+              ancho={a.ancho}
+              x={a.x + d.x + tp * (idx % 2 ? -60 : 60)}
+              y={a.y + d.y}
+              rotY={a.rotY + tp * (idx % 2 ? -8 : 8)}
+              rotX={a.rotX}
+              rotZ={a.rotZ}
+              escala={interpolate(tp, [0, 0.12, 0.5], [1.12, 1.0, 1.04], CL)}
+            />
+          )}
+          <Chyron texto={plano.etiqueta} mono={FUENTE_MONO} color="#7ff5e0" style={{ position: 'absolute', left: idx % 2 ? 1240 : 110, top: 150, fontSize: 28 }} />
         </>
       ) : (
         <>
@@ -456,9 +492,9 @@ export const Funciones: React.FC = () => {
           <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(1,18,20,0.95) 0%, rgba(1,18,20,0.7) 45%, rgba(1,18,20,0) 75%)' }} />
         </>
       )}
-      <div style={{ position: 'absolute', left: 110, top: plano ? 820 : 300 }}>
+      <div style={plano ? { position: 'absolute', left: 0, right: 0, top: 48, display: 'flex', justifyContent: 'center' } : { position: 'absolute', left: 110, top: 300 }}>
         <Sube t={t} en={me}>
-          <div style={{ fontFamily: FUENTE_TITULO, fontSize: plano ? 64 : 92, color: '#fff', textShadow: '0 4px 24px rgba(0,0,0,0.6)' }}>Model estimates.</div>
+          <div style={{ fontFamily: FUENTE_TITULO, fontSize: plano ? 54 : 92, color: '#fff', textShadow: '0 4px 24px rgba(0,0,0,0.6)', ...(plano ? { padding: '6px 28px', borderRadius: 999, background: 'rgba(1,18,20,0.6)', backdropFilter: 'blur(10px)' } : {}) }}>Model estimates.</div>
         </Sube>
         {!plano ? (
           <div style={{ position: 'relative', marginTop: 16, display: 'inline-block' }}>
@@ -497,6 +533,18 @@ export const Cierre: React.FC<{ url: string; fuentes: string }> = ({ url, fuente
   return (
     <AbsoluteFill style={{ overflow: 'hidden', scale: `${interpolate(t, [0, fin], [1, 1.06])}` }}>
       <FondoVivo tono="cierre" />
+      <Laptop
+        clip={CLIPS.escLugares}
+        ancho={900}
+        x={900}
+        y={interpolate(t, [lg - 0.3, lg + 0.8], [1250, 820], { ...CL, easing: SUAVE })}
+        rotX={14}
+        rotY={interpolate(t, [lg, fin], [-10, -4], CL)}
+        desenfoque={3}
+        opacidad={interpolate(t, [lg - 0.3, lg + 0.3], [0, 0.6], CL)}
+      />
+      <Telefono clip={CLIPS.lugares} ancho={250} x={1460} y={interpolate(t, [lg - 0.1, lg + 0.9], [1400, 720], { ...CL, easing: SUAVE })} rotY={-20} rotX={6} desenfoque={3} sombra={false} />
+      <AbsoluteFill style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 45%, rgba(11,7,16,0.55), rgba(11,7,16,0))' }} />
       <AbsoluteFill style={{ alignItems: 'center', transformOrigin: 'top center', top: interpolate(sube, [0, 1], [330, 150]), scale: `${interpolate(sube, [0, 1], [1, 0.62])}` }}>
         <div style={{ display: 'flex', gap: 34 }}>
           <Sube t={t} en={k(M.cierreFrase1)} dur={0.4}>

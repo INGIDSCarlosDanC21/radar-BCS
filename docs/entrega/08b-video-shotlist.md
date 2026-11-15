@@ -6,7 +6,18 @@ Reemplaza la versión de la mañana. **Decisión de Carlos (2026-11-15): pantall
 
 ## Tráiler 16:9 de 28 s (versión principal, 2026-11-15, noche)
 
-> **Actualización:** voz nueva "Katie" (26.69 s) y cortes en 3.5, 6.5, 12.5, 16.5, 19 y 23 s. Los teléfonos muestran **clips reales de la app en movimiento**, y entre 19 y 21.5 s hay un montaje de funciones (GOES-West, IMERG, capas, Agro/NDVI, calor del suelo). Cada escena tiene su propio fondo vivo, y los subtítulos son cinéticos y de color. Tabla vigente en `video/README.md`; la tabla de abajo es la versión anterior.
+> **Narración vigente (2026-11-15, voz "Tamsin", ElevenLabs voice library, model Eleven v4, 1.08×, 27.31 s).** Los subtítulos dicen exactamente esto, con las cifras en dígitos:
+> 1. "In La Paz, heat, water and the sea touch everyone." (0.00–3.79)
+> 2. "Radar BCS turns NASA data into answers." (3.97–7.46)
+> 3. "Since 2001, air temperature rose about 1.5 degrees. Statistically significant." (7.68–13.71)
+> 4. "Rainfall? No clear change." (13.93–16.00)
+> 5. "The map shows WHERE: 38 places." (16.18–19.10)
+> 6. "Sea and weather today? Model estimates, not official warnings." (19.32–23.45)
+> 7. "What changed, not why. Radar BCS." (23.80–27.31)
+>
+> El tráiler dura 29 s, con cortes en 4, 7.5, 14, 16, 19.5 y 23.5 s. Hay laptop con la versión de escritorio en el título, en el mapa de 38 lugares, en el montaje de funciones y en el cierre. La tabla vigente está en `video/README.md`; las tablas de abajo (voz anterior) quedan como historial.
+>
+> **Versión anterior (voz "Katie"):** cortes en 3.5, 6.5, 12.5, 16.5, 19 y 23 s. Los teléfonos muestran **clips reales de la app en movimiento**, y entre 19 y 21.5 s hay un montaje de funciones (GOES-West, IMERG, capas, Agro/NDVI, calor del suelo). Cada escena tiene su propio fondo vivo, y los subtítulos son cinéticos y de color. Tabla vigente en `video/README.md`; la tabla de abajo es la versión anterior.
 
 Mismo guion y misma voz; nuevo montaje horizontal 1920 × 1080 en Remotion (`video/`, composición `RadarBCSTrailer`). Cortes en la rejilla de 120 BPM. Tiempos editables en `video/src/guion.ts` (`TRAILER_ESCENAS`, `SENALES`).
 
