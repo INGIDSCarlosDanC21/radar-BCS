@@ -23,3 +23,15 @@
   .barra,.mas{display:none}
   body{padding-bottom:0}
 }
+
+/* Marca "AI-generated" (requisito de la entrega: marca visible junto a lo generado con IA; la ven los jueces). No se puede quitar.
+   Para que estorbe menos: sin recuadro, texto discreto y, en celular, debajo del logo en vez de competir con el botón de idioma. */
+.marca-ia{border:0;border-radius:0;padding:0;background:none}
+@media (max-width:1023px){
+  .cabecera{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"marca idioma" "ia idioma";align-items:center;column-gap:8px;row-gap:0}
+  .cabecera .marca{grid-area:marca;justify-self:start;min-height:36px}
+  .cabecera .marca img{height:36px}
+  .cabecera .marca-ia{grid-area:ia;justify-self:start;margin:0;line-height:14px}
+  .cabecera .sub{display:none}
+  .cabecera .idioma{grid-area:idioma}
+}

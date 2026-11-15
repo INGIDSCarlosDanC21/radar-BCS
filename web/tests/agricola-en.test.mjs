@@ -99,7 +99,7 @@ test('inglés: la pantalla agrícola no deja palabras de interfaz en español', 
 test('español sin parámetro: textos y marcas de siempre', (t) => {
   t.after(() => RBT.setLang('es'));
   const h = paginas('es');
-  for (const es of ['>Mapa Agrícola</h1>', 'Cerrar</button>', '>Fuentes</h4>', 'Fuente: ', '<b>Motivo:</b>', 'Consultado: ',
+  for (const es of ['>Mapa Agrícola</h1>', 'Cerrar</span></button>', '>Fuentes (', 'Fuente: ', '<b>Motivo:</b>', 'Consultado: ',
     'Rastrear Terreno', 'placeholder="Buscar localidad (Los Planes, El Carrizal…)"', 'ANÁLISIS AGROCLIMÁTICO',
     'Diagnóstico Agroclimático &amp; Sanidad de Suelos', 'Zona: <b>Municipio de La Paz, B.C.S.</b>', 'ficha abierta',
     'aria-label="Pie de página"', 'Licencia Apache-2.0', 'Factibilidad y Cultivos', 'Tomate rojo (jitomate)']) {
