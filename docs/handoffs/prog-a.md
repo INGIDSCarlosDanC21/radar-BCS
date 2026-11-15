@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo.** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Handoff — Programador A
 
 Actualizado el 2026-11-15 (issues #97 y #81). Rama de este bloque: `prog-a/campos-en`; los PR a `dev` los abre el usuario (mi token no puede).

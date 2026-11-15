@@ -16,7 +16,6 @@ Pitch line (use in both options): **"Radar BCS turns NASA open data into answers
 - Radar BCS: what is changing in La Paz, told with NASA data
 - Team OptiPaz · NASA Space Apps Challenge 2026 · La Paz, Mexico
 - Challenge: *Be An Earth System Trend Detective!*
-- Team members: Diego Careaga Celis, Carlos Daniel Castro Ochoa, Luca Alexander Reinaga Genesta, Ehileen Rocha Garcia, Roberto Vega Hernandez *(confirm everyone is registered in the platform and appears on the Members tab)*
 - Visual: Radar BCS logo.
 
 **Slide 2 — The local problem**
@@ -26,15 +25,15 @@ Pitch line (use in both options): **"Radar BCS turns NASA open data into answers
 
 **Slide 3 — Our solution (project screenshot)**
 - A free, Spanish-language website for phones. No install, no account.
-- Pick a variable and see what changed since 2001 (2002 for water); the map shows six sample points of the city.
+- Pick a variable and see what changed since 2001 (2002 for water); the Weather map shows 38 places of the state.
 - Visual: **real screenshot of the live app** at https://ingidscarlosdanc21.github.io/radar-BCS/ [FILL: replace placeholder page with real screen].
 
 **Slide 4 — Four questions, four screens**
 - *What is changing?* Heat, vegetation, rainfall, regional water storage.
-- *Where?* A map of six sample points in La Paz (heat and vegetation).
+- *Where?* A map of 38 places of Baja California Sur (air heat and rainfall) and six zones in La Paz (vegetation).
 - *How much?* Total change since 2001 and by decade.
 - *Is it significant?* A trend test shows how sure we are, in plain language.
-- Plus: *What can I do?* Simple actions for heat and water.
+- Plus: *What can I do?* Simple actions for heat and water, inside the Weather screen.
 
 **Slide 5 — How NASA data makes it possible**
 - Land surface temperature and vegetation: MODIS (MOD11A2, MOD13Q1).

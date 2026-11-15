@@ -1,4 +1,4 @@
-/* Pestaña Mapa como el frame "Clima - Mapa" de Figma (diseno/pantallas/clima-mapa.png), con datos reales:
+/* Pantalla Clima (antes pestaña Mapa) como el frame "Clima - Mapa" de Figma (diseno/pantallas/clima-mapa.png), con datos reales:
    - "Mapa Meteorológico": mapa de Baja California Sur con el ícono del estado del cielo y la temperatura de las
      7 localidades de Inicio (las MISMAS, de la misma respuesta de Open-Meteo vía RBCielo.datos(): siempre coinciden).
    - "Diagnóstico Climático Territorial": 4 tarjetas con lo que dice el modelo hoy en La Paz (máxima, UV máximo,
@@ -224,7 +224,7 @@
     reloj = setTimeout(function () {
       reloj = null;
       var caja = raiz.querySelector('#cm-tarjetas');
-      if (!caja || caja.isConnected === false) return; // ya se salió de la pestaña Mapa
+      if (!caja || caja.isConnected === false) return; // ya se salió de la pantalla Clima
       cargar(raiz, opciones);
     }, ms);
   }

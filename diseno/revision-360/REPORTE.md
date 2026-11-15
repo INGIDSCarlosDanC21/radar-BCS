@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo. Documento de diseño de 2026-11-14 (barra de 4 pestañas, 6 o 7 localidades).** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Revisión a 360 px del sitio real (issue #98)
 
 ## Actualización: segunda pasada sobre `dev` (2026-11-14, noche)

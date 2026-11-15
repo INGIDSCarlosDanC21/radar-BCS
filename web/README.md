@@ -2,7 +2,7 @@
 
 **Dueño:** Diego (Prog. B). `web/assets/` es de Ehileen (UI/UX).
 
-**Propósito:** sitio web en español para celular con 4 pantallas (Inicio, Mapa, Ficha y Acciones), publicado en GitHub Pages. Es HTML, CSS y JS sin build; depende de Leaflet 1.9.4 (CDN) y de Google Fonts.
+**Propósito:** sitio web en español para celular con Inicio, Clima, Pesca, Agro y Avisos (la Ficha se abre desde Inicio; las Acciones están dentro de Clima), publicado en GitHub Pages. Es HTML, CSS y JS sin build; depende de Leaflet 1.9.4 (CDN) y de Google Fonts.
 
 ## Probar en local
 

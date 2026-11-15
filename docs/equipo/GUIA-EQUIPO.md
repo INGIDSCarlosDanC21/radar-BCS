@@ -39,7 +39,7 @@ Cada una de estas piezas responde una pregunta del reto (ver sección 5). Si fal
 
 ## 4. Cada pantalla: qué es, por qué está y qué significa
 
-El menú inferior es **Inicio · Clima · Pesca · Más** (en "Más": Agro, Avisos, Acciones). Cada número muestra su fuente.
+El menú inferior es **Clima · Pesca · Inicio (al centro) · Agro · Avisos**. Las Acciones están dentro de Clima y la Ficha se abre desde Inicio. Cada número muestra su fuente.
 
 ### Cómo leer los números (vale para todas las fichas)
 
@@ -84,7 +84,7 @@ El menú inferior es **Inicio · Clima · Pesca · Más** (en "Más": Agro, Avis
 - **Por qué está:** estrés hídrico y sequía afectan al campo. Datos de SoilGrids, CONAGUA, SIAP, SEPADA y MODIS NDVI.
 - **Qué significa:** lo no verificado (SIAP, SEPADA) está declarado como tal.
 
-### Acciones
+### Acciones (dentro de Clima)
 - **Qué es:** consejos contra el calor y para ahorrar agua.
 - **Por qué está:** cierra el ciclo con **¿qué hago?**. Salen de fuentes públicas (CDC, EPA WaterSense, OMS).
 

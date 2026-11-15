@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo. Documento de diseño de 2026-11-14 (barra de 4 pestañas, 6 o 7 localidades).** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Especificación de implementación (para Diego, Prog. B)
 
 Fuente: Figma "Radar paceño" (id `ae9KMSMZUexeV0dBhDkNR1`) y `diseno/figma-auditoria.json` (generado 2026-11-15). Autora: Ehileen (UI/UX).

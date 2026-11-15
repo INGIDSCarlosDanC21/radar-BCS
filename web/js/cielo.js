@@ -253,7 +253,7 @@
       im.src = u;
     })(k);
   }
-  /* Una sola respuesta compartida por Inicio y la pestaña Mapa durante CADA_MIN minutos: las dos pantallas muestran
+  /* Una sola respuesta compartida por Inicio y la pantalla Clima durante CADA_MIN minutos: las dos pantallas muestran
      siempre las mismas cifras. opciones.fetch permite probar sin red. */
   var CACHE = null;
   function datos(opciones) {

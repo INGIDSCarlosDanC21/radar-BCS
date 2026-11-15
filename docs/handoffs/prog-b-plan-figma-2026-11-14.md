@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo.** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Plan Prog. B — pantallas de Figma (Login, Register, Home)
 
 Fecha: 2026-11-14, noche. Meta: `main` actualizado el dom 15 a las 11:00.
