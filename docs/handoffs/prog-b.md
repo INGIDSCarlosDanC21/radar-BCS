@@ -144,3 +144,11 @@ Falta:
 Los 6 PRs se fusionan entre sí sin choques (62 pruebas en la suma). `verificar-todo.ps1` pasa completo en cada rama, con un `uv venv` en `.venv` (ignorado por git).
 
 Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agricola.json` cuando entre el calor del aire de Luca, teléfono real (#71), lector de pantalla real y vista previa al compartir.
+
+## 2026-11-15: Clima, buscador, chips y detalle (rama `prog-b/clima-detalle`, plan en `docs/PLAN-CLIMA.md`)
+
+- **Hecho:** buscador "Buscar ubicación en BCS…" (filtra las 7 localidades sin tildes, con `aria-live`), chips General/Calor/Viento/UV/Humedad que cambian lo que dice cada pin, y detalle debajo de las 4 tarjetas (uno a la vez, "Cerrar", foco al título, foco de vuelta a la tarjeta). El detalle usa `RBVivo.cargar({clima:true})` y `reglas-clima.js` de Luca (#174): cifras, curva de 24 h en SVG y enlace a la pantalla de antes. La localidad elegida se marca en el mapa y se cambia tocando un pin.
+- **Archivos:** `web/js/clima-detalle.js` y `web/css/clima-detalle.css` (nuevos); cambios chicos en `clima-mapa.js` (estado de capa y selección, pines por capa), `app.js` (monta el detalle) e `index.html`. `clima-mapa.js` es de Ehileen: queda anotado en el PR.
+- **Decisiones:** sin etiqueta de calor (`nivelCalor()` es `null`); Comondú dice "sin dato detallado" (no tiene puerto); el viento se muestra en km/h (1 nudo = 1.852 km/h) y la corriente tal como la da Open-Meteo, km/h **sin verificar**.
+- **Medido:** 360/375 px sin scroll horizontal en EN, 4 detalles con foco al título y 0 textos menores de 12 px; consola sin errores. 158 pruebas de `web/tests` y `verificar-todo.ps1` en verde.
+- **No verificado:** teléfono real (#71), lector de pantalla real, contraste con herramienta, 1280 px y modo oscuro. Sin construir (sin fuente): lo de la sección 5 del plan.

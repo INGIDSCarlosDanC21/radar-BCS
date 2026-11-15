@@ -1,0 +1,37 @@
+/* Clima: buscador, chips de capa y detalle de cada tarjeta (clima-detalle.js). Mínimo 12 px y áreas táctiles de 44 px. */
+.cd-barra{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.cd-buscar{position:relative}
+.cd-buscar input{width:100%;box-sizing:border-box;min-height:44px;padding:8px 14px;border:1px solid #c4c6cd;border-radius:9999px;background:#fff;color:#000d21;font:inherit;font-size:16px}
+.cd-res{position:absolute;z-index:1100;left:0;right:0;top:48px;margin:0;padding:4px;list-style:none;background:#fff;border:1px solid #c4c6cd;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.cd-op{display:block;width:100%;min-height:44px;text-align:left;padding:8px 12px;border:0;border-radius:8px;background:none;color:#000d21;font:inherit;cursor:pointer}
+.cd-op:hover{background:#eef1f4}
+.cd-chips{display:flex;flex-wrap:wrap;gap:8px}
+.cd-chip{min-height:44px;padding:8px 16px;border:1px solid #c4c6cd;border-radius:9999px;background:#fff;color:#000d21;font:inherit;font-size:14px;cursor:pointer}
+.cd-chip[aria-pressed="true"]{background:#000d21;border-color:#000d21;color:#fff}
+.cm-pin-sel .cm-pin-c{box-shadow:0 0 0 3px #97f3b5}
+.cm-pin-sel .cm-pin-t{outline:2px solid #97f3b5}
+
+.cd-detalle{margin-top:16px;padding:20px;background:#fff;color:#000d21;border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.05),0 1px 3px rgba(0,0,0,.08)}
+.cd-detalle:focus{outline:none}
+.cd-cab{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cd-cab h3{margin:0;font-family:'Space Grotesk',system-ui,sans-serif;font-size:22px;line-height:28px}
+.cd-cab h3:focus-visible{outline:2px solid #006d3d;outline-offset:2px}
+.cd-cerrar{min-height:44px;min-width:44px;padding:8px 16px;border:1px solid #c4c6cd;border-radius:9999px;background:#fff;color:#000d21;font:inherit;cursor:pointer}
+.cd-lugar{margin:4px 0 12px;color:#44474d;font-size:14px}
+.cd-datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0}
+.cd-dato{background:#f4f6f8;border-radius:8px;padding:10px 12px}
+.cd-dato dt{font-size:12px;line-height:16px;color:#44474d}
+.cd-dato dd{margin:2px 0 0;font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:18px;line-height:24px}
+.cd-curva{margin:16px 0 0}
+.cd-curva figcaption{font-size:14px;color:#44474d;margin-bottom:4px}
+.cd-curva svg{display:block;width:100%;height:90px;background:#f4f6f8;border-radius:8px}
+.cd-linea{fill:none;stroke:#006d3d;stroke-width:2.5;vector-effect:non-scaling-stroke}
+.cd-pto{fill:#006d3d}
+.cd-ahora{stroke:#44474d;stroke-width:1;stroke-dasharray:3 3;vector-effect:non-scaling-stroke}
+.cd-eje{display:flex;justify-content:space-between;font-size:12px;line-height:16px;color:#44474d;margin-top:2px}
+.cd-curva-res{margin:4px 0 0;font-size:12px;line-height:16px;color:#44474d}
+.cd-nota,.cd-fuente,.cd-vacio{font-size:14px;line-height:20px;color:#44474d;margin:12px 0 0}
+.cd-fuente{font-size:12px;line-height:16px}
+.cd-enlace{margin:12px 0 0}
+.cd-enlace a{display:inline-block;min-height:44px;line-height:44px;color:#006d3d;text-decoration:underline}
+@media (min-width:640px){.cd-barra{flex-direction:row;align-items:center}.cd-buscar{flex:1;max-width:420px}}

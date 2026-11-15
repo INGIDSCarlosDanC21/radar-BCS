@@ -90,6 +90,7 @@
     });
     pintar();
     if (window.RBSim) window.RBSim.sateliteActivar(main);
+    if (window.RBClimaDetalle) window.RBClimaDetalle.montar(main);
     if (CM) CM.cargar(main);
   }
 

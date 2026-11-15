@@ -28,7 +28,8 @@
       'cm.viento': 'Viento, Oleaje & Corrientes', 'cm.vientoB': '{v} km/h {r}', 'cm.vientoS': 'Ráfagas de hasta {v} km/h hoy', 'cm.vientoL': 'Ver pronóstico marino y de viento costero',
       'cm.lluvia': 'Humedad y Lluvia', 'cm.lluviaB': '{v} % lluvia', 'cm.lluviaS': 'Humedad ahora: {v} %', 'cm.lluviaL': 'Ver avisos de lluvia y tormenta',
       'cm.cargando': 'Cargando el cielo de ahora…', 'cm.error': 'No pudimos cargar el clima de ahora. Las tendencias por zona siguen abajo.',
-      'cm.zonasH': 'Cómo cambió cada zona de La Paz desde 2001'
+      'cm.zonasH': 'Cómo cambió cada zona de La Paz desde 2001',
+      'cm.pinCalor': '{v}° (sens. {s}°)', 'cm.pinViento': '{v} km/h {r}', 'cm.pinUv': 'UV máx {v}', 'cm.pinHum': '{v} % hum.'
     },
     en: {
       'cm.h1': 'Weather Map',
@@ -40,7 +41,8 @@
       'cm.viento': 'Wind, Waves & Currents', 'cm.vientoB': '{v} km/h {r}', 'cm.vientoS': 'Gusts up to {v} km/h today', 'cm.vientoL': 'See the marine and coastal wind forecast',
       'cm.lluvia': 'Humidity and Rain', 'cm.lluviaB': '{v} % rain', 'cm.lluviaS': 'Humidity now: {v} %', 'cm.lluviaL': 'See rain and storm alerts',
       'cm.cargando': 'Loading the sky now…', 'cm.error': "We couldn't load the current weather. The zone trends are still below.",
-      'cm.zonasH': 'How each zone of La Paz has changed since 2001'
+      'cm.zonasH': 'How each zone of La Paz has changed since 2001',
+      'cm.pinCalor': '{v}° (feels {s}°)', 'cm.pinViento': '{v} km/h {r}', 'cm.pinUv': 'UV max {v}', 'cm.pinHum': '{v} % hum.'
     }
   };
   ['es', 'en'].forEach(function (l) {
@@ -61,7 +63,9 @@
 
   function tarjetas(f) {
     return TARJETAS.map(function (k) {
-      return '<a class="cm-tarjeta cm-' + k.id + '" href="' + k.href + '">' +
+      var CD = typeof window !== 'undefined' && window.RBClimaDetalle;
+      var abierta = CD && CD.abierta && CD.abierta() === k.id;
+      return '<a class="cm-tarjeta cm-' + k.id + '" href="' + k.href + '" data-cd="' + k.id + '"' + (CD ? ' role="button" aria-expanded="' + !!abierta + '" aria-controls="cd-detalle"' : '') + '>' +
         '<span class="cm-acento" aria-hidden="true"></span>' +
         '<span class="cm-cab"><span class="cm-ico" aria-hidden="true"><img src="assets/iconos/' + k.icono + '.svg" alt="" width="28" height="28"></span>' +
         '<span class="cm-tit"><strong>' + esc(t('cm.' + k.id)) + '</strong><span class="cm-renglon">' + esc(f ? k.renglon(f) : t('cm.cargando')) + '</span></span>' +
@@ -70,25 +74,38 @@
     }).join('');
   }
 
-  /* Marcado de la parte de arriba (lo pone app.js antes del mapa de zonas). */
+  /* Marcado de la parte de arriba (lo pone app.js antes del mapa de zonas). Con clima-detalle.js: buscador y chips arriba, detalle debajo de las tarjetas. */
   function html() {
+    var CD = typeof window !== 'undefined' && window.RBClimaDetalle;
     return '<section class="cm" aria-labelledby="cm-h1"><h1 id="cm-h1">' + t('cm.h1') + '</h1><p class="lead">' + t('cm.lead') + '</p>' +
-      '<div class="cm-marco"><div id="cm-mapa" class="cm-mapa" role="region" aria-label="' + esc(t('cm.region')) + '"></div>' +
+      (CD ? CD.barraHtml() : '') + '<div class="cm-marco"><div id="cm-mapa" class="cm-mapa" role="region" aria-label="' + esc(t('cm.region')) + '"></div>' +
       '<div class="cl-leyenda cm-leyenda" id="cm-leyenda">' + CL.leyenda() + '</div></div>' +
       '<p class="cm-estado" id="cm-estado">' + t('cm.cargando') + '</p>' +
       '<div class="cm-diag-cab"><h2>' + t('cm.diag') + '</h2><p>' + t('cm.diagSub') + '</p></div>' +
-      '<div class="cm-tarjetas" id="cm-tarjetas">' + tarjetas(null) + '</div></section>' +
+      '<div class="cm-tarjetas" id="cm-tarjetas">' + tarjetas(null) + '</div>' + (CD ? '<div id="cd-detalle" class="cd-detalle" tabindex="-1" hidden></div>' : '') + '</section>' +
       '<h2 class="cm-zonas-h">' + t('cm.zonasH') + '</h2>';
   }
 
   /* Pin de Figma: círculo con el ícono del cielo y etiqueta oscura "Lugar · 21°C Despejado"; La Paz resaltada. */
   /* Etiquetas que salen hacia la izquierda para no encimarse (Bahía Magdalena queda a unos 50 km de Comondú). */
   var IZQ = { bahiamagdalena: true };
-  function pinHtml(f) {
-    var l = f.lugar;
-    return '<span class="cm-pin' + (l.principal ? ' cm-pin-lp' : '') + (IZQ[l.id] ? ' cm-pin-izq' : '') + '" role="img" aria-label="' + esc(l.es + ': ' + f.e.texto + ', ' + num(f.c.temperature_2m) + ' °C') + '">' +
+  var CAPAS = ['general', 'calor', 'viento', 'uv', 'humedad'];
+  var ESTADO = { capa: 'general', sel: 'lapaz' }, FILAS = null, RAIZ = null, alElegir = null;
+  /* Lo que dice el pin según el chip de capa; "—" si el modelo no trae el dato. */
+  function valorCapa(f, capa) {
+    var c = f.c || {};
+    if (capa === 'calor') return t('cm.pinCalor', { v: num(c.temperature_2m), s: num(c.apparent_temperature) });
+    if (capa === 'viento') return t('cm.pinViento', { v: num(c.wind_speed_10m), r: CL.rumbo(c.wind_direction_10m) }).replace(/ $/, '');
+    if (capa === 'uv') return t('cm.pinUv', { v: num(f.uvMax) });
+    if (capa === 'humedad') return t('cm.pinHum', { v: num(c.relative_humidity_2m) });
+    return num(c.temperature_2m) + '°C';
+  }
+  function pinHtml(f, capa) {
+    var l = f.lugar; capa = capa || 'general';
+    var val = valorCapa(f, capa);
+    return '<span class="cm-pin' + (l.principal ? ' cm-pin-lp' : '') + (ESTADO.sel === l.id ? ' cm-pin-sel' : '') + (IZQ[l.id] ? ' cm-pin-izq' : '') + '" role="img" aria-label="' + esc(l.es + ': ' + f.e.texto + ', ' + num(f.c.temperature_2m) + ' °C' + (capa === 'general' ? '' : ', ' + val)) + '">' +
       '<span class="cm-pin-c">' + CL.icono(f.e, l.principal ? 'cl-blanco' : '') + '</span>' +
-      '<span class="cm-pin-t" aria-hidden="true"><span class="cm-n">' + esc(l.es) + ' · </span>' + num(f.c.temperature_2m) + '°C<em> ' + esc(f.e.texto) + '</em></span></span>';
+      '<span class="cm-pin-t" aria-hidden="true"><span class="cm-n">' + esc(l.es) + ' · </span>' + esc(val) + (capa === 'general' ? '<em> ' + esc(f.e.texto) + '</em>' : '') + '</span></span>';
   }
 
   var MAPA = null, CAPA = null, reloj = null;
@@ -108,10 +125,15 @@
     if (CAPA) CAPA.remove();
     CAPA = L.layerGroup(filas.map(function (f) {
       // En celular el pin es compacto (ícono y temperatura); al tocarlo se ve el nombre y el estado del cielo.
-      return L.marker([f.lugar.lat, f.lugar.lon], { icon: L.divIcon({ className: 'cm-pin-wrap', html: pinHtml(f), iconSize: [0, 0], iconAnchor: [0, 0] }), keyboard: false, zIndexOffset: f.lugar.principal ? 1000 : 0 })
-        .bindPopup(esc(f.lugar.es) + ': ' + num(f.c.temperature_2m) + ' °C, ' + esc(f.e.texto));
+      return L.marker([f.lugar.lat, f.lugar.lon], { icon: L.divIcon({ className: 'cm-pin-wrap', html: pinHtml(f, ESTADO.capa), iconSize: [0, 0], iconAnchor: [0, 0] }), keyboard: false, zIndexOffset: f.lugar.principal || ESTADO.sel === f.lugar.id ? 1000 : 0 })
+        .bindPopup(esc(f.lugar.es) + ': ' + num(f.c.temperature_2m) + ' °C, ' + esc(f.e.texto))
+        .on('click', function () { if (alElegir) alElegir(f.lugar.id); });
     })).addTo(MAPA);
   }
+
+  function repintar() { if (RAIZ && FILAS) pintarMapa(RAIZ, FILAS); }
+  function elegir(id) { ESTADO.sel = id; repintar(); }
+  function capa(c) { if (CAPAS.indexOf(c) < 0) return; ESTADO.capa = c; repintar(); }
 
   function cargar(raiz, opciones) {
     opciones = opciones || {};
@@ -119,6 +141,7 @@
     if (reloj) { clearTimeout(reloj); reloj = null; }
     return CL.datos(opciones).then(function (filas) {
       var lp = filas[0];
+      FILAS = filas; RAIZ = raiz;
       raiz.querySelector('#cm-tarjetas').innerHTML = tarjetas(lp);
       var est = raiz.querySelector('#cm-estado');
       if (est) est.textContent = t('cielo.sincro', { h: (lp.c.time || '').slice(11, 16) });
@@ -143,7 +166,7 @@
     }, ms);
   }
 
-  var RBClimaMapa = { html: html, tarjetas: tarjetas, pinHtml: pinHtml, cargar: cargar, TARJETAS: TARJETAS, TX: TX };
+  var RBClimaMapa = { html: html, tarjetas: tarjetas, pinHtml: pinHtml, cargar: cargar, CAPAS: CAPAS, ESTADO: ESTADO, valorCapa: valorCapa, repintar: repintar, elegir: elegir, capa: capa, filas: function () { return FILAS; }, alElegir: function (f) { alElegir = f; }, TARJETAS: TARJETAS, TX: TX };
   if (typeof window !== 'undefined') window.RBClimaMapa = RBClimaMapa;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBClimaMapa;
 })();
