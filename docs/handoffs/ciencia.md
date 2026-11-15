@@ -7,11 +7,10 @@
 
 ## En curso
 
-- Issue #5: validación con NASA POWER hecha y MODIS revisado en `hallazgos.md` (sin reproducir). Fuentes del contexto local ya verificadas (el acuífero con la fuente oficial del DOF).
+- Issue #5: validación con NASA POWER hecha y MODIS reproducido con los CSV de Drive y revisado en `hallazgos.md`. Fuentes del contexto local ya verificadas (el acuífero con la fuente oficial del DOF).
 
 ## Falta
 
-- Reproducir las cifras de MODIS (Luca debe compartir los CSV de AppEEARS por Drive; no están en git).
 - Revisar por qué la temperatura de superficie baja en El Centenario y Sur (ver `hallazgos.md`).
 - Agua subterránea (GRACE/GLDAS): no empezada; si no se hace, declararlo y poner "No usado".
 - Hacer que la web muestre el calor del aire y el de superficie juntos (decisión en `docs/decisiones.md`).
