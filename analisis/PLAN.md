@@ -75,3 +75,8 @@ El indicador `agua` publicaba p = 9.9e-18 (Mann-Kendall estacional simple), dema
 - Calor de superficie (promedio de 6 zonas): 2001-2021, antes de la deriva, **+0.94 °C, significativo (p = 0.0003)**; 2001-2025, **−0.48 °C, p = 0.11**. La anomalía frente a 2001-2021 baja a −0.3 (2022), −1.6 (2023), −1.8 (2024), −3.6 (2025) y −5.5 °C (2026, ene-oct) a medida que el paso se adelanta. Es lo esperado si el sensor mide más temprano en la mañana, cuando la superficie aún se está calentando.
 - Lectura: el "sin cambio claro" de 2001-2025 probablemente mezcla un calentamiento real hasta 2021 con un sesgo del paso del satélite después. No está probado que el sesgo explique toda la baja; falta contrastar con Aqua (MYD11A2, tarea `enviaraqua`; su propia hora de paso también viene en el CSV).
 - **Decisión (2026-11-15, Luca; Carlos la confirma al fusionar):** calor se publica con 2001-2021 (+0.94 °C, p = 0.0003) y una nota de la deriva en la limitación; regenerar con `--calor-hasta 2021`. Pendiente: contraste con Aqua.
+
+## Estado al 2026-11-15 (cierre del issue #97)
+- Cifras vigentes (`--calor-hasta 2021`): calor +0.94 °C (2001-2021), vegetación −0.013 (2001-2026), lluvia sin cifra, agua +1.36 cm. Las secciones anteriores son historial; las cifras de 2001-2025 ya no son las publicadas.
+- Hecho: campos `*_en`, `analisis.validar` los exige, `scripts/verificar-todo.ps1`, Spearman (`correlacion.py`), contraste con Aqua (`contraste_aqua.py`: no confirma el calor 2001-2021). 56 pruebas.
+- Falta: decisión de Carlos sobre la cifra de calor; pruebas de `appeears.py`; GLDAS-2.2 CLSM; validación contra fuente de NDVI y POWER T2M.
