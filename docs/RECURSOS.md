@@ -105,4 +105,19 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | Google Stitch (herramienta de diseño de interfaces con IA, stitch.google.com), 2026-11-14 | Diseño de la interfaz de las 4 pantallas (disposición, paleta) por UI/UX (Ehileen y Roberto). Flujo (confirmado por Ehileen el 2026-11-15, igual para todas las pantallas): el equipo hizo un prototipo de media fidelidad, se ajustó en Stitch y el equipo hizo la edición final a mano en Figma; el logotipo NO salió de Stitch (ver fila anterior). Lo que se use en la web se adapta y se revisa a mano | `web/assets/`, `diseno/` y la interfaz de `web/` (pantallas de referencia en `diseno/pantallas/`; las pantallas finales son del equipo) | **Usado** (confirmado por Carlos el 2026-11-14). Toda imagen generada lleva marca "AI-generated". **Términos revisados el 2026-11-14 dentro de la app** (<https://stitch.google.com/terms>, "Additional Terms of Service for Stitch"; la página solo carga con sesión iniciada; capturas en `diseno/evidencias/stitch-terminos-2026-11-14.png` y `stitch-privacidad-2026-11-14.png`): los resultados de Stitch "no siempre son exactos" y el usuario debe verificar por su cuenta todo lo que sugiere la IA; quien conecta servicios externos (p. ej. GitHub) responde por ese uso. Los términos adicionales **no dicen nada sobre la propiedad o licencia de lo generado**; por ser "adicionales" se entiende que complementan los Términos de Servicio de Google (<https://policies.google.com/terms>), que dicen que Google no reclama la propiedad del contenido generado (inferencia por el título, no lo dice la página). Privacidad (aviso actualizado el 2026-10-23): por defecto Stitch no entrena con los datos del usuario; una muestra puede revisarse por personas, así que no se subieron datos personales ni claves. |
 | Skills y plugins de terceros | Ver [`docs/skills-terceros.md`](skills-terceros.md) | Herramientas de desarrollo | Ver archivo |
 
+## Presentación HTML del pitch (2026-11-15, `presentacion/`)
+
+| Recurso | URL | Licencia | Dónde se usa |
+|---|---|---|---|
+| reveal.js 5.2.1 | <https://github.com/hakimel/reveal.js> | MIT | `presentacion/vendor/reveal/` |
+| animejs 3.2.2 | <https://github.com/juliangarnier/anime> | MIT | `presentacion/vendor/anime/` |
+| @google/model-viewer 4.4.0 (copiado, sin uso en las diapositivas: no funciona con doble clic) | <https://github.com/google/model-viewer> | Apache-2.0 | `presentacion/vendor/model-viewer/` |
+| Space Grotesk, Manrope y JetBrains Mono (vía @fontsource 5.3.0, subset latin, autoalojadas) | <https://fontsource.org/> | SIL OFL 1.1 | `presentacion/vendor/fonts/` |
+| Imagen del huracán Odile, 2014-09-14, MODIS Terra (sin modificar) | NASA Worldview / GIBS, capa `MODIS_Terra_CorrectedReflectance_TrueColor` | Datos de la NASA (política de datos abiertos de Earthdata) | `presentacion/assets/img/odile-2014-09-14.jpg` |
+| Foto MODIS/GIBS de BCS (abril de 2025) | NASA GIBS (ver `web/img/FUENTES.md`) | Datos de la NASA | `presentacion/assets/img/bcs-modis-2025-04-20.jpg` |
+| Cifras de eventos extremos | Informes de ciclones tropicales del NHC/NOAA (ver `docs/investigacion/eventos-extremos.md`) | Dominio público (NOAA) | Notas y diapositivas del pitch |
+| Modelos 3D CC0 de Quaternius (palmera, nube, casa, barco; vía Poly Pizza), **descargados pero sin usar** y fuera de git (`*.glb` está ignorado) | <https://poly.pizza/> (ver `presentacion/assets/modelos/MODELOS.md`) | CC0 | Local solamente |
+
+IA: Claude Code (Sonnet y Opus) maquetó la presentación y redactó el guion del pitch, y los datos salen de los archivos del repo. El tráiler del video lleva una voz sintética de ElevenLabs (declarada arriba).
+
 Recordatorio: imágenes y video generados llevan marca de agua visible "AI-generated"; prohibido usar o modificar logos de la NASA; sin menores de 18.

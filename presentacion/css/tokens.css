@@ -1,0 +1,67 @@
+/* Radar BCS · presentación HTML — tokens de diseño.
+   Colores y tipografías tomados de web/assets/tokens.css (prefijo --rb-) y video/src/estilo.ts.
+   Prefijo --p- (presentación) para no chocar con los de la web.
+   Medidas en px del lienzo de Reveal (1280 x 720); Reveal escala todo junto. */
+:root {
+  /* Marca (web/assets/tokens.css) */
+  --p-tinta: #000d21;          /* fondo más profundo */
+  --p-marino: #0c2340;         /* fondo base del deck */
+  --p-cian: #51d8e8;           /* acento principal: datos, progreso, foco */
+  --p-cian-claro: #90f1ff;
+  --p-cian-oscuro: #0098a6;
+  --p-verde: #006d3d;          /* estado "en vivo", confirmación */
+  --p-verde-claro: #7ed99e;    /* verde legible sobre oscuro */
+  --p-fondo-pagina: #f7f9fc;   /* texto principal sobre oscuro / superficies claras */
+  --p-azul-gris: #778bad;      /* texto secundario, líneas */
+  --p-blanco: #ffffff;
+
+  /* Acento cálido: SOLO para calor (temperatura del aire y de superficie). Nada más. */
+  --p-calor: #c2410c;
+  --p-calor-claro: #fb923c;    /* versión legible sobre marino para cifras de calor */
+
+  /* Alarma del cronómetro (solo HUD, cuando una parte se pasa de tiempo) */
+  --p-alarma: #e11d48;
+
+  /* Superficies sobre fondo oscuro */
+  --p-superficie: rgba(247, 249, 252, 0.06);
+  --p-superficie-fuerte: rgba(247, 249, 252, 0.11);
+  --p-borde: rgba(119, 139, 173, 0.35);
+  --p-texto: #f7f9fc;
+  --p-texto-suave: #b4c1d8;    /* azul-gris aclarado: 7.9:1 sobre marino */
+  --p-texto-tenue: #8fa2c2;    /* solo etiquetas >= 18px */
+
+  /* Tipografía (fuentes locales en vendor/fonts/fuentes.css) */
+  --p-fuente-titulo: "Space Grotesk", system-ui, sans-serif;   /* 500, 700 */
+  --p-fuente-cuerpo: "Manrope", system-ui, sans-serif;         /* 600, 800 */
+  --p-fuente-datos: "JetBrains Mono", ui-monospace, monospace; /* 500 */
+
+  /* Escala para proyector (px del lienzo 1280x720) */
+  --p-t-gigante: 132px;  /* una cifra protagonista */
+  --p-t-display: 76px;   /* título de apertura o frase final */
+  --p-t-titulo: 56px;    /* título de diapositiva (mínimo) */
+  --p-t-subtitulo: 36px;
+  --p-t-cuerpo: 26px;    /* mínimo de cuerpo */
+  --p-t-etiqueta: 18px;  /* mínimo absoluto: chips, fuentes, HUD */
+  --p-interlinea-titulo: 1.05;
+  --p-interlinea-cuerpo: 1.35;
+
+  /* Lienzo y zona segura (proyector 4:3 recorta los lados de 16:9) */
+  --p-ancho: 1280px;
+  --p-alto: 720px;
+  --p-segura-x: 160px;        /* (1280 - 960) / 2 */
+  --p-segura-ancho: 960px;
+  --p-contenido-arriba: 148px; /* debajo del chip y la línea de objetivo */
+  --p-contenido-alto: 488px;   /* hasta y = 636, encima de orador y cronómetro */
+
+  /* Forma */
+  --p-radio: 18px;
+  --p-radio-chico: 10px;
+  --p-radio-pildora: 999px;
+  --p-espacio: 24px;
+
+  /* Movimiento (mismo lenguaje que el tráiler: video/src/trailer/comun.tsx) */
+  --p-suave: cubic-bezier(0.16, 1, 0.3, 1);   /* SUAVE: entradas */
+  --p-entra: cubic-bezier(0.7, 0, 0.84, 0);   /* ENTRA: salidas */
+  --p-dur-entrada: 640ms;
+  --p-dur-corta: 220ms;
+}

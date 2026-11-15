@@ -1,0 +1,98 @@
+<!-- Parte 4/6 · DEMOSTRACIÓN · orador: Diego · tiempo: 2:30
+     Objetivo: Mostrarlo
+     Reglas: solo <section data-parte="4" ...> aquí. Sin estilos en línea ni scripts. Clases en css/deck.css (ver DISENO.md).
+     Todo texto dentro de <div class="zona">. Toda cifra lleva <p class="fuente">. Notas del orador en <aside class="notes">.
+     Respaldo de la demo en vivo: la web real se muestra en otra ventana. -->
+
+<!-- 4a · Tráiler -->
+<section data-parte="4" data-animacion>
+  <div class="zona centro">
+    <div class="etiqueta" data-entra="lider">Primero, 30 segundos · voz sintética en inglés</div>
+    <video class="captura video-trailer" data-trailer src="assets/video/trailer.mp4" poster="assets/capturas/min/inicio.png" preload="metadata" playsinline data-entra></video>
+    <button class="chip-dato" type="button" data-reproducir data-entra>▶ Reproducir tráiler</button>
+    <div class="etiqueta" data-entra>Si el video no carga: sigue con las 4 paradas</div>
+  </div>
+  <aside class="notes">
+    <p>Primero, treinta segundos. La voz es sintética y está en inglés.</p>
+    <p>[clic en ▶ · 29 s de video · no hablar encima · al terminar, cambiar a la web en vivo]</p>
+  </aside>
+</section>
+
+<!-- 4b · Parada 1: Inicio → Calor -->
+<section data-parte="4" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <div data-entra="lider"><span class="chip-dato">Parada 1 · 0:30</span></div>
+        <h3 class="subtitulo" data-entra>Inicio → <span class="calor">Calor</span></h3>
+        <div class="cifra calor" data-entra>+<span data-contador="1.47" data-decimales="2">1,47</span><span class="unidad">°C</span></div>
+        <div data-entra><span class="sello" data-sello="900">p &lt; 0.001</span></div>
+        <p class="fuente" data-entra>NASA POWER, aire de La Paz, 2001-2025</p>
+        <div class="etiqueta" data-entra>Demo en vivo: toca Calor</div>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/ficha-calor.png" alt="Ficha de calor con el aumento de 1.47 grados"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Esto es Inicio: calor, vegetación, lluvia y agua. Toco Calor. [toca] El aire en La Paz subió 1.47 grados de 2001 a 2025. [señala el sello] Y este sello dice p menor a 0.001: estadísticamente significativo. Es un cambio medido, no una sensación.</p>
+  </aside>
+</section>
+
+<!-- 4c · Parada 2: Lluvia -->
+<section data-parte="4" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <div data-entra="lider"><span class="chip-dato">Parada 2 · 0:30</span></div>
+        <h3 class="subtitulo" data-entra>Lluvia</h3>
+        <h2 class="titulo" data-entra>Sin cambio <span class="marca">claro</span></h2>
+        <div data-entra><span class="sello" data-sello="900">p = 0.129</span></div>
+        <p class="fuente" data-entra>NASA POWER, lluvia, 2001-2025</p>
+        <div class="etiqueta" data-entra>Demo en vivo: vuelve a Inicio y toca Lluvia</div>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/ficha-lluvia.png" alt="Ficha de lluvia: sin cambio claro"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Ahora la lluvia. [toca] Aquí la web es honesta: no se detecta un cambio claro, p igual a 0.129. [pausa 1 s] No inventamos una tendencia que los datos no muestran. Eso también es información.</p>
+  </aside>
+</section>
+
+<!-- 4d · Parada 3: Clima, mapa de 38 lugares -->
+<section data-parte="4" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <div data-entra="lider"><span class="chip-dato">Parada 3 · 0:35</span></div>
+        <div class="cifra" data-entra><span data-contador="38">38</span><span class="unidad">lugares</span></div>
+        <p data-entra><span class="calor">Calor: sube en los 38.</span> Lluvia: solo en 8, de Los Cabos.</p>
+        <p class="fuente" data-entra>NASA POWER, 2001-2025 · 21 celdas compartidas de unos 50 km</p>
+        <div class="etiqueta" data-entra>Demo en vivo: Clima, alterna Calor y Lluvia</div>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/mapa-lugares.png" alt="Mapa de 38 lugares de Baja California Sur"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>En Clima está el mapa de 38 lugares de Baja California Sur. [muestra Calor] El calor del aire subió en los 38. [cambia a Lluvia] La lluvia, solo en 8 lugares de Los Cabos. Ojo: varios lugares comparten la misma celda de datos, de unos 50 kilómetros, y la pantalla lo avisa.</p>
+  </aside>
+</section>
+
+<!-- 4e · Parada 4: Agua regional + Acciones -->
+<section data-parte="4" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <div data-entra="lider"><span class="chip-dato">Parada 4 · 0:25</span></div>
+        <h2 class="titulo" data-entra>Agua <span class="marca">regional</span></h2>
+        <p data-entra>GRACE mide cientos de km: no es el acuífero. Abajo, Acciones.</p>
+        <p class="fuente" data-entra>NASA GRACE y GRACE-FO, JPL Mascon, 2002-2026</p>
+        <div class="etiqueta" data-entra>Demo en vivo: opción Agua, baja a Acciones</div>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/acciones.png" alt="Acciones: qué hacer contra el calor y para cuidar el agua"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>La opción Agua es regional: el satélite GRACE mide cientos de kilómetros. No es el acuífero de La Paz, y lo decimos. [baja] Abajo, Acciones: qué hacer hoy. [toca Avisos] Y en Avisos, alertas del modelo. No son oficiales; aquí están los enlaces a las fuentes oficiales. [voltea al público]</p>
+    <p>Esto es lo que hay hoy. Lo que sigue te lo cuenta el más joven del equipo.</p>
+  </aside>
+</section>

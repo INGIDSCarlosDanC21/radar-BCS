@@ -67,3 +67,10 @@ Cómo revisar: `git diff --stat dev` debe mostrar solo `docs/`.
 - **Falta:** video de 30 s y pasos de la plataforma (Carlos), Submit for Judging (meta 13:00, límite 23:59), prueba con sol real y la segunda prueba de disponibilidad de servicios (`docs/investigacion/disponibilidad-servicios.md`).
 - **Falta (después de enviar):** limpiar el historial de git (decisión del 2026-11-14) y avisar al equipo para clonar de nuevo.
 - **Qué bloquea:** nada de mi lado.
+
+## Presentación HTML del pitch (2026-11-15, noche)
+
+- **Qué hice:** presentación offline en `presentacion/` (Reveal.js + anime.js vendorizados, 6 partes, 1280×720 con zona segura para 800×600), pitch por integrante en `docs/entrega/11-pitch-equipo.md`, eventos extremos verificados en `docs/investigacion/eventos-extremos.md`, skill `.claude/skills/diapositivas-html/` y guía `docs/entrega/12-presentacion-como-usar.md`.
+- **Cómo abrirla:** doble clic en `presentacion/INICIAR-PRESENTACION.bat` (teclas: flechas, T, R, S, F, P). Respaldo: `presentacion/index.html`.
+- **Falta:** capturas de Clima, Pesca y Avisos (Open-Meteo llegó a su límite: `node scripts/capturar-presentacion.mjs --solo=clima,pesca,avisos`); copiar `trailer.mp4` por Drive/USB (está en `.gitignore`); ensayo con cronómetro; abrir el `.bat` en la PC del evento.
+- **Bloquea:** nada. Regla 7: el orador 5 figura solo como "Integrante 6".
