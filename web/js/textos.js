@@ -8,6 +8,8 @@
   var DIC = {
     es: {
       'html.saltar': 'Saltar al contenido',
+      'html.desc': 'Radar BCS: cómo han cambiado el calor, la vegetación, la lluvia y el agua en La Paz, B.C.S. desde 2001, con datos abiertos de la NASA.',
+      'html.ogTitulo': 'Radar BCS: tendencias ambientales de La Paz, B.C.S.',
       'html.cargando': 'Cargando datos…',
       'html.pie': 'Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0',
       'html.ia': 'Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch; logotipo generado con IA (Gemini).',
@@ -96,6 +98,8 @@
     },
     en: {
       'html.saltar': 'Skip to content',
+      'html.desc': 'Radar BCS: how heat, vegetation, rainfall and water have changed in La Paz, Baja California Sur, since 2001, with open NASA data.',
+      'html.ogTitulo': 'Radar BCS: environmental trends in La Paz, Baja California Sur',
       'html.cargando': 'Loading data…',
       'html.pie': 'Team OptiPaz · NASA Space Apps Challenge 2026 · Apache-2.0 License',
       'html.ia': 'Code and analysis written with AI assistance (Claude Code); interface designed with help from Google Stitch; AI-generated logo (Gemini).',
@@ -213,6 +217,14 @@
   /* Textos fijos de index.html: data-t pone textContent, data-t-aria pone aria-label. */
   function aplicar(doc) {
     doc.documentElement.lang = lang;
+    // Descripción y vista previa al compartir (#119 D3)
+    function meta(sel, v) { var m = doc.querySelector(sel); if (m) m.setAttribute('content', v); }
+    meta('meta[name="description"]', t('html.desc'));
+    meta('meta[property="og:description"]', t('html.desc'));
+    meta('meta[property="og:title"]', t('html.ogTitulo'));
+    meta('meta[property="og:image:alt"]', t('home.alt'));
+    meta('meta[property="og:locale"]', lang === 'en' ? 'en_US' : 'es_MX');
+    meta('meta[property="og:locale:alternate"]', lang === 'en' ? 'es_MX' : 'en_US');
     doc.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = t(el.getAttribute('data-t')); });
     doc.querySelectorAll('[data-t-alt]').forEach(function (el) { el.setAttribute('alt', t(el.getAttribute('data-t-alt'))); });
     doc.querySelectorAll('[data-t-title]').forEach(function (el) { el.setAttribute('title', t(el.getAttribute('data-t-title'))); });
