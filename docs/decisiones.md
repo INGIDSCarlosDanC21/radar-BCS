@@ -121,3 +121,11 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Decisión:** (1) la clave **publishable/anon** de Supabase **sí se sube al repo** (en `web/js/config.js`), porque es pública por diseño y la protegen las reglas de Row Level Security; **nunca** `service_role` ni `sb_secret_`. (2) El correo de contacto del aviso de privacidad para pedir que se borre una cuenta es el que dio Carlos (contactarfloppa@gmail.com). (3) Carlos comprobó que el correo de confirmación de Supabase sí llega.
 - **Condiciones que siguen valiendo:** login opcional, solo correo y contraseña, corte el domingo a las 09:00 (issue #73).
 - **Quién decidió:** Carlos (Líder), 2026-11-14.
+
+### 2026-11-14 — Calor de superficie: la serie se corta en 2021 por la deriva de Terra
+
+- **Contexto:** con 2001-2025 la superficie MODIS daba "sin cambio claro" (p = 0.11); con 2026 daba una baja de -1.06 °C. Luca comprobó con `Day_view_time` de MOD11A2 que desde 2022 Terra pasa cada vez más temprano (hora local media de unas 10.8 h a 9.2 h en 2026), así que la superficie se mide antes de calentarse y la serie baja de forma artificial. Con 2001-2021 sale +0.94 °C significativo (p = 0.0003) y El Centenario y Sur (la "baja" que reproduje) dejan de salir significativos (PR #90).
+- **Decisión:** Calor muestra la superficie MODIS en 2001-2021 (+0.94 °C) y el aire POWER (+1.47 °C, 2001-2025) en la nota; la limitación explica el corte completo en la tarjeta. Falta el contraste con Aqua (MYD11A2): si Aqua no muestra calentamiento, se revisa. Es la causa más probable, no está probada; la web no la presenta como hecho.
+- **Reemplaza** la entrada "Calor: el número principal es la superficie (MODIS)" solo en el periodo y en la cifra: antes "sin cifra".
+- **Cómo se revierte:** `python -m analisis.exportar --calor-hasta 2025` y `python -m analisis.zonas --calor-hasta 2025`, y copiar a `web/data/`.
+- **Quién decidió:** propuesta de Luca, aceptada en `dev` por el asistente del Líder; **Carlos confirma** (si no, se revierte).
