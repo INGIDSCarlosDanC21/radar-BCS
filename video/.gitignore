@@ -16,3 +16,4 @@ public/tomas/
 
 # Audio del trailer (efectos WAV sin recompresion para conservar el inicio exacto): sí se suben
 !public/audio/*.wav
+public/clips/

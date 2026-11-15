@@ -2,16 +2,15 @@
 // porque se monta dentro de su <Sequence>. Los tiempos absolutos de la voz están en guion.ts.
 import { AbsoluteFill, Easing, Img, interpolate, staticFile } from 'remotion';
 import { COLOR, FUENTE_CUERPO, FUENTE_MONO, FUENTE_TITULO } from '../estilo';
-import { CIFRA_CALOR, LUGARES, MOMENTOS as M, P_CALOR, P_LLUVIA, PALABRAS_APERTURA, TRAILER_ESCENAS as E } from '../guion';
+import { CIFRA_CALOR, CLIPS, LUGARES, MOMENTOS as M, MONTAJE_FUNCIONES, P_CALOR, P_LLUVIA, PALABRAS_APERTURA, TRAILER_ESCENAS as E } from '../guion';
 
 // Convierte un momento ABSOLUTO de guion.ts a segundos locales de una escena.
 const local = (abs: number, escena: { desde: number }) => abs - escena.desde;
-import { Barras, Chyron, CL, Cromatica, ENTRA, SUAVE, useDeriva, useSeg } from './comun';
+import { Barras, Chyron, CL, Cromatica, ENTRA, FondoVivo, SUAVE, useDeriva, useSeg } from './comun';
 import { aFoto, CAJA_FOTO, LUGARES_38, SERIE_CALOR, SERIE_LLUVIA } from './datos';
 import { Telefono } from './Telefono';
 
 const NARANJA = '#ff8a3d';
-const FONDO = `radial-gradient(ellipse 90% 80% at 50% 40%, ${COLOR.marino} 0%, ${COLOR.tinta} 70%, #00050e 100%)`;
 
 // Texto que sube desde una máscara (revelado editorial).
 const Sube: React.FC<{ t: number; en: number; children: React.ReactNode; dur?: number; style?: React.CSSProperties }> = ({
@@ -65,12 +64,13 @@ export const Apertura: React.FC = () => {
   const d = useDeriva('apertura', 5);
   const escalaFoto = 1920 / CAJA_FOTO.ancho; // la foto cubre el ancho del cuadro
   const lp = aFoto(24.14, -110.31); // La Paz (web/data/localidades_tendencias.json)
-  const zoom = interpolate(t, [0, 3], [1.0, 1.32], { ...CL, easing: Easing.inOut(Easing.sin) });
+  const durA = E.apertura.hasta - E.apertura.desde;
+  const zoom = interpolate(t, [0, durA], [1.0, 1.32], { ...CL, easing: Easing.inOut(Easing.sin) });
   // la cámara empuja hacia La Paz
-  const cx = interpolate(t, [0, 3], [960, lp.x * escalaFoto], CL);
-  const cy = interpolate(t, [0, 3], [560, lp.y * escalaFoto], CL);
+  const cx = interpolate(t, [0, durA], [960, lp.x * escalaFoto], CL);
+  const cy = interpolate(t, [0, durA], [560, lp.y * escalaFoto], CL);
   const abre = interpolate(t, [0, 0.9], [540, 0], { ...CL, easing: SUAVE });
-  const salida = interpolate(t, [2.55, 3], [1, 2.6], { ...CL, easing: ENTRA });
+  const salida = interpolate(t, [durA - 0.45, durA], [1, 2.6], { ...CL, easing: ENTRA });
   return (
     <AbsoluteFill style={{ background: '#000', overflow: 'hidden' }}>
       <svg width="0" height="0" style={{ position: 'absolute' }}>
@@ -97,7 +97,7 @@ export const Apertura: React.FC = () => {
         style={{
           background:
             'radial-gradient(ellipse 40% 30% at 30% 40%, rgba(255,200,150,0.18), transparent 70%), radial-gradient(ellipse 35% 25% at 75% 70%, rgba(150,220,255,0.14), transparent 70%)',
-          translate: `${interpolate(t, [0, 3], [-60, 90])}px 0px`,
+          translate: `${interpolate(t, [0, durA], [-60, 90])}px 0px`,
           scale: `${zoom * 1.1}`,
           mixBlendMode: 'screen',
         }}
@@ -108,7 +108,7 @@ export const Apertura: React.FC = () => {
         mono={FUENTE_MONO}
         style={{ position: 'absolute', left: 96, top: 120, opacity: interpolate(t, [0.3, 0.5], [0, 1], CL) }}
       />
-      <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', scale: `${salida}`, opacity: interpolate(t, [2.7, 3], [1, 0], CL) }}>
+      <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', scale: `${salida}`, opacity: interpolate(t, [durA - 0.3, durA], [1, 0], CL) }}>
         <div style={{ display: 'flex', gap: 56, alignItems: 'baseline' }}>
           {PALABRAS_APERTURA.map((p, i) => {
             const q = interpolate(t, [local(p.en, E.apertura) - 0.05, local(p.en, E.apertura) + 0.3], [0, 1], { ...CL, easing: SUAVE });
@@ -152,16 +152,12 @@ export const Titulo: React.FC = () => {
   const logoY = interpolate(t, [1.0, 1.8], [520, 470], { ...CL, easing: SUAVE });
   const barrido = interpolate(t, [0.45, 1.1], [-40, 140], CL);
   return (
-    <AbsoluteFill style={{ background: FONDO, overflow: 'hidden' }}>
-      <Img
-        src={staticFile('bcs-modis.jpg')}
-        style={{ position: 'absolute', left: -200, top: -300, width: 2400, opacity: 0.22, filter: 'blur(14px) saturate(0.6)', rotate: `${t * 1.2}deg`, scale: `${1.1 + t * 0.02}` }}
-      />
+    <AbsoluteFill style={{ overflow: 'hidden' }}>
+      <FondoVivo tono="marca" />
       {/* segundo teléfono al fondo, desenfocado (profundidad) */}
-      <Telefono captura="tomas/toma2-calor.png" desdePx={0} ancho={330} x={1590 + d.x} y={interpolate(sube, [0, 1], [1500, 600])} rotY={-30} rotX={10} rotZ={6} desenfoque={7} sombra={false} />
+      <Telefono clip={CLIPS.cielo} ancho={330} x={1590 + d.x} y={interpolate(sube, [0, 1], [1500, 600])} rotY={-30} rotX={10} rotZ={6} desenfoque={7} sombra={false} />
       <Telefono
-        captura="tomas/toma1-inicio.png"
-        desdePx={interpolate(t, [2.0, 2.9], [0, 1351], { ...CL, easing: Easing.inOut(Easing.cubic) })}
+        clip={CLIPS.barra}
         ancho={400}
         x={1230 + d.x}
         y={interpolate(sube, [0, 1], [1700, 560]) + d.y}
@@ -211,13 +207,13 @@ export const Calor: React.FC = () => {
   const camino = vals.map((v, i) => `${i ? 'L' : 'M'}${px(i).toFixed(1)},${py(v).toFixed(1)}`).join(' ');
   const visibles = Math.floor(dibujo * (vals.length - 1) + 0.001);
   return (
-    <AbsoluteFill style={{ background: 'radial-gradient(ellipse 80% 80% at 70% 40%, #3a1a0c 0%, #12090a 60%, #050304 100%)', overflow: 'hidden', ...latigo(t, dur, false, true) }}>
+    <AbsoluteFill style={{ overflow: 'hidden', ...latigo(t, dur, false, true) }}>
+      <FondoVivo tono="calor" particulas="brasas" />
       <AbsoluteFill style={{ scale: `${interpolate(t, [0, dur], [1.0, 1.07])}`, translate: `${d.x}px ${d.y}px` }}>
         {/* rejilla tenue */}
         <AbsoluteFill style={{ backgroundImage: 'linear-gradient(rgba(255,140,60,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,140,60,0.06) 1px, transparent 1px)', backgroundSize: '80px 80px' }} />
         <Telefono
-          captura="tomas/toma2-calor.png"
-          desdePx={interpolate(t, [0.6, 3.2], [0, 330], { ...CL, easing: Easing.inOut(Easing.cubic) })}
+          clip={CLIPS.calorSim}
           ancho={360}
           x={interpolate(t, [0, dur], [480, 510])}
           y={515}
@@ -303,11 +299,11 @@ export const Lluvia: React.FC = () => {
   const H = 300;
   const bw = W / vals.length;
   return (
-    <AbsoluteFill style={{ background: 'radial-gradient(ellipse 80% 80% at 35% 40%, #0b2a4a 0%, #04101f 60%, #01050c 100%)', overflow: 'hidden', ...latigo(t, dur, true, true) }}>
+    <AbsoluteFill style={{ overflow: 'hidden', ...latigo(t, dur, true, true) }}>
+      <FondoVivo tono="lluvia" particulas="lluvia" />
       <AbsoluteFill style={{ scale: `${interpolate(t, [0, dur], [1.08, 1.0])}`, translate: `${d.x}px ${d.y}px` }}>
         <Telefono
-          captura="tomas/toma3-lluvia.png"
-          desdePx={interpolate(t, [0.3, 2.0], [0, 260], { ...CL, easing: Easing.inOut(Easing.cubic) })}
+          clip={CLIPS.lluvia}
           ancho={350}
           x={1540}
           y={515}
@@ -351,11 +347,12 @@ export const Mapa: React.FC = () => {
   const lp = aFoto(24.14, -110.31);
   const escala = 1.15;
   return (
-    <AbsoluteFill style={{ background: '#01060f', overflow: 'hidden' }}>
+    <AbsoluteFill style={{ overflow: 'hidden' }}>
+      <FondoVivo tono="mapa" />
       <div
         style={{
           position: 'absolute',
-          left: 1060 - (CAJA_FOTO.ancho * escala) / 2,
+          left: 930 - (CAJA_FOTO.ancho * escala) / 2,
           top: 560 - (CAJA_FOTO.alto * escala) / 2,
           width: CAJA_FOTO.ancho * escala,
           height: CAJA_FOTO.alto * escala,
@@ -392,7 +389,8 @@ export const Mapa: React.FC = () => {
           La Paz
         </div>
       </div>
-      <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(1,6,15,0.92) 0%, rgba(1,6,15,0.6) 30%, rgba(1,6,15,0) 55%)' }} />
+      <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(1,14,10,0.92) 0%, rgba(1,14,10,0.55) 30%, rgba(1,14,10,0) 55%)' }} />
+      <Telefono clip={CLIPS.lugares} ancho={330} x={1640} y={interpolate(t, [0, dur], [560, 520])} rotY={interpolate(t, [0, dur], [-26, -16])} rotX={6} rotZ={2} escala={interpolate(t, [0, 0.4], [0.8, 1], { ...CL, easing: SUAVE })} />
       <div style={{ position: 'absolute', left: 110, top: 200 }}>
         <Chyron texto="WHERE · BAJA CALIFORNIA SUR" mono={FUENTE_MONO} />
         <div style={{ fontFamily: FUENTE_TITULO, fontSize: 260, color: '#fff', lineHeight: 1, marginTop: 20, fontVariantNumeric: 'tabular-nums', textShadow: '0 0 40px rgba(81,216,232,0.5)' }}>
@@ -411,74 +409,77 @@ export const Mapa: React.FC = () => {
   );
 };
 
-// ─── 6. AVISOS (18.5–22 s): cortes rápidos y "not official warnings" ────────────────────────
-export const Avisos: React.FC = () => {
+// ─── 6. FUNCIONES (frase 6): montaje rápido de la app real + "Not official warnings." ───────
+// Un corte cada 0.5 s (MONTAJE_FUNCIONES en guion.ts); cada plano con otro ángulo de cámara.
+const ANGULOS = [
+  { x: 1180, y: 560, ancho: 470, rotY: -22, rotX: 10, rotZ: -4 },
+  { x: 760, y: 540, ancho: 520, rotY: 20, rotX: 6, rotZ: 3 },
+  { x: 1240, y: 600, ancho: 600, rotY: -12, rotX: 18, rotZ: -7 },
+  { x: 860, y: 520, ancho: 450, rotY: 28, rotX: -4, rotZ: 4 },
+  { x: 1160, y: 560, ancho: 520, rotY: -30, rotX: 8, rotZ: 0 },
+];
+export const Funciones: React.FC = () => {
   const t = useSeg();
-  const d = useDeriva('avisos', 10, 0.8);
-  const k = (abs: number) => local(abs, E.avisos);
-  const fin = E.avisos.hasta - E.avisos.desde;
-  const me = k(M.modelEstimates); // corte al plano final (texto)
+  const d = useDeriva('funciones', 10, 0.8);
+  const k = (abs: number) => local(abs, E.funciones);
+  const finMontaje = k(M.notOfficial) - 0.05;
   const no = k(M.notOfficial);
-  // tres planos rápidos repartidos antes de 'model estimates'
-  const plano = t < me / 3 ? 0 : t < (2 * me) / 3 ? 1 : t < me ? 2 : 3;
+  const me = k(M.modelEstimates);
+  const idx = MONTAJE_FUNCIONES.findIndex((p, i) => {
+    const sig = MONTAJE_FUNCIONES[i + 1];
+    return t >= k(p.desde) && t < (sig ? k(sig.desde) : finMontaje);
+  });
+  const plano = idx >= 0 ? MONTAJE_FUNCIONES[idx] : null;
+  const a = ANGULOS[Math.max(idx, 0) % ANGULOS.length];
+  const tp = plano ? t - k(plano.desde) : 0; // tiempo dentro del plano
   return (
-    <AbsoluteFill style={{ background: FONDO, overflow: 'hidden' }}>
-      {plano === 0 ? (
-        <>
-          <Telefono captura="tomas/toma5a-clima.png" desdePx={interpolate(t, [0, me / 3], [0, 120])} ancho={760} x={1180 + d.x} y={interpolate(t, [0, me / 3], [760, 680])} rotZ={-7} rotX={18} rotY={-10} />
-          <Chyron texto="TODAY'S WEATHER" mono={FUENTE_MONO} style={{ position: 'absolute', left: 110, top: 150, fontSize: 30 }} />
-        </>
-      ) : null}
-      {plano === 1 ? (
-        <>
-          <Telefono captura="tomas/toma5a-clima.png" desdePx={interpolate(t, [me / 3, (2 * me) / 3], [420, 560])} ancho={1300} x={760 + d.x} y={560 + d.y} rotY={16} rotX={4} rotZ={3} escala={interpolate(t, [me / 3, (2 * me) / 3], [1, 1.08])} />
-          <Chyron texto="MODEL ESTIMATE" mono={FUENTE_MONO} style={{ position: 'absolute', right: 110, top: 150, fontSize: 30 }} />
-        </>
-      ) : null}
-      {plano === 2 ? (
-        <>
-          <Telefono captura="tomas/toma5b-pesca.png" desdePx={interpolate(t, [(2 * me) / 3, me], [0, 180])} ancho={560} x={1300 + d.x} y={600} rotY={-24} rotX={10} rotZ={5} />
-          <Chyron texto="TODAY'S SEA" mono={FUENTE_MONO} style={{ position: 'absolute', left: 110, top: 150, fontSize: 30 }} />
-        </>
-      ) : null}
-      {plano === 3 ? (
+    <AbsoluteFill style={{ overflow: 'hidden' }}>
+      <FondoVivo tono="mar" />
+      {plano ? (
         <>
           <Telefono
-            captura="tomas/toma5b-pesca.png"
-            desdePx={3162 - 40}
-            ancho={1150}
-            x={1260 + d.x}
-            y={interpolate(t, [me, fin], [640, 560]) + d.y}
-            rotY={interpolate(t, [me, fin], [-14, -6])}
-            rotX={8}
-            rotZ={2}
-            desenfoque={interpolate(t, [me, me + 0.4, no + 0.1, no + 0.5], [12, 0, 0, 7], CL)}
+            key={plano.clip + idx}
+            clip={{ ...CLIPS[plano.clip], desde: CLIPS[plano.clip].desde }}
+            ancho={a.ancho}
+            x={a.x + d.x + tp * (idx % 2 ? -60 : 60)}
+            y={a.y + d.y}
+            rotY={a.rotY + tp * (idx % 2 ? -8 : 8)}
+            rotX={a.rotX}
+            rotZ={a.rotZ}
+            escala={interpolate(tp, [0, 0.12, 0.5], [1.12, 1.0, 1.04], CL)}
           />
-          <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(0,13,33,0.95) 0%, rgba(0,13,33,0.7) 45%, rgba(0,13,33,0) 75%)' }} />
-          <div style={{ position: 'absolute', left: 110, top: 300 }}>
-            <Sube t={t} en={me + 0.05}>
-              <div style={{ fontFamily: FUENTE_TITULO, fontSize: 92, color: '#fff' }}>Model estimates.</div>
-            </Sube>
-            <div style={{ position: 'relative', marginTop: 16, display: 'inline-block' }}>
-              <div
-                style={{
-                  position: 'absolute',
-                  left: -14,
-                  top: 10,
-                  bottom: 4,
-                  width: `calc(${interpolate(t, [no + 0.15, no + 0.65], [0, 100], { ...CL, easing: SUAVE })}% + ${interpolate(t, [no + 0.15, no + 0.25], [0, 28], CL)}px)`,
-                  background: COLOR.cian,
-                  borderRadius: 8,
-                  rotate: '-1deg',
-                }}
-              />
-              <Sube t={t} en={no}>
-                <div style={{ position: 'relative', fontFamily: FUENTE_TITULO, fontSize: 92, color: t > no + 0.45 ? COLOR.tinta : '#fff' }}>Not official warnings.</div>
-              </Sube>
-            </div>
-          </div>
+          <Chyron texto={plano.etiqueta} mono={FUENTE_MONO} color="#7ff5e0" style={{ position: 'absolute', left: idx % 2 ? 1180 : 110, top: 140, fontSize: 30 }} />
         </>
-      ) : null}
+      ) : (
+        <>
+          <Telefono clip={CLIPS.avisos} ancho={1050} x={1300 + d.x} y={interpolate(t, [finMontaje, 4], [640, 560]) + d.y} rotY={interpolate(t, [finMontaje, 4], [-14, -6])} rotX={8} rotZ={2} desenfoque={interpolate(t, [finMontaje, finMontaje + 0.3, no + 0.5, no + 0.9], [12, 0, 0, 7], CL)} />
+          <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(1,18,20,0.95) 0%, rgba(1,18,20,0.7) 45%, rgba(1,18,20,0) 75%)' }} />
+        </>
+      )}
+      <div style={{ position: 'absolute', left: 110, top: plano ? 820 : 300 }}>
+        <Sube t={t} en={me}>
+          <div style={{ fontFamily: FUENTE_TITULO, fontSize: plano ? 64 : 92, color: '#fff', textShadow: '0 4px 24px rgba(0,0,0,0.6)' }}>Model estimates.</div>
+        </Sube>
+        {!plano ? (
+          <div style={{ position: 'relative', marginTop: 16, display: 'inline-block' }}>
+            <div
+              style={{
+                position: 'absolute',
+                left: -14,
+                top: 10,
+                bottom: 4,
+                width: `calc(${interpolate(t, [no + 0.15, no + 0.65], [0, 100], { ...CL, easing: SUAVE })}% + ${interpolate(t, [no + 0.15, no + 0.25], [0, 28], CL)}px)`,
+                background: '#ff6b6b',
+                borderRadius: 8,
+                rotate: '-1deg',
+              }}
+            />
+            <Sube t={t} en={no}>
+              <div style={{ position: 'relative', fontFamily: FUENTE_TITULO, fontSize: 92, color: '#fff' }}>Not official warnings.</div>
+            </Sube>
+          </div>
+        ) : null}
+      </div>
     </AbsoluteFill>
   );
 };
@@ -494,8 +495,8 @@ export const Cierre: React.FC<{ url: string; fuentes: string }> = ({ url, fuente
   const barrido = interpolate(t, [lg + 0.4, lg + 1.1], [-40, 140], CL);
   const rayos = interpolate(t, [lg, lg + 0.2, lg + 1.5], [0, 1, 0], CL);
   return (
-    <AbsoluteFill style={{ background: FONDO, overflow: 'hidden', scale: `${interpolate(t, [0, fin], [1, 1.06])}` }}>
-      <Img src={staticFile('bcs-modis.jpg')} style={{ position: 'absolute', left: -100, top: -200, width: 2200, opacity: 0.16, filter: 'blur(10px) saturate(0.5)', scale: `${1 + t * 0.015}` }} />
+    <AbsoluteFill style={{ overflow: 'hidden', scale: `${interpolate(t, [0, fin], [1, 1.06])}` }}>
+      <FondoVivo tono="cierre" />
       <AbsoluteFill style={{ alignItems: 'center', transformOrigin: 'top center', top: interpolate(sube, [0, 1], [330, 150]), scale: `${interpolate(sube, [0, 1], [1, 0.62])}` }}>
         <div style={{ display: 'flex', gap: 34 }}>
           <Sube t={t} en={k(M.cierreFrase1)} dur={0.4}>

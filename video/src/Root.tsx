@@ -3,7 +3,7 @@ import { DURACION_S, FPS } from './guion';
 import type { Manifiesto, PropsVideo } from './tipos';
 import { VideoRadarBCS } from './Video';
 import { TrailerRadarBCS, type PropsTrailer } from './trailer/Trailer';
-import { LECHO, SENALES, TRAILER_DURACION_S } from './guion';
+import { LECHO, SENALES, TRAILER_DURACION_S, VOZ } from './guion';
 
 // Lo dinámico: duración (de guion.ts), si existe la narración y el manifiesto de capturas.
 const calculateMetadata: CalculateMetadataFunction<PropsVideo> = async ({ props }) => {
@@ -67,8 +67,8 @@ const metadatosTrailer: CalculateMetadataFunction<PropsTrailer> = async ({ props
   const nombres = [...new Set([LECHO, ...SENALES.map((s) => s.archivo)])];
   const audios: string[] = [];
   for (const n of nombres) if (await existe(n)) audios.push(n);
-  const hayNarracion = await existe('narracion.mp3');
-  if (!hayNarracion) console.warn('[radar-bcs] AVISO: falta public/narracion.mp3 (tráiler sin voz).');
+  const hayNarracion = await existe(VOZ);
+  if (!hayNarracion) console.warn(`[radar-bcs] AVISO: falta public/${VOZ} (tráiler sin voz).`);
   if (audios.length === 0) console.warn('[radar-bcs] AVISO: no hay efectos en public/audio/ (rama lider/trailer-audio).');
   return { durationInFrames: TRAILER_DURACION_S * FPS, fps: FPS, props: { ...props, audios, hayNarracion } };
 };

@@ -1,11 +1,14 @@
 // Teléfono en 3D hecho con transformaciones CSS (perspectiva real, grosor por capas, bisel,
 // reflejo que se mueve con el giro y sombra de contacto). La pantalla es una captura REAL de la web
 // (video/public/tomas/*.png, 1080 px de ancho, de scripts/capturar-video.mjs).
-import { Img, staticFile } from 'remotion';
+import { Video } from '@remotion/media';
+import { Img, staticFile, useVideoConfig } from 'remotion';
+import type { Clip } from '../guion';
 
 export type PropsTelefono = {
-  captura: string; // p. ej. "tomas/toma2-calor.png"
-  desdePx: number; // px de la captura (escala 1080) que quedan arriba de la pantalla
+  captura?: string; // captura fija (tomas/*.png); se usa si no hay clip
+  desdePx?: number; // px de la captura (escala 1080) que quedan arriba de la pantalla
+  clip?: Clip; // clip REAL grabado de la web (clips/*.mp4, 390x844 a DPR 2)
   ancho: number; // ancho del teléfono en px del video
   x: number; // centro en px
   y: number;
@@ -22,7 +25,8 @@ const CAPAS = 9; // capas para el grosor del cuerpo
 
 export const Telefono: React.FC<PropsTelefono> = ({
   captura,
-  desdePx,
+  desdePx = 0,
+  clip,
   ancho,
   x,
   y,
@@ -33,6 +37,7 @@ export const Telefono: React.FC<PropsTelefono> = ({
   desenfoque = 0,
   sombra = true,
 }) => {
+  const { fps } = useVideoConfig();
   const bisel = ancho * 0.035;
   const alto = ancho * PROPORCION + bisel * 2;
   const radio = ancho * 0.14;
@@ -88,7 +93,11 @@ export const Telefono: React.FC<PropsTelefono> = ({
           }}
         >
           <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: radio - bisel, overflow: 'hidden', background: '#f7f9fc' }}>
-            <Img src={staticFile(captura)} style={{ position: 'absolute', left: 0, top: -desdePx * k, width: anchoPantalla }} />
+            {clip ? (
+              <Video src={staticFile(clip.archivo)} muted trimBefore={Math.round(clip.desde * fps)} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
+            ) : captura ? (
+              <Img src={staticFile(captura)} style={{ position: 'absolute', left: 0, top: -desdePx * k, width: anchoPantalla }} />
+            ) : null}
             {/* isla de la cámara */}
             <div style={{ position: 'absolute', left: '50%', top: bisel * 0.9, width: ancho * 0.26, height: ancho * 0.07, marginLeft: -ancho * 0.13, borderRadius: 999, background: '#03060c' }} />
             {/* reflejo del vidrio */}
