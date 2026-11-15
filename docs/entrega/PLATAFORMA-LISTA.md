@@ -17,10 +17,10 @@ Preparado el 2026-11-15 por el asistente del Líder. **Todo el contenido de la p
 |---|---|---|---|
 | 1 | **Project Name** | `Radar BCS` (reemplaza el "Project OptiPaz" que trae) | |
 | 2 | **High-Level Project Summary** | Texto de [`01`](01-high-level-summary.md) (el párrafo bajo "Summary") | **193 palabras, 1168 caracteres** (límite 50-200 palabras; la plataforma topa en 1500 caracteres) |
-| 3 | **Link to Project Demo** | **UN solo** enlace público al video de 30 s (o a las diapositivas, máx. 7). Ver [`02`](02-demo-link.md) y el guion [`08b`](08b-video-shotlist.md) | **Pendiente: falta grabar el video.** Probar el enlace en una ventana sin sesión. Sin menores (nombre, voz ni imagen); subtítulos en inglés quemados |
+| 3 | **Link to Project Demo** | **UN solo** enlace público al video de 30 s (o a las diapositivas, máx. 7). Ver [`02`](02-demo-link.md), el guion [`08b`](08b-video-shotlist.md) y el brief [`08c`](08c-brief-video.md). Voz sintética de ElevenLabs, declarada en el video | **Pendiente: falta grabar el video.** Probar el enlace en una ventana sin sesión. Sin menores (nombre, voz ni imagen); subtítulos en inglés quemados |
 | 4 | **Link to Final Project** | `https://ingidscarlosdanc21.github.io/radar-BCS/?lang=en` (abre directo en inglés) y, si cabe, el repositorio `https://github.com/INGIDSCarlosDanC21/radar-BCS` | Probado sin sesión el 2026-11-15; volver a abrirlo justo antes de enviar |
 | 5 | **Detailed Project Description** | Texto de [`04`](04-project-details.md), **sin** los comentarios `<!-- -->` ni el TODO de la última viñeta (hardware: quitar la frase "TODO..." o la del celular real si #71 aún no se hizo) | Editor de texto enriquecido: pegar como texto sin formato |
-| 6 | **Use of Super Intelligence (SI)** | Lista desplegable ("select all that apply"): marcar **todo lo usado** (modelo de lenguaje / asistente de código: Claude Code; generación de imágenes: Gemini; Google Stitch, o "Other" y escribir "Google Stitch" si no está). Texto de [`05`](05-use-of-ai.md) | **No lo ven los jueces**; sí ven la marca de agua del logo, el pie y los metadatos. No omitir nada (regla 10 de `AGENTS.md`) |
+| 6 | **Use of Super Intelligence (SI)** | Lista desplegable ("select all that apply"): marcar **todo lo usado** (modelo de lenguaje / asistente de código: Claude Code; generación de imágenes: Gemini; voz sintética: ElevenLabs (solo si se usó de verdad en el video); Google Stitch, o "Other" y escribir "Google Stitch" si no está). Texto de [`05`](05-use-of-ai.md) | **No lo ven los jueces**; sí ven la marca de agua del logo, el pie y los metadatos. No omitir nada (regla 10 de `AGENTS.md`) |
 | 7 | **NASA Data** | Filas de la tabla de abajo (A) | "Link Text" + "Link Url", una fila por recurso, con `https://` completo |
 | 8 | **Space Agency Partner Data and Other References** | Filas de la tabla de abajo (B). **Partner Data: ninguno** | Una fila por recurso |
 | 9 | Casillas finales | **Agree to Terms and Conditions** y **Confirm All Work is Original** | Obligatorias; las marca quien envía |
@@ -47,6 +47,8 @@ Preparado el 2026-11-15 por el asistente del Líder. **Todo el contenido de la p
 | Leaflet 1.9.4 (map library, BSD-2-Clause) | https://leafletjs.com/ |
 | OpenStreetMap tiles (ODbL) | https://www.openstreetmap.org/copyright |
 | Nominatim place search (OpenStreetMap, ODbL) | https://nominatim.org/release-docs/latest/api/Search/ |
+| U.S. Naval Observatory moon phases API | https://aa.usno.navy.mil/data/api |
+| NOAA CoastWatch ERDDAP (chlorophyll and sea surface temperature) | https://coastwatch.pfeg.noaa.gov/erddap/ |
 | Google Material Symbols (icons, Apache-2.0) | https://fonts.google.com/icons |
 | Google Fonts: Space Grotesk, Manrope, JetBrains Mono (OFL 1.1) | https://github.com/google/fonts/tree/main/ofl/ |
 | pyMannKendall (MIT) | https://github.com/mmhs013/pyMannKendall |

@@ -175,7 +175,7 @@
       'acc.c1': 'Wear loose, light-colored clothing that covers your arms and legs, and a wide-brimmed hat that shades your face, ears and neck.',
       'acc.c2': 'If you can, do outdoor activities during the coolest part of the day or at night.',
       'acc.c3': 'If you have air conditioning, use it; if not, find a cool place. Even a few hours in a cool place lowers the risk.',
-      'acc.c4': 'Use a fan only if it is below 32 °C indoors: above that it can raise your body temperature.',
+      'acc.c4': 'Use a fan only if the temperature indoors is below 32 °C: above that it can raise your body temperature.',
       'acc.c5': 'Cool off with a cool shower, a damp cloth or a spray bottle with cool water.',
       'acc.c6': 'Drink water, which is usually the best choice, and avoid alcohol because it dehydrates you.',
       'acc.a1': 'Turn off the tap while brushing your teeth or shaving.',

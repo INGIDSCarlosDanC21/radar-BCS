@@ -15,7 +15,7 @@ Auditor: Luca (Prog. A), con ayuda de Claude (IA). Fecha: 2026-11-15. Condición
 | 5. Prueba de `home` con fecha fija | Resuelto: `web/tests` pasa 45 de 45 |
 | Opcional: cortes de fecha en la nota del acuífero 0324 | Pendiente, menor: la nota aún no cita los cortes (30-dic-2022 y 30-sep-2021) |
 
-Lo que sigue sin verificar: SIAP 2025 (todas las cifras de Cultivos), SEPADA, El Carrizal en SoilGrids, población de Chametla (INEGI) y la licencia de SoilGrids. Ninguna es una cifra que contradiga su fuente: son cifras que no pude abrir.
+Actualización 2026-11-15: **SIAP 2025 verificado** contra el CSV (ver ficha Factibilidad y Cultivos). Lo que sigue sin verificar: SEPADA, El Carrizal en SoilGrids, población de Chametla (INEGI) y la licencia de SoilGrids. Ninguna es una cifra que contradiga su fuente: son cifras que no pude abrir.
 
 Lo que sigue de la primera pasada queda abajo, sin cambios.
 
@@ -29,9 +29,9 @@ Cada cifra se comparó con la fuente que declara la ficha, abierta el 2026-11-15
 
 | Cifra | Fuente declarada | Enlace | ¿Coincide? |
 |---|---|---|---|
-| 3,879.6 ha sembradas; 100 % riego; ciclos OI 2,424.5 / PV 424.3 / perennes 1,030.8 ha | SIAP, cierre 2025 | `nube.agricultura.gob.mx/datosAbiertos/Agricola.php` | **No verificada**: el servidor no respondió (sin respuesta tras 25 s y tras 500 s). La suma interna cuadra (2,424.5 + 424.3 + 1,030.8 = 3,879.6) |
-| 8 cultivos suman 2,620.5 ha (68 %); valor $1,210.0 millones MXN | SIAP | igual | **No verificada**; la suma interna cuadra (2,620.5 / 3,879.6 = 67.5 %, la ficha redondea a 68 %) |
-| Tomate 902.5 ha, chile 742.0 ha, mango 344.0 / 231.5 ha, albahaca y demás tarjetas | SIAP | igual | **No verificada** (mismo motivo) |
+| 3,879.6 ha sembradas; 100 % riego; ciclos OI 2,424.5 / PV 424.3 / perennes 1,030.8 ha | SIAP, cierre 2025 | `nube.agricultura.gob.mx/datosAbiertos/Agricola.php` | **Verificada el 2026-11-15** contra el CSV 2025 de La Paz (70 filas): 3,879.6 ha sembradas, 100 % riego, OI 2,424.5 / perennes 1,030.8 ha; PV 424.2 ha en el CSV (la ficha dice 424.3: diferencia de redondeo de 0.1 ha) |
+| 8 cultivos suman 2,620.5 ha (68 %); valor $1,210.0 millones MXN | SIAP | igual | **Verificada el 2026-11-15**: valor de producción 1,210.0 millones MXN; 2,620.5 / 3,879.6 = 67.5 %, la ficha redondea a 68 % |
+| Tomate 902.5 ha, chile 742.0 ha, mango 344.0 / 231.5 ha, albahaca y demás tarjetas | SIAP | igual | **Verificada el 2026-11-15** para tomate 902.5, chile 742.0 y mango 344.0 ha (albahaca y demás tarjetas no se revisaron una por una) |
 
 ### Ficha Clima y Agua
 

@@ -1,36 +1,46 @@
-# Video de 30 segundos: guion y lista de tomas (versión del 2026-11-15)
+# Video de 30 segundos: guion y lista de tomas (versión del 2026-11-15, tarde)
 
-Reemplaza la tabla de la opción B de `08-demo-draft.md`, que se escribió antes de Pesca, Avisos, el Mapa Meteorológico y "Mira La Paz desde el espacio". Narración en español con **subtítulos en inglés quemados en el video** (la plataforma pide inglés escrito). Si preferimos evitar el riesgo, se narra en inglés.
+Reemplaza la versión de la mañana. **Decisión de Carlos (2026-11-15): pantalla + voz sintética de ElevenLabs, nadie en cámara.** Narración **en inglés** (los jueces oyen y leen inglés) con **subtítulos en inglés quemados**, idénticos a la voz. El brief para quien arme el video está en [`08c-brief-video.md`](08c-brief-video.md).
+
+**Una sola historia:** el problema local → qué cambió (con honestidad sobre lo que no sabemos) → dónde → qué es de hoy y qué no → cierre. Responde las 4 preguntas del reto (qué, dónde, cuánto, ¿significativo?) sin enseñar todas las pantallas.
 
 **Línea de apertura de la entrega:** "Radar BCS turns NASA open data into answers for every resident of La Paz."
 
-## Guion (unas 62 palabras en español, unos 26 s a ritmo calmado, 4 s de margen)
+## Guion (64 palabras en inglés, unos 25 s a ritmo calmado, 5 s de margen)
 
-| Tiempo | En pantalla (grabación de la web, 390 px) | Narración (ES) | Subtítulo (EN) |
-|---|---|---|---|
-| 0:00 | Tarjeta de título: "Radar BCS · OptiPaz · Be An Earth System Trend Detective!" | "Somos OptiPaz, de La Paz." | "We are OptiPaz, from La Paz." |
-| 0:03 | **Inicio:** las 4 tarjetas (calor, vegetación, lluvia, agua) | "Radar BCS: datos de la NASA para cada vecino." | "Radar BCS: NASA data for every resident." |
-| 0:07 | **Ficha de calor:** cifra del aire y la prueba estadística; "Viaja en el tiempo" un instante | "El aire subió casi un grado y medio desde 2001, y mostramos qué tan seguros estamos." | "Air temperature rose about 1.5 °C since 2001, and we show how sure we are." |
-| 0:13 | **Ficha de vegetación** y luego **Ficha de agua** con la palabra "regional" a la vista | "La vegetación bajó. El agua regional subió, pero no mide nuestro acuífero." | "Vegetation declined. Regional water rose, but it does not measure our aquifer." |
-| 0:19 | **Mapa:** cielo en vivo con íconos y luego "Mira La Paz desde el espacio" (fotos de la NASA año por año); un vistazo a **Pesca** con "modelo, no oficial" | "Hoy: cielo en vivo, fotos de la NASA y el mar, con estimaciones, no avisos oficiales." | "Today: live sky, NASA photos and the sea, as estimates, not official warnings." |
-| 0:26 | Enlace de la web en texto + "Datos: NASA MODIS · POWER · GRACE · GIBS" (solo texto) | "Qué cambió, no por qué. Radar BCS." | "What changed, not why. Radar BCS." |
+| Tiempo | En pantalla (grabación de la web pública, 390 × 844) | Narración (EN, voz de ElevenLabs) y subtítulo (EN, igual) |
+|---|---|---|
+| 0:00 | Tarjeta de título "Radar BCS · OptiPaz" y luego **Inicio** con las 4 tarjetas (calor, vegetación, lluvia, agua) | "In La Paz, heat, water and the sea touch everyone. Radar BCS turns NASA data into answers." (17) |
+| 0:06 | **Ficha de Calor:** cifra del aire (+1.5 °C) y el "p < 0.001" a la vista | "Air temperature rose about 1.5 degrees since 2001, a statistically significant change." (12) |
+| 0:12 | **Ficha de Lluvia** ("no se detecta cambio claro") | "Where we are unsure, we say it: rainfall shows no clear change." (12) |
+| 0:17 | **Mapa de zonas** con los pines por estado | "The map shows where, across six zones." (7) |
+| 0:21 | **Clima** (4 tarjetas) y un vistazo a **Pesca** con la pastilla "modelo, no oficial" | "Today's sea and weather are model estimates, not official warnings." (10) |
+| 0:26 | Texto: enlace de la web + "Data: NASA POWER · MODIS · GRACE · GIBS" | "What changed, not why. Radar BCS." (6) |
 
-Todas las cifras salen de `data/salida/indicadores.json` y `docs/investigacion/hallazgos.md` (calor del aire +1.47 °C, 2001-2025). **No decir:** por qué subió el calor, que la superficie se calentó (los dos satélites no coinciden), que hay más agua local o que el acuífero se recupera, ninguna causa (urbanización, cambio climático), ni que se probó en un celular real hasta que el issue #71 lo confirme.
+**Texto fijo en pantalla durante todo el video (pequeño, arriba): "AI-generated voice (ElevenLabs)."** Cumple la regla de la Guía de envío (videos generados con marca visible) y se repite en la descripción del video.
 
-## Cómo grabar
+Las cifras salen de `data/salida/indicadores.json` y `docs/investigacion/hallazgos.md` (aire +1.47 °C, 2001-2025, p < 0.001; lluvia p = 0.129, no significativa). **No decir:** por qué subió el calor, que la superficie se calentó (Terra y Aqua no coinciden), que hay más agua local o que el acuífero se recupera, ninguna causa (urbanización, cambio climático), que los avisos del modelo son oficiales, ni que se probó en un celular real hasta que el issue #71 lo confirme.
 
-1. **Cuándo:** de día (después de las 07:00), para que los íconos del mapa sean de sol y no de luna; con la web pública (https://ingidscarlosdanc21.github.io/radar-BCS/) ya actualizada con `main`.
-2. **Cómo:** grabación de pantalla del celular o de Chrome con el modo de celular a 390 × 844. Una toma por fila de la tabla, de 3 a 6 segundos, sin cursor visible y sin notificaciones.
-3. **Idioma de la web:** la grabación va con la web en español; los subtítulos en inglés se agregan en la edición.
-4. **Antes de grabar:** abrir cada pantalla una vez para que carguen los datos en vivo (cielo, mapa y Pesca) y confirmar que aparecen cifras, no "sin dato".
+## Alternativas si algo falla
+
+- **ElevenLabs no disponible o rechazado:** el mismo texto lo narra un integrante **mayor de 18** que acepte que NASA use su voz; entonces se quita la línea "AI-generated voice" y se corrige `05` y `docs/RECURSOS.md`.
+- **No alcanza el tiempo para armar el video:** 7 diapositivas (máx., contando portada) con las mismas ideas; el campo de demo acepta un enlace a las diapositivas.
+
+## Cómo producirlo
+
+1. **Quién hace qué:** Carlos crea la voz en su cuenta de ElevenLabs con el texto de la tabla (columna de narración) y descarga el audio; otro Claude arma el video con el brief `08c` (tomas, subtítulos, medición); Carlos lo sube a un enlace público.
+2. **Cuándo grabar la pantalla:** de día (después de las 07:00) para que los íconos del cielo sean de sol; con el sitio público ya actualizado con `main`.
+3. **Cómo:** Chrome en modo celular 390 × 844, español de la web, sin cursor visible ni notificaciones, una toma por fila de la tabla. Se pueden usar `?lang=en` para que la pantalla coincida con el inglés de la voz.
+4. **Antes de grabar:** abrir cada pantalla una vez para que carguen los datos en vivo y confirmar que aparecen cifras, no "sin dato".
 
 ## Lista de producción
 
-- [ ] Subtítulos en inglés quemados, legibles en un celular.
-- [ ] Solo imágenes propias o libres: la web, el logo y las fotos de NASA GIBS; todo recurso está en `docs/RECURSOS.md` y `docs/entrega/07`.
+- [ ] Subtítulos en inglés quemados, legibles en un celular, idénticos a la voz.
+- [ ] Línea fija visible "AI-generated voice (ElevenLabs)" y lo mismo en la descripción del video.
+- [ ] Solo imágenes propias o libres: la web y el logo; todo recurso está en `docs/RECURSOS.md` y `docs/entrega/07`.
 - [ ] Sin logos, banderas ni parches de la NASA. NASA solo se menciona en texto.
-- [ ] **Sin menores de 18:** nadie aparece, se nombra o se oye (incluida la narración y los créditos). Quien narre debe ser mayor de edad y estar de acuerdo con que NASA use su voz en relación con el material.
-- [ ] Si el logo (generado con Gemini) sale en pantalla, queda declarado en `05` y en la descripción del video ("logo generated with AI (Gemini)"), según la regla de `docs/FUENTES-Y-IA.md`.
-- [ ] Sin voz sintética; si se usa, declararla en `05` y en el campo de IA de la plataforma.
-- [ ] Duración de 30 s o menos (contar con el cronómetro, no a ojo).
+- [ ] **Sin menores de 18:** nadie aparece, se nombra o se oye (créditos incluidos).
+- [ ] Si el logo (generado con Gemini) sale en pantalla, conserva su marca "AI-generated"; está declarado en `05`.
+- [ ] ElevenLabs declarado en `05`, en `docs/RECURSOS.md` y marcado en el campo de IA de la plataforma.
+- [ ] Duración de 30 s o menos (medida con cronómetro o con la herramienta de edición, no a ojo).
 - [ ] Enlace público, probado con una ventana sin sesión iniciada.
