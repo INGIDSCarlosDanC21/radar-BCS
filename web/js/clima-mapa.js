@@ -180,7 +180,11 @@
         ancho < 700 ? { paddingTopLeft: [56, 48], paddingBottomRight: [96, 36] } : { paddingTopLeft: [150, 30], paddingBottomRight: [420, 30] });
       CAPA = null;
       // Lejos (poco zoom) los pines chicos muestran solo el ícono; con zoom 8 o más, también la temperatura.
-      var lejos = function () { caja.classList.toggle('cm-z-lejos', MAPA.getZoom() < 8); };
+      var lejos = function () {
+        var z = MAPA.getZoom();
+        caja.classList.toggle('cm-z-lejos', z < 8);
+        caja.classList.toggle('cm-z-estrecho', z < 7.5 && (caja.clientWidth || 360) < 640);   // en celular, con poco zoom solo los lugares principales
+      };
       MAPA.on('zoomend', lejos); lejos();
     }
     if (CAPA) CAPA.remove();
