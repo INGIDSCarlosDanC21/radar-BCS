@@ -61,6 +61,7 @@ Los CSV están en Drive (`datasets/appeears-6-zonas/`, subidos por Luca) y se co
 - **Pero el resultado depende de la prueba.** Con la media de cada año y Mann-Kendall simple, El Centenario da -0.022 °C por año (p = 0.27) y Sur -0.026 (p = 0.39): **no significativo**. Con medias anuales y Mann-Kendall simple (mismos datos y mismo filtro), ninguna de las 6 zonas sale significativa para la superficie (p entre 0.25 y 0.59).
 - **La baja viene de los últimos años.** En El Centenario la media anual de superficie de día fue de 37-38.5 °C hasta 2021 y bajó a 36.9 (2022), 35.7 (2023), 35.6 (2024) y **33.5 °C (2025)**; las 46 lecturas de cada año son válidas. En Centro también cae en 2025 (30.0 °C frente a unos 32 de años anteriores). Una baja de ~4 °C de un año al otro en toda la ciudad no se parece a un cambio del paisaje.
 - **Hipótesis, luego revisada:** la órbita de Terra se desplaza desde 2020 y su hora de paso es cada vez más temprana (NASA: https://terra.nasa.gov/about/terra-orbital-drift-information). NASA dice que el efecto en los datos de tierra es pequeño. Luca la contrastó con `Day_view_time` de MOD11A2 (PR #90): la hora media de paso baja de ≈10.8 h a ≈9.2 h en 2026. Sigue siendo la causa más probable y **no está probada**; falta el contraste con Aqua (#87).
+- **Contraste con Aqua (2026-11-15, Luca, PR #103, `python -m analisis.contraste_aqua`; no reproducido aún por Investigación):** en 2003-2021 Terra da +1.04 °C (p = 0.0005) y Aqua (paso de tarde, MYD11A2) da +0.27 °C (p = 0.29, **no significativo**). Aqua también cambia su hora de paso desde 2022 (de 13.4 h a 15.2 h en 2026, más tarde, al revés que Terra). **La subida de la superficie no se confirma con un segundo satélite**, y ninguno de los dos tiene una hora de paso estable. Esto no prueba que Terra esté mal ni que Aqua tenga razón: deja el resultado de superficie como **no concluyente**.
 - **Consecuencia (vigente):** la web y la demo muestran la superficie 2001-2021 (+0.94 °C, significativa) con la nota del aire (+1.47 °C, 2001-2025) y la limitación del corte en 2021. No se cita "baja de 1.3 °C" en ninguna zona.
 
 ### Frases propuestas para la web (sin causalidad)
@@ -72,6 +73,6 @@ Los CSV están en Drive (`datasets/appeears-6-zonas/`, subidos por Luca) y se co
 
 ## Pendiente
 
-- Contraste de la superficie con Aqua (MYD11A2) para reforzar o descartar la explicación de la hora de paso de Terra (#87).
+- Decidir qué se muestra de la superficie ahora que Aqua no confirma la subida de Terra (ver `docs/decisiones.md`, 2026-11-15). Hasta decidir, la web conserva Terra 2001-2021 con su limitación.
 - Decidir si el pipeline debe usar también la prueba sobre medias anuales para la superficie.
 - Agua: hecha con GRACE JPL Mascon como tendencia regional (PR #63 y #84); no es el acuífero de La Paz ni se puede bajar a zonas.
