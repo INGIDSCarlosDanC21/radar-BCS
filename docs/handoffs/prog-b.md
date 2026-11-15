@@ -150,3 +150,11 @@ Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agric
 - Datos: Open-Meteo (modelo, no estaciones) vía `RBVivo.cargar({clima:true})`; sin etiqueta de calor.
 - Probar: `python -m http.server 8777` en `web/` y abrir `#clima`; `node --test web/tests/`.
 - Falta: confirmar unidad y dirección de la corriente (se muestra km/h y grados); revisión visual de Ehileen; el servidor de red del equipo debe servir esta rama.
+
+## 2026-11-15: mapa de zonas con íconos y búsqueda (rama `prog-b/mapa-iconos`)
+
+- **Hecho:** cada zona lleva un marcador con ícono en su centro (calor: llama ▲ si sube con tendencia clara, copo ▼ si baja; vegetación: pasto ▲/▼; guion si no hay cambio claro; "?" sin datos). El polígono se conserva: es la huella del píxel MODIS de 1 km. Barra de búsqueda "Colonia, C.P. o calle" (Nominatim/OpenStreetMap, solo al enviar), botón "Mi ubicación" y tarjeta que dice en qué zona cae el lugar, cuánto cambió, periodo y fuente de la capa; fuera de las 6 zonas lo dice. Búsqueda por nombre de zona también.
+- **Archivos:** `web/js/zonas-busqueda.js`, `web/css/zonas-busqueda.css`, `web/tests/zonas-busqueda.test.mjs` (nuevos); `app.js` e `index.html` (cambios chicos).
+- **Medido:** 360 y 1280 px (ES y EN) sin scroll horizontal, 6 marcadores, sin textos menores de 12 px, sin errores; vegetación cambia los íconos y lluvia no muestra marcadores (no hay dato por zona).
+- **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro, "Mi ubicación" (necesita permiso del navegador; solo se probó que el botón existe). Las 8 imágenes de la carpeta de Drive no se usaron: son PNG de origen y licencia sin confirmar; se usaron los glifos Material Symbols que ya están en `web/assets/iconos/mapa`. Ehileen puede entregar SVG propios.
+- **Límites:** el código postal solo aparece si Nominatim lo trae en el nombre; no se inventa. El centro de La Paz (24.1423, -110.3132) queda fuera de las 6 zonas con dato.
