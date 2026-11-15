@@ -69,8 +69,9 @@ test('cargar(): llena las tarjetas y dice que son los mismos datos que Inicio; s
 test('Inicio y Mapa piden la misma URL y comparten la respuesta (una sola llamada cada 10 min)', async () => {
   assert.match(CL.url(), /daily=temperature_2m_min,temperature_2m_max,uv_index_max,precipitation_probability_max,wind_gusts_10m_max/);
   const app = leer('js/app.js'), html = leer('index.html');
-  assert.match(app, /var h = \(CM \? CM\.html\(\) : '<h1>'/, 'la pestaña Mapa tiene un solo <h1>');
-  assert.match(app, /if \(CM\) CM\.cargar\(main\);/);
+  assert.match(app, /var h = '<h1>' \+ t\('titulo\.mapa'\)/, 'la pestaña Mapa ya no trae el Mapa Meteorológico');
+  assert.ok(!/CM\.html\(\)/.test(app.slice(app.indexOf('function mapaVista'), app.indexOf('function buscadorHtml'))));
+  assert.match(app, /window\.RBClimaMapa\.cargar\(main, \{ abrir: h\[1\] \|\| null, lugar: h\[2\] \|\| null \}\)/, 'la pestaña Clima lo carga');
   const i = (s) => html.indexOf(s);
   assert.ok(i('js/cielo.js') < i('js/clima-mapa.js') && i('js/clima-mapa.js') < i('js/app.js'), 'orden de scripts');
   assert.ok(html.includes('css/clima-mapa.css'));
@@ -84,4 +85,35 @@ test('en inglés', () => {
   for (const en of ['Weather Map', 'Regional Climate Overview', 'Heat & Feels-like Temperature', 'See wind, waves and currents', 'How each zone of La Paz has changed since 2001'])
     assert.ok(h.includes(en.replace(/&/g, '&amp;')), en);
   for (const es of ['Mapa Meteorológico', 'Diagnóstico', 'Ver consejos']) assert.ok(!h.includes(es), es);
+});
+
+test('lugar elegido: las tarjetas apuntan a #clima/<ficha>/<lugar> con los valores de ese lugar', () => {
+  T.setLang('es');
+  const filas = CL.unir(resp);
+  const loreto = filas.find((f) => f.lugar.id === 'loreto');
+  const h = CM.tarjetas(loreto);
+  const destinos = [...h.matchAll(/class="cm-tarjeta cm-\w+" href="(#[\w/]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(destinos, ['#clima/calor/loreto', '#clima/uv/loreto', '#clima/viento/loreto', '#clima/lluvia/loreto']);
+  const nodos = { '#cm-tarjetas': { innerHTML: '' }, '#cm-diag-sub': { innerHTML: '' } };
+  const pines = [{ a: 'loreto', c: new Set() }, { a: 'lapaz', c: new Set() }].map((x) => ({ getAttribute: () => x.a, classList: { toggle: (n, on) => (on ? x.c.add(n) : x.c.delete(n)) }, x }));
+  const raiz = { querySelector: (q) => nodos[q] || null, querySelectorAll: (q) => (q.startsWith('.cm-pin') ? pines : []) };
+  CM.cargar({ querySelector: () => null }, conFetch); // sin nodos: no hace nada
+  return CM.cargar({ querySelector: (q) => (q === '#cm-tarjetas' ? nodos[q] : q === '#cm-estado' ? { textContent: '' } : null), querySelectorAll: (q) => (q.startsWith('.cm-pin') ? pines : []) }, conFetch).then(() => {
+    CM.elegir(raiz, 'loreto');
+    assert.ok(nodos['#cm-diag-sub'].innerHTML.includes('Loreto'));
+    assert.ok(nodos['#cm-tarjetas'].innerHTML.includes('/loreto"'));
+    assert.ok(pines[0].x.c.has('cm-pin-sel') && !pines[1].x.c.has('cm-pin-sel'));
+  });
+});
+
+test('fichas: cada lugar del mapa con ficha tiene un pueblo real en RBVivo.PUERTOS; Comondú se avisa sin ficha', () => {
+  const clima = leer('js/clima.js'), vivo = leer('js/datos-vivos.js');
+  const mapa = clima.match(/var LUGAR_PUEBLO = \{([^}]*)\}/)[1];
+  const pares = [...mapa.matchAll(/(\w+): '(\w+)'/g)];
+  assert.equal(pares.length, 6);
+  for (const [, lugar, pueblo] of pares) {
+    assert.ok(CL.LUGARES.some((l) => l.id === lugar), 'lugar ' + lugar);
+    assert.ok(vivo.includes("id: '" + pueblo + "'"), 'pueblo ' + pueblo);
+  }
+  assert.ok(!mapa.includes('comondu') && leer('js/clima-mapa.js').includes('cm.sinFicha'));
 });

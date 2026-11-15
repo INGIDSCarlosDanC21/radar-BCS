@@ -73,3 +73,4 @@
   .cm-pin-lp .cm-pin-t .cm-n{display:inline}
   .cm-insignia{align-self:flex-start}
 }
+.cm-pin-sel .cm-pin-c{outline:3px solid #006d3d;outline-offset:2px}

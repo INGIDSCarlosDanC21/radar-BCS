@@ -46,3 +46,4 @@
 .cl-curva-sin,.cl-nota{color:var(--suave);font-size:13px}
 .cl-nota{margin-top:16px}
 .cl-enlaces a{min-height:44px;display:inline-block;padding:10px 0}
+.cl-volver{display:inline-flex;align-items:center;min-height:44px;color:var(--texto);font:600 14px 'JetBrains Mono',monospace}

@@ -47,6 +47,7 @@
       'cli.vientoNota': 'Oleaje y corriente salen de un modelo marino, no de boyas. No es un aviso oficial.',
       'cli.verAvisos': 'Ver los avisos del modelo', 'cli.verPesca': 'Ver el Mapa Pesquero',
       'cli.nota': 'Datos de un modelo meteorológico para cada pueblo: no son estaciones ni avisos oficiales. Datos del tiempo: Open-Meteo.com (CC BY 4.0).',
+      'cli.volver': '← Mapa Meteorológico', 'cli.sinFicha': 'Ese lugar no tiene ficha técnica: no hay un pueblo equivalente en los datos. Elige otro lugar en el mapa.',
       'cli.cargando': 'Cargando el clima…', 'cli.error': 'No se pudo cargar el clima (¿sin conexión?). El resto de la web no cambia.', 'cli.sin': 'sin dato',
       'cli.r0': 'norte', 'cli.r1': 'noreste', 'cli.r2': 'este', 'cli.r3': 'sureste', 'cli.r4': 'sur', 'cli.r5': 'suroeste', 'cli.r6': 'oeste', 'cli.r7': 'noroeste'
     },
@@ -77,6 +78,7 @@
       'cli.vientoNota': 'Waves and current come from a marine model, not buoys. It is not an official warning.',
       'cli.verAvisos': 'See the model notices', 'cli.verPesca': 'See the Fishing Map',
       'cli.nota': 'Data from a weather model for each town: not weather stations or official warnings. Weather data: Open-Meteo.com (CC BY 4.0).',
+      'cli.volver': '← Weather Map', 'cli.sinFicha': 'That place has no data sheet: there is no matching town in the data. Pick another place on the map.',
       'cli.cargando': 'Loading the weather…', 'cli.error': 'The weather could not be loaded (offline?). The rest of the site does not change.', 'cli.sin': 'no data',
       'cli.r0': 'north', 'cli.r1': 'northeast', 'cli.r2': 'east', 'cli.r3': 'southeast', 'cli.r4': 'south', 'cli.r5': 'southwest', 'cli.r6': 'west', 'cli.r7': 'northwest'
     }
@@ -220,21 +222,24 @@
     if (est.mapa) { est.mapa.destruir(); est.mapa = null; }
   }
 
-  function montar(main, datos, abierta, edadMs) {
+  /* Lugares del Mapa Meteorológico (cielo.js) y su pueblo en estas fichas; Comondú no tiene equivalente. */
+  var LUGAR_PUEBLO = { lapaz: 'lapaz', loscabos: 'cabos', loreto: 'loreto', mulege: 'mulege', guerreronegro: 'guerreronegro', bahiamagdalena: 'bahiamagdalena' };
+  function puebloDe(lugar) { return lugar ? LUGAR_PUEBLO[lugar] || null : 'lapaz'; }
+
+  function montar(main, datos, abierta, edadMs, lugar) {
     var cuerpo = main.querySelector('#cl-cuerpo');
     var idx = V.indiceAhora(datos.horas);
-    var S = { puerto: 'lapaz', capa: 'general', card: TARJETAS.indexOf(abierta) >= 0 ? abierta : null };
+    var pueblo = puebloDe(lugar), sinFicha = !pueblo;
+    var S = { puerto: pueblo || 'lapaz', capa: 'general', card: !sinFicha && TARJETAS.indexOf(abierta) >= 0 ? abierta : null };
     function k() { for (var i = 0; i < datos.puertos.length; i++) if (datos.puertos[i].id === S.puerto) return i; return 0; }
     var hora = (V.ahoraLocal(new Date(Date.now() - (edadMs || 0))) || '').slice(11, 16);
     var pill = main.querySelector('#cl-act'); if (pill) { pill.textContent = t('cli.act', { h: hora || '—' }); pill.hidden = false; }
 
-    cuerpo.innerHTML =
+    if (sinFicha) { cuerpo.innerHTML = '<p class="aviso" role="status">' + esc(t('cli.sinFicha')) + '</p><p><a class="cl-volver" href="#clima">' + esc(t('cli.volver')) + '</a></p>'; return; }
+    cuerpo.innerHTML = '<p><a class="cl-volver" href="#clima">' + esc(t('cli.volver')) + '</a></p>' +
       '<div class="cl-busca"><label for="cl-q">' + esc(t('cli.buscar')) + '</label><input id="cl-q" type="search" list="cl-lista" autocomplete="off" placeholder="' + esc(t('cli.buscar')) + '">' +
       '<datalist id="cl-lista">' + datos.puertos.map(function (p) { return '<option value="' + esc(p.nombre) + '"></option>'; }).join('') + '</datalist>' +
       '<p class="cl-busca-msg" id="cl-q-msg" role="status" hidden>' + esc(t('cli.buscarVacio')) + '</p></div>' +
-      '<div class="chips cl-capas" role="group" aria-label="' + esc(t('cli.capas')) + '">' + CAPAS.map(function (c) {
-        return '<button type="button" class="pe-chip" data-capa="' + c + '" aria-pressed="false">' + esc(t('cli.c.' + c)) + '</button>';
-      }).join('') + '</div>' +
       '<div class="pe-mapa-caja"><div id="cl-mapa" class="pe-mapa" role="region" aria-label="' + esc(t('cli.mapaReg')) + '"></div></div>' +
       '<p class="cl-zona" id="cl-zona"></p><div id="cl-tarj"></div><section class="cl-det" id="cl-det" aria-labelledby="cl-det-h" hidden></section>' +
       '<p class="fuente cl-nota">' + esc(t('cli.nota')) + ' <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></p>';
@@ -246,7 +251,7 @@
       alElegir: function (id) { S.puerto = id; pintar(); }
     });
 
-    function url(id) { try { history.replaceState(null, '', id ? '#clima/' + id : '#clima'); } catch (e) { /* sin historial */ } }
+    function url(id) { try { history.replaceState(null, '', id ? '#clima/' + id + (lugar ? '/' + lugar : '') : '#clima'); } catch (e) { /* sin historial */ } }
     function pintar() {
       var i = k(), p = datos.puertos[i], r = C.resumenPuerto(datos, idx, i);
       cuerpo.querySelectorAll('[data-capa]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-capa') === S.capa)); });
@@ -278,7 +283,7 @@
     pintar();
   }
 
-  function render(main, abierta) {
+  function render(main, abierta, lugar) {
     limpiar();
     var mi = est.ficha;
     main.innerHTML = '<section class="cl" aria-labelledby="cl-h1"><div class="pe-cab"><p class="hm-mono pe-ins"><i class="hm-punto" aria-hidden="true"></i>' + esc(t('cli.kicker')) + '</p>' +
@@ -287,7 +292,7 @@
     return V.cargar({ clima: true }).then(function (r) {
       if (mi !== est.ficha) return;
       main.removeAttribute('aria-busy');
-      montar(main, r.datos, abierta, r.edadMs);
+      montar(main, r.datos, abierta, r.edadMs, lugar);
     }).catch(function () {
       if (mi !== est.ficha) return;
       main.removeAttribute('aria-busy');
