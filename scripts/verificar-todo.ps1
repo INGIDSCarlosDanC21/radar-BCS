@@ -47,7 +47,7 @@ if (-not $node) { Falla "node no está instalado: no se pueden correr las prueba
 else {
   foreach ($carpeta in "web/tests", "diseno/tests") {
     if (-not (Test-Path (Join-Path $raiz $carpeta))) { Write-Host "(no existe $carpeta; se omite)"; continue }
-    $archivos = Get-ChildItem (Join-Path $raiz $carpeta) -Filter "*.test.mjs" | ForEach-Object { "$carpeta/$($_.Name)" }
+    $archivos = @(Get-ChildItem (Join-Path $raiz $carpeta) -Filter "*.test.mjs" | ForEach-Object { "$carpeta/$($_.Name)" })
     if (-not $archivos) { Write-Host "(sin archivos *.test.mjs en $carpeta; se omite)"; continue }
     & node --test @archivos
     if ($LASTEXITCODE -eq 0) { Bien "node --test $carpeta" } else { Falla "node --test $carpeta (código $LASTEXITCODE)" }
