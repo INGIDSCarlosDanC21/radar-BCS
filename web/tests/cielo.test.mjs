@@ -144,3 +144,18 @@ test('la imagen GOES-West pide un cuadro con TIME (sin TIME, GIBS devuelve uno v
   assert.match(CL.urlGoes(ahora, 0), /GOES-West_ABI_GeoColor_v0_NRT[\s\S]*&TIME=2026-11-15T15:00:00Z$/);
   assert.match(CL.marcoMapa('alt'), /src="[^"]*&TIME=\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:00Z"/, 'la imagen inicial ya lleva TIME');
 });
+
+test('la imagen de Inicio se anima con las últimas 2 horas de GOES-West: 12 cuadros de 10 min, solo imágenes de GIBS, con pausa y sin romper la actualización', () => {
+  assert.equal(CL.ANIM.cuadros, 12);
+  assert.equal(typeof CL.animar, 'function');
+  const ahora = Date.UTC(2026, 10, 15, 15, 43, 20);
+  const urls = Array.from({ length: CL.ANIM.cuadros }, (_, k) => CL.urlGoes(ahora, k));
+  assert.equal(new Set(urls).size, 12, 'cada cuadro es una hora distinta');
+  for (const u of urls) assert.match(u, /^https:\/\/gibs\.earthdata\.nasa\.gov\/wms\/epsg4326\/nrt\/wms\.cgi\?[\s\S]*&TIME=\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:00Z$/);
+  assert.match(urls[11], /TIME=2026-11-15T13:10:00Z$/, 'el más viejo está 110 min antes del más nuevo (15:00)');
+  for (const l of ['es', 'en']) { T.setLang(l); for (const k of ['cielo.play', 'cielo.pausa', 'cielo.animAria']) assert.ok(T.t(k) && T.t(k) !== k, l + ' ' + k); }
+  T.setLang('es');
+  const src = fs.readFileSync(new URL('../js/cielo.js', import.meta.url), 'utf8');
+  assert.match(src, /prefers-reduced-motion: reduce/, 'respeta "menos movimiento"');
+  assert.match(src, /data-anim/, 'la actualización de 10 min no pisa la animación');
+});
