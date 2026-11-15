@@ -30,7 +30,7 @@ test('sin null/undefined/NaN ni textos de radar', () => {
 test('contenido obligatorio', () => {
   const h = RBHome.html(datos);
   assert.ok(h.includes('Mostramos qué cambió, no por qué. Una tendencia no prueba la causa.'));
-  assert.ok(h.includes('Tendencias 2001–2026 · NASA'));
+  assert.ok(h.includes('Tendencias 2001–2026 · datos de la NASA'));
   assert.ok(h.includes('Datos generados el ' + datos.generado), 'la fecha sale de indicadores.json, no fija');
   assert.ok(h.includes('Licencia Apache-2.0'));
 });
