@@ -73,6 +73,6 @@ Los CSV están en Drive (`datasets/appeears-6-zonas/`, subidos por Luca) y se co
 
 ## Pendiente
 
-- Decidir qué se muestra de la superficie ahora que Aqua no confirma la subida de Terra (ver `docs/decisiones.md`, 2026-11-15). Hasta decidir, la web conserva Terra 2001-2021 con su limitación.
+- Hecho el 2026-11-15: Carlos eligió la opción B (aire principal, superficie no concluyente); ver `docs/decisiones.md`. Pendiente: que Investigación repita el contraste de Aqua con el CSV de MYD11A2.
 - Decidir si el pipeline debe usar también la prueba sobre medias anuales para la superficie.
 - Agua: hecha con GRACE JPL Mascon como tendencia regional (PR #63 y #84); no es el acuífero de La Paz ni se puede bajar a zonas.
