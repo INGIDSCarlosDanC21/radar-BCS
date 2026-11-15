@@ -15,7 +15,7 @@
   function html(sec, texto) {
     var f = FORMAS[sec] || FORMAS.inicio;
     var b = f.map(function (x) { return '<div class="esq-b ' + x[0] + '" style="height:' + x[1] + 'px"></div>'; }).join('');
-    return '<div class="esq esq-' + (FORMAS[sec] ? sec : 'inicio') + '" role="status" aria-busy="true">' +
+    return '<div class="esq esq-' + (FORMAS[sec] ? sec : 'inicio') + '" role="status">' +
       '<span class="sr">' + String(texto).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }) + '</span>' +
       '<div aria-hidden="true">' + b + '</div></div>';
   }

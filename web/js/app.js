@@ -281,7 +281,9 @@
       if (a.getAttribute('data-nav') === sec) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     document.body.setAttribute('data-vista', sec);
-    if (!DATOS) { if (window.RBEsq) main.innerHTML = window.RBEsq.html(sec, t('html.cargando')); return; }
+    // aria-busy en <main> mientras carga (#119 D5); se quita al pintar el contenido o el error.
+    if (!DATOS) { main.setAttribute('aria-busy', 'true'); if (window.RBEsq) main.innerHTML = window.RBEsq.html(sec, t('html.cargando')); return; }
+    main.removeAttribute('aria-busy');
     franja(sec);
     if (sec === 'inicio') { if (window.RBHome) window.RBHome.render(main, DATOS); else inicio(); }
     else if (sec === 'mapa') mapaVista();
@@ -294,10 +296,12 @@
   /* ---------- Mapa Agrícola (datos en data/agricola.json) ---------- */
   var AGRO = null;
   function agricolaVista(abierta) {
-    var pintar = function () { window.RBAgricola.render(main, AGRO, ZONAS, abierta); };
+    var pintar = function () { main.removeAttribute('aria-busy'); window.RBAgricola.render(main, AGRO, ZONAS, abierta); };
     if (AGRO) return pintar();
+    main.setAttribute('aria-busy', 'true');
     main.innerHTML = window.RBEsq ? window.RBEsq.html('agricola', t('agro.cargando')) : '<p class="cargando">' + t('agro.cargando') + '</p>';
     fetch('data/agricola.json').then(ok).then(function (d) { AGRO = d; pintar(); }).catch(function (e) {
+      main.removeAttribute('aria-busy');
       main.innerHTML = '<div class="error" role="alert"><h2>' + t('err.agro') + '</h2><p>' + esc(t('err.detalle', { d: e.message })) + '</p></div>';
     });
   }
@@ -311,6 +315,7 @@
   T.aplicar(document);
   ruta(); // sin datos todavía: pinta el esqueleto de la pantalla pedida
   cargar().then(function () { ruta(); }).catch(function (e) {
+    main.removeAttribute('aria-busy');
     main.innerHTML = '<div class="error" role="alert"><h2>' + t('err.datos') + '</h2><p>' + esc(t('err.detalle', { d: e.message })) +
       '</p><p>' + t('err.file') + '</p></div>';
   });

@@ -14,7 +14,7 @@ test('hay esqueleto para cada pantalla y uno de respaldo', () => {
 
 test('el lector de pantalla oye solo el texto de carga; los bloques son decorativos', () => {
   const h = E.html('ficha', 'Cargando <datos>');
-  assert.match(h, /role="status" aria-busy="true"/);
+  assert.match(h, /role="status"/);
   assert.match(h, /<span class="sr">Cargando &lt;datos&gt;<\/span>/);
   assert.match(h, /<div aria-hidden="true"><div class="esq-b/);
 });
