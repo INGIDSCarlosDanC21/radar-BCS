@@ -75,7 +75,9 @@
   }
 
   function mapaVista() {
-    var h = '<h1>' + t('titulo.mapa') + '</h1><p class="lead">' + t('mapa.lead') + '</p><div class="chips" role="group" aria-label="' + t('mapa.grupo') + '">';
+    // Arriba, el "Mapa Meteorológico" y el "Diagnóstico Climático Territorial" de Figma (clima-mapa.js); abajo, las tendencias por zona.
+    var CM = window.RBClimaMapa;
+    var h = (CM ? CM.html() : '<h1>' + t('titulo.mapa') + '</h1>') + '<p class="lead">' + t('mapa.lead') + '</p><div class="chips" role="group" aria-label="' + t('mapa.grupo') + '">';
     IDS.forEach(function (id) {
       h += '<button type="button" class="chip" data-ind="' + id + '" aria-pressed="' + (id === indMapa) + '">' + esc(tit(ind(id))) + '</button>';
     });
@@ -88,6 +90,7 @@
     });
     pintar();
     if (window.RBSim) window.RBSim.sateliteActivar(main);
+    if (CM) CM.cargar(main);
   }
 
   /* Qué mide cada capa por zona (MODIS vía AppEEARS). nota: aviso junto al mapa y la lista.

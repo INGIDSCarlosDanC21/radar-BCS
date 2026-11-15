@@ -1,0 +1,75 @@
+/* Pestaña Mapa: "Mapa Meteorológico" y "Diagnóstico Climático Territorial" del frame "Clima - Mapa" de Figma.
+   Íconos del cielo y leyenda: cielo.css. */
+.cm{margin-bottom:8px}
+.cm h1{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;color:#000d21;font-size:32px;line-height:40px;letter-spacing:-.8px;margin:8px 0 4px}
+.cm .lead{color:#44474d;max-width:640px}
+.cm-marco{position:relative;margin-top:16px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.1)}
+.cm-mapa{height:380px;background:#cfe8f0}
+.cm-leyenda{margin:12px}
+.cm-estado{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;line-height:16px;color:#44474d;margin:8px 0 0}
+
+/* Pines (Figma): círculo blanco con el ícono y etiqueta azul marino; La Paz resaltada. */
+.cm-pin-wrap{background:none;border:0}
+/* El centro del círculo queda en la coordenada; la etiqueta sale a la derecha (o a la izquierda con .cm-pin-izq). */
+.cm-pin{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transform:translate(-18px,-50%)}
+.cm-pin-izq{flex-direction:row-reverse;transform:translate(calc(-100% + 18px),-50%)}
+.cm-pin-c{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9999px;background:#fff;border:2px solid #000d21;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.cm-pin-c .cl-ico{width:22px;height:22px}
+.cm-pin-t{background:#000d21;color:#fff;border-radius:6px;padding:4px 8px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;line-height:16px}
+.cm-pin-t em{font-style:normal;color:#97f3b5}
+.cm-pin-lp .cm-pin-c{background:#000d21;border-color:#51d8e8;box-shadow:0 0 0 3px rgba(81,216,232,.35)}
+.cm-pin-lp .cm-pin-t{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;border:1px solid #51d8e8}
+
+/* Diagnóstico Climático Territorial */
+.cm-diag-cab{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:4px 16px;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #e0e3e6}
+.cm-diag-cab h2{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;color:#000d21;font-size:26px;line-height:32px;letter-spacing:-.6px;margin:0}
+.cm-diag-cab p{color:#44474d;font-size:14px;line-height:20px;margin:0}
+.cm-diag-cab a{color:#006d3d;text-decoration:underline}
+.cm-tarjetas{display:grid;grid-template-columns:1fr;gap:16px}
+.cm-tarjeta{position:relative;display:flex;flex-direction:column;gap:16px;background:#fff;border-radius:12px;padding:24px 20px 18px;overflow:hidden;
+  text-decoration:none;color:#000d21;box-shadow:0 1px 2px rgba(0,0,0,.05),0 1px 3px rgba(0,0,0,.08)}
+.cm-tarjeta:hover{box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.cm-tarjeta:focus-visible{outline:3px solid #006d3d;outline-offset:2px}
+.cm-acento{position:absolute;left:0;right:0;top:0;height:6px}
+.cm-calor .cm-acento{background:linear-gradient(90deg,#fbbf24,#d97706)}
+.cm-uv .cm-acento{background:linear-gradient(90deg,#f97316,#dc2626)}
+.cm-viento .cm-acento{background:linear-gradient(90deg,#14b8a6,#006d3d)}
+.cm-lluvia .cm-acento{background:linear-gradient(90deg,#60a5fa,#0c2340)}
+.cm-cab{display:flex;align-items:flex-start;gap:14px}
+.cm-ico{flex:none;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:8px}
+.cm-calor .cm-ico{background:#fff7e6}.cm-uv .cm-ico{background:#fff1f2}.cm-viento .cm-ico{background:#e6f6f0}.cm-lluvia .cm-ico{background:#eef4ff}
+.cm-tit{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.cm-tit strong{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;line-height:26px}
+.cm-renglon{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;line-height:16px}
+.cm-calor .cm-renglon{color:#b45309}.cm-uv .cm-renglon{color:#c81e1e}.cm-viento .cm-renglon{color:#006d3d}.cm-lluvia .cm-renglon{color:#44474d}
+.cm-insignia{flex:none;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;line-height:16px;border-radius:9999px;padding:4px 10px;border:1px solid}
+.cm-calor .cm-insignia{background:#fff7e6;border-color:#fbbf24;color:#92400e}
+.cm-uv .cm-insignia{background:#fff1f2;border-color:#fecaca;color:#b91c1c}
+.cm-viento .cm-insignia{background:#dcfce7;border-color:#bbf7d0;color:#065f46}
+.cm-lluvia .cm-insignia{background:#eff6ff;border-color:#bfdbfe;color:#1e3a8a}
+.cm-ir{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:24px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;line-height:18px;color:#000d21}
+.cm-ir span{font-size:18px}
+.cm-zonas-h{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;color:#000d21;font-size:22px;line-height:28px;margin:40px 0 4px}
+
+@media (min-width:768px){
+  .cm-tarjetas{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1024px){
+  .cm h1{font-size:48px;line-height:56px;letter-spacing:-1.2px}
+  .cm-mapa{height:560px}
+  .cm-leyenda{position:absolute;right:16px;top:16px;margin:0;width:210px;z-index:500}
+  .cm-leyenda ul{flex-direction:column;gap:6px}
+  .cm-diag-cab h2{font-size:36px;line-height:44px}
+}
+/* Celular: pines compactos (ícono + temperatura); el nombre y el estado salen al tocar el pin. */
+@media (max-width:640px){
+  .cm-mapa{height:420px}
+  .cm-pin-c{width:30px;height:30px}
+  .cm-pin-c .cl-ico{width:18px;height:18px}
+  .cm-pin{gap:3px;transform:translate(-15px,-50%)}
+  .cm-pin-izq{transform:translate(calc(-100% + 15px),-50%)}
+  .cm-pin-t{padding:2px 6px}
+  .cm-pin-t .cm-n,.cm-pin-t em{display:none}
+  .cm-pin-lp .cm-pin-t .cm-n{display:inline}
+  .cm-insignia{align-self:flex-start}
+}
