@@ -5,7 +5,7 @@
 
 ## Aviso: las pantallas son maquetas con datos de ejemplo
 
-Las PNG de `pantallas/` y `componentes/` son **maquetas de diseño** (se importaron de Google Stitch, generado con IA). Muestran datos **de ejemplo** que no salen de ninguna fuente nuestra: temperaturas de ciudades, "Actualizado hace 4 min", "En vivo, Satélite GOES-18", escala de radar en dBZ, índice UV, viento, presión, alertas, "Red estatal de estaciones" y el texto "Todos los derechos reservados".
+Las PNG de `pantallas/` y `componentes/` son **maquetas de diseño** (el equipo hizo un prototipo de media fidelidad, se ajustó en Google Stitch, que es IA, y la edición final se hizo a mano en Figma; confirmado por Ehileen el 2026-11-15). Muestran datos **de ejemplo** que no salen de ninguna fuente nuestra: temperaturas de ciudades, "Actualizado hace 4 min", "En vivo, Satélite GOES-18", escala de radar en dBZ, índice UV, viento, presión, alertas, "Red estatal de estaciones" y el texto "Todos los derechos reservados".
 
 Reglas (AGENTS.md, reglas 1 y 6):
 

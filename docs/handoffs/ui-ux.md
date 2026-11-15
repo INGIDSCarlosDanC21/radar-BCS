@@ -27,7 +27,7 @@
 - Que Diego corrija lo de `diseno/revision-360/REPORTE.md` (P0: scroll horizontal en Ficha de lluvia, sigue; P1: pines de Agrícola, modo oscuro, logo con marca de IA en la cabecera).
 - Inglés (#93): `textos.js` en PR #123; falta que Luca aplique la lista de #118, que Diego aplique lo de #119 y que Roberto revise `agricola.json` (U1).
 - Decisión del Líder: ¿las PNG de maquetas de `diseno/` necesitan la etiqueta "AI-generated" en la imagen? (PR #126).
-- Lista de qué pantallas de Figma salieron de Stitch, pantalla por pantalla (la sabe Ehileen).
+- ~~Lista de pantallas de Stitch~~ Hecho el 2026-11-15: todas siguieron el mismo flujo (prototipo de media fidelidad del equipo → ajuste en Stitch → edición final a mano en Figma).
 
 ## Bloqueos
 
