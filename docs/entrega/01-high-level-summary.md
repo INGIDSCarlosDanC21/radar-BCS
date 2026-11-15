@@ -6,7 +6,7 @@ Requirement (literal, from "Components of Project"):
 Provide a high-level summary of your project, 50 - 200 words. What did you develop? How does it address the challenge? Why is it important?"
 -->
 
-<!-- Nota interna: resumen de 153 palabras (limite 50-200). Recontar si se edita. -->
+<!-- Nota interna: resumen de 153 palabras (limite 50-200) y unos 1100 caracteres (la plataforma topa en 1500). Recontar si se edita. Cuando exista la version en ingles de la web (?lang=en, issue #93), cambiar "written in Spanish" por "available in Spanish and English". -->
 
 **Project name:** Radar BCS (team OptiPaz)
 
