@@ -203,7 +203,7 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 
 - **Regla (la indicó Carlos en el chat; el texto oficial está por citar):** toda fuente de información y toda IA se documentan en `docs/` o en GitHub; no hace falta repetirlas en cada pantalla. Documento central: `docs/FUENTES-Y-IA.md`.
 - **Qué se quitó:** la etiqueta "AI-generated" junto al logo del encabezado, las líneas "Fuente: …" de las tarjetas de Inicio y del Mapa Agrícola, y dos créditos de imagen repetidos. **Qué se queda:** atribución de OpenStreetMap y de Open-Meteo (sus licencias la exigen), rótulos de seguridad, limitaciones, pie con licencia y línea de IA. Ahorro medido en celular: Inicio 4399 → 3945 px, Agro Clima 6210 → 5836 px.
-- **Riesgo declarado:** la diapositiva oficial de envío que tenemos pide marca de agua visible en imágenes generadas; el logo (única imagen generada) conserva la declaración en el pie y en `docs/entrega/05`, y la etiqueta en el pie de Inicio. Si la sede o la NASA lo piden, se vuelve a mostrar quitando `.marca-ia{display:none}` de `web/css/fuentes.css`.
+- **Riesgo declarado (actualizado 2026-11-15, 04:50):** se leyó el texto oficial (Guía de envío y Preguntas frecuentes, 13 nov 2026): piden una descripción del uso de IA, y **la guía sigue exigiendo marca de agua visible en imágenes y videos generados**. El logo (única imagen generada) conserva la declaración en el pie de cada pantalla, la etiqueta del pie de Inicio, `docs/entrega/05` y `docs/RECURSOS.md`, pero ya no tiene etiqueta en el encabezado. Hay un PR listo y sin fusionar (#176) que la pone dentro de la imagen del logo sin ocupar espacio. Decisión de Carlos.
 
 ## "Ver más" y decisiones delegadas por Carlos (2026-11-15, 04:30)
 
