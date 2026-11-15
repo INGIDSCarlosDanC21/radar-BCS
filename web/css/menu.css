@@ -35,3 +35,11 @@
   .cabecera .sub{display:none}
   .cabecera .idioma{grid-area:idioma}
 }
+
+/* Escritorio: cabecera a todo lo ancho (pedido de UI/UX, 2026-11-15): logo a la izquierda, secciones al centro, idioma a la derecha. */
+@media (min-width:1024px){
+  .cabecera{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;max-width:none;padding:12px 32px;margin:0}
+  .cabecera .marca{justify-self:start}
+  .cabecera .menu-sup{justify-self:center;flex-wrap:nowrap;margin:0}
+  .cabecera .idioma{justify-self:end}
+}

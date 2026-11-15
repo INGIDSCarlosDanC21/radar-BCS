@@ -30,7 +30,7 @@
       pieDesc: 'Tendencias ambientales de La Paz, B.C.S., con datos abiertos de la NASA.',
       pieNav: 'Pie de página', pantallas: 'Pantallas', inicio: 'Inicio', mapa: 'Mapa', fichas: 'Fichas', acciones: 'Acciones',
       agricola: 'Mapa Agrícola',
-      copy: '© 2026 Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0<br>Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch; logotipo generado con IA (Gemini).',
+      copy: '© 2026 Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0',
       noMapa: 'No se pudo mostrar el mapa.', noLoc: 'No encontramos esa localidad en el mapa.',
       acercar: 'Acercar', alejar: 'Alejar', coord: 'Coordenadas: '
     },
@@ -47,7 +47,7 @@
       pieDesc: 'Environmental trends in La Paz, B.C.S., with NASA open data.',
       pieNav: 'Page footer', pantallas: 'Screens', inicio: 'Home', mapa: 'Map', fichas: 'Details', acciones: 'Actions',
       agricola: 'Farming Map',
-      copy: '© 2026 Team OptiPaz · NASA Space Apps Challenge 2026 · Apache-2.0 License<br>Code and analysis written with AI assistance (Claude Code); interface designed with help from Google Stitch; AI-generated logo (Gemini).',
+      copy: '© 2026 Team OptiPaz · NASA Space Apps Challenge 2026 · Apache-2.0 License',
       noMapa: 'The map could not be displayed.', noLoc: 'We could not find that locality on the map.',
       acercar: 'Zoom in', alejar: 'Zoom out', coord: 'Coordinates: '
     }
@@ -291,9 +291,7 @@
         '<div id="ag-cta">' + ctaDe(datos, abierta) + '</div>' +
       '</section>' + estadoPie + '</div>' +
       '<footer class="ag-pie"><div class="ag-pie-grid"><div><p class="ag-marca"><i class="ag-dot"></i>RADAR BCS</p>' +
-        '<p class="ag-pie-desc">' + esc(tx('pieDesc')) + '</p></div>' +
-        '<nav aria-label="' + esc(tx('pieNav')) + '"><p class="ag-mono ag-negro">' + esc(tx('pantallas')) + '</p>' +
-        '<a href="#inicio">' + esc(tx('inicio')) + '</a><a href="#mapa">' + esc(tx('mapa')) + '</a><a href="#acciones">' + esc(tx('acciones')) + '</a><a href="#agricola">' + esc(tx('agricola')) + '</a></nav></div>' +
+        '<p class="ag-pie-desc">' + esc(tx('pieDesc')) + '</p></div></div>' +
         '<p class="ag-mono ag-copy">' + tx('copy') + '</p></footer>' +
       '</div>';
     return h;

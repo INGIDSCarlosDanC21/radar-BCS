@@ -60,3 +60,10 @@
   .cl-fig .hm-cred{position:absolute;left:12px;bottom:12px;margin:0}
   .cl-principal .hm-cifra-grande{font-size:64px;line-height:64px}
 }
+
+/* Escritorio: las 6 ciudades ocupan el mismo alto que la tarjeta de La Paz (pedido de UI/UX, 2026-11-15). */
+@media (min-width:1024px){
+  .cl-sec .hm-rejilla{align-items:stretch}
+  .cl-peques{grid-auto-rows:1fr;align-content:stretch;height:100%}
+  .cl-peque{display:flex;flex-direction:column;justify-content:space-between}
+}
