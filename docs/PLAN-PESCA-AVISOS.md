@@ -2,7 +2,7 @@
 
 Pedido de Carlos (chat, 2026-11-15): agregar las pestañas **Pesca** y **Avisos y Alertas**, fieles al Figma con ajustes de proporciones; el mapa es de **iconos**; **sin gráficas, sin tablas y sin descripciones largas**; iconos CC0 o libres; bien integradas. Esto **reabre** la regla 1 de `docs/PLAN-CIERRE.md` ("Pesca no se construye"), con la condición de siempre: **ninguna cifra ni aviso inventado** (regla 1 de `AGENTS.md`).
 
-Este plan es una propuesta de ejecución. Las decisiones que necesitan el OK de Carlos están en la sección 8.
+**Estado (2026-11-15):** construido. Se aplicaron las recomendaciones de la sección 8 (Carlos pidió terminar lo que faltaba): menú superior de texto / inferior con iconos, "Estado del mar (modelo)" y avisos del modelo más enlaces oficiales. Resultados de F0 en `docs/investigacion/umbrales-mar.md`; decisión en `docs/decisiones.md`. Las secciones de abajo se conservan como registro del plan.
 
 ## 1. Qué se conserva del Figma y qué se quita
 
@@ -55,11 +55,20 @@ Cada regla se evalúa por hora y por zona con datos de Open-Meteo y lleva su umb
 
 Filtros: **Todas · Meteorológicas · Agrícolas · Pesca y marítimo**, con contador.
 
-## 4. Navegación (pide decisión)
+## 4. Navegación (dos menús según el ancho)
 
-Hoy la barra inferior tiene 5 pestañas (Inicio, Mapa, Ficha, Agro, Acciones). Con Pesca y Avisos serían 7, y la guía de `ui-ux-pro-max` dice **máximo 5 en la barra inferior**.
+Indicación de Carlos: **en escritorio el menú es superior y de texto; al llegar a cierto ancho se pasa a inferior, con iconos, para celular.**
 
-**Propuesta:** en celular (< 1024 px) la barra queda en **Inicio · Mapa · Pesca · Avisos · Más**; "Más" abre una hoja con Ficha, Agro y Acciones. En escritorio (≥ 1024 px) el menú de arriba lleva todas las pestañas, como en el Figma. Rutas `#pesca` y `#avisos`, con enlace directo y sin romper las actuales.
+| Ancho | Menú | Qué lleva |
+|---|---|---|
+| **≥ 1024 px (escritorio)** | **Superior, solo texto**, como el Figma (`diseno/ESPECIFICACION.md` §4: Manrope 14, color `#44474d`, relleno 4px 16px, radio 8, pestaña activa en azul marino) | Inicio · Mapa · Ficha · Agro · Pesca · Avisos · Acciones (todas, sin "Más") |
+| **< 1024 px (celular y tableta)** | **Inferior fija, con iconos** (ícono + etiqueta corta, 44 px de alto mínimo, zona segura del celular) | Inicio · Mapa · Pesca · Avisos · **Más** |
+
+- El punto de cambio es **1024 px**, el mismo que ya usan `estilos.css` y `home.css` para el ancho de escritorio; si Diego prefiere otro, se cambia en un solo lugar (una variable CSS y una consulta de medios).
+- **Por qué "Más":** la guía de `ui-ux-pro-max` dice máximo 5 en la barra inferior. "Más" abre una hoja corta con Ficha, Agro y Acciones. En escritorio no hace falta.
+- **Estado actual (importante):** hoy la barra inferior se ve **también en escritorio** y no existe el menú superior; el menú superior de texto es trabajo nuevo (Diego, F1). Los iconos de la barra inferior, hoy símbolos de texto, se cambian por los SVG de `web/assets/iconos/mapa/`.
+- Los dos menús son el **mismo `<nav>`** con una sola lista de enlaces (sin duplicar rutas): CSS decide cuál se ve, con foco visible, `aria-current` en la pestaña activa y `aria-label` "Secciones". Rutas `#pesca` y `#avisos`, con enlace directo y sin romper las actuales.
+- Pestaña activa: no solo color; subrayado o fondo y `aria-current="page"`.
 
 ## 5. Arquitectura (para no escribir lo mismo dos veces)
 
@@ -97,7 +106,7 @@ Del repositorio (`.claude/skills/`), en este orden de uso:
 
 ## 8. Decisiones que necesitan el OK de Carlos
 
-1. **Navegación:** barra de celular "Inicio · Mapa · Pesca · Avisos · Más" (recomendada) frente a 7 pestañas apretadas.
+1. **Navegación:** menú superior de texto en escritorio y barra inferior con iconos en celular (indicación de Carlos), con "Más" en la barra inferior para no pasar de 5 (recomendado) frente a 7 pestañas apretadas.
 2. **Semáforo:** renombrarlo "Estado del mar (modelo)" con umbrales publicados (recomendado) frente a mostrar una "bandera" que parezca oficial. Mostrar una bandera que no decretó la Capitanía no es una opción que recomiende.
 3. **Avisos:** avisos automáticos del modelo + enlaces a avisos oficiales (recomendado) frente a solo enlaces.
 4. **Alcance:** Pesca primero y Avisos después. Si a las 10:00 Avisos no está listo, se entrega solo Pesca y Avisos queda para después de enviar.
@@ -108,7 +117,7 @@ Del repositorio (`.claude/skills/`), en este orden de uso:
 | Quién | Qué | Carpeta |
 |---|---|---|
 | **Líder (esta sesión)** | `datos-vivos.js`, `reglas-mar.js`, `mapa-iconos.js`, `pesca.js`, `avisos.js`, pruebas, docs de datos y recursos | `web/js/` nuevos, `docs/` |
-| **Diego** | Barra responsive con "Más", rutas `#pesca` y `#avisos`, esqueleto de carga, 360 px | `index.html`, `app.js`, `esqueleto.js`, `estilos.css` |
+| **Diego** | Los dos menús (superior de texto ≥ 1024 px, inferior con iconos < 1024 px, con "Más"), rutas `#pesca` y `#avisos`, esqueleto de carga, 360 px | `index.html`, `app.js`, `esqueleto.js`, `estilos.css` |
 | **Ehileen** | Actualizar en Figma Pesca y Avisos con mapa de iconos y sin texto largo, versión de 360 px, y revisar con `impeccable critique` y `web-design-guidelines` | `diseno/`, `web/assets/` |
 | **Luca** | Verificar las fuentes de los umbrales (F0.2), revisar `reglas-mar.js` (es "ciencia") y comprobar que cada cifra de pantalla se puede rastrear | revisión; `analisis/` no cambia |
 | **Roberto** (no disponible) | Revisión del inglés y texto alternativo cuando regrese | |

@@ -1,0 +1,43 @@
+/* Pestaña Avisos: contador, filtros, simbología de 4 colores, tarjetas cortas. Cada nivel lleva ícono + texto, no solo color. */
+.av-cab{display:flex;justify-content:flex-end;margin-top:8px}
+.av-sync{margin:0}
+.av-titulo{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:4px}
+.av h1{font-family:var(--f-titulo);font-size:2rem;line-height:1.1;margin:.3em 0 .2em}
+@media (min-width:1024px){.av h1{font-size:3rem}}
+.av-sub{margin:0;color:var(--suave);font-size:1.05rem}
+.av-total{display:inline-flex;align-items:center;gap:10px;margin:0;padding:8px 16px;border-radius:999px;background:var(--gris-120);font:700 1rem var(--f-titulo)}
+.av-num{display:inline-flex;align-items:center;justify-content:center;min-width:32px;height:32px;padding:0 8px;border-radius:999px;background:var(--acento);color:#fff}
+.av-barra{margin-top:12px}
+.av-chip{min-height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--gris-120);color:var(--texto);font-family:var(--f-datos);font-size:13px;font-weight:500;cursor:pointer;touch-action:manipulation}
+.av-chip[aria-pressed=true]{background:var(--acento);color:var(--acento-t)}
+
+/* Niveles */
+.av-niv{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 6px;border-radius:999px;font:700 12px var(--f-datos);text-transform:uppercase}
+.av-ic{width:18px;height:18px}
+.av-niv-3{background:#fde8e8;color:#9b1c1c}.av-niv-2{background:#ffedd5;color:#9a3412}.av-niv-1{background:#fef3c7;color:#854d0e}.av-niv-0{background:#dbeafe;color:#1e40af}
+.av-simb ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0;padding:12px;list-style:none;border-radius:12px;background:var(--tarjeta);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+@media (min-width:1024px){.av-simb ul{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.av-s{display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-size:.85rem;color:var(--suave)}
+
+/* Avisos oficiales: solo enlaces */
+.av-ofi{margin:12px 0}
+.av-ofi h2,.av-g-cab h2{font-family:var(--f-titulo);font-size:1.2rem;margin:0}
+.av-ofi p{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+.av-of{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:8px;background:var(--tarjeta);box-shadow:0 1px 2px rgba(0,0,0,.08);color:var(--acento);font-weight:600;text-decoration:none}
+
+/* Grupos y tarjetas */
+.av-g{margin:16px 0;padding:14px;border-radius:12px;background:var(--tarjeta);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.av-g[hidden]{display:none}
+.av-g-cab{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.av-cuenta{padding:3px 10px;border-radius:999px;background:#d6f5e3;color:#00522d;font:600 12px var(--f-datos)}
+.av-c{margin:8px 0;padding:12px 14px;border-radius:10px;background:var(--fondo);border-left:5px solid var(--borde)}
+.av-n3{border-left-color:#dc2626}.av-n2{border-left-color:#ea580c}.av-n1{border-left-color:#d97706}.av-n0{border-left-color:#2563eb}
+.av-fila{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.av-cat{padding:2px 8px;border-radius:6px;background:var(--gris-120);color:var(--suave);font:500 11px var(--f-datos);text-transform:uppercase}
+.av-mod{background:#e0e7ff;color:#312e81}
+.av-hora{margin-left:auto;font:500 12px var(--f-datos);color:var(--suave)}
+.av-t{margin:6px 0 2px;font-family:var(--f-titulo);font-size:1.15rem}
+.av-det{margin:0;font-size:.95rem}
+.av-zona{margin:4px 0 0;font:400 12px var(--f-datos);color:var(--suave)}
+.av-vacio{display:flex;align-items:center;gap:8px;margin:8px 0;color:var(--suave)}
+.av-nota{margin-top:12px}

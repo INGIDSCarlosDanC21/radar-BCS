@@ -1,0 +1,78 @@
+/* Pestaña Pesca: mapa de iconos + control de hora + 4 mosaicos cortos. Variables de estilos.css; acentos de diseno/ESPECIFICACION.md §4. */
+.pe-cab{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
+.pe-ins{display:inline-flex;align-items:center;gap:8px;margin:0;padding:4px 12px;border-radius:999px;background:#d6f5e3;color:#00522d;font-size:12px;text-transform:uppercase}
+.pe h1{font-family:var(--f-titulo);font-size:2rem;line-height:1.1;margin:.5em 0 .2em}
+@media (min-width:1024px){.pe h1{font-size:3rem}}
+.pe-sub{margin:0 0 12px;color:var(--suave);font-size:1.05rem}
+.pe-carga{color:var(--suave);margin:24px 0}
+.pe-chip{min-height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--gris-120);color:var(--texto);font-family:var(--f-datos);font-size:13px;font-weight:500;cursor:pointer;touch-action:manipulation}
+.pe-chip[aria-pressed=true]{background:var(--acento);color:var(--acento-t)}
+.pe-vars{margin-top:0}
+
+/* Mapa oscuro: la base de OpenStreetMap se oscurece con un filtro; los pines llevan ícono + valor */
+.pe-mapa-caja{position:relative;margin:8px 0 0}
+.pe-mapa{height:520px;border-radius:12px;background:#04122b;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.1)}
+@media (min-width:640px){.pe-mapa{height:560px}}
+.mi-base{filter:invert(1) hue-rotate(180deg) brightness(.82) contrast(.9) saturate(.55)}
+.pe-mapa .leaflet-container{background:#04122b;font:inherit}
+.pe-mapa .leaflet-control-attribution{background:rgba(255,255,255,.8);font-size:11px}
+.mi-caja{width:0;height:0;background:none;border:0}
+.mi-pin{display:inline-flex;align-items:center;gap:6px;min-height:44px;min-width:44px;padding:0 12px 0 8px;transform:translate(-50%,-50%);white-space:nowrap;border-radius:999px;border:3px solid var(--borde);background:#fff;color:var(--texto);font:700 13px var(--f-datos);box-shadow:0 2px 6px rgba(0,0,0,.45);cursor:pointer;touch-action:manipulation}
+.mi-pin .mi-ic{width:22px;height:22px}
+.mi-verde{border-color:#2e9d5f}.mi-verde .mi-ic{color:#006d3d}
+.mi-amarillo{border-color:#f0b429}.mi-amarillo .mi-ic{color:#8a5a00}
+.mi-rojo{border-color:#d9482b}.mi-rojo .mi-ic{color:#b4380f}
+.mi-neutro .mi-ic{color:var(--acento)}
+.mi-pin.mi-activo{background:var(--acento);color:#fff;z-index:1000}
+.mi-pin.mi-activo .mi-ic{color:#fff}
+.mi-pin:focus-visible{outline:3px solid #fff;outline-offset:2px}
+/* Celular: pines más compactos para que no se encimen; el área de toque sigue siendo de 44 px (zona invisible alrededor). */
+@media (max-width:639px){
+  .mi-pin{position:relative;min-height:34px;min-width:34px;padding:0 9px 0 6px;gap:4px;font-size:12px;border-width:2px}
+  .mi-pin .mi-ic{width:18px;height:18px}
+  .mi-pin::after{content:"";position:absolute;inset:-5px}
+}
+.pe-aviso{position:absolute;left:8px;right:8px;bottom:8px;margin:0;padding:8px 12px;border-radius:8px;background:var(--aviso);color:var(--texto);font-size:.9rem;z-index:500}
+.pe-aviso[hidden]{display:none}
+
+/* Leyenda */
+.pe-ley{display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0;font-size:.85rem;color:var(--suave)}
+.pe-ley-i{display:inline-flex;align-items:center;gap:6px}
+.pe-pt{display:inline-block;width:14px;height:14px;border-radius:50%;border:3px solid}
+.pe-pt-verde{border-color:#2e9d5f}.pe-pt-amarillo{border-color:#f0b429}.pe-pt-rojo{border-color:#d9482b}
+.pe-ley-t{flex:1 1 100%;margin:0;font-size:.85rem;color:var(--suave)}
+.pe-ley-barra{flex:1 1 100%;height:14px;border-radius:7px;border:1px solid var(--borde)}
+.pe-ley-marcas{position:relative;flex:1 1 100%;height:16px;font-family:var(--f-datos);font-size:12px}
+.pe-ley-marcas span{position:absolute;top:0}
+
+/* Hora y simulación (como la línea de horas del Figma) */
+.pe-reloj{display:flex;align-items:center;gap:8px;margin:12px 0 8px;padding:8px;border-radius:12px;background:#0c2340;color:#fff}
+.pe-reloj-c{flex:1;min-width:0;text-align:center}
+.pe-hora{display:block;font:700 15px var(--f-datos);text-transform:capitalize}
+.pe-reloj input[type=range]{width:100%;height:44px;margin:0;accent-color:#7dd3fc;cursor:pointer}
+.pe-flecha{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;border:0;border-radius:8px;background:rgba(255,255,255,.14);color:#fff;cursor:pointer;touch-action:manipulation}
+.pe-flecha:disabled{opacity:.35;cursor:default}
+.pe-flecha:focus-visible,.pe-sim:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.pe-sim{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;border:0;border-radius:12px;background:var(--acento);color:#fff;font:600 1.05rem var(--f-cuerpo);cursor:pointer;touch-action:manipulation}
+
+/* Diagnóstico: 4 mosaicos cortos */
+.pe-diag{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-top:20px}
+.pe-diag h2{font-family:var(--f-titulo);font-size:1.5rem;margin:0}
+.pe-zona{margin:0;padding:4px 12px;border-radius:999px;background:var(--gris-120);font:500 12px var(--f-datos)}
+.pe-mosaicos{display:grid;gap:12px;margin-top:12px}
+@media (min-width:640px){.pe-mosaicos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pe-m{background:var(--tarjeta);border-radius:12px;border-top:4px solid var(--borde);box-shadow:0 1px 2px rgba(0,0,0,.05);padding:14px 16px}
+.pe-m-seg{border-top-color:#fbbf24}.pe-m-oc{border-top-color:#1eb8c8}.pe-m-cl{border-top-color:#4b5f7f}.pe-m-clo{border-top-color:#006d3d}
+.pe-m-cab{display:flex;align-items:center;gap:10px}
+.pe-m h3{margin:0;font-family:var(--f-titulo);font-size:1.1rem}
+.pe-grande{margin:10px 0 2px;font-family:var(--f-titulo);font-size:1.7rem;font-weight:800;line-height:1.1}
+.pe-estado{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 2px;font-weight:700}
+.pe-sem{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font:700 13px var(--f-datos)}
+.pe-sem i{display:inline-block;width:10px;height:10px;border-radius:50%;background:currentColor}
+.pe-sem-verde{background:#d6f5e3;color:#00522d}.pe-sem-amarillo{background:#fef3c7;color:#7a4b00}.pe-sem-rojo{background:#fde8e8;color:#9b1c1c}.pe-sem-sin{background:var(--gris-120);color:var(--suave)}
+.pe-dato{margin:2px 0 0;font-size:.95rem}
+.pe-peq{margin:6px 0 0;font-size:.8rem;color:var(--suave)}
+.pe-btn{display:inline-flex;align-items:center;min-height:44px;margin:10px 0 2px;padding:0 16px;border:0;border-radius:8px;background:var(--acento);color:#fff;font:600 .95rem var(--f-cuerpo);cursor:pointer;touch-action:manipulation}
+.pe-btn[aria-pressed=true]{background:#006d3d}
+.pe-nota{margin-top:16px}
+.pe a{display:inline-block;min-height:24px}
