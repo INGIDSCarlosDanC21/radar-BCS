@@ -21,6 +21,18 @@ Actualizado el 2026-11-15 (issues #97 y #81). Rama de este bloque: `prog-a/campo
 - Mapa Agrícola (#88): NO PASA todavía. Ficha Clima con cifras viejas y leyenda "2001–2025". Verificados POWER y la tabla del DOF; sin verificar SIAP, SoilGrids, Monitor de Sequía, GeoNames.
 - Login (#77): sin claves secretas, pero `generar-config.ps1` y su prueba no detectan una clave `service_role` en formato JWT; falta la pantalla para fijar la contraseña nueva; textos "Costero" y "Todos los derechos reservados" por corregir; falta configurar Supabase.
 
+## Bloque autónomo #118 (2026-11-15)
+
+Ramas subidas, sin PR abierto (mi token no abre PR; los abre el usuario, a `dev`). Orden de fusión: 1, luego 2 a 5.
+
+1. `prog-a/calor-aire` (L1, P0, cifras: revisa el Líder): el calor sale de POWER T2M, +1.47 °C 2001-2025 (p = 2.8e-17, por década +0.611); `validar` exige T2M, periodo desde 2001 y a Aqua en la limitación. Con esta rama, `web/tests` falla 2 pruebas de Diego: `agricola.test.mjs` (el resumen de Clima sigue en +0.94 °C) y `home.test.mjs` (fija «Datos generados el 2026-11-14»).
+2. `prog-a/auditoria-agricola` (L2): `docs/investigacion/auditoria-agricola.md`. Veredicto NO PASA todavía: 3 correcciones para Diego (#119) y SIAP y SEPADA sin comprobar (servidores sin respuesta).
+3. `prog-a/cifras-entrega` (L3): `test_cifras_entrega.py`; pasa con L1 (las cifras de `docs/entrega/04` y `08` coinciden con `data/salida`). Sin L1, falla contra la superficie vieja.
+4. `prog-a/reproducir-aqua` (L4): sección del README. El CSV de Aqua (1.7 MB) está solo en mi caché local; alguien debe subirlo a Drive `datasets/appeears-6-zonas/` y anotarlo en `docs/DRIVE.md`.
+5. `prog-a/pruebas-appeears`: 6 pruebas sin red para `appeears.py`.
+
+L5: los PR abiertos de Diego (#116, #121, #122) y de UI/UX (#123, #124) no tocan cifras ni datos; no hay nada que revisar por esa regla. No aprobé #85: la puerta falla 2 pruebas de web con L1 y el Mapa Agrícola no pasa.
+
 ## Falta
 
 - Carlos: revisar la `limitacion` nueva del calor y que `docs/entrega/04` y `hallazgos.md` digan lo mismo.
