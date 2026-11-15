@@ -23,8 +23,21 @@
     if (datos && datos.datos_de_prueba === true) return true;
     return vista === 'mapa' && !!zonas && zonas.datos_de_prueba === true;
   }
+  // Explicación en lenguaje sencillo del método que trae cada indicador (significancia.metodo).
+  // Textos según docs/investigacion/metodo.md y analisis/exportar.py.
+  function explicaMetodo(metodo) {
+    var m = String(metodo || '').toLowerCase();
+    var sen = ' La pendiente de Sen estima cuánto cambia por año.';
+    if (m.indexOf('total anual') >= 0)
+      return 'Suma la lluvia de cada año y ve si esos totales suben o bajan de forma consistente. Se usa el total anual porque muchos meses no llueve nada.' + sen;
+    if (m.indexOf('autocorrel') >= 0)
+      return 'Compara cada mes del año con los mismos meses de otros años y ve si el dato sube o baja de forma consistente. El p-valor corrige la autocorrelación entre meses (un mes se parece al anterior), así que es más prudente.' + sen;
+    if (m.indexOf('estacional') >= 0)
+      return 'Compara cada mes del año con los mismos meses de otros años y ve si el dato sube o baja de forma consistente.' + sen;
+    return '';
+  }
   var RB = { num: num, dec: dec, pTexto: pTexto, signo: signo, clase: clase,
-    textoCambio: textoCambio, textoFuente: textoFuente, mostrarFranja: mostrarFranja };
+    textoCambio: textoCambio, textoFuente: textoFuente, mostrarFranja: mostrarFranja, explicaMetodo: explicaMetodo };
   if (typeof window !== 'undefined') window.RB = RB;
   if (typeof module !== 'undefined' && module.exports) module.exports = RB;
 })();

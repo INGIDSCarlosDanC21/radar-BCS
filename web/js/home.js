@@ -24,7 +24,9 @@
   }
   function pTxt(i) {
     var g = i.significancia;
-    return g && g.p_valor != null ? 'p = ' + RB.pTexto(g.p_valor, 3) : '';
+    if (!g || g.p_valor == null) return '';
+    var t = RB.pTexto(g.p_valor, 3);
+    return t.charAt(0) === '<' ? 'p ' + t : 'p = ' + t;
   }
   function cortoDataset(i) {
     return String(RB.textoFuente(i)).split(' vía ')[0];
@@ -118,7 +120,7 @@
         '<p class="hm-pie-desc">Tendencias ambientales de La Paz, B.C.S., con datos abiertos de la NASA.</p></div>' +
         '<nav aria-label="Pie de página"><p class="hm-mono hm-negro">Pantallas</p>' +
         '<a href="#inicio">Inicio</a><a href="#mapa">Mapa</a><a href="#ficha/calor">Fichas</a><a href="#acciones">Acciones</a></nav>' +
-      '</div><p class="hm-mono hm-copy">© 2026 Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0</p></footer>' +
+      '</div><p class="hm-mono hm-copy">© 2026 Equipo OptiPaz · NASA Space Apps Challenge 2026 · Licencia Apache-2.0<br>Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch.</p></footer>' +
       '</div>';
     return h;
   }
