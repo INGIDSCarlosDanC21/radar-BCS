@@ -149,6 +149,7 @@
     opc = opc || {};
     var f = opc.fetch || (typeof fetch !== 'undefined' ? fetch.bind(typeof window !== 'undefined' ? window : undefined) : null);
     var st = opc.storage !== undefined ? opc.storage : (typeof sessionStorage !== 'undefined' ? sessionStorage : null);
+    var lt = opc.respaldo !== undefined ? opc.respaldo : (opc.fetch ? null : (function () { try { return typeof localStorage !== 'undefined' ? localStorage : null; } catch (e) { return null; } })());
     var ahora = opc.ahoraMs != null ? opc.ahoraMs : Date.now();
     var conClima = !!opc.clima, clave = conClima ? CACHE_CLAVE_CLIMA : CACHE_CLAVE;
     if (st) {
@@ -166,7 +167,18 @@
       var datos = unir(r[0], r[1], conClima ? r[2] : undefined);
       if (!datos) throw new Error('respuesta incompleta');
       if (st) { try { st.setItem(clave, JSON.stringify({ t: ahora, datos: datos })); } catch (e) { /* cuota llena */ } }
+      if (lt) { try { lt.setItem(clave + '-respaldo', JSON.stringify({ t: ahora, datos: datos })); } catch (e) { /* cuota llena */ } }
       return { datos: datos, cache: false, edadMs: 0 };
+    }).catch(function (e) {
+      // Respaldo (2026-11-15): si Open-Meteo no responde (p. ej. 429, límite diario de la red), la última respuesta buena
+      // de las últimas 24 h; edadMs dice su antigüedad y la pantalla muestra su hora ("Actualizado …").
+      if (lt) {
+        try {
+          var g = JSON.parse(lt.getItem(clave + '-respaldo') || 'null');
+          if (g && g.t && ahora - g.t < 24 * 3600000 && g.datos && g.datos.horas) return { datos: g.datos, cache: true, edadMs: ahora - g.t, respaldo: true };
+        } catch (x) { /* sin respaldo */ }
+      }
+      throw e;
     });
     if (!opc.fetch) { enVuelo[clave] = p; var libre = function () { if (enVuelo[clave] === p) enVuelo[clave] = null; }; p.then(libre, libre); }
     return p;
