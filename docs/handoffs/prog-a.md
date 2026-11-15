@@ -23,6 +23,7 @@
 - Campos `*_en` en `data/salida/` (título, variable, nota del cambio, limitación, método, dataset y resolución de la fuente; `nombre_en` y `nota_en` por zona). Mismas cifras que el español; `analisis.validar` los exige. No hay campo "descripción" en el contrato: `variable_en` hace ese papel. Los nombres de zona son propios y no se traducen.
 - `scripts/verificar-todo.ps1`: pytest, validar, `node --test` (web y diseño), `web/data` = `data/salida` (3 archivos) y archivos de menos de 5 MB. Probar: `powershell -File scripts/verificar-todo.ps1`.
 - `analisis.publicar` ahora copia también `zonas_tendencias.json`.
+- Contraste con Aqua (#87), `python -m analisis.contraste_aqua`: 2003-2021 Terra +1.04 °C (p = 0.0005) y Aqua +0.27 °C (p = 0.29, no significativo). Aqua también cambia su hora de paso desde 2022 (13.4 h a 15.2 h en 2026, más tarde, al revés que Terra). El calor de superficie 2001-2021 no se confirma con Aqua; ver el informe en el issue #87.
 - Falta del #97: auditoría del Mapa Agrícola (#88), contraste con Aqua (#87), revisión del login (#77/#81).
 
 ## Falta
