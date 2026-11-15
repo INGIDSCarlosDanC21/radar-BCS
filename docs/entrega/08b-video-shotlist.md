@@ -4,6 +4,33 @@ Reemplaza la versión de la mañana. **Decisión de Carlos (2026-11-15): pantall
 
 **Una sola historia:** el problema local → qué cambió (con honestidad sobre lo que no sabemos) → dónde → qué es de hoy y qué no → cierre. Responde las 4 preguntas del reto (qué, dónde, cuánto, ¿significativo?) sin enseñar todas las pantallas.
 
+## Tráiler 16:9 de 28 s (versión principal, 2026-11-15, noche)
+
+> **Narración vigente (2026-11-15, voz "Tamsin", ElevenLabs voice library, model Eleven v4, 1.08×, 27.31 s).** Los subtítulos dicen exactamente esto, con las cifras en dígitos:
+> 1. "In La Paz, heat, water and the sea touch everyone." (0.00–3.79)
+> 2. "Radar BCS turns NASA data into answers." (3.97–7.46)
+> 3. "Since 2001, air temperature rose about 1.5 degrees. Statistically significant." (7.68–13.71)
+> 4. "Rainfall? No clear change." (13.93–16.00)
+> 5. "The map shows WHERE: 38 places." (16.18–19.10)
+> 6. "Sea and weather today? Model estimates, not official warnings." (19.32–23.45)
+> 7. "What changed, not why. Radar BCS." (23.80–27.31)
+>
+> El tráiler dura 29 s, con cortes en 4, 7.5, 14, 16, 19.5 y 23.5 s. Hay laptop con la versión de escritorio en el título, en el mapa de 38 lugares, en el montaje de funciones y en el cierre. La tabla vigente está en `video/README.md`; las tablas de abajo (voz anterior) quedan como historial.
+>
+> **Versión anterior (voz "Katie"):** cortes en 3.5, 6.5, 12.5, 16.5, 19 y 23 s. Los teléfonos muestran **clips reales de la app en movimiento**, y entre 19 y 21.5 s hay un montaje de funciones (GOES-West, IMERG, capas, Agro/NDVI, calor del suelo). Cada escena tiene su propio fondo vivo, y los subtítulos son cinéticos y de color. Tabla vigente en `video/README.md`; la tabla de abajo es la versión anterior.
+
+Mismo guion y misma voz; nuevo montaje horizontal 1920 × 1080 en Remotion (`video/`, composición `RadarBCSTrailer`). Cortes en la rejilla de 120 BPM. Tiempos editables en `video/src/guion.ts` (`TRAILER_ESCENAS`, `SENALES`).
+
+| Tiempo | Voz | Plano |
+|---|---|---|
+| 0.0–3.0 | "In La Paz, heat, water and the sea touch everyone." | De negro (barras que se abren) a la foto MODIS/GIBS de BCS con empuje hacia La Paz, calima, bruma en parallax, fuga de luz; HEAT (1.0 s), WATER (1.5 s), SEA (2.0 s) entran con desenfoque y salen en zoom-through |
+| 3.0–6.0 | "Radar BCS turns NASA data into answers." | Golpe + destello: logo en tarjeta blanca con glitch y aberración cromática, barrido de luz; teléfono 3D sube y gira mostrando Inicio, segundo teléfono desenfocado al fondo |
+| 6.0–12.0 | "Air temperature rose about 1.5 degrees since 2001, a statistically significant change." | Gradación cálida; teléfono con la ficha de Calor en órbita; contador hasta +1.47 °C; gráfica anual real 2001–2025 que se dibuja; sello "p < 0.001" con marcador "statistically significant"; salida en whip pan |
+| 12.0–15.5 | "Where we are unsure, we say it: rainfall shows no clear change." | Gradación fría; barras anuales reales de lluvia; "No clear change" y "p = 0.129 · not statistically significant"; teléfono con la ficha de Lluvia que se desenfoca (rack focus) |
+| 15.5–18.5 | "The map shows where, across 38 places." | La misma foto satelital inclinada en perspectiva; 38 pines en 4 oleadas (16.0, 16.5, 17.0, 17.5 s) con contador 00→38 y etiqueta La Paz |
+| 18.5–22.0 | "Today's sea and weather are model estimates, not official warnings." | Cortes cada 0.5 s: Clima (picado holandés), close-up de tarjeta, Pesca; luego "Model estimates." / "Not official warnings." con marcador cian sobre el diagnóstico del mar desenfocado |
+| 22.0–28.0 | "What changed, not why. Radar BCS." | Golpe: "What changed, not why." en tipografía grande; logo con destello radial y chispas (23.5 s); URL y "Data: NASA POWER · MODIS · GRACE · GIBS"; fundido a negro 27.5–28 s |
+
 **Línea de apertura de la entrega:** "Radar BCS turns NASA open data into answers for every resident of La Paz."
 
 ## Guion (64 palabras en inglés, unos 25 s a ritmo calmado, 5 s de margen)
@@ -17,13 +44,13 @@ Reemplaza la versión de la mañana. **Decisión de Carlos (2026-11-15): pantall
 | 0:21 | **Clima** (4 tarjetas) y un vistazo a **Pesca** con la pastilla "modelo, no oficial" | "Today's sea and weather are model estimates, not official warnings." (10) |
 | 0:26 | Texto: enlace de la web + "Data: NASA POWER · MODIS · GRACE · GIBS" | "What changed, not why. Radar BCS." (6) |
 
-**Texto fijo en pantalla durante todo el video (pequeño, arriba): "AI-generated voice (ElevenLabs)."** Cumple la regla de la Guía de envío (videos generados con marca visible) y se repite en la descripción del video.
+**Sin etiqueta de IA visible en pantalla** (decisión de Carlos, 2026-11-15; ver `docs/decisiones.md`). La declaración de la voz sintética va en la descripción del video ("Narration is an AI-generated voice (ElevenLabs)"), en `docs/entrega/05-use-of-ai.md`, en `docs/RECURSOS.md` y en el campo de IA de la plataforma.
 
 Las cifras salen de `data/salida/indicadores.json` y `docs/investigacion/hallazgos.md` (aire +1.47 °C, 2001-2025, p < 0.001; lluvia p = 0.129, no significativa). **No decir:** por qué subió el calor, que la superficie se calentó (Terra y Aqua no coinciden), que hay más agua local o que el acuífero se recupera, ninguna causa (urbanización, cambio climático), que los avisos del modelo son oficiales, ni que se probó en un celular real hasta que el issue #71 lo confirme.
 
 ## Alternativas si algo falla
 
-- **ElevenLabs no disponible o rechazado:** el mismo texto lo narra un integrante **mayor de 18** que acepte que NASA use su voz; entonces se quita la línea "AI-generated voice" y se corrige `05` y `docs/RECURSOS.md`.
+- **ElevenLabs no disponible o rechazado:** el mismo texto lo narra un integrante **mayor de 18** que acepte que NASA use su voz; entonces se quita la declaración de voz sintética de la descripción del video y se corrige `05` y `docs/RECURSOS.md`.
 - **No alcanza el tiempo para armar el video:** 7 diapositivas (máx., contando portada) con las mismas ideas; el campo de demo acepta un enlace a las diapositivas.
 
 ## Cómo producirlo
@@ -36,11 +63,11 @@ Las cifras salen de `data/salida/indicadores.json` y `docs/investigacion/hallazg
 ## Lista de producción
 
 - [ ] Subtítulos en inglés quemados, legibles en un celular, idénticos a la voz.
-- [ ] Línea fija visible "AI-generated voice (ElevenLabs)" y lo mismo en la descripción del video.
+- [ ] Sin etiqueta de IA en pantalla; la declaración "AI-generated voice (ElevenLabs)" va en la descripción del video.
 - [ ] Solo imágenes propias o libres: la web y el logo; todo recurso está en `docs/RECURSOS.md` y `docs/entrega/07`.
 - [ ] Sin logos, banderas ni parches de la NASA. NASA solo se menciona en texto.
 - [ ] **Sin menores de 18:** nadie aparece, se nombra o se oye (créditos incluidos).
-- [ ] Si el logo (generado con Gemini) sale en pantalla, conserva su marca "AI-generated"; está declarado en `05`.
-- [ ] ElevenLabs declarado en `05`, en `docs/RECURSOS.md` y marcado en el campo de IA de la plataforma.
+- [ ] El logo (generado con Gemini) sale en su versión limpia, sin marca en pantalla; está declarado en `05` y en `docs/RECURSOS.md`.
+- [ ] ElevenLabs y Gemini declarados en `05`, en `docs/RECURSOS.md`, en la descripción del video y marcados en el campo de IA de la plataforma.
 - [ ] Duración de 30 s o menos (medida con cronómetro o con la herramienta de edición, no a ojo).
 - [ ] Enlace público, probado con una ventana sin sesión iniciada.

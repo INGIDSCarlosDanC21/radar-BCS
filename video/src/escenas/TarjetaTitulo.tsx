@@ -2,7 +2,7 @@ import { AbsoluteFill, Easing, Img, Interactive, interpolate, staticFile, useCur
 import { COLOR, CUADRO, FUENTE_MONO, FUENTE_TITULO } from '../estilo';
 
 // Toma 1 (inicio): tarjeta de título "Radar BCS · OptiPaz" con la paleta de la web.
-// Sin logos de la NASA. El logo de Radar BCS va SOLO en su versión con la marca "AI-generated".
+// Sin logos de la NASA ni etiquetas de IA en pantalla (decisión de Carlos, 2026-11-15; ver docs/decisiones.md).
 export const TarjetaTitulo: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -36,7 +36,7 @@ export const TarjetaTitulo: React.FC = () => {
             }),
           }}
         >
-          <Img name="Logo Radar BCS (AI-generated)" src={staticFile('logo-radar-bcs-ai-generated.png')} style={{ width: 820, display: 'block' }} />
+          <Img name="Logo Radar BCS" src={staticFile('logo-radar-bcs.png')} style={{ width: 820, display: 'block' }} />
         </div>
         <Interactive.Div
           name="Título"
