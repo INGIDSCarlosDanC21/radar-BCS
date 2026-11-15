@@ -17,6 +17,12 @@ a{color:var(--acento)}
 .marca{font-weight:800;font-size:1.1rem}.sub{color:var(--suave);font-size:.9rem}
 /* Interruptor de idioma (#93): visible en todas las pantallas, área táctil de 44 px. */
 .cabecera{align-items:center;gap:8px}.cabecera .sub{margin-right:auto}
+/* Logo (generado con IA) con la marca "AI-generated" legible junto a él (AGENTS.md regla 6) */
+.marca{display:flex;align-items:center;min-height:44px}.marca img{display:block;height:28px;width:auto}
+.marca-ia{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:16px;padding:2px 6px;border:1px solid var(--borde);border-radius:6px;color:var(--suave);white-space:nowrap}
+@media (max-width:399px){.cabecera .sub{display:none}.cabecera .marca-ia{margin-right:auto}}
+img.ico{display:inline-block;height:1em;width:auto;vertical-align:-.12em;margin-right:.35em}
+@media (prefers-color-scheme:dark){.marca img{background:#fff;border-radius:6px;padding:2px 6px;box-sizing:content-box}}
 .idioma{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--acento);border-radius:999px;color:var(--acento);font-weight:700;font-size:.9rem;text-decoration:none;white-space:nowrap}
 .idioma:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
 main{max-width:720px;margin:0 auto;padding:8px 16px 16px;outline:none}
@@ -64,9 +70,3 @@ svg.grafica text{fill:var(--suave);font-size:11px}
 .barra span[aria-hidden]{font-size:1.2rem;line-height:1}
 .leaflet-container{font:inherit}
 @media (min-width:640px){.tarjetas{grid-template-columns:1fr 1fr}#mapa-caja{height:420px}}
-/* Logo (generado con IA) con la marca "AI-generated" legible junto a él (AGENTS.md regla 6) */
-.marca{display:flex;align-items:center;min-height:44px}.marca img{display:block;height:28px;width:auto}
-.marca-ia{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:16px;padding:2px 6px;border:1px solid var(--borde);border-radius:6px;color:var(--suave);white-space:nowrap}
-@media (max-width:399px){.cabecera .sub{display:none}.cabecera .marca-ia{margin-right:auto}}
-img.ico{display:inline-block;height:1em;width:auto;vertical-align:-.12em;margin-right:.35em}
-@media (prefers-color-scheme:dark){.marca img{background:#fff;border-radius:6px;padding:2px 6px;box-sizing:content-box}}
