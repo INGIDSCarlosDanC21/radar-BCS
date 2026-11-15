@@ -55,3 +55,13 @@ Cómo revisar: `git diff --stat dev` debe mostrar solo `docs/`.
 - **Qué falta (mío):** prueba con sol real después de las 07:00 y segunda prueba de disponibilidad de servicios a las 12:00 (`docs/investigacion/disponibilidad-servicios.md`).
 - **Qué falta (de Carlos):** video de 30 s (hoy, antes de las 23:59), pasos de la plataforma con `docs/entrega/PLATAFORMA-LISTA.md` y Submit for Judging (meta 13:00).
 - **Qué bloquea:** nada de mi lado. Aviso: dos PR de Luca se abrieron hacia `main` por error; se redirigieron a `dev` (los PR van siempre a `dev`).
+
+## 2026-11-15 tarde
+
+- **Hecho (a `main`, con el "fusiona" de Carlos):** #183 (05:16), #200 (07:38), #202 (07:52), #205 (08:22), #208 (08:46) y #211 (09:09). Línea de tiempo con horas en `docs/cronologia.md`.
+- **En `dev`, todavía no en `main`:** #212 (navegación con íconos, Acciones en Clima, Agro con capas), #213 (19 puertos y 20 lugares) y #214 (animación de 2 horas de GOES-West en Inicio).
+- **#216 (`dev` a `main`):** abierto a las 10:04; **espera el "fusiona" de Carlos**. No se fusiona sin esa palabra.
+- **Incidente:** al fusionar #214 quedaron marcas de conflicto en `docs/entrega/04-project-details.md`; #215 las corrigió a las 10:04 y no llegaron a `main`. Se revisó el repo: no hay otras.
+- **Falta:** video de 30 s y pasos de la plataforma (Carlos), Submit for Judging (meta 13:00, límite 23:59), prueba con sol real y la segunda prueba de disponibilidad de servicios (`docs/investigacion/disponibilidad-servicios.md`).
+- **Falta (después de enviar):** limpiar el historial de git (decisión del 2026-11-14) y avisar al equipo para clonar de nuevo.
+- **Qué bloquea:** nada de mi lado.
