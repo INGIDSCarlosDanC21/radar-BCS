@@ -240,7 +240,7 @@
     var g = i.significancia || {};
     h += '<div class="bloque"><h2>¿Es estadísticamente significativo?</h2>' +
       '<p><strong>' + esc(conclusion(i)) + '</strong></p>' +
-      '<p>Método: ' + esc(g.metodo || 'sin calcular') + '. Compara cada mes del año con los mismos meses de otros años y ve si el dato sube o baja de forma consistente; la pendiente de Sen estima cuánto cambia por año.</p>' +
+      '<p>Método: ' + esc(g.metodo || 'sin calcular') + '.' + (RB.explicaMetodo(g.metodo) ? ' ' + esc(RB.explicaMetodo(g.metodo)) : '') + '</p>' +
       '<p>p-valor: ' + (g.p_valor != null ? esc(pTexto(g.p_valor, 3)) : 'sin calcular') + ' · alfa: ' + (g.alfa != null ? esc(num(g.alfa, 2)) : 'sin dato') +
       '. Si p es menor que alfa, la tendencia se considera clara.</p></div>';
     h += '<div class="bloque"><h2>Fuente</h2><p><strong>' + esc(RB.textoFuente(i)) + '</strong></p><p>' +

@@ -18,6 +18,10 @@
   - **Imagen:** MODIS Terra de NASA GIBS (CC0), en `web/img/` con su `FUENTES.md`.
   - **Earth Engine:** script `web/tools/gee_imagen_bcs.py` para un compuesto MCD43A4. Requiere cuenta y no se ha corrido.
 - **Login y Register:** por el issue #73, se sacaron del PR #69 y pasaron a la rama `prog-b/login`, con su PR aparte a `dev`. Corte: domingo 15 nov, 09:00.
+- **Issue #78** (rama `prog-b/issue-78`), atendiendo la auditoría de Carlos:
+  - **Método por ficha:** cada ficha explica su propio método según `significancia.metodo`. Calor y vegetación usan la prueba estacional; lluvia, el total anual; agua, la corrección por autocorrelación. La función es `RB.explicaMetodo` en `reglas.js` y tiene prueba.
+  - **Aviso de IA:** está en el pie general y en el pie de la Home: "Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch". Ambas herramientas están declaradas en `docs/RECURSOS.md`.
+- **Datos de vegetación 2001-2026:** todavía no se copian a `web/data/`. Se copian una sola vez, cuando Luca suba la frase nueva de Calor; al 15 nov 00:00 aún no está en `dev`.
 
 ## En curso
 
