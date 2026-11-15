@@ -2,6 +2,14 @@
 
 Fecha: 2026-11-15. Revisado sobre `origin/dev` (2c21191) con `?lang=en`, en las 8 rutas: `#inicio`, `#mapa`, `#ficha/{calor|vegetacion|lluvia|agua}`, `#agricola` y `#acciones`. Revisó UI/UX (Ehileen, con Claude Code). Falta el visto bueno de Roberto.
 
+## Estado (2026-11-15, plan autónomo #117/#120)
+
+- `textos.js`: corregido en el PR #123 ("Statistical test", "NASA data", "details", "Downloaded on", "Year by year", "rainfall").
+- Pie con el logo de IA: lo resuelve el PR #121 de Diego.
+- Campos `*_en` de los datos (PRECTOTCORR, "Rain" → "Rainfall", "REGIONAL"): lista exacta para Luca en #118. La nota de calor de abajo es anterior a la opción B (`docs/decisiones.md`); Luca decide su texto final.
+- "Track Terrain" (`agricola.js`), "2021-2021" (`app.js`), "P" mayúscula (`home.css`) y fechas: en #119 para Diego. Los textos de `agricola.json` le tocan a Roberto (U1 de #120).
+- "Water" se queda así: GRACE mide toda el agua almacenada, no solo el agua subterránea ("groundwater" sería incorrecto).
+
 ## Resultado general
 
 - **Cobertura:** en inglés, casi todo el texto visible está traducido. El script buscó palabras en español en el texto, en `alt`, en `aria-label` y en `placeholder`. Solo encontró "parámetro PRECTOTCORR", en la fuente de la lluvia. "Español" y "Ver este sitio en español" están bien así: son el botón para volver al español y llevan `lang="es"`.
