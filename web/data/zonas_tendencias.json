@@ -1,0 +1,117 @@
+{
+ "generado_con": "analisis/exportar.py (código generado con IA: sí, Claude)",
+ "periodo": {
+  "inicio": 2001,
+  "fin": 2021
+ },
+ "zonas": {
+  "Centro": {
+   "calor_lst": {
+    "unidades": "°C",
+    "pendiente_por_anio": 0.0543,
+    "cambio_total": 1.086,
+    "p_valor": 2.303e-06,
+    "significativo": true,
+    "meses_sin_dato": 0
+   },
+   "vegetacion_ndvi": {
+    "unidades": "NDVI",
+    "pendiente_por_anio": -0.0012,
+    "cambio_total": -0.03,
+    "p_valor": 1.058e-05,
+    "significativo": true,
+    "meses_sin_dato": 175
+   }
+  },
+  "Chametla": {
+   "calor_lst": {
+    "unidades": "°C",
+    "pendiente_por_anio": 0.075,
+    "cambio_total": 1.5,
+    "p_valor": 1.005e-06,
+    "significativo": true,
+    "meses_sin_dato": 0
+   },
+   "vegetacion_ndvi": {
+    "unidades": "NDVI",
+    "pendiente_por_anio": -0.0013,
+    "cambio_total": -0.033,
+    "p_valor": 1.049e-25,
+    "significativo": true,
+    "meses_sin_dato": 7
+   }
+  },
+  "El Centenario": {
+   "calor_lst": {
+    "unidades": "°C",
+    "pendiente_por_anio": 0.0192,
+    "cambio_total": 0.383,
+    "p_valor": 0.2062,
+    "significativo": false,
+    "meses_sin_dato": 0
+   },
+   "vegetacion_ndvi": {
+    "unidades": "NDVI",
+    "pendiente_por_anio": -0.0018,
+    "cambio_total": -0.046,
+    "p_valor": 1.621e-12,
+    "significativo": true,
+    "meses_sin_dato": 25
+   }
+  },
+  "Oriente": {
+   "calor_lst": {
+    "unidades": "°C",
+    "pendiente_por_anio": 0.055,
+    "cambio_total": 1.1,
+    "p_valor": 0.0001603,
+    "significativo": true,
+    "meses_sin_dato": 0
+   },
+   "vegetacion_ndvi": {
+    "unidades": "NDVI",
+    "pendiente_por_anio": 0.0003,
+    "cambio_total": 0.008,
+    "p_valor": 0.001474,
+    "significativo": true,
+    "meses_sin_dato": 3
+   }
+  },
+  "Sur": {
+   "calor_lst": {
+    "unidades": "°C",
+    "pendiente_por_anio": 0.0208,
+    "cambio_total": 0.415,
+    "p_valor": 0.1553,
+    "significativo": false,
+    "meses_sin_dato": 0
+   },
+   "vegetacion_ndvi": {
+    "unidades": "NDVI",
+    "pendiente_por_anio": 0.0009,
+    "cambio_total": 0.024,
+    "p_valor": 0.00333,
+    "significativo": true,
+    "meses_sin_dato": 3
+   }
+  },
+  "Surponiente": {
+   "calor_lst": {
+    "unidades": "°C",
+    "pendiente_por_anio": 0.0449,
+    "cambio_total": 0.897,
+    "p_valor": 0.0002113,
+    "significativo": true,
+    "meses_sin_dato": 0
+   },
+   "vegetacion_ndvi": {
+    "unidades": "NDVI",
+    "pendiente_por_anio": -0.0017,
+    "cambio_total": -0.042,
+    "p_valor": 0.0009546,
+    "significativo": true,
+    "meses_sin_dato": 34
+   }
+  }
+ }
+}

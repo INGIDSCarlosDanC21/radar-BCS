@@ -43,3 +43,15 @@ test('franja', () => {
   assert.equal(RB.mostrarFranja({ datos_de_prueba: false }, { datos_de_prueba: true }, 'inicio'), false);
   assert.equal(RB.mostrarFranja({ datos_de_prueba: true }, {}, 'ficha'), true);
 });
+
+test('cada ficha explica su propio método (#78)', async () => {
+  const fs = await import('node:fs');
+  const d = JSON.parse(fs.readFileSync(new URL('../data/indicadores.json', import.meta.url), 'utf8').replace(/^\uFEFF/, ''));
+  const txt = id => RB.explicaMetodo(d.indicadores.find(i => i.id === id).significancia.metodo);
+  assert.match(txt('lluvia'), /total/);
+  assert.doesNotMatch(txt('lluvia'), /cada mes/);
+  assert.match(txt('agua'), /autocorrelación/);
+  assert.match(txt('calor'), /cada mes/);
+  assert.doesNotMatch(txt('calor'), /autocorrelación/);
+  assert.equal(RB.explicaMetodo(null), '');
+});
