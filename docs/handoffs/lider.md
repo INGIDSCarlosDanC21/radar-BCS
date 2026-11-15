@@ -46,4 +46,4 @@ Cómo revisar: `git diff --stat dev` debe mostrar solo `docs/`.
 ## Pedidos del Líder tras revisar MODIS (2026-11-14)
 
 - **Luca (Prog. A):** sube a Drive (`datasets/`) los CSV de AppEEARS de las 6 zonas, para que Investigación reproduzca las cifras. Revisa por qué la superficie baja en El Centenario y Sur (calidad 0b01, hora de paso) antes de que se cite.
-- **Diego (Prog. B):** la tarjeta y la ficha de Calor deben mostrar la `limitacion` junto a la cifra (aire sube, superficie sin cambio claro, no sabemos por qué). Frases en `docs/investigacion/hallazgos.md`. Copia la salida nueva de `data/salida/` a `web/data/` cuando lo revises.
+- **Diego (Prog. B):** hecho en el PR #57: Calor muestra la superficie MODIS con su nota (el aire sube +1.47 °C; no coinciden) y `web/data/` ya tiene la salida nueva. Falta integrar la interfaz de UI/UX.

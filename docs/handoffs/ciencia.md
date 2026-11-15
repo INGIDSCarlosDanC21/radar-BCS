@@ -13,7 +13,7 @@
 
 - Revisar por qué la temperatura de superficie baja en El Centenario y Sur (ver `hallazgos.md`).
 - Agua subterránea (GRACE/GLDAS): no empezada; si no se hace, declararlo y poner "No usado".
-- Hacer que la web muestre el calor del aire y el de superficie juntos (decisión en `docs/decisiones.md`).
+- (Hecho, PR #57/#65) La web muestra la superficie MODIS como número de Calor y el aire (+1.47 °C) en la nota; ver `docs/decisiones.md`.
 - Abrir en navegador los DOI de Hirsch et al. y Sen (ya verificados contra Crossref, no leídos).
 
 ## Bloqueos
