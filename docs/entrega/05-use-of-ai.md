@@ -19,7 +19,7 @@ Also from "Project Submission": images and videos that are generated content nee
 
 ## Where and how each tool was used
 
-- Claude Code (Anthropic's AI coding assistant, including smaller Claude models as helpers): repository setup; searching and checking sources for the local context; drafting documentation and the English submission drafts; and writing the trend-analysis prototype code (`analisis/prototipo_power.py`). A team member reviewed the results, reproduced the numbers independently, and checked the sources by opening them.
+- Claude Code (Anthropic's AI coding assistant, including smaller Claude models as helpers): repository setup; searching and checking sources for the local context; drafting documentation and the English submission drafts; and writing most of the code: the trend-analysis pipeline and its tests (`analisis/`), the data files it produces (marked "generated with AI" in their `generado_con` field) and the website code (`web/`). Team members reviewed the results and checked the sources by opening them. The NASA POWER results were reproduced independently, and the MODIS results were re-run from the original AppEEARS files (this check was also done with Claude's help).
 - Google Stitch (Google's AI design tool): used by the UI/UX members to design the interface of the four screens (layout, color palette and logo). What reaches the website is adapted and reviewed by hand. TODO: UI/UX to list exactly which screens or images came from Stitch and confirm its terms of use for the generated designs.
 - No other AI tools were used (no voice, video or 3D generation so far).
 - Third-party skills and plugins used as development tools: listed in docs/skills-terceros.md. TODO: summarize if needed.
