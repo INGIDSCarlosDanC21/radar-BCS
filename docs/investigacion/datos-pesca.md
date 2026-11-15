@@ -52,3 +52,10 @@ Sin verificar: modelo exacto y resolución por punto (la documentación solo dic
 - Decisión: la clorofila y la SST numéricas por punto solo se pueden pedir desde el pipeline (`analisis/`), no desde la web, y requieren un punto en mar abierto por puerto. Cualquier archivo nuevo en `data/` lo revisa y fusiona el Líder.
 
 Investigación en línea delegada a subagentes haiku de Claude Code y revisada por Luca (ver `docs/RECURSOS.md`, sección IA).
+
+## Segunda ronda de confirmación (2026-11-15, agentes haiku)
+- **Mareas:** NOAA CO-OPS lista la estación TWC0397 (La Paz) pero devuelve "No Predictions data was found". Sin estaciones oficiales abiertas para Loreto, Santa Rosalía, Pichilingue ni Bahía Magdalena; UNAM, SEMAR, CICESE, IOC y UHSLC no dieron datos de BCS (SEMAR 403, CICESE sin respuesta). Open-Meteo Marine sí da `sea_level_height_msl` (La Paz, 168 valores sin nulos, CORS `*`), pero es un **modelo, no marea astronómica ni medición**: no se muestra como marea. Muestra en el scratchpad de la sesión, no en el repo.
+- **Avisos:** sin RSS, CAP ni API de SMN, Protección Civil o SEMAR en los intentos; proteccioncivil.gob.mx y bcs.gob.mx no respondieron, así que es "no encontrado", no una prueba. NHC RSS (`index-at.xml`) cubre el Atlántico y no trae CORS; la API de NWS tiene CORS pero no cubre BCS.
+- **Vedas:** datos.gob.mx bloquea las consultas automáticas (403); existe un dataset de normatividad de CONAPESCA sin leer (`nube.conapesca.gob.mx/datosabiertos/Normatividad_Pesquera.txt`). No se puede afirmar que no exista un calendario abierto.
+- **Tallas:** solo se leyó la NOM-005-PESC-1993 (abulón, península), vigencia sin verificar en el DOF. La NOM-064-SAG/PESC/SEMARNAT-2013 no fija tallas. Langosta, almeja catarina y callo de hacha: sin norma leída. No se cita ninguna talla.
+- **Web:** `web/js/pesca.js` muestra ahora, en 3 de los 4 mosaicos, líneas "Pendiente: …" para lo anterior, y ya no dice "~9 km" porque esa resolución no está confirmada.
