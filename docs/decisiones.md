@@ -141,3 +141,13 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Contexto:** la entrada del 2026-11-14 dejó Calor en 2001-2021 (+0.94 °C, Terra) y dijo "si Aqua no muestra calentamiento, se revisa". Luca (PR #103, `analisis.contraste_aqua`) encontró que en 2003-2021 Terra da +1.04 °C (p = 0.0005) y Aqua +0.27 °C (p = 0.29, no significativo); Aqua también cambia su hora de paso desde 2022 (13.4 h a 15.2 h, más tarde). Carlos confirmó el corte en 2021 con la condición de "datos más recientes y confiables"; esta es una información nueva, no cubierta por esa confirmación.
 - **Estado:** **pendiente de decisión de Carlos.** Mientras tanto la web y `docs/entrega/` conservan Terra 2001-2021 con su limitación, y **no se pasa a `main`** hasta decidir.
 - **Opciones:** (A) mantener Terra como cifra principal y agregar que Aqua no lo confirma; (B) **recomendada por el asistente:** encabezar con la temperatura del aire (+1.47 °C, POWER, significativa) y mostrar la superficie como no concluyente (Terra +0.9 °C, Aqua sin cambio claro, ninguna con hora de paso estable), sin cifra principal de superficie; (C) volver a "sin cambio claro" para la superficie. Cualquier opción exige cambiar la limitación en `exportar.py` (ES y EN), `web/data/`, y `docs/entrega/04`, `06`, `08`.
+
+### 2026-11-15 — El login con Supabase no entra a la entrega
+
+- **Decisión:** el asistente del Líder, por encargo de Carlos ("decide"). Se cierra el PR #77 **sin fusionar**; la rama `prog-b/login` y el proyecto de Supabase se conservan para después del evento.
+- **Por qué:**
+  1. **No cumple una función para quien lo usa.** La cuenta no guarda nada ni personaliza nada; las 4 preguntas del reto se responden sin cuenta, y el relato dice "sin cuenta".
+  2. **Agrega obligaciones sin tiempo para cumplirlas:** correos de residentes (datos personales; solo +18, aviso de privacidad, canal de borrado), pantallas en inglés, revisión de seguridad de Luca y una prueba real de registro en celular que nadie ha hecho; además, el correo predeterminado de Supabase tiene límites y puede fallar justo cuando el jurado lo pruebe.
+  3. **La prioridad que Carlos fijó** era 1) interfaz, 2) celular real, 3) login. El tiempo se usa mejor en el inglés de la web (requisito de elegibilidad) y en la puerta de calidad.
+- **Qué se hace:** `docs/entrega/07` y `CHECKLIST-ENVIO` ya no esperan Supabase; `docs/RECURSOS.md` marca `supabase-js` y Supabase Auth como "no se usa en la entrega". No hay que quitar nada de `web/` (el login nunca llegó a `dev`).
+- **Cómo se retoma:** después de la entrega, abrir de nuevo la rama `prog-b/login` (22 pruebas, clave publishable ya conectada) y cerrar lo pendiente: propósito de la cuenta, revisión de Luca y prueba real de registro.
