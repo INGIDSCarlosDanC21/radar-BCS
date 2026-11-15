@@ -22,18 +22,18 @@ Lo que no se llega a hacer esta noche queda anotado como pendiente de mañana; n
 | PR #83 sin datos de prueba | Diego | Abierto, fusiona limpio con `dev` |
 | PR #89 método por ficha y aviso de IA en el pie | Diego | Abierto; solo choca en `docs/handoffs/prog-b.md` |
 | PR #77 login con Supabase (Auth, opcional) | Diego | Abierto; sale de una base vieja, hay que ponerlo al día con `dev` |
-| PR #88 Mapa Agrícola | Diego | Abierto; trae fuentes nuevas (SIAP, CONAGUA, SoilGrids, SMN, GeoNames) |
+| PR #88 Mapa Agrícola | Diego | Abierto; **Carlos decidió que entra**; trae fuentes nuevas (SIAP, CONAGUA, SoilGrids, SMN, GeoNames) |
 | Rama `ui-ux/pantallas-figma` (17 pantallas, logo, íconos, tokens) | Ehileen | Subida hace minutos, **sin PR** (el handoff dice `#PR_PENDIENTE`) |
 | Ramas `prog-a/revision-al-dia` y `prog-a/extender-2026` (REVISION y PLAN al día) | Luca | Subidas, **sin PR** |
 | #87 contraste de Calor con Aqua | Luca | Pendiente |
 | #93 versión en inglés | todos | Sin empezar |
-| PR #85 "Dev → main" | Carlos | Obsoleto: se reemplaza por uno nuevo cuando pase la puerta de calidad |
+| PR #85 "Dev → main" | Carlos | Se conserva como vehículo a `main` (se actualiza solo con `dev`); no se fusiona hasta pasar la puerta de calidad |
 
 ## Reglas de alcance de esta noche
 
 1. **Solo entran a la web cosas con datos reales y fuente.** Las pantallas de Figma de Clima (humedad, UV, viento y oleaje, sensación térmica) y Pesca (oceanografía, potencial pesquero, semáforo de seguridad) no tienen datos nuestros. Se quedan como diseño de referencia en `diseno/`, **no se construyen** y no se mencionan en la entrega salvo como trabajo futuro.
 2. **El botón "Iniciar simulación" del diseño no se construye.** La especificación dice "qué hace: por confirmar". No se inventa una simulación con números que no salen de los datos.
-3. **Mapa Agrícola (#88)** entra solo si pasa la auditoría de fuentes de Luca (ver abajo) y tiene su versión en inglés. Si no llega a tiempo, se deja fuera de `main` sin pena: no es una de las 4 pantallas del reto.
+3. **Mapa Agrícola (#88)**: Carlos decidió que entra. Antes de `main` necesita la auditoría de fuentes de Luca (ver abajo) y su versión en inglés. Si la auditoría falla o no llega a tiempo, se deja fuera de `main`: no es una de las 4 pantallas del reto.
 4. **Login (#77)** sigue opcional y con la hora de corte del domingo 09:00. Si no está probado a esa hora, no entra a `main`.
 5. Sin congelamiento de funciones (decisión de Carlos), pero **todo lo que va a `main` se prueba antes** con la puerta de calidad.
 6. Las prioridades, de mayor a menor: **P0** lo necesario para entregar; **P1** mejora que entra si no rompe nada; **P2** solo si sobra tiempo.
@@ -67,7 +67,7 @@ Una a la vez; después de cada una se corren las pruebas. La revisión la hace e
 2. **Auditar la fuente de datos del Mapa Agrícola (#88)** como revisor independiente: que cada cifra de `web/data/agricola.json` salga de la fuente que dice (SIAP 2025, CONAGUA/DOF, NASA POWER, SoilGrids CC BY 4.0, SMN, GeoNames), que haya enlace y fecha de consulta, y que no haya números sin origen. Resultado en un comentario del PR: "pasa" o lista de lo que falla.
 3. **Campos `*_en`** en `data/salida/*.json` (título, descripción, método, limitación, fuente) y que `analisis.validar` los exija (#93).
 4. **Un solo comando de verificación** (`scripts/verificar-todo.ps1`): pytest de `analisis`, `analisis.validar`, `node --test` de web y de diseño, que `web/data/{indicadores.json,zonas.geojson,zonas_tendencias.json}` sean idénticos a `data/salida/`, y que ningún archivo del repo pese más de 5 MB. Que falle con mensaje claro.
-5. **Contraste de Calor con Aqua (#87)** (MYD11A2), con resultado escrito aunque salga mal para la hipótesis. Es de Carlos confirmar el corte en 2021.
+5. **Contraste de Calor con Aqua (#87)** (MYD11A2), con resultado escrito aunque salga mal para la hipótesis. Carlos confirmó el corte en 2021 mientras no haya datos más recientes y confiables; si Aqua lo contradice, se revisa.
 6. **Revisión de seguridad del login (#81)**: llave publishable (no secret), RLS, correo de borrado de cuenta, sin datos personales en el repo.
 
 ### Ehileen y Roberto (UI/UX)
@@ -80,9 +80,9 @@ Una a la vez; después de cada una se corren las pruebas. La revisión la hace e
 7. Actualizar `docs/entrega/05` y `07` si cambia algo (ya lo dejaron como "por confirmar").
 
 ### Carlos
-1. **Confirmar Calor 2001-2021** (o pedir que se revierta con `--calor-hasta 2025`).
-2. Decidir si Mapa Agrícola entra (por defecto: entra si pasa la auditoría).
-3. Cerrar o sustituir el PR #85.
+1. ~~Confirmar Calor 2001-2021~~ Hecho (con la condición de datos más recientes y confiables).
+2. ~~Decidir si Mapa Agrícola entra~~ Hecho: entra, sujeto a la auditoría de fuentes.
+3. ~~Cerrar o sustituir el PR #85~~ Hecho: se conserva como vehículo a `main`.
 4. Probar en un celular real (#71) cuando `main` tenga la nueva versión.
 5. Grabar el video de 30 s (≤30 s, subtítulos en inglés, sin menores) con el guion de `08`.
 6. Pasos de la plataforma y confirmar la hora del Local Lead.

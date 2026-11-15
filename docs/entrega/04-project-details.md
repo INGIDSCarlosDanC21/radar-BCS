@@ -26,7 +26,7 @@ Radar BCS is a free website for phones, with no installation, written in Spanish
 
 Every number on the site shows its data source. The site shows what changed, not why. A trend does not prove its cause, and we do not claim one.
 
-<!-- Nota interna: las metas de 'What do you hope to achieve' son una propuesta de Claude (tomadas de la diapositiva 7 de 08-demo-draft.md); Carlos confirma o cambia. Vegetacion con los numeros de data/salida/ en dev (PR #84, 2001-2026); web/data/ debe copiarse igual antes de enviar. Calor usa 2001-2021 por el cambio de hora de paso de Terra (PR #90, propuesta de Luca aceptada en dev; Carlos confirma); falta el contraste con Aqua. -->
+<!-- Nota interna: las metas de 'What do you hope to achieve' son una propuesta de Claude (tomadas de la diapositiva 7 de 08-demo-draft.md); Carlos confirma o cambia. Vegetacion con los numeros de data/salida/ en dev (PR #84, 2001-2026); web/data/ debe copiarse igual antes de enviar. Calor usa 2001-2021 por el cambio de hora de paso de Terra (PR #90, propuesta de Luca aceptada en dev; confirmada por Carlos); falta el contraste con Aqua. -->
 <!-- Nota interna: resultados del pipeline de Luca (data/salida/indicadores.json y zonas_tendencias.json, 2026-11-14), revisados por Investigacion en docs/investigacion/hallazgos.md. Si algun numero cambia, cambiarlo aqui. Investigacion reprodujo las salidas de MODIS con los CSV de Drive; la baja de la superficie en El Centenario y Sur depende de la prueba y de los ultimos anios (hallazgos.md), por eso no se interpreta. -->
 
 Results so far (2001-2025 unless noted; NASA POWER is a single grid cell about 50 km wide around La Paz; MODIS is six sample points in and around the city):
