@@ -6,6 +6,9 @@
     (typeof require !== 'undefined' ? require('./reglas.js') : null);
   var T = (typeof window !== 'undefined' && window.RBT) ||
     (typeof require !== 'undefined' ? require('./textos.js') : null);
+  /* El cielo ahora (cielo.js, #144 fase 2). Sin cielo.js, Inicio queda como en la fase 1. */
+  var CL = (typeof window !== 'undefined' && window.RBCielo) ||
+    (typeof require !== 'undefined' ? require('./cielo.js') : null);
   function t(k, v) { return T.t(k, v); }
   function tit(i) { return T.d(i, 'titulo'); }
 
@@ -125,11 +128,13 @@
     });
     h += '</div></div>' +
       '<p class="aviso hm-aviso">' + t('aviso.causa') + '</p></section>' +
+      (CL ? CL.marcoSeccion() : '') +
       '<section class="hm-sec hm-sec-mapa" aria-labelledby="hm-h3"><div class="hm-marco">' +
         '<div class="hm-marco-cab"><h2 id="hm-h3">' + t('home.hMapa') + '</h2>' +
-        '<p class="hm-mono hm-insignia"><i class="hm-punto" aria-hidden="true"></i>' + t('home.insignia') + '</p></div>' +
-        '<figure class="hm-fig"><img src="img/bcs-modis-2025-04-20-600.jpg" srcset="img/bcs-modis-2025-04-20-600.jpg 600w, img/bcs-modis-2025-04-20.jpg 1200w" sizes="(min-width: 1024px) 1216px, 100vw" width="1200" height="1060" alt="' + esc(t('home.alt')) + '" loading="lazy">' +
-        '<figcaption class="hm-cred">' + t('home.cred') + '</figcaption></figure>' +
+        '<p class="hm-mono hm-insignia"><i class="hm-punto" aria-hidden="true"></i>' + t(CL ? 'cielo.insignia' : 'home.insignia') + '</p></div>' +
+        '<figure class="hm-fig' + (CL ? ' cl-fig' : '') + '">' + (CL ? CL.marcoMapa(t('home.alt')) :
+          '<img src="img/bcs-modis-2025-04-20-600.jpg" srcset="img/bcs-modis-2025-04-20-600.jpg 600w, img/bcs-modis-2025-04-20.jpg 1200w" sizes="(min-width: 1024px) 1216px, 100vw" width="1200" height="1060" alt="' + esc(t('home.alt')) + '" loading="lazy">') +
+        '<figcaption class="hm-cred">' + t(CL ? 'cielo.cred' : 'home.cred') + '</figcaption></figure>' +
       '</div></section>' +
       '<footer class="hm-pie"><div class="hm-pie-grid">' +
         '<div><p class="hm-marca"><i class="hm-punto"></i>RADAR BCS</p>' +
@@ -149,6 +154,7 @@
 
   function render(main, datos) {
     main.innerHTML = html(datos);
+    if (CL && typeof window !== 'undefined') CL.cargar(main);
   }
 
   var RBHome = { html: html, render: render };

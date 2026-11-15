@@ -22,7 +22,8 @@ test('4 tarjetas data-indicador, cada una con Fuente:', () => {
 
 test('sin null/undefined/NaN ni textos de radar', () => {
   const h = RBHome.html(datos);
-  for (const bad of ['null', 'undefined', 'NaN', 'dBZ', 'GOES', 'en vivo']) {
+  // GOES-West sí aparece desde #144 (imagen real de NASA GIBS con su fuente); se sigue prohibiendo el "GOES-18 en vivo" de la maqueta.
+  for (const bad of ['null', 'undefined', 'NaN', 'dBZ', 'GOES-18', 'en vivo']) {
     assert.ok(!h.includes(bad), 'aparece ' + bad);
   }
 });

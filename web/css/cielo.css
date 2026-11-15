@@ -1,39 +1,61 @@
-/* "El cielo ahora en BCS" (Inicio). Usa las variables de estilos.css y el marco de las secciones de home.css (.hm-sec). */
-.cielo-rej{display:grid;gap:16px;margin-top:16px}
-@media (min-width:1024px){.cielo-rej{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}}
-.cielo-cap,.cielo-c{background:var(--tarjeta);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.05);padding:16px}
-.cielo-cap{border-top:4px solid var(--acento)}
-.cielo-peqs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-@media (min-width:640px){.cielo-peqs{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.cielo-fila{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.cielo-nom{margin:0;font-family:var(--f-titulo);font-weight:700;font-size:1.05rem}
-.cielo-nom-g{font-size:1.5rem}
-.cielo-eti2{margin:0 0 2px;font-family:var(--f-datos);font-size:12px;color:var(--suave);text-transform:uppercase}
-.cielo-temp{margin:6px 0 0;font-family:var(--f-titulo);font-weight:800;font-size:1.8rem;line-height:1.1}
-.cielo-temp-g{font-size:3.4rem;margin:8px 0 4px}
-.cielo-min{margin:0;align-self:flex-end;font-family:var(--f-datos);font-size:12px;color:var(--suave)}
-.cielo-est{margin:4px 0 0;color:var(--suave);font-size:.95rem}
-.cielo-est-g{font-size:1.05rem}
-.cielo-datos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
-.cielo-dato{background:var(--fondo);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:2px}
-.cielo-rot{font-family:var(--f-datos);font-size:12px;color:var(--suave)}
-.cielo-val{font-family:var(--f-titulo);font-weight:700;font-size:1.05rem}
-.cielo-h3{font-family:var(--f-titulo);font-size:1.2rem;margin:24px 0 8px}
-.cielo-nota{margin-top:12px}
-.cielo-cargando{color:var(--suave);margin:16px 0}
+/* El cielo ahora en BCS y mapa con pines (#144 fase 2). Medidas del frame "Inicio" de Figma
+   (diseno/ESPECIFICACION.md §10). Reutiliza las clases hm-* de home.css para tarjetas y encabezados. */
+.cl-sec{padding-top:24px}
+.cl-estado{color:#44474d;font-size:14px;line-height:20px;padding:16px 0}
+.cl-error{background:#fff4d6;border:1px solid #cfd3d8;border-radius:8px;padding:12px 16px;color:#000d21}
+.cl-viejo{margin:0 0 16px}
 
-/* Íconos: máscara del SVG de Material Symbols; el color lo pone la web (sol ámbar, nubes gris, agua azul). */
-.cielo-ic{display:inline-block;flex:none;width:32px;height:32px;background:currentColor;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain}
-.cielo-ic-g{width:56px;height:56px}
-.cielo-ic-p{width:22px;height:22px}
-.cielo-sol{color:#b45309}
-.cielo-nube{color:#44474d}
-.cielo-agua{color:#1f5f99}
+/* Íconos del cielo: el SVG es negro; el color se aproxima con filtros sobre <img>. */
+.cl-ico{display:inline-block;width:24px;height:24px;flex:none}
+.cl-sol{filter:invert(45%) sepia(93%) saturate(1500%) hue-rotate(10deg) brightness(95%)}      /* ~#d97706 */
+.cl-nube{filter:invert(48%) sepia(6%) saturate(400%) hue-rotate(180deg) brightness(92%)}      /* ~#74777e */
+.cl-lluvia{filter:invert(28%) sepia(60%) saturate(900%) hue-rotate(185deg) brightness(90%)}   /* ~#1f5f99 */
+.cl-tormenta{filter:invert(35%) sepia(15%) saturate(900%) hue-rotate(180deg) brightness(85%)} /* ~#4b5f7f */
+.cl-ico.cl-blanco{filter:invert(100%)}
+.hm-ico-circ .cl-ico{width:32px;height:32px}
 
-.cielo-mapa{height:360px;border-radius:12px;overflow:hidden;background:#0c2340;box-shadow:0 2px 4px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.1)}
-@media (min-width:640px){.cielo-mapa{height:560px}}
-.cielo-pin-caja{background:none;border:0}
-/* En celular los pines solo llevan ícono y temperatura (los nombres se encimarían); el nombre está en las tarjetas. */
-@media (max-width:639px){.cielo-pin-n{display:none}}
-.cielo-pin{display:inline-flex;align-items:center;gap:4px;transform:translate(-12px,-50%);white-space:nowrap;background:var(--tarjeta);color:var(--texto);border-radius:999px;padding:3px 10px 3px 6px;font:700 12px var(--f-cuerpo);box-shadow:0 1px 3px rgba(0,0,0,.4)}
-.cielo-pin.cielo-pin-izq{flex-direction:row-reverse;padding:3px 6px 3px 10px;transform:translate(calc(-100% + 12px),-50%)}
+/* Tarjeta principal: cifra con unidad pequeña y condición al lado (como "28°C Cielo despejado"). */
+.cl-principal .hm-cifra-grande{font-size:56px;line-height:60px;color:#000d21}
+.cl-unidad{font-size:24px;line-height:32px;vertical-align:top;margin-left:2px}
+.cl-cond{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:20px;line-height:28px;color:#000d21}
+.cl-sens{font-size:14px;line-height:20px;color:#44474d}
+.cl-peques{grid-template-columns:1fr 1fr}
+.cl-peque .hm-cifra{margin-top:4px}
+.cl-peque .hm-t-peq{font-size:16px;line-height:22px}
+.hm .cl-fuente{margin-top:16px;text-transform:none;letter-spacing:0;font-size:12px;line-height:18px}
+.hm .cl-fuente a{color:#006d3d;text-decoration:underline}
+
+/* Mapa: imagen GOES-West con el mismo recuadro que la MODIS; los pines usan % del lienzo. */
+.cl-fig{display:flex;flex-direction:column;background:#000d21}
+.cl-fig::after{display:none}
+.cl-lienzo{position:relative;width:100%;aspect-ratio:1200/1060;margin:0 auto}
+.cl-lienzo .cl-img{display:block;width:100%;height:100%;object-fit:fill}
+.cl-pines{position:absolute;inset:0}
+.cl-pin{position:absolute;transform:translate(-14px,-50%);display:inline-flex;align-items:center;gap:4px;white-space:nowrap;
+  background:#fff;color:#000d21;border-radius:9999px;padding:4px 10px 4px 8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;line-height:16px;
+  box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.cl-pin .cl-ico{width:16px;height:16px}
+.cl-pin-oscuro{background:#000d21;color:#fff;border:1px solid rgba(255,255,255,.85)}
+.cl-pin-izq{flex-direction:row-reverse;transform:translate(calc(-100% + 14px),-50%);padding:4px 8px 4px 10px}
+.cl-pin-arriba{transform:translate(-14px,-100%)}
+.cl-pin-izq.cl-pin-arriba{transform:translate(calc(-100% + 14px),-100%)}
+.cl-leyenda{background:#fff;border-radius:12px;margin:12px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.cl-leyenda ul{list-style:none;margin:8px 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 12px}
+.cl-leyenda li{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:16px;color:#000d21}
+.cl-leyenda .cl-ico{width:18px;height:18px}
+.hm .cl-ley-t{color:#000d21;font-weight:700}
+.hm .cl-ley-n{text-transform:none;letter-spacing:0}
+.cl-fig .hm-cred{position:static;margin:0 12px 12px;align-self:flex-start}
+
+@media (min-width:640px){
+  .cl-peques{grid-template-columns:1fr 1fr 1fr}
+  .cl-peque .hm-t-peq{font-size:20px;line-height:28px}
+}
+@media (min-width:1024px){
+  .cl-fig{display:block;position:relative;height:680px}
+  .cl-lienzo{height:680px;width:auto}
+  .cl-leyenda{position:absolute;top:16px;right:16px;margin:0;width:210px}
+  .cl-leyenda ul{flex-direction:column;gap:6px}
+  .cl-fig .hm-cred{position:absolute;left:12px;bottom:12px;margin:0}
+  .cl-principal .hm-cifra-grande{font-size:64px;line-height:64px}
+}
