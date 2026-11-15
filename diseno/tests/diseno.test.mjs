@@ -1,0 +1,289 @@
+// Pruebas del diseno de Radar BCS. Solo node:test y node:assert.
+// Uso: node --test diseno/tests/
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const R = (...p) => path.join(RAIZ, ...p);
+const auditoria = JSON.parse(fs.readFileSync(R('diseno', 'figma-auditoria.json'), 'utf8'));
+const MAX_BYTES = 5 * 1024 * 1024;
+const FUENTES = ['Space Grotesk', 'Manrope', 'JetBrains Mono'];
+
+function listar(dir) {
+  const salida = [];
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) salida.push(...listar(p));
+    else salida.push(p);
+  }
+  return salida;
+}
+
+function leerPNG(archivo) {
+  const b = fs.readFileSync(archivo);
+  const firma = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+  if (b.length < 24 || !b.subarray(0, 8).equals(firma)) return null;
+  return { ancho: b.readUInt32BE(16), alto: b.readUInt32BE(20), bytes: b.length };
+}
+
+// ---------- (a) auditoria ----------
+test('auditoria: 17 pantallas finales', () => {
+  assert.equal(auditoria.pantallas.length, 17);
+});
+
+test('auditoria: header y footer son instancias de los componentes', () => {
+  const nombres = auditoria.componentes.map((c) => c.nombre);
+  assert.ok(nombres.includes('Header / Navegación principal'));
+  assert.ok(nombres.includes('Footer / Pie de página'));
+  for (const p of auditoria.pantallas) {
+    assert.equal(p.header?.componente, 'Header / Navegación principal', p.nombre);
+    assert.equal(p.footer?.componente, 'Footer / Pie de página', p.nombre);
+    assert.equal(p.ancho, 1280, p.nombre);
+  }
+});
+
+test('auditoria: exactamente una pestana activa y es su seccion', () => {
+  for (const p of auditoria.pantallas) {
+    assert.equal(p.pestanasActivas.length, 1, p.nombre);
+    assert.equal(p.pestanasActivas[0], p.seccion, p.nombre);
+    assert.ok(auditoria.pestanas.includes(p.seccion), p.nombre);
+  }
+});
+
+test('auditoria: solo las 3 fuentes de marca', () => {
+  for (const p of auditoria.pantallas) {
+    for (const f of Object.keys(p.fuentes)) assert.ok(FUENTES.includes(f), `${p.nombre}: ${f}`);
+  }
+});
+
+test('auditoria: titulo alineado a x=32 cuando existe', () => {
+  for (const p of auditoria.pantallas) {
+    if (p.tituloX !== null) assert.equal(p.tituloX, 32, p.nombre);
+  }
+});
+
+test('auditoria: subsecciones tienen acento y boton de simulacion', () => {
+  const subs = auditoria.pantallas.filter((p) => /^(Clima|Agricultura|Pesca) - /.test(p.nombre) && !p.nombre.endsWith(' - Mapa'));
+  assert.equal(subs.length, 12);
+  for (const p of subs) {
+    assert.ok(Array.isArray(p.acento) && p.acento.length > 0, `${p.nombre}: falta acento`);
+    assert.equal(p.botonSimulacion, 'Botón / Iniciar simulación', p.nombre);
+  }
+});
+
+test('auditoria: sin erratas', () => {
+  for (const p of auditoria.pantallas) assert.deepEqual(p.erratas, [], p.nombre);
+});
+
+// ---------- (b) PNG ----------
+// El export de Figma agrega ~8 px de margen por lado (1296 de ancho para un frame de 1280).
+test('PNG de la auditoria existen, son validos, ancho 1280 (+ margen de export <= 24 px) y < 5 MB', () => {
+  for (const p of auditoria.pantallas) {
+    const f = R(...p.archivo.split('/'));
+    assert.ok(fs.existsSync(f), `no existe ${p.archivo}`);
+    const png = leerPNG(f);
+    assert.ok(png, `firma PNG invalida: ${p.archivo}`);
+    assert.ok(png.ancho >= 1280 && png.ancho <= 1280 + 24, `${p.archivo}: ancho ${png.ancho}`);
+    assert.ok(png.bytes < MAX_BYTES, p.archivo);
+  }
+});
+
+// login y registrar son frames aparte de 1440x1024 (no estan en la auditoria).
+test('login.png y registrar.png existen y son PNG de 1440 de ancho', () => {
+  for (const n of ['login', 'registrar']) {
+    const png = leerPNG(R('diseno', 'pantallas', `${n}.png`));
+    assert.ok(png, n);
+    assert.equal(png.ancho, 1440, n);
+  }
+});
+
+test('todo archivo en web/assets y diseno pesa < 5 MB y todo PNG es valido', () => {
+  for (const f of [...listar(R('web', 'assets')), ...listar(R('diseno'))]) {
+    assert.ok(fs.statSync(f).size < MAX_BYTES, f);
+    if (f.toLowerCase().endsWith('.png')) assert.ok(leerPNG(f), `PNG invalido: ${f}`);
+  }
+});
+
+// ---------- (c) SVG ----------
+const dirIconos = R('web', 'assets', 'iconos');
+const svgs = fs.readdirSync(dirIconos).filter((f) => f.endsWith('.svg'));
+
+test('hay 12 iconos SVG', () => {
+  assert.equal(svgs.length, 12);
+});
+
+for (const nombre of svgs) {
+  test(`icono ${nombre}: SVG valido y seguro`, () => {
+    const t = fs.readFileSync(path.join(dirIconos, nombre), 'utf8').trim();
+    assert.match(t, /^(<\?xml[^>]*>\s*)?<svg[\s>][\s\S]*<\/svg>$/);
+    assert.match(t, /<svg[^>]*(viewBox=|width=)/);
+    assert.doesNotMatch(t, /<script/i);
+    assert.doesNotMatch(t, /(href|src)\s*=\s*["']\s*https?:/i);
+    assert.doesNotMatch(t, /nasa/i);
+  });
+}
+
+// ---------- (d) tokens ----------
+test('tokens.css define los colores de acentos y las 3 fuentes', () => {
+  const css = fs.readFileSync(R('web', 'assets', 'tokens.css'), 'utf8').toLowerCase();
+  const hex = new Set();
+  for (const lista of Object.values(auditoria.acentosPorSeccion)) {
+    for (const t of lista) {
+      for (const r of t.relleno) for (const m of r.match(/#[0-9a-f]{6}/gi) || []) hex.add(m.toLowerCase());
+    }
+  }
+  assert.ok(hex.size >= 10);
+  for (const h of hex) assert.ok(css.includes(h), `falta ${h} en tokens.css`);
+  for (const f of FUENTES) assert.ok(css.includes(f.toLowerCase()), `falta fuente ${f}`);
+  assert.ok(/--rb-margen:\s*32px/.test(css));
+  assert.ok(/--rb-ancho-contenido:\s*1216px/.test(css));
+  assert.equal(css.match(/^\s*--(?!rb-)[a-z0-9-]+:/gm), null, 'variables sin prefijo --rb-');
+});
+
+// ---------- (e) contraste WCAG ----------
+function lum(hex) {
+  const c = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+    .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+}
+function contraste(a, b) {
+  const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m);
+  return (x + 0.05) / (y + 0.05);
+}
+const pares = [
+  ['blanco sobre pestana activa', '#ffffff', '#0c2340'],
+  ['texto del menu sobre header', '#44474d', '#ffffff'],
+  ['tinta sobre fondo de pagina', '#000d21', '#f7f9fc'],
+  ['pildora de estado', '#047240', '#97f3b5'],
+  ['verde vivo sobre blanco', '#006d3d', '#ffffff'],
+];
+for (const [nombre, fg, bg] of pares) {
+  test(`contraste >= 4.5: ${nombre} (${fg} sobre ${bg})`, () => {
+    const r = contraste(fg, bg);
+    console.log(`  contraste ${nombre}: ${r.toFixed(2)}:1`);
+    assert.ok(r >= 4.5, `${r.toFixed(2)} < 4.5`);
+  });
+}
+
+// Modo oscuro: lee los valores del bloque @media (prefers-color-scheme: dark) de tokens.css.
+function tokensOscuros() {
+  const css = fs.readFileSync(R('web', 'assets', 'tokens.css'), 'utf8');
+  const i = css.indexOf('@media (prefers-color-scheme: dark)');
+  assert.ok(i > 0, 'tokens.css no tiene bloque de modo oscuro');
+  const t = {};
+  for (const m of css.slice(i).matchAll(/(--rb-[a-z0-9-]+):\s*(#[0-9a-f]{6})/gi)) t[m[1]] = m[2].toLowerCase();
+  return t;
+}
+const paresOscuros = [
+  ['tinta sobre fondo', '--rb-tinta', '--rb-fondo-pagina'],
+  ['tinta sobre tarjeta', '--rb-tinta', '--rb-fondo-tarjeta'],
+  ['texto suave sobre fondo', '--rb-texto-suave', '--rb-fondo-pagina'],
+  ['texto suave sobre tarjeta', '--rb-texto-suave', '--rb-fondo-tarjeta'],
+  ['texto suave sobre gris 140', '--rb-texto-suave', '--rb-gris-140'],
+  ['gris medio sobre tarjeta', '--rb-gris-medio', '--rb-fondo-tarjeta'],
+  ['verde vivo sobre tarjeta', '--rb-verde-vivo', '--rb-fondo-tarjeta'],
+  ['pildora de estado', '--rb-pildora-texto', '--rb-pildora-fondo'],
+  ['cian sobre tarjeta', '--rb-cian-oscuro', '--rb-fondo-tarjeta'],
+  ['error sobre su fondo', '--rb-error', '--rb-error-fondo'],
+  ['azul info sobre tarjeta', '--rb-azul-info', '--rb-fondo-tarjeta'],
+];
+for (const [nombre, fg, bg] of paresOscuros) {
+  test(`modo oscuro, contraste >= 4.5: ${nombre} (${fg} sobre ${bg})`, () => {
+    const t = tokensOscuros();
+    assert.ok(t[fg] && t[bg], `falta ${fg} o ${bg} en el bloque oscuro`);
+    const r = contraste(t[fg], t[bg]);
+    console.log(`  oscuro ${nombre}: ${r.toFixed(2)}:1`);
+    assert.ok(r >= 4.5, `${r.toFixed(2)} < 4.5`);
+  });
+}
+test('modo oscuro: blanco sobre pestana activa >= 4.5', () => {
+  const r = contraste('#ffffff', tokensOscuros()['--rb-marino']);
+  assert.ok(r >= 4.5, `${r.toFixed(2)} < 4.5`);
+});
+
+// ---------- (f) logo ----------
+test('logo existe y es proporcional a 156x44 (exportado a 3x)', () => {
+  const png = leerPNG(R('web', 'assets', 'logo-radar-bcs.png'));
+  assert.ok(png);
+  assert.ok(Math.abs(png.ancho / png.alto - 156 / 44) < 0.03, `${png.ancho}x${png.alto}`);
+  assert.ok(Math.abs(png.ancho - 468) <= 4, `ancho ${png.ancho}`);
+});
+
+test('iconos: licencia Apache de Material Symbols y cada SVG documentado en el README', () => {
+  const dir = R('web', 'assets', 'iconos');
+  const licencia = fs.readFileSync(path.join(dir, 'LICENSE-material-symbols.txt'), 'utf8');
+  assert.match(licencia, /Apache License\s+Version 2\.0/);
+  const readme = fs.readFileSync(path.join(dir, 'README.md'), 'utf8');
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.svg'))) {
+    assert.ok(readme.includes('`' + f + '`'), `${f} no aparece en iconos/README.md`);
+  }
+});
+
+test('#98: marca "AI-generated" junto al logo en el encabezado de cada pantalla', () => {
+  for (const p of auditoria.pantallas) assert.equal(p.marcaIAJuntoAlLogo, true, `${p.nombre}: falta la marca AI-generated junto al logo`);
+  const png = fs.readFileSync(R('web', 'assets', 'logo-radar-bcs-ai-generated.png'));
+  assert.equal(png.subarray(1, 4).toString('latin1'), 'PNG');
+});
+
+test('#98: sin nombres de personas reales como ejemplo en las maquetas', () => {
+  for (const p of auditoria.pantallas) assert.deepEqual(p.nombresDeEjemplo, [], `${p.nombre}: ${p.nombresDeEjemplo}`);
+});
+
+// ---------- (g) #144: Inicio con textos verdaderos y estado del cielo con íconos ----------
+const dirCielo = R('web', 'assets', 'iconos', 'cielo');
+const CIELO = ['sunny', 'clear_night', 'partly_cloudy_day', 'partly_cloudy_night', 'cloud', 'foggy', 'rainy_light', 'rainy', 'thunderstorm'];
+
+test('#144: los 9 íconos del cielo existen, son SVG seguros y están documentados con su código WMO', () => {
+  const readme = fs.readFileSync(path.join(dirCielo, 'README.md'), 'utf8');
+  assert.match(readme, /Apache License 2\.0/);
+  for (const n of CIELO) {
+    const t = fs.readFileSync(path.join(dirCielo, n + '.svg'), 'utf8').trim();
+    assert.match(t, /^<svg[\s>][\s\S]*<\/svg>$/, n);
+    assert.doesNotMatch(t, /<script|(href|src)\s*=\s*["']\s*https?:|nasa/i, n);
+    assert.ok(readme.includes('`' + n + '`'), `${n} no aparece en cielo/README.md`);
+  }
+  // Cada código WMO de Open-Meteo tiene ícono en la tabla.
+  for (const c of [0, 1, 2, 3, 45, 48, 51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 71, 73, 75, 77, 80, 81, 82, 85, 86, 95, 96, 99]) {
+    const filas = readme.split('\n').filter((l) => l.startsWith('|')).map((l) => l.split('|')[1] || '');
+    assert.ok(filas.some((celda) => celda.split(/[^0-9]+/).includes(String(c))), `código WMO ${c} sin ícono en la tabla`);
+  }
+});
+
+test('#144: Inicio sin afirmaciones del mockup sin fuente (estaciones, radar, avisos, enlaces inexistentes)', () => {
+  const ini = auditoria.pantallas.find((p) => p.nombre === 'Inicio');
+  assert.deepEqual(ini.afirmacionesSinFuente, []);
+  // El pie es un componente: ninguna pantalla conserva sus enlaces o leyendas falsas.
+  for (const p of auditoria.pantallas) {
+    const pie = p.afirmacionesSinFuente.filter((t) => /API meteorológica|Red de telemetría|Protocolo OGC|Todos los derechos reservados/i.test(t));
+    assert.deepEqual(pie, [], p.nombre);
+  }
+});
+
+test('#144: el mapa de Inicio usa íconos del cielo y la leyenda cubre los 7 estados', () => {
+  const ini = auditoria.pantallas.find((p) => p.nombre === 'Inicio');
+  for (const n of ['sunny', 'partly_cloudy_day', 'cloud', 'foggy', 'rainy_light', 'rainy', 'thunderstorm']) {
+    assert.ok(ini.iconosCielo.includes(n), `falta ${n} en Inicio`);
+  }
+});
+
+test('#144: Inicio · 360 existe, mide 360 px y su PNG es válido', () => {
+  const m = (auditoria.movil || []).find((p) => p.nombre === 'Inicio · 360');
+  assert.ok(m, 'falta el frame "Inicio · 360" en la auditoría');
+  assert.equal(m.ancho, 360);
+  const { ancho } = leerPNG(R(...m.archivo.split('/')));
+  assert.equal(ancho, 720, 'el PNG se exporta a 2x');
+});
+
+test('#144: Inicio · 360 cumple la spec de celular (12 px, 44 px, sin desborde, marca de IA, sin afirmaciones)', () => {
+  const m = auditoria.movil.find((p) => p.nombre === 'Inicio · 360');
+  assert.deepEqual(m.textoMenorA12, [], 'texto menor a 12 px');
+  assert.deepEqual(m.fueraDelAncho, [], 'elementos fuera de los 360 px');
+  for (const t of m.tactiles) assert.ok(t.alto >= 44 && t.ancho >= 44, `${t.nombre}: ${t.ancho}x${t.alto}`);
+  assert.equal(m.marcaIA, true);
+  assert.deepEqual(m.afirmacionesSinFuente, []);
+  assert.deepEqual(Object.keys(m.fuentes).sort(), ['JetBrains Mono', 'Manrope', 'Space Grotesk']);
+  for (const n of ['sunny', 'partly_cloudy_day', 'cloud', 'foggy', 'rainy_light', 'rainy', 'thunderstorm']) assert.ok(m.iconosCielo.includes(n), n);
+});

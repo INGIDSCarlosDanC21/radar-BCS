@@ -1,0 +1,190 @@
+# Especificación de implementación (para Diego, Prog. B)
+
+Fuente: Figma "Radar paceño" (id `ae9KMSMZUexeV0dBhDkNR1`) y `diseno/figma-auditoria.json` (generado 2026-11-15). Autora: Ehileen (UI/UX).
+Todo lo que diga **(propuesta)** no está en Figma: es una sugerencia de UI/UX para celular.
+Los PNG miden 1296 px de ancho: son frames de 1280 px más ~8 px de margen por lado del export.
+
+## 1. Pantallas
+
+Rutas sugeridas (sugerida = no existe aún; Diego decide el enrutado).
+
+| Pantalla | Sección | PNG | Ruta (sugerida) |
+|---|---|---|---|
+| Inicio | Inicio | `diseno/pantallas/inicio.png` | `#inicio` |
+| Clima - Mapa | Clima | `diseno/pantallas/clima-mapa.png` | `#clima` |
+| Clima - Calor y Sensación Térmica | Clima | `diseno/pantallas/clima-calor-y-sensacion-termica.png` | `#clima/calor` |
+| Clima - Radiación UV y Exposición Solar | Clima | `diseno/pantallas/clima-radiacion-uv-y-exposicion-solar.png` | `#clima/uv` |
+| Clima - Viento, Oleaje y Corrientes | Clima | `diseno/pantallas/clima-viento-oleaje-y-corrientes.png` | `#clima/viento` |
+| Clima - Humedad y Lluvia | Clima | `diseno/pantallas/clima-humedad-y-lluvia.png` | `#clima/lluvia` |
+| Agricultura - Mapa | Agricultura | `diseno/pantallas/agricultura-mapa.png` | `#agricultura` |
+| Agricultura - Factibilidad y Vocación | Agricultura | `diseno/pantallas/agricultura-factibilidad-y-vocacion.png` | `#agricultura/cultivos` |
+| Agricultura - Clima y Agua | Agricultura | `diseno/pantallas/agricultura-clima-y-agua.png` | `#agricultura/agua` |
+| Agricultura - Salud del Suelo | Agricultura | `diseno/pantallas/agricultura-salud-del-suelo.png` | `#agricultura/suelo` |
+| Agricultura - Riesgos y Sanidad | Agricultura | `diseno/pantallas/agricultura-riesgos-y-sanidad.png` | `#agricultura/riesgos` |
+| Pesca - Mapa | Pesca | `diseno/pantallas/pesca-mapa.png` | `#pesca` |
+| Pesca - Semáforo de Seguridad | Pesca | `diseno/pantallas/pesca-semaforo-de-seguridad.png` | `#pesca/seguridad` |
+| Pesca - Condiciones Oceanográficas | Pesca | `diseno/pantallas/pesca-condiciones-oceanograficas.png` | `#pesca/oceano` |
+| Pesca - Clima y Atmósfera Costera | Pesca | `diseno/pantallas/pesca-clima-y-atmosfera-costera.png` | `#pesca/atmosfera` |
+| Pesca - Potencial y Actividad Pesquera | Pesca | `diseno/pantallas/pesca-potencial-y-actividad-pesquera.png` | `#pesca/potencial` |
+| Avisos y Alertas | Avisos y Alertas | `diseno/pantallas/avisos-y-alertas.png` | `#avisos` |
+| Inicio de sesión (1440x1024, fuera de la auditoría) | - | `diseno/pantallas/login.png` | `#login` |
+| Registro (1440x1024, fuera de la auditoría) | - | `diseno/pantallas/registrar.png` | `#registro` |
+
+Login/registro: el AGENTS.md habla de login opcional con Supabase; confirmar con Carlos si entra en la entrega (POR CONFIRMAR).
+
+Estructura de cada pantalla de subsección (igual en las 12): barra de estado + título + buscador (copia de su pantalla "Mapa") → mapa → botón "Iniciar simulación" → tarjeta de diagnóstico con barra de acento arriba → footer.
+El título (x=32) es "Mapa Meteorológico" (Clima), "Mapa Agrícola" (Agricultura) o "Mapa Pesquero" (Pesca). Inicio y Avisos no llevan ese bloque.
+
+## 2. Cuadrícula y componentes
+
+- Marco de escritorio: 1280 px. Margen lateral 32 px, contenido 1216 px (`--rb-margen`, `--rb-ancho-contenido`).
+- Fondo de página `#f7f9fc`; tarjetas `#ffffff`.
+
+**Header** ("Header / Navegación principal", 1280x64, fondo `#ffffff` con sombra, PNG `diseno/componentes/header-navegacion-principal.png`)
+- Izquierda: logo 156x44 en x=32, y=10 (`web/assets/logo-radar-bcs.png`, imagen exportada a 3x: 470x132).
+- Centro: enlaces Inicio, Clima, Agricultura, Pesca, Avisos y Alertas. Manrope 14, color `#44474d`, relleno 4px 16px, radio 8.
+- Derecha: "Inicio de sesión" (JetBrains Mono 12, `#000d21`) y botón "Registro" (fondo `#0c2340`, texto blanco, JetBrains Mono 12, redondeado tipo píldora).
+
+**Regla de pestaña activa:** exactamente una por pantalla, la de su sección (confirmado en las 17). Activa = fondo `#0c2340` + texto `#ffffff`. En Inicio es "Inicio"; en cualquier pantalla de Clima, "Clima"; etc. Poner `aria-current="page"` en esa pestaña.
+
+**Footer** ("Footer / Pie de página", 1280x262, PNG `diseno/componentes/footer-pie-de-pagina.png`): descripción de la plataforma, columnas de enlaces y línea "© 2026 RADAR BCS. Todos los derechos reservados." Se coloca 40 px debajo del contenido. Los textos de enlaces (Privacidad, Términos, "Protocolo OGC", "API meteorológica", etc.) son del mockup: confirmar cuáles existen realmente antes de mostrarlos.
+
+**Botón "Iniciar simulación"** (1216x56, ancho completo del contenido, azul marino oscuro, ícono + texto centrados, PNG `diseno/componentes/boton-iniciar-simulacion.png`). Qué hace la simulación: POR CONFIRMAR con el equipo.
+
+## 3. Historia de color por sección
+
+Cada tarjeta de subsección en la pantalla maestra ("Mapa") tiene una barra superior de color; la pantalla de esa subsección usa **el mismo color** en su tarjeta de diagnóstico ("Acento de sección"). Clima: degradado de 6 px; Agricultura y Pesca: sólido de 4 px. Los valores están en `web/assets/tokens.css`.
+
+| Subsección | Acento | Token | Ícono |
+|---|---|---|---|
+| Clima - Calor y Sensación Térmica | `#fbbf24` a `#d97706` | `--rb-acento-clima-calor` | `web/assets/iconos/clima-calor-y-sensacion-termica.svg` |
+| Clima - Radiación UV | `#f97316` a `#dc2626` | `--rb-acento-clima-uv` | `.../clima-radiacion-uv-y-exposicion-solar.svg` |
+| Clima - Viento, Oleaje y Corrientes | `#14b8a6` a `#006d3d` | `--rb-acento-clima-viento` | `.../clima-viento-oleaje-y-corrientes.svg` |
+| Clima - Humedad y Lluvia | `#60a5fa` a `#0c2340` | `--rb-acento-clima-lluvia` | `.../clima-humedad-y-lluvia.svg` |
+| Agricultura - Factibilidad y Cultivos | `#006d3d` | `--rb-acento-agri-cultivos` | `.../agricultura-factibilidad-y-cultivos.svg` |
+| Agricultura - Clima y Agua | `#51d8e8` | `--rb-acento-agri-agua` | `.../agricultura-clima-y-agua.svg` |
+| Agricultura - Salud del Suelo | `#7ed99e` | `--rb-acento-agri-suelo` | `.../agricultura-salud-del-suelo.svg` |
+| Agricultura - Riesgos y Sanidad | `#fbbf24` | `--rb-acento-agri-riesgos` | `.../agricultura-riesgos-y-sanidad.svg` |
+| Pesca - Semáforo de Seguridad | `#fbbf24` | `--rb-acento-pesca-seguridad` | `.../pesca-semaforo-de-seguridad.svg` |
+| Pesca - Condiciones Oceanográficas | `#1eb8c8` | `--rb-acento-pesca-oceano` | `.../pesca-condiciones-oceanograficas.svg` |
+| Pesca - Clima y Atmósfera Costera | `#4b5f7f` | `--rb-acento-pesca-atmosfera` | `.../pesca-clima-y-atmosfera-costera.svg` |
+| Pesca - Potencial y Actividad Pesquera | `#006d3d` | `--rb-acento-pesca-potencial` | `.../pesca-potencial-y-actividad-pesquera.svg` |
+
+Nota de nombres: la pantalla se llama "Factibilidad y Vocación", pero el ícono y la tarjeta se llaman "Factibilidad y Cultivos".
+Los SVG traen el relleno `#0C2340` fijo; úsalos con `<img>` o inline. No cambian de color con `currentColor`.
+
+## 4. Tipografía (observada en Figma)
+
+Solo 3 fuentes de Google Fonts, licencia SIL OFL 1.1 (registrar en `docs/RECURSOS.md`). `web/index.html` ya las carga.
+
+| Uso | Fuente | Token |
+|---|---|---|
+| Títulos (H1 "Mapa Meteorológico", títulos de tarjeta, "RADAR BCS") | Space Grotesk | `--rb-fuente-titulo` |
+| Texto corrido, menú | Manrope (14 en el menú) | `--rb-fuente-cuerpo` |
+| Etiquetas, datos, botones, estados, pie | JetBrains Mono (12 en header) | `--rb-fuente-datos` |
+
+Tamaños de H1 y tarjetas: aproximados en el PNG, no medidos en la auditoría (POR CONFIRMAR en Figma; en el mockup el H1 se ve de unos 44 a 48 px).
+
+## 5. Responsive a 360 px
+
+Figma solo tiene escritorio (1280). Lo siguiente es **(propuesta de UI/UX, no está en Figma)**:
+- Navegación: la **barra inferior** que ya tiene la web (Inicio, Mapa, Ficha, Agro, Acciones; ≥44 px, `aria-current`) se queda; es mejor que una hamburguesa en celular. Mantener la regla de pestaña activa.
+- Header: logo con la marca "AI-generated" a la izquierda (ver §7) y el botón "English" a la derecha.
+- Márgenes laterales de 16 px en vez de 32; contenido a todo el ancho.
+- Tarjetas de diagnóstico: 1 columna (en escritorio son 2).
+- Buscador y chips de filtro: chips en una fila con scroll horizontal.
+- Botón "Iniciar simulación": ancho completo, alto mínimo 56 px.
+- Footer: columnas apiladas.
+- Mapa: alto fijo (p. ej. 360 px, propuesta) y controles de zoom grandes.
+- Usar `--rb-alto-header` (64 px) para el relleno superior si el header es fijo.
+
+## 6. Accesibilidad
+
+Resultados de contraste (WCAG 2.1, calculados en `diseno/tests/diseno.test.mjs`; texto normal exige 4.5:1):
+
+| Par | Razón | Resultado |
+|---|---|---|
+| Blanco sobre `#0c2340` (pestaña activa) | 15.79:1 | Pasa |
+| `#44474d` sobre `#ffffff` (menú) | 9.32:1 | Pasa |
+| `#000d21` sobre `#f7f9fc` (título/fondo) | 18.44:1 | Pasa |
+| `#047240` sobre `#97f3b5` (píldora de estado) | 4.53:1 | Pasa por poco; no oscurecer el fondo |
+| `#006d3d` sobre `#ffffff` (verde vivo) | 6.45:1 | Pasa |
+
+Sin hallazgos de contraste fallido en estos 5 pares. No se revisaron los demás pares del diseño (por ejemplo, texto naranja/ámbar de etiquetas sobre fondos claros, que en el mockup se ve de bajo contraste): POR REVISAR.
+
+**Modo oscuro:** la web es siempre clara (decisión de Carlos, PR #142). El bloque oscuro de `web/assets/tokens.css` queda como propuesta sin cargar; sus 12 pares de texto pasan 4.5:1 por si algún día se retoma.
+
+**Hallazgo en `dev` (2026-11-14):** en modo oscuro, Inicio (`home.css`) y Agrícola (`agricola.css`) fijan el fondo claro `#f7f9fc` con colores escritos a mano, mientras la cabecera y el pie usan texto claro del tema oscuro. Resultado medido: "La Paz, B.C.S.", "English" y el pie quedan con contraste de 1.80:1 y 1.96:1 (falla). En modo claro las 5 rutas pasan. Arreglo: en esos dos CSS cambiar los hex fijos por los tokens `--rb-*` (que ya cambian solos en oscuro) e importar `assets/tokens.css` en `index.html`.
+
+Lista de revisión:
+- [ ] Foco visible en enlaces, pestañas y botones (`:focus-visible` con contorno de 2 px de `--rb-marino` o `--rb-verde-vivo`; no quitar `outline`).
+- [ ] Pestaña activa con `aria-current="page"`.
+- [ ] Logo con `alt="Radar BCS"`.
+- [ ] Íconos decorativos con `aria-hidden="true"` (si van junto a un texto) o `alt=""` en `<img>`.
+- [ ] No depender solo del color: las barras de acento van acompañadas del título y el ícono; el semáforo de pesca debe llevar texto ("Seguro", "Precaución", etc.).
+- [ ] Un solo `<h1>` por pantalla, títulos jerárquicos.
+- [ ] Áreas táctiles de al menos 44x44 px en celular.
+- [ ] `prefers-reduced-motion` respetado en animaciones.
+- [ ] Mapa: alternativa en texto o tabla para lo que muestran los marcadores.
+- [ ] Texto de JetBrains Mono de 12 px es pequeño: en celular usar 12 px como mínimo y no por debajo.
+
+## 7. Declaración de IA del logotipo
+
+El logo fue generado con **Gemini** (Google), confirmado por Ehileen el 2026-11-14 y registrado en `docs/RECURSOS.md`, sección IA. Regla del proyecto: marca visible "AI-generated" o mención en el texto del sitio.
+Instrucción (pedido del Líder en #98): la marca **"AI-generated" debe verse junto al logo en el encabezado**, no solo en el pie. Usar `web/assets/logo-radar-bcs-ai-generated.png` (logo + etiqueta, ya exportado a 3x; en el header mostrarlo a 44 px de alto con `alt="Radar BCS, logotipo generado con IA (AI-generated)"`) o maquetar la etiqueta como texto: JetBrains Mono Medium 10 px, color `--rb-texto-suave` (#44474d), borde 1 px #c4c6ce, radio 4 px, padding 2px 6px, 8 px a la derecha del logo. Además, en el pie: **"Logotipo generado con IA (Gemini) · AI-generated"**. Términos de Gemini revisados: <https://policies.google.com/terms> y <https://policies.google.com/terms/generative-ai/use-policy>.
+
+**Hallazgos de la revisión a 360 px:** ver `diseno/revision-360/REPORTE.md` (P0: la Ficha de lluvia tiene scroll horizontal por la URL larga de la fuente; sigue en `dev` el 2026-11-14). Se puede repetir con `diseno/tools/revisar-360.js`.
+
+**Íconos:** los 12 de `web/assets/iconos/` son Google Material Symbols (Apache 2.0; ver `web/assets/iconos/README.md` y `LICENSE-material-symbols.txt`). No hace falta atribución en la web. Si se agrega un ícono de Flaticon, su licencia gratuita exige en la página o en el pie una línea por autor: *"Icon made by [autor] from www.flaticon.com"* ([guía de Flaticon](https://support.flaticon.com/s/article/Attribution-How-when-and-where-FI?language=en_US)).
+
+## 8. Qué NO hacer
+
+- No usar, copiar ni imitar logos o marca de la NASA (ni en mapas, ni en íconos, ni en el footer).
+- No dejar las cifras de los PNG: **todas son de ejemplo del mockup** (28°C, 34.5°C Max, "Índice 11+", "18-25 km/h NO", "0% Lluvia", "Actualizado: 13:45 MST", etc.). Usar datos reales con fuente a la vista (regla 1 y 3 de AGENTS.md).
+- No dejar textos del mockup que afirmen cosas no verificadas: "ENLACE SATELITAL ACTIVO", "en tiempo real", "Fuente de telemetría: CONAGUA / SMN / Red Radar Costero BCS", "Protocolo OGC", "API meteorológica". Cada uno requiere confirmar que existe o cambiarlo.
+- No afirmar causas ("por qué"): solo qué cambió.
+- No agregar más fuentes ni colores fuera de `tokens.css`.
+- No usar colores de modo oscuro fuera del bloque oscuro de `tokens.css` (propuesta de UI/UX con contraste probado; ver §6).
+- No editar `diseno/pantallas/*.png` a mano: se regeneran desde Figma (ver `diseno/tools/README.md`).
+- No usar imágenes de personas menores de 18.
+
+## 9. Cómo implementarlo (en orden)
+
+1. Leer `AGENTS.md`, esta guía y mirar `diseno/componentes/*.png` y `diseno/pantallas/clima-mapa.png`.
+2. Enlazar `web/assets/tokens.css` en `index.html` antes de `estilos.css` y `home.css`. Usar `var(--rb-...)`, no colores sueltos.
+3. Confirmar que las 3 fuentes están cargadas (ya lo están en `index.html`).
+4. Construir el componente Header: logo, 5 pestañas, regla de pestaña activa con `aria-current="page"`, botones de sesión.
+5. Construir el Footer (con la línea de IA del logo) y colocarlo 40 px bajo el contenido.
+6. Construir el botón "Iniciar simulación" como componente reutilizable.
+7. Pantalla Inicio, luego los 3 mapas maestros (Clima, Agricultura, Pesca) con su bloque de estado + título + buscador.
+8. Pantallas de subsección: mismo bloque superior, mapa, botón, tarjeta con barra de acento (tabla de la sección 3) e ícono SVG.
+9. Avisos y Alertas; login y registro si Carlos los confirma.
+10. Versión móvil de 360 px (sección 5) y revisión con la lista de accesibilidad (sección 6).
+11. Reemplazar todos los números de ejemplo por datos reales con fuente.
+12. Correr `powershell -File diseno/tools/verificar-diseno.ps1` y `node --test "web/tests/*.test.mjs"`; abrir PR a `dev`.
+
+## 10. Inicio fiel a Figma y estado del cielo (issue #144)
+
+Frames: **"Inicio"** (1280, `diseno/pantallas/inicio.png`) e **"Inicio · 360"** (celular, `diseno/pantallas/inicio-360.png`, exportado a 2x). Los generan `diseno/tools/inicio-figma.js` e `inicio-360-figma.js`. Las pruebas de `diseno/tests` revisan que no haya afirmaciones sin fuente, que el texto no baje de 12 px, que las áreas táctiles midan 44 px y que estén los íconos del cielo.
+
+**Fase 1 (dentro del alcance, ya se puede hacer):** orden y textos de Inicio con los datos que ya existen.
+
+| # | Sección | Contenido | Datos |
+|---|---|---|---|
+| 1 | Héroe | "Cómo ha cambiado **La Paz** desde 2001" (La Paz en cian `#51d8e8`, subrayado), subtítulo, botones "Ver mapa de zonas" y "Qué puedo hacer". Imagen MODIS de `web/img/` con velo `#000d21` al 72 %. Sin carrusel ni flechas | Ya está en `home.js` |
+| 2 | ¿Qué cambia? | Kicker "TENDENCIAS DESDE 2001 · DATOS DE LA NASA". Tarjeta principal de **Calor** (+1.47 °C, aire 2001-2025, NASA POWER), más Vegetación, Lluvia y Agua (región) con su ícono de sección, p-valor y estado. Aviso "Mostramos qué cambió, no por qué" | `web/data/indicadores.json` |
+| 3 | El cielo ahora en BCS | Tarjeta grande de La Paz y 6 tarjetas: Los Cabos, Loreto, Comondú, Mulegé, Guerrero Negro y Bahía Magdalena | **Fase 2** (Open-Meteo) |
+| 4 | Monitoreo satelital | Mapa de la península con un **pin por localidad: ícono del cielo + temperatura**, y la leyenda "Estado del cielo" (7 estados) | **Fase 2** (GIBS GOES-West + Open-Meteo) |
+| 5 | Pie | Componente actualizado: sin "API meteorológica", "Red de telemetría", "Protocolo OGC" ni "Todos los derechos reservados". Lleva "Logotipo generado con IA (Gemini) · AI-generated" y la licencia Apache-2.0 | Texto fijo |
+
+Mientras no exista la fase 2, las secciones 3 y 4 **no se muestran**: no hay que dejar las cifras de ejemplo de la maqueta.
+
+**Fase 2 (solo si Carlos aprueba en #144):**
+- **Datos:** una sola llamada a Open-Meteo con las 7 coordenadas (`latitude=..,..&longitude=..,..`), con `current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,is_day,wind_speed_10m,wind_direction_10m,surface_pressure`, `daily=temperature_2m_min` y `timezone=America/Mazatlan`. Sin clave. Licencia y atribución: POR VERIFICAR antes de publicar. Índice UV: POR VERIFICAR; si no está en `current`, se quita la métrica.
+- **Rótulo honesto:** "Ahora · modelo meteorológico Open-Meteo (no son estaciones)" y "Actualizado HH:MM · hora de La Paz", con la hora que trae la respuesta, no la del celular.
+- **Íconos:** tabla código WMO → ícono en `web/assets/iconos/cielo/README.md`. Colores: ámbar `#d97706` para sol, gris `#74777e` para nubes y niebla, azul `#1f5f99` para lluvia, `#4b5f7f` para tormenta y blanco sobre pines oscuros. Cada ícono lleva `alt` o `aria-label` con el estado ("Despejado", "Clear").
+- **Pines:** marcadores de Leaflet en la coordenada de cada localidad. Coordenadas de la maqueta (aproximadas, POR VERIFICAR con INEGI por Luca): Santa Rosalía 27.34, −112.27 · Loreto 26.01, −111.35 · Bahía Magdalena 24.79, −112.11 · La Paz 24.14, −110.31 · Cabo San Lucas 22.89, −109.91. Texto del pin: "La Paz 28°C"; `aria-label` "La Paz: despejado, 28 °C".
+- **Fondo del mapa:** capa casi en tiempo real de NASA GIBS GOES-West (WMTS `epsg3857/nrt`; nombre exacto de la capa POR VERIFICAR en el GetCapabilities). Insignia "Imagen GOES-West · NASA GIBS" con la hora de la imagen. En la maqueta el fondo es la imagen MODIS fija.
+- **Estados:** cargando (esqueleto, como #122); **sin conexión** ("No pudimos cargar el clima de ahora. Las tendencias siguen disponibles." / "We couldn't load the current weather. The trends are still available."); dato con **más de 1 hora** ("Dato de hace más de 1 hora"); código desconocido → `cloud` + "Sin dato del cielo".
+- **360 px:** una columna; la leyenda va **debajo** del mapa (no encima); las 6 localidades en 2 columnas de 160 px; los botones del héroe a todo el ancho y de 48 px o más; la barra inferior de la web se queda igual.
+- **Lo que no cambia:** el reto es de tendencias. "El cielo ahora" es contexto, no una tendencia, y no se usa para afirmar causas (regla 2).

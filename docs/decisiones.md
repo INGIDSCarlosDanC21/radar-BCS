@@ -106,3 +106,76 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Decisión:** el equipo trabaja hasta que ya no pueda. La prioridad es que las 4 pantallas muestren datos reales. El agua (issue #7) se hace si llega; si no, se declara "sin datos". Sigue la meta interna de enviar a las 13:00 del domingo y el límite oficial de las 23:59. Lo que sí se mantiene: probar antes de pasar a `main` (regla 9).
 - **Reemplaza** el congelamiento de las entradas anteriores sobre el calendario.
 - **Quién decidió:** Carlos (Líder).
+
+### 2026-11-14 — Calor: el número principal es la superficie (MODIS); el aire va en la nota
+
+- **Contexto:** el PR #63 de Luca (ya en `main` desde el PR #65) cambió Calor a la temperatura de superficie de MODIS, y lo anotó como "decisión de Carlos". Carlos aclaró que **no la había tomado**; dijo que debe ser lo más conveniente y que la anotación fue un error suyo.
+- **Decisión:** se acepta lo que quedó, porque es lo más coherente con las reglas 1 y 2: la tarjeta de Calor muestra la superficie MODIS ("sin cambio claro", p = 0.11, sin cifra) y su nota dice que el aire de NASA POWER sí sube +1.47 °C y que las dos medidas no coinciden. No se esconde ninguna de las dos. En el mapa, calor por zona dice "Sin cambio claro" con la nota de que la baja de El Centenario y Sur depende de la prueba y de 2022-2025.
+- **Reemplaza** la entrada anterior ("la web muestra el aire y la superficie juntos") solo en cuál es el número principal; sigue valiendo que las dos mediciones se ven y que se dice que no coinciden.
+- **Cómo se revierte:** si Carlos prefiere al aire como número principal, es un cambio en `analisis/exportar.py` (indicador `calor`) y en `web/data/indicadores.json`.
+- **Quién decidió:** Carlos (Líder) la acepta el 2026-11-14 sin haberla propuesto; propuesta original de Luca, revisada por Claude e Investigación.
+
+### 2026-11-14 — Login con Supabase: clave publishable en el repo y correo de contacto
+
+- **Contexto:** Programación B implementa un login opcional con Supabase Auth (issue #73). Hacía falta decidir cómo llega la clave publishable a GitHub Pages y qué correo pone el aviso de privacidad para borrar cuentas.
+- **Decisión:** (1) la clave **publishable/anon** de Supabase **sí se sube al repo** (en `web/js/config.js`), porque es pública por diseño y la protegen las reglas de Row Level Security; **nunca** `service_role` ni `sb_secret_`. (2) El correo de contacto del aviso de privacidad para pedir que se borre una cuenta es el que dio Carlos (contactarfloppa@gmail.com). (3) Carlos comprobó que el correo de confirmación de Supabase sí llega.
+- **Condiciones que siguen valiendo:** login opcional, solo correo y contraseña, corte el domingo a las 09:00 (issue #73).
+- **Quién decidió:** Carlos (Líder), 2026-11-14.
+
+### 2026-11-14 — Calor de superficie: la serie se corta en 2021 por la deriva de Terra
+
+- **Contexto:** con 2001-2025 la superficie MODIS daba "sin cambio claro" (p = 0.11); con 2026 daba una baja de -1.06 °C. Luca comprobó con `Day_view_time` de MOD11A2 que desde 2022 Terra pasa cada vez más temprano (hora local media de unas 10.8 h a 9.2 h en 2026), así que la superficie se mide antes de calentarse y la serie baja de forma artificial. Con 2001-2021 sale +0.94 °C significativo (p = 0.0003) y El Centenario y Sur (la "baja" que reproduje) dejan de salir significativos (PR #90).
+- **Decisión:** Calor muestra la superficie MODIS en 2001-2021 (+0.94 °C) y el aire POWER (+1.47 °C, 2001-2025) en la nota; la limitación explica el corte completo en la tarjeta. Falta el contraste con Aqua (MYD11A2): si Aqua no muestra calentamiento, se revisa. Es la causa más probable, no está probada; la web no la presenta como hecho.
+- **Reemplaza** la entrada "Calor: el número principal es la superficie (MODIS)" solo en el periodo y en la cifra: antes "sin cifra".
+- **Cómo se revierte:** `python -m analisis.exportar --calor-hasta 2025` y `python -m analisis.zonas --calor-hasta 2025`, y copiar a `web/data/`.
+- **Quién decidió:** propuesta de Luca, aceptada en `dev` por el asistente del Líder; **confirmada por Carlos el 2026-11-14** (ver la entrada siguiente).
+
+### 2026-11-14 — Carlos confirma Calor 2001-2021; entra el Mapa Agrícola; el PR #85 se queda como vehículo a `main`
+
+- **Calor:** Carlos confirmó la superficie MODIS en 2001-2021 (+0.94 °C) **con la condición de que no haya datos de superficie más recientes y confiables**. Si el contraste con Aqua (#87) u otro producto permite medir bien 2022-2026, se vuelve a revisar con él. Mientras tanto no se extiende la serie.
+- **Mapa Agrícola (PR #88, Diego):** Carlos decidió que **entra**. No lo pidió el reto; se acepta como pantalla extra. Condiciones que siguen vigentes: auditoría de fuentes por Luca antes de `main`, versión en inglés, y todo recurso nuevo (SIAP, CONAGUA/DOF, SoilGrids CC BY 4.0, SMN, GeoNames, NASA POWER) en `docs/RECURSOS.md` y `docs/entrega/07`. Si no pasa la auditoría, se deja fuera de `main`.
+- **PR #85 (dev → main):** lo decidió el asistente del Líder por encargo de Carlos. Es un PR de rama a rama y se actualiza solo con `dev`, así que **se conserva como vehículo** (no se cierra ni se reabre otro). Se retituló y su descripción lleva la puerta de calidad; **no se fusiona hasta que pase** y Carlos lo apruebe.
+
+### 2026-11-15 — Aqua no confirma la subida de la superficie: se revisa la presentación del calor
+
+- **Contexto:** la entrada del 2026-11-14 dejó Calor en 2001-2021 (+0.94 °C, Terra) y dijo "si Aqua no muestra calentamiento, se revisa". Luca (PR #103, `analisis.contraste_aqua`) encontró que en 2003-2021 Terra da +1.04 °C (p = 0.0005) y Aqua +0.27 °C (p = 0.29, no significativo); Aqua también cambia su hora de paso desde 2022 (13.4 h a 15.2 h, más tarde). Carlos confirmó el corte en 2021 con la condición de "datos más recientes y confiables"; esta es una información nueva, no cubierta por esa confirmación.
+- **Estado:** **resuelto: Carlos eligió la opción B** (ver la entrada siguiente).
+- **Opciones:** (A) mantener Terra como cifra principal y agregar que Aqua no lo confirma; (B) **recomendada por el asistente:** encabezar con la temperatura del aire (+1.47 °C, POWER, significativa) y mostrar la superficie como no concluyente (Terra +0.9 °C, Aqua sin cambio claro, ninguna con hora de paso estable), sin cifra principal de superficie; (C) volver a "sin cambio claro" para la superficie. Cualquier opción exige cambiar la limitación en `exportar.py` (ES y EN), `web/data/`, y `docs/entrega/04`, `06`, `08`.
+
+### 2026-11-15 — El login con Supabase no entra a la entrega
+
+- **Decisión:** el asistente del Líder, por encargo de Carlos ("decide"). Se cierra el PR #77 **sin fusionar**; la rama `prog-b/login` y el proyecto de Supabase se conservan para después del evento.
+- **Por qué:**
+  1. **No cumple una función para quien lo usa.** La cuenta no guarda nada ni personaliza nada; las 4 preguntas del reto se responden sin cuenta, y el relato dice "sin cuenta".
+  2. **Agrega obligaciones sin tiempo para cumplirlas:** correos de residentes (datos personales; solo +18, aviso de privacidad, canal de borrado), pantallas en inglés, revisión de seguridad de Luca y una prueba real de registro en celular que nadie ha hecho; además, el correo predeterminado de Supabase tiene límites y puede fallar justo cuando el jurado lo pruebe.
+  3. **La prioridad que Carlos fijó** era 1) interfaz, 2) celular real, 3) login. El tiempo se usa mejor en el inglés de la web (requisito de elegibilidad) y en la puerta de calidad.
+- **Qué se hace:** `docs/entrega/07` y `CHECKLIST-ENVIO` ya no esperan Supabase; `docs/RECURSOS.md` marca `supabase-js` y Supabase Auth como "no se usa en la entrega". No hay que quitar nada de `web/` (el login nunca llegó a `dev`).
+- **Cómo se retoma:** después de la entrega, abrir de nuevo la rama `prog-b/login` (22 pruebas, clave publishable ya conectada) y cerrar lo pendiente: propósito de la cuenta, revisión de Luca y prueba real de registro.
+
+### 2026-11-15 — Calor: Carlos elige la opción B (aire principal, superficie no concluyente)
+
+- **Decisión de Carlos:** opción **B**. Resuelve la entrada anterior ("Aqua no confirma la subida de la superficie").
+- **Qué se muestra:** la tarjeta de calor encabeza con la **temperatura del aire (NASA POWER T2M): +1.47 °C en 2001-2025, significativa**. La **superficie MODIS** se muestra solo como **no concluyente**, sin cifra principal: Terra +0.9 °C (2001-2021), Aqua sin cambio claro (+0.27 °C, p = 0.29, 2003-2021), y la hora de paso de ambos satélites se mueve desde 2022. Es lo que dice la limitación (ES y EN).
+- **Mapa de calor por zona:** conserva las cifras por zona de la serie Terra 2001-2021, **con una nota visible** de que Aqua no confirma la tendencia de superficie y que son orientativas. No se presenta ninguna como "significativa" sin esa nota. (Decisión del asistente del Líder dentro de la opción B; Carlos la puede cambiar a "sin cifra por zona".)
+- **Cómo se implementa:** Luca cambia `exportar.py` para que `calor` salga de POWER T2M (la rama que ya existe) con la limitación nueva en ES y EN; Diego ajusta la nota del calor por zona (ES y EN). Los textos de `docs/entrega/04`, `06`, `08` y `hallazgos.md` ya están alineados. `docs/entrega/06` suma MYD11A2 (Aqua) como dato NASA usado.
+- **Reemplaza** la presentación de Calor de las entradas del 2026-11-14 ("el número principal es la superficie (MODIS)" y "Calor 2001-2021"); el corte de Terra en 2021 sigue.
+
+### 2026-11-15 — Simulaciones en el Mapa y la Ficha, y lenguaje sencillo
+
+- **Decisión de Carlos (en el chat, madrugada del 15 nov):** construir las cuatro cosas, porque los mapas eran "recuadros rojos aburridos" y la web tenía muchos tecnicismos.
+- **1. Mapa, "Mira La Paz desde el espacio":** fotos reales del satélite Terra de la NASA (servicio GIBS), una por año, 2001-2026, tomadas en abril, con control de año y botón Reproducir. Dos vistas: "Vista real" (color) y "Calor del suelo" (compuesto de 8 días, con la escala de colores oficial de GIBS en °C). El bloque dice que es **una foto por año, no una tendencia**, y que la temperatura del suelo no es la del aire (Aqua no la confirma). No se agrega ninguna cifra: son imágenes de la NASA.
+- **2. Ficha, "Viaja en el tiempo":** control de año con la serie anual real de cada indicador (`serie_anual`), con una frase en palabras sencillas, un medidor y una gráfica con la línea de tendencia.
+- **3. Proyección "si la tendencia sigue":** solo **calor y vegetación** (tendencia clara), hasta **2035**. Prolonga la línea de Sen publicada (`tendencia_por_decada`), con el intercepto como mediana de y − m·x. Se muestra con borde punteado y la etiqueta "Si la tendencia sigue (no es un pronóstico)", más un aviso: solo prolonga la línea de los últimos años, el clima real puede cambiar y no explica por qué cambia (regla 2). **No se proyecta la lluvia** (sin tendencia clara) **ni el agua** (anomalía regional, no del acuífero de La Paz); la pantalla explica por qué.
+- **4. Lenguaje sencillo:** cada ficha abre con una frase de qué mide; el método (Mann-Kendall, Sen), el p-valor y alfa pasan a un desplegable "Detalles técnicos"; la pregunta oficial "¿Es estadísticamente significativo?" se conserva con la respuesta en palabras simples primero. El mapa de zonas numera cada zona con su lugar en la lista de abajo.
+- **Qué cambia respecto a `docs/PLAN-CIERRE.md` (regla 2):** el botón "Iniciar simulación" de Figma sigue sin construirse tal cual (su función era "por confirmar"); lo que se agrega son simulaciones que **solo usan datos reales del proyecto o imágenes de la NASA**. Sigue vigente que no se inventan números.
+- **Riesgos y cómo se quitan:** (a) la proyección es una extrapolación lineal; si Carlos prefiere no mostrarla, basta que `permiteProyeccion` devuelva `false` en `web/js/simulaciones.js` y el control termina en 2025; (b) las imágenes de GIBS necesitan conexión (sin ella se avisa y el resto del mapa sigue); (c) la capa "Calor del suelo" es Terra, que marcamos como no concluyente: por eso el bloque la presenta como foto y remite a la Ficha.
+- **Pendiente:** mencionar las simulaciones en `docs/entrega/04` y en el guion del video (`08`) cuando Carlos revise; Ehileen puede pulir el aspecto con su diseño.
+
+### 2026-11-15 — El Mapa Agrícola entra a `main` con la reserva de SIAP y SEPADA; la proyección se queda
+
+- **Decisión de Carlos (chat):** la proyección "si la tendencia sigue" **se queda**; la reserva del Mapa Agrícola la decide el asistente ("toma la mejor decisión para esta situación"); fusionar el PR #85 si se puede.
+- **Intento de cerrar la reserva (2026-11-15, ~02:00):** SIAP (`nube.agricultura.gob.mx`) no respondió en 21 s y SEPADA (`sepada.bcs.gob.mx`) tampoco en 10 s. No hay caché de la descarga en este equipo (la de Diego está en el suyo). No se pudo verificar nada nuevo.
+- **Decisión del asistente del Líder:** el Mapa Agrícola entra **completo**, con la reserva declarada. Razones: (1) las cifras de Cultivos salen de la descarga directa del SIAP del 14 nov con `web/tools/armar_agricola.py`, no se escribieron a mano; (2) la aritmética interna cuadra (2,620.5 / 3,879.6 ha = 67.5 %); (3) nada contradice su fuente, solo no se pudo reabrir; (4) cada ficha muestra su fuente y la fecha de consulta (14 nov 2026); (5) quitar Cultivos dejaría el mapa sin su dato principal y la regla 1 se cumple diciendo qué no se pudo verificar.
+- **Qué se declara:** en la entrega y ante el jurado, las cifras de SIAP 2025 y la cita de SEPADA son de la consulta del 14 nov y **no se volvieron a verificar el 15 nov**.
+- **Cómo se cierra o se revierte:** Luca (`docs/investigacion/auditoria-agricola.md`) las compara con el SIAP en cuanto responda y el veredicto pasa a "pasa". Si algo no coincide, se corrige en `web/data/agricola.json` (o se retira esa ficha) y se avisa a Carlos. Carlos puede cambiar esta decisión en cualquier momento.
+- **Proyección:** se queda tal como está (solo calor y vegetación, hasta 2035, "no es un pronóstico"); queda registrada en la entrada "Simulaciones en el Mapa y la Ficha".

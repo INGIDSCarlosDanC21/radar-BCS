@@ -1,0 +1,1003 @@
+{
+  "archivo": "Figma \"Radar paceño\" (ae9KMSMZUexeV0dBhDkNR1)",
+  "generado": "2026-11-15T08:41:27.550Z",
+  "pestanas": [
+    "Inicio",
+    "Clima",
+    "Agricultura",
+    "Pesca",
+    "Avisos y Alertas"
+  ],
+  "componentes": [
+    {
+      "id": "158:25",
+      "nombre": "Header / Navegación principal",
+      "ancho": 1280,
+      "alto": 64
+    },
+    {
+      "id": "158:407",
+      "nombre": "Footer / Pie de página",
+      "ancho": 1280,
+      "alto": 262
+    },
+    {
+      "id": "158:1700",
+      "nombre": "Botón / Iniciar simulación",
+      "ancho": 1216,
+      "alto": 56
+    }
+  ],
+  "acentosPorSeccion": {
+    "Clima": [
+      {
+        "tarjeta": "Calor & Sensación Térmica",
+        "alto": 6,
+        "relleno": [
+          "GRADIENT_LINEAR(#fbbf24>#d97706)"
+        ]
+      },
+      {
+        "tarjeta": "Radiación UV & Exposición Solar",
+        "alto": 6,
+        "relleno": [
+          "GRADIENT_LINEAR(#f97316>#dc2626)"
+        ]
+      },
+      {
+        "tarjeta": "Viento, Oleaje & Corrientes",
+        "alto": 6,
+        "relleno": [
+          "GRADIENT_LINEAR(#14b8a6>#006d3d)"
+        ]
+      },
+      {
+        "tarjeta": "Humedad y lluvia",
+        "alto": 6,
+        "relleno": [
+          "GRADIENT_LINEAR(#60a5fa>#0c2340)"
+        ]
+      }
+    ],
+    "Agricultura": [
+      {
+        "tarjeta": "Factibilidad y Cultivos",
+        "alto": 4,
+        "relleno": [
+          "#006d3d"
+        ]
+      },
+      {
+        "tarjeta": "Clima y Agua",
+        "alto": 4,
+        "relleno": [
+          "#51d8e8"
+        ]
+      },
+      {
+        "tarjeta": "Salud del Suelo",
+        "alto": 4,
+        "relleno": [
+          "#7ed99e"
+        ]
+      },
+      {
+        "tarjeta": "Riesgos y Sanidad",
+        "alto": 4,
+        "relleno": [
+          "#fbbf24"
+        ]
+      }
+    ],
+    "Pesca": [
+      {
+        "tarjeta": "Semáforo de Seguridad",
+        "alto": 4,
+        "relleno": [
+          "#fbbf24"
+        ]
+      },
+      {
+        "tarjeta": "Condiciones Oceanográficas",
+        "alto": 4,
+        "relleno": [
+          "#1eb8c8"
+        ]
+      },
+      {
+        "tarjeta": "Clima y Atmósfera Costera",
+        "alto": 4,
+        "relleno": [
+          "#4b5f7f"
+        ]
+      },
+      {
+        "tarjeta": "Potencial y Actividad Pesquera",
+        "alto": 4,
+        "relleno": [
+          "#006d3d"
+        ]
+      }
+    ]
+  },
+  "paleta": [
+    {
+      "color": "#44474d",
+      "usos": 899
+    },
+    {
+      "color": "#ffffff",
+      "usos": 746
+    },
+    {
+      "color": "#000d21",
+      "usos": 659
+    },
+    {
+      "color": "#006d3d",
+      "usos": 369
+    },
+    {
+      "color": "#f2f4f7",
+      "usos": 148
+    },
+    {
+      "color": "#191c1e",
+      "usos": 135
+    },
+    {
+      "color": "#0c2340",
+      "usos": 119
+    },
+    {
+      "color": "#e0e3e6",
+      "usos": 97
+    },
+    {
+      "color": "#eceef1",
+      "usos": 87
+    },
+    {
+      "color": "#97f3b5",
+      "usos": 79
+    },
+    {
+      "color": "#778bad",
+      "usos": 76
+    },
+    {
+      "color": "#047240",
+      "usos": 64
+    },
+    {
+      "color": "#9af6b8",
+      "usos": 45
+    },
+    {
+      "color": "#51d8e8",
+      "usos": 39
+    },
+    {
+      "color": "#d97706",
+      "usos": 37
+    },
+    {
+      "color": "#0098a6",
+      "usos": 34
+    },
+    {
+      "color": "#f59e0b",
+      "usos": 30
+    },
+    {
+      "color": "#e6e8eb",
+      "usos": 29
+    },
+    {
+      "color": "#e11d48",
+      "usos": 29
+    },
+    {
+      "color": "#f7f9fc",
+      "usos": 28
+    },
+    {
+      "color": "#b45309",
+      "usos": 28
+    },
+    {
+      "color": "#ba1a1a",
+      "usos": 27
+    },
+    {
+      "color": "#0284c7",
+      "usos": 24
+    },
+    {
+      "color": "#78350f",
+      "usos": 21
+    },
+    {
+      "color": "#92400e",
+      "usos": 20
+    },
+    {
+      "color": "#74777e",
+      "usos": 18
+    },
+    {
+      "color": "#ffdad6",
+      "usos": 18
+    },
+    {
+      "color": "#93000a",
+      "usos": 18
+    },
+    {
+      "color": "#fef3c7",
+      "usos": 16
+    },
+    {
+      "color": "#000000",
+      "usos": 15
+    },
+    {
+      "color": "#ea580c",
+      "usos": 14
+    },
+    {
+      "color": "#90f1ff",
+      "usos": 14
+    },
+    {
+      "color": "#fff1f2",
+      "usos": 14
+    },
+    {
+      "color": "#c4c6ce",
+      "usos": 13
+    },
+    {
+      "color": "#4b5f7f",
+      "usos": 11
+    },
+    {
+      "color": "#fffbeb",
+      "usos": 10
+    },
+    {
+      "color": "#fbbf24",
+      "usos": 10
+    },
+    {
+      "color": "#1e88e5",
+      "usos": 9
+    },
+    {
+      "color": "#ecfdf5",
+      "usos": 9
+    },
+    {
+      "color": "#065f46",
+      "usos": 9
+    }
+  ],
+  "pantallas": [
+    {
+      "id": "104:1871",
+      "nombre": "Agricultura - Clima y Agua",
+      "archivo": "diseno/pantallas/agricultura-clima-y-agua.png",
+      "seccion": "Agricultura",
+      "ancho": 1280,
+      "alto": 3512,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Agricultura"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 172,
+        "Space Grotesk": 28,
+        "Manrope": 41
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Agrícola",
+      "acento": [
+        "#51d8e8"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "108:2638",
+      "nombre": "Agricultura - Factibilidad y Vocación",
+      "archivo": "diseno/pantallas/agricultura-factibilidad-y-vocacion.png",
+      "seccion": "Agricultura",
+      "ancho": 1280,
+      "alto": 3063,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Agricultura"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 134,
+        "Space Grotesk": 21,
+        "Manrope": 38
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Agrícola",
+      "acento": [
+        "#006d3d"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "83:2695",
+      "nombre": "Agricultura - Mapa",
+      "archivo": "diseno/pantallas/agricultura-mapa.png",
+      "seccion": "Agricultura",
+      "ancho": 1280,
+      "alto": 1778,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Agricultura"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 45,
+        "Space Grotesk": 9,
+        "Manrope": 15
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Agrícola",
+      "acento": null,
+      "botonSimulacion": null,
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "112:3853",
+      "nombre": "Agricultura - Riesgos y Sanidad",
+      "archivo": "diseno/pantallas/agricultura-riesgos-y-sanidad.png",
+      "seccion": "Agricultura",
+      "ancho": 1280,
+      "alto": 3141,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Agricultura"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 74,
+        "Space Grotesk": 30,
+        "Manrope": 54
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Agrícola",
+      "acento": [
+        "#fbbf24"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "112:3267",
+      "nombre": "Agricultura - Salud del Suelo",
+      "archivo": "diseno/pantallas/agricultura-salud-del-suelo.png",
+      "seccion": "Agricultura",
+      "ancho": 1280,
+      "alto": 2966,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Agricultura"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 94,
+        "Space Grotesk": 17,
+        "Manrope": 46
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Agrícola",
+      "acento": [
+        "#7ed99e"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "99:2",
+      "nombre": "Avisos y Alertas",
+      "archivo": "diseno/pantallas/avisos-y-alertas.png",
+      "seccion": "Avisos y Alertas",
+      "ancho": 1280,
+      "alto": 2367,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Avisos y Alertas"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 72,
+        "Space Grotesk": 20,
+        "Manrope": 26
+      },
+      "tituloX": null,
+      "tituloTexto": null,
+      "acento": null,
+      "botonSimulacion": null,
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "115:446",
+      "nombre": "Clima - Calor y Sensación Térmica",
+      "archivo": "diseno/pantallas/clima-calor-y-sensacion-termica.png",
+      "seccion": "Clima",
+      "ancho": 1280,
+      "alto": 2663,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Clima"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 97,
+        "Space Grotesk": 17,
+        "Manrope": 25
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Meteorológico",
+      "acento": [
+        "GRADIENT_LINEAR(#fbbf24>#d97706)"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
+    },
+    {
+      "id": "127:4758",
+      "nombre": "Clima - Humedad y Lluvia",
+      "archivo": "diseno/pantallas/clima-humedad-y-lluvia.png",
+      "seccion": "Clima",
+      "ancho": 1280,
+      "alto": 2328,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Clima"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 94,
+        "Space Grotesk": 16,
+        "Manrope": 22
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Meteorológico",
+      "acento": [
+        "GRADIENT_LINEAR(#60a5fa>#0c2340)"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
+    },
+    {
+      "id": "66:325",
+      "nombre": "Clima - Mapa",
+      "archivo": "diseno/pantallas/clima-mapa.png",
+      "seccion": "Clima",
+      "ancho": 1280,
+      "alto": 1815,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Clima"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 55,
+        "Space Grotesk": 8,
+        "Manrope": 16
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Meteorológico",
+      "acento": null,
+      "botonSimulacion": null,
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
+    },
+    {
+      "id": "127:2407",
+      "nombre": "Clima - Radiación UV y Exposición Solar",
+      "archivo": "diseno/pantallas/clima-radiacion-uv-y-exposicion-solar.png",
+      "seccion": "Clima",
+      "ancho": 1280,
+      "alto": 2230,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Clima"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 81,
+        "Space Grotesk": 10,
+        "Manrope": 28
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Meteorológico",
+      "acento": [
+        "GRADIENT_LINEAR(#f97316>#dc2626)"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
+    },
+    {
+      "id": "127:1351",
+      "nombre": "Clima - Viento, Oleaje y Corrientes",
+      "archivo": "diseno/pantallas/clima-viento-oleaje-y-corrientes.png",
+      "seccion": "Clima",
+      "ancho": 1280,
+      "alto": 2661,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Clima"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 92,
+        "Space Grotesk": 23,
+        "Manrope": 25
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Meteorológico",
+      "acento": [
+        "GRADIENT_LINEAR(#14b8a6>#006d3d)"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
+    },
+    {
+      "id": "62:2",
+      "nombre": "Inicio",
+      "archivo": "diseno/pantallas/inicio.png",
+      "seccion": "Inicio",
+      "ancho": 1280,
+      "alto": 2716,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Inicio"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "Space Grotesk": 52,
+        "Manrope": 15,
+        "JetBrains Mono": 42
+      },
+      "tituloX": null,
+      "tituloTexto": null,
+      "acento": null,
+      "botonSimulacion": null,
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": [
+        "sunny",
+        "sunny",
+        "partly_cloudy_day",
+        "cloud",
+        "foggy",
+        "rainy_light",
+        "sunny",
+        "sunny",
+        "rainy_light",
+        "sunny",
+        "partly_cloudy_day",
+        "sunny",
+        "partly_cloudy_day",
+        "cloud",
+        "foggy",
+        "rainy_light",
+        "rainy",
+        "thunderstorm"
+      ]
+    },
+    {
+      "id": "141:2396",
+      "nombre": "Pesca - Clima y Atmósfera Costera",
+      "archivo": "diseno/pantallas/pesca-clima-y-atmosfera-costera.png",
+      "seccion": "Pesca",
+      "ancho": 1280,
+      "alto": 2419,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Pesca"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 65,
+        "Space Grotesk": 12,
+        "Manrope": 75
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Pesquero",
+      "acento": [
+        "#4b5f7f"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "131:1008",
+      "nombre": "Pesca - Condiciones Oceanográficas",
+      "archivo": "diseno/pantallas/pesca-condiciones-oceanograficas.png",
+      "seccion": "Pesca",
+      "ancho": 1280,
+      "alto": 2771,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Pesca"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 114,
+        "Space Grotesk": 17,
+        "Manrope": 39
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Pesquero",
+      "acento": [
+        "#1eb8c8"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "90:496",
+      "nombre": "Pesca - Mapa",
+      "archivo": "diseno/pantallas/pesca-mapa.png",
+      "seccion": "Pesca",
+      "ancho": 1280,
+      "alto": 1570,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Pesca"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 44,
+        "Space Grotesk": 8,
+        "Manrope": 19
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Pesquero",
+      "acento": null,
+      "botonSimulacion": null,
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "142:3656",
+      "nombre": "Pesca - Potencial y Actividad Pesquera",
+      "archivo": "diseno/pantallas/pesca-potencial-y-actividad-pesquera.png",
+      "seccion": "Pesca",
+      "ancho": 1280,
+      "alto": 3065,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Pesca"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 113,
+        "Space Grotesk": 15,
+        "Manrope": 44
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Pesquero",
+      "acento": [
+        "#006d3d"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    },
+    {
+      "id": "124:4511",
+      "nombre": "Pesca - Semáforo de Seguridad",
+      "archivo": "diseno/pantallas/pesca-semaforo-de-seguridad.png",
+      "seccion": "Pesca",
+      "ancho": 1280,
+      "alto": 2424,
+      "header": {
+        "tipo": "INSTANCE",
+        "componente": "Header / Navegación principal",
+        "y": 0,
+        "alto": 64
+      },
+      "pestanasActivas": [
+        "Pesca"
+      ],
+      "marcaIAJuntoAlLogo": true,
+      "footer": {
+        "tipo": "INSTANCE",
+        "componente": "Footer / Pie de página"
+      },
+      "fuentes": {
+        "JetBrains Mono": 80,
+        "Space Grotesk": 13,
+        "Manrope": 50
+      },
+      "tituloX": 32,
+      "tituloTexto": "Mapa Pesquero",
+      "acento": [
+        "#fbbf24"
+      ],
+      "botonSimulacion": "Botón / Iniciar simulación",
+      "erratas": [],
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    }
+  ],
+  "movil": [
+    {
+      "nombre": "Inicio · 360",
+      "archivo": "diseno/pantallas/inicio-360.png",
+      "ancho": 360,
+      "alto": 3046,
+      "fuentes": {
+        "JetBrains Mono": 40,
+        "Space Grotesk": 39,
+        "Manrope": 4
+      },
+      "textoMenorA12": [],
+      "fueraDelAncho": [],
+      "tactiles": [
+        {
+          "nombre": "Botón English",
+          "alto": 46,
+          "ancho": 81
+        },
+        {
+          "nombre": "Botón / Ver mapa de zonas",
+          "alto": 51,
+          "ancho": 328
+        },
+        {
+          "nombre": "Botón / Qué puedo hacer",
+          "alto": 51,
+          "ancho": 328
+        },
+        {
+          "nombre": "Pestaña / Inicio",
+          "alto": 56,
+          "ancho": 72
+        },
+        {
+          "nombre": "Pestaña / Mapa",
+          "alto": 56,
+          "ancho": 72
+        },
+        {
+          "nombre": "Pestaña / Ficha",
+          "alto": 56,
+          "ancho": 72
+        },
+        {
+          "nombre": "Pestaña / Agro",
+          "alto": 56,
+          "ancho": 72
+        },
+        {
+          "nombre": "Pestaña / Acciones",
+          "alto": 56,
+          "ancho": 72
+        }
+      ],
+      "afirmacionesSinFuente": [],
+      "marcaIA": true,
+      "iconosCielo": [
+        "sunny",
+        "partly_cloudy_day",
+        "cloud",
+        "foggy",
+        "rainy_light",
+        "rainy",
+        "thunderstorm"
+      ]
+    }
+  ]
+}

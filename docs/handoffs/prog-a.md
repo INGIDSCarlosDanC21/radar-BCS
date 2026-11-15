@@ -1,38 +1,50 @@
 # Handoff — Programador A
 
+Actualizado el 2026-11-15 (issues #97 y #81). Rama de este bloque: `prog-a/campos-en`; los PR a `dev` los abre el usuario (mi token no puede).
+
 ## Hecho
 
-- Pipeline de tendencias (PR #37, #38, #52): `analisis/` con NASA POWER, MODIS (AppEEARS, 6 puntos), GRACE y exportación según `docs/contrato-datos.md`; 22 pruebas.
-- `data/salida/` (cifras calculadas por código generado con IA, sin revisión de Investigación):
-  - Calor = MODIS LST (decisión de Carlos), 2001-2025: sin cambio claro (p = 0.11), por eso sin cifra; el aire POWER sube +1.47 °C y se cita en la limitación.
-  - Vegetación = NDVI MODIS: -0.019, significativo.
-  - Lluvia (total anual, POWER): sin cambio claro (p = 0.13), sin cifra.
-  - Agua = GRACE (JPL Mascon CRI), 2002-2026 (2026 parcial): +1.36 cm, regional, significativo; no es el acuífero.
-  - `zonas.geojson` real (6 zonas = píxeles MODIS de 1 km) y `zonas_tendencias.json`.
-- CSV de AppEEARS (6 zonas) en Drive: `datasets/appeears-6-zonas/`.
-- Texto de la ficha de agua listo para Carlos: `analisis/texto-ficha-agua.md`.
-- Estado completo y decisiones: `analisis/PLAN.md`.
+- Pipeline de tendencias en `analisis/` (NASA POWER, MODIS por AppEEARS en 6 puntos, GRACE) y exportación según `docs/contrato-datos.md`; 56 pruebas. `data/salida/` lo genera código escrito con IA, sin revisión de Investigación.
+- Cifras vigentes en `data/salida/` (`python -m analisis.exportar --calor-hasta 2021`):
+  - Calor (opción B): aire NASA POWER T2M, 2001-2025, +1.47 °C (p = 2.8e-17). La superficie MODIS (+0.94 °C 2001-2021) queda solo por zona, como orientativa.
+  - Vegetación (NDVI): 2001-2026 (2026 parcial), -0.013 (p = 0.0036).
+  - Lluvia (POWER, total anual): sin cifra (p = 0.13).
+  - Agua (GRACE, regional, no el acuífero): 2002-2026, +1.36 cm (p = 0.0094).
+  - `zonas.geojson` y `zonas_tendencias.json` reales (6 zonas = píxeles MODIS).
+- Campos `*_en` en `data/salida/` (título, variable, nota del cambio, limitación, método, dataset y resolución de la fuente; `nombre_en` y `nota_en` por zona). Mismas cifras que el español; `analisis.validar` los exige. `variable_en` hace de descripción. Los nombres de zona no se traducen.
+- `scripts/verificar-todo.ps1`: pytest, validar, `node --test` (web y diseño), `web/data` = `data/salida` (3 archivos) y archivos de menos de 5 MB. `analisis.publicar` copia también `zonas_tendencias.json`.
+- Revisiones de #81: Spearman lluvia-agua con código y prueba (`python -m analisis.correlacion`, rho = 0.52, p = 0.018, n = 20; correlación, no causa); `PLAN.md` y `REVISION.md` al día.
+- Deriva de Terra: Day_view_time pasa de ≈10.8 h a 9.17 h en 2026. Contraste con Aqua (`python -m analisis.contraste_aqua`): 2003-2021 Terra +1.04 °C (p = 0.0005), Aqua +0.27 °C (p = 0.29, no significativo). Aqua también cambia su hora desde 2022 (13.4 h a 15.2 h en 2026, más tarde). Aqua no confirma el calentamiento de superficie 2001-2021 y la deriva de Terra no basta como explicación. No se afirma ninguna causa.
 
-## En curso
+## Auditorías hechas (comentarios que pega el usuario, mi token no puede)
 
-- PR con los últimos cambios (calor MODIS, agua hasta 2026, p-valor real, texto de la ficha de agua).
+- Mapa Agrícola (#88): NO PASA todavía. Ficha Clima con cifras viejas y leyenda "2001–2025". Verificados POWER y la tabla del DOF; sin verificar SIAP, SoilGrids, Monitor de Sequía, GeoNames.
+- Login (#77): sin claves secretas, pero `generar-config.ps1` y su prueba no detectan una clave `service_role` en formato JWT; falta la pantalla para fijar la contraseña nueva; textos "Costero" y "Todos los derechos reservados" por corregir; falta configurar Supabase.
+
+## Bloque autónomo #118 (2026-11-15)
+
+Ramas subidas, sin PR abierto (mi token no abre PR; los abre el usuario, a `dev`). Orden de fusión: 1, luego 2 a 5.
+
+1. `prog-a/calor-aire` (L1, P0, cifras: revisa el Líder): el calor sale de POWER T2M, +1.47 °C 2001-2025 (p = 2.8e-17, por década +0.611); `validar` exige T2M, periodo desde 2001 y a Aqua en la limitación. Con esta rama, `web/tests` falla 2 pruebas de Diego: `agricola.test.mjs` (el resumen de Clima sigue en +0.94 °C) y `home.test.mjs` (fija «Datos generados el 2026-11-14»).
+2. `prog-a/auditoria-agricola` (L2): `docs/investigacion/auditoria-agricola.md`. Veredicto NO PASA todavía: 3 correcciones para Diego (#119) y SIAP y SEPADA sin comprobar (servidores sin respuesta).
+3. `prog-a/cifras-entrega` (L3): `test_cifras_entrega.py`; pasa con L1 (las cifras de `docs/entrega/04` y `08` coinciden con `data/salida`). Sin L1, falla contra la superficie vieja.
+4. `prog-a/reproducir-aqua` (L4): sección del README. El CSV de Aqua (1.7 MB) está solo en mi caché local; alguien debe subirlo a Drive `datasets/appeears-6-zonas/` y anotarlo en `docs/DRIVE.md`.
+5. `prog-a/pruebas-appeears`: 6 pruebas sin red para `appeears.py`.
+
+L5: los PR abiertos de Diego (#116, #121, #122) y de UI/UX (#123, #124) no tocan cifras ni datos; no hay nada que revisar por esa regla. No aprobé #85: la puerta falla 2 pruebas de web con L1 y el Mapa Agrícola no pasa.
 
 ## Falta
 
-- Copiar la salida a `web/data/` con `python -m analisis.publicar`, en un PR acordado con Diego (su PR #57 de mapa pide las coordenadas de los 6 puntos: están en `zonas.geojson`).
-- Agua: contraste con GLDAS-2.2 CLSM (GWS); opcional.
-- Revisión humana de cifras y código por Luca e Investigación.
+- Carlos: revisar la `limitacion` nueva del calor y que `docs/entrega/04` y `hallazgos.md` digan lo mismo.
+- Diego: copiar `data/salida/` a `web/data/` (`python -m analisis.publicar`), cambiar `CAPA_ZONA.calor.sinCifra` de `web/js/app.js`, usar los `*_en` para ES/EN, regenerar `agricola.json` con cifras vigentes y corregir lo del login.
+- Auditar SIAP del #88 (necesita descargar el CSV); repetir la auditoría cuando Diego corrija.
+- Opcional: GLDAS-2.2 CLSM como contraste del agua; pruebas para `analisis/appeears.py`; Carlos revisa `analisis/texto-ficha-agua.md` y define el canal de borrado de cuentas.
 
 ## Bloqueos
 
-- Ninguno por mi parte. Necesito a Carlos para fusionar y a Diego para acordar la copia a `web/`.
+- Ninguno. Mi token no puede abrir PRs ni comentar: los abre el usuario desde la web.
 
-## Para otros roles
-
-- Carlos: revisar `analisis/texto-ficha-agua.md`; comentar y cerrar el issue #7 (todo lo pedido está hecho).
-- Diego: `data/salida/zonas.geojson` y `indicadores.json` actualizados; falta copiarlos a `web/data/`.
-
-Probar: `pip install -r analisis/requirements.txt`, `python -m analisis.exportar`, `python -m analisis.zonas`, `python -m pytest analisis`.
+Probar: `pip install -r analisis/requirements.txt`, `python -m analisis.exportar --calor-hasta 2021`, `python -m analisis.zonas --calor-hasta 2021`, `python -m analisis.validar`, `python -m pytest analisis`, `powershell -File scripts/verificar-todo.ps1`.
 
 ---
 

@@ -3,3 +3,4 @@ numpy
 pymannkendall
 pytest
 netCDF4
+scipy

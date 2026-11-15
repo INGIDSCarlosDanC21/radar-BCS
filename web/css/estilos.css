@@ -1,62 +1,93 @@
 :root{
-  --fondo:#f6f4ef;--tarjeta:#fff;--texto:#1b1f23;--suave:#4a525a;--borde:#cfd3d8;
-  --acento:#0b5cad;--acento-t:#fff;--franja:#ffd400;--franja-t:#1b1f23;
-  --sube:#b4380f;--baja:#1f5f99;--nulo:#8a9096;--aviso:#fff4d6;
+  /* Paleta y letra del diseño de Figma (web/assets/tokens.css), las mismas de Inicio y Agro (#129).
+     No se enlaza tokens.css: trae un bloque de modo oscuro propuesto y la web es siempre clara. */
+  --fondo:#f7f9fc;--tarjeta:#fff;--texto:#000d21;--suave:#44474d;--borde:#c4c6ce;
+  --acento:#0c2340;--acento-t:#fff;--franja:#ffd400;--franja-t:#1b1f23;
+  --sube:#b4380f;--baja:#1f5f99;--nulo:#8a9096;--aviso:#fff4d6;--gris-120:#eceef1;
+  --f-titulo:"Space Grotesk",system-ui,sans-serif;--f-cuerpo:"Manrope",system-ui,sans-serif;--f-datos:"JetBrains Mono",ui-monospace,monospace;
+  --ancho:1216px;--margen:32px;
 }
-@media (prefers-color-scheme:dark){
-  :root{--fondo:#12161a;--tarjeta:#1d2329;--texto:#f0f2f4;--suave:#b6bdc4;--borde:#3a434b;
-  --acento:#7db8ff;--acento-t:#0a1722;--sube:#ff9a73;--baja:#8cc2ff;--nulo:#9aa1a8;--aviso:#3a3317}
-}
+/* La web es siempre clara (Figma solo tiene modo claro): no sigue el modo oscuro del sistema. */
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--fondo);color:var(--texto);font:1rem/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+body{margin:0;background:var(--fondo);color:var(--texto);font:1rem/1.5 var(--f-cuerpo);padding-bottom:calc(64px + env(safe-area-inset-bottom))}
 a{color:var(--acento)}
-.saltar{position:absolute;left:-999px}.saltar:focus{left:8px;top:8px;background:var(--tarjeta);padding:8px;z-index:9999}
+.saltar{position:absolute;left:-999px}.saltar:focus{left:16px;top:8px;background:var(--tarjeta);padding:12px;min-height:44px;z-index:9999}
 .franja{background:var(--franja);color:var(--franja-t);font-weight:700;text-align:center;padding:8px 12px;font-size:.9rem}
 .cabecera{display:flex;justify-content:space-between;align-items:baseline;padding:12px 16px 0;max-width:720px;margin:0 auto}
 .marca{font-weight:800;font-size:1.1rem}.sub{color:var(--suave);font-size:.9rem}
+/* Interruptor de idioma (#93): visible en todas las pantallas, área táctil de 44 px. */
+.cabecera{align-items:center;gap:8px}.cabecera .sub{margin-right:auto}
+/* Logo (generado con IA) con la marca "AI-generated" legible junto a él (AGENTS.md regla 6) */
+.marca{display:flex;align-items:center;min-height:44px}.marca img{display:block;height:28px;width:auto}
+.marca-ia{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:16px;padding:2px 6px;border:1px solid var(--borde);border-radius:6px;color:var(--suave);white-space:nowrap}
+@media (max-width:399px){.cabecera .sub{display:none}.cabecera .marca-ia{margin-right:auto}}
+@media (min-width:400px){.marca img{height:44px}}
+img.ico{display:inline-block;height:1em;width:auto;vertical-align:-.12em;margin-right:.35em}
+.idioma{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--acento);border-radius:999px;color:var(--acento);font-weight:700;font-size:.9rem;text-decoration:none;white-space:nowrap}
+.idioma:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
 main{max-width:720px;margin:0 auto;padding:8px 16px 16px;outline:none}
 h1{font-size:1.6rem;line-height:1.2;margin:.6em 0 .3em}
 h2{font-size:1.2rem;margin:1.2em 0 .4em}
+h1,h2,.cifra,.grande{font-family:var(--f-titulo)}
 p{margin:.4em 0}
 .lead{color:var(--suave);font-size:1.05rem}
 .tarjetas{display:grid;gap:12px;margin-top:16px}
-.tarjeta{display:block;background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;min-height:44px}
+.tarjeta{display:block;background:var(--tarjeta);border:0;box-shadow:0 1px 2px rgba(0,0,0,.05);border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;min-height:44px}
 .tarjeta:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+/* #119 D6: foco visible también en campos, elementos con tabindex y el mapa */
+input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:not([tabindex="-1"]):focus-visible,.leaflet-container:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+main:focus-visible{outline:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tarjeta h2{margin:0 0 4px;font-size:1.1rem}
 .cifra{font-size:2rem;font-weight:800;line-height:1.1}
 .cifra small{font-size:1rem;font-weight:600;color:var(--suave)}
 .nota-limite{margin:.25rem 0 .5rem;font-size:.875rem;line-height:1.35;color:var(--suave)}
 .sube{color:var(--sube)}.baja{color:var(--baja)}
-.etiqueta{display:inline-block;border:1px solid var(--borde);border-radius:999px;padding:2px 10px;font-size:.85rem;margin:6px 0}
+.etiqueta{display:inline-block;font-family:var(--f-datos);border:1px solid var(--borde);border-radius:999px;padding:2px 10px;font-size:.85rem;margin:6px 0}
 .etiqueta.si{border-color:var(--acento);font-weight:600}
 .fuente{font-size:.8rem;color:var(--suave);margin:2px 0 0}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.chip{min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--borde);background:var(--tarjeta);color:var(--texto);font:inherit;font-weight:600;cursor:pointer}
-.chip[aria-pressed=true]{background:var(--acento);color:var(--acento-t);border-color:var(--acento)}
-#mapa-caja{height:320px;border-radius:12px;border:1px solid var(--borde);background:var(--tarjeta)}
+.chip{min-height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--gris-120);color:var(--texto);font:inherit;font-family:var(--f-datos);font-size:13px;font-weight:500;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--acento);color:var(--acento-t)}
+#mapa-caja{height:320px;border-radius:12px;border:0;box-shadow:0 2px 4px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.1);background:var(--tarjeta);overflow:hidden}
 .aviso{background:var(--aviso);border:1px solid var(--borde);border-radius:10px;padding:10px 12px;margin:12px 0;font-size:.95rem}
 .leyenda{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.85rem;margin:8px 0}
 .leyenda i{display:inline-block;width:16px;height:16px;vertical-align:-3px;border:1px solid var(--borde);margin-right:4px}
+.sincambio{background:rgb(242,240,235)}.leyenda i.sincambio{border-color:#333}
 .sindatos{background:repeating-linear-gradient(45deg,#9aa0a6,#9aa0a6 3px,#d5d8db 3px,#d5d8db 6px)}
 ol.top{padding-left:1.3em}ol.top li{margin:6px 0}
 table{border-collapse:collapse;width:100%;background:var(--tarjeta)}
 th,td{border:1px solid var(--borde);padding:8px;text-align:left}
 .grande{font-size:2.6rem;font-weight:800;line-height:1.1;margin:.2em 0}
-.bloque{background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;padding:4px 16px 14px;margin:14px 0}
+.bloque{background:var(--tarjeta);border:0;box-shadow:0 1px 2px rgba(0,0,0,.05);border-radius:12px;padding:4px 16px 14px;margin:14px 0}
 .bloque h2{margin-top:.8em}
-svg.grafica{width:100%;height:auto;display:block}
-svg.grafica text{fill:var(--suave);font-size:11px}
+svg.grafica{width:100%;max-width:720px;height:auto;display:block}
+svg.grafica text{fill:var(--suave);font-size:12px}
 .pestanas{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
 .volver{display:inline-block;min-height:44px;line-height:44px}
 .barras{display:grid;gap:6px;margin:8px 0}
-.barras div{display:grid;grid-template-columns:90px 1fr 70px;gap:8px;align-items:center;font-size:.9rem}
+.barras div{display:grid;grid-template-columns:90px minmax(0,1fr) auto;gap:8px;align-items:center;font-size:.9rem}
 .barras .b{height:14px;background:var(--acento);border-radius:3px;min-width:2px}
 .error{border:2px solid var(--sube);border-radius:10px;padding:12px;background:var(--tarjeta)}
+/* Esqueleto de carga (#96): mismo alto que las tarjetas, sin parpadeo; quieto con prefers-reduced-motion */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.esq-b{border-radius:12px;margin:0 0 16px;background:linear-gradient(90deg,var(--borde) 0%,var(--tarjeta) 50%,var(--borde) 100%);background-size:200% 100%;animation:esq 1.6s ease-in-out infinite;opacity:.6}
+.esq-linea{width:60%}.esq-texto{width:90%}.esq-hero{border-radius:0}
+body[data-vista=inicio] .esq-b:not(.esq-hero),body[data-vista=agricola] .esq-b:not(.esq-hero){margin-left:16px;margin-right:16px}
+@keyframes esq{0%{background-position:100% 0}100%{background-position:-100% 0}}
+@media (prefers-reduced-motion:reduce){.esq-b{animation:none}}
 .pie{max-width:720px;margin:16px auto 0;padding:0 16px 16px;font-size:.85rem;color:var(--suave);text-align:center}
-.barra{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);background:var(--tarjeta);border-top:1px solid var(--borde);padding-bottom:env(safe-area-inset-bottom);z-index:1000}
+.barra{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(5,1fr);background:var(--tarjeta);border-top:1px solid var(--borde);padding-bottom:env(safe-area-inset-bottom);z-index:1000}
 .barra a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;text-decoration:none;color:var(--suave);font-size:.8rem;font-weight:600}
 .barra a[aria-current=page]{color:var(--acento);box-shadow:inset 0 3px 0 var(--acento)}
-.barra span{font-size:1.2rem;line-height:1}
+.barra span[aria-hidden]{font-size:1.2rem;line-height:1}
 .leaflet-container{font:inherit}
+@media (min-width:1024px){.cabecera,main,.pie{max-width:var(--ancho);padding-inline:var(--margen)}}
 @media (min-width:640px){.tarjetas{grid-template-columns:1fr 1fr}#mapa-caja{height:420px}}
+/* 360 px (#96, diseno/revision-360/REPORTE.md): nada se sale de la pantalla y los toques miden 44 px */
+main{overflow-wrap:break-word}
+a.enlace-fuente{display:inline-block;min-height:44px;padding-block:12px;overflow-wrap:anywhere}
+.fuente a[target],#resumen p>a{display:inline-block;min-height:44px;padding-block:12px}
+#mapa-caja .leaflet-bar a{width:44px;height:44px;line-height:44px;font-size:22px}
+.barras div>span:last-child{white-space:nowrap}

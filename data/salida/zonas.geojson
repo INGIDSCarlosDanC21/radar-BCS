@@ -4,7 +4,7 @@
  "generado_con": "analisis/exportar.py (código generado con IA: sí, Claude)",
  "periodo": {
   "inicio": 2001,
-  "fin": 2025
+  "fin": 2021
  },
  "features": [
   {
@@ -39,13 +39,14 @@
    "properties": {
     "id": "z01",
     "nombre": "Centro",
+    "nombre_en": "Centro",
     "cambios": {
      "calor": {
-      "cambio_total": -0.099,
-      "significativo": false
+      "cambio_total": 1.086,
+      "significativo": true
      },
      "vegetacion": {
-      "cambio_total": -0.034,
+      "cambio_total": -0.03,
       "significativo": true
      },
      "lluvia": {
@@ -57,7 +58,8 @@
       "significativo": null
      }
     },
-    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel."
+    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel.",
+    "nota_en": "Polygon = 1 km MODIS pixel (LST); the NDVI is from the 250 m point inside that pixel."
    }
   },
   {
@@ -92,13 +94,14 @@
    "properties": {
     "id": "z02",
     "nombre": "Chametla",
+    "nombre_en": "Chametla",
     "cambios": {
      "calor": {
-      "cambio_total": 0.051,
-      "significativo": false
+      "cambio_total": 1.5,
+      "significativo": true
      },
      "vegetacion": {
-      "cambio_total": -0.034,
+      "cambio_total": -0.033,
       "significativo": true
      },
      "lluvia": {
@@ -110,7 +113,8 @@
       "significativo": null
      }
     },
-    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel."
+    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel.",
+    "nota_en": "Polygon = 1 km MODIS pixel (LST); the NDVI is from the 250 m point inside that pixel."
    }
   },
   {
@@ -145,13 +149,14 @@
    "properties": {
     "id": "z03",
     "nombre": "El Centenario",
+    "nombre_en": "El Centenario",
     "cambios": {
      "calor": {
-      "cambio_total": -1.301,
-      "significativo": true
+      "cambio_total": 0.383,
+      "significativo": false
      },
      "vegetacion": {
-      "cambio_total": -0.047,
+      "cambio_total": -0.046,
       "significativo": true
      },
      "lluvia": {
@@ -163,7 +168,8 @@
       "significativo": null
      }
     },
-    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel."
+    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel.",
+    "nota_en": "Polygon = 1 km MODIS pixel (LST); the NDVI is from the 250 m point inside that pixel."
    }
   },
   {
@@ -198,14 +204,15 @@
    "properties": {
     "id": "z04",
     "nombre": "Oriente",
+    "nombre_en": "Oriente",
     "cambios": {
      "calor": {
-      "cambio_total": -0.401,
-      "significativo": false
+      "cambio_total": 1.1,
+      "significativo": true
      },
      "vegetacion": {
-      "cambio_total": 0.004,
-      "significativo": false
+      "cambio_total": 0.008,
+      "significativo": true
      },
      "lluvia": {
       "cambio_total": null,
@@ -216,7 +223,8 @@
       "significativo": null
      }
     },
-    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel."
+    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel.",
+    "nota_en": "Polygon = 1 km MODIS pixel (LST); the NDVI is from the 250 m point inside that pixel."
    }
   },
   {
@@ -251,14 +259,15 @@
    "properties": {
     "id": "z05",
     "nombre": "Sur",
+    "nombre_en": "Sur",
     "cambios": {
      "calor": {
-      "cambio_total": -1.26,
-      "significativo": true
+      "cambio_total": 0.415,
+      "significativo": false
      },
      "vegetacion": {
-      "cambio_total": 0.013,
-      "significativo": false
+      "cambio_total": 0.024,
+      "significativo": true
      },
      "lluvia": {
       "cambio_total": null,
@@ -269,7 +278,8 @@
       "significativo": null
      }
     },
-    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel."
+    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel.",
+    "nota_en": "Polygon = 1 km MODIS pixel (LST); the NDVI is from the 250 m point inside that pixel."
    }
   },
   {
@@ -304,13 +314,14 @@
    "properties": {
     "id": "z06",
     "nombre": "Surponiente",
+    "nombre_en": "Surponiente",
     "cambios": {
      "calor": {
-      "cambio_total": -0.219,
-      "significativo": false
+      "cambio_total": 0.897,
+      "significativo": true
      },
      "vegetacion": {
-      "cambio_total": -0.05,
+      "cambio_total": -0.042,
       "significativo": true
      },
      "lluvia": {
@@ -322,7 +333,8 @@
       "significativo": null
      }
     },
-    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel."
+    "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel.",
+    "nota_en": "Polygon = 1 km MODIS pixel (LST); the NDVI is from the 250 m point inside that pixel."
    }
   }
  ]

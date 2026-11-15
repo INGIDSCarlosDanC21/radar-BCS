@@ -7,7 +7,7 @@ import shutil
 
 from analisis.descargar import RAIZ
 
-ARCHIVOS = ["indicadores.json", "zonas.geojson"]
+ARCHIVOS = ["indicadores.json", "zonas.geojson", "zonas_tendencias.json"]
 
 
 def main():

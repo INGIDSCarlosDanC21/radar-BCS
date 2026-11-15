@@ -89,7 +89,8 @@ def test_salida_cumple_contrato():
     assert salida["version_contrato"] == "0.1" and salida["datos_de_prueba"] is False
     assert [i["id"] for i in salida["indicadores"]] == ["calor", "vegetacion", "lluvia", "agua"]
     claves = {"id", "titulo", "variable", "unidades", "cambio_total", "cambio_total_nota", "tendencia_por_decada",
-              "por_decada", "significancia", "serie_anual", "fuente", "limitacion"}
+              "por_decada", "significancia", "serie_anual", "fuente", "limitacion",
+              "titulo_en", "variable_en", "cambio_total_nota_en", "limitacion_en"}
     for i in salida["indicadores"]:
         assert set(i) == claves
     calor, veg, lluvia_i, agua = salida["indicadores"]
@@ -99,3 +100,16 @@ def test_salida_cumple_contrato():
         assert vacio["cambio_total"] is None and vacio["significancia"]["significativo"] is None
         assert vacio["fuente"] is None
     assert calor["fuente"]["dataset"] and calor["fuente"]["url"] and calor["fuente"]["fecha_descarga"] == "2026-11-14"
+
+
+def test_promedio_anual_sin_parcial_deja_nan_el_ultimo_anio_incompleto():
+    mat = np.ones((2, 12))
+    mat[1, 11] = np.nan
+    a = t.promedio_anual_sin_parcial(mat)
+    assert a[0] == 1.0 and np.isnan(a[1])
+    assert not np.isnan(t.promedio_anual_sin_parcial(np.ones((2, 12)))[1])
+
+
+def test_por_decada_etiqueta_con_los_anios_que_entran():
+    filas = t.por_decada(list(range(2021, 2027)), [1.0] * 5 + [float("nan")], 2021, 2026)
+    assert filas == [{"decada": "2021-2025", "media": 1.0}]
