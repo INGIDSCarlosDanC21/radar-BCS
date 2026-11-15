@@ -62,7 +62,11 @@
       'pes.f.sol': 'Sol', 'pes.f.solT': 'Amanecer y atardecer', 'pes.f.amanece': 'Amanece', 'pes.f.anochece': 'Atardece',
       'pes.sinDato': 'sin dato', 'pes.sinDatoPuerto': 'Sin dato para esta hora',
       'pes.r0': 'norte', 'pes.r1': 'noreste', 'pes.r2': 'este', 'pes.r3': 'sureste', 'pes.r4': 'sur', 'pes.r5': 'suroeste', 'pes.r6': 'oeste', 'pes.r7': 'noroeste',
-      'pes.pinOla': '{n}: oleaje {v}, {e}', 'pes.pinViento': '{n}: viento {v}, {e}', 'pes.pinSst': '{n}: temperatura del mar {v}'
+      'pes.pinOla': '{n}: oleaje {v}, {e}', 'pes.pinViento': '{n}: viento {v}, {e}', 'pes.pinSst': '{n}: temperatura del mar {v}',
+      'pes.busca': 'Buscar un puerto', 'pes.bLugar': 'Buscar puerto', 'pes.bPh': 'Ej.: Loreto',
+      'pes.bVacio': 'No hay un puerto con ese nombre. Prueba con La Paz, Loreto o Bahía Tortugas.',
+      'pes.bVarios': 'Hay varios puertos con ese nombre ({n}). Escribe más letras o elige uno de la lista.',
+      'pes.bOk': 'Mostrando {n} en el mapa.'
     },
     en: {
       'pes.kicker': 'Now · Open-Meteo marine model (not buoys)', 'pes.act': 'Marine model · La Paz time',
@@ -107,7 +111,11 @@
       'pes.f.sol': 'Sun', 'pes.f.solT': 'Sunrise and sunset', 'pes.f.amanece': 'Sunrise', 'pes.f.anochece': 'Sunset',
       'pes.sinDato': 'no data', 'pes.sinDatoPuerto': 'No data for this hour',
       'pes.r0': 'north', 'pes.r1': 'northeast', 'pes.r2': 'east', 'pes.r3': 'southeast', 'pes.r4': 'south', 'pes.r5': 'southwest', 'pes.r6': 'west', 'pes.r7': 'northwest',
-      'pes.pinOla': '{n}: waves {v}, {e}', 'pes.pinViento': '{n}: wind {v}, {e}', 'pes.pinSst': '{n}: sea temperature {v}'
+      'pes.pinOla': '{n}: waves {v}, {e}', 'pes.pinViento': '{n}: wind {v}, {e}', 'pes.pinSst': '{n}: sea temperature {v}',
+      'pes.busca': 'Search for a port', 'pes.bLugar': 'Search port', 'pes.bPh': 'e.g. Loreto',
+      'pes.bVacio': 'No port has that name. Try La Paz, Loreto or Bahía Tortugas.',
+      'pes.bVarios': 'Several ports match that name ({n}). Type more letters or pick one from the list.',
+      'pes.bOk': 'Showing {n} on the map.'
     }
   };
   ['es', 'en'].forEach(function (l) {
@@ -147,6 +155,23 @@
       }
       return { id: p.id, menor: !!p.menor, lat: p.mar[0], lon: p.mar[1], icono: icono, valor: valor, tono: tono(nivel), etiqueta: etq, activo: p.id === activo };
     });
+  }
+  /* Buscador de puertos: solo compara con los puertos ya cargados (RB.coincidencias, compartido con Clima); cero peticiones.
+     Devuelve {i: índice del puerto o -1, motivo: 'ok' | 'vacio' (sin texto) | 'varios' | 'nada', varios: nombres que coinciden}. */
+  function buscarPuerto(puertos, texto) {
+    if (!RB.sinAcentos(texto)) return { i: -1, motivo: 'vacio', varios: [] };
+    var c = RB.coincidencias(puertos, texto);
+    if (c.exacto >= 0) return { i: c.exacto, motivo: 'ok', varios: [] };
+    if (c.parciales.length === 1) return { i: c.parciales[0], motivo: 'ok', varios: [] };
+    if (c.parciales.length > 1) return { i: -1, motivo: 'varios', varios: c.parciales.map(function (k) { return puertos[k].nombre; }) };
+    return { i: -1, motivo: 'nada', varios: [] };
+  }
+  /* Formulario del buscador (mismas clases de campo que el de Clima: cm-campo, 44 px y letra de 16 px). */
+  function buscadorHtml(puertos) {
+    return '<form class="pe-busca" id="pe-busca" role="search" aria-label="' + esc(t('pes.busca')) + '" novalidate>' +
+      '<div class="cm-campo"><label for="pe-q">' + esc(t('pes.bLugar')) + '</label><input id="pe-q" type="search" list="pe-lista" autocomplete="off" enterkeyhint="search" placeholder="' + esc(t('pes.bPh')) + '" aria-describedby="pe-q-msg">' +
+      '<datalist id="pe-lista">' + puertos.map(function (p) { return '<option value="' + esc(p.nombre) + '"></option>'; }).join('') + '</datalist></div>' +
+      '<p class="pe-busca-msg" id="pe-q-msg" role="status" aria-live="polite"></p></form>';
   }
   /* Caja que contiene todos los puertos: [[lat mín, lon mín], [lat máx, lon máx]]. */
   function limitesPuertos(datos) {
@@ -334,7 +359,7 @@
     var porId = {}; datos.puertos.forEach(function (p) { porId[p.id] = p; });
     var cloFecha = V.sumaDias(V.fechaDe(datos.horas[ahora]), -1);
 
-    cuerpo.innerHTML =
+    cuerpo.innerHTML = buscadorHtml(datos.puertos) +
       '<div class="chips pe-puertos" role="group" aria-label="' + esc(t('pes.puerto')) + '">' + datos.puertos.map(function (p) {
         return '<button type="button" class="pe-chip" data-puerto="' + esc(p.id) + '" aria-pressed="false">' + esc(p.nombre) + '</button>';
       }).join('') + '</div>' +
@@ -435,6 +460,27 @@
     est.onKey = function (ev) { if (S.ficha && (ev.key === 'Escape' || ev.key === 'Esc')) cerrarFicha(); };
     document.addEventListener('keydown', est.onKey);
     rng.addEventListener('input', function () { parar(); S.h = +rng.value; pintar(); });
+    /* Buscador: al escribir, si un solo puerto coincide se elige como si lo tocaran (chip, pin, diagnóstico) y el mapa se centra en él
+       sin cambiar el zoom. Solo usa los datos ya cargados: no pide nada a Open-Meteo. */
+    var q = cuerpo.querySelector('#pe-q'), qmsg = cuerpo.querySelector('#pe-q-msg');
+    function aplicarBusqueda(final) {
+      var r = buscarPuerto(datos.puertos, q.value), txt = '';
+      if (r.i >= 0) {
+        var p = datos.puertos[r.i];
+        if (S.puerto !== p.id || final) {
+          S.puerto = p.id; pintar();
+          var chip = cuerpo.querySelector('[data-puerto="' + p.id + '"]'), fila = chip && chip.parentNode;   // en celular la fila de puertos se desliza: se lleva el chip a la vista
+          if (fila && fila.scrollWidth > fila.clientWidth) fila.scrollLeft = Math.max(0, chip.offsetLeft - fila.offsetLeft - 16);
+          if (est.mapa && est.mapa.mapa) { try { est.mapa.mapa.panTo([p.mar[0], p.mar[1]], { animate: false }); } catch (x) { /* sin mapa */ } }
+        }
+        txt = t('pes.bOk', { n: p.nombre });
+      } else if (r.motivo === 'nada') txt = t('pes.bVacio');
+      else if (r.motivo === 'varios' && final) txt = t('pes.bVarios', { n: r.varios.join(', ') });
+      if (qmsg.textContent !== txt) qmsg.textContent = txt;
+      qmsg.className = 'pe-busca-msg' + (r.i < 0 && txt ? ' pe-busca-err' : '');
+    }
+    q.addEventListener('input', function () { aplicarBusqueda(false); });
+    cuerpo.querySelector('#pe-busca').addEventListener('submit', function (ev) { ev.preventDefault(); aplicarBusqueda(true); if (q.blur) q.blur(); });
     pintar();
   }
 
@@ -456,7 +502,7 @@
     });
   }
 
-  var RBPesca = { render: render, limpiar: limpiar, pines: pines, fichas: fichas, fasesLunares: fasesLunares, urlLuna: urlLuna, pedirLuna: pedirLuna, mareograma: mareograma, leyenda: leyenda, estadoPuerto: estadoPuerto, montar: montar, TX: TX };
+  var RBPesca = { render: render, limpiar: limpiar, pines: pines, fichas: fichas, fasesLunares: fasesLunares, urlLuna: urlLuna, pedirLuna: pedirLuna, mareograma: mareograma, leyenda: leyenda, estadoPuerto: estadoPuerto, montar: montar, buscarPuerto: buscarPuerto, buscadorHtml: buscadorHtml, TX: TX };
   if (typeof window !== 'undefined') window.RBPesca = RBPesca;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBPesca;
 })();

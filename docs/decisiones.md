@@ -248,3 +248,9 @@ Regla: no decir que la lluvia es de GPM ni que la TSM es de MODIS; hoy son POWER
 - **Barra:** Clima · Pesca · **Inicio al centro** (botón redondo) · Agro · Avisos, todos con ícono (también en el menú de escritorio). Se quita la hoja "Más".
 - **Acciones** deja de ser una pantalla de solo texto: vive al final de Clima como "¿Qué puedo hacer?", con una tarjeta con ícono por consejo (los mismos 10 de CDC y EPA, ninguno nuevo). `#acciones` redirige a `#clima/acciones`.
 - **Agro:** etiquetas de pines cortas (solo el nombre; el dato va en el popup), capas de NASA GIBS (satélite y vegetación NDVI) y los puntos de los 38 lugares de BCS con calor del aire y lluvia (NASA POWER).
+
+## Buscador de puertos en Pesca, sin selector de fecha (Carlos, 2026-11-15)
+
+- **Qué:** Pesca tiene arriba del mapa el mismo campo de búsqueda que Clima (`cm-campo`, 44 px, letra de 16 px). Busca entre los 19 puertos ya cargados, sin acentos ni mayúsculas; si un solo puerto coincide lo elige como si lo tocaran (botón, pin, diagnóstico y fichas) y centra el mapa sin cambiar el zoom. Si no hay ninguno dice "No hay un puerto con ese nombre" con ejemplos reales. La comparación vive en `reglas.js` (`RB.coincidencias` / `RB.buscarNombre`) y la usan Clima y Pesca.
+- **Costo:** cero peticiones nuevas al buscar (medido en Chrome emulando 390 y 360 px: 0 recursos nuevos; la carga fría de Pesca sigue en 2 peticiones a Open-Meteo, 57 coordenadas).
+- **Fecha: no se implementó.** En Clima, cambiar la fecha pide una petición agrupada de 20 coordenadas (valores diarios). Pesca necesita datos por hora del modelo marino (19 puntos) y del pronóstico (38 puntos: mar y pueblo) para su mapa, su reloj y sus fichas: unas 57 coordenadas por cada fecha elegida, casi lo mismo que una carga fría. Con el límite gratuito de 10 000 al día no vale la pena; Pesca ya tiene ayer, hoy y dos días más con las flechas del reloj sin costo extra.
