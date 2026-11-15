@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Radar BCS · OptiPaz · Pitch</title>
+  <!-- ARCHIVO GENERADO: index.html se crea con `node presentacion/build.mjs` desde plantilla.html + partes/*.html. No edites index.html a mano. -->
+  <link rel="stylesheet" href="vendor/fonts/fuentes.css">
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/deck.css">
+</head>
+<body>
+  <div class="fondo" aria-hidden="true"></div>
+  <canvas class="fondo-viento" aria-hidden="true"></canvas>
+  <div class="fondo-grano" aria-hidden="true"></div>
+  <div class="fondo-vineta" aria-hidden="true"></div>
+
+  <div class="reveal">
+    <div class="slides">
+<!-- ===== 01-gancho.html ===== -->
+<!-- Parte 1/6 · EL GANCHO · orador: Ehileen · tiempo: 0:50
+     Objetivo: Captar atención y situar el problema
+     Reglas: solo <section data-parte="1" ...> aquí. Sin estilos en línea ni scripts. Clases en css/deck.css (ver DISENO.md).
+     Todo texto dentro de <div class="zona">. Toda cifra lleva <p class="fuente">. Notas del orador en <aside class="notes">. -->
+<section data-parte="1" data-animacion>
+  <div class="zona centro">
+    <div class="etiqueta" data-entra>Baja California Sur · datos abiertos de la NASA</div>
+    <h1 class="display" data-entra="lider">Radar <span class="marca">BCS</span></h1>
+    <p class="subtitulo suave" data-entra>Lo que cambia despacio, año con año</p>
+  </div>
+  <aside class="notes">
+    <p>[Fondo oscuro con viento y grano, solo "Radar BCS".]</p>
+    <p>Levanten la mano si alguna vez han guardado agua en cubetas antes de una tormenta. [pausa 2 s, mirar a la sala, bajar la mano]</p>
+  </aside>
+</section>
+
+<section data-parte="1" data-animacion>
+  <div class="zona">
+    <div class="columnas">
+      <div>
+        <div class="etiqueta" data-entra>Septiembre de 2014 · huracán Odile</div>
+        <div class="cifra" data-entra="lider"><span data-contador="10000">10,000</span></div>
+        <p class="cuerpo-fuerte" data-entra>personas sin hogar en La Paz, como máximo</p>
+        <p class="fuente" data-entra>NHC, Tropical Cyclone Report, Odile (2014). «Hasta» 10,000, según reportes de prensa.</p>
+      </div>
+      <div data-entra="decor">
+        <img class="captura" src="assets/img/odile-2014-09-14.jpg" alt="Imagen satelital del huracán Odile frente al sur de la península de Baja California, 14 de septiembre de 2014">
+        <p class="fuente">NASA Worldview / GIBS, MODIS Terra, 2014-09-14</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Septiembre de 2014. Odile entra como huracán categoría 3 junto a Cabo San Lucas. [avanza: cifra 10,000] Aquí, en La Paz, según el Centro Nacional de Huracanes, hasta diez mil personas se quedaron sin hogar. [respira, 1 s]</p>
+    <p>Eso lo recordamos todos. Lo que casi nadie ve es lo que cambia despacio, año con año, sin hacer ruido.</p>
+    <p>[No decir que Odile golpeó La Paz de frente: tocó tierra al este de Cabo San Lucas.]</p>
+  </aside>
+</section>
+
+<section data-parte="1" data-animacion>
+  <div class="zona">
+    <div class="columnas">
+      <div>
+        <h2 class="titulo" data-entra="lider">¿Tiene <span class="marca">razón</span> tu abuela?</h2>
+        <p class="cuerpo suave" data-entra>«Antes no hacía tanto calor.»</p>
+      </div>
+      <div data-entra="decor">
+        <img class="captura" src="assets/img/bcs-modis-2025-04-20.jpg" alt="Imagen satelital en color verdadero de Baja California Sur, 20 de abril de 2025">
+        <p class="fuente">NASA EOSDIS GIBS / Worldview, MODIS Terra, 2025-04-20</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Imagina a tu abuela, un mediodía de julio, decidiendo si sale al patio. Ella vive aquí desde siempre, y dice que antes no hacía tanto calor. [pausa corta] ¿Tiene razón?</p>
+    <p>[Voltea hacia Roberto] Roberto, ¿qué dicen los datos?</p>
+  </aside>
+</section>
+
+<!-- ===== 02-problema.html ===== -->
+<!-- Parte 2/6 · PROBLEMA Y RETO · orador: Roberto · tiempo: 1:10
+     Objetivo: Conectar el dolor real con el desafío
+     Reglas: solo <section data-parte="2" ...> aquí. Sin estilos en línea ni scripts. Clases en css/deck.css (ver DISENO.md).
+     Todo texto dentro de <div class="zona">. Toda cifra lleva <p class="fuente">. Notas del orador en <aside class="notes">. -->
+<section data-parte="2" data-animacion>
+  <div class="zona">
+    <h2 class="titulo" data-entra="lider">Algo sí está <span class="marca">cambiando</span></h2>
+    <div class="tarjeta calor" data-entra>
+      <div class="etiqueta">Enfermedades por calor · Baja California Sur · 2026 vs 2025</div>
+      <div class="cifra calor">+<span data-contador="41.8" data-decimales="1">41.8</span><span class="unidad">%</span></div>
+      <p class="fuente">El Congresista, 27 oct 2026. Cifra de todo el estado, no de La Paz.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Algo sí está cambiando. Y no es solo una sensación. [pausa 1 s]</p>
+    <p>Este año, en Baja California Sur, las enfermedades por calor subieron 41.8 % frente a 2025. Es la cifra de todo el estado, según El Congresista. [respira]</p>
+    <p>Imagina el camión de las tres de la tarde. Tú, sin sombra, esperando. Y en la noche, una casa donde el ventilador ya no alcanza.</p>
+    <p>La información existe. Pero vive en reportes y portales técnicos, hechos para especialistas. No llega a quien espera ese camión. [pausa]</p>
+    <p>[No dar estimado para La Paz ni mezclar con las defunciones en la misma frase.]</p>
+  </aside>
+</section>
+
+<section data-parte="2" data-animacion>
+  <div class="zona">
+    <h2 class="titulo" data-entra="lider">El agua también <span class="marca">aprieta</span></h2>
+    <div class="rejilla-3">
+      <div class="tarjeta acento" data-entra>
+        <div class="etiqueta">Entra al acuífero al año</div>
+        <div class="cifra"><span data-contador="21">21</span></div>
+        <p class="cuerpo">millones de m³</p>
+        <p class="fuente">CONAGUA, DOF, 17 ago 2023</p>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <div class="etiqueta">Se extrae al año</div>
+        <div class="cifra"><span data-contador="37">37</span></div>
+        <p class="cuerpo">millones de m³</p>
+        <p class="fuente">CONAGUA, DOF, 17 ago 2023</p>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <div class="etiqueta">Agua de La Paz de un solo acuífero</div>
+        <div class="cifra"><span data-contador="90">90</span><span class="unidad">%</span></div>
+        <p class="fuente">Forest Trends, nov 2024</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>[Diapositiva opcional: no está en el guion hablado de 1:10. Úsala solo si sobra tiempo o en preguntas.]</p>
+    <p>El acuífero de La Paz recibe 21 millones de metros cúbicos al año y se le extraen 37 (CONAGUA, DOF, 2023). Además, La Paz toma 90 % de su agua de ese único acuífero (Forest Trends, 2024).</p>
+    <p>[No mezclar con el "13 millones" de Forest Trends en la misma frase. Es un dato de situación, no una causa.]</p>
+  </aside>
+</section>
+
+<section data-parte="2" data-animacion>
+  <div class="zona">
+    <h2 class="titulo" data-entra="lider">Cuatro <span class="marca">preguntas</span></h2>
+    <div class="rejilla-4">
+      <div class="tarjeta acento" data-entra>
+        <div class="etiqueta">¿Qué cambia?</div>
+        <p class="cuerpo-fuerte">Aire, suelo y agua</p>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <div class="etiqueta">¿Dónde?</div>
+        <p class="cuerpo-fuerte">Baja California Sur</p>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <div class="etiqueta">¿Cuánto?</div>
+        <p class="cuerpo-fuerte">De 2001 a 2026</p>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <div class="etiqueta">¿Es significativo?</div>
+        <p class="cuerpo-fuerte">Sí, para el calor</p>
+      </div>
+    </div>
+    <p class="cuerpo suave" data-entra>Cuando no lo es, también lo decimos.</p>
+  </div>
+  <aside class="notes">
+    <p>Por eso tomamos el reto de la NASA: ser detectives de las tendencias de la Tierra. [avanza: rejilla de 4] Cuatro preguntas. ¿Qué cambia? El aire, el suelo y el agua. ¿Dónde? En Baja California Sur. ¿Cuánto? De 2001 a 2026. ¿Es significativo? Para el calor, sí. Y cuando no lo es, como en la lluvia, también lo decimos.</p>
+    <p>[Voltea hacia Carlos] Carlos, ¿cómo se lo pusimos en la mano a todos?</p>
+  </aside>
+</section>
+
+<!-- ===== 03-solucion.html ===== -->
+<!-- Parte 3/6 · SOLUCIÓN + DATOS DE LA NASA · orador: Carlos · tiempo: 1:10
+     Objetivo: Presentar proyecto y validar su base científica
+     Reglas: solo <section data-parte="3" ...> aquí. Sin estilos en línea ni scripts. Clases en css/deck.css (ver DISENO.md).
+     Todo texto dentro de <div class="zona">. Toda cifra lleva <p class="fuente">. Notas del orador en <aside class="notes">. -->
+
+<!-- 3a · En la mano, y gratis -->
+<section data-parte="3" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <div class="etiqueta" data-entra>Web gratuita · Español → Inglés</div>
+        <h2 class="titulo" data-entra="lider">En la mano, <span class="marca">y gratis</span></h2>
+        <p class="suave" data-entra>Sin instalar nada. Hecha para el celular.</p>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/inicio.png" alt="Pantalla de inicio de Radar BCS con cuatro tarjetas"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>En la mano, y gratis. [pausa]</p>
+    <p>Esto es Radar BCS: una página web gratuita, sin instalar nada, en español y también en inglés.</p>
+  </aside>
+</section>
+
+<!-- 3b · Menú y propósito -->
+<section data-parte="3" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <h2 class="titulo" data-entra="lider">Un solo <span class="marca">propósito</span></h2>
+        <p data-entra>Facilitar el acceso a información técnica de poco alcance.</p>
+        <div class="etiqueta" data-entra>Inicio · Clima · Pesca · Agro · Avisos</div>
+        <p class="fuente" data-entra>Acciones vive dentro de Clima</p>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/menu-inferior.png" alt="Menú inferior: Inicio, Clima, Pesca, Agro y Avisos"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Abajo, un menú sencillo: Inicio, Clima, Pesca, Agro y Avisos. Y dentro de Clima, Acciones: qué puede hacer cada quien contra el calor y para cuidar el agua.</p>
+    <p>Nuestro propósito es uno: que la información técnica, que hoy llega a pocos, llegue a todos. [respira]</p>
+  </aside>
+</section>
+
+<!-- 3c · Cuatro datasets, cada uno con su límite -->
+<section data-parte="3" data-animacion>
+  <div class="zona">
+    <div class="etiqueta" data-entra="lider">Datos abiertos de la NASA · qué mide y hasta dónde</div>
+    <div class="columnas">
+      <div class="tarjeta acento" data-entra>
+        <span class="chip-dato">MODIS</span>
+        <p>Vegetación de la ciudad</p>
+        <div class="etiqueta">Límite · 6 puntos, no toda la ciudad</div>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <span class="chip-dato">NASA POWER</span>
+        <p>Aire y lluvia</p>
+        <div class="etiqueta">Límite · celdas de unos 50 km</div>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <span class="chip-dato">GRACE / GRACE-FO</span>
+        <p>Agua almacenada</p>
+        <div class="etiqueta">Límite · región, no el acuífero</div>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <span class="chip-dato">GIBS</span>
+        <p>Fotos de satélite</p>
+        <div class="etiqueta">Límite · una foto al año, no tendencia</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>¿Los números? Datos abiertos de la NASA. [chips, uno por nombre] MODIS, para la vegetación. NASA POWER, para el aire y la lluvia. GRACE y GRACE-FO, para el agua, a escala regional. Y GIBS, para las imágenes de satélite.</p>
+    <p>Cada uno con su límite a la vista: no decimos más de lo que el satélite puede ver.</p>
+  </aside>
+</section>
+
+<!-- 3d · 300 meses, sello y lema -->
+<section data-parte="3" data-animacion>
+  <div class="zona centro">
+    <div class="etiqueta" data-entra="lider">Aire de La Paz · 2001-2025</div>
+    <div class="cifra" data-entra><span data-contador="300">300</span><span class="unidad">meses seguidos</span></div>
+    <p class="fuente" data-entra>NASA POWER, mensual 2001-2025, sin un solo mes faltante</p>
+    <span class="sello" data-sello="900" data-entra>Mann-Kendall + Sen</span>
+    <h3 class="subtitulo" data-entra>Mostramos qué cambió, <span class="marca">no por qué</span>.</h3>
+  </div>
+  <aside class="notes">
+    <p>Para el aire: 300 meses seguidos, de 2001 a 2025, sin un hueco. [sello] Cada tendencia pasa por Mann-Kendall estacional y la pendiente de Sen: cuánto cambió y qué tan seguros estamos.</p>
+    <p>Imagina al pescador que, antes de salir, revisa el mar en su teléfono.</p>
+    <p>[voltea hacia Diego] Diego, enséñales cómo se ve.</p>
+  </aside>
+</section>
+
+<!-- ===== 04-demo.html ===== -->
+<!-- Parte 4/6 · DEMOSTRACIÓN · orador: Diego · tiempo: 2:30
+     Objetivo: Mostrarlo
+     Reglas: solo <section data-parte="4" ...> aquí. Sin estilos en línea ni scripts. Clases en css/deck.css (ver DISENO.md).
+     Todo texto dentro de <div class="zona">. Toda cifra lleva <p class="fuente">. Notas del orador en <aside class="notes">.
+     Respaldo de la demo en vivo: la web real se muestra en otra ventana. -->
+
+<!-- 4a · Tráiler -->
+<section data-parte="4" data-animacion>
+  <div class="zona centro">
+    <div class="etiqueta" data-entra="lider">Primero, 30 segundos · voz sintética en inglés</div>
+    <video class="captura video-trailer" data-trailer src="assets/video/trailer.mp4" poster="assets/capturas/min/inicio.png" preload="metadata" playsinline data-entra></video>
+    <button class="chip-dato" type="button" data-reproducir data-entra>▶ Reproducir tráiler</button>
+    <div class="etiqueta" data-entra>Si el video no carga: sigue con las 4 paradas</div>
+  </div>
+  <aside class="notes">
+    <p>Primero, treinta segundos. La voz es sintética y está en inglés.</p>
+    <p>[clic en ▶ · 29 s de video · no hablar encima · al terminar, cambiar a la web en vivo]</p>
+  </aside>
+</section>
+
+<!-- 4b · Parada 1: Inicio → Calor -->
+<section data-parte="4" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <div data-entra="lider"><span class="chip-dato">Parada 1 · 0:30</span></div>
+        <h3 class="subtitulo" data-entra>Inicio → <span class="calor">Calor</span></h3>
+        <div class="cifra calor" data-entra>+<span data-contador="1.47" data-decimales="2">1,47</span><span class="unidad">°C</span></div>
+        <div data-entra><span class="sello" data-sello="900">p &lt; 0.001</span></div>
+        <p class="fuente" data-entra>NASA POWER, aire de La Paz, 2001-2025</p>
+        <div class="etiqueta" data-entra>Demo en vivo: toca Calor</div>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/ficha-calor.png" alt="Ficha de calor con el aumento de 1.47 grados"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Esto es Inicio: calor, vegetación, lluvia y agua. Toco Calor. [toca] El aire en La Paz subió 1.47 grados de 2001 a 2025. [señala el sello] Y este sello dice p menor a 0.001: estadísticamente significativo. Es un cambio medido, no una sensación.</p>
+  </aside>
+</section>
+
+<!-- 4c · Parada 2: Lluvia -->
+<section data-parte="4" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <div data-entra="lider"><span class="chip-dato">Parada 2 · 0:30</span></div>
+        <h3 class="subtitulo" data-entra>Lluvia</h3>
+        <h2 class="titulo" data-entra>Sin cambio <span class="marca">claro</span></h2>
+        <div data-entra><span class="sello" data-sello="900">p = 0.129</span></div>
+        <p class="fuente" data-entra>NASA POWER, lluvia, 2001-2025</p>
+        <div class="etiqueta" data-entra>Demo en vivo: vuelve a Inicio y toca Lluvia</div>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/ficha-lluvia.png" alt="Ficha de lluvia: sin cambio claro"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Ahora la lluvia. [toca] Aquí la web es honesta: no se detecta un cambio claro, p igual a 0.129. [pausa 1 s] No inventamos una tendencia que los datos no muestran. Eso también es información.</p>
+  </aside>
+</section>
+
+<!-- 4d · Parada 3: Clima, mapa de 38 lugares -->
+<section data-parte="4" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <div data-entra="lider"><span class="chip-dato">Parada 3 · 0:35</span></div>
+        <div class="cifra" data-entra><span data-contador="38">38</span><span class="unidad">lugares</span></div>
+        <p data-entra><span class="calor">Calor: sube en los 38.</span> Lluvia: solo en 8, de Los Cabos.</p>
+        <p class="fuente" data-entra>NASA POWER, 2001-2025 · 21 celdas compartidas de unos 50 km</p>
+        <div class="etiqueta" data-entra>Demo en vivo: Clima, alterna Calor y Lluvia</div>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/mapa-lugares.png" alt="Mapa de 38 lugares de Baja California Sur"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>En Clima está el mapa de 38 lugares de Baja California Sur. [muestra Calor] El calor del aire subió en los 38. [cambia a Lluvia] La lluvia, solo en 8 lugares de Los Cabos. Ojo: varios lugares comparten la misma celda de datos, de unos 50 kilómetros, y la pantalla lo avisa.</p>
+  </aside>
+</section>
+
+<!-- 4e · Parada 4: Agua regional + Acciones -->
+<section data-parte="4" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="lista">
+        <div data-entra="lider"><span class="chip-dato">Parada 4 · 0:25</span></div>
+        <h2 class="titulo" data-entra>Agua <span class="marca">regional</span></h2>
+        <p data-entra>GRACE mide cientos de km: no es el acuífero. Abajo, Acciones.</p>
+        <p class="fuente" data-entra>NASA GRACE y GRACE-FO, JPL Mascon, 2002-2026</p>
+        <div class="etiqueta" data-entra>Demo en vivo: opción Agua, baja a Acciones</div>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/min/acciones.png" alt="Acciones: qué hacer contra el calor y para cuidar el agua"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>La opción Agua es regional: el satélite GRACE mide cientos de kilómetros. No es el acuífero de La Paz, y lo decimos. [baja] Abajo, Acciones: qué hacer hoy. [toca Avisos] Y en Avisos, alertas del modelo. No son oficiales; aquí están los enlaces a las fuentes oficiales. [voltea al público]</p>
+    <p>Esto es lo que hay hoy. Lo que sigue te lo cuenta el más joven del equipo.</p>
+  </aside>
+</section>
+
+<!-- ===== 05-impacto.html ===== -->
+<!-- Parte 5/6 · IMPACTO Y ESCALABILIDAD · orador: Integrante 6 · tiempo: 1:10
+     Objetivo: Futuro fuera del hackatón
+     Reglas: solo <section data-parte="5" ...> aquí. Sin estilos en línea ni scripts. Clases en css/deck.css (ver DISENO.md).
+     Todo texto dentro de <div class="zona">. Toda cifra lleva <p class="fuente">. Notas del orador en <aside class="notes">. -->
+
+<!-- 5.1 · No se acaba hoy (mapa de 38 lugares en teléfono) -->
+<section data-parte="5" data-animacion>
+  <div class="zona">
+    <div class="columnas texto-captura">
+      <div class="texto">
+        <h2 class="display" data-entra="lider">No se acaba <span class="marca">hoy</span></h2>
+        <p class="suave" data-entra>38 lugares de Baja California Sur, ya en tu bolsillo.</p>
+        <p class="fuente" data-entra>NASA POWER · 38 lugares de BCS en Radar BCS</p>
+      </div>
+      <div class="telefono" data-entra><img src="assets/capturas/mapa-lugares.png" alt="Mapa de los 38 lugares de Baja California Sur en Radar BCS"></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Yo soy de aquí. En 2023, con Norma, cerraron el puerto de La Paz. Esas cosas se ven venir. Lo que cambia despacio, no. [pausa 1 s]</p>
+    <p>Esto no se acaba cuando termine el hackatón. Ya cubre 38 lugares de Baja California Sur.</p>
+  </aside>
+</section>
+
+<!-- 5.2 · Lo que sigue: tres planes -->
+<section data-parte="5" data-animacion>
+  <div class="zona">
+    <h2 class="titulo" data-entra="lider">Lo que <span class="marca">sigue</span></h2>
+    <div class="rejilla-3">
+      <div class="tarjeta acento" data-entra>
+        <p class="etiqueta">Siguiente paso</p>
+        <p class="cuerpo-fuerte">Escuelas</p>
+        <p class="suave">Que un maestro lo abra en clase.</p>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <p class="etiqueta">Siguiente paso</p>
+        <p class="cuerpo-fuerte">Revisión local</p>
+        <p class="suave">Que expertos de aquí lo revisen y corrijan.</p>
+      </div>
+      <div class="tarjeta acento" data-entra>
+        <p class="etiqueta">Siguiente paso</p>
+        <p class="cuerpo-fuerte">Otras ciudades</p>
+        <p class="suave">Mismo método, datos NASA globales: Loreto, Mulegé y más.</p>
+      </div>
+    </div>
+    <span class="chip-dato" data-entra>Código abierto · Apache-2.0</span>
+  </div>
+  <aside class="notes">
+    <p>Lo que sigue son planes, no logros. Queremos llevarlo a las escuelas, para que un maestro lo abra en clase. Queremos que expertos de aquí lo revisen y nos corrijan. Y como los datos de la NASA que usamos cubren todo el planeta, el mismo método puede servir para Loreto, Mulegé o cualquier otra ciudad.</p>
+    <p>El código es abierto, con licencia Apache-2.0: cualquiera puede usarlo.</p>
+  </aside>
+</section>
+
+<!-- 5.3 · 90 % -->
+<section data-parte="5" data-animacion>
+  <div class="zona">
+    <p class="etiqueta" data-entra>Por qué importa aquí</p>
+    <div class="cifra" data-entra="lider"><span data-contador="90">90</span><span class="unidad">%</span></div>
+    <h2 class="titulo" data-entra>del agua de La Paz sale de <span class="marca">un solo</span> acuífero.</h2>
+    <p class="fuente" data-entra>Forest Trends, nov 2024</p>
+  </div>
+  <aside class="notes">
+    <p>Y hay algo que muchos no saben: La Paz toma el 90 % de su agua de un solo acuífero. [respira]</p>
+    <p>Imagina a la familia que, antes de una tormenta, no sabe si el arroyo va a bajar. Quizá tú nunca abras Radar BCS. Pero alguien en tu casa, sí.</p>
+  </aside>
+</section>
+
+<!-- 5.4 · 21 vs 37 -->
+<section data-parte="5" data-animacion>
+  <div class="zona">
+    <h2 class="titulo" data-entra="lider">Entra menos de lo que <span class="marca">sale</span></h2>
+    <div class="columnas">
+      <div data-entra>
+        <div class="cifra"><span data-contador="21">21</span></div>
+        <p class="cuerpo-fuerte">millones de m³ entran al año</p>
+      </div>
+      <div data-entra>
+        <div class="cifra"><span data-contador="37">37</span></div>
+        <p class="cuerpo-fuerte">millones de m³ se extraen al año</p>
+      </div>
+    </div>
+    <p class="fuente" data-entra>CONAGUA, acuerdo del acuífero de La Paz, DOF 17 ago 2023</p>
+  </div>
+  <aside class="notes">
+    <p>Según el acuerdo oficial de CONAGUA, el acuífero de La Paz recibe 21 millones de metros cúbicos al año y se le extraen 37. Es lo que dice el documento; nosotros mostramos qué cambió, no por qué.</p>
+    <p>[voltea hacia Luca] Luca, dilo tú.</p>
+  </aside>
+</section>
+
+<!-- ===== 06-cierre.html ===== -->
+<!-- Parte 6/6 · CIERRE · orador: Luca · tiempo: 0:40
+     Objetivo: Frase memorable
+     Reglas: solo <section data-parte="6" ...> aquí. Sin estilos en línea ni scripts. Clases en css/deck.css (ver DISENO.md).
+     Todo texto dentro de <div class="zona">. Toda cifra lleva <p class="fuente">. Notas del orador en <aside class="notes">. -->
+
+<!-- 6.1 · Último dato -->
+<section data-parte="6" data-animacion>
+  <div class="zona centro">
+    <p class="etiqueta" data-entra>Aire de La Paz · 2001–2025</p>
+    <div class="cifra calor" data-entra="lider">+<span data-contador="1.47" data-decimales="2">1.47</span><span class="unidad">°C</span></div>
+    <div data-entra><span class="sello" data-sello="900">p &lt; 0.001</span></div>
+    <p class="fuente" data-entra>NASA POWER, 2001-2025</p>
+  </div>
+  <aside class="notes">
+    <p>Un huracán se ve venir en el cielo. El calor, no: llega despacio, año con año. [pausa 1 s]</p>
+    <p>Con datos de la NASA les mostramos 1.47 grados más en el aire de La Paz, de 2001 a 2025. No les decimos por qué. Les decimos qué cambió, y qué tan seguros estamos.</p>
+  </aside>
+</section>
+
+<!-- 6.2 · Frase final -->
+<section data-parte="6" data-animacion>
+  <div class="zona centro">
+    <h2 class="display" data-entra="lider">Mostramos qué cambió, <span class="marca">no por qué.</span></h2>
+    <p class="cuerpo-fuerte cian" data-entra>https://ingidscarlosdanc21.github.io/radar-BCS/</p>
+    <img class="captura" src="assets/img/logo-radar-bcs.png" alt="Radar BCS" data-entra="decor">
+  </div>
+  <aside class="notes">
+    <p>Imagina que la próxima vez que tu abuela dude en salir al patio, la respuesta ya esté en su mano. [pausa 2 s; el equipo da un paso al frente]</p>
+    <p>[todos, a la vez] Radar BCS. Mostramos qué cambió, no por qué.</p>
+    <p>[Luca] Gracias. Somos OptiPaz.</p>
+  </aside>
+</section>
+    </div>
+  </div>
+
+  <script src="vendor/reveal/reveal.js"></script>
+  <script src="vendor/reveal/plugin/notes/notes.js"></script>
+  <script src="vendor/anime/anime.min.js"></script>
+  <!-- model-viewer 4.4.0 es un módulo ES (termina en export{...}) y carga .glb con fetch:
+       NO funciona con doble clic (file://), solo servido por http. Por eso no se carga aquí.
+       Ver DISENO.md, sección "3D". -->
+  <!-- <script type="module" src="vendor/model-viewer/model-viewer.min.js"></script> -->
+  <script src="js/deck.js"></script>
+</body>
+</html>

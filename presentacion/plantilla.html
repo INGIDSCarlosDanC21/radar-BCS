@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Radar BCS · OptiPaz · Pitch</title>
+  <!-- ARCHIVO GENERADO: index.html se crea con `node presentacion/build.mjs` desde plantilla.html + partes/*.html. No edites index.html a mano. -->
+  <link rel="stylesheet" href="vendor/fonts/fuentes.css">
+  <link rel="stylesheet" href="vendor/reveal/reset.css">
+  <link rel="stylesheet" href="vendor/reveal/reveal.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/deck.css">
+</head>
+<body>
+  <div class="fondo" aria-hidden="true"></div>
+  <canvas class="fondo-viento" aria-hidden="true"></canvas>
+  <div class="fondo-grano" aria-hidden="true"></div>
+  <div class="fondo-vineta" aria-hidden="true"></div>
+
+  <div class="reveal">
+    <div class="slides">
+<!-- @@PARTES@@ -->
+    </div>
+  </div>
+
+  <script src="vendor/reveal/reveal.js"></script>
+  <script src="vendor/reveal/plugin/notes/notes.js"></script>
+  <script src="vendor/anime/anime.min.js"></script>
+  <!-- model-viewer 4.4.0 es un módulo ES (termina en export{...}) y carga .glb con fetch:
+       NO funciona con doble clic (file://), solo servido por http. Por eso no se carga aquí.
+       Ver DISENO.md, sección "3D". -->
+  <!-- <script type="module" src="vendor/model-viewer/model-viewer.min.js"></script> -->
+  <script src="js/deck.js"></script>
+</body>
+</html>

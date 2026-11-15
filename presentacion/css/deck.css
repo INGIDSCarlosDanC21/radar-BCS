@@ -1,0 +1,219 @@
+/* Radar BCS · presentación HTML — estilos comunes.
+   Todas las clases que usan las partes viven aquí. Las partes NO traen estilos en línea.
+   Lienzo 1280x720; zona segura 960x720 centrada (x 160–1120). Ver DISENO.md. */
+
+/* ---------- Base ---------- */
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--p-tinta);
+  color: var(--p-texto);
+  font-family: var(--p-fuente-cuerpo);
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.reveal { font-family: var(--p-fuente-cuerpo); font-size: var(--p-t-cuerpo); color: var(--p-texto); background: transparent; }
+.reveal .slides {
+  /* Reveal va con disableLayout: el tamaño y la escala los pone js/deck.js (escalar). */
+  position: absolute; left: 50%; top: 50%; right: auto; bottom: auto; margin: 0;
+  width: var(--p-ancho); height: var(--p-alto);
+  transform-origin: 50% 50%;
+  text-align: left;
+}
+.reveal .slides > section {
+  width: var(--p-ancho);
+  height: var(--p-alto);
+  padding: 0;
+  box-sizing: border-box;
+  top: 0 !important;
+}
+.reveal ::selection { background: var(--p-cian); color: var(--p-tinta); }
+
+/* ---------- Fondo: gradiente marino + viento + grano + viñeta (capas fijas, detrás) ---------- */
+.fondo {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 22% 18%, rgba(81, 216, 232, 0.10), transparent 70%),
+    radial-gradient(ellipse 60% 70% at 85% 90%, rgba(0, 109, 61, 0.14), transparent 70%),
+    linear-gradient(160deg, var(--p-marino) 0%, #08182e 55%, var(--p-tinta) 100%);
+}
+.fondo-viento { position: fixed; inset: 0; z-index: 1; pointer-events: none; width: 100%; height: 100%; }
+.fondo-grano {
+  position: fixed; inset: 0; z-index: 2; pointer-events: none;
+  opacity: 0.07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+}
+.fondo-vineta {
+  position: fixed; inset: 0; z-index: 3; pointer-events: none;
+  background: radial-gradient(ellipse 78% 72% at 50% 50%, transparent 58%, rgba(0, 4, 12, 0.6) 100%);
+}
+.reveal { position: fixed; inset: 0; z-index: 4; overflow: hidden; }
+
+/* ---------- HUD fijo (lo dibuja js/deck.js, igual en todas las partes) ---------- */
+.hud {
+  position: fixed; left: 50%; top: 50%; z-index: 10;
+  width: var(--p-ancho); height: var(--p-alto);
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+.hud-progreso {
+  position: absolute; left: var(--p-segura-x); top: 26px; width: var(--p-segura-ancho);
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+}
+.hud-seg { height: 6px; border-radius: 3px; background: rgba(119, 139, 173, 0.28); overflow: hidden; }
+.hud-seg i { display: block; height: 100%; width: 0; background: var(--p-cian); border-radius: 3px; transition: width 400ms var(--p-suave); }
+.hud-seg.hecho i { width: 100%; background: rgba(81, 216, 232, 0.55); }
+.hud-chip {
+  position: absolute; left: var(--p-segura-x); top: 48px;
+  font-family: var(--p-fuente-datos); font-weight: 500; font-size: var(--p-t-etiqueta);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--p-tinta); background: var(--p-cian);
+  padding: 5px 12px 4px; border-radius: var(--p-radio-chico);
+}
+.hud-objetivo {
+  position: absolute; left: var(--p-segura-x); top: 90px; max-width: var(--p-segura-ancho);
+  font-family: var(--p-fuente-cuerpo); font-weight: 600; font-size: 22px;
+  color: var(--p-texto-suave); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hud-orador, .hud-reloj {
+  position: absolute; top: 662px;
+  font-family: var(--p-fuente-datos); font-weight: 500; font-size: var(--p-t-etiqueta);
+  color: var(--p-texto-suave);
+}
+.hud-orador { left: var(--p-segura-x); display: flex; align-items: center; gap: 10px; text-transform: lowercase; }
+.hud-orador b { width: 12px; height: 12px; border-radius: 50%; background: var(--p-cian); box-shadow: 0 0 12px currentColor; }
+.hud-reloj { right: var(--p-segura-x); text-align: right; font-variant-numeric: tabular-nums; }
+.hud-reloj small { font-size: var(--p-t-etiqueta); color: var(--p-texto-tenue); margin-right: 8px; }
+.hud-reloj.pasado { color: var(--p-alarma); }
+.hud-reloj.pasado::before { content: "● "; animation: parpadeo 1s steps(2) infinite; }
+@keyframes parpadeo { 50% { opacity: 0; } }
+
+/* ---------- Zona de contenido (dentro de cada <section>) ---------- */
+.zona {
+  position: absolute;
+  left: var(--p-segura-x); top: var(--p-contenido-arriba);
+  width: var(--p-segura-ancho); height: var(--p-contenido-alto);
+  box-sizing: border-box;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--p-espacio);
+}
+.zona.arriba { justify-content: flex-start; }
+.zona.centro { align-items: center; text-align: center; }
+
+/* Sangrado: decoración que puede salir de la zona segura (nunca texto). */
+.sangrado { position: absolute; inset: 0; pointer-events: none; }
+
+/* ---------- Tipografía ---------- */
+.reveal h1, .reveal h2, .reveal h3, .titulo, .display, .subtitulo {
+  font-family: var(--p-fuente-titulo); font-weight: 700; color: var(--p-texto);
+  margin: 0; text-transform: none; letter-spacing: -0.015em; line-height: var(--p-interlinea-titulo);
+  text-wrap: balance;
+}
+.display { font-size: var(--p-t-display); letter-spacing: -0.025em; }
+.titulo, .reveal h2 { font-size: var(--p-t-titulo); }
+.subtitulo, .reveal h3 { font-size: var(--p-t-subtitulo); font-weight: 500; color: var(--p-texto-suave); }
+.reveal p, .cuerpo { font-size: var(--p-t-cuerpo); line-height: var(--p-interlinea-cuerpo); margin: 0; max-width: 30em; text-wrap: pretty; }
+.cuerpo-fuerte { font-weight: 800; }
+.suave { color: var(--p-texto-suave); }
+.etiqueta {
+  font-family: var(--p-fuente-datos); font-weight: 500; font-size: var(--p-t-etiqueta);
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--p-texto-tenue);
+}
+.cian { color: var(--p-cian); }
+.verde { color: var(--p-verde-claro); }
+.calor { color: var(--p-calor-claro); }      /* SOLO cifras/temas de calor */
+.marca { color: var(--p-cian); }            /* resalta una palabra dentro de un título */
+
+/* Lista con viñeta de punto cian */
+.lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.lista li { font-size: var(--p-t-cuerpo); line-height: 1.3; padding-left: 30px; position: relative; }
+.lista li::before { content: ""; position: absolute; left: 4px; top: 0.5em; width: 10px; height: 10px; border-radius: 50%; background: var(--p-cian); }
+
+/* ---------- Datos ---------- */
+.cifra {
+  font-family: var(--p-fuente-titulo); font-weight: 700; font-size: var(--p-t-gigante);
+  line-height: 0.95; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: var(--p-cian);
+}
+.cifra.calor { color: var(--p-calor-claro); }
+.cifra .unidad { font-size: 0.4em; font-weight: 500; letter-spacing: 0; margin-left: 0.12em; color: var(--p-texto-suave); }
+.chip-dato {
+  display: inline-flex; align-items: center; gap: 8px; align-self: flex-start;
+  font-family: var(--p-fuente-datos); font-weight: 500; font-size: var(--p-t-etiqueta);
+  color: var(--p-texto); background: var(--p-superficie-fuerte);
+  border: 1px solid var(--p-borde); border-radius: var(--p-radio-pildora); padding: 6px 14px;
+}
+.chip-dato.calor { border-color: rgba(194, 65, 12, 0.7); color: var(--p-calor-claro); }
+/* Fuente de cada cifra (regla 1 y 3 de AGENTS.md): obligatoria bajo toda cifra */
+.fuente {
+  font-family: var(--p-fuente-datos); font-weight: 500; font-size: var(--p-t-etiqueta);
+  color: var(--p-texto-tenue); line-height: 1.3;
+}
+.reveal p.fuente { font-size: var(--p-t-etiqueta); line-height: 1.3; }
+.fuente::before { content: "Fuente · "; color: var(--p-azul-gris); }
+/* Logo del proyecto (PNG con fondo blanco): mosaico claro */
+.logo { display: block; background: #fff; padding: 14px 22px; border-radius: var(--p-radio); height: 64px; width: auto; box-sizing: content-box; }
+
+/* Sello estadístico (lo anima sello(el) en deck.js) */
+.sello {
+  display: inline-flex; align-items: center; justify-content: center; align-self: flex-start;
+  font-family: var(--p-fuente-datos); font-weight: 500; font-size: 24px; letter-spacing: 0.04em;
+  color: var(--p-verde-claro); border: 3px solid var(--p-verde-claro); border-radius: var(--p-radio-chico);
+  padding: 8px 16px; margin: 6px 6px 6px 8px; transform: rotate(-4deg);
+  box-shadow: 0 0 0 0 rgba(126, 217, 158, 0.5);
+}
+
+/* ---------- Superficies ---------- */
+.tarjeta {
+  background: var(--p-superficie); border: 1px solid var(--p-borde);
+  border-radius: var(--p-radio); padding: 22px 24px; box-sizing: border-box;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.tarjeta.calor { border-top: 4px solid var(--p-calor); color: var(--p-texto); } /* solo el borde es cálido */
+.tarjeta.acento { border-top: 4px solid var(--p-cian); }
+.columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+.columnas.texto-captura { grid-template-columns: 1fr 300px; }
+.rejilla-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.rejilla-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+/* Captura de la web en un teléfono (capturas 780x1688). Alto por defecto 460px. */
+.telefono {
+  position: relative; height: 460px; aspect-ratio: 780 / 1688; box-sizing: content-box;
+  border: 8px solid #1a2a44; border-radius: 34px; overflow: hidden; background: var(--p-tinta);
+  box-shadow: 0 30px 60px rgba(0, 4, 12, 0.55), 0 0 0 1px rgba(144, 241, 255, 0.18);
+  justify-self: center;
+}
+.telefono img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: top; }
+/* Tráiler 16:9 dentro de la zona segura */
+.video-trailer { width: 640px; max-width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: var(--p-tinta); }
+.telefono.chico { height: 360px; }
+.captura { display: block; max-width: 100%; max-height: 100%; border-radius: var(--p-radio); box-shadow: 0 24px 50px rgba(0, 4, 12, 0.5); }
+
+/* Modelo 3D (model-viewer) */
+.modelo { width: 320px; height: 320px; background: transparent; --poster-color: transparent; }
+
+/* Marcador de esqueleto: borrar al poner el contenido real */
+.pendiente {
+  font-family: var(--p-fuente-datos); font-weight: 500; font-size: 32px; letter-spacing: 0.06em;
+  color: var(--p-cian); border: 2px dashed rgba(81, 216, 232, 0.6); border-radius: var(--p-radio);
+  padding: 28px 40px; align-self: center;
+}
+
+/* ---------- Movimiento ---------- */
+/* Cambio de diapositiva: Reveal va con transition 'none'; aquí solo un fundido corto. */
+.reveal .slides > section.present { animation: aparecer var(--p-dur-corta) linear both; }
+@keyframes aparecer { from { opacity: 0; } to { opacity: 1; } }
+
+/* Estado inicial de lo que entra con entrar(); solo si deck.js está activo (clase en <html>). */
+.js-anim section[data-animacion] [data-entra] { opacity: 0; }
+.js-anim section[data-animacion].visto [data-entra] { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-seg i { transition: none; }
+  .hud-reloj.pasado::before { animation: none; }
+}
+
+/* Impresión / PDF de respaldo (?print-pdf): sin capas fijas */
+@media print {
+  .fondo-viento, .fondo-grano, .hud { display: none; }
+  .js-anim section[data-animacion] [data-entra] { opacity: 1 !important; }
+}
