@@ -35,3 +35,7 @@ uv run --python 3.12 --with requests --with pymannkendall --with numpy analisis/
 ```
 
 Salidas en `data/prototipo/` (ver su README). Sirve para contrastar el pipeline de arriba; los valores validados están en `docs/investigacion/hallazgos.md`.
+
+## Reproducir las cifras de MODIS
+
+Los CSV de AppEEARS (6 zonas) no van al repo: están en Drive, `datasets/appeears-6-zonas/` (`docs/DRIVE.md`). Cópialos a `data/cache/appeears/usuario/` y corre `python -m analisis.exportar`.
