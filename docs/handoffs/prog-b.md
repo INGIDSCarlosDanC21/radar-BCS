@@ -159,6 +159,14 @@ Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agric
 - **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro, "Mi ubicación" (necesita permiso del navegador; solo se probó que el botón existe). Las 8 imágenes de la carpeta de Drive no se usaron: son PNG de origen y licencia sin confirmar; se usaron los glifos Material Symbols que ya están en `web/assets/iconos/mapa`. Ehileen puede entregar SVG propios.
 - **Límites:** el código postal solo aparece si Nominatim lo trae en el nombre; no se inventa. El centro de La Paz (24.1423, -110.3132) queda fuera de las 6 zonas con dato.
 
+## 2026-11-15: sondeo de datos del mapa pesquero (#190, rama `prog-b/datos-pesca`)
+
+- **Hecho:** `docs/investigacion/datos-pesca.md` con fuente, estado y límites por dato, y una muestra real en `web/tests/fixtures/pesca-sondeo-2026-11-15.json`. Sin cambios de código ni de `data/`.
+- **Listo para usar en la web (verificado):** presión, visibilidad, probabilidad de lluvia, CAPE, punto de rocío, amanecer y atardecer (Open-Meteo Forecast); oleaje de fondo y de viento y nivel del mar con marea del modelo (Open-Meteo Marine, sin huecos en los 8 puertos).
+- **Necesita script de Luca:** clorofila numérica (ERDDAP) y ciclones (NHC): ambos sin CORS.
+- **Pendiente sin fuente verificada:** mareas oficiales, fase lunar, anomalía de SST, tallas, vedas con fechas, ANP, avisos oficiales.
+- **Error del Figma:** "NOM-009-SAG/PESC" es el procedimiento de vedas, no de tallas mínimas.
+
 ## 2026-11-15: fichas expandibles del Mapa Pesquero (rama `prog-b/pesca-fichas`)
 
 - **Hecho:** los 4 mosaicos de Pesca pasan a fichas como las del Mapa Agrícola (mismas clases `.ag-*`, mismo formato): al abrir una se ocultan las otras 3 y ocupa todo el ancho; cabecera con ícono, lectura del modelo (no oficial), tarjetas con cifras, pendientes, fuentes y Cerrar (arriba, abajo y con Escape).
