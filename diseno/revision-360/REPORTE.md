@@ -1,4 +1,39 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo. Documento de diseño de 2026-11-14 (barra de 4 pestañas, 6 o 7 localidades).** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Revisión a 360 px del sitio real (issue #98)
+
+## Tercera pasada sobre `dev` (2026-11-15, 11:00, Ehileen)
+
+Medición con la lógica de `diseno/tools/revisar-360.js`, en un viewport de 360x800, sobre `dev` en `223099a`, con la navegación actual (Clima · Pesca · Inicio · Agro · Avisos).
+- **Rutas revisadas:** `#inicio`, `#clima`, `#clima/acciones`, `#pesca`, `#agricola`, `#avisos` y `#ficha/{calor|vegetacion|lluvia|agua}`, en español; también las principales en inglés.
+- **Cómo se midió:**
+  - contraste de texto con el sistema en modo claro y en modo oscuro;
+  - foco con la tecla Tab real;
+  - reglas `:focus-visible` de todas las hojas de estilo;
+  - `prefers-reduced-motion` en el código.
+
+**Resultado global:**
+- Ninguna pantalla tiene scroll horizontal, ni en español ni en inglés.
+- No aparecen "null", "undefined" ni "NaN".
+- Cada pantalla tiene un solo `<h1>`.
+- En inglés no quedan textos en español.
+
+| Hallazgo | Estado | Dato medido |
+|---|---|---|
+| P0 Scroll horizontal en Ficha de lluvia | **Resuelto** | La página mide 360 px |
+| P1 Letra de 10–11 px en Inicio, Fichas y Agro | **Resuelto** | 0 textos menores de 12 px en Inicio, Clima, Agro y las 4 Fichas |
+| P1 Zoom del mapa de 30 px | **Resuelto** | Mide 40x40 en Clima |
+| P1 Modo oscuro roto en Inicio y Agro | **Resuelto** | La web declara `color-scheme: light` y se ve siempre en claro. Con el sistema en oscuro, 0 textos bajo 4.5:1 en las 6 rutas |
+| P1 Pines de Agro cortados (#128) | **Sigue, menor** | Las etiquetas ya no tapan la vista. Los pines miden 24 px de alto y 16x16 los puntos chicos (45 áreas táctiles menores de 44 px en Agro) |
+| P1 Pines de Pesca | **Nuevo** | `button.mi-pin` de 77x34 px (menos de 44 de alto); 14 áreas táctiles chicas |
+| P1 Avisos: letra y enlaces chicos | **Nuevo** | 8 etiquetas `.av-cat` ("Agrícola", "Mar") en 11 px; enlaces "Ver ficha" de 65x16 px |
+| P1 Clima: enlace "Open-Meteo" | **Nuevo** | 82x19 px |
+| P1 Foco poco visible en Inicio | **Nuevo** | `home.css:29` (`.hm a:focus-visible`) usa un contorno cian `#51d8e8`, que sobre las tarjetas claras da 1.61:1 (WCAG 2.4.11 pide 3:1). Arreglo: dejar el cian solo en el bloque oscuro de arriba y usar `var(--acento)` (#0c2340) en las tarjetas |
+| P2 Logo de la cabecera | **Nuevo** | El enlace `.marca` mide 128x36 px (menos de 44 de alto). Se corrige en el PR del logo |
+| P2 Chips de puertos en Pesca | Nota | 19 chips en una fila con scroll lateral (2601 px). Funciona, pero no hay pista visual de que hay más chips a la derecha |
+| Reducir movimiento | **OK** | Las animaciones de satélite, cielo, Pesca, Agro, "Ver más" y el esqueleto de carga se detienen con `prefers-reduced-motion` |
+
+Falta revisar con un lector de pantalla real y en un teléfono real (#71).
 
 ## Actualización: segunda pasada sobre `dev` (2026-11-14, noche)
 

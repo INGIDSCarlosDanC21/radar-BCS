@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo.** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Plan: Clima, lo que falta (domingo 15 de noviembre)
 
 Origen: el documento "Plan de acción" (control de instrucciones que usan Luca y Diego con sus asistentes) y el Figma `diseno/pantallas/clima-*.png`. Pide la vista de Clima con el **buscador arriba**, el mapa y **4 tarjetas** (*Calor y sensación térmica*, *Radiación UV y exposición solar*, *Viento, oleaje y corrientes*, *Humedad y lluvia*), con Agro como referencia. Decisión de Carlos (2026-11-15): entra, **solo con datos reales** y con **corte a las 09:30**; si no está verde, se envía sin lo que falte.

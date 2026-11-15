@@ -35,6 +35,8 @@ Si una ruta no abre justo la pantalla, navega con el menú inferior y toca; veri
 
 ## Herramientas
 
+- **Decisión (2026-11-15): el video se arma con Remotion** en [`video/`](../../video/README.md). Capturas: `node scripts/capturar-video.mjs` (Chrome sin ventana, 390 × 844 a 1080 px de ancho, inglés, espera datos). Render: `cd video && npm install && npm run render`. Texto y tiempos en `video/src/guion.ts`. Si cambia la web (p. ej. la UI móvil compacta), repetir las capturas antes de renderizar.
+
 - Esta computadora **no tiene ffmpeg**. Opciones: instalarlo con `winget install Gyan.FFmpeg`, o editar en CapCut, DaVinci Resolve o Clipchamp.
 - Para capturas fijas hay un script de Chrome sin ventana en `C:\Users\mitte\.claude\jobs\d07f6ee7\tmp\captura.mjs` (acepta un JSON con la URL, el ancho y pasos de JavaScript/espera/foto). Sirve para tomas fijas; las tomas con movimiento se graban con la grabadora de pantalla.
 

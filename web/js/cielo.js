@@ -204,6 +204,7 @@
       reloj = null;
       var sec = raiz.querySelector('#hm-cielo');
       if (!sec || (sec.isConnected === false)) return; // ya se salió de Inicio
+      if (oculta()) { programar(raiz, opciones); return; }   // pestaña oculta: no gasta consultas
       var img = raiz.querySelector('.cl-img');
       if (img && img.src.indexOf('gibs') >= 0 && !(img.getAttribute && img.getAttribute('data-anim'))) img.src = urlGoes(Date.now(), 0) + '&_=' + Math.floor(Date.now() / (CADA_MIN * 60000));
       cargar(raiz, opciones);
@@ -253,16 +254,34 @@
       im.src = u;
     })(k);
   }
-  /* Una sola respuesta compartida por Inicio y la pestaña Mapa durante CADA_MIN minutos: las dos pantallas muestran
+  /* Una sola respuesta compartida por Inicio y la pantalla Clima durante CADA_MIN minutos: las dos pantallas muestran
      siempre las mismas cifras. opciones.fetch permite probar sin red. */
   var CACHE = null;
+  /* Respaldo (2026-11-15): la última respuesta buena se guarda en localStorage y se usa si Open-Meteo no responde
+     (p. ej. 429 "Daily API request limit exceeded" cuando muchas personas comparten la misma red). Se marca con su hora:
+     la sección dice "El dato tiene más de 1 hora" si es viejo y la pantalla Clima avisa que es un dato guardado. Vale 24 h. */
+  var GUARDADO = 'rb-cielo-ultimo', RESPALDO_MS = 24 * 3600000;
+  function almacen() { try { return typeof localStorage !== 'undefined' ? localStorage : null; } catch (e) { return null; } }
+  function guardar(json) { var s = almacen(); if (s) try { s.setItem(GUARDADO, JSON.stringify({ t: Date.now(), r: json })); } catch (e) { /* cuota llena */ } }
+  function respaldo() {
+    var s = almacen(); if (!s) return null;
+    try { var g = JSON.parse(s.getItem(GUARDADO) || 'null'); return g && g.t && g.r && Date.now() - g.t < RESPALDO_MS ? g : null; } catch (e) { return null; }
+  }
+  /* Mientras la pestaña está oculta no se pide nada (cada pedido cuenta 20 lugares para el límite diario de Open-Meteo). */
+  function oculta() { return typeof document !== 'undefined' && document.hidden === true; }
   function datos(opciones) {
     opciones = opciones || {};
     var pedir = opciones.fetch || (typeof fetch !== 'undefined' ? fetch : null);
     if (!pedir) return Promise.reject(new Error('sin fetch'));
     var ahora = Date.now();
     if (!opciones.fetch && CACHE && ahora - CACHE.t < CADA_MIN * 60000) return CACHE.p;
-    var p = pedir(url()).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(unir);
+    var p = pedir(url()).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (j) {
+      if (!opciones.fetch) guardar(j);
+      return unir(j);
+    }, function (e) {
+      var g = !opciones.fetch && respaldo(); if (!g) throw e;
+      var filas = unir(g.r); filas.guardado = { t: g.t, motivo: e && e.message }; return filas;
+    });
     if (!opciones.fetch) { CACHE = { t: ahora, p: p }; p.catch(function () { CACHE = null; }); }
     return p;
   }
@@ -288,15 +307,15 @@
       programar(raiz, opciones);
       if (!opciones.fetch) animar(raiz);
       return true;
-    }).catch(function () {
-      if (sec.innerHTML.indexOf('cl-estado') >= 0) sec.innerHTML = sec.innerHTML.replace(/<p class="cl-estado">[\s\S]*<\/p>/, '<p class="cl-estado cl-error">' + t('cielo.error') + '</p>');
+    }).catch(function (e) {
+      if (sec.innerHTML.indexOf('cl-estado') >= 0) sec.innerHTML = sec.innerHTML.replace(/<p class="cl-estado">[\s\S]*<\/p>/, '<p class="cl-estado cl-error">' + t(e && e.message === '429' ? 'cielo.limite' : 'cielo.error') + '</p>');
       sec.removeAttribute('aria-busy');
       programar(raiz, opciones);
       return false;
     });
   }
 
-  var RBCielo = { LUGARES: LUGARES, ESTADOS: ESTADOS, grupo: grupo, estado: estado, url: url, posicion: posicion, unir: unir,
+  var RBCielo = { respaldo: respaldo, GUARDADO: GUARDADO, oculta: oculta, LUGARES: LUGARES, ESTADOS: ESTADOS, grupo: grupo, estado: estado, url: url, posicion: posicion, unir: unir,
     minutosDesde: minutosDesde, seccion: seccion, pines: pines, leyenda: leyenda, marcoSeccion: marcoSeccion, marcoMapa: marcoMapa,
     cargar: cargar, datos: datos, uvCat: uvCat, rumbo: rumbo, num: num, icono: icono, GOES: GOES, ANIM: ANIM, animar: animar, urlGoes: urlGoes, tiempoGoes: tiempoGoes, CADA_MIN: CADA_MIN };
   if (typeof window !== 'undefined') window.RBCielo = RBCielo;

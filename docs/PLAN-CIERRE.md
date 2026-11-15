@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo.** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Plan de cierre: noche del sábado 14 de noviembre
 
 Escrito por el asistente del Líder a las 22:30 (hora de La Paz), tras revisar `dev`, los PR abiertos y las ramas de cada quien. Carlos lo confirma o lo corrige. Lista de lo que se entrega en la plataforma: [`entrega/CHECKLIST-ENVIO.md`](entrega/CHECKLIST-ENVIO.md).

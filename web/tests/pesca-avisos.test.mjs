@@ -235,7 +235,7 @@ test('menú: 5 secciones con ícono, Inicio al centro, sin hoja "Más" (Acciones
   assert.equal((barra.match(/mi-ic/g) || []).length, 5, 'cada pestaña de abajo lleva ícono');
   assert.match(barra, /<a href="#inicio" data-nav="inicio" class="barra-centro">/, 'Inicio es el botón central');
   assert.match(css, /\.menu-sup\{display:none\}/); assert.match(css, /@media \(min-width:1024px\)\{[\s\S]*\.menu-sup\{display:flex/); assert.match(css, /\.barra,\.mas\{display:none\}/);
-  assert.match(css, /\.barra a\.barra-centro::before/);
+  assert.match(css, /\.barra a\.barra-centro\{[^}]*background:/, 'Inicio destacado con fondo de píldora (detalle en barra-movil.test.mjs)');
   assert.equal(Menu.enMas('agricola'), false); assert.equal(Menu.enMas('acciones'), false);
   assert.equal(Menu.seccionDe('#pesca'), 'pesca'); assert.equal(Menu.seccionDe('#ficha/calor'), 'ficha'); assert.equal(Menu.seccionDe('#nada'), 'inicio');
 });

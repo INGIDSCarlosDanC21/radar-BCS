@@ -16,11 +16,11 @@ Preparado el 2026-11-15 por el asistente del Líder. **Todo el contenido de la p
 | # | Campo de la plataforma | Qué pegar | Conteo / nota |
 |---|---|---|---|
 | 1 | **Project Name** | `Radar BCS` (reemplaza el "Project OptiPaz" que trae) | |
-| 2 | **High-Level Project Summary** | Texto de [`01`](01-high-level-summary.md) (el párrafo bajo "Summary") | **198 palabras, 1199 caracteres** (límite 50-200 palabras; la plataforma topa en 1500 caracteres) |
+| 2 | **High-Level Project Summary** | Texto de [`01`](01-high-level-summary.md) (el párrafo bajo "Summary") | **198 palabras, 1203 caracteres** (límite 50-200 palabras; la plataforma topa en 1500 caracteres) |
 | 3 | **Link to Project Demo** | **UN solo** enlace público al video de 30 s (o a las diapositivas, máx. 7). Ver [`02`](02-demo-link.md), el guion [`08b`](08b-video-shotlist.md) y el brief [`08c`](08c-brief-video.md). Voz sintética de ElevenLabs, declarada en el video | **Pendiente: falta grabar el video.** Probar el enlace en una ventana sin sesión. Sin menores (nombre, voz ni imagen); subtítulos en inglés quemados |
 | 4 | **Link to Final Project** | `https://ingidscarlosdanc21.github.io/radar-BCS/?lang=en` (abre directo en inglés) y, si cabe, el repositorio `https://github.com/INGIDSCarlosDanC21/radar-BCS` | Probado sin sesión el 2026-11-15; volver a abrirlo justo antes de enviar |
 | 5 | **Detailed Project Description** | Texto de [`04`](04-project-details.md), **sin** los comentarios `<!-- -->` ni el TODO de la última viñeta (hardware: quitar la frase "TODO..." o la del celular real si #71 aún no se hizo) | Editor de texto enriquecido: pegar como texto sin formato |
-| 6 | **Use of Super Intelligence (SI)** | Lista desplegable ("select all that apply"): marcar **todo lo usado** (modelo de lenguaje / asistente de código: Claude Code; generación de imágenes: Gemini; voz sintética: ElevenLabs (solo si se usó de verdad en el video); Google Stitch, o "Other" y escribir "Google Stitch" si no está). Texto de [`05`](05-use-of-ai.md) | **No lo ven los jueces**; sí ven la marca de agua del logo, el pie y los metadatos. No omitir nada (regla 10 de `AGENTS.md`) |
+| 6 | **Use of Super Intelligence (SI)** | Lista desplegable ("select all that apply"): marcar **todo lo usado** (modelo de lenguaje / asistente de código: Claude Code; generación de imágenes: Gemini; voz sintética: ElevenLabs (decidido el 2026-11-15: la voz del video); Google Stitch, o "Other" y escribir "Google Stitch" si no está). Texto de [`05`](05-use-of-ai.md) | **No lo ven los jueces**; sí ven la marca de agua del logo, el pie y los metadatos. No omitir nada (regla 10 de `AGENTS.md`) |
 | 7 | **NASA Data** | Filas de la tabla de abajo (A) | "Link Text" + "Link Url", una fila por recurso, con `https://` completo |
 | 8 | **Space Agency Partner Data and Other References** | Filas de la tabla de abajo (B). **Partner Data: ninguno** | Una fila por recurso |
 | 9 | Casillas finales | **Agree to Terms and Conditions** y **Confirm All Work is Original** | Obligatorias; las marca quien envía |
@@ -81,7 +81,7 @@ Los textos largos de licencia y "dónde se usa" de cada fila están en [`06`](06
 - [ ] **Sin nombre, voz ni imagen de menores** en el texto, el video, las capturas y la lista de integrantes del campo de detalles.
 - [ ] Enlace de la **demo** y del **proyecto** abiertos en una ventana **sin sesión**, sin contraseña ni registro.
 - [ ] Video de **30 s o menos** con subtítulos en inglés (o diapositivas, máx. 7 contando la portada).
-- [ ] Resumen entre 50 y 200 palabras y menos de 1500 caracteres (hoy: 198 y 1199).
+- [ ] Resumen entre 50 y 200 palabras y menos de 1500 caracteres (hoy: 198 y 1203).
 - [ ] Ninguna fila dice "TODO" ni queda un campo en español.
 - [ ] Todos los integrantes en *Members*, en La Paz y fuera de la lista de espera.
 - [ ] Pulsar **Submit for Judging** antes del domingo 15 de noviembre a las 23:59 (meta: 13:00). Debe aparecer un **banner de confirmación** y el panel debe decir "Project Submitted for Judging": guardar una **captura de pantalla** en esta carpeta.

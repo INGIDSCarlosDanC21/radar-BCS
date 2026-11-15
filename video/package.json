@@ -1,0 +1,40 @@
+{
+  "name": "radar-bcs-video",
+  "version": "1.0.0",
+  "description": "Video de 30 s de Radar BCS (NASA Space Apps 2026, equipo OptiPaz)",
+  "repository": {},
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "private": true,
+  "dependencies": {
+    "@remotion/cli": "4.0.543",
+    "@remotion/google-fonts": "4.0.543",
+    "@remotion/media": "4.0.543",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.543"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.543",
+    "@types/react": "19.3.0",
+    "@types/web": "0.0.166",
+    "eslint": "10.12.0",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio",
+    "capturas": "node ../scripts/capturar-video.mjs",
+    "render": "remotion render RadarBCS30s out/radar-bcs-30s.mp4",
+    "render:prueba": "remotion render RadarBCS30s out/prueba-silencio.mp4",
+    "duracion": "remotion ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 out/radar-bcs-30s.mp4",
+    "duracion:voz": "remotion ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1 public/narracion.mp3",
+    "build": "remotion bundle",
+    "lint": "eslint src && tsc"
+  },
+  "allowScripts": {
+    "esbuild": false
+  }
+}

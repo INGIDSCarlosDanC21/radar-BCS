@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo.** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Plan: pestañas Pesca y Avisos (fieles a Figma, mapa de iconos, datos reales)
 
 Pedido de Carlos (chat, 2026-11-15): agregar las pestañas **Pesca** y **Avisos y Alertas**, fieles al Figma con ajustes de proporciones; el mapa es de **iconos**; **sin gráficas, sin tablas y sin descripciones largas**; iconos CC0 o libres; bien integradas. Esto **reabre** la regla 1 de `docs/PLAN-CIERRE.md` ("Pesca no se construye"), con la condición de siempre: **ninguna cifra ni aviso inventado** (regla 1 de `AGENTS.md`).
