@@ -88,7 +88,7 @@
     return API + '?latitude=' + LUGARES.map(function (l) { return l.lat; }).join(',') +
       '&longitude=' + LUGARES.map(function (l) { return l.lon; }).join(',') +
       '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,is_day,wind_speed_10m,wind_direction_10m,surface_pressure,uv_index' +
-      '&daily=temperature_2m_min&timezone=America%2FMazatlan&forecast_days=1';
+      '&daily=temperature_2m_min,temperature_2m_max,uv_index_max,precipitation_probability_max,wind_gusts_10m_max&timezone=America%2FMazatlan&forecast_days=1';
   }
   /* Posición del pin sobre la imagen (porcentaje del ancho y alto). */
   function posicion(l) {
@@ -99,7 +99,9 @@
     var l = Object.prototype.toString.call(resp) === '[object Array]' ? resp : [resp];
     return LUGARES.map(function (lugar, k) {
       var r = l[k] || {}, c = r.current || {}, d = r.daily || {};
-      return { lugar: lugar, c: c, min: d.temperature_2m_min ? d.temperature_2m_min[0] : null, e: estado(c.weather_code, c.is_day) };
+      function hoy(v) { return d[v] && typeof d[v][0] === 'number' ? d[v][0] : null; }
+      return { lugar: lugar, c: c, min: hoy('temperature_2m_min'), max: hoy('temperature_2m_max'), uvMax: hoy('uv_index_max'),
+        lluvia: hoy('precipitation_probability_max'), rachas: hoy('wind_gusts_10m_max'), e: estado(c.weather_code, c.is_day) };
     });
   }
   /* Minutos entre la hora del dato (hora local de La Paz) y "ahora" (Date). */
@@ -185,6 +187,19 @@
       cargar(raiz, opciones);
     }, ms);
   }
+  /* Una sola respuesta compartida por Inicio y la pestaña Mapa durante CADA_MIN minutos: las dos pantallas muestran
+     siempre las mismas cifras. opciones.fetch permite probar sin red. */
+  var CACHE = null;
+  function datos(opciones) {
+    opciones = opciones || {};
+    var pedir = opciones.fetch || (typeof fetch !== 'undefined' ? fetch : null);
+    if (!pedir) return Promise.reject(new Error('sin fetch'));
+    var ahora = Date.now();
+    if (!opciones.fetch && CACHE && ahora - CACHE.t < CADA_MIN * 60000) return CACHE.p;
+    var p = pedir(url()).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(unir);
+    if (!opciones.fetch) { CACHE = { t: ahora, p: p }; p.catch(function () { CACHE = null; }); }
+    return p;
+  }
   function cargar(raiz, opciones) {
     opciones = opciones || {};
     if (!raiz || typeof raiz.querySelector !== 'function') return Promise.resolve(false);
@@ -194,11 +209,9 @@
       var ins = raiz.querySelector('.hm-insignia'); if (ins) ins.lastChild.nodeValue = t('home.insignia');
       var cr = raiz.querySelector('.hm-cred'); if (cr) cr.textContent = t('home.cred');
     };
-    var pedir = opciones.fetch || (typeof fetch !== 'undefined' ? fetch : null);
-    if (!sec || !pedir) return Promise.resolve(false);
-    return pedir(url()).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (resp) {
+    if (!sec || (!opciones.fetch && typeof fetch === 'undefined')) return Promise.resolve(false);
+    return datos(opciones).then(function (filas) {
       // Una sola respuesta pinta las tarjetas, los pines y la hora de la leyenda: siempre coinciden.
-      var filas = unir(resp);
       sec.innerHTML = seccion(filas, opciones.ahora);
       sec.removeAttribute('aria-busy');
       if (pin) pin.innerHTML = pines(filas);
@@ -216,7 +229,7 @@
 
   var RBCielo = { LUGARES: LUGARES, ESTADOS: ESTADOS, grupo: grupo, estado: estado, url: url, posicion: posicion, unir: unir,
     minutosDesde: minutosDesde, seccion: seccion, pines: pines, leyenda: leyenda, marcoSeccion: marcoSeccion, marcoMapa: marcoMapa,
-    cargar: cargar, uvCat: uvCat, rumbo: rumbo, GOES: GOES, CADA_MIN: CADA_MIN };
+    cargar: cargar, datos: datos, uvCat: uvCat, rumbo: rumbo, num: num, icono: icono, GOES: GOES, CADA_MIN: CADA_MIN };
   if (typeof window !== 'undefined') window.RBCielo = RBCielo;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBCielo;
 })();
