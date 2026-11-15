@@ -1,0 +1,28 @@
+/* Fuentes e IA documentadas fuera de la pantalla (regla indicada por Carlos, 2026-11-15):
+   toda fuente de datos y todo uso de IA debe estar documentado, pero no hace falta repetirlo en cada tarjeta.
+   La documentación completa está en el repositorio (docs/FUENTES-Y-IA.md, docs/RECURSOS.md, docs/entrega/05, 06 y 07)
+   y la web enlaza a ella desde el pie.
+   Este archivo solo oculta líneas repetidas para ahorrar scroll; el texto sigue en el código y es fácil de volver a mostrar.
+   NO se ocultan: la atribución de OpenStreetMap (licencia ODbL, esquina del mapa), la de Open-Meteo (CC BY 4.0),
+   los rótulos de seguridad ("no es aviso oficial", "no son estaciones"), las limitaciones ni el pie de página. */
+
+/* Encabezado: sin la etiqueta "AI-generated" junto al logo (el logo sigue declarado en docs/entrega/05 y RECURSOS).
+   El <span class="marca-ia"> se borra de index.html cuando se fusione el PR #159 (toca esa misma línea). */
+.marca-ia { display: none; }
+
+/* Inicio: "Fuente: …" repetida en cada una de las 4 tarjetas, y el crédito de la imagen GOES
+   (el encabezado de la imagen ya dice "Imagen GOES-West · NASA GIBS") */
+.hm .hm-fuente,
+.hm-cred { display: none; }
+
+/* Mapa Agrícola: "Fuente: …" repetida en cada tarjeta (las fuentes completas siguen en "Fuentes (n)" de cada ficha) */
+.ag-tj-fuente { display: none; }
+
+/* Mapa: el crédito de las imágenes satelitales ya sale en la esquina del mapa ("NASA EOSDIS GIBS / MODIS Terra") */
+.sim-sat-cred { display: none; }
+
+/* Tarjetas del Mapa Agrícola del mismo alto cuando hay varias por fila (pedido de UI/UX, 2026-11-15).
+   En celular (una columna) cada tarjeta mide lo que necesita, para no sumar scroll. */
+@media (min-width: 640px) {
+  .ag-tjs { grid-auto-rows: 1fr; }
+}

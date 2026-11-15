@@ -322,7 +322,7 @@
       '<div id="sim-sat-ley" class="sim-ley"></div>' +
       '<p class="sim-frase" id="sim-sat-txt" aria-live="polite"></p>' +
       '<p class="aviso">' + esc(t('sat.aviso')) + '</p>' +
-      '<p class="fuente">' + esc(t('sat.cred')) + '</p></section>';
+      '<p class="fuente sim-sat-cred">' + esc(t('sat.cred')) + '</p></section>';
   }
   function sateliteActivar(raiz) {
     var cont = raiz.querySelector('#sim-sat');
