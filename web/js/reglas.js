@@ -43,8 +43,28 @@
   function icono(id) {
     return ICONOS[id] ? '<img class="ico" src="assets/iconos/' + ICONOS[id] + '.svg" alt="" aria-hidden="true" height="20">' : '';
   }
+  /* Buscador de lugares compartido (Clima y Pesca): sin acentos, sin mayúsculas y sin espacios de sobra. Solo compara
+     texto con la lista que ya está en memoria: no hace ninguna petición. nombres(x) da los nombres de cada elemento
+     (por omisión [x.nombre]). Devuelve {exacto: índice o -1, parciales: [índices que contienen el texto]}. */
+  function sinAcentos(s) { var x = String(s == null ? '' : s).toLowerCase().trim(); return x.normalize ? x.normalize('NFD').replace(/[̀-ͯ]/g, '') : x; }
+  function coincidencias(lista, texto, nombres) {
+    var q = sinAcentos(texto), r = { exacto: -1, parciales: [] };
+    if (!q) return r;
+    (lista || []).forEach(function (x, i) {
+      var ns = (nombres ? nombres(x) : [x.nombre]).map(sinAcentos);
+      if (ns.indexOf(q) >= 0) { if (r.exacto < 0) r.exacto = i; }
+      else if (ns.some(function (n) { return n.indexOf(q) >= 0; })) r.parciales.push(i);
+    });
+    return r;
+  }
+  /* Índice del elemento con ese nombre exacto o, si solo uno lo contiene, ese; si no, -1. */
+  function buscarNombre(lista, texto, nombres) {
+    var r = coincidencias(lista, texto, nombres);
+    return r.exacto >= 0 ? r.exacto : r.parciales.length === 1 ? r.parciales[0] : -1;
+  }
   var RB = { icono: icono, num: num, dec: dec, pTexto: pTexto, signo: signo, clase: clase,
-    textoCambio: textoCambio, textoFuente: textoFuente, mostrarFranja: mostrarFranja, explicaMetodo: explicaMetodo };
+    textoCambio: textoCambio, textoFuente: textoFuente, mostrarFranja: mostrarFranja, explicaMetodo: explicaMetodo,
+    sinAcentos: sinAcentos, coincidencias: coincidencias, buscarNombre: buscarNombre };
   if (typeof window !== 'undefined') window.RB = RB;
   if (typeof module !== 'undefined' && module.exports) module.exports = RB;
 })();
