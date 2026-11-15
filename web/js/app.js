@@ -76,9 +76,8 @@
   }
 
   function mapaVista() {
-    // Arriba, el "Mapa Meteorológico" y el "Diagnóstico Climático Territorial" de Figma (clima-mapa.js); abajo, las tendencias por zona.
-    var CM = window.RBClimaMapa;
-    var h = (CM ? CM.html() : '<h1>' + t('titulo.mapa') + '</h1>') + '<p class="lead">' + t('mapa.lead') + '</p><div class="chips" role="group" aria-label="' + t('mapa.grupo') + '">';
+    // El Mapa Meteorológico vive ahora en la pestaña Clima; aquí solo quedan las tendencias por zona.
+    var h = '<h1>' + t('titulo.mapa') + '</h1><p class="lead">' + t('mapa.lead') + '</p><div class="chips" role="group" aria-label="' + t('mapa.grupo') + '">';
     IDS.forEach(function (id) {
       h += '<button type="button" class="chip" data-ind="' + id + '" aria-pressed="' + (id === indMapa) + '">' + esc(tit(ind(id))) + '</button>';
     });
@@ -92,7 +91,6 @@
     pintar();
     bindBusqueda();
     if (window.RBSim) window.RBSim.sateliteActivar(main);
-    if (CM) CM.cargar(main);
   }
 
   /* Búsqueda de un lugar sobre el mapa de zonas (zonas-busqueda.js). */
@@ -411,7 +409,12 @@
       var modulo = sec === 'pesca' ? window.RBPesca : sec === 'avisos' ? window.RBAvisos : window.RBClima;
       document.getElementById('franja').hidden = true;
       main.setAttribute('aria-busy', 'true');
-      if (modulo) modulo.render(main, h[1] || null);
+      if (sec === 'clima' && window.RBClimaMapa) {
+        // La pestaña Clima muestra el "Mapa Meteorológico" (clima-mapa.js); el detalle de cada tarjeta sigue en clima.js.
+        main.innerHTML = window.RBClimaMapa.html().replace(/<h2 class="cm-zonas-h">[^]*?<\/h2>/, '');
+        main.removeAttribute('aria-busy');
+        window.RBClimaMapa.cargar(main, { abrir: h[1] || null, lugar: h[2] || null });
+      } else if (modulo) modulo.render(main, h[1] || null, h[2] || null);
       document.title = 'Radar BCS — ' + t('titulo.' + sec);
       return;
     }

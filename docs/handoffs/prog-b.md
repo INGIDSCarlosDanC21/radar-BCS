@@ -186,3 +186,11 @@ Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agric
 - **Animación:** igual que Agrícola: la ficha crece desde su tarjeta, al cerrar vuelve a ella, scroll suave, sin animar con `prefers-reduced-motion`.
 - **Nota:** el commit con las variables nuevas de `datos-vivos.js` no había llegado a `dev` (se fusionó #191 antes); va en esta rama.
 - **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro, fluidez medida en un equipo lento.
+
+## 2026-11-15: Mapa Meteorológico pasa de Mapa a Clima, con fichas por lugar (rama `prog-b/clima-mapa-fichas`)
+
+- **Qué cambió:** el "Mapa Meteorológico" y su "Diagnóstico Climático Territorial" salieron de la pestaña Mapa (que ahora arranca con sus indicadores) y son la vista de Clima. Se quitaron los chips de capa sobre el mapa de `clima.js`.
+- **Fichas por lugar:** al tocar un lugar del mapa, las 4 tarjetas y la ficha abierta (calor, UV, viento, lluvia) muestran los valores de ese lugar, sin cambiar de vista. La barra cambia a `#clima/<ficha>/<lugar>` (enlace directo; no recarga).
+- **Datos:** los de siempre, del modelo Open-Meteo (no son estaciones). Comondú no tiene ficha (no hay pueblo equivalente en `RBVivo.PUERTOS`) y lo dice en pantalla.
+- **Medido:** 168 pruebas pasan; en el navegador de prueba tarjeta y ficha coinciden (Loreto máx. 28 °C).
+- **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro.
