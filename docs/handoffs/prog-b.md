@@ -65,3 +65,14 @@ node --test "web/tests/*.test.mjs"
 - Web base con 4 pantallas y datos de prueba; contrato de datos propuesto.
 - Tarde: datos reales de NASA POWER conectados e issue #36 resuelto.
 - Noche: vegetación real (PR #54) y tendencias reales por punto en el Mapa (issue #9).
+
+## 2026-11-14 (noche): AVISO de Carlos sobre el login con Supabase (leer antes de seguir)
+
+Carlos pidió dejar esto por escrito. El detalle completo y la lista de condiciones están en el issue #73; resumen:
+
+- **El login es opcional.** Las 4 pantallas funcionan sin cuenta; el jurado y la demo entran sin cuenta. Si lo vuelves obligatorio, avisa a Carlos antes (cambia el relato "sin cuenta").
+- **Solo Supabase Auth con correo y contraseña.** No pidas nada más (nombre, edad, teléfono, foto). Row Level Security en cualquier tabla. **Nunca** `service_role` ni claves en el repo (es público); usa `.env`.
+- **Aviso en el sitio:** qué se guarda (solo el correo), para mayores de 18, cómo borrar la cuenta.
+- **Registra Supabase** en `docs/RECURSOS.md` y en `docs/entrega/04-project-details.md`, y arregla ahí la frase "needs no account".
+- **Rama `prog-b/login`, PR a `dev`.** **Hora de corte: domingo 15 nov, 09:00:** si no está probado (con y sin sesión, 360 px y celular real, issue #71) y opcional, no entra a `main`.
+- **Prioridad:** 1) integrar la interfaz de UI/UX, 2) probar en celular real (#71), 3) login.

@@ -31,15 +31,15 @@ Every number on the site shows its data source. The site shows what changed, not
 Results so far (2001-2025; NASA POWER is one point of about 50 km around La Paz; MODIS is six sample points in the city):
 
 - **Air temperature (NASA POWER):** rose by about 0.06 °C per year, roughly 1.5 °C in total (a linear estimate, not a measurement). The change is statistically significant (p < 0.001).
-- **Land surface temperature (MODIS, daytime, average of six points):** no clear change (about -0.02 °C per year, p = 0.11, not significant). This does **not** match the air temperature, and we show both instead of picking one. Air and ground temperature are different measurements, and the satellite sees the ground at one time of day. At two of the six points (El Centenario and Sur) the ground temperature fell significantly; we do not interpret this yet.
+- **Land surface temperature (MODIS, daytime, average of six points):** no clear change (about -0.02 °C per year, p = 0.11, not significant). This does **not** match the air temperature, and we show both instead of picking one. Air and ground temperature are different measurements, and the satellite sees the ground at one time of day. At two of the six points (El Centenario and Sur) one statistical test flags a fall in ground temperature, but a second test does not, and the fall comes from 2022-2025; we do not interpret it yet, and the site shows "no clear change" for all six points.
 - **Vegetation (MODIS NDVI, average of six points):** fell by about 0.02 NDVI units in 24 years, which is statistically significant (p < 0.001). Some months have no valid reading at urban points, so this is a rough picture, not a measurement of the whole city.
 - **Rainfall (NASA POWER):** varies a lot from year to year, and no clear change is detected in the annual total (p = 0.13, not significant). Not detecting a change does not prove there is none.
-- **Groundwater:** TODO (GRACE/GLDAS analysis not done yet; shown as "no data" on the site).
-- **Zones of La Paz with the most change:** six sample points only (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), not full neighborhood polygons. The map zones are still test data and are labeled "TEST DATA" on the site. TODO: update if the map gets real zones.
+- **Water (NASA GRACE and GRACE-FO, JPL Mascon CRI RL06.3Mv04, 2002-2026):** total water stored in the region (soil, surface water and aquifers together) rose by about 1.4 cm of water equivalent, a statistically significant change (p = 0.009, seasonal Mann-Kendall with a correction for autocorrelation; 2026 is a partial year). The satellite sees hundreds of kilometers at once, so this describes the region, **not the La Paz aquifer**.
+- **Zones of La Paz with the most change:** six sample points only (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), each drawn as the 1 km MODIS pixel that contains it, not full neighborhood polygons. Vegetation shows a number for the four points with a clear trend; heat shows "no clear change"; rainfall and water are measured at regional scale, so the map has no zones for them.
 
 ## How does it work?
 
-1. We take long time series of NASA data for La Paz (see the NASA Data section). The datasets used are MODIS land surface temperature (MOD11A2) and vegetation index (MOD13Q1, NDVI), downloaded for six points in La Paz with NASA AppEEARS, and NASA POWER rainfall and air temperature. GRACE/GLDAS groundwater is planned but not used yet.
+1. We take long time series of NASA data for La Paz (see the NASA Data section). The datasets used are MODIS land surface temperature (MOD11A2) and vegetation index (MOD13Q1, NDVI), downloaded for six points in La Paz with NASA AppEEARS, and NASA POWER rainfall and air temperature, and NASA GRACE and GRACE-FO (JPL Mascon) water storage.
 2. We turn them into monthly or seasonal series for the region and for zones of the city, and plot them.
 3. We measure the rate of change with Sen's slope.
 4. We test significance with the seasonal Mann-Kendall test. This test looks for a steady upward or downward trend while taking the yearly seasonal cycle into account.
@@ -49,7 +49,7 @@ Limits we state on the site:
 
 - MODIS land surface temperature has 1 km resolution, so one pixel covers several neighborhoods. We use six sample points, not the whole city, and we drop readings flagged as low quality, so some months are missing at some points.
 - ECOSTRESS (70 m) has irregular dates, so it gives a snapshot of heat by neighborhood, not a trend.
-- GRACE/GLDAS groundwater (28-300 km) only gives a regional trend, not a trend by neighborhood.
+- GRACE water storage (hundreds of km) only gives a regional trend, not a trend by neighborhood, and it does not say how much water the La Paz aquifer holds.
 - NASA POWER (about 50 km) is coarse for a single city.
 - A trend shows what changed, not why.
 - Rainfall and air temperature have 25 years of data (2001-2025). Urban NDVI points lose many months after quality filtering (up to 167 of 300 at one point), which makes their trend less reliable.
@@ -74,4 +74,4 @@ We hope residents of La Paz can see for themselves what has changed around them,
 - Code and coordination: Git and GitHub. Large files (datasets, video, 3D, audio) are kept on Google Drive.
 - AI tools used during development: see the Use of AI section.
 - License of our project: Apache-2.0.
-- Hardware: TODO (confirm what was used for development and testing).
+- Hardware: no special hardware; everything was built on the team members' own computers: an ASUS TUF Gaming A16 laptop; a desktop PC (Ryzen 5700X, NVIDIA RTX 3060 12 GB, 32 GB RAM); an Acer Aspire A515 laptop; a Lenovo LOQ 15IAX9 laptop; an Acer Nitro AM515-58 laptop; and an HP 245 G8 notebook. The analysis (Python) does not need a GPU, and the site is static (GitHub Pages), so no servers, sensors or microcontrollers were used. The site was checked in desktop browsers at phone width (360 px). TODO: once it has been opened on a real phone (issue #71), add the phone model and browser here; until then, do not claim phone testing.
