@@ -107,3 +107,7 @@ Carlos pidió dejar esto por escrito. El detalle completo y la lista de condicio
 - **Registra Supabase** en `docs/RECURSOS.md` y en `docs/entrega/04-project-details.md`, y arregla ahí la frase "needs no account".
 - **Rama `prog-b/login`, PR a `dev`.** **Hora de corte: domingo 15 nov, 09:00:** si no está probado (con y sin sesión, 360 px y celular real, issue #71) y opcional, no entra a `main`.
 - **Prioridad:** 1) integrar la interfaz de UI/UX, 2) probar en celular real (#71), 3) login.
+
+## 2026-11-15: decisión sobre el login (Carlos, por el asistente del Líder)
+
+El PR #77 se cerró sin fusionar: el login con Supabase **no entra a la entrega**. Tu rama `prog-b/login` y el proyecto de Supabase se conservan para después del evento. Motivos en `docs/decisiones.md` (2026-11-15). Tu tiempo ahora: 1) versión en inglés (#93), 2) correcciones a 360 px, 3) integrar logo e íconos. No borres la rama.
