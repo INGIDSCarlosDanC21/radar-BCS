@@ -1,5 +1,5 @@
 /* Pestaña Pesca (docs/PLAN-PESCA-AVISOS.md). ES5, sin build.
-   Mapa de iconos de 8 puertos con oleaje, viento y temperatura del mar de un MODELO (Open-Meteo Marine, ~9 km; no son boyas),
+   Mapa de iconos de 8 puertos con oleaje, viento y temperatura del mar de un MODELO (Open-Meteo Marine; no son boyas),
    control de hora con "Iniciar simulación" y 4 mosaicos cortos. Sin gráficas, sin tablas, sin textos largos.
    El "semáforo" del Figma pasa a "Estado del mar (modelo)": verde, amarillo o rojo con la escala de Douglas y de Beaufort
    (web/js/reglas-mar.js). No es una bandera oficial y así se rotula. La capa de clorofila es de NASA GIBS (VIIRS NOAA-20). */
@@ -20,7 +20,7 @@
 
   var TX = {
     es: {
-      'pes.kicker': 'Ahora · modelo marino Open-Meteo (no son boyas)', 'pes.act': 'Modelo de ~9 km · hora de La Paz',
+      'pes.kicker': 'Ahora · modelo marino Open-Meteo (no son boyas)', 'pes.act': 'Modelo marino · hora de La Paz',
       'pes.sub': 'Oleaje, viento y temperatura del mar en los puertos de BCS.',
       'pes.puerto': 'Puerto', 'pes.var': 'Dato en el mapa', 'pes.v.ola': 'Oleaje', 'pes.v.viento': 'Viento', 'pes.v.sst': 'Temp. del mar',
       'pes.mapaReg': 'Mapa de puertos de Baja California Sur con iconos de oleaje, viento o temperatura del mar',
@@ -34,10 +34,14 @@
       'pes.cloVer': 'Ver en el mapa', 'pes.cloQuitar': 'Quitar del mapa', 'pes.cloFecha': 'Satélite NASA VIIRS NOAA-20 · {f}',
       'pes.cloTit': 'Clorofila (mg/m³, escala logarítmica)', 'pes.cloError': 'No se pudo cargar la capa de clorofila.',
       'pes.vedas': 'Vedas (CONAPESCA)',
+      'pes.pend.seg': 'Pendiente: sin feed abierto de avisos oficiales para BCS',
+      'pes.pend.oc': 'Pendiente: sin mareas oficiales abiertas para BCS',
+      'pes.pend.clo': 'Pendiente: clorofila en números (hoy solo imagen)',
+      'pes.pend.veda': 'Tallas y fechas de veda: sin fuente abierta verificada',
       'pes.ley.verde': 'Verde', 'pes.ley.amarillo': 'Amarillo', 'pes.ley.rojo': 'Rojo',
       'pes.ley.ola.verde': 'menos de 1.25 m', 'pes.ley.ola.amarillo': '1.25 a 2.5 m', 'pes.ley.ola.rojo': '2.5 m o más',
       'pes.ley.viento.verde': 'menos de 22 kt', 'pes.ley.viento.amarillo': '22 a 33 kt', 'pes.ley.viento.rojo': '34 kt o más',
-      'pes.nota': 'Estimación de un modelo de ~9 km, no es un aviso oficial. Consulta a la Capitanía de Puerto (SEMAR). Datos del mar: Open-Meteo.com (CC BY 4.0).',
+      'pes.nota': 'Estimación de un modelo, no es un aviso oficial. Consulta a la Capitanía de Puerto (SEMAR). Datos del mar: Open-Meteo.com (CC BY 4.0).',
       'pes.cargando': 'Cargando el modelo marino…',
       'pes.error': 'No se pudo cargar el modelo marino (¿sin conexión?). El resto de la web no cambia.',
       'pes.sinDato': 'sin dato', 'pes.sinDatoPuerto': 'Sin dato para esta hora',
@@ -45,7 +49,7 @@
       'pes.pinOla': '{n}: oleaje {v}, {e}', 'pes.pinViento': '{n}: viento {v}, {e}', 'pes.pinSst': '{n}: temperatura del mar {v}'
     },
     en: {
-      'pes.kicker': 'Now · Open-Meteo marine model (not buoys)', 'pes.act': '~9 km model · La Paz time',
+      'pes.kicker': 'Now · Open-Meteo marine model (not buoys)', 'pes.act': 'Marine model · La Paz time',
       'pes.sub': 'Waves, wind and sea temperature at the ports of BCS.',
       'pes.puerto': 'Port', 'pes.var': 'Data on the map', 'pes.v.ola': 'Waves', 'pes.v.viento': 'Wind', 'pes.v.sst': 'Sea temp.',
       'pes.mapaReg': 'Map of ports of Baja California Sur with icons for waves, wind or sea temperature',
@@ -59,10 +63,14 @@
       'pes.cloVer': 'Show on the map', 'pes.cloQuitar': 'Remove from the map', 'pes.cloFecha': 'NASA VIIRS NOAA-20 satellite · {f}',
       'pes.cloTit': 'Chlorophyll (mg/m³, logarithmic scale)', 'pes.cloError': 'The chlorophyll layer could not be loaded.',
       'pes.vedas': 'Fishing closures (CONAPESCA)',
+      'pes.pend.seg': 'Pending: no open feed of official warnings for BCS',
+      'pes.pend.oc': 'Pending: no open official tide data for BCS',
+      'pes.pend.clo': 'Pending: chlorophyll as numbers (image only today)',
+      'pes.pend.veda': 'Size limits and closure dates: no verified open source',
       'pes.ley.verde': 'Green', 'pes.ley.amarillo': 'Yellow', 'pes.ley.rojo': 'Red',
       'pes.ley.ola.verde': 'under 1.25 m', 'pes.ley.ola.amarillo': '1.25 to 2.5 m', 'pes.ley.ola.rojo': '2.5 m or more',
       'pes.ley.viento.verde': 'under 22 kt', 'pes.ley.viento.amarillo': '22 to 33 kt', 'pes.ley.viento.rojo': '34 kt or more',
-      'pes.nota': 'Estimate from a ~9 km model, not an official warning. Check with the Port Captaincy (SEMAR). Sea data: Open-Meteo.com (CC BY 4.0).',
+      'pes.nota': 'Estimate from a model, not an official warning. Check with the Port Captaincy (SEMAR). Sea data: Open-Meteo.com (CC BY 4.0).',
       'pes.cargando': 'Loading the marine model…',
       'pes.error': 'The marine model could not be loaded (offline?). The rest of the site does not change.',
       'pes.sinDato': 'no data', 'pes.sinDatoPuerto': 'No data for this hour',
@@ -117,13 +125,17 @@
   function mosaicos(p, idx, cloActiva, cloFecha) {
     var e = estadoPuerto(p, idx), sem = e.estado || 'sin';
     var seg = '<p class="pe-estado"><span class="pe-sem pe-sem-' + sem + '"><i aria-hidden="true"></i>' + esc(t('mar.e.' + sem)) + '</span> ' + esc(e.estado ? t('mar.e.' + sem + 'T') : '') + '</p>' +
-      '<p class="pe-dato">' + esc(t('pes.dOla', { h: n1(e.ola), v: n0(e.viento) })) + '</p><p class="pe-peq">' + esc(t('pes.segNota')) + '</p>';
+      '<p class="pe-dato">' + esc(t('pes.dOla', { h: n1(e.ola), v: n0(e.viento) })) + '</p><p class="pe-peq">' + esc(t('pes.segNota')) + '</p>' +
+      '<p class="pe-peq pe-pend">' + esc(t('pes.pend.seg')) + '</p>';
     var oc = '<p class="pe-grande">' + esc(t('pes.vOla', { h: n1(e.ola), p: n0(e.per) })) + '</p>' +
-      '<p class="pe-dato">' + esc(t('pes.dMar', { d: rumbo(e.dir) || '—', s: n1(e.sst), c: n1(e.corr) })) + '</p>';
+      '<p class="pe-dato">' + esc(t('pes.dMar', { d: rumbo(e.dir) || '—', s: n1(e.sst), c: n1(e.corr) })) + '</p>' +
+      '<p class="pe-peq pe-pend">' + esc(t('pes.pend.oc')) + '</p>';
     var cl = '<p class="pe-grande">' + esc(t('pes.vViento', { v: n0(e.viento), d: rumbo(e.vdir) })) + '</p>' +
       '<p class="pe-dato">' + esc(t('pes.dViento', { r: n0(e.rachas), b: M.beaufort(e.viento) == null ? '—' : M.beaufort(e.viento) })) + ' · ' + esc(M.textoViento(e.viento)) + '</p>';
     var clo = '<button type="button" class="pe-btn" id="pe-clo" aria-pressed="' + (cloActiva ? 'true' : 'false') + '">' + esc(t(cloActiva ? 'pes.cloQuitar' : 'pes.cloVer')) + '</button>' +
       '<p class="pe-dato">' + esc(t('pes.cloFecha', { f: cloFecha })) + '</p>' +
+      '<p class="pe-peq pe-pend">' + esc(t('pes.pend.clo')) + '</p>' +
+      '<p class="pe-peq pe-pend">' + esc(t('pes.pend.veda')) + '</p>' +
       '<p class="pe-peq"><a href="' + URL_VEDAS + '" target="_blank" rel="noopener">' + esc(t('pes.vedas')) + '</a></p>';
     return mosaico('seg', 'pesca-semaforo-de-seguridad', t('pes.m.seg'), seg) + mosaico('oc', 'pesca-condiciones-oceanograficas', t('pes.m.oc'), oc) +
       mosaico('cl', 'pesca-clima-y-atmosfera-costera', t('pes.m.cl'), cl) + mosaico('clo', 'pesca-potencial-y-actividad-pesquera', t('pes.m.clo'), clo);
