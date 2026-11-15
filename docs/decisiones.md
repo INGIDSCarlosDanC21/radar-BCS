@@ -128,4 +128,10 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Decisión:** Calor muestra la superficie MODIS en 2001-2021 (+0.94 °C) y el aire POWER (+1.47 °C, 2001-2025) en la nota; la limitación explica el corte completo en la tarjeta. Falta el contraste con Aqua (MYD11A2): si Aqua no muestra calentamiento, se revisa. Es la causa más probable, no está probada; la web no la presenta como hecho.
 - **Reemplaza** la entrada "Calor: el número principal es la superficie (MODIS)" solo en el periodo y en la cifra: antes "sin cifra".
 - **Cómo se revierte:** `python -m analisis.exportar --calor-hasta 2025` y `python -m analisis.zonas --calor-hasta 2025`, y copiar a `web/data/`.
-- **Quién decidió:** propuesta de Luca, aceptada en `dev` por el asistente del Líder; **Carlos confirma** (si no, se revierte).
+- **Quién decidió:** propuesta de Luca, aceptada en `dev` por el asistente del Líder; **confirmada por Carlos el 2026-11-14** (ver la entrada siguiente).
+
+### 2026-11-14 — Carlos confirma Calor 2001-2021; entra el Mapa Agrícola; el PR #85 se queda como vehículo a `main`
+
+- **Calor:** Carlos confirmó la superficie MODIS en 2001-2021 (+0.94 °C) **con la condición de que no haya datos de superficie más recientes y confiables**. Si el contraste con Aqua (#87) u otro producto permite medir bien 2022-2026, se vuelve a revisar con él. Mientras tanto no se extiende la serie.
+- **Mapa Agrícola (PR #88, Diego):** Carlos decidió que **entra**. No lo pidió el reto; se acepta como pantalla extra. Condiciones que siguen vigentes: auditoría de fuentes por Luca antes de `main`, versión en inglés, y todo recurso nuevo (SIAP, CONAGUA/DOF, SoilGrids CC BY 4.0, SMN, GeoNames, NASA POWER) en `docs/RECURSOS.md` y `docs/entrega/07`. Si no pasa la auditoría, se deja fuera de `main`.
+- **PR #85 (dev → main):** lo decidió el asistente del Líder por encargo de Carlos. Es un PR de rama a rama y se actualiza solo con `dev`, así que **se conserva como vehículo** (no se cierra ni se reabre otro). Se retituló y su descripción lleva la puerta de calidad; **no se fusiona hasta que pase** y Carlos lo apruebe.
