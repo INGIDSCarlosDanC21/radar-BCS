@@ -67,21 +67,21 @@ Regla automática (por contenido, no por pantalla) y excepciones por contenedor:
 
 ## 6. Cómo evitar choques con Ehileen y Diego
 
-**Estado al 2026-11-15, 03:05:** Ehileen tiene abierto el **PR #157** ("Inicio: solo los títulos en ¿Qué cambia? y El cielo ahora; sin aviso ni textos de Open-Meteo"). Está limpio y sin conflictos con `dev`. Toca `home.js`, `cielo.js`, `textos.js`, `cielo.css`, sus pruebas y `diseno/ESPECIFICACION.md`. **Va en la misma dirección** que este plan: ella ya recorta textos de Inicio.
+**Estado al 2026-11-15, 03:30:** Ehileen tiene abiertos dos PR: el **#157** y el **#159** ("Fichas sin pestaña: solo desde Inicio, sin filtrado superior y con botón claro para volver"). El #159 quita la pestaña Ficha de los dos menús, quita los chips de arriba de cada ficha y cambia el botón de regreso; toca `app.js`, `menu.js`, `index.html`, `agricola.js`, `home.js`, `estilos.css`, `home.css` y `textos.js`. Los dos están limpios con `dev` y entre sí. **No cambia las mediciones de este plan** (los textos largos de las fichas siguen igual), pero sí el cuadro de abajo. Sobre el #157: ("Inicio: solo los títulos en ¿Qué cambia? y El cielo ahora; sin aviso ni textos de Open-Meteo"). Está limpio y sin conflictos con `dev`. Toca `home.js`, `cielo.js`, `textos.js`, `cielo.css`, sus pruebas y `diseno/ESPECIFICACION.md`. **Va en la misma dirección** que este plan: ella ya recorta textos de Inicio.
 
 | Archivo | Quién lo toca ahora | Este plan |
 |---|---|---|
 | `home.js`, `home.css`, `cielo.js`, `cielo.css`, `textos.js` | Ehileen (#157 y pulido de UI/UX) | **No se toca** |
-| `agricola.js`, `agricola.css` | Diego; yo hice la limpieza del #158 | No se toca: el componente actúa desde afuera |
-| `app.js` | Compartido | No se toca |
-| `index.html` | Compartido | 2 líneas (el estilo y el script) |
+| `agricola.js`, `agricola.css` | Diego; yo hice la limpieza del #158; Ehileen (#159) | No se toca: el componente actúa desde afuera |
+| `app.js`, `menu.js`, `estilos.css` | Compartidos; Ehileen (#159) | No se toca |
+| `index.html` | Compartido; Ehileen (#159) | 2 líneas (el estilo y el script). **Se agregan después de fusionar el #159** para que no choque |
 | `ver-mas.js`, `ver-mas.css`, `ver-mas.test.mjs` | Nadie | Archivos nuevos |
 
 Reglas para no chocar:
 1. **No empezar hasta que Carlos apruebe** este plan, y avisar a Ehileen antes (mensaje abajo).
 2. **Inicio queda fuera** del componente mientras Ehileen lo esté puliendo: el componente trae una lista de exclusión (`.hm`) que se quita cuando ella lo confirme.
 3. Rama propia `lider/ver-mas` y PR a `dev`; antes de abrirlo, traer `dev` para detectar choques.
-4. Si el #157 se fusiona antes, se vuelve a medir Inicio.
+4. Si el #157 o el #159 se fusionan antes, se vuelve a medir Inicio y las fichas (el #159 cambia la cabecera de la Ficha).
 
 **Mensaje sugerido para Ehileen (issue #119 o #144):** "Voy a agregar un componente aparte, `ver-mas.js` y `ver-mas.css`, que recorta a 3 líneas los textos de más de 4 líneas y pone 'Ver más'. No toca tus archivos (`home.*`, `cielo.*`, `textos.js`). Inicio queda fuera hasta que me digas. Si algún texto no debe plegarse, ponle `data-vm="no"`."
 
