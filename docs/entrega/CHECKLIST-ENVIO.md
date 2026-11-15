@@ -37,6 +37,20 @@ Al final, dos casillas obligatorias: **Agree to Terms and Conditions** y **Confi
 
 Aparece **un banner arriba de la pantalla con un mensaje de confirmación**, y el panel pasa de "Project Requires Submission for Judging" a **"Project Submitted for Judging"**, con "Last Saved" y "Last Submitted". Guardar **captura de pantalla** en esta carpeta.
 
+## Lo que muestra el formulario real (revisado en la plataforma el 2026-11-14, 22:50, sin guardar ni enviar nada)
+
+Se abrió Edit Details como dueño del equipo y solo se leyó. Estado de la página: todo vacío; "Project OptiPaz — Check back later". Datos que **no** estaban en el PDF o que conviene saber:
+
+- **El Summary tiene tope de 1500 caracteres** (contador "0/1500"), además de las 50-200 palabras sugeridas. Nuestro `01` mide unos 1100 caracteres: cabe.
+- **"Project Name"** viene con el texto "Project OptiPaz"; hay que cambiarlo por el nombre real (Radar BCS).
+- **Project Details** es un editor de texto enriquecido: se pega el texto de `04` (sin formato raro).
+- **La pregunta "Use of Super Intelligence (SI)" es una lista de opciones múltiples** ("select all that apply") y la respuesta **no la ven los jueces**, solo sirve para recopilar datos. Lo que sí ven son las marcas "AI-generated", el texto descriptivo y los metadatos dentro del proyecto. Se elige todo lo que usamos, sin omitir nada (regla 10).
+- **NASA Data y Space Agency Partner & Other Data** son filas de "Link Text" + "Link Url" con botón "Add New Link": una fila por recurso, con la URL completa (https://...). El texto largo de `06` y `07` se resume en esas filas.
+- **Las dos casillas finales son obligatorias** ("Agree to Terms and Conditions" y "Confirm All Work is Original").
+- **Save Progress NO envía el proyecto ni lo cierra** (lo dice la plataforma), pero **desde ahí los cambios quedan visibles para cualquiera que abra la página del equipo**. No se guarda texto a medias, con TODO, con nombres de menores ni en español. Solo se guarda lo que ya se pueda leer públicamente.
+- **Solo cuenta el último clic en "Submit for Judging"**; tras el cierre (dom 15 nov 23:59, hora de La Paz) "submission is final".
+- Con el **Lock** en OFF, otro miembro puede abrir y sobrescribir. Poner ON al empezar a llenar y avisar al equipo.
+
 ## Estado (se actualiza aquí; última revisión 2026-11-14 noche)
 
 - [x] 01 resumen (153 palabras)
