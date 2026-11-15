@@ -26,7 +26,7 @@ Radar BCS is a free website for phones, with no installation, written in Spanish
 
 Every number on the site shows its data source. The site shows what changed, not why. A trend does not prove its cause, and we do not claim one.
 
-<!-- Nota interna: resultados del pipeline de Luca (data/salida/indicadores.json y zonas_tendencias.json, 2026-11-14), revisados por Investigacion en docs/investigacion/hallazgos.md. Si algun numero cambia, cambiarlo aqui. Investigacion no pudo reproducir los numeros de MODIS (los CSV de AppEEARS estan fuera de git). -->
+<!-- Nota interna: resultados del pipeline de Luca (data/salida/indicadores.json y zonas_tendencias.json, 2026-11-14), revisados por Investigacion en docs/investigacion/hallazgos.md. Si algun numero cambia, cambiarlo aqui. Investigacion reprodujo las salidas de MODIS con los CSV de Drive; la baja de la superficie en El Centenario y Sur depende de la prueba y de los ultimos anios (hallazgos.md), por eso no se interpreta. -->
 
 Results so far (2001-2025; NASA POWER is one point of about 50 km around La Paz; MODIS is six sample points in the city):
 

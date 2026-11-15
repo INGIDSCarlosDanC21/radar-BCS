@@ -41,6 +41,11 @@ def test_tendencia_anual_recupera_pendiente_y_sin_tendencia():
     assert t.tendencia_anual([1.0, np.nan, 2.0, 3.0, 4.0, 5.0, 6.0])["pendiente_por_anio"] == pytest.approx(1.0)
 
 
+def test_p_valor_nunca_es_cero_con_tendencia_muy_fuerte():
+    r = t.tendencia_estacional(_serie(0.5))
+    assert 0 < r["p_valor"] < 1e-6
+
+
 def test_cambio_total_usa_intervalos():
     assert t.cambio_total(0.05, 2001, 2025) == pytest.approx(1.2)
 
