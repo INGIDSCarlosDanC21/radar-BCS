@@ -39,7 +39,7 @@
       'cli.r.uvAhora': 'Índice UV ahora', 'cli.r.uvMax': 'Índice UV máximo de hoy', 'cli.r.amanecer': 'Amanecer', 'cli.r.anochecer': 'Anochecer', 'cli.r.sol': 'Horas de sol hoy',
       'cli.r.viento': 'Viento', 'cli.r.rachas': 'Rachas', 'cli.r.beaufort': 'Escala de Beaufort', 'cli.r.ola': 'Estado del mar (modelo)', 'cli.r.periodo': 'Periodo del oleaje',
       'cli.r.corr': 'Corriente', 'cli.r.sst': 'Temperatura del mar', 'cli.r.hum': 'Humedad', 'cli.r.prob': 'Probabilidad de lluvia (24 h)', 'cli.r.mm': 'Lluvia en 24 h', 'cli.r.cielo': 'Cielo',
-      'cli.vDir': '{v} kt del {d}', 'cli.oleaje': '{h} m · {e}', 'cli.corr': '{v} km/h · dirección {g}°', 'cli.corrCalma': '{v} km/h',
+      'cli.vDir': '{v} kt (≈ {k} km/h) del {d}', 'cli.oleaje': '{h} m · {e}', 'cli.corr': '{v} km/h · dirección {g}°', 'cli.corrCalma': '{v} km/h',
       'cli.s.sens': 'Sensación térmica (°C)', 'cli.s.uv': 'Índice UV', 'cli.s.viento': 'Viento (kt)', 'cli.s.hum': 'Humedad (%)',
       'cli.curva': 'Últimas y próximas 12 horas', 'cli.curvaAhora': 'ahora', 'cli.curvaAlt': '{s}: mínimo {a}, máximo {b} en 24 horas', 'cli.curvaSin': 'Sin datos para dibujar la curva.',
       'cli.consejos': 'Qué puedes hacer', 'cli.fuenteCdc': 'CDC, Five Steps (Heat Action Plan)',
@@ -69,7 +69,7 @@
       'cli.r.uvAhora': 'UV index now', 'cli.r.uvMax': 'Highest UV index today', 'cli.r.amanecer': 'Sunrise', 'cli.r.anochecer': 'Sunset', 'cli.r.sol': 'Hours of sun today',
       'cli.r.viento': 'Wind', 'cli.r.rachas': 'Gusts', 'cli.r.beaufort': 'Beaufort scale', 'cli.r.ola': 'Sea state (model)', 'cli.r.periodo': 'Wave period',
       'cli.r.corr': 'Current', 'cli.r.sst': 'Sea temperature', 'cli.r.hum': 'Humidity', 'cli.r.prob': 'Chance of rain (24 h)', 'cli.r.mm': 'Rain in 24 h', 'cli.r.cielo': 'Sky',
-      'cli.vDir': '{v} kt from the {d}', 'cli.oleaje': '{h} m · {e}', 'cli.corr': '{v} km/h · direction {g}°', 'cli.corrCalma': '{v} km/h',
+      'cli.vDir': '{v} kt (≈ {k} km/h) from the {d}', 'cli.oleaje': '{h} m · {e}', 'cli.corr': '{v} km/h · direction {g}°', 'cli.corrCalma': '{v} km/h',
       'cli.s.sens': 'Apparent temperature (°C)', 'cli.s.uv': 'UV index', 'cli.s.viento': 'Wind (kt)', 'cli.s.hum': 'Humidity (%)',
       'cli.curva': 'Last and next 12 hours', 'cli.curvaAhora': 'now', 'cli.curvaAlt': '{s}: low {a}, high {b} over 24 hours', 'cli.curvaSin': 'No data to draw the curve.',
       'cli.consejos': 'What you can do', 'cli.fuenteCdc': 'CDC, Five Steps (Heat Action Plan)',
@@ -197,7 +197,7 @@
         '<p class="fuente">' + esc(t('fic.fuente')) + ': <a href="' + URL_OMS + '" target="_blank" rel="noopener">' + esc(t('cli.fuenteOms')) + '</a></p>';
     } else if (id === 'viento') {
       var v = r.viento;
-      filas = fila(t('cli.r.viento'), v.kt == null ? t('cli.sin') : t('cli.vDir', { v: n(v.kt), d: rumbo(p.s.vdir && p.s.vdir[idx]) || '—' })) +
+      filas = fila(t('cli.r.viento'), v.kt == null ? t('cli.sin') : t('cli.vDir', { v: n(v.kt), k: n(v.kt * 1.852), d: rumbo(p.s.vdir && p.s.vdir[idx]) || '—' })) +
         fila(t('cli.r.rachas'), con(v.rachas, 0, 'kt')) + fila(t('cli.r.beaufort'), v.beaufort == null ? t('cli.sin') : v.beaufort + ' · ' + M.textoViento(v.kt)) +
         fila(t('cli.r.ola'), v.ola == null ? t('cli.sin') : t('cli.oleaje', { h: n(v.ola, 1), e: M.textoOla(v.ola) })) + fila(t('cli.r.periodo'), con(v.periodo, 0, 's')) +
         fila(t('cli.r.corr'), v.corriente == null ? t('cli.sin') : (v.corriente > 0 && v.cdir != null ? t('cli.corr', { v: n(v.corriente, 1), g: n(v.cdir) }) : t('cli.corrCalma', { v: n(v.corriente, 1) }))) +
