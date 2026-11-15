@@ -2,18 +2,19 @@
 
 Escrito a las 03:28 (hora de La Paz) por el asistente del Líder. Quedan **9 h 30 min** para la meta interna (**Submit for Judging a las 13:00**) y **20 h 30 min** para el cierre oficial (23:59). Este plan reemplaza las listas sueltas del chat. Lo anterior está en [`PLAN-CIERRE.md`](PLAN-CIERRE.md) (noche del sábado) y la lista de campos de la plataforma en [`entrega/CHECKLIST-ENVIO.md`](entrega/CHECKLIST-ENVIO.md).
 
-## 0. Estado en una mirada
+## 0. Estado en una mirada (actualizado a las 05:20)
 
 | Área | Estado |
 |---|---|
-| Web (Inicio, Mapa, Ficha, Acciones, Agro, Pesca, Avisos, ES/EN) | En `dev`; `main` tiene todo hasta #156 (falta lo de abajo) |
-| Datos y estadística | Cerrados (calor, vegetación, lluvia, agua); SIAP/SEPADA sin verificar, declarado |
-| PR de Ehileen | #157 y #162 fusionados a `dev`; **#159 abierto** (limpio con `dev`) |
-| Fuentes e IA fuera de la pantalla | PR propio abierto (`docs/FUENTES-Y-IA.md`) |
-| Textos largos con "Ver más" | Plan listo, **espera decisiones de Carlos** |
-| Borradores de entrega `01` a `08` | Escritos; faltan alinear `04` a `07` con la web final |
-| Video de 30 s | **Sin grabar**, guion sin Pesca, Avisos, simulaciones ni cielo |
+| Web (Inicio, Mapa, Clima, Ficha, Agro, Pesca, Avisos, Acciones, ES/EN) | **Terminada en `dev`**, con puerta de calidad y revisión a 360, 390 y 1280 px |
+| `main` (lo que ve el jurado) | Tiene todo hasta #172; **falta pasar** Clima, la marca en el logo, `PLATAFORMA-LISTA` y los ajustes de la entrega (PR `dev → main` abierto, espera el "fusiona" de Carlos) |
+| Clima (buscador, chips, 4 tarjetas con detalle) | Hecho por Luca (#178), integrado en #180; las tarjetas de la pestaña Mapa llevan a su detalle |
+| "Ver más" y pliegues | Hecho (#167, #171) |
+| Fuentes e IA documentadas fuera de pantalla | Hecho (`FUENTES-Y-IA.md`); marca de agua del logo **dentro de la imagen** (#181), según el texto oficial |
+| Borradores de entrega `01` a `08b` | Al día; paquete para pegar en `PLATAFORMA-LISTA.md` |
+| Video de 30 s | **Sin grabar** (guion listo); debe estar hoy, antes de las 23:59 |
 | Plataforma | Nada guardado ni enviado (a propósito) |
+| Falta de mi lado | Prueba con sol real (después de las 07:00) y segunda prueba de servicios (12:00) |
 
 ## 1. Lo que solo Carlos puede decidir o hacer
 
