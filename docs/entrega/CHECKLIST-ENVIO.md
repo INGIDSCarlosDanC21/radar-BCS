@@ -51,16 +51,16 @@ Se abrió Edit Details como dueño del equipo y solo se leyó. Estado de la pág
 - **Solo cuenta el último clic en "Submit for Judging"**; tras el cierre (dom 15 nov 23:59, hora de La Paz) "submission is final".
 - Con el **Lock** en OFF, otro miembro puede abrir y sobrescribir. Poner ON al empezar a llenar y avisar al equipo.
 
-## Estado (se actualiza aquí; última revisión 2026-11-14 noche)
+## Estado (se actualiza aquí; última revisión 2026-11-15, 05:20)
 
-- [x] 01 resumen (153 palabras)
-- [ ] 02 enlace de la demo (video aún no grabado)
-- [ ] 03 enlace del proyecto: falta confirmar las 4 pantallas y **la versión en inglés**
-- [ ] 04 detalles: falta celular real (#71) y confirmar equipos
-- [ ] 05 uso de IA: falta lo de Stitch (#79)
-- [x] 06 datos NASA (revisar con el último PR de Luca)
-- [ ] 07 referencias: íconos y logo ya declarados; falta confirmar si hay audio o modelos 3D (ninguno hasta ahora). El login con Supabase no entra
-- [ ] Plataforma: Lock, Submit for Judging, captura del banner
+- [x] 01 resumen (181 palabras, 1093 caracteres; incluye el contexto en vivo)
+- [ ] 02 enlace de la demo: **video por grabar** (guion en `08b-video-shotlist.md`); debe subirse y probarse sin sesión antes de las 23:59
+- [x] 03 enlace del proyecto: sitio público probado sin sesión el 2026-11-15, en español y en inglés (`?lang=en`), sin errores de consola
+- [x] 04 detalles al día con la web final (Mapa Meteorológico, Clima, Pesca, Avisos); falta anotar el celular real si se prueba (#71) y confirmar equipos
+- [x] 05 uso de IA al día (Claude Code, Gemini para el logo con marca de agua dentro de la imagen, Google Stitch); falta elegir las opciones en el menú de la plataforma
+- [x] 06 datos NASA (incluye las 3 capas de NASA GIBS)
+- [x] 07 referencias al día (logo con marca, Open-Meteo con la tercera petición de Clima)
+- [ ] Plataforma: Lock, llenar los campos con `PLATAFORMA-LISTA.md`, Submit for Judging, captura del banner (lo hace quien tiene la sesión del equipo)
 - [ ] Todos en la pestaña Members
 
 Los pendientes de cada persona están en sus issues (#78, #79, #80, #81, #82).
