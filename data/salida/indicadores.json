@@ -302,12 +302,12 @@
     "fecha_descarga": "2026-11-14"
    },
    "limitacion": "Se descartan lecturas de relleno y de calidad baja (MODLAND 0b10/0b11); algunos meses de zonas urbanas quedan sin dato. El NDVI de un punto de 250 m no representa toda la ciudad. No indica la causa del cambio. El año 2026 es parcial: entra a la prueba de tendencia mensual, pero no al promedio anual ni a la media por década.",
-   "limitacion_en": "Fill values and low-quality readings are discarded (MODLAND 0b10/0b11); some months in urban zones have no data. The NDVI of a 250 m point does not represent the whole city. It does not tell the cause of the change. The year 2026 is partial: it enters the monthly trend test, but not the annual average or the decade average."
+   "limitacion_en": "Missing and low-quality readings are removed (MODLAND quality flags 0b10/0b11); some months in urban zones have no data. The NDVI of a 250 m point does not represent the whole city. It does not tell the cause of the change. The year 2026 is partial: it enters the monthly trend test, but not the annual average or the decade average."
   },
   {
    "id": "lluvia",
    "titulo": "Lluvia",
-   "titulo_en": "Rain",
+   "titulo_en": "Rainfall",
    "variable": "Precipitación corregida (NASA POWER PRECTOTCORR), total anual",
    "variable_en": "Corrected precipitation (NASA POWER PRECTOTCORR), annual total",
    "unidades": "mm/año",
@@ -443,12 +443,12 @@
     "resolucion": "reanálisis MERRA-2, ~50 km (no es medición local)",
     "resolucion_en": "MERRA-2 reanalysis, ~50 km (not a local measurement)",
     "dataset": "NASA POWER Monthly (MERRA-2), parámetro PRECTOTCORR, community AG",
-    "dataset_en": "NASA POWER Monthly (MERRA-2), parameter PRECTOTCORR, community AG",
+    "dataset_en": "NASA POWER Monthly (MERRA-2), PRECTOTCORR parameter, AG community",
     "periodo": "2001-2025",
     "fecha_descarga": "2026-11-14"
    },
    "limitacion": "Lluvia concentrada en pocos meses y muy variable de un año a otro; la tendencia se calcula con el total anual. Dato de reanálisis (~50 km), no de pluviómetro.",
-   "limitacion_en": "Rain is concentrated in a few months and varies a lot from year to year; the trend is computed with the annual total. Reanalysis data (~50 km), not a rain gauge."
+   "limitacion_en": "Rainfall is concentrated in a few months and varies a lot from year to year; the trend is computed with the annual total. Reanalysis data (~50 km), not a rain gauge."
   },
   {
    "id": "agua",
@@ -594,7 +594,7 @@
     "fecha_descarga": "2026-11-14"
    },
    "limitacion": "Tendencia REGIONAL del agua total almacenada (suelo, agua subterránea y superficial), no del acuífero de La Paz. Es una anomalía respecto a un promedio de referencia, en cm de agua equivalente. El periodo va de 2002 al último mes publicado (el año 2026 es parcial: entra a la prueba de tendencia mensual, no al promedio anual); faltan meses (hueco entre GRACE y GRACE-FO) y se promedian solo los años con al menos 9 meses. El p-valor corrige la autocorrelación entre meses (la prueba estacional simple da uno mucho menor, demasiado optimista). No indica la causa.",
-   "limitacion_en": "REGIONAL trend of total stored water (soil, groundwater and surface water), not of the La Paz aquifer. It is an anomaly against a reference average, in cm of water equivalent. The period goes from 2002 to the last published month (the year 2026 is partial: it enters the monthly trend test, not the annual average); months are missing (gap between GRACE and GRACE-FO) and only years with at least 9 months are averaged. The p-value corrects for autocorrelation between months (the plain seasonal test gives a much lower, too optimistic one). It does not tell the cause."
+   "limitacion_en": "Regional trend of total stored water (soil, groundwater and surface water), not of the La Paz aquifer. It is an anomaly against a reference average, in cm of water equivalent. The period goes from 2002 to the last published month (the year 2026 is partial: it enters the monthly trend test, not the annual average); months are missing (gap between GRACE and GRACE-FO) and only years with at least 9 months are averaged. The p-value corrects for autocorrelation between months (the plain seasonal test gives a much lower, too optimistic one). It does not tell the cause."
   }
  ]
 }
