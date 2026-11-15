@@ -13,11 +13,9 @@ Código generado con IA (Claude); revisar antes de citar cifras.
 
 ## Falla o bloquea
 - **Tarea MOD13Q1 de AppEEARS** sigue descargando (~26%); no hace falta para los resultados porque se usan los CSV de 6 zonas de Luca (`data/cache/appeears/usuario/`). MOD11A2 de la tarea del pipeline ya bajó.
-- **Calor: POWER (aire) y MODIS (superficie) no coinciden** (decidido: se muestra MODIS, ver abajo). Aire +1.465 °C (significativo); LST MODIS ciudad −0.02 °C/año, p = 0.11 (no significativa). Solo El Centenario y Sur bajan significativamente. Falta que Investigación decida qué se muestra; hoy `calor` = aire y la limitación lo dice.
+- **Calor: POWER (aire) y MODIS (superficie) no coinciden.** Decidido (`docs/decisiones.md`, 2026-11-14): el número principal es MODIS (sin cifra, p = 0.11) y el aire (+1.465 °C, significativo) va en la `limitacion`. Solo El Centenario y Sur bajan significativamente por zona; el mapa los muestra "sin cambio claro".
 - LST: Oriente y Sur solo tienen calidad MODLAND 0b01 (no 0b00); NDVI de Centro pierde 167 meses al filtrar.
-- `web/data/zonas.geojson` sigue siendo la cuadrícula sintética (issue #36); no copiar `indicadores.json` a `web/data/` sin resolverlo.
-- `p_valor` del calor sale 0.0 (la web muestra "p < 0.001").
-- Issue #7 aún dice "Hirsch-Slack" (el método es `seasonal_test`).
+- `web/data/` ya trae los archivos reales (PR #57); `analisis/publicar.py` solo hace falta si se regeneran.
 - `appeears.py` sin pruebas.
 
 ## Mejoras
