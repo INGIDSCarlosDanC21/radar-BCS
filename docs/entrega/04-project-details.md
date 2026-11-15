@@ -14,7 +14,7 @@ Requirement (literal, from "Components of Project"):
 
 ## What exactly does it do?
 
-Radar BCS is a free website for phones, with no installation, written in Spanish for the residents of La Paz, Baja California Sur, Mexico. It uses open NASA data to show how four things have changed in La Paz since 2001: heat, vegetation, rainfall and groundwater. It is built to answer the four questions of the "Be An Earth System Trend Detective!" challenge, one screen at a time:
+Radar BCS is a free website for phones, with no installation, available in Spanish and English, for the residents of La Paz, Baja California Sur, Mexico. It uses open NASA data to show how four things have changed in La Paz since 2001: heat, vegetation, rainfall and groundwater. It is built to answer the four questions of the "Be An Earth System Trend Detective!" challenge, one screen at a time:
 
 | Question | Screen | How it answers |
 |---|---|---|
