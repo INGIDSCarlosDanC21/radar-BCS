@@ -1,0 +1,48 @@
+/* Pantalla Clima. Prefijo .cl-. Reutiliza .pe-* (cabecera, chips y mapa) de pesca.css y los acentos --rb-acento-clima-* de assets/tokens.css. */
+.cl h1{margin:8px 0 4px}
+.cl-busca{margin:8px 0}
+.cl-busca label{display:block;font-size:13px;color:var(--suave);margin-bottom:4px}
+.cl-busca input{width:100%;min-height:44px;padding:0 12px;border:1px solid var(--borde);border-radius:8px;background:var(--tarjeta);color:var(--texto);font:inherit;font-size:16px}
+.cl-busca-msg{margin:4px 0 0;font-size:13px;color:var(--suave)}
+.cl-capas{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.cl-zona{margin:16px 0 8px;font-family:var(--f-titulo);font-weight:600;font-size:1.1rem}
+.cl-tarjetas{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:640px){.cl-tarjetas{grid-template-columns:1fr 1fr}}
+@media (min-width:1024px){.cl-tarjetas{grid-template-columns:repeat(4,1fr)}}
+.cl-t{background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;overflow:hidden;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.cl-t::before{content:"";display:block;height:var(--rb-acento-clima-alto,6px)}
+.cl-t-calor::before{background:var(--rb-acento-clima-calor)}
+.cl-t-uv::before{background:var(--rb-acento-clima-uv)}
+.cl-t-viento::before{background:var(--rb-acento-clima-viento)}
+.cl-t-lluvia::before{background:var(--rb-acento-clima-lluvia)}
+.cl-t-on{outline:2px solid var(--acento)}
+.cl-t-btn{display:flex;flex-direction:column;gap:6px;width:100%;min-height:44px;padding:16px;border:0;background:none;color:var(--texto);font:inherit;text-align:left;cursor:pointer;touch-action:manipulation}
+.cl-t-btn:focus-visible,.cl-cerrar:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+.cl-t-cab{display:flex;align-items:center;gap:8px}
+.cl-t-tit{font-family:var(--f-titulo);font-weight:600;font-size:1rem}
+.cl-t-cifra{font-family:var(--f-titulo);font-weight:700;font-size:1.75rem;line-height:1.15}
+.cl-t-eti{font-size:13px;color:var(--suave)}
+.cl-t-frase{font-size:14px}
+.cl-t-ver{margin-top:4px;font-family:var(--f-datos);font-size:13px;font-weight:600;color:var(--acento);text-decoration:underline}
+.cl-det{margin:16px 0;padding:16px;background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px}
+.cl-det[hidden]{display:none}
+.cl-det-cab{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.cl-det h3{margin:0;font-family:var(--f-titulo);font-size:1.25rem}
+.cl-det h3:focus{outline:none}
+.cl-det h4{margin:16px 0 8px;font-size:1rem}
+.cl-cerrar{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--borde);background:var(--gris-120);color:var(--texto);font-family:var(--f-datos);font-size:13px;cursor:pointer}
+.cl-filas{margin:12px 0 0;display:grid;grid-template-columns:1fr;gap:0}
+@media (min-width:640px){.cl-filas{grid-template-columns:1fr 1fr;column-gap:32px}}
+.cl-fila{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--gris-120)}
+.cl-fila dt{color:var(--suave);font-size:14px}
+.cl-fila dd{margin:0;font-weight:600;text-align:right}
+.cl-lista{margin:0 0 8px;padding-left:20px}
+.cl-curva{width:100%;max-width:560px;height:auto;display:block}
+.cl-c-l{fill:none;stroke:var(--acento);stroke-width:2;stroke-linejoin:round}
+.cl-c-pt{fill:var(--acento)}
+.cl-c-eje{stroke:var(--borde);stroke-width:1}
+.cl-c-ahora{stroke:var(--suave);stroke-width:1;stroke-dasharray:3 3}
+.cl-c-txt{font-family:var(--f-datos);font-size:12px;fill:var(--suave)}
+.cl-curva-sin,.cl-nota{color:var(--suave);font-size:13px}
+.cl-nota{margin-top:16px}
+.cl-enlaces a{min-height:44px;display:inline-block;padding:10px 0}

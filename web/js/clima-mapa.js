@@ -24,9 +24,9 @@
       'cm.region': 'Mapa de Baja California Sur con el estado del cielo de 7 localidades',
       'cm.diag': 'Diagnóstico Climático Territorial', 'cm.diagSub': 'Hoy en La Paz, según el modelo meteorológico <a href="https://open-meteo.com/">Open-Meteo</a>. Toca una tarjeta para ver más.',
       'cm.calor': 'Calor & Sensación Térmica', 'cm.calorB': 'Máx {v} °C', 'cm.calorS': 'Sensación térmica ahora: {v} °C', 'cm.calorL': 'Ver consejos contra el calor',
-      'cm.uv': 'Radiación UV & Exposición Solar', 'cm.uvB': 'Índice {v}', 'cm.uvS': 'Máximo de hoy: {c}', 'cm.uvL': 'Ver avisos de UV y cómo protegerte',
-      'cm.viento': 'Viento, Oleaje & Corrientes', 'cm.vientoB': '{v} km/h {r}', 'cm.vientoS': 'Ráfagas de hasta {v} km/h hoy', 'cm.vientoL': 'Ver pronóstico marino y de viento costero',
-      'cm.lluvia': 'Humedad y Lluvia', 'cm.lluviaB': '{v} % lluvia', 'cm.lluviaS': 'Humedad ahora: {v} %', 'cm.lluviaL': 'Ver avisos de lluvia y tormenta',
+      'cm.uv': 'Radiación UV & Exposición Solar', 'cm.uvB': 'Índice {v}', 'cm.uvS': 'Máximo de hoy: {c}', 'cm.uvL': 'Ver el índice UV y cómo protegerte',
+      'cm.viento': 'Viento, Oleaje & Corrientes', 'cm.vientoB': '{v} km/h {r}', 'cm.vientoS': 'Ráfagas de hasta {v} km/h hoy', 'cm.vientoL': 'Ver viento, oleaje y corrientes',
+      'cm.lluvia': 'Humedad y Lluvia', 'cm.lluviaB': '{v} % lluvia', 'cm.lluviaS': 'Humedad ahora: {v} %', 'cm.lluviaL': 'Ver humedad y lluvia en detalle',
       'cm.cargando': 'Cargando el cielo de ahora…', 'cm.error': 'No pudimos cargar el clima de ahora. Las tendencias por zona siguen abajo.',
       'cm.zonasH': 'Cómo cambió cada zona de La Paz desde 2001'
     },
@@ -36,9 +36,9 @@
       'cm.region': 'Map of Baja California Sur with the sky condition of 7 towns',
       'cm.diag': 'Regional Climate Overview', 'cm.diagSub': 'Today in La Paz, from the <a href="https://open-meteo.com/">Open-Meteo</a> weather model. Tap a card to see more.',
       'cm.calor': 'Heat & Feels-like Temperature', 'cm.calorB': 'High {v} °C', 'cm.calorS': 'Feels like {v} °C now', 'cm.calorL': 'See tips against the heat',
-      'cm.uv': 'UV Radiation & Sun Exposure', 'cm.uvB': 'Index {v}', 'cm.uvS': "Today's peak: {c}", 'cm.uvL': 'See UV alerts and how to protect yourself',
-      'cm.viento': 'Wind, Waves & Currents', 'cm.vientoB': '{v} km/h {r}', 'cm.vientoS': 'Gusts up to {v} km/h today', 'cm.vientoL': 'See the marine and coastal wind forecast',
-      'cm.lluvia': 'Humidity and Rain', 'cm.lluviaB': '{v} % rain', 'cm.lluviaS': 'Humidity now: {v} %', 'cm.lluviaL': 'See rain and storm alerts',
+      'cm.uv': 'UV Radiation & Sun Exposure', 'cm.uvB': 'Index {v}', 'cm.uvS': "Today's peak: {c}", 'cm.uvL': 'See the UV index and how to protect yourself',
+      'cm.viento': 'Wind, Waves & Currents', 'cm.vientoB': '{v} km/h {r}', 'cm.vientoS': 'Gusts up to {v} km/h today', 'cm.vientoL': 'See wind, waves and currents',
+      'cm.lluvia': 'Humidity and Rain', 'cm.lluviaB': '{v} % rain', 'cm.lluviaS': 'Humidity now: {v} %', 'cm.lluviaL': 'See humidity and rain in detail',
       'cm.cargando': 'Loading the sky now…', 'cm.error': "We couldn't load the current weather. The zone trends are still below.",
       'cm.zonasH': 'How each zone of La Paz has changed since 2001'
     }
@@ -49,13 +49,13 @@
 
   /* Las 4 tarjetas de Figma: ícono de web/assets/iconos, acento, insignia, renglón y a dónde lleva. */
   var TARJETAS = [
-    { id: 'calor', icono: 'clima-calor-y-sensacion-termica', href: '#acciones',
+    { id: 'calor', icono: 'clima-calor-y-sensacion-termica', href: '#clima/calor',
       insignia: function (f) { return t('cm.calorB', { v: num(f.max) }); }, renglon: function (f) { return t('cm.calorS', { v: num(f.c.apparent_temperature) }); } },
-    { id: 'uv', icono: 'clima-radiacion-uv-y-exposicion-solar', href: '#avisos',
+    { id: 'uv', icono: 'clima-radiacion-uv-y-exposicion-solar', href: '#clima/uv',
       insignia: function (f) { return t('cm.uvB', { v: num(f.uvMax) }); }, renglon: function (f) { return t('cm.uvS', { c: CL.uvCat(f.uvMax) || '—' }); } },
-    { id: 'viento', icono: 'clima-viento-oleaje-y-corrientes', href: '#pesca',
+    { id: 'viento', icono: 'clima-viento-oleaje-y-corrientes', href: '#clima/viento',
       insignia: function (f) { return t('cm.vientoB', { v: num(f.c.wind_speed_10m), r: CL.rumbo(f.c.wind_direction_10m) }); }, renglon: function (f) { return t('cm.vientoS', { v: num(f.rachas) }); } },
-    { id: 'lluvia', icono: 'clima-humedad-y-lluvia', href: '#avisos',
+    { id: 'lluvia', icono: 'clima-humedad-y-lluvia', href: '#clima/lluvia',
       insignia: function (f) { return t('cm.lluviaB', { v: num(f.lluvia) }); }, renglon: function (f) { return t('cm.lluviaS', { v: num(f.c.relative_humidity_2m) }); } }
   ];
 
