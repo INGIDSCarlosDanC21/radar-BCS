@@ -69,9 +69,9 @@ test('cargar(): llena las tarjetas y dice que son los mismos datos que Inicio; s
 test('Inicio y Mapa piden la misma URL y comparten la respuesta (una sola llamada cada 10 min)', async () => {
   assert.match(CL.url(), /daily=temperature_2m_min,temperature_2m_max,uv_index_max,precipitation_probability_max,wind_gusts_10m_max/);
   const app = leer('js/app.js'), html = leer('index.html');
-  assert.match(app, /var h = '<h1>' \+ t\('titulo\.mapa'\)/, 'la pestaña Mapa ya no trae el Mapa Meteorológico');
+  assert.ok(!/<h1>' \+ t\('titulo\.mapa'\)/.test(app), 'la pestaña Mapa ya no existe: su contenido vive dentro de Clima');
   assert.ok(!/CM\.html\(\)/.test(app.slice(app.indexOf('function mapaVista'), app.indexOf('function buscadorHtml'))));
-  assert.match(app, /window\.RBClimaMapa\.cargar\(main, \{ abrir: h\[1\] \|\| null, lugar: h\[2\] \|\| null \}\)/, 'la pestaña Clima lo carga');
+  assert.match(app, /window\.RBClimaMapa\.cargar\(main, \{ abrir: h\[1\] === 'zonas' \? null : \(h\[1\] \|\| null\), lugar: h\[2\] \|\| null \}\)/, 'la pestaña Clima lo carga');
   const i = (s) => html.indexOf(s);
   assert.ok(i('js/cielo.js') < i('js/clima-mapa.js') && i('js/clima-mapa.js') < i('js/app.js'), 'orden de scripts');
   assert.ok(html.includes('css/clima-mapa.css'));

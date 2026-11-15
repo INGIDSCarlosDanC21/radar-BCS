@@ -18,7 +18,7 @@ Un video **MP4 vertical 1080 × 1920** (o 390 × 844 escalado), **de 30 s o meno
 | 1 | Tarjeta de título "Radar BCS · OptiPaz" (fondo liso con los colores de la web; **sin** logos de NASA) y luego Inicio | `index.html?lang=en` | ~6 s |
 | 2 | Ficha de Calor con la cifra de +1.5 °C y "p < 0.001" visibles | `?lang=en#ficha/calor` | ~6 s |
 | 3 | Ficha de Lluvia con "no clear change" visible | `?lang=en#ficha/lluvia` | ~5 s |
-| 4 | Mapa de zonas con los pines por estado (sin teclear nada en el buscador) | `?lang=en#mapa`, bajar hasta el mapa de zonas | ~4 s |
+| 4 | Mapa de lugares con los pines por estado (sin teclear nada en el buscador) | `?lang=en#clima/zonas` (baja solo hasta el mapa) | ~4 s |
 | 5 | Clima (4 tarjetas) y un vistazo a Pesca con la pastilla "model, not official" | `?lang=en#clima`, luego `#pesca` | ~5 s |
 | 6 | Texto final: el enlace de la web y `Data: NASA POWER · MODIS · GRACE · GIBS` (solo texto) | tarjeta de cierre | ~3 s |
 

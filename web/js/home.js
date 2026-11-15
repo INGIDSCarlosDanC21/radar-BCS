@@ -87,7 +87,7 @@
         '<div class="hm-hero-cont">' +
           '<h1 id="hm-h1">' + t('home.h1') + '</h1>' +
           '<p class="hm-sub">' + t('home.sub') + '</p>' +
-          '<div class="hm-botones"><a class="hm-btn hm-btn-claro" href="#mapa">' + t('home.btnMapa') + '</a>' +
+          '<div class="hm-botones"><a class="hm-btn hm-btn-claro" href="#clima/zonas">' + t('home.btnMapa') + '</a>' +
           '<a class="hm-btn hm-btn-oscuro" href="#acciones">' + t('home.btnAcc') + '</a></div>' +
         '</div></section>' +
       // Solo el título, a pedido de UI/UX (Ehileen, 2026-11-15). La fuente sigue en cada tarjeta.
