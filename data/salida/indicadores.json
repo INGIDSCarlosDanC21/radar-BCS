@@ -152,9 +152,9 @@
    "titulo": "Vegetación",
    "variable": "NDVI (MODIS MOD13Q1 V061, 250 m), promedio de 6 zonas",
    "unidades": "NDVI",
-   "cambio_total": -0.019,
-   "cambio_total_nota": "pendiente de Sen por año × 24 intervalos anuales (2001-2025); estimación, no medición",
-   "tendencia_por_decada": -0.008,
+   "cambio_total": -0.013,
+   "cambio_total_nota": "pendiente de Sen por año × 25 intervalos anuales (2001-2026); estimación, no medición",
+   "tendencia_por_decada": -0.005,
    "por_decada": [
     {
      "decada": "2001-2010",
@@ -171,7 +171,7 @@
    ],
    "significancia": {
     "metodo": "Mann-Kendall estacional + pendiente de Sen",
-    "p_valor": 1.288e-05,
+    "p_valor": 0.003626,
     "alfa": 0.05,
     "significativo": true
    },
@@ -275,16 +275,20 @@
     {
      "anio": 2025,
      "valor": 0.207
+    },
+    {
+     "anio": 2026,
+     "valor": null
     }
    ],
    "fuente": {
     "url": "https://appeears.earthdatacloud.nasa.gov/",
     "resolucion": "MODIS, 6 puntos de La Paz (promedio de zonas)",
     "dataset": "MODIS MOD13Q1.061 (NDVI) vía NASA AppEEARS",
-    "periodo": "2001-2025",
+    "periodo": "2001-2026",
     "fecha_descarga": "2026-11-14"
    },
-   "limitacion": "Se descartan lecturas de relleno y de calidad baja (MODLAND 0b10/0b11); algunos meses de zonas urbanas quedan sin dato. El NDVI de un punto de 250 m no representa toda la ciudad. No indica la causa del cambio."
+   "limitacion": "Se descartan lecturas de relleno y de calidad baja (MODLAND 0b10/0b11); algunos meses de zonas urbanas quedan sin dato. El NDVI de un punto de 250 m no representa toda la ciudad. No indica la causa del cambio. El año 2026 es parcial: entra a la prueba de tendencia mensual, pero no al promedio anual ni a la media por década."
   },
   {
    "id": "lluvia",
@@ -435,7 +439,7 @@
    "tendencia_por_decada": 0.568,
    "por_decada": [
     {
-     "decada": "2002-2011",
+     "decada": "2003-2011",
      "media": -0.088
     },
     {
@@ -443,7 +447,7 @@
      "media": 0.744
     },
     {
-     "decada": "2022-2026",
+     "decada": "2022-2025",
      "media": 0.665
     }
    ],

@@ -5,6 +5,7 @@ Verificación: el centro del píxel cae a menos de 1 km del punto pedido (ver pr
 """
 import csv
 import json
+import sys
 
 import numpy as np
 
@@ -69,8 +70,9 @@ def construir(inicio, fin, lst, ndvi, pix):
 def main():
     from analisis.descargar import INICIO, ultimo_anio_completo
     inicio, fin = INICIO, ultimo_anio_completo()
-    lst, ndvi = modis.cargar(inicio, fin)
-    salida = construir(inicio, fin, lst, ndvi, pixeles(modis.ruta_csv("MOD11A2")))
+    fin_lst = modis.anio_final("MOD11A2", modis.tope_calor(sys.argv))
+    lst, ndvi = modis.cargar(inicio, fin_lst, modis.anio_final("MOD13Q1"))
+    salida = construir(inicio, fin_lst, lst, ndvi, pixeles(modis.ruta_csv("MOD11A2")))
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
     SALIDA.write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"Escrito {SALIDA} ({SALIDA.stat().st_size} bytes, {len(salida['features'])} zonas)")

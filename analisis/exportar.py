@@ -4,6 +4,7 @@ Un solo comando:  python -m analisis.exportar        (desde la raíz del repo)
 """
 import datetime as dt
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -52,17 +53,24 @@ def _vacio(id_, titulo, pendiente):
             "serie_anual": [], "fuente": None, "limitacion": pendiente}
 
 
+def _parcial(mat, fin):
+    """Frase para la limitación cuando el último año no está completo."""
+    if not np.isnan(mat[-1]).any():
+        return ""
+    return (f" El año {fin} es parcial: entra a la prueba de tendencia mensual, pero no al promedio anual ni a la media por década.")
+
+
 FUENTE_MODIS = {"url": "https://appeears.earthdatacloud.nasa.gov/", "resolucion": "MODIS, 6 puntos de La Paz (promedio de zonas)"}
 
 
 def _vegetacion(ndvi_zonas, fecha, inicio, fin):
     mat = modis.ciudad(ndvi_zonas)
     return _indicador(
-        "vegetacion", "Vegetación", "NDVI (MODIS MOD13Q1 V061, 250 m), promedio de 6 zonas", "NDVI", t.promedio_anual,
+        "vegetacion", "Vegetación", "NDVI (MODIS MOD13Q1 V061, 250 m), promedio de 6 zonas", "NDVI", t.promedio_anual_sin_parcial,
         mat, None, fecha, inicio, fin,
         {**FUENTE_MODIS, "dataset": "MODIS MOD13Q1.061 (NDVI) vía NASA AppEEARS"},
         "Se descartan lecturas de relleno y de calidad baja (MODLAND 0b10/0b11); algunos meses de zonas urbanas quedan "
-        "sin dato. El NDVI de un punto de 250 m no representa toda la ciudad. No indica la causa del cambio.")
+        "sin dato. El NDVI de un punto de 250 m no representa toda la ciudad. No indica la causa del cambio." + _parcial(mat, fin))
 
 
 def _agua(mat, fecha, fin):
@@ -86,6 +94,7 @@ def zonas(lst, ndvi, inicio, fin):
     sal = {}
     for nombre, mats, unidad in (("calor_lst", lst, "°C"), ("vegetacion_ndvi", ndvi, "NDVI")):
         for z, m in mats.items():
+            fin = inicio + m.shape[0] - 1  # cada producto llega hasta su último año
             e = t.tendencia_estacional(m)
             sal.setdefault(z, {})[nombre] = {
                 "unidades": unidad, "pendiente_por_anio": _r(e["pendiente_por_anio"], 4),
@@ -95,20 +104,22 @@ def zonas(lst, ndvi, inicio, fin):
     return sal
 
 
-def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, lst_mat=None, agua_mat=None, fin_agua=None):
+def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, lst_mat=None, agua_mat=None, fin_agua=None,
+              fin_lst=None, fin_ndvi=None):
     fin = fin or descargar.ultimo_anio_completo()
     fuente_power = {"url": descargar.DOCS, "resolucion": "reanálisis MERRA-2, ~50 km (no es medición local)"}
     t2m = t.matriz_mensual(datos, "T2M", inicio, fin)
     lluvia = t.mm_por_mes(t.matriz_mensual(datos, "PRECTOTCORR", inicio, fin), inicio)
     est_aire = t.tendencia_estacional(t2m)
+    fin_lst, fin_ndvi = fin_lst or fin, fin_ndvi or fin
     if lst_mat is not None:
         calor = _indicador(
             "calor", "Calor", "Temperatura de superficie de día (MODIS MOD11A2 LST), promedio de 6 zonas", "°C",
-            t.promedio_anual, lst_mat, datos, fecha, inicio, fin,
+            t.promedio_anual_sin_parcial, lst_mat, datos, fecha, inicio, fin_lst,
             {**FUENTE_MODIS, "dataset": "MODIS MOD11A2.061 (LST_Day_1km) vía NASA AppEEARS", "resolucion": "1 km, 6 puntos de La Paz (promedio de zonas)"},
             "Temperatura de la superficie (suelo y techos), no del aire. Se descartan lecturas de relleno y nubes. "
             f"La temperatura del aire (NASA POWER, reanálisis ~50 km) sí sube: {est_aire['pendiente_por_anio'] * (fin - inicio):+.2f} °C en {inicio}-{fin}; "
-            "miden cosas distintas y no se explica la diferencia.")
+            "miden cosas distintas y no se explica la diferencia." + _parcial(lst_mat, fin_lst))
     else:
         calor = _indicador(
             "calor", "Calor", "Temperatura del aire a 2 m (NASA POWER T2M)", "°C", t.promedio_anual, t2m, datos, fecha,
@@ -125,7 +136,7 @@ def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, 
         "generado_con": GENERADO_CON, "periodo": {"inicio": inicio, "fin": fin},
         "indicadores": [
             calor,
-            _vegetacion(ndvi_zonas, fecha, inicio, fin) if ndvi_zonas else
+            _vegetacion(ndvi_zonas, fecha, inicio, fin_ndvi) if ndvi_zonas else
             _vacio("vegetacion", "Vegetación", "Pendiente: MODIS MOD13Q1 (NDVI)."),
             rain,
             _agua(agua_mat, fecha, fin_agua or fin) if agua_mat is not None else
@@ -137,15 +148,16 @@ def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, 
 def main():
     datos, fecha = descargar.descargar_power()
     inicio, fin = descargar.INICIO, descargar.ultimo_anio_completo()
-    lst, ndvi = modis.cargar(inicio, fin)
+    fin_lst, fin_ndvi = modis.anio_final("MOD11A2", modis.tope_calor(sys.argv)), modis.anio_final("MOD13Q1")
+    lst, ndvi = modis.cargar(inicio, fin_lst, fin_ndvi)
     ruta, fecha_grace = agua.descargar_grace()
     lecturas = agua.leer(ruta)
     fin_agua = max(a for a, _, _ in lecturas)  # lo más reciente que tenga GRACE (2026 parcial)
     mat_agua = agua.matriz_grace(lecturas, fin_agua)
-    salida = construir(datos, fecha, inicio, fin, ndvi, modis.ciudad(lst), mat_agua, fin_agua)
+    salida = construir(datos, fecha, inicio, fin, ndvi, modis.ciudad(lst), mat_agua, fin_agua, fin_lst, fin_ndvi)
     salida["indicadores"][3]["fuente"]["fecha_descarga"] = fecha_grace
-    SALIDA_ZONAS.write_text(json.dumps({"generado_con": GENERADO_CON, "periodo": {"inicio": inicio, "fin": fin},
-                                        "zonas": zonas(lst, ndvi, inicio, fin)}, ensure_ascii=False, indent=1), encoding="utf-8")
+    SALIDA_ZONAS.write_text(json.dumps({"generado_con": GENERADO_CON, "periodo": {"inicio": inicio, "fin": fin_lst},
+                                        "zonas": zonas(lst, ndvi, inicio, fin_lst)}, ensure_ascii=False, indent=1), encoding="utf-8")
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
     SALIDA.write_text(json.dumps(salida, ensure_ascii=False, indent=1), encoding="utf-8")
     for i in salida["indicadores"]:
