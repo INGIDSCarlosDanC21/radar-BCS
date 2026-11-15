@@ -4,6 +4,7 @@ La pendiente que devuelve pymannkendall.seasonal_test(period=12) es por año (ve
 mediana de pendientes por mes en el prototipo). Los faltantes (valor de relleno de POWER) son NaN.
 """
 import calendar
+import math
 
 import numpy as np
 import pymannkendall as mk
@@ -42,10 +43,15 @@ def suma_anual(mat):
     return np.where(np.isnan(mat).any(axis=1), np.nan, np.nansum(mat, axis=1))
 
 
+def _p(r):
+    """p-valor real: la librería lo redondea a 0.0 con |z| grande; se recalcula desde z (normal de dos colas)."""
+    return float(r.p) if r.p > 0 else math.erfc(abs(float(r.z)) / math.sqrt(2))
+
+
 def tendencia_estacional(mat, alfa=ALFA):
     """MK estacional y Sen sobre la serie cronológica. Devuelve pendiente/año, p, significativo, tau."""
     r = mk.seasonal_test(mat.reshape(-1), period=12, alpha=alfa)
-    return {"pendiente_por_anio": float(r.slope), "p_valor": float(r.p),
+    return {"pendiente_por_anio": float(r.slope), "p_valor": _p(r),
             "significativo": bool(r.h), "tau": float(r.Tau)}
 
 
@@ -59,7 +65,7 @@ def tendencia_anual(serie, alfa=ALFA):
     """MK simple y Sen sobre una serie ANUAL (para lluvia: los ceros mensuales anulan el Sen estacional)."""
     v = np.asarray(serie, dtype=float)
     r = mk.original_test(v[~np.isnan(v)], alpha=alfa)
-    return {"pendiente_por_anio": float(r.slope), "p_valor": float(r.p),
+    return {"pendiente_por_anio": float(r.slope), "p_valor": _p(r),
             "significativo": bool(r.h), "tau": float(r.Tau)}
 
 

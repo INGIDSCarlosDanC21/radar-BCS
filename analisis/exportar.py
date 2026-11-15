@@ -28,7 +28,7 @@ def _indicador(id_, titulo, variable, unidades, mat_anual_fn, mat, datos, fecha,
     anual = mat_anual_fn(mat)
     est = t.tendencia_anual(anual) if anual_simple else t.tendencia_estacional(mat)
     pend = est["pendiente_por_anio"]
-    claro = est["significativo"] or not anual_simple  # lluvia sin cambio claro: sin cifra (contrato, anexo 3)
+    claro = est["significativo"]  # sin cambio claro: sin cifra (contrato, anexo 3, aplicado a todos los indicadores)
     return {
         "id": id_, "titulo": titulo, "variable": variable, "unidades": unidades,
         "cambio_total": _r(t.cambio_total(pend, inicio, fin)) if claro else None,
@@ -73,7 +73,8 @@ def _agua(mat, fecha, fin):
         {"dataset": "JPL GRACE and GRACE-FO Mascon CRI RL06.3Mv04 (PO.DAAC)", "url": agua.DOI,
          "resolucion": "malla de 0.5° (interpolada de mascones de 3°); señal regional de cientos de km"},
         "Tendencia REGIONAL del agua total almacenada (suelo, agua subterránea y superficial), no del acuífero de La Paz. "
-        "Es una anomalía respecto a un promedio de referencia, en cm de agua equivalente. El periodo empieza en 2002; "
+        "Es una anomalía respecto a un promedio de referencia, en cm de agua equivalente. El periodo va de 2002 al último mes publicado "
+        f"(el año {fin} es parcial: entra a la prueba de tendencia mensual, no al promedio anual); "
         "faltan meses (hueco entre GRACE y GRACE-FO) y se promedian solo los años con al menos 9 meses. "
         f"Con la prueba que corrige la autocorrelación, p = {c['p_valor']:.2g} ({'significativa' if c['significativo'] else 'no significativa'}). No indica la causa.")
 
@@ -92,18 +93,25 @@ def zonas(lst, ndvi, inicio, fin):
     return sal
 
 
-def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, lst_ciudad=None, agua_mat=None):
+def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, lst_mat=None, agua_mat=None, fin_agua=None):
     fin = fin or descargar.ultimo_anio_completo()
     fuente_power = {"url": descargar.DOCS, "resolucion": "reanálisis MERRA-2, ~50 km (no es medición local)"}
     t2m = t.matriz_mensual(datos, "T2M", inicio, fin)
     lluvia = t.mm_por_mes(t.matriz_mensual(datos, "PRECTOTCORR", inicio, fin), inicio)
-    calor = _indicador(
-        "calor", "Calor", "Temperatura del aire a 2 m (NASA POWER T2M)", "°C", t.promedio_anual, t2m, datos, fecha,
-        inicio, fin, {**fuente_power, "dataset": "NASA POWER Monthly (MERRA-2), parámetro T2M, community AG"},
-        "Es temperatura del aire (reanálisis ~50 km), no de la superficie."
-        + (f" La temperatura de superficie MODIS (LST, promedio de 6 zonas) da {lst_ciudad['pendiente_por_anio']:+.3f} °C/año, "
-           f"p = {lst_ciudad['p_valor']:.2g}, {'significativa' if lst_ciudad['significativo'] else 'no significativa'}: no coincide con el aire."
-           if lst_ciudad else " Pendiente: MODIS MOD11A2."))
+    est_aire = t.tendencia_estacional(t2m)
+    if lst_mat is not None:
+        calor = _indicador(
+            "calor", "Calor", "Temperatura de superficie de día (MODIS MOD11A2 LST), promedio de 6 zonas", "°C",
+            t.promedio_anual, lst_mat, datos, fecha, inicio, fin,
+            {**FUENTE_MODIS, "dataset": "MODIS MOD11A2.061 (LST_Day_1km) vía NASA AppEEARS", "resolucion": "1 km, 6 puntos de La Paz (promedio de zonas)"},
+            "Temperatura de la superficie (suelo y techos), no del aire. Se descartan lecturas de relleno y nubes. "
+            f"La temperatura del aire (NASA POWER, reanálisis ~50 km) sí sube: {est_aire['pendiente_por_anio'] * (fin - inicio):+.2f} °C en {inicio}-{fin}; "
+            "miden cosas distintas y no se explica la diferencia.")
+    else:
+        calor = _indicador(
+            "calor", "Calor", "Temperatura del aire a 2 m (NASA POWER T2M)", "°C", t.promedio_anual, t2m, datos, fecha,
+            inicio, fin, {**fuente_power, "dataset": "NASA POWER Monthly (MERRA-2), parámetro T2M, community AG"},
+            "Es temperatura del aire (reanálisis ~50 km), no de la superficie. Pendiente: MODIS MOD11A2.")
     rain = _indicador(
         "lluvia", "Lluvia", "Precipitación corregida (NASA POWER PRECTOTCORR), total anual", "mm/año", t.suma_anual,
         lluvia, datos, fecha, inicio, fin,
@@ -118,7 +126,7 @@ def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, 
             _vegetacion(ndvi_zonas, fecha, inicio, fin) if ndvi_zonas else
             _vacio("vegetacion", "Vegetación", "Pendiente: MODIS MOD13Q1 (NDVI)."),
             rain,
-            _agua(agua_mat, fecha, fin) if agua_mat is not None else
+            _agua(agua_mat, fecha, fin_agua or fin) if agua_mat is not None else
             _vacio("agua", "Agua", "Pendiente: GRACE (tendencia regional)."),
         ],
     }
@@ -129,8 +137,10 @@ def main():
     inicio, fin = descargar.INICIO, descargar.ultimo_anio_completo()
     lst, ndvi = modis.cargar(inicio, fin)
     ruta, fecha_grace = agua.descargar_grace()
-    mat_agua = agua.matriz_grace(agua.leer(ruta), fin)
-    salida = construir(datos, fecha, inicio, fin, ndvi, t.tendencia_estacional(modis.ciudad(lst)), mat_agua)
+    lecturas = agua.leer(ruta)
+    fin_agua = max(a for a, _, _ in lecturas)  # lo más reciente que tenga GRACE (2026 parcial)
+    mat_agua = agua.matriz_grace(lecturas, fin_agua)
+    salida = construir(datos, fecha, inicio, fin, ndvi, modis.ciudad(lst), mat_agua, fin_agua)
     salida["indicadores"][3]["fuente"]["fecha_descarga"] = fecha_grace
     SALIDA_ZONAS.write_text(json.dumps({"generado_con": GENERADO_CON, "periodo": {"inicio": inicio, "fin": fin},
                                         "zonas": zonas(lst, ndvi, inicio, fin)}, ensure_ascii=False, indent=1), encoding="utf-8")

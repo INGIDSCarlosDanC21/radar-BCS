@@ -95,4 +95,7 @@ def promedio_anual_minimo(mat, min_meses=9):
     """Media anual de la anomalía solo si el año tiene al menos `min_meses` meses; si no, NaN."""
     validos = (~np.isnan(mat)).sum(axis=1)
     with np.errstate(all="ignore"):
-        return np.where(validos >= min_meses, np.nanmean(mat, axis=1), np.nan)
+        anual = np.where(validos >= min_meses, np.nanmean(mat, axis=1), np.nan)
+    if validos[-1] < 12 and anual.size:
+        anual[-1] = np.nan  # el último año, si está incompleto, no entra al promedio anual (sesgo estacional)
+    return anual

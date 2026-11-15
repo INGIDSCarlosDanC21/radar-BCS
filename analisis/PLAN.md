@@ -13,7 +13,7 @@ Código generado con IA (Claude); revisar antes de citar cifras.
 
 ## Falla o bloquea
 - **Tarea MOD13Q1 de AppEEARS** sigue descargando (~26%); no hace falta para los resultados porque se usan los CSV de 6 zonas de Luca (`data/cache/appeears/usuario/`). MOD11A2 de la tarea del pipeline ya bajó.
-- **Calor: POWER (aire) y MODIS (superficie) no coinciden.** Aire +1.465 °C (significativo); LST MODIS ciudad −0.02 °C/año, p = 0.11 (no significativa). Solo El Centenario y Sur bajan significativamente. Falta que Investigación decida qué se muestra; hoy `calor` = aire y la limitación lo dice.
+- **Calor: POWER (aire) y MODIS (superficie) no coinciden** (decidido: se muestra MODIS, ver abajo). Aire +1.465 °C (significativo); LST MODIS ciudad −0.02 °C/año, p = 0.11 (no significativa). Solo El Centenario y Sur bajan significativamente. Falta que Investigación decida qué se muestra; hoy `calor` = aire y la limitación lo dice.
 - LST: Oriente y Sur solo tienen calidad MODLAND 0b01 (no 0b00); NDVI de Centro pierde 167 meses al filtrar.
 - `web/data/zonas.geojson` sigue siendo la cuadrícula sintética (issue #36); no copiar `indicadores.json` a `web/data/` sin resolverlo.
 - `p_valor` del calor sale 0.0 (la web muestra "p < 0.001").
@@ -61,3 +61,9 @@ Es otro píxel que los de las 6 zonas, así que no se compara valor por valor; s
 - **Lectura prudente:** el agua total regional *sube* (decenios: -0.09, +0.74, +0.67 cm). No es agua subterránea de La Paz ni dice nada del acuífero; puede reflejar años más lluviosos, y no se explica la causa. Esto choca con el mensaje "se pierde agua": Carlos debe decidir cómo presentarlo.
 - **Sin hacer:** contraste con GLDAS-2.2 CLSM (`GWS_tavg`, agua subterránea modelada, desde 2003): requiere GES DISC o Google Earth Engine. Sigue como mejora.
 - `zonas.geojson` mantiene `agua: null` (la señal es regional).
+
+## Decisiones de Carlos aplicadas (2026-11-14)
+- **Calor = MODIS LST (superficie)**, promedio de 6 zonas, 2001-2025: -0.020 °C/año, p = 0.11, no significativo. Por eso `cambio_total` y `tendencia_por_decada` van en `null` con la nota "No se detecta un cambio claro…" (misma regla que la lluvia, ahora aplicada a todos los indicadores). La limitación cita que el aire (POWER) sube +1.47 °C y que miden cosas distintas; no se explica la diferencia.
+- **Agua = lo más actual hasta 2026**: el periodo va de 2002 a 2026 (último mes publicado: septiembre de 2026). Resultado: +1.362 cm, p = 9.9e-18 (MK estacional; con autocorrelación sigue significativa). 2026 es parcial: entra a la prueba mensual, no al promedio anual ni a las décadas (`2022-2026` promedia solo 2022-2025).
+- `p_valor` ya no sale `0.0` (regla 4 del anexo): se recalcula desde z cuando la librería lo redondea. Prueba nueva.
+- Vegetación, lluvia y calor siguen en 2001-2025 (los CSV de MODIS bajados llegan a 2025); no se ha extendido a 2026.
