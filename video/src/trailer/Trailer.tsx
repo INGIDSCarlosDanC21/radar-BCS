@@ -47,7 +47,7 @@ const BandaInferior: React.FC = () => (
 const volumenLecho = (f: number, fps: number) => {
   const t = f / fps;
   const habla = SUBTITULOS.some((s) => t >= s.desde - 0.15 && t <= s.hasta + 0.15);
-  const base = habla ? 0.32 : 0.6;
+  const base = habla ? 0.14 : 0.32;
   return t > 27 ? base * interpolate(t, [27, 28], [1, 0], CL) : base;
 };
 
@@ -101,7 +101,7 @@ export const TrailerRadarBCS: React.FC<PropsTrailer> = ({ audios, hayNarracion }
       {hay('bed-120bpm-28s') ? <Audio name="Lecho 120 BPM" src={staticFile('audio/bed-120bpm-28s.mp3')} volume={(fr) => volumenLecho(fr, fps)} /> : null}
       {SENALES.filter((s) => hay(s.archivo)).map((s, i) => (
         <Sequence key={i} name={`SFX ${s.archivo}`} from={f(s.archivo.startsWith('riser') ? s.en : s.en)} layout="none">
-          <Audio src={staticFile(`audio/${s.archivo}.mp3`)} volume={s.volumen} />
+          <Audio src={staticFile(`audio/${s.archivo}.mp3`)} volume={s.volumen * 0.6} />
         </Sequence>
       ))}
     </AbsoluteFill>

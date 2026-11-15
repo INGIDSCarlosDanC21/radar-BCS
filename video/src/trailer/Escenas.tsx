@@ -349,7 +349,7 @@ export const Mapa: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          left: 1120 - (CAJA_FOTO.ancho * escala) / 2,
+          left: 1060 - (CAJA_FOTO.ancho * escala) / 2,
           top: 560 - (CAJA_FOTO.alto * escala) / 2,
           width: CAJA_FOTO.ancho * escala,
           height: CAJA_FOTO.alto * escala,
@@ -366,7 +366,7 @@ export const Mapa: React.FC = () => {
           return (
             <div key={l.id} style={{ position: 'absolute', left: p.x * escala, top: p.y * escala }}>
               <div style={{ position: 'absolute', left: -30, top: -30, width: 60, height: 60, borderRadius: 30, border: `3px solid ${NARANJA}`, opacity: 1 - onda, scale: `${0.3 + onda * 1.4}` }} />
-              <div style={{ position: 'absolute', left: -9, top: -9, width: 18, height: 18, borderRadius: 9, background: NARANJA, border: '3px solid #fff', scale: `${q}`, boxShadow: `0 0 18px ${NARANJA}` }} />
+              <div style={{ position: 'absolute', left: -13, top: -13, width: 26, height: 26, borderRadius: 13, background: NARANJA, border: '3px solid #fff', scale: `${q}`, boxShadow: `0 0 18px ${NARANJA}` }} />
             </div>
           );
         })}
@@ -455,7 +455,7 @@ export const Avisos: React.FC = () => {
                   left: -14,
                   top: 10,
                   bottom: 4,
-                  width: `calc(${interpolate(t, [2.0, 2.5], [0, 100], { ...CL, easing: SUAVE })}% + 28px)`,
+                  width: `calc(${interpolate(t, [2.0, 2.5], [0, 100], { ...CL, easing: SUAVE })}% + ${interpolate(t, [2.0, 2.1], [0, 28], CL)}px)`,
                   background: COLOR.cian,
                   borderRadius: 8,
                   rotate: '-1deg',
@@ -480,7 +480,7 @@ export const Cierre: React.FC<{ url: string; fuentes: string }> = ({ url, fuente
   const barrido = interpolate(t, [1.9, 2.6], [-40, 140], CL);
   const rayos = interpolate(t, [1.5, 1.7, 3.0], [0, 1, 0], CL);
   return (
-    <AbsoluteFill style={{ background: FONDO, overflow: 'hidden' }}>
+    <AbsoluteFill style={{ background: FONDO, overflow: 'hidden', scale: `${interpolate(t, [0, 6], [1, 1.06])}` }}>
       <Img src={staticFile('bcs-modis.jpg')} style={{ position: 'absolute', left: -100, top: -200, width: 2200, opacity: 0.16, filter: 'blur(10px) saturate(0.5)', scale: `${1 + t * 0.015}` }} />
       <AbsoluteFill style={{ alignItems: 'center', transformOrigin: 'top center', top: interpolate(sube, [0, 1], [330, 150]), scale: `${interpolate(sube, [0, 1], [1, 0.62])}` }}>
         <div style={{ display: 'flex', gap: 34 }}>
