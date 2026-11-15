@@ -17,13 +17,13 @@ Reemplaza la versión de la mañana. **Decisión de Carlos (2026-11-15): pantall
 | 0:21 | **Clima** (4 tarjetas) y un vistazo a **Pesca** con la pastilla "modelo, no oficial" | "Today's sea and weather are model estimates, not official warnings." (10) |
 | 0:26 | Texto: enlace de la web + "Data: NASA POWER · MODIS · GRACE · GIBS" | "What changed, not why. Radar BCS." (6) |
 
-**Texto fijo en pantalla durante todo el video (pequeño, arriba): "AI-generated voice (ElevenLabs)."** Cumple la regla de la Guía de envío (videos generados con marca visible) y se repite en la descripción del video.
+**Sin etiqueta de IA visible en pantalla** (decisión de Carlos, 2026-11-15; ver `docs/decisiones.md`). La declaración de la voz sintética va en la descripción del video ("Narration is an AI-generated voice (ElevenLabs)"), en `docs/entrega/05-use-of-ai.md`, en `docs/RECURSOS.md` y en el campo de IA de la plataforma.
 
 Las cifras salen de `data/salida/indicadores.json` y `docs/investigacion/hallazgos.md` (aire +1.47 °C, 2001-2025, p < 0.001; lluvia p = 0.129, no significativa). **No decir:** por qué subió el calor, que la superficie se calentó (Terra y Aqua no coinciden), que hay más agua local o que el acuífero se recupera, ninguna causa (urbanización, cambio climático), que los avisos del modelo son oficiales, ni que se probó en un celular real hasta que el issue #71 lo confirme.
 
 ## Alternativas si algo falla
 
-- **ElevenLabs no disponible o rechazado:** el mismo texto lo narra un integrante **mayor de 18** que acepte que NASA use su voz; entonces se quita la línea "AI-generated voice" y se corrige `05` y `docs/RECURSOS.md`.
+- **ElevenLabs no disponible o rechazado:** el mismo texto lo narra un integrante **mayor de 18** que acepte que NASA use su voz; entonces se quita la declaración de voz sintética de la descripción del video y se corrige `05` y `docs/RECURSOS.md`.
 - **No alcanza el tiempo para armar el video:** 7 diapositivas (máx., contando portada) con las mismas ideas; el campo de demo acepta un enlace a las diapositivas.
 
 ## Cómo producirlo
@@ -36,11 +36,11 @@ Las cifras salen de `data/salida/indicadores.json` y `docs/investigacion/hallazg
 ## Lista de producción
 
 - [ ] Subtítulos en inglés quemados, legibles en un celular, idénticos a la voz.
-- [ ] Línea fija visible "AI-generated voice (ElevenLabs)" y lo mismo en la descripción del video.
+- [ ] Sin etiqueta de IA en pantalla; la declaración "AI-generated voice (ElevenLabs)" va en la descripción del video.
 - [ ] Solo imágenes propias o libres: la web y el logo; todo recurso está en `docs/RECURSOS.md` y `docs/entrega/07`.
 - [ ] Sin logos, banderas ni parches de la NASA. NASA solo se menciona en texto.
 - [ ] **Sin menores de 18:** nadie aparece, se nombra o se oye (créditos incluidos).
-- [ ] Si el logo (generado con Gemini) sale en pantalla, conserva su marca "AI-generated"; está declarado en `05`.
-- [ ] ElevenLabs declarado en `05`, en `docs/RECURSOS.md` y marcado en el campo de IA de la plataforma.
+- [ ] El logo (generado con Gemini) sale en su versión limpia, sin marca en pantalla; está declarado en `05` y en `docs/RECURSOS.md`.
+- [ ] ElevenLabs y Gemini declarados en `05`, en `docs/RECURSOS.md`, en la descripción del video y marcados en el campo de IA de la plataforma.
 - [ ] Duración de 30 s o menos (medida con cronómetro o con la herramienta de edición, no a ojo).
 - [ ] Enlace público, probado con una ventana sin sesión iniciada.

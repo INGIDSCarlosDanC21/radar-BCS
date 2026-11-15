@@ -69,7 +69,6 @@ export const PLANOS: Record<'inicio' | 'calor' | 'lluvia' | 'mapa' | 'clima' | '
 // Deriva lenta (px del video por segundo) para que la pantalla no se vea congelada.
 export const DERIVA_PX_S = 14;
 
-export const LINEA_IA = 'AI-generated voice (ElevenLabs)';
 export const URL_WEB = 'ingidscarlosdanc21.github.io/radar-BCS';
 export const FUENTES_DATOS = 'Data: NASA POWER · MODIS · GRACE · GIBS';
 

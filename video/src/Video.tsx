@@ -1,6 +1,5 @@
 import { Audio } from '@remotion/media';
 import { AbsoluteFill, Sequence, staticFile, Track, useVideoConfig } from 'remotion';
-import { LineaIA } from './componentes/LineaIA';
 import { Subtitulos } from './componentes/Subtitulos';
 import { TarjetaCierre } from './escenas/TarjetaCierre';
 import { TarjetaTitulo } from './escenas/TarjetaTitulo';
@@ -10,7 +9,7 @@ import { ESCENAS, PLANOS } from './guion';
 import type { PropsVideo } from './tipos';
 
 // Video de 30 s de Radar BCS: una secuencia por toma (tiempos en guion.ts), subtítulos quemados,
-// línea fija de IA arriba y la narración de ElevenLabs si existe public/narracion.mp3.
+// y la narración de ElevenLabs si existe public/narracion.mp3.
 export const VideoRadarBCS: React.FC<PropsVideo> = ({ hayNarracion, tomas }) => {
   const { fps } = useVideoConfig();
   const f = (s: number) => Math.round(s * fps);
@@ -46,7 +45,6 @@ export const VideoRadarBCS: React.FC<PropsVideo> = ({ hayNarracion, tomas }) => 
         </Sequence>
       </Track>
       <Subtitulos />
-      <LineaIA />
       {hayNarracion ? <Audio name="Narración (ElevenLabs)" src={staticFile('narracion.mp3')} /> : null}
     </AbsoluteFill>
   );
