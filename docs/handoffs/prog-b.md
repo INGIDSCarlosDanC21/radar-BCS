@@ -127,3 +127,20 @@ Falta:
 - Que Carlos actualice la fila del logo en `docs/entrega/07`: la marca es texto junto al logo, no el PNG con la etiqueta.
 - Teléfono real (#71) y contraste medido con herramienta.
 - P2 del reporte que no hice: chips de la ficha en una fila y `<details>` para el método.
+
+## 2026-11-15: bloque autónomo #119 (reglas del #117)
+
+| Tarea | PR | Estado |
+|---|---|---|
+| D1 360 px | #116 (actualizado) | Abierto. Sin scroll a 360 px en ES/EN (5 pantallas y 4 fichas de Agro); toques de 44 px, también el buscador y los marcadores de Agro |
+| D2 logo e íconos | #121 (actualizado) | Abierto. Logo de 44 px desde 400 px; las 4 fichas de Agro con sus íconos `agricultura-*`; lista de archivos usados en el PR para `docs/entrega/07` y `05` |
+| D3 idioma y vista previa | #125 | Abierto. `description` y `og:*` en ES/EN; la vista previa real sale en español porque los rastreadores no corren JS |
+| D4 auditoría de Luca | #130 | **Listo para revisión del Líder** (toca `web/data/agricola.json`). Correcciones 2, 3 y 5 aplicadas; la 1 sale sola al regenerar cuando entre el calor del aire |
+| D5 esqueleto | #122 (actualizado) | Abierto. `aria-busy` en `<main>` y prueba del estado de error con el `app.js` real |
+| D6 accesibilidad | #131 | Abierto. "Saltar al contenido" mandaba a Inicio (arreglado); anuncio de pantalla; foco visible; contraste AA en modo claro y oscuro |
+| D7 matriz | comentario en #85, issue #132 | `dev` falla solo en lluvia a 360 y 390 px (lo arregla #116); la suma de mis PRs pasa |
+| D8 revisión | #123 (Ehileen) | Revisado y en verde; **no lo fusioné**, mi sesión no tiene permiso |
+
+Los 6 PRs se fusionan entre sí sin choques (62 pruebas en la suma). `verificar-todo.ps1` pasa completo en cada rama, con un `uv venv` en `.venv` (ignorado por git).
+
+Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agricola.json` cuando entre el calor del aire de Luca, teléfono real (#71), lector de pantalla real y vista previa al compartir.
