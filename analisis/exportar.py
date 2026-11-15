@@ -87,7 +87,7 @@ def _vegetacion(ndvi_zonas, fecha, inicio, fin):
         "sin dato. El NDVI de un punto de 250 m no representa toda la ciudad. No indica la causa del cambio." + _parcial(mat, fin),
         en={"titulo": "Vegetation", "variable": "NDVI (MODIS MOD13Q1 V061, 250 m), average of 6 zones",
             "metodo": "Seasonal Mann-Kendall + Sen's slope",
-            "limitacion": "Fill values and low-quality readings are discarded (MODLAND 0b10/0b11); some months in urban zones have no data. "
+            "limitacion": "Missing and low-quality readings are removed (MODLAND quality flags 0b10/0b11); some months in urban zones have no data. "
                           "The NDVI of a 250 m point does not represent the whole city. It does not tell the cause of the change." + _parcial_en(mat, fin)})
 
 
@@ -109,7 +109,7 @@ def _agua(mat, fecha, fin):
         metodo="Mann-Kendall estacional con corrección por autocorrelación + pendiente de Sen",
         en={"titulo": "Water", "variable": "Total water storage anomaly (GRACE/GRACE-FO, JPL Mascon CRI RL06.3Mv04), La Paz grid cell",
             "metodo": "Seasonal Mann-Kendall with autocorrelation correction + Sen's slope",
-            "limitacion": "REGIONAL trend of total stored water (soil, groundwater and surface water), not of the La Paz aquifer. "
+            "limitacion": "Regional trend of total stored water (soil, groundwater and surface water), not of the La Paz aquifer. "
                           "It is an anomaly against a reference average, in cm of water equivalent. The period goes from 2002 to the last published month "
                           f"(the year {fin} is partial: it enters the monthly trend test, not the annual average); "
                           "months are missing (gap between GRACE and GRACE-FO) and only years with at least 9 months are averaged. "
@@ -156,12 +156,13 @@ def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, 
     rain = _indicador(
         "lluvia", "Lluvia", "Precipitación corregida (NASA POWER PRECTOTCORR), total anual", "mm/año", t.suma_anual,
         lluvia, datos, fecha, inicio, fin,
-        {**fuente_power, "dataset": "NASA POWER Monthly (MERRA-2), parámetro PRECTOTCORR, community AG"},
+        {**fuente_power, "dataset": "NASA POWER Monthly (MERRA-2), parámetro PRECTOTCORR, community AG",
+         "dataset_en": "NASA POWER Monthly (MERRA-2), PRECTOTCORR parameter, AG community"},
         "Lluvia concentrada en pocos meses y muy variable de un año a otro; la tendencia se calcula con el total anual. "
         "Dato de reanálisis (~50 km), no de pluviómetro.", anual_simple=True,
-        en={"titulo": "Rain", "variable": "Corrected precipitation (NASA POWER PRECTOTCORR), annual total",
+        en={"titulo": "Rainfall", "variable": "Corrected precipitation (NASA POWER PRECTOTCORR), annual total",
             "metodo": "Mann-Kendall on the annual total + Sen's slope",
-            "limitacion": "Rain is concentrated in a few months and varies a lot from year to year; the trend is computed with the annual total. "
+            "limitacion": "Rainfall is concentrated in a few months and varies a lot from year to year; the trend is computed with the annual total. "
                           "Reanalysis data (~50 km), not a rain gauge."})
     return {
         "version_contrato": VERSION_CONTRATO, "datos_de_prueba": False, "generado": dt.date.today().isoformat(),
