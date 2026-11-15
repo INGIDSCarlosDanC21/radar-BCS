@@ -62,7 +62,7 @@
     var h = '<article class="hm-principal" data-indicador="' + esc(i.id) + '">' +
       '<div class="hm-barra" aria-hidden="true"></div>' +
       '<p class="hm-mono hm-verde">' + t('home.principal') + '</p>' +
-      '<h3 class="hm-t-prin">' + esc(t('home.enLaPaz', { t: tit(i) })) + '</h3>' +
+      '<h3 class="hm-t-prin">' + RB.icono(i.id) + esc(t('home.enLaPaz', { t: tit(i) })) + '</h3>' +
       '<p class="hm-cifra-grande ' + esc(c.clase) + '">' + esc(c.texto) + '</p>' +
       '<p class="hm-linea">' + etq(i) + (p ? ' <span class="hm-mono">' + esc(p) + '</span>' : '') + '</p>' +
       (i.limitacion ? '<p class="hm-peq">' + esc(T.d(i, 'limitacion')) + '</p>' : '') +
@@ -81,7 +81,7 @@
     var nota = '';
     if (i.id === 'agua' && i.limitacion) nota = String(T.d(i, 'limitacion')).split('. ')[0] + '.';
     return '<article class="hm-peque" data-indicador="' + esc(i.id) + '">' +
-      '<h3 class="hm-t-peq">' + esc(tit(i)) + '</h3>' +
+      '<h3 class="hm-t-peq">' + RB.icono(i.id) + esc(tit(i)) + '</h3>' +
       '<p class="hm-cifra ' + esc(c.clase) + '">' + esc(c.texto) + '</p>' +
       '<p class="hm-linea">' + etq(i) + (p ? ' <span class="hm-mono">' + esc(p) + '</span>' : '') + '</p>' +
       (nota ? '<p class="hm-peq">' + esc(nota) + '</p>' : '') +
