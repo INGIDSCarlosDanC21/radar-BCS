@@ -134,3 +134,28 @@ def test_salida_en_ingles_no_repite_el_espanol(ind):
     """Un texto en inglés copiado del español sería un error de la traducción."""
     for i in ind["indicadores"]:
         assert i["limitacion_en"] != i["limitacion"] and i["titulo_en"] != i["titulo"]
+
+
+def _calor(ind):
+    return next(i for i in ind["indicadores"] if i["id"] == "calor")
+
+
+def test_calor_es_el_del_aire_y_menciona_a_aqua():
+    """Opción B: la salida real publica el aire (T2M) y su limitación (ES y EN) explica el contraste con Aqua."""
+    ind = json.loads(v.INDICADORES.read_text(encoding="utf-8"))
+    c = _calor(ind)
+    assert "T2M" in c["variable"] and c["fuente"]["periodo"].startswith("2001-")
+    assert "Aqua" in c["limitacion"] and "Aqua" in c["limitacion_en"]
+    assert c["significancia"]["significativo"] is True and c["cambio_total"] == pytest.approx(1.47, abs=0.01)
+
+
+def test_calor_de_superficie_no_valida(ind):
+    _calor(ind)["variable"] = "Temperatura de superficie de día (MODIS MOD11A2 LST), promedio de 6 zonas"
+    assert _hay(v.validar_indicadores(ind), "debe ser el del aire")
+
+
+def test_calor_sin_aqua_en_la_limitacion(ind):
+    c = _calor(ind)
+    c["limitacion"], c["limitacion_en"] = "Solo aire.", "Air only."
+    e = v.validar_indicadores(ind)
+    assert _hay(e, "limitacion: debe mencionar") and _hay(e, "limitacion_en: debe mencionar")

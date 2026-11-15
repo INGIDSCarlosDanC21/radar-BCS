@@ -6,7 +6,7 @@ Para revisores (Luca e Investigación). Las cifras salen de `data/salida/indicad
 
 ```
 pip install -r analisis/requirements.txt
-python -m analisis.exportar --calor-hasta 2021   # escribe indicadores.json y zonas_tendencias.json
+python -m analisis.exportar --calor-hasta 2021   # escribe indicadores.json (calor = aire) y zonas_tendencias.json (superficie 2001-2021)
 python -m analisis.zonas --calor-hasta 2021      # escribe zonas.geojson
 python -m analisis.validar                       # contrato de datos + campos *_en
 python -m pytest analisis                        # 56 funciones test_
@@ -25,7 +25,7 @@ Cifra = `cambio_total` (JSON). Sin cifra = `null`. Los valores son los del JSON 
 
 | Indicador (`id`) | Cifra publicada | p-valor (JSON) | Periodo | Método (`significancia.metodo`) | Función en el código |
 |---|---|---|---|---|---|
-| Calor (`calor`, MODIS LST, 6 zonas) | +0.935 °C (por década +0.468) | 0.0003177 (significativo) | 2001-2021 | MK estacional + Sen | `tendencias.tendencia_estacional` |
+| Calor (`calor`, NASA POWER T2M, aire a 2 m; opción B) | +1.465 °C (por década +0.611) | 2.762e-17 (significativo) | 2001-2025 | MK estacional + Sen | `tendencias.tendencia_estacional` |
 | Vegetación (`vegetacion`, NDVI MOD13Q1) | -0.013 (por década -0.005) | 0.003626 (significativo) | 2001-2026 (2026 parcial) | MK estacional + Sen | `tendencias.tendencia_estacional` |
 | Lluvia (`lluvia`, NASA POWER PRECTOTCORR) | sin cifra | 0.129 (no significativo) | 2001-2025 | MK sobre total anual + Sen | `tendencias.tendencia_anual` |
 | Agua (`agua`, GRACE/GRACE-FO CRI) | +1.362 cm (por década +0.568) | 0.009435 (significativo) | 2002-2026 (2026 parcial) | MK estacional con corrección por autocorrelación + Sen | `tendencias.tendencia_estacional_correlacionada` |
@@ -50,14 +50,14 @@ Pendiente de verificar contra la fuente: los valores de NDVI y de POWER T2M (no 
 
 - **No es causa.** Las tendencias muestran qué cambió, no por qué (regla 2 de `AGENTS.md`).
 - **Agua regional, no acuífero.** GRACE mide cientos de km; el dato no describe el acuífero de La Paz ni los pozos (`analisis/texto-ficha-agua.md`).
-- **Calor de superficie ≠ aire.** MODIS LST mide superficie (suelo y techos); NASA POWER T2M mide aire (reanálisis ~50 km). Se explica en la `limitacion` del JSON; no se explica la diferencia.
+- **Calor de superficie ≠ aire.** El calor publicado es el aire (NASA POWER T2M, reanálisis ~50 km). MODIS LST mide superficie (suelo y techos) y queda como "no concluyente" (Terra +0.9 °C, Aqua +0.27 °C, p = 0.29): solo en `zonas_tendencias.json` y `contraste_aqua`. Se explica en la `limitacion`; no se explica la diferencia.
 - **Lluvia de reanálisis.** NASA POWER (MERRA-2, ~50 km) no es pluviómetro local.
 
 ## Discrepancias detectadas (para revisar)
 
 - Agua, décadas: el JSON etiqueta `2022-2026` pero el promedio solo cubre 2022-2025 (así lo explica la `limitacion`).
 - `PLAN.md` menciona `correlated_seasonal_test` para calor y vegetación; el código de `exportar.py` no lo usa (solo `tendencia_estacional_correlacionada` en agua).
-- La `limitacion` del calor atribuye la caída posterior a 2021 a la deriva de Terra; tras el contraste con Aqua conviene que Carlos la revise.
+- Resuelto con la opción B (`docs/decisiones.md`, 2026-11-15): el calor es el del aire y su `limitacion` ya no atribuye la caída a la deriva de Terra; explica el contraste con Aqua.
 
 ## No pude verificar
 
