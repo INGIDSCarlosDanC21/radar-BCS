@@ -2,7 +2,9 @@
 
 Pedido de Carlos (chat, 2026-11-15): que los textos largos se acorten y ofrezcan un botón **"Ver más"** con el resto de la información, para optimizar el espacio. La gente hace mucho scroll.
 
-Este documento es un **plan**. Todavía no se programó nada. Las decisiones que necesitan el OK de Carlos están en la sección 8.
+**Estado (2026-11-15, 04:30): implementado** en `web/js/ver-mas.js`, `web/css/ver-mas.css` y `web/tests/ver-mas.test.mjs` (PR de la rama `lider/ver-mas`). Carlos dejó las decisiones de la sección 8 al asistente, que eligió lo recomendado: umbral de 3 líneas / más de 4, excepciones de la sección 3, Inicio incluido (Ehileen ya fusionó sus PR) y el extra 4 (botón "Subir", incluido en el mismo componente). **Los extras 1 y 2 (plegar grupos del Agro y "Sobre los datos" en Ficha) no se hicieron**: tocan `agricola.js` y `app.js`, que Diego está editando para Clima; quedan para después de su PR.
+
+**Resultado medido** (celular de 390 px, 19 textos plegados, 0 con scroll horizontal, botones de 44 px): Agro Clima 5996 → 5531 px, Ficha de agua 3015 → 2679 px, Ficha de calor 2907 → 2643 px, Inicio 3901 → 3793 px, Mapa 2360 → 2268 px. Pesca y Avisos no cambian (ya son cortos).
 
 ## 1. Cuánto pesan hoy los textos largos (medido el 2026-11-15, celular de 390 px)
 

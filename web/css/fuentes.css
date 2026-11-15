@@ -7,8 +7,7 @@
    los rótulos de seguridad ("no es aviso oficial", "no son estaciones"), las limitaciones ni el pie de página. */
 
 /* Encabezado: sin la etiqueta "AI-generated" junto al logo (el logo sigue declarado en docs/entrega/05 y RECURSOS).
-   El <span class="marca-ia"> se borra de index.html cuando se fusione el PR #159 (toca esa misma línea). */
-.marca-ia { display: none; }
+   Para volver a mostrarla: poner de nuevo el <span class="marca-ia"> en index.html (ver docs/FUENTES-Y-IA.md). */
 
 /* Inicio: "Fuente: …" repetida en cada una de las 4 tarjetas, y el crédito de la imagen GOES
    (el encabezado de la imagen ya dice "Imagen GOES-West · NASA GIBS") */
