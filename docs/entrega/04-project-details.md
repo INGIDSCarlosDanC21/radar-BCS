@@ -19,18 +19,19 @@ Radar BCS is a free website for phones, with no installation, available in Spani
 | Question | Screen | How it answers |
 |---|---|---|
 | What is changing? | 1. Home | Four cards: heat, vegetation, rainfall and water. The user picks a variable. |
-| Where is it changing? | 2. Map | Zones of La Paz with the most change. |
+| Where is it changing? | 2. Map | A meteorological map of Baja California Sur (current sky) and, below it, the zones of La Paz with the most change. |
 | How much is it changing? | 3. Fact sheet | Total change since 2001 and change by decade. |
 | Is the change statistically significant? | 3. Fact sheet | Seasonal Mann-Kendall test and Sen's slope (rainfall: Mann-Kendall on annual totals; water: seasonal test corrected for autocorrelation). |
 | (Extra) What can I do? | 4. Actions | Tips to protect yourself from heat and to save water. |
 
-Every number on the site shows its data source. The site shows what changed, not why. A trend does not prove its cause, and we do not claim one.
+Every number comes from a documented data source: each fact sheet states it, and the full list is in this submission (NASA Data and Other Resources) and in the open repository. The site shows what changed, not why. A trend does not prove its cause, and we do not claim one.
 
 To make the numbers easy to read, the site also has a few interactive aids. None of them adds a new result: they use the same series or NASA imagery.
 
 - **See La Paz from space (Map screen):** real MODIS Terra photos from NASA GIBS, one per year (2001-2026, taken in April), in true color or as ground heat, with a year slider and a Play button. It is one photo per year, not a trend.
 - **Travel through time (Details screen):** a year slider over the real yearly series of each indicator, with a plain-language sentence. For heat and vegetation, where the trend is clear, it can also extend the Sen's-slope line to 2035; this is shown with a dashed style, labeled "not a forecast", and it does not say why anything changes. Rainfall (no clear trend) and water (regional, not the aquifer) are not extended.
-- **The sky now in BCS (Home screen):** current sky conditions and temperature of eight places from the Open-Meteo weather model (not weather stations), next to a near-real-time NOAA GOES-West satellite image served by NASA GIBS. **This section is current context, not a trend.** It is not one of our results, it is not used to claim causes, and the trend results above do not depend on it.
+- **The sky now in BCS (Home screen):** current sky conditions and temperature of seven places from the Open-Meteo weather model (not weather stations), next to a near-real-time NOAA GOES-West satellite image served by NASA GIBS. **This section is current context, not a trend.** It is not one of our results, it is not used to claim causes, and the trend results above do not depend on it.
+- **Meteorological Map and Territorial Climate Diagnostic (top of the Map screen):** the same seven places and sky icons on a map of Baja California Sur, and four cards with today's values for La Paz from the same model: maximum and feels-like temperature, maximum UV index with its WHO category, wind and gusts, and chance of rain with humidity. **Current context, not trends;** it is a weather model, not weather stations, and it does not feed any trend result.
 - **Fishing Map (Fishing screen):** a map of icons for eight ports of Baja California Sur with waves, wind or sea temperature from the Open-Meteo marine model (about 9 km, not buoys), an hour control with a "Start simulation" button that plays the hours of the day, and four short tiles (sea state, sea conditions, coastal wind, chlorophyll). The chlorophyll layer is NASA satellite imagery (VIIRS NOAA-20, served by NASA GIBS). The sea state is green, yellow or red from the Douglas and Beaufort scales; **it is a model estimate, not an official warning or a port flag**.
 - **Alerts (Alerts screen):** automatic notices computed from the same model for the next 24 hours (waves, wind, rain, thunderstorms and UV), each with its level, zone and time, the two farming notices already audited on the Farming Map, and links to the official sources (SMN, NHC, CENAPRED, SEMAR, CONAPESCA). **Model notices are not official**; when there is none, the screen says so.
 
