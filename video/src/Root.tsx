@@ -2,6 +2,8 @@ import { Composition, staticFile, type CalculateMetadataFunction } from 'remotio
 import { DURACION_S, FPS } from './guion';
 import type { Manifiesto, PropsVideo } from './tipos';
 import { VideoRadarBCS } from './Video';
+import { TrailerRadarBCS, type PropsTrailer } from './trailer/Trailer';
+import { LECHO, SENALES, TRAILER_DURACION_S, VOZ } from './guion';
 
 // Lo dinámico: duración (de guion.ts), si existe la narración y el manifiesto de capturas.
 const calculateMetadata: CalculateMetadataFunction<PropsVideo> = async ({ props }) => {
@@ -51,8 +53,39 @@ function duracionAudio(src: string): Promise<number | null> {
   });
 }
 
+// Tráiler: comprueba qué audios existen en public/ (voz y efectos de la rama lider/trailer-audio).
+const existe = async (ruta: string) => {
+  try {
+    const r = await fetch(staticFile(ruta), { method: 'HEAD' });
+    return r.ok;
+  } catch {
+    return false;
+  }
+};
+const metadatosTrailer: CalculateMetadataFunction<PropsTrailer> = async ({ props }) => {
+  if (TRAILER_DURACION_S > 30) throw new Error('El tráiler debe durar 30 s o menos (guion.ts).');
+  const nombres = [...new Set([LECHO, ...SENALES.map((s) => s.archivo)])];
+  const audios: string[] = [];
+  for (const n of nombres) if (await existe(n)) audios.push(n);
+  const hayNarracion = await existe(VOZ);
+  if (!hayNarracion) console.warn(`[radar-bcs] AVISO: falta public/${VOZ} (tráiler sin voz).`);
+  if (audios.length === 0) console.warn('[radar-bcs] AVISO: no hay efectos en public/audio/ (rama lider/trailer-audio).');
+  return { durationInFrames: TRAILER_DURACION_S * FPS, fps: FPS, props: { ...props, audios, hayNarracion } };
+};
+
 export const RemotionRoot: React.FC = () => {
   return (
+    <>
+    <Composition
+      id="RadarBCSTrailer"
+      component={TrailerRadarBCS}
+      durationInFrames={840}
+      fps={30}
+      width={1920}
+      height={1080}
+      calculateMetadata={metadatosTrailer}
+      defaultProps={{ audios: [], hayNarracion: false }}
+    />
     <Composition
       id="RadarBCS30s"
       component={VideoRadarBCS}
@@ -63,5 +96,6 @@ export const RemotionRoot: React.FC = () => {
       calculateMetadata={calculateMetadata}
       defaultProps={{ hayNarracion: false, tomas: null }}
     />
+    </>
   );
 };

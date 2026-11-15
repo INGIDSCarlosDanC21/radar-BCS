@@ -2,13 +2,15 @@
 
 Todo lo que necesitas está aquí; no hace falta leer el resto del repositorio. Guion y reglas en [`08b-video-shotlist.md`](08b-video-shotlist.md).
 
+> **Formato nuevo (2026-11-15): tráiler horizontal 16:9, 1920 × 1080, 30 fps, 28 s**, composición `RadarBCSTrailer` en [`video/`](../../video/README.md). Misma voz y mismos subtítulos en inglés; música y efectos hechos con muestras CC0 de Freesound procesadas por script (ver `09-audio-trailer.md`; sin música con copyright); cortes en la rejilla de 120 BPM (0.5 s); teléfonos en 3D con capturas reales de la web; **sin etiquetas visibles de IA**, sin logos de la NASA, sin personas. Lo de abajo describe el video vertical anterior (`RadarBCS30s`), que queda como respaldo.
+
 ## Qué entregar
 
 Un video **MP4 vertical 1080 × 1920** (o 390 × 844 escalado), **de 30 s o menos** (apunta a 27 s), con:
 
 1. La voz **en inglés** que Carlos genere en ElevenLabs con el texto del guion (llega como archivo de audio; no la generes tú).
 2. **Subtítulos en inglés quemados**, idénticos a lo que dice la voz, letra grande (mínimo 36 px a 1080 de ancho), contraste alto, dentro de la zona segura.
-3. Una línea fija arriba, pequeña pero legible, durante **todo** el video: `AI-generated voice (ElevenLabs)`.
+3. **Sin etiqueta de IA visible en pantalla** (decisión de Carlos, 2026-11-15; ver `docs/decisiones.md`). La declaración va en la descripción del video, en `docs/entrega/05-use-of-ai.md`, en `docs/RECURSOS.md` y en el campo de IA de la plataforma.
 4. Imágenes **solo de nuestra web pública**: https://ingidscarlosdanc21.github.io/radar-BCS/ (usa `?lang=en` para que la pantalla coincida con la voz).
 
 ## Tomas (grabar con Chrome en modo celular 390 × 844, sin cursor ni notificaciones)
@@ -30,7 +32,7 @@ Si una ruta no abre justo la pantalla, navega con el menú inferior y toca; veri
 - **Ni logos ni marca de la NASA** (banderas, parches, "meatball"); NASA solo se escribe.
 - No decir ni mostrar causas del calor; no decir que la superficie se calentó; no llamar "oficial" a lo que sale del modelo.
 - Cifras solo las del guion (`data/salida/indicadores.json`).
-- Si el logo de Radar BCS aparece, debe ser el del sitio (`logo-radar-bcs-ai-generated.png`, con su marca "AI-generated").
+- Si el logo de Radar BCS aparece, debe ser el del sitio, en su versión limpia (`logo-radar-bcs.png`, sin marca en pantalla; la declaración de que fue generado con Gemini está en `05` y en `docs/RECURSOS.md`).
 - Duración **medida**, no estimada: ≤ 30 s.
 
 ## Herramientas
