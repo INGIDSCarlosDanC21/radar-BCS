@@ -32,7 +32,7 @@ Lo que no se llega a hacer esta noche queda anotado como pendiente de mañana; n
 ## Reglas de alcance de esta noche
 
 1. **Solo entran a la web cosas con datos reales y fuente.** Las pantallas de Figma de Clima (humedad, UV, viento y oleaje, sensación térmica) y Pesca (oceanografía, potencial pesquero, semáforo de seguridad) no tienen datos nuestros. Se quedan como diseño de referencia en `diseno/`, **no se construyen** y no se mencionan en la entrega salvo como trabajo futuro.
-2. **El botón "Iniciar simulación" del diseño no se construye.** La especificación dice "qué hace: por confirmar". No se inventa una simulación con números que no salen de los datos.
+2. **El botón "Iniciar simulación" del diseño no se construye.** La especificación dice "qué hace: por confirmar". No se inventa una simulación con números que no salen de los datos. *(Actualizado el 2026-11-15: Carlos pidió simulaciones con datos reales; ver `docs/decisiones.md`, "Simulaciones en el Mapa y la Ficha". Siguen sin inventarse números.)*
 3. **Mapa Agrícola (#88)**: Carlos decidió que entra. Antes de `main` necesita la auditoría de fuentes de Luca (ver abajo) y su versión en inglés. Si la auditoría falla o no llega a tiempo, se deja fuera de `main`: no es una de las 4 pantallas del reto.
 4. **Login (#77):** no entra a la entrega (decidido el 2026-11-15, ver `docs/decisiones.md`). La web funciona sin cuenta, como dice el relato.
 5. Sin congelamiento de funciones (decisión de Carlos), pero **todo lo que va a `main` se prueba antes** con la puerta de calidad.

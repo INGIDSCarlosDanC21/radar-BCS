@@ -1,0 +1,56 @@
+/* Simulaciones: "Viaja en el tiempo" (Ficha) y "Mira La Paz desde el espacio" (Mapa). Usa las variables de estilos.css. */
+.sim-mapa{height:320px;border-radius:12px;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.1);background:var(--gris-120);margin:8px 0}
+@media (min-width:640px){.sim-mapa{height:420px}}
+.sim-mapa .leaflet-layer{transition:opacity .4s ease}
+@media (prefers-reduced-motion:reduce){.sim-mapa .leaflet-layer{transition:none}}
+/* El calor del suelo es de 1 km por píxel: se deja con bordes duros en vez de borroso. */
+.sim-pix{image-rendering:pixelated;image-rendering:crisp-edges}
+.sim-ciudad.leaflet-tooltip{background:var(--tarjeta);color:var(--texto);border:0;border-radius:8px;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.sim-ciudad.leaflet-tooltip:before{display:none}
+
+/* Botones propios (no usan .chip: app.js engancha todos los .chip de la pantalla Mapa como selectores de indicador). */
+.sim-chip{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:0;background:var(--gris-120);color:var(--texto);font:inherit;font-family:var(--f-datos);font-size:13px;font-weight:500;cursor:pointer}
+.sim-chip[aria-pressed=true]{background:var(--acento);color:var(--acento-t)}
+.sim-ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:12px 0}
+.sim-ctrl input[type=range]{flex:1 1 100%;order:3;width:100%;min-width:0;height:44px;margin:0;accent-color:var(--acento);cursor:pointer}
+.sim-play{flex:none;min-width:132px;background:var(--acento);color:var(--acento-t);justify-content:center}
+.sim-play:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+.sim-anio-ch{flex:none;margin-left:auto;min-width:3.2em;text-align:right}
+
+.sim-tarjeta{background:var(--fondo);border-radius:12px;padding:14px 16px;margin:10px 0;border:2px solid transparent}
+.sim-tarjeta.sim-proy{border:2px dashed var(--acento);background:var(--tarjeta)}
+.sim-etq{font-family:var(--f-datos);font-size:13px;font-weight:500;color:var(--suave);text-transform:uppercase;letter-spacing:.02em}
+.sim-fila{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:4px 0 8px}
+.sim-anio-g{font-family:var(--f-titulo);font-size:2.6rem;font-weight:800;line-height:1.1}
+.sim-valor{font-family:var(--f-titulo);font-size:1.6rem;font-weight:700;color:var(--acento)}
+.sim-med{height:16px;background:var(--gris-120);border-radius:8px;overflow:hidden}
+.sim-med-r{display:block;height:100%;border-radius:8px;background:var(--acento);transition:width .35s ease}
+@media (prefers-reduced-motion:reduce){.sim-med-r{transition:none}}
+.sim-maq[data-ind=calor] .sim-med-r{background:var(--sube)}
+.sim-maq[data-ind=vegetacion] .sim-med-r{background:#2e6b34}
+.sim-maq[data-ind=lluvia] .sim-med-r,.sim-maq[data-ind=agua] .sim-med-r{background:var(--baja)}
+.sim-med-et{display:flex;justify-content:space-between;font-family:var(--f-datos);font-size:12px;color:var(--suave);margin-top:4px}
+.sim-frase{font-size:1.05rem;line-height:1.45;margin:12px 0 0}
+
+.sim-graf .sim-zona{fill:var(--acento);opacity:.07}
+.sim-graf .sim-tend{stroke:var(--suave);stroke-width:1.5;opacity:.8}
+.sim-graf .sim-tend-proy{stroke:var(--acento);stroke-width:2.5;stroke-dasharray:6 5;opacity:1}
+.sim-graf .sim-guia{stroke:var(--acento);stroke-width:1;opacity:.5}
+.sim-graf .sim-punto{fill:var(--acento);stroke:#fff;stroke-width:2}
+.sim-graf .sim-punto-proy{fill:#fff;stroke:var(--acento);stroke-width:3}
+
+.sim-ley{margin:8px 0 4px}
+.sim-ley-tit{font-size:.85rem;color:var(--suave);margin:0 0 4px}
+.sim-ley-barra{height:14px;border-radius:7px;border:1px solid var(--borde)}
+.sim-ley-marcas{display:flex;justify-content:space-between;font-family:var(--f-datos);font-size:12px;color:var(--suave);margin-top:2px}
+.sim-ley-ext{display:flex;justify-content:space-between;font-size:.8rem;color:var(--suave)}
+
+/* Número de cada zona del mapa = su lugar en la lista de abajo */
+.etq-zona.leaflet-tooltip{display:flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;border:2px solid #fff;border-radius:50%;background:var(--acento);color:#fff;font:700 13px var(--f-datos);box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.etq-zona.leaflet-tooltip:before{display:none}
+
+/* "Detalles técnicos" de la Ficha: el texto sencillo va primero y el método, el p-valor y alfa quedan a un toque */
+.bloque details.detalles{margin-top:8px}
+.bloque details.detalles summary{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font-weight:600;color:var(--acento)}
+.bloque details.detalles summary::before{content:"\25B8";font-size:1.1em}
+.bloque details.detalles[open] summary::before{content:"\25BE"}
