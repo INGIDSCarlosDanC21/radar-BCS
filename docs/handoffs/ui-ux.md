@@ -24,7 +24,7 @@
 - Íconos: los 12 exportados son Google Material Symbols (Apache 2.0, verificado el 2026-11-14; ver `web/assets/iconos/README.md`). Si en otra pantalla se usó un ícono de Flaticon, falta identificarlo y poner su atribución.
 - ~~Modo oscuro de los tokens~~ Hecho (propuesta, sin Figma).
 - Que Diego corrija lo de `diseno/revision-360/REPORTE.md` (P0: scroll horizontal en Ficha de lluvia, sigue; P1: pines de Agrícola, modo oscuro, logo con marca de IA en la cabecera).
-- Inglés (#93): revisión hecha el 2026-11-15 en `diseno/revision-ingles/REVISION.md` (6 P1 y 14 P2 para Diego y Luca). Falta el visto bueno de Roberto.
+- Inglés (#93): revisión hecha el 2026-11-15 en `diseno/revision-ingles/REVISION.md` (6 P1 y 15 P2 para Diego y Luca). Falta el visto bueno de Roberto.
 
 ## Bloqueos
 
