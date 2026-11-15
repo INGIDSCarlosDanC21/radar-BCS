@@ -20,10 +20,10 @@ test('estructura de Figma: título, mapa, leyenda y 4 tarjetas que llevan a pant
   assert.match(h, /id="cm-mapa"/); assert.match(h, /Estado del cielo/);
   const titulos = ['Calor & Sensación Térmica', 'Radiación UV & Exposición Solar', 'Viento, Oleaje & Corrientes', 'Humedad y Lluvia'];
   for (const ti of titulos) assert.ok(h.includes(ti.replace(/&/g, '&amp;')), ti);
-  const destinos = [...h.matchAll(/class="cm-tarjeta cm-\w+" href="(#\w+)"/g)].map((m) => m[1]);
-  assert.deepEqual(destinos, ['#acciones', '#avisos', '#pesca', '#avisos']);
+  const destinos = [...h.matchAll(/class="cm-tarjeta cm-\w+" href="(#[\w/]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(destinos, ['#clima/calor', '#clima/uv', '#clima/viento', '#clima/lluvia']);
   const rutas = leer('js/app.js');
-  for (const d of new Set(destinos)) assert.ok(rutas.includes("'" + d.slice(1) + "'"), 'la ruta ' + d + ' existe');
+  for (const d of new Set(destinos)) assert.ok(rutas.includes("'" + d.slice(1).split('/')[0] + "'"), 'la ruta ' + d + ' existe');
   for (const ic of CM.TARJETAS.map((k) => k.icono)) assert.ok(fs.existsSync(new URL('../assets/iconos/' + ic + '.svg', import.meta.url)), ic);
 });
 
@@ -81,7 +81,7 @@ test('en inglés', () => {
   T.setLang('en');
   const h = CM.html() + CM.tarjetas(CL.unir(resp)[0]);
   T.setLang('es');
-  for (const en of ['Weather Map', 'Regional Climate Overview', 'Heat & Feels-like Temperature', 'See the marine and coastal wind forecast', 'How each zone of La Paz has changed since 2001'])
+  for (const en of ['Weather Map', 'Regional Climate Overview', 'Heat & Feels-like Temperature', 'See wind, waves and currents', 'How each zone of La Paz has changed since 2001'])
     assert.ok(h.includes(en.replace(/&/g, '&amp;')), en);
   for (const es of ['Mapa Meteorológico', 'Diagnóstico', 'Ver consejos']) assert.ok(!h.includes(es), es);
 });

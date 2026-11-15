@@ -21,6 +21,17 @@ Actualizado el 2026-11-15 (issues #97 y #81). Rama de este bloque: `prog-a/campo
 - Mapa Agrícola (#88): NO PASA todavía. Ficha Clima con cifras viejas y leyenda "2001–2025". Verificados POWER y la tabla del DOF; sin verificar SIAP, SoilGrids, Monitor de Sequía, GeoNames.
 - Login (#77): sin claves secretas, pero `generar-config.ps1` y su prueba no detectan una clave `service_role` en formato JWT; falta la pantalla para fijar la contraseña nueva; textos "Costero" y "Todos los derechos reservados" por corregir; falta configurar Supabase.
 
+## Clima: datos y reglas (2026-11-15, rama `prog-a/clima-datos`)
+
+Parte de Luca de `docs/PLAN-CLIMA.md`. PR a `dev` (lo abre el usuario). Solo agrega; Pesca y Avisos no cambian.
+
+- `web/js/datos-vivos.js`: `urlClima()`, series `temp, sens, hum, plluvia, lluvia, rad` y `dias` por puerto, y `cdir` (dirección de la corriente) en la petición marina. **Diego:** las series de clima solo vienen con `RBVivo.cargar({clima:true})` (3 peticiones y caché propia); sin esa opción no existen y `dias` es `[]`.
+- `web/js/reglas-clima.js` (`RBReglasClima`): `resumenPuerto`, `curva24`, `nivelUV` (OMS), `proteccionUV`, `nivelCalor` (siempre `null`), `horasDeSol`, `textoUV`, `textoProteccion`; textos ES/EN con prefijo `clm.`.
+- `web/tests/clima.test.mjs` (9 pruebas) y fixture real `web/tests/fixtures/clima-2026-11-15.json` (respuesta cruda de Open-Meteo, 144 KB, bajada el 2026-11-15 04:20); las cifras se comparan contra ella.
+- `docs/investigacion/umbrales-clima.md` y conteo de llamadas en `disponibilidad-servicios.md` (33.6 llamadas por visita a Clima en el cálculo conservador).
+- Detalles para la pantalla: `viento.corriente` viene en km/h (unidad por defecto de Open-Meteo, sin verificar aquí) y `cdir` no significa nada cuando la corriente es 0; `uv.nivel` es el del máximo del día (`uv.ahora` es de la hora); `prob24` y `mm24` son de las próximas 24 h (hora+1 a hora+24).
+- Falta: Carlos decide si hace falta etiqueta de calor (hoy solo el número); confirmar los nombres de las 5 categorías UV en la guía impresa de la OMS.
+
 ## Bloque autónomo #118 (2026-11-15)
 
 Ramas subidas, sin PR abierto (mi token no abre PR; los abre el usuario, a `dev`). Orden de fusión: 1, luego 2 a 5.
@@ -51,3 +62,7 @@ Probar: `pip install -r analisis/requirements.txt`, `python -m analisis.exportar
 ## 2026-11-14
 
 - Entorno del repo configurado.
+
+## Problemas de impacto local (2026-11-15, prog-a/problemas-locales)
+- Qué hice: acomodé los 3 problemas en `docs/decisiones.md`, entrega 01, 04 y 06, `RECURSOS.md` y `datasets.md`. Lo no usado quedó "previsto" sin cifras.
+- Falta: URL de TROPOMI/Sentinel (ESA, no respondió), DOI y resolución de los previstos, y decidir si se agrega alguno con datos.

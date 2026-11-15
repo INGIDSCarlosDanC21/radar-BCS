@@ -37,6 +37,20 @@ Con 32 por visita completa: unas **310 visitas al día**, unas **150 por hora** 
 
 Si hiciera falta más margen (no se ha hecho): guardar la caché en `localStorage` (se comparte entre pestañas y visitas, hoy es `sessionStorage` solo para Pesca y Avisos) y subirla de 10 a 15 minutos; usar solo los 8 puntos de mar y quitar los 8 de pueblo en Pesca; y dar caché al cielo de Inicio.
 
+### Clima: una tercera petición, solo en esa pantalla
+
+Regla de conteo, consultada el 2026-11-15 en <https://open-meteo.com/en/pricing>: una petición cuenta como una llamada, y como varias si, **por ubicación**, trae más de 10 variables o abarca más de 2 semanas (ejemplo de la página: 15 variables = 1.5 llamadas). La página **no dice** cómo cuenta varias ubicaciones.
+
+`RBVivo.cargar({clima:true})` agrega una petición solo para los 8 pueblos (6 variables por hora y 6 por día = 12, o 1.2 llamadas por ubicación). Pesca y Avisos siguen con 2 peticiones.
+
+| Visita | Cálculo conservador (cada ubicación cuenta, con el peso por variables) | Llamadas |
+|---|---|---|
+| Pesca o Avisos | 8 marinas (7 variables) + 16 de pronóstico (5 variables) | 24 |
+| Clima | las 24 de arriba + 8 × 1.2 | 33.6 |
+| Inicio + Clima | 8 + 33.6 | 41.6 |
+
+Contra los límites gratuitos (600 por minuto, 5,000 por hora, 10,000 por día): unas **297 visitas a Clima al día**, unas 148 por hora y unas 17 por minuto antes de topar. La caché de 10 minutos (propia de Clima) reduce las repetidas. Si las ubicaciones se cuentan como una sola llamada por petición, el margen es mucho mayor. Si hiciera falta menos: pedir Clima sin las 8 de mar ni las 16 de pronóstico, solo con la petición de pueblos.
+
 ## 3. Otros riesgos
 
 - **GOES-West:** el cuadro más reciente puede venir vacío durante unos minutos; la web ya cae a la imagen MODIS fija si no carga.

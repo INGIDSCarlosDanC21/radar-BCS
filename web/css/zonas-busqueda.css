@@ -1,0 +1,43 @@
+/* Mapa de zonas: marcadores con ícono y búsqueda de un lugar (zonas-busqueda.js). Texto mínimo de 12 px y áreas táctiles de 44 px. */
+.zb-wrap{background:none;border:0}
+
+/* Marcador: círculo blanco con borde del color de la zona, glifo del mismo color y flecha chica (no solo color). */
+.zb-pin{position:relative;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9999px;background:#fff;
+  border:3px solid var(--zb-c,#9aa0a6);box-shadow:0 1px 4px rgba(0,0,0,.35);box-sizing:border-box;color:#191c1e}
+.zb-ico{width:18px;height:18px;background:var(--zb-c);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+.zb-sim{font:700 16px/1 'Space Grotesk',system-ui,sans-serif;color:#44474d}
+.zb-sin .zb-sim::before{content:'–'}
+.zb-nodato{border-style:dashed}
+.zb-nodato .zb-sim::before{content:'?'}
+.zb-flecha{position:absolute;right:-5px;bottom:-5px;width:16px;height:16px;border-radius:9999px;background:var(--zb-c);color:#fff;font:700 9px/16px sans-serif;text-align:center}
+.zb-sube .zb-flecha::before{content:'▲'}
+.zb-baja .zb-flecha::before{content:'▼'}
+.zb-sin .zb-flecha,.zb-nodato .zb-flecha{display:none}
+.zb-sube .zb-sim,.zb-baja .zb-sim{display:none}
+.zb-mini{width:22px;height:22px;border-width:2px;vertical-align:middle}
+.zb-mini .zb-ico{width:12px;height:12px}
+.zb-mini .zb-sim{font-size:12px}
+.zb-mini .zb-flecha{width:12px;height:12px;right:-4px;bottom:-4px;font-size:7px;line-height:12px}
+.leyenda .zb-ley{margin-left:8px}
+.leyenda span .zb-pin{margin-right:4px}
+
+/* Pin del lugar buscado: gota verde. */
+.zb-ubic{display:block;width:28px;height:28px;background:#006d3d;border:3px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 4px rgba(0,0,0,.4);margin-top:2px}
+
+/* Barra de búsqueda (patrón de píldora, como Google Maps). */
+.zb-form{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.zb-form input{flex:1 1 220px;min-width:0;min-height:44px;box-sizing:border-box;padding:8px 16px;border:1px solid #c4c6cd;border-radius:9999px;background:#fff;color:#000d21;font:inherit;font-size:16px}
+.zb-ir,.zb-loc{min-height:44px;padding:8px 16px;border-radius:9999px;font:inherit;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.zb-ir{border:0;background:#000d21;color:#fff}
+.zb-loc{border:1px solid #c4c6cd;background:#fff;color:#000d21}
+.zb-priv{margin:0 0 8px}
+.zb-res{list-style:none;margin:0 0 8px;padding:4px;background:#fff;border:1px solid #c4c6cd;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.zb-op{display:block;width:100%;min-height:44px;text-align:left;padding:8px 12px;border:0;border-radius:8px;background:none;color:#000d21;font:inherit;font-size:14px;cursor:pointer}
+.zb-op:hover{background:#eef1f4}
+.zb-msg{min-height:0;margin:0 0 8px;font-size:14px;color:#44474d}
+.zb-tarjeta{position:relative;margin:8px 0 12px;padding:14px 16px;background:#fff;color:#000d21;border-radius:12px;border-left:4px solid #006d3d;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.zb-tarjeta h3{margin:0 56px 6px 0;font-size:17px;line-height:24px}
+.zb-tarjeta p{margin:4px 0}
+.zb-x{position:absolute;top:6px;right:6px;min-height:44px;min-width:44px;padding:0 12px;border:1px solid #c4c6cd;border-radius:9999px;background:#fff;color:#000d21;font:inherit;font-size:14px;cursor:pointer}
+.zb-form input:focus-visible,.zb-ir:focus-visible,.zb-loc:focus-visible,.zb-op:focus-visible,.zb-x:focus-visible{outline:2px solid #006d3d;outline-offset:2px}
+.zb-pin:focus-visible,.zb-wrap:focus-visible{outline:2px solid #006d3d;outline-offset:2px}

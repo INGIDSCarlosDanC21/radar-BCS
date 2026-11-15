@@ -209,3 +209,20 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 
 - Carlos pidió que el asistente eligiera lo mejor para el proyecto en todas las decisiones abiertas. **Se aplicó lo recomendado:** "Ver más" a 3 líneas para textos de más de 4 (sin plegar seguridad, atribución, licencia ni IA), Inicio incluido, botón "Subir"; **#159 fusionado** a `dev`; **Clima entra** con alcance acotado y corte a las 09:30 (`docs/PLAN-CLIMA.md`, issue #166), usando los 8 puertos de `RBVivo.PUERTOS` (no los 7 de Inicio) para no sumar llamadas a Open-Meteo.
 - **No hecho aún:** extras de plegar grupos del Agro y "Sobre los datos" en Ficha (esperan el PR de Clima porque tocan `agricola.js` y `app.js`).
+
+## Marca de agua del logo (Carlos delegó la decisión, 2026-11-15, 05:20)
+
+- El texto oficial (Guía de envío, 13 nov 2026) exige marca de agua visible en imágenes generadas. **Decisión recomendada y aplicada:** el encabezado usa `logo-radar-bcs-ai-generated.png`, con la marca dentro de la imagen; sin etiqueta de texto aparte y sin fila extra. Sustituye al riesgo declarado más arriba. Se revierte cambiando el `src` del logo en `index.html` por `logo-radar-bcs.png`.
+- **Clima entró** con el detalle de las 4 tarjetas (pantalla de Luca, integrada por el Líder en #180); las tarjetas de "Diagnóstico Climático Territorial" de la pestaña Mapa llevan a ese detalle.
+
+## Problemas de impacto local (Luca, 2026-11-15)
+
+Se ordena lo que ya existe en 3 problemas; sin pantallas ni cifras nuevas.
+
+| Problema | Usado (fuente) | Previsto, sin usar |
+|---|---|---|
+| Estrés hídrico y sequía | Lluvia (NASA POWER), agua almacenada (GRACE/GRACE-FO), NDVI (MODIS) | GPM (lluvia), SMAP (humedad del suelo) |
+| Ciclones y costa | Temperatura del mar, oleaje, viento y corriente (Open-Meteo, modelo, no NASA); GIBS GOES-West y clorofila VIIRS; avisos SMN/NHC | TSM de MODIS, presión, nivel del mar y erosión, Landsat/Sentinel |
+| Calor urbano y aire | Temperatura de superficie (MODIS Terra y Aqua), temperatura del aire (POWER), NDVI | ECOSTRESS/Landsat urbano, aerosoles (OMI/TROPOMI) |
+
+Regla: no decir que la lluvia es de GPM ni que la TSM es de MODIS; hoy son POWER y el modelo marino.
