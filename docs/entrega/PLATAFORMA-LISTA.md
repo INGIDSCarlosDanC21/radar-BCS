@@ -35,7 +35,7 @@ Preparado el 2026-11-15 por el asistente del Líder. **Todo el contenido de la p
 | MODIS MOD13Q1 v061 (NDVI vegetation index) | https://lpdaac.usgs.gov/products/mod13q1v061/ |
 | GRACE and GRACE-FO JPL Mascon (total water storage anomaly) | https://doi.org/10.5067/TEMSC-3JC634 |
 | NASA Earthdata AppEEARS (extraction of the MODIS series) | https://appeears.earthdatacloud.nasa.gov/ |
-| NASA GIBS imagery: MODIS Terra photos, GOES-West near real time, VIIRS chlorophyll | https://gibs.earthdata.nasa.gov/ |
+| NASA GIBS imagery: MODIS Terra photos, GOES-West clouds, IMERG rain estimates, VIIRS chlorophyll | https://gibs.earthdata.nasa.gov/ |
 
 ## (B) Other references: filas para "Add New Link"
 
