@@ -92,3 +92,10 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Decisión:** el límite oficial es **23:59**. Se conserva como **meta interna** pulsar "Submit for Judging" a más tardar a las **13:00** (borrador completo a las 11:00), para que el equipo practique antes de la evaluación del jurado (17:00). El congelamiento de funciones (sáb 22:00) no cambia.
 - **Cierra el pendiente** de conseguir la hora por escrito: ya hay documento (diapositiva oficial). Reemplaza las entradas "12:00" y "14:00".
 - **Quién decidió:** Carlos (Líder).
+
+### 2026-11-14 — Calor: la web muestra el aire y la superficie juntos
+
+- **Contexto:** con MODIS (Luca, PR #50), la temperatura de superficie de día (6 puntos) no muestra cambio claro (p = 0.11), mientras el aire de NASA POWER sube +1.465 °C (significativo). Mostrar solo el aire daría una historia más fuerte, pero ocultaría un resultado que lo contradice.
+- **Decisión:** la tarjeta y la ficha de **Calor** muestran las dos mediciones y dicen que no coinciden y que no se sabe por qué. El número principal sigue siendo el del aire (es el indicador del contrato), pero la `limitacion` que menciona la superficie debe verse junto a la cifra, no escondida. No se interpreta la baja de ~1.3 °C en El Centenario y Sur hasta revisarla. Frases en `docs/investigacion/hallazgos.md`.
+- **Alternativas descartadas:** mostrar solo el aire; mostrar solo la superficie; promediar ambas (no tiene sentido físico).
+- **Quién decidió:** Carlos (Líder) con Investigación; propuesta de Claude, pendiente de que Carlos la confirme si prefiere otra cosa.

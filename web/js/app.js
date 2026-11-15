@@ -38,6 +38,7 @@
       var e = etiqueta(sig(i)), t = RB.textoCambio(i);
       h += '<a class="tarjeta" href="#ficha/' + esc(i.id) + '"><h2>' + esc(i.titulo) + '</h2>' +
         '<div class="cifra ' + t.clase + '">' + esc(t.texto) + '</div>' +
+        (i.id === 'calor' && t.tipo === 'cifra' && i.limitacion ? '<p class="nota-limite"><strong>Límite:</strong> ' + esc(i.limitacion) + '</p>' : '') +
         '<p class="fuente">Periodo: ' + esc((i.fuente && i.fuente.periodo) || 'pendiente') + '</p>' +
         '<span class="etiqueta ' + e[1] + '">' + e[0] + '</span>' +
         '<p class="fuente">Fuente: ' + esc(RB.textoFuente(i)) + '</p>' +

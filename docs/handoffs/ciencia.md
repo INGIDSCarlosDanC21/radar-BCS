@@ -7,17 +7,15 @@
 
 ## En curso
 
-- Issue #5: validación con NASA POWER hecha (reproducción del PR #20, contrastes en `metodo.md`, primeros hallazgos en `hallazgos.md`). Falta repetirla con MODIS y con el pipeline final de Luca.
+- Issue #5: validación con NASA POWER hecha y MODIS revisado en `hallazgos.md` (sin reproducir). Fuentes del contexto local ya verificadas (el acuífero con la fuente oficial del DOF).
 
 ## Falta
 
-- Leer la fuente primaria del acuífero (acuerdo DOF del 17/08/2023, CONAGUA 0324) para el déficit oficial.
-- Localizar el informe de Temperaturas Naturales Extremas de la Secretaría de Salud (fuente primaria de las cifras de calor).
-- Título exacto y fecha del estudio de vulnerabilidad de FMCN.
-- Abrir en navegador los DOI de Hirsch et al. (1982), Hirsch y Slack (1984) y Sen (1968).
-- Tesis de la UABCS sobre islas de calor: no encontrada.
-- Fichas de dataset con URL exactas en `docs/investigacion/datasets.md`.
-- Actualizar `docs/investigacion/hallazgos.md` con el pipeline final de Luca y agregar MODIS cuando haya datos.
+- Reproducir las cifras de MODIS (Luca debe compartir los CSV de AppEEARS por Drive; no están en git).
+- Revisar por qué la temperatura de superficie baja en El Centenario y Sur (ver `hallazgos.md`).
+- Agua subterránea (GRACE/GLDAS): no empezada; si no se hace, declararlo y poner "No usado".
+- Hacer que la web muestre el calor del aire y el de superficie juntos (decisión en `docs/decisiones.md`).
+- Abrir en navegador los DOI de Hirsch et al. y Sen (ya verificados contra Crossref, no leídos).
 
 ## Bloqueos
 
