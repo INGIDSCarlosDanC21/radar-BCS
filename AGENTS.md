@@ -39,6 +39,7 @@ Detalle completo: `docs/referencia/` (documentos del evento convertidos a Markdo
 | Luca | luca6874 | Programador A: datos y tendencias (Python) | `rol-programador-a` | `analisis/`, `data/` |
 | Diego | DiegoCareaga946 | Programador B: web, mapa, fichas, GitHub Pages | `rol-programador-b` | `web/` |
 | Ehileen | Ehileen22 | UI/UX: interfaz, logotipo, assets | `rol-ui-ux` | `web/assets/`, `diseno/` |
+| Roberto | rvega22 | UI/UX, en apoyo a Ehileen (invitado 2026-11-14) | `rol-ui-ux` | `web/assets/`, `diseno/` (coordinar con Ehileen) |
 
 Cada rol edita solo sus carpetas. Si necesitas tocar la de otro, abre un issue o PR y avisa.
 

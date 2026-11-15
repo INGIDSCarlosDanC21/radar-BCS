@@ -8,7 +8,7 @@ from pathlib import Path
 
 import numpy as np
 
-from analisis import descargar, modis, tendencias as t
+from analisis import agua, descargar, modis, tendencias as t
 
 RAIZ = Path(__file__).resolve().parent.parent
 SALIDA = RAIZ / "data" / "salida" / "indicadores.json"
@@ -65,6 +65,19 @@ def _vegetacion(ndvi_zonas, fecha, inicio, fin):
         "sin dato. El NDVI de un punto de 250 m no representa toda la ciudad. No indica la causa del cambio.")
 
 
+def _agua(mat, fecha, fin):
+    c = t.tendencia_estacional_correlacionada(mat)
+    return _indicador(
+        "agua", "Agua", "Anomalía de agua total almacenada (GRACE/GRACE-FO, JPL Mascon CRI RL06.3Mv04), celda de La Paz",
+        "cm", agua.promedio_anual_minimo, mat, None, fecha, agua.INICIO, fin,
+        {"dataset": "JPL GRACE and GRACE-FO Mascon CRI RL06.3Mv04 (PO.DAAC)", "url": agua.DOI,
+         "resolucion": "malla de 0.5° (interpolada de mascones de 3°); señal regional de cientos de km"},
+        "Tendencia REGIONAL del agua total almacenada (suelo, agua subterránea y superficial), no del acuífero de La Paz. "
+        "Es una anomalía respecto a un promedio de referencia, en cm de agua equivalente. El periodo empieza en 2002; "
+        "faltan meses (hueco entre GRACE y GRACE-FO) y se promedian solo los años con al menos 9 meses. "
+        f"Con la prueba que corrige la autocorrelación, p = {c['p_valor']:.2g} ({'significativa' if c['significativo'] else 'no significativa'}). No indica la causa.")
+
+
 def zonas(lst, ndvi, inicio, fin):
     """Tendencia por zona (LST en °C y NDVI); archivo auxiliar, no forma parte del contrato v0.1."""
     sal = {}
@@ -79,7 +92,7 @@ def zonas(lst, ndvi, inicio, fin):
     return sal
 
 
-def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, lst_ciudad=None):
+def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, lst_ciudad=None, agua_mat=None):
     fin = fin or descargar.ultimo_anio_completo()
     fuente_power = {"url": descargar.DOCS, "resolucion": "reanálisis MERRA-2, ~50 km (no es medición local)"}
     t2m = t.matriz_mensual(datos, "T2M", inicio, fin)
@@ -105,7 +118,8 @@ def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, 
             _vegetacion(ndvi_zonas, fecha, inicio, fin) if ndvi_zonas else
             _vacio("vegetacion", "Vegetación", "Pendiente: MODIS MOD13Q1 (NDVI)."),
             rain,
-            _vacio("agua", "Agua", "Pendiente: GRACE/GLDAS (tendencia regional)."),
+            _agua(agua_mat, fecha, fin) if agua_mat is not None else
+            _vacio("agua", "Agua", "Pendiente: GRACE (tendencia regional)."),
         ],
     }
 
@@ -114,7 +128,10 @@ def main():
     datos, fecha = descargar.descargar_power()
     inicio, fin = descargar.INICIO, descargar.ultimo_anio_completo()
     lst, ndvi = modis.cargar(inicio, fin)
-    salida = construir(datos, fecha, inicio, fin, ndvi, t.tendencia_estacional(modis.ciudad(lst)))
+    ruta, fecha_grace = agua.descargar_grace()
+    mat_agua = agua.matriz_grace(agua.leer(ruta), fin)
+    salida = construir(datos, fecha, inicio, fin, ndvi, t.tendencia_estacional(modis.ciudad(lst)), mat_agua)
+    salida["indicadores"][3]["fuente"]["fecha_descarga"] = fecha_grace
     SALIDA_ZONAS.write_text(json.dumps({"generado_con": GENERADO_CON, "periodo": {"inicio": inicio, "fin": fin},
                                         "zonas": zonas(lst, ndvi, inicio, fin)}, ensure_ascii=False, indent=1), encoding="utf-8")
     SALIDA.parent.mkdir(parents=True, exist_ok=True)
