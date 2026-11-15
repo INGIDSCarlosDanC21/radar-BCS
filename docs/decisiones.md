@@ -135,3 +135,27 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Calor:** Carlos confirmó la superficie MODIS en 2001-2021 (+0.94 °C) **con la condición de que no haya datos de superficie más recientes y confiables**. Si el contraste con Aqua (#87) u otro producto permite medir bien 2022-2026, se vuelve a revisar con él. Mientras tanto no se extiende la serie.
 - **Mapa Agrícola (PR #88, Diego):** Carlos decidió que **entra**. No lo pidió el reto; se acepta como pantalla extra. Condiciones que siguen vigentes: auditoría de fuentes por Luca antes de `main`, versión en inglés, y todo recurso nuevo (SIAP, CONAGUA/DOF, SoilGrids CC BY 4.0, SMN, GeoNames, NASA POWER) en `docs/RECURSOS.md` y `docs/entrega/07`. Si no pasa la auditoría, se deja fuera de `main`.
 - **PR #85 (dev → main):** lo decidió el asistente del Líder por encargo de Carlos. Es un PR de rama a rama y se actualiza solo con `dev`, así que **se conserva como vehículo** (no se cierra ni se reabre otro). Se retituló y su descripción lleva la puerta de calidad; **no se fusiona hasta que pase** y Carlos lo apruebe.
+
+### 2026-11-15 — Aqua no confirma la subida de la superficie: se revisa la presentación del calor
+
+- **Contexto:** la entrada del 2026-11-14 dejó Calor en 2001-2021 (+0.94 °C, Terra) y dijo "si Aqua no muestra calentamiento, se revisa". Luca (PR #103, `analisis.contraste_aqua`) encontró que en 2003-2021 Terra da +1.04 °C (p = 0.0005) y Aqua +0.27 °C (p = 0.29, no significativo); Aqua también cambia su hora de paso desde 2022 (13.4 h a 15.2 h, más tarde). Carlos confirmó el corte en 2021 con la condición de "datos más recientes y confiables"; esta es una información nueva, no cubierta por esa confirmación.
+- **Estado:** **resuelto: Carlos eligió la opción B** (ver la entrada siguiente).
+- **Opciones:** (A) mantener Terra como cifra principal y agregar que Aqua no lo confirma; (B) **recomendada por el asistente:** encabezar con la temperatura del aire (+1.47 °C, POWER, significativa) y mostrar la superficie como no concluyente (Terra +0.9 °C, Aqua sin cambio claro, ninguna con hora de paso estable), sin cifra principal de superficie; (C) volver a "sin cambio claro" para la superficie. Cualquier opción exige cambiar la limitación en `exportar.py` (ES y EN), `web/data/`, y `docs/entrega/04`, `06`, `08`.
+
+### 2026-11-15 — El login con Supabase no entra a la entrega
+
+- **Decisión:** el asistente del Líder, por encargo de Carlos ("decide"). Se cierra el PR #77 **sin fusionar**; la rama `prog-b/login` y el proyecto de Supabase se conservan para después del evento.
+- **Por qué:**
+  1. **No cumple una función para quien lo usa.** La cuenta no guarda nada ni personaliza nada; las 4 preguntas del reto se responden sin cuenta, y el relato dice "sin cuenta".
+  2. **Agrega obligaciones sin tiempo para cumplirlas:** correos de residentes (datos personales; solo +18, aviso de privacidad, canal de borrado), pantallas en inglés, revisión de seguridad de Luca y una prueba real de registro en celular que nadie ha hecho; además, el correo predeterminado de Supabase tiene límites y puede fallar justo cuando el jurado lo pruebe.
+  3. **La prioridad que Carlos fijó** era 1) interfaz, 2) celular real, 3) login. El tiempo se usa mejor en el inglés de la web (requisito de elegibilidad) y en la puerta de calidad.
+- **Qué se hace:** `docs/entrega/07` y `CHECKLIST-ENVIO` ya no esperan Supabase; `docs/RECURSOS.md` marca `supabase-js` y Supabase Auth como "no se usa en la entrega". No hay que quitar nada de `web/` (el login nunca llegó a `dev`).
+- **Cómo se retoma:** después de la entrega, abrir de nuevo la rama `prog-b/login` (22 pruebas, clave publishable ya conectada) y cerrar lo pendiente: propósito de la cuenta, revisión de Luca y prueba real de registro.
+
+### 2026-11-15 — Calor: Carlos elige la opción B (aire principal, superficie no concluyente)
+
+- **Decisión de Carlos:** opción **B**. Resuelve la entrada anterior ("Aqua no confirma la subida de la superficie").
+- **Qué se muestra:** la tarjeta de calor encabeza con la **temperatura del aire (NASA POWER T2M): +1.47 °C en 2001-2025, significativa**. La **superficie MODIS** se muestra solo como **no concluyente**, sin cifra principal: Terra +0.9 °C (2001-2021), Aqua sin cambio claro (+0.27 °C, p = 0.29, 2003-2021), y la hora de paso de ambos satélites se mueve desde 2022. Es lo que dice la limitación (ES y EN).
+- **Mapa de calor por zona:** conserva las cifras por zona de la serie Terra 2001-2021, **con una nota visible** de que Aqua no confirma la tendencia de superficie y que son orientativas. No se presenta ninguna como "significativa" sin esa nota. (Decisión del asistente del Líder dentro de la opción B; Carlos la puede cambiar a "sin cifra por zona".)
+- **Cómo se implementa:** Luca cambia `exportar.py` para que `calor` salga de POWER T2M (la rama que ya existe) con la limitación nueva en ES y EN; Diego ajusta la nota del calor por zona (ES y EN). Los textos de `docs/entrega/04`, `06`, `08` y `hallazgos.md` ya están alineados. `docs/entrega/06` suma MYD11A2 (Aqua) como dato NASA usado.
+- **Reemplaza** la presentación de Calor de las entradas del 2026-11-14 ("el número principal es la superficie (MODIS)" y "Calor 2001-2021"); el corte de Terra en 2021 sigue.

@@ -21,7 +21,7 @@ Lo que no se llega a hacer esta noche queda anotado como pendiente de mañana; n
 | Calor 2001-2021 (+0.94 °C), vegetación a 2026, agua GRACE | Luca | En `dev` (PR #84, #90). Falta que `web/data/` los copie |
 | PR #83 sin datos de prueba | Diego | Abierto, fusiona limpio con `dev` |
 | PR #89 método por ficha y aviso de IA en el pie | Diego | Abierto; solo choca en `docs/handoffs/prog-b.md` |
-| PR #77 login con Supabase (Auth, opcional) | Diego | Abierto; sale de una base vieja, hay que ponerlo al día con `dev` |
+| PR #77 login con Supabase (Auth, opcional) | Diego | **Pospuesto y cerrado sin fusionar** (decisión del 2026-11-15); la rama `prog-b/login` queda para después del evento |
 | PR #88 Mapa Agrícola | Diego | Abierto; **Carlos decidió que entra**; trae fuentes nuevas (SIAP, CONAGUA, SoilGrids, SMN, GeoNames) |
 | Rama `ui-ux/pantallas-figma` (17 pantallas, logo, íconos, tokens) | Ehileen | Subida hace minutos, **sin PR** (el handoff dice `#PR_PENDIENTE`) |
 | Ramas `prog-a/revision-al-dia` y `prog-a/extender-2026` (REVISION y PLAN al día) | Luca | Subidas, **sin PR** |
@@ -34,7 +34,7 @@ Lo que no se llega a hacer esta noche queda anotado como pendiente de mañana; n
 1. **Solo entran a la web cosas con datos reales y fuente.** Las pantallas de Figma de Clima (humedad, UV, viento y oleaje, sensación térmica) y Pesca (oceanografía, potencial pesquero, semáforo de seguridad) no tienen datos nuestros. Se quedan como diseño de referencia en `diseno/`, **no se construyen** y no se mencionan en la entrega salvo como trabajo futuro.
 2. **El botón "Iniciar simulación" del diseño no se construye.** La especificación dice "qué hace: por confirmar". No se inventa una simulación con números que no salen de los datos.
 3. **Mapa Agrícola (#88)**: Carlos decidió que entra. Antes de `main` necesita la auditoría de fuentes de Luca (ver abajo) y su versión en inglés. Si la auditoría falla o no llega a tiempo, se deja fuera de `main`: no es una de las 4 pantallas del reto.
-4. **Login (#77)** sigue opcional y con la hora de corte del domingo 09:00. Si no está probado a esa hora, no entra a `main`.
+4. **Login (#77):** no entra a la entrega (decidido el 2026-11-15, ver `docs/decisiones.md`). La web funciona sin cuenta, como dice el relato.
 5. Sin congelamiento de funciones (decisión de Carlos), pero **todo lo que va a `main` se prueba antes** con la puerta de calidad.
 6. Las prioridades, de mayor a menor: **P0** lo necesario para entregar; **P1** mejora que entra si no rompe nada; **P2** solo si sobra tiempo.
 
@@ -48,7 +48,7 @@ Una a la vez; después de cada una se corren las pruebas. La revisión la hace e
 4. **Copia de `data/salida/` a `web/data/`** y texto de calor por zona (`CAPA_ZONA.calor.sinCifra`, que ya tiene cifra). P0. Se puede hacer en el mismo PR que #89 o en uno chico aparte.
 5. **PR de Ehileen** con diseño, assets y tokens (solo `diseno/`, `web/assets/` y `docs/`). P1
 6. **#88** Mapa Agrícola, después de la auditoría de Luca y de ponerlo al día con `dev`. P1
-7. **#77** login, al día con `dev`; Luca revisa seguridad (issue #81). P1
+7. ~~#77 login~~ Pospuesto: no entra.
 8. **Integración visual** de logo, íconos y tokens en `web/` (Diego). P1
 9. **Interruptor ES/EN** (#93) con `?lang=en`. P0 (puede entrar antes que 5 a 8 si hace falta)
 
@@ -102,7 +102,7 @@ Todo en verde, o no pasa:
 - [ ] `python -m analisis.validar` (con los campos `*_en`).
 - [ ] `node --test "web/tests/*.test.mjs"` y `node --test "diseno/tests/*.test.mjs"` (si el PR de Ehileen ya entró).
 - [ ] `web/data/` idéntico a `data/salida/` para los tres archivos de indicadores.
-- [ ] Cada cifra de la web coincide con `data/salida/` y con `docs/entrega/04` (calor +0.94 °C 2001-2021 y aire +1.47 °C; vegetación -0.013 p = 0.004 a 2026; lluvia sin cambio claro p = 0.129; agua +1.36 cm p = 0.009, regional).
+- [ ] Cada cifra de la web coincide con `data/salida/` y con `docs/entrega/04` (calor: aire +1.47 °C 2001-2025 como cifra principal y superficie "no concluyente" sin cifra principal; vegetación -0.013 p = 0.004 a 2026; lluvia sin cambio claro p = 0.129; agua +1.36 cm p = 0.009, regional).
 - [ ] Sitio abierto **sin sesión iniciada**, en ES y con `?lang=en`: sin errores en la consola, sin pedir registro, 4 pantallas con fuente visible, y a 360 px sin scroll horizontal.
 - [ ] No hay nombre, foto ni voz de menores de 18 en el repo ni en el sitio (búsqueda del nombre que indicó Carlos; no se escribe en ningún archivo).
 - [ ] No hay logos de NASA, claves secretas ni archivos de más de 5 MB.
@@ -117,7 +117,7 @@ Todo en verde, o no pasa:
 | 23:30-01:00 | Ronda 2: auditoría de #88; #88 y #77 al día; EN en JSON (Luca) y diccionario ES/EN (Diego); logo e íconos aclarados. |
 | 01:00-02:00 | Ronda 3: interruptor ES/EN en `dev`, integración visual, 360 px, revisión de inglés. |
 | 02:00-02:30 | Puerta de calidad y PR `dev → main`. Si algo falla, pasa lo que está verde y el resto queda para mañana. |
-| Dom 08:00-09:00 | Hora de corte del login. Primer revisión del sitio público sin sesión. |
+| Dom 08:00-09:00 | Primera revisión del sitio público sin sesión. |
 | Dom 09:00-11:00 | Prueba en celular real (#71), video, textos finales. |
 | Dom 11:00 | Borrador de entrega completo. |
 | Dom 13:00 | **Submit for Judging** (límite oficial 23:59). |
@@ -128,4 +128,4 @@ Todo en verde, o no pasa:
 - **Cansancio y fusiones apuradas:** dos PR de Diego tocan los mismos archivos; se fusiona uno por uno.
 - **Logo e íconos sin origen confirmado:** pueden obligar a quitarlos antes de enviar.
 - **Calor:** el corte en 2021 depende de una explicación probable (deriva de Terra) todavía sin el contraste de Aqua.
-- **Login:** Supabase puede tener límites de correo; si no está probado a las 09:00, queda fuera.
+- **Login:** pospuesto; no es un riesgo de la entrega.

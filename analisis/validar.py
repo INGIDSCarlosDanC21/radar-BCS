@@ -17,6 +17,9 @@ IND_CAMPOS = ("id", "titulo", "variable", "unidades", "cambio_total", "cambio_to
               "por_decada", "significancia", "serie_anual", "fuente", "limitacion")
 SIG_CAMPOS = ("metodo", "p_valor", "alfa", "significativo")
 FUENTE_CAMPOS = ("dataset", "url", "resolucion", "periodo", "fecha_descarga")
+# textos en inglés (issue #93): obligatorios en todo indicador con datos; la web inglesa los lee sin traducir nada
+IND_EN = ("titulo_en", "variable_en", "cambio_total_nota_en", "limitacion_en")
+FUENTE_EN = ("dataset_en", "resolucion_en")
 UNIDADES_FIJAS = {"calor": "°C", "lluvia": "mm/año"}  # vegetación y agua las define Prog. A
 
 
@@ -43,6 +46,13 @@ def _numero_o_nulo(v, donde, err):
         err.append(f"{donde}: debe ser número o null")
     elif v == -9999:
         err.append(f"{donde}: -9999 no vale, los faltantes van como null")
+
+
+def _texto(obj, campo, donde, err):
+    """Un texto en inglés debe ser una cadena no vacía."""
+    v = obj.get(campo)
+    if not isinstance(v, str) or not v.strip():
+        err.append(f"{donde}.{campo}: falta el texto en inglés (cadena no vacía)")
 
 
 def _indicador(ind, donde, err):
@@ -84,6 +94,14 @@ def _indicador(ind, donde, err):
     # un indicador sin dato va con fuente null; si trae fuente, debe estar completa
     if ind.get("fuente") is not None:
         _faltan(ind["fuente"], FUENTE_CAMPOS, f"{donde}.fuente", err)
+        # solo los indicadores con datos llevan inglés; los "pendiente" (fuente null) no tienen texto que traducir
+        for c in IND_EN:
+            _texto(ind, c, donde, err)
+        if isinstance(sig, dict):
+            _texto(sig, "metodo_en", f"{donde}.significancia", err)
+        if isinstance(ind["fuente"], dict):
+            for c in FUENTE_EN:
+                _texto(ind["fuente"], c, f"{donde}.fuente", err)
 
 
 def validar_indicadores(d):
@@ -142,6 +160,8 @@ def validar_zonas(d):
         p = f.get("properties")
         if not _faltan(p, ("id", "nombre", "cambios"), f"{donde}.properties", err):
             continue
+        for c in ("nombre_en", "nota_en"):
+            _texto(p, c, f"{donde}.properties", err)
         cambios = p["cambios"]
         if not isinstance(cambios, dict):
             err.append(f"{donde}.properties.cambios: debe ser un objeto")

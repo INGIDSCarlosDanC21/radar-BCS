@@ -56,13 +56,14 @@ def construir(inicio, fin, lst, ndvi, pix):
             "type": "Feature",
             "geometry": {"type": "Polygon", "coordinates": [poligono_pixel(tile, linea, muestra)]},
             "properties": {
-                "id": f"z{i:02d}", "nombre": zona,
+                "id": f"z{i:02d}", "nombre": zona, "nombre_en": zona,  # nombres propios de zonas: no se traducen
                 "cambios": {
                     "calor": _cambio(tz["calor_lst"]),
                     "vegetacion": _cambio(tz["vegetacion_ndvi"]),
                     "lluvia": {"cambio_total": None, "significativo": None},
                     "agua": {"cambio_total": None, "significativo": None}},
-                "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel."}})
+                "nota": "Polígono = píxel MODIS de 1 km (LST); el NDVI es del punto de 250 m dentro de ese píxel.",
+                "nota_en": "Polygon = 1 km MODIS pixel (LST); the NDVI is from the 250 m point inside that pixel."}})
     return {"type": "FeatureCollection", "datos_de_prueba": False,
             "generado_con": exportar.GENERADO_CON, "periodo": {"inicio": inicio, "fin": fin}, "features": feats}
 

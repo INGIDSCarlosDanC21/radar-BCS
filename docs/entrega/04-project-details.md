@@ -14,7 +14,7 @@ Requirement (literal, from "Components of Project"):
 
 ## What exactly does it do?
 
-Radar BCS is a free website for phones, with no installation, written in Spanish for the residents of La Paz, Baja California Sur, Mexico. It uses open NASA data to show how four things have changed in La Paz since 2001: heat, vegetation, rainfall and groundwater. It is built to answer the four questions of the "Be An Earth System Trend Detective!" challenge, one screen at a time:
+Radar BCS is a free website for phones, with no installation, available in Spanish and English, for the residents of La Paz, Baja California Sur, Mexico. It uses open NASA data to show how four things have changed in La Paz since 2001: heat, vegetation, rainfall and groundwater. It is built to answer the four questions of the "Be An Earth System Trend Detective!" challenge, one screen at a time:
 
 | Question | Screen | How it answers |
 |---|---|---|
@@ -26,17 +26,17 @@ Radar BCS is a free website for phones, with no installation, written in Spanish
 
 Every number on the site shows its data source. The site shows what changed, not why. A trend does not prove its cause, and we do not claim one.
 
-<!-- Nota interna: las metas de 'What do you hope to achieve' son una propuesta de Claude (tomadas de la diapositiva 7 de 08-demo-draft.md); Carlos confirma o cambia. Vegetacion con los numeros de data/salida/ en dev (PR #84, 2001-2026); web/data/ debe copiarse igual antes de enviar. Calor usa 2001-2021 por el cambio de hora de paso de Terra (PR #90, propuesta de Luca aceptada en dev; confirmada por Carlos); falta el contraste con Aqua. -->
+<!-- Nota interna: las metas de 'What do you hope to achieve' son una propuesta de Claude (tomadas de la diapositiva 7 de 08-demo-draft.md); Carlos confirma o cambia. Vegetacion con los numeros de data/salida/ en dev (PR #84, 2001-2026); web/data/ debe copiarse igual antes de enviar. Calor: Carlos eligio la opcion B el 2026-11-15 (principal = aire +1.47 C 2001-2025; superficie MODIS 2001-2021 como no concluyente porque Aqua no confirma a Terra; ver docs/decisiones.md). -->
 <!-- Nota interna: resultados del pipeline de Luca (data/salida/indicadores.json y zonas_tendencias.json, 2026-11-14), revisados por Investigacion en docs/investigacion/hallazgos.md. Si algun numero cambia, cambiarlo aqui. Investigacion reprodujo las salidas de MODIS con los CSV de Drive; la baja de la superficie en El Centenario y Sur depende de la prueba y de los ultimos anios (hallazgos.md), por eso no se interpreta. -->
 
 Results so far (2001-2025 unless noted; NASA POWER is a single grid cell about 50 km wide around La Paz; MODIS is six sample points in and around the city):
 
-- **Air temperature (NASA POWER):** rose by about 0.06 °C per year, roughly 1.5 °C in total (Sen's slope over the period; an estimate, not a measurement). The change is statistically significant (p < 0.001).
-- **Land surface temperature (MODIS, daytime, average of six points, 2001-2021):** rose by about 0.9 °C in total (+0.94 °C, Sen's slope; statistically significant, p = 0.0003), in the same direction as the air temperature. We stop this series in 2021 on purpose: from 2022 the Terra satellite crosses La Paz earlier and earlier (the mean local observation time falls from about 10.8 h to 9.2 h in 2026, from the MOD11A2 Day_view_time field), so the surface is measured before it warms up and the series drops artificially. This is the most likely explanation, not proven, and a cross-check with the Aqua satellite is pending. The heat card shows this surface result and notes that air temperature (whole 2001-2025 period) rose by about 1.47 °C. They are different measurements over different years.
+- **Air temperature (NASA POWER), the main heat figure on the site:** rose by about 0.06 °C per year, roughly 1.5 °C in total (Sen's slope over the period; an estimate, not a measurement). The change is statistically significant (p < 0.001).
+- **Land surface temperature (MODIS, daytime, average of six points): inconclusive.** Terra shows a rise of about 0.9 °C over 2001-2021 (+0.94 °C, Sen's slope; p = 0.0003). But Aqua, a second MODIS satellite that passes in the afternoon, shows no clear change over a similar period (2003-2021: +0.27 °C, p = 0.29, against +1.04 °C for Terra), and the observation time of both satellites drifts from 2022 (Terra earlier in the morning, Aqua later in the afternoon). The two satellites do not confirm each other, so the heat card leads with the air temperature and shows the surface only as an inconclusive result, without a headline figure. We cut the Terra series in 2021 because from 2022 its mean local pass time falls from about 10.8 h to 9.2 h in 2026 (MOD11A2 Day_view_time field), which makes the surface drop artificially. We do not claim to know the cause; this is the most likely explanation, not proven.
 - **Vegetation (MODIS NDVI, average of six points, 2001-2026; 2026 is a partial year):** fell by about 0.013 NDVI units, which is statistically significant (p = 0.004). Some months have no valid reading at urban points, so this is a rough picture, not a measurement of the whole city.
 - **Rainfall (NASA POWER):** varies a lot from year to year, and no clear change is detected in the annual total (p = 0.13, not significant). Not detecting a change does not prove there is none.
 - **Water (NASA GRACE and GRACE-FO, JPL Mascon CRI RL06.3Mv04, 2002-2026):** total water stored in the region (soil, surface water and aquifers together) rose by about 1.4 cm of water equivalent, a statistically significant change (p = 0.009, seasonal Mann-Kendall with a correction for autocorrelation; 2026 is a partial year). The satellite sees hundreds of kilometers at once, so this describes the region, **not the La Paz aquifer**.
-- **Zones of La Paz with the most change:** six sample points only (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), each drawn as the 1 km MODIS pixel that contains it, not full neighborhood polygons. Vegetation shows a number at all six points (a statistically significant decrease at four, and a small increase at Oriente and Sur); heat shows a statistically significant rise at four points (Centro, Chametla, Oriente and Surponiente) and no clear change at El Centenario and Sur; rainfall and water are measured at regional scale, so the map has no zones for them.
+- **Zones of La Paz with the most change:** six sample points only (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), each drawn as the 1 km MODIS pixel that contains it, not full neighborhood polygons. Vegetation shows a number at all six points (a statistically significant decrease at four, and a small increase at Oriente and Sur); heat by zone comes from the Terra surface series (a rise at four points, Centro, Chametla, Oriente and Surponiente, and no clear change at El Centenario and Sur) and is shown with a note that Aqua does not confirm the surface trend, so it is indicative only; rainfall and water are measured at regional scale, so the map has no zones for them.
 
 ## How does it work?
 
@@ -53,7 +53,7 @@ Limits we state on the site:
 - NASA POWER (about 50 km) is coarse for a single city.
 - A trend shows what changed, not why.
 - Rainfall and air temperature have 25 years of data (2001-2025). Urban NDVI points lose many months after quality filtering (up to 175 months at one point), which makes their trend less reliable.
-- Air temperature (2001-2025) and MODIS surface temperature (2001-2021, cut because of the satellite's changing pass time) are different measurements over different years. We report both.
+- Air temperature (2001-2025) is the main heat figure. MODIS surface temperature (2001-2021) is inconclusive: Terra and Aqua disagree and the pass time of both drifts. We report both and say so.
 
 ## What benefits does it have?
 

@@ -59,7 +59,7 @@ Se abrió Edit Details como dueño del equipo y solo se leyó. Estado de la pág
 - [ ] 04 detalles: falta celular real (#71) y confirmar equipos
 - [ ] 05 uso de IA: falta lo de Stitch (#79)
 - [x] 06 datos NASA (revisar con el último PR de Luca)
-- [ ] 07 referencias: faltan íconos, logo, audio y Supabase si el login sale
+- [ ] 07 referencias: íconos y logo ya declarados; falta confirmar si hay audio o modelos 3D (ninguno hasta ahora). El login con Supabase no entra
 - [ ] Plataforma: Lock, Submit for Judging, captura del banner
 - [ ] Todos en la pestaña Members
 

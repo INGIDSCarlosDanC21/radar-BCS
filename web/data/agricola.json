@@ -1,0 +1,1487 @@
+{
+  "generado": "2026-11-14",
+  "zona": "Municipio de La Paz, B.C.S.",
+  "zona_en": "Municipality of La Paz, B.C.S.",
+  "estado_linea": "DATOS ABIERTOS AGRÍCOLAS · MUNICIPIO DE LA PAZ",
+  "estado_linea_en": "AGRICULTURAL OPEN DATA · MUNICIPALITY OF LA PAZ",
+  "consulta_linea": "Consultado: 14 nov 2026 · SIAP, CONAGUA, ISRIC, NASA",
+  "consulta_linea_en": "Accessed: 14 Nov 2026 · SIAP, CONAGUA, ISRIC, NASA",
+  "mapa": {
+    "centro": [
+      24.0,
+      -110.2
+    ],
+    "zoom": 9,
+    "info": {
+      "titulo": "Municipio de La Paz",
+      "titulo_en": "Municipality of La Paz",
+      "texto": "3,879.6 ha sembradas en 2025 (SIAP)",
+      "texto_en": "3,879.6 ha sown in 2025 (SIAP)"
+    },
+    "localidades": [
+      {
+        "id": "los-planes",
+        "nombre": "Los Planes",
+        "lat": 23.96723,
+        "lon": -109.935,
+        "etiqueta": "Los Planes: pH 8.0 · franco arenoso",
+        "etiqueta_en": "Los Planes: pH 8.0 · sandy loam",
+        "fuente_coord": "GeoNames 3997291 (CC BY 4.0)",
+        "fuente_coord_en": "GeoNames 3997291 (CC BY 4.0)"
+      },
+      {
+        "id": "el-carrizal",
+        "nombre": "El Carrizal",
+        "lat": 23.78434,
+        "lon": -110.31166,
+        "etiqueta": "El Carrizal: acuífero con 0.71 hm³/año disponibles",
+        "etiqueta_en": "El Carrizal: aquifer with 0.71 hm³/year available",
+        "fuente_coord": "GeoNames 4010618 (CC BY 4.0)",
+        "fuente_coord_en": "GeoNames 4010618 (CC BY 4.0)"
+      },
+      {
+        "id": "el-centenario",
+        "nombre": "El Centenario",
+        "lat": 24.1025,
+        "lon": -110.41444,
+        "etiqueta": "El Centenario: pH 7.9 · franco arenoso",
+        "etiqueta_en": "El Centenario: pH 7.9 · sandy loam",
+        "fuente_coord": "GeoNames 8858277 (CC BY 4.0)",
+        "fuente_coord_en": "GeoNames 8858277 (CC BY 4.0)"
+      },
+      {
+        "id": "chametla",
+        "nombre": "Chametla",
+        "lat": 24.09926,
+        "lon": -110.37395,
+        "etiqueta": "Chametla: 3,054 habitantes (INEGI 2020)",
+        "etiqueta_en": "Chametla: 3,054 inhabitants (INEGI 2020)",
+        "fuente_coord": "GeoNames 4022333 (CC BY 4.0)",
+        "fuente_coord_en": "GeoNames 4022333 (CC BY 4.0)"
+      }
+    ],
+    "leyenda": {
+      "titulo": "CAMBIO DE NDVI 2001–2025",
+      "titulo_en": "NDVI CHANGE 2001–2025",
+      "etiqueta": "Índice NDVI",
+      "etiqueta_en": "NDVI index",
+      "min": "Baja",
+      "min_en": "Low",
+      "max": "Sube",
+      "max_en": "Rises",
+      "nota": "6 zonas del equipo (zonas.geojson)",
+      "nota_en": "6 team zones (zonas.geojson)"
+    },
+    "pie": [
+      "Acuífero Los Planes: déficit de 2.34 hm³/año (DOF 09/11/2023)",
+      "Monitor de Sequía: La Paz sin categoría registrada al 31 oct 2026"
+    ],
+    "pie_en": [
+      "Los Planes aquifer: deficit of 2.34 hm³/year (DOF 09/11/2023)",
+      "Drought Monitor: La Paz no category recorded as of 31 Oct 2026"
+    ],
+    "fuentes_pie": "SIAP / CONAGUA / ISRIC / NASA",
+    "fuentes_pie_en": "SIAP / CONAGUA / ISRIC / NASA"
+  },
+  "fichas": [
+    {
+      "id": "cultivos",
+      "titulo": "Factibilidad y Cultivos",
+      "titulo_en": "Feasibility and Crops",
+      "subtitulo": "Qué se siembra y qué límites de agua hay",
+      "subtitulo_en": "What is planted and what water limits exist",
+      "chip": "3,879.6 ha sembradas",
+      "chip_en": "3,879.6 ha sown",
+      "enlace": "Ver cultivos sembrados y restricciones de agua",
+      "enlace_en": "See planted crops and water restrictions",
+      "detalle": {
+        "chips": [
+          "SIAP · CIERRE AGRÍCOLA 2025",
+          "100 % RIEGO"
+        ],
+        "chips_en": [
+          "SIAP · 2025 AGRICULTURAL CLOSE",
+          "100 % IRRIGATION"
+        ],
+        "titulo_largo": "Factibilidad y Cultivos del Municipio de La Paz",
+        "titulo_largo_en": "Feasibility and Crops of the Municipality of La Paz",
+        "descripcion": "Los ocho cultivos con más superficie sembrada en el municipio de La Paz en 2025 y la disponibilidad de agua subterránea de los acuíferos documentados.",
+        "descripcion_en": "The eight crops with the largest sown area in the municipality of La Paz in 2025 and the groundwater availability of the documented aquifers.",
+        "veredicto": {
+          "etiqueta": "Superficie sembrada 2025",
+          "etiqueta_en": "Sown area 2025",
+          "valor": "3,879.6 ha",
+          "valor_en": "3,879.6 ha"
+        },
+        "dictamen": {
+          "titulo": "RESUMEN CON DATOS OFICIALES",
+          "titulo_en": "SUMMARY WITH OFFICIAL DATA",
+          "texto": "Cierre agrícola 2025 del municipio de La Paz (SIAP): 3,879.6 ha sembradas, 100 % bajo riego (otoño-invierno 2,424.5 ha, primavera-verano 424.3 ha, perennes 1,030.8 ha). Los 8 cultivos con más superficie suman 2,620.5 ha (68 % del total). Valor de la producción del municipio: $1,210.0 millones MXN. Son cifras del cierre 2025, no indican qué conviene sembrar.",
+          "texto_en": "2025 agricultural close of the municipality of La Paz (SIAP): 3,879.6 ha sown, 100 % under irrigation (fall-winter 2,424.5 ha, spring-summer 424.3 ha, perennial 1,030.8 ha). The 8 crops with the largest area add up to 2,620.5 ha (68 % of the total). Value of the municipality's production: $1,210.0 million MXN. These are figures from the 2025 close; they do not indicate what is best to plant."
+        },
+        "grupo": {
+          "titulo": "Principales cultivos sembrados",
+          "titulo_en": "Main crops planted",
+          "nota": "SIAP, cierre 2025 (suma de ciclos)",
+          "nota_en": "SIAP, 2025 close (sum of cycles)",
+          "tarjetas": [
+            {
+              "chip": "Riego · Otoño-Invierno y Primavera-Verano",
+              "chip_en": "Irrigated · Fall-Winter and Spring-Summer",
+              "titulo": "Tomate rojo (jitomate)",
+              "titulo_en": "Red tomato (jitomate)",
+              "texto": "Valor de la producción en 2025: $530.1 millones MXN.",
+              "texto_en": "Value of production in 2025: $530.1 million MXN.",
+              "filas": [
+                [
+                  "Sembrada",
+                  "902.5 ha"
+                ],
+                [
+                  "Cosechada",
+                  "902.5 ha"
+                ],
+                [
+                  "Rendimiento (por ciclo)",
+                  "Otoño-Invierno: 66.49 t/ha; Primavera-Verano: 56.88 t/ha"
+                ],
+                [
+                  "Ciclo",
+                  "Otoño-Invierno, Primavera-Verano"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Sown",
+                  "902.5 ha"
+                ],
+                [
+                  "Harvested",
+                  "902.5 ha"
+                ],
+                [
+                  "Yield (per cycle)",
+                  "Fall-Winter: 66.49 t/ha; Spring-Summer: 56.88 t/ha"
+                ],
+                [
+                  "Cycle",
+                  "Fall-Winter, Spring-Summer"
+                ]
+              ],
+              "fuente": "SIAP, cierre agrícola 2025",
+              "fuente_en": "SIAP, 2025 agricultural close"
+            },
+            {
+              "chip": "Riego · Otoño-Invierno y Primavera-Verano",
+              "chip_en": "Irrigated · Fall-Winter and Spring-Summer",
+              "titulo": "Chile verde",
+              "titulo_en": "Green chili pepper",
+              "texto": "Valor de la producción en 2025: $466.5 millones MXN.",
+              "texto_en": "Value of production in 2025: $466.5 million MXN.",
+              "filas": [
+                [
+                  "Sembrada",
+                  "742.0 ha"
+                ],
+                [
+                  "Cosechada",
+                  "742.0 ha"
+                ],
+                [
+                  "Rendimiento (por ciclo)",
+                  "Otoño-Invierno: 60.07 t/ha; Primavera-Verano: 30.73 t/ha"
+                ],
+                [
+                  "Ciclo",
+                  "Otoño-Invierno, Primavera-Verano"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Sown",
+                  "742.0 ha"
+                ],
+                [
+                  "Harvested",
+                  "742.0 ha"
+                ],
+                [
+                  "Yield (per cycle)",
+                  "Fall-Winter: 60.07 t/ha; Spring-Summer: 30.73 t/ha"
+                ],
+                [
+                  "Cycle",
+                  "Fall-Winter, Spring-Summer"
+                ]
+              ],
+              "fuente": "SIAP, cierre agrícola 2025",
+              "fuente_en": "SIAP, 2025 agricultural close"
+            },
+            {
+              "chip": "Riego · Perennes",
+              "chip_en": "Irrigated · Perennial",
+              "titulo": "Mango",
+              "titulo_en": "Mango",
+              "texto": "Valor de la producción en 2025: $11.7 millones MXN. Se registró menos superficie cosechada (231.5 ha) que sembrada (344.0 ha).",
+              "texto_en": "Value of production in 2025: $11.7 million MXN. Less harvested area (231.5 ha) than sown area (344.0 ha) was recorded.",
+              "filas": [
+                [
+                  "Sembrada",
+                  "344.0 ha"
+                ],
+                [
+                  "Cosechada",
+                  "231.5 ha"
+                ],
+                [
+                  "Rendimiento (por ciclo)",
+                  "Perennes: 8.54 t/ha"
+                ],
+                [
+                  "Ciclo",
+                  "Perennes"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Sown",
+                  "344.0 ha"
+                ],
+                [
+                  "Harvested",
+                  "231.5 ha"
+                ],
+                [
+                  "Yield (per cycle)",
+                  "Perennial: 8.54 t/ha"
+                ],
+                [
+                  "Cycle",
+                  "Perennial"
+                ]
+              ],
+              "fuente": "SIAP, cierre agrícola 2025",
+              "fuente_en": "SIAP, 2025 agricultural close"
+            },
+            {
+              "chip": "Riego · Otoño-Invierno y Primavera-Verano",
+              "chip_en": "Irrigated · Fall-Winter and Spring-Summer",
+              "titulo": "Albahaca",
+              "titulo_en": "Basil",
+              "texto": "Valor de la producción en 2025: $21.2 millones MXN.",
+              "texto_en": "Value of production in 2025: $21.2 million MXN.",
+              "filas": [
+                [
+                  "Sembrada",
+                  "138.0 ha"
+                ],
+                [
+                  "Cosechada",
+                  "138.0 ha"
+                ],
+                [
+                  "Rendimiento (por ciclo)",
+                  "Otoño-Invierno: 9.16 t/ha; Primavera-Verano: 10.12 t/ha"
+                ],
+                [
+                  "Ciclo",
+                  "Otoño-Invierno, Primavera-Verano"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Sown",
+                  "138.0 ha"
+                ],
+                [
+                  "Harvested",
+                  "138.0 ha"
+                ],
+                [
+                  "Yield (per cycle)",
+                  "Fall-Winter: 9.16 t/ha; Spring-Summer: 10.12 t/ha"
+                ],
+                [
+                  "Cycle",
+                  "Fall-Winter, Spring-Summer"
+                ]
+              ],
+              "fuente": "SIAP, cierre agrícola 2025",
+              "fuente_en": "SIAP, 2025 agricultural close"
+            },
+            {
+              "chip": "Riego · Otoño-Invierno",
+              "chip_en": "Irrigated · Fall-Winter",
+              "titulo": "Jícama",
+              "titulo_en": "Jicama",
+              "texto": "Valor de la producción en 2025: $15.0 millones MXN.",
+              "texto_en": "Value of production in 2025: $15.0 million MXN.",
+              "filas": [
+                [
+                  "Sembrada",
+                  "135.0 ha"
+                ],
+                [
+                  "Cosechada",
+                  "135.0 ha"
+                ],
+                [
+                  "Rendimiento (por ciclo)",
+                  "Otoño-Invierno: 22.22 t/ha"
+                ],
+                [
+                  "Ciclo",
+                  "Otoño-Invierno"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Sown",
+                  "135.0 ha"
+                ],
+                [
+                  "Harvested",
+                  "135.0 ha"
+                ],
+                [
+                  "Yield (per cycle)",
+                  "Fall-Winter: 22.22 t/ha"
+                ],
+                [
+                  "Cycle",
+                  "Fall-Winter"
+                ]
+              ],
+              "fuente": "SIAP, cierre agrícola 2025",
+              "fuente_en": "SIAP, 2025 agricultural close"
+            },
+            {
+              "chip": "Riego · Otoño-Invierno y Primavera-Verano",
+              "chip_en": "Irrigated · Fall-Winter and Spring-Summer",
+              "titulo": "Maíz grano",
+              "titulo_en": "Grain corn",
+              "texto": "Valor de la producción en 2025: $4.6 millones MXN.",
+              "texto_en": "Value of production in 2025: $4.6 million MXN.",
+              "filas": [
+                [
+                  "Sembrada",
+                  "130.0 ha"
+                ],
+                [
+                  "Cosechada",
+                  "130.0 ha"
+                ],
+                [
+                  "Rendimiento (por ciclo)",
+                  "Otoño-Invierno: 5.56 t/ha; Primavera-Verano: 6.40 t/ha"
+                ],
+                [
+                  "Ciclo",
+                  "Otoño-Invierno, Primavera-Verano"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Sown",
+                  "130.0 ha"
+                ],
+                [
+                  "Harvested",
+                  "130.0 ha"
+                ],
+                [
+                  "Yield (per cycle)",
+                  "Fall-Winter: 5.56 t/ha; Spring-Summer: 6.40 t/ha"
+                ],
+                [
+                  "Cycle",
+                  "Fall-Winter, Spring-Summer"
+                ]
+              ],
+              "fuente": "SIAP, cierre agrícola 2025",
+              "fuente_en": "SIAP, 2025 agricultural close"
+            },
+            {
+              "chip": "Riego · Perennes",
+              "chip_en": "Irrigated · Perennial",
+              "titulo": "Palma de ornato",
+              "titulo_en": "Ornamental palm",
+              "texto": "Valor de la producción en 2025: $0 MXN. El cierre no registra superficie cosechada.",
+              "texto_en": "Value of production in 2025: $0 MXN. The close records no harvested area.",
+              "filas": [
+                [
+                  "Sembrada",
+                  "129.0 ha"
+                ],
+                [
+                  "Cosechada",
+                  "0.0 ha"
+                ],
+                [
+                  "Rendimiento (por ciclo)",
+                  "Perennes: sin dato"
+                ],
+                [
+                  "Ciclo",
+                  "Perennes"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Sown",
+                  "129.0 ha"
+                ],
+                [
+                  "Harvested",
+                  "0.0 ha"
+                ],
+                [
+                  "Yield (per cycle)",
+                  "Perennial: no data"
+                ],
+                [
+                  "Cycle",
+                  "Perennial"
+                ]
+              ],
+              "fuente": "SIAP, cierre agrícola 2025",
+              "fuente_en": "SIAP, 2025 agricultural close"
+            },
+            {
+              "chip": "Riego · Perennes",
+              "chip_en": "Irrigated · Perennial",
+              "titulo": "Higo",
+              "titulo_en": "Fig",
+              "texto": "Valor de la producción en 2025: $1.7 millones MXN.",
+              "texto_en": "Value of production in 2025: $1.7 million MXN.",
+              "filas": [
+                [
+                  "Sembrada",
+                  "100.0 ha"
+                ],
+                [
+                  "Cosechada",
+                  "100.0 ha"
+                ],
+                [
+                  "Rendimiento (por ciclo)",
+                  "Perennes: 1.22 t/ha"
+                ],
+                [
+                  "Ciclo",
+                  "Perennes"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Sown",
+                  "100.0 ha"
+                ],
+                [
+                  "Harvested",
+                  "100.0 ha"
+                ],
+                [
+                  "Yield (per cycle)",
+                  "Perennial: 1.22 t/ha"
+                ],
+                [
+                  "Cycle",
+                  "Perennial"
+                ]
+              ],
+              "fuente": "SIAP, cierre agrícola 2025",
+              "fuente_en": "SIAP, 2025 agricultural close"
+            }
+          ]
+        },
+        "grupo_alerta": {
+          "titulo": "Restricciones documentadas de agua subterránea",
+          "titulo_en": "Documented groundwater restrictions",
+          "nota": "CONAGUA, DOF 09/11/2023 · es restricción de concesiones de agua, no veda de cultivos",
+          "nota_en": "CONAGUA, DOF 09/11/2023 · it is a restriction on water concessions, not a ban on crops",
+          "tarjetas": [
+            {
+              "chip": "Sin disponibilidad",
+              "chip_en": "No availability",
+              "titulo": "Acuífero Los Planes (0323)",
+              "titulo_en": "Los Planes aquifer (0323)",
+              "texto": "Recarga 10.8 hm³/año · descarga natural comprometida 0.2 · extracción 12.94 · disponibilidad media anual (DMA) -2.34 hm³/año (déficit).",
+              "texto_en": "Recharge 10.8 hm³/year · committed natural discharge 0.2 · extraction 12.94 · mean annual availability (DMA) -2.34 hm³/year (deficit).",
+              "motivo": "Ficha de CONAGUA: «no existe volumen disponible para otorgar nuevas concesiones; por el contrario su déficit es de 2'337,757 m3.»",
+              "motivo_en": "CONAGUA fact sheet: \"there is no volume available to grant new concessions; on the contrary, its deficit is 2'337,757 m3.\"",
+              "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
+              "fuente_en": "DOF 09/11/2023 (cutoff 30-Dec-2022)"
+            },
+            {
+              "chip": "Sin disponibilidad",
+              "chip_en": "No availability",
+              "titulo": "Acuífero Todos Santos (0313)",
+              "titulo_en": "Todos Santos aquifer (0313)",
+              "texto": "Recarga 18.4 hm³/año · descarga natural comprometida 14.7 · extracción 6.66 · disponibilidad media anual (DMA) -2.96 hm³/año (déficit).",
+              "texto_en": "Recharge 18.4 hm³/year · committed natural discharge 14.7 · extraction 6.66 · mean annual availability (DMA) -2.96 hm³/year (deficit).",
+              "motivo": "Ficha de CONAGUA: «no existe un volumen disponible para otorgar nuevas concesiones; por el contrario el déficit es de 2,964,513 m3 anuales.»",
+              "motivo_en": "CONAGUA fact sheet: \"there is no volume available to grant new concessions; on the contrary, the deficit is 2,964,513 m3 per year.\"",
+              "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
+              "fuente_en": "DOF 09/11/2023 (cutoff 30-Dec-2022)"
+            },
+            {
+              "chip": "Sin disponibilidad",
+              "chip_en": "No availability",
+              "titulo": "Acuífero La Paz (0324)",
+              "titulo_en": "La Paz aquifer (0324)",
+              "texto": "Recarga 21.0 hm³/año · descarga natural comprometida 0.0 · extracción 34.49 · disponibilidad media anual (DMA) -13.49 hm³/año (déficit).",
+              "texto_en": "Recharge 21.0 hm³/year · committed natural discharge 0.0 · extraction 34.49 · mean annual availability (DMA) -13.49 hm³/year (deficit).",
+              "motivo": "La tabla del DOF 09/11/2023 registra DMA negativa. El acuerdo específico del DOF 17/08/2023 da otro déficit: «resultando en el acuífero un déficit de 27.82732 millones de metros cúbicos anuales» (volúmenes al 30-sep-2021). No se pudo verificar cuál rige.",
+              "motivo_en": "The DOF 09/11/2023 table records a negative DMA. The specific agreement of DOF 17/08/2023 gives another deficit: \"resulting in a deficit in the aquifer of 27.82732 million cubic meters per year\" (volumes as of 30-Sep-2021). It could not be verified which one governs.",
+              "fuente": "DOF 09/11/2023 (corte 30-dic-2022) y DOF 17/08/2023",
+              "fuente_en": "DOF 09/11/2023 (cutoff 30-Dec-2022) and DOF 17/08/2023"
+            }
+          ]
+        },
+        "notas": [
+          {
+            "titulo": "Sin desglose por valle",
+            "titulo_en": "No breakdown by valley",
+            "texto": "Todo el municipio de La Paz es un solo CADER en el cierre del SIAP; no hay cifras separadas por valle o localidad.",
+            "texto_en": "The whole municipality of La Paz is a single CADER in the SIAP close; there are no separate figures by valley or locality."
+          },
+          {
+            "titulo": "Calendarios de siembra",
+            "titulo_en": "Planting calendars",
+            "texto": "Los calendarios de siembra por cultivo no se pudieron verificar con una fuente oficial y por eso no se muestran.",
+            "texto_en": "Planting calendars by crop could not be verified with an official source, so they are not shown."
+          },
+          {
+            "titulo": "El Carrizal sí tiene volumen",
+            "titulo_en": "El Carrizal does have volume",
+            "texto": "El acuífero El Carrizal (0322) sí tiene volumen disponible para nuevas concesiones: +0.71 hm³/año (DOF 09/11/2023 (corte 30-dic-2022)). La asignación de localidad a acuífero se hizo por nombre, no con polígonos.",
+            "texto_en": "The El Carrizal aquifer (0322) does have volume available for new concessions: +0.71 hm³/year (DOF 09/11/2023 (cutoff 30-Dec-2022)). The assignment of locality to aquifer was done by name, not with polygons."
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "SIAP, Cierre de la producción agrícola por municipio 2025",
+            "nombre_en": "SIAP, Close of agricultural production by municipality 2025",
+            "url": "https://nube.agricultura.gob.mx/index.php?view=10AE434F-A2158368-A120BC5A-EDF4AFAA&ANIO=2025",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "CONAGUA, Acuerdo de disponibilidad media anual de 653 acuíferos (DOF 09/11/2023)",
+            "nombre_en": "CONAGUA, Agreement on mean annual availability of 653 aquifers (DOF 09/11/2023)",
+            "url": "https://dof.gob.mx/nota_detalle.php?codigo=5708074&fecha=09/11/2023",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "CONAGUA, ficha del acuífero Los Planes (0323)",
+            "nombre_en": "CONAGUA, fact sheet of the Los Planes aquifer (0323)",
+            "url": "https://sigagis.conagua.gob.mx/gas1/Edos_Acuiferos_18/BajaCaliforniaSur/DR_0323.pdf",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "CONAGUA, ficha del acuífero Todos Santos (0313)",
+            "nombre_en": "CONAGUA, fact sheet of the Todos Santos aquifer (0313)",
+            "url": "https://sigagis.conagua.gob.mx/gas1/Edos_Acuiferos_18/BajaCaliforniaSur/DR_0313.pdf",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "DOF 17/08/2023, acuerdo específico acuífero La Paz (0324)",
+            "nombre_en": "DOF 17/08/2023, specific agreement for the La Paz aquifer (0324)",
+            "url": "https://dof.gob.mx/nota_detalle.php?codigo=5698953&fecha=17/08/2023",
+            "consultado": "2026-11-14"
+          }
+        ],
+        "cta": {
+          "etiqueta": "DATOS ABIERTOS",
+          "etiqueta_en": "OPEN DATA",
+          "titulo": "¿Quieres revisar los datos originales?",
+          "titulo_en": "Want to check the original data?",
+          "texto": "El cierre agrícola municipal 2025 se descarga completo del portal de datos abiertos del SIAP.",
+          "texto_en": "The full 2025 municipal agricultural close can be downloaded from the SIAP open data portal.",
+          "boton": "Abrir fuente (SIAP)",
+          "boton_en": "Open source (SIAP)",
+          "url": "https://nube.agricultura.gob.mx/datosAbiertos/Agricola.php"
+        }
+      }
+    },
+    {
+      "id": "clima",
+      "titulo": "Clima y Agua",
+      "titulo_en": "Climate and Water",
+      "subtitulo": "Normales de NASA POWER 2001-2025",
+      "subtitulo_en": "NASA POWER normals 2001-2025",
+      "chip": "≈262.8 mm de lluvia al año (estimación)",
+      "chip_en": "≈262.8 mm of rain per year (estimate)",
+      "enlace": "Ver clima, tendencias y agua subterránea",
+      "enlace_en": "See climate, trends and groundwater",
+      "detalle": {
+        "chips": [
+          "NASA POWER · 2001-2025",
+          "ESTIMACIÓN DE REANÁLISIS"
+        ],
+        "chips_en": [
+          "NASA POWER · 2001-2025",
+          "REANALYSIS ESTIMATE"
+        ],
+        "titulo_largo": "Clima de La Paz y agua subterránea cercana",
+        "titulo_largo_en": "Climate of La Paz and nearby groundwater",
+        "descripcion": "Temperatura, lluvia, radiación, humedad y viento promedio del punto de La Paz, junto con las tendencias del equipo.",
+        "descripcion_en": "Average temperature, rainfall, radiation, humidity and wind at the La Paz point, together with the team's trends.",
+        "veredicto": {
+          "etiqueta": "Lluvia anual estimada (POWER × 365)",
+          "etiqueta_en": "Estimated annual rainfall (POWER × 365)",
+          "valor": "≈262.8 mm (estimación)",
+          "valor_en": "≈262.8 mm (estimate)"
+        },
+        "dictamen": {
+          "titulo": "RESUMEN DE LOS 4 INDICADORES DEL EQUIPO",
+          "titulo_en": "SUMMARY OF THE TEAM'S 4 INDICATORS",
+          "texto": "Calor: cambio estimado de +0.94 °C en 2001-2021, estadísticamente significativo (p < 0.001). Vegetación: cambio estimado de -0.013 NDVI en 2001-2026, estadísticamente significativo (p = 0.004). Lluvia: no se detecta un cambio claro; por eso no se muestra una cifra de cambio (p = 0.129). Agua: cambio estimado de +1.36 cm en 2002-2026, estadísticamente significativo (p = 0.009). Límites: el calor es temperatura de la superficie, no del aire; la lluvia es de reanálisis (~50 km), no de pluviómetro; el agua es una señal regional, no del acuífero de La Paz. Mostramos qué cambió, no por qué.",
+          "texto_en": "Heat: estimated change of +0.94 °C in 2001-2021, statistically significant (p < 0.001). Vegetation: estimated change of -0.013 NDVI in 2001-2026, statistically significant (p = 0.004). Rain: no clear change is detected, so no change figure is shown (p = 0.129). Water: estimated change of +1.36 cm in 2002-2026, statistically significant (p = 0.009). Limits: heat is surface temperature, not air temperature; rainfall comes from a reanalysis (~50 km), not from a rain gauge; water is a regional signal, not from the La Paz aquifer. We show what changed, not why."
+        },
+        "grupo": {
+          "titulo": "Climatología de La Paz (24.14, -110.31)",
+          "titulo_en": "Climatology of La Paz (24.14, -110.31)",
+          "nota": "NASA POWER, promedio 2001-2025 · lluvia anual = promedio diario × 365 (derivada)",
+          "nota_en": "NASA POWER, 2001-2025 average · annual rainfall = daily average × 365 (derived)",
+          "tarjetas": [
+            {
+              "chip": "NASA POWER · °C",
+              "chip_en": "NASA POWER · °C",
+              "titulo": "Temperatura del aire a 2 m (T2M)",
+              "titulo_en": "Air temperature at 2 m (T2M)",
+              "texto": "Promedio diario del aire a 2 m de altura. Es un promedio de 2001 a 2025 para la celda de unos 50 km que incluye a La Paz.",
+              "texto_en": "Daily average of the air at 2 m height. It is an average from 2001 to 2025 for the cell of about 50 km that includes La Paz.",
+              "filas": [
+                [
+                  "Anual",
+                  "24.71 °C"
+                ],
+                [
+                  "Mes más alto",
+                  "agosto: 30.02 °C"
+                ],
+                [
+                  "Mes más bajo",
+                  "enero: 19.12 °C"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Annual",
+                  "24.71 °C"
+                ],
+                [
+                  "Highest month",
+                  "August: 30.02 °C"
+                ],
+                [
+                  "Lowest month",
+                  "January: 19.12 °C"
+                ]
+              ],
+              "fuente": "NASA POWER (MERRA-2), climatología 2001-2025",
+              "fuente_en": "NASA POWER (MERRA-2), 2001-2025 climatology"
+            },
+            {
+              "chip": "NASA POWER · °C",
+              "chip_en": "NASA POWER · °C",
+              "titulo": "Temperatura máxima diaria a 2 m (T2M_MAX)",
+              "titulo_en": "Daily maximum temperature at 2 m (T2M_MAX)",
+              "texto": "Máxima diaria del aire a 2 m de altura. Es un promedio de 2001 a 2025 para la celda de unos 50 km que incluye a La Paz. En la respuesta de POWER, el valor anual (ANN) de esta variable es igual al del mes más alto (38.78 °C); por eso se muestra el promedio mensual calculado.",
+              "texto_en": "Daily maximum of the air at 2 m height. It is an average from 2001 to 2025 for the cell of about 50 km that includes La Paz. In the POWER response, the annual value (ANN) of this variable equals that of the highest month (38.78 °C); that is why the calculated monthly average is shown.",
+              "filas": [
+                [
+                  "Promedio de los 12 meses (calculado)",
+                  "34.82 °C"
+                ],
+                [
+                  "Mes más alto",
+                  "junio: 38.78 °C"
+                ],
+                [
+                  "Mes más bajo",
+                  "enero: 28.84 °C"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Average of the 12 months (calculated)",
+                  "34.82 °C"
+                ],
+                [
+                  "Highest month",
+                  "June: 38.78 °C"
+                ],
+                [
+                  "Lowest month",
+                  "January: 28.84 °C"
+                ]
+              ],
+              "fuente": "NASA POWER (MERRA-2), climatología 2001-2025",
+              "fuente_en": "NASA POWER (MERRA-2), 2001-2025 climatology"
+            },
+            {
+              "chip": "NASA POWER · mm/día",
+              "chip_en": "NASA POWER · mm/day",
+              "titulo": "Lluvia (PRECTOTCORR)",
+              "titulo_en": "Rainfall (PRECTOTCORR)",
+              "texto": "Precipitación corregida, en mm por día. Es un promedio de 2001 a 2025 para la celda de unos 50 km que incluye a La Paz.",
+              "texto_en": "Corrected precipitation, in mm per day. It is an average from 2001 to 2025 for the cell of about 50 km that includes La Paz.",
+              "filas": [
+                [
+                  "Anual",
+                  "0.72 mm/día"
+                ],
+                [
+                  "Mes más alto",
+                  "septiembre: 3.65 mm/día"
+                ],
+                [
+                  "Mes más bajo",
+                  "abril y mayo: 0.01 mm/día"
+                ],
+                [
+                  "Lluvia anual estimada",
+                  "262.8 mm (estimación: ANN × 365)"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Annual",
+                  "0.72 mm/day"
+                ],
+                [
+                  "Highest month",
+                  "September: 3.65 mm/day"
+                ],
+                [
+                  "Lowest month",
+                  "April and May: 0.01 mm/day"
+                ],
+                [
+                  "Estimated annual rainfall",
+                  "262.8 mm (estimate: ANN × 365)"
+                ]
+              ],
+              "fuente": "NASA POWER (MERRA-2), climatología 2001-2025",
+              "fuente_en": "NASA POWER (MERRA-2), 2001-2025 climatology"
+            },
+            {
+              "chip": "NASA POWER · MJ/m²/día",
+              "chip_en": "NASA POWER · MJ/m²/day",
+              "titulo": "Radiación solar en superficie (ALLSKY_SFC_SW_DWN)",
+              "titulo_en": "Solar radiation at the surface (ALLSKY_SFC_SW_DWN)",
+              "texto": "Radiación de onda corta que llega a la superficie con cielo real. Es un promedio de 2001 a 2025 para la celda de unos 50 km que incluye a La Paz.",
+              "texto_en": "Shortwave radiation reaching the surface under real sky conditions. It is an average from 2001 to 2025 for the cell of about 50 km that includes La Paz.",
+              "filas": [
+                [
+                  "Anual",
+                  "20.87 MJ/m²/día"
+                ],
+                [
+                  "Mes más alto",
+                  "mayo: 26.76 MJ/m²/día"
+                ],
+                [
+                  "Mes más bajo",
+                  "diciembre: 14.07 MJ/m²/día"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Annual",
+                  "20.87 MJ/m²/day"
+                ],
+                [
+                  "Highest month",
+                  "May: 26.76 MJ/m²/day"
+                ],
+                [
+                  "Lowest month",
+                  "December: 14.07 MJ/m²/day"
+                ]
+              ],
+              "fuente": "NASA POWER (MERRA-2), climatología 2001-2025",
+              "fuente_en": "NASA POWER (MERRA-2), 2001-2025 climatology"
+            },
+            {
+              "chip": "NASA POWER · %",
+              "chip_en": "NASA POWER · %",
+              "titulo": "Humedad relativa a 2 m (RH2M)",
+              "titulo_en": "Relative humidity at 2 m (RH2M)",
+              "texto": "Humedad relativa del aire a 2 m. Es un promedio de 2001 a 2025 para la celda de unos 50 km que incluye a La Paz.",
+              "texto_en": "Relative humidity of the air at 2 m. It is an average from 2001 to 2025 for the cell of about 50 km that includes La Paz.",
+              "filas": [
+                [
+                  "Anual",
+                  "59.79 %"
+                ],
+                [
+                  "Mes más alto",
+                  "diciembre: 67.37 %"
+                ],
+                [
+                  "Mes más bajo",
+                  "mayo: 49.29 %"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Annual",
+                  "59.79 %"
+                ],
+                [
+                  "Highest month",
+                  "December: 67.37 %"
+                ],
+                [
+                  "Lowest month",
+                  "May: 49.29 %"
+                ]
+              ],
+              "fuente": "NASA POWER (MERRA-2), climatología 2001-2025",
+              "fuente_en": "NASA POWER (MERRA-2), 2001-2025 climatology"
+            },
+            {
+              "chip": "NASA POWER · m/s",
+              "chip_en": "NASA POWER · m/s",
+              "titulo": "Viento a 2 m (WS2M)",
+              "titulo_en": "Wind at 2 m (WS2M)",
+              "texto": "Velocidad del viento a 2 m de altura. Es un promedio de 2001 a 2025 para la celda de unos 50 km que incluye a La Paz.",
+              "texto_en": "Wind speed at 2 m height. It is an average from 2001 to 2025 for the cell of about 50 km that includes La Paz.",
+              "filas": [
+                [
+                  "Anual",
+                  "2.71 m/s"
+                ],
+                [
+                  "Mes más alto",
+                  "diciembre: 3.10 m/s"
+                ],
+                [
+                  "Mes más bajo",
+                  "agosto: 2.43 m/s"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Annual",
+                  "2.71 m/s"
+                ],
+                [
+                  "Highest month",
+                  "December: 3.10 m/s"
+                ],
+                [
+                  "Lowest month",
+                  "August: 2.43 m/s"
+                ]
+              ],
+              "fuente": "NASA POWER (MERRA-2), climatología 2001-2025",
+              "fuente_en": "NASA POWER (MERRA-2), 2001-2025 climatology"
+            }
+          ]
+        },
+        "grupo_alerta": {
+          "titulo": "Agua subterránea en acuíferos cercanos",
+          "titulo_en": "Groundwater in nearby aquifers",
+          "nota": "CONAGUA, DOF 09/11/2023 · localidad→acuífero asignada por nombre, no verificada espacialmente",
+          "nota_en": "CONAGUA, DOF 09/11/2023 · locality→aquifer assigned by name, not spatially verified",
+          "tarjetas": [
+            {
+              "chip": "Con volumen disponible",
+              "chip_en": "With available volume",
+              "titulo": "Acuífero El Carrizal (0322)",
+              "titulo_en": "El Carrizal aquifer (0322)",
+              "texto": "Recarga 14.2 hm³/año · descarga natural comprometida 0.0 · extracción 13.49 · disponibilidad media anual (DMA) +0.71 hm³/año (volumen disponible).",
+              "texto_en": "Recharge 14.2 hm³/year · committed natural discharge 0.0 · extraction 13.49 · mean annual availability (DMA) +0.71 hm³/year (available volume).",
+              "motivo": "Ficha de CONAGUA: «existe un volumen disponible para otorgar nuevas concesiones de 713,376 m3 anuales.»",
+              "motivo_en": "CONAGUA fact sheet: \"there is a volume available to grant new concessions of 713,376 m3 per year.\"",
+              "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
+              "fuente_en": "DOF 09/11/2023 (cutoff 30-Dec-2022)"
+            },
+            {
+              "chip": "Sin disponibilidad",
+              "chip_en": "No availability",
+              "titulo": "Acuífero Los Planes (0323)",
+              "titulo_en": "Los Planes aquifer (0323)",
+              "texto": "Recarga 10.8 hm³/año · descarga natural comprometida 0.2 · extracción 12.94 · disponibilidad media anual (DMA) -2.34 hm³/año (déficit).",
+              "texto_en": "Recharge 10.8 hm³/year · committed natural discharge 0.2 · extraction 12.94 · mean annual availability (DMA) -2.34 hm³/year (deficit).",
+              "motivo": "Ficha de CONAGUA: «no existe volumen disponible para otorgar nuevas concesiones; por el contrario su déficit es de 2'337,757 m3.»",
+              "motivo_en": "CONAGUA fact sheet: \"there is no volume available to grant new concessions; on the contrary, its deficit is 2'337,757 m3.\"",
+              "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
+              "fuente_en": "DOF 09/11/2023 (cutoff 30-Dec-2022)"
+            },
+            {
+              "chip": "Sin disponibilidad",
+              "chip_en": "No availability",
+              "titulo": "Acuífero La Paz (0324)",
+              "titulo_en": "La Paz aquifer (0324)",
+              "texto": "Recarga 21.0 hm³/año · descarga natural comprometida 0.0 · extracción 34.49 · disponibilidad media anual (DMA) -13.49 hm³/año (déficit).",
+              "texto_en": "Recharge 21.0 hm³/year · committed natural discharge 0.0 · extraction 34.49 · mean annual availability (DMA) -13.49 hm³/year (deficit).",
+              "motivo": "La tabla del DOF 09/11/2023 registra DMA negativa. El acuerdo específico del DOF 17/08/2023 da otro déficit; ver la nota sobre la discrepancia.",
+              "motivo_en": "The DOF 09/11/2023 table records a negative DMA. The specific agreement of DOF 17/08/2023 gives another deficit; see the note on the discrepancy.",
+              "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
+              "fuente_en": "DOF 09/11/2023 (cutoff 30-Dec-2022)"
+            }
+          ]
+        },
+        "notas": [
+          {
+            "titulo": "Reanálisis de ~50 km",
+            "titulo_en": "~50 km reanalysis",
+            "texto": "NASA POWER es un reanálisis (MERRA-2) de unos 50 km: no es una medición local ni de estación.",
+            "texto_en": "NASA POWER is a reanalysis (MERRA-2) of about 50 km: it is not a local or station measurement."
+          },
+          {
+            "titulo": "Los Planes en la misma celda",
+            "titulo_en": "Los Planes in the same cell",
+            "texto": "Los Planes cae en una celda casi idéntica a la de La Paz: 13 de 78 valores difieren, y la diferencia máxima es de 0.75 en sus unidades.",
+            "texto_en": "Los Planes falls in a cell almost identical to that of La Paz: 13 of 78 values differ, and the maximum difference is 0.75 in their units."
+          },
+          {
+            "titulo": "Acuífero La Paz (0324): dos cifras",
+            "titulo_en": "La Paz aquifer (0324): two figures",
+            "texto": "Para el acuífero La Paz (0324) hay dos publicaciones con cifras distintas: la tabla del DOF 09/11/2023 (DMA -13.49 hm³/año, la que se muestra) y el acuerdo específico del DOF 17/08/2023, que da otro déficit (27.83 hm³/año, con volúmenes al 30-sep-2021). No se pudo verificar cuál rige.",
+            "texto_en": "For the La Paz aquifer (0324) there are two publications with different figures: the DOF 09/11/2023 table (DMA -13.49 hm³/year, the one shown) and the specific agreement of DOF 17/08/2023, which gives another deficit (27.83 hm³/year, with volumes as of 30-Sep-2021). It could not be verified which one governs."
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "NASA POWER, climatología (API v2.10.1)",
+            "nombre_en": "NASA POWER, climatology (API v2.10.1)",
+            "url": "https://power.larc.nasa.gov/api/temporal/climatology/point?parameters=T2M,T2M_MAX,PRECTOTCORR,ALLSKY_SFC_SW_DWN,RH2M,WS2M&community=AG&longitude=-110.31&latitude=24.14&format=JSON",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "Indicadores del equipo (MODIS, NASA POWER, GRACE) · web/data/indicadores.json",
+            "nombre_en": "Team indicators (MODIS, NASA POWER, GRACE) · web/data/indicadores.json",
+            "url": "https://appeears.earthdatacloud.nasa.gov/",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "JPL GRACE/GRACE-FO Mascon (PO.DAAC)",
+            "nombre_en": "JPL GRACE/GRACE-FO Mascon (PO.DAAC)",
+            "url": "https://doi.org/10.5067/TEMSC-3JC634",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "CONAGUA, Acuerdo de disponibilidad media anual de 653 acuíferos (DOF 09/11/2023)",
+            "nombre_en": "CONAGUA, Agreement on mean annual availability of 653 aquifers (DOF 09/11/2023)",
+            "url": "https://dof.gob.mx/nota_detalle.php?codigo=5708074&fecha=09/11/2023",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "DOF 17/08/2023, acuerdo específico acuífero La Paz (0324)",
+            "nombre_en": "DOF 17/08/2023, specific agreement for the La Paz aquifer (0324)",
+            "url": "https://dof.gob.mx/nota_detalle.php?codigo=5698953&fecha=17/08/2023",
+            "consultado": "2026-11-14"
+          }
+        ],
+        "cta": {
+          "etiqueta": "DATOS ABIERTOS",
+          "etiqueta_en": "OPEN DATA",
+          "titulo": "¿Quieres revisar los datos originales?",
+          "titulo_en": "Want to check the original data?",
+          "texto": "La climatología de NASA POWER se consulta sin cuenta para cualquier punto.",
+          "texto_en": "The NASA POWER climatology can be queried without an account for any point.",
+          "boton": "Abrir fuente (NASA POWER)",
+          "boton_en": "Open source (NASA POWER)",
+          "url": "https://power.larc.nasa.gov/"
+        }
+      }
+    },
+    {
+      "id": "suelo",
+      "titulo": "Salud del Suelo",
+      "titulo_en": "Soil Health",
+      "subtitulo": "Propiedades modeladas por SoilGrids",
+      "subtitulo_en": "Properties modeled by SoilGrids",
+      "chip": "Franco arenoso (derivada)",
+      "chip_en": "Sandy loam (derived)",
+      "enlace": "Ver propiedades del suelo por localidad",
+      "enlace_en": "See soil properties by locality",
+      "detalle": {
+        "chips": [
+          "ISRIC · SOILGRIDS 2.0",
+          "MODELO A 250 M"
+        ],
+        "chips_en": [
+          "ISRIC · SOILGRIDS 2.0",
+          "250 M MODEL"
+        ],
+        "titulo_largo": "Suelo en Los Planes, El Carrizal y El Centenario",
+        "titulo_largo_en": "Soil in Los Planes, El Carrizal and El Centenario",
+        "descripcion": "Propiedades del suelo a 0-5 cm estimadas por un modelo global, en tres localidades del municipio de La Paz.",
+        "descripcion_en": "Soil properties at 0-5 cm estimated by a global model, in three localities of the municipality of La Paz.",
+        "veredicto": {
+          "etiqueta": "Clase textural USDA a 0-5 cm (derivada)",
+          "etiqueta_en": "USDA textural class at 0-5 cm (derived)",
+          "valor": "Franco arenoso",
+          "valor_en": "Sandy loam"
+        },
+        "dictamen": {
+          "titulo": "RESUMEN CON DATOS DE MODELO",
+          "titulo_en": "SUMMARY WITH MODEL DATA",
+          "texto": "Clase textural derivada con el triángulo USDA a partir de arena, limo y arcilla: Los Planes, franco arenoso; El Carrizal, franco arenoso; El Centenario, franco arenoso. pH a 0-5 cm: Los Planes 8.0, El Carrizal 8.0 y El Centenario 7.9. Son estimaciones de modelo, no análisis de laboratorio.",
+          "texto_en": "Textural class derived with the USDA triangle from sand, silt and clay: Los Planes, sandy loam; El Carrizal, sandy loam; El Centenario, sandy loam. pH at 0-5 cm: Los Planes 8.0, El Carrizal 8.0 and El Centenario 7.9. These are model estimates, not laboratory analyses."
+        },
+        "grupo": {
+          "titulo": "Propiedades a 0-5 cm por localidad",
+          "titulo_en": "Properties at 0-5 cm by locality",
+          "nota": "SoilGrids 2.0, valor medio del modelo",
+          "nota_en": "SoilGrids 2.0, model mean value",
+          "tarjetas": [
+            {
+              "chip": "SoilGrids 2.0 · 0-5 cm",
+              "chip_en": "SoilGrids 2.0 · 0-5 cm",
+              "titulo": "Los Planes",
+              "titulo_en": "Los Planes",
+              "texto": "Clase textural USDA (derivada, no es dato de SoilGrids): franco arenoso. GeoNames lo registra como San Juan de los Planes.",
+              "texto_en": "USDA textural class (derived, not a SoilGrids value): sandy loam. GeoNames lists it as San Juan de los Planes.",
+              "filas": [
+                [
+                  "pH",
+                  "8.0"
+                ],
+                [
+                  "Arena / limo / arcilla",
+                  "55.8 % / 31.8 % / 12.4 %"
+                ],
+                [
+                  "Carbono orgánico",
+                  "8.5 g/kg"
+                ],
+                [
+                  "Nitrógeno",
+                  "1.06 g/kg"
+                ],
+                [
+                  "Capacidad de intercambio catiónico",
+                  "17.5 cmol(c)/kg"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "pH",
+                  "8.0"
+                ],
+                [
+                  "Sand / silt / clay",
+                  "55.8 % / 31.8 % / 12.4 %"
+                ],
+                [
+                  "Organic carbon",
+                  "8.5 g/kg"
+                ],
+                [
+                  "Nitrogen",
+                  "1.06 g/kg"
+                ],
+                [
+                  "Cation exchange capacity",
+                  "17.5 cmol(c)/kg"
+                ]
+              ],
+              "fuente": "ISRIC SoilGrids v2.0, píxel en 23.96723, -109.935",
+              "fuente_en": "ISRIC SoilGrids v2.0, pixel at 23.96723, -109.935"
+            },
+            {
+              "chip": "SoilGrids 2.0 · 0-5 cm",
+              "chip_en": "SoilGrids 2.0 · 0-5 cm",
+              "titulo": "El Carrizal",
+              "titulo_en": "El Carrizal",
+              "texto": "Clase textural USDA (derivada, no es dato de SoilGrids): franco arenoso. GeoNames tiene otros registros con este nombre; se uso el de mayor poblacion del municipio.",
+              "texto_en": "USDA textural class (derived, not a SoilGrids value): sandy loam. GeoNames has other records with this name; the one with the largest population in the municipality was used.",
+              "filas": [
+                [
+                  "pH",
+                  "8.0"
+                ],
+                [
+                  "Arena / limo / arcilla",
+                  "66.7 % / 20.5 % / 12.7 %"
+                ],
+                [
+                  "Carbono orgánico",
+                  "7.5 g/kg"
+                ],
+                [
+                  "Nitrógeno",
+                  "1.43 g/kg"
+                ],
+                [
+                  "Capacidad de intercambio catiónico",
+                  "15.6 cmol(c)/kg"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "pH",
+                  "8.0"
+                ],
+                [
+                  "Sand / silt / clay",
+                  "66.7 % / 20.5 % / 12.7 %"
+                ],
+                [
+                  "Organic carbon",
+                  "7.5 g/kg"
+                ],
+                [
+                  "Nitrogen",
+                  "1.43 g/kg"
+                ],
+                [
+                  "Cation exchange capacity",
+                  "15.6 cmol(c)/kg"
+                ]
+              ],
+              "fuente": "ISRIC SoilGrids v2.0, píxel en 23.78434, -110.31166",
+              "fuente_en": "ISRIC SoilGrids v2.0, pixel at 23.78434, -110.31166"
+            },
+            {
+              "chip": "SoilGrids 2.0 · 0-5 cm",
+              "chip_en": "SoilGrids 2.0 · 0-5 cm",
+              "titulo": "El Centenario",
+              "titulo_en": "El Centenario",
+              "texto": "Clase textural USDA (derivada, no es dato de SoilGrids): franco arenoso.",
+              "texto_en": "USDA textural class (derived, not a SoilGrids value): sandy loam.",
+              "filas": [
+                [
+                  "pH",
+                  "7.9"
+                ],
+                [
+                  "Arena / limo / arcilla",
+                  "53.7 % / 31.3 % / 14.9 %"
+                ],
+                [
+                  "Carbono orgánico",
+                  "8.3 g/kg"
+                ],
+                [
+                  "Nitrógeno",
+                  "1.80 g/kg"
+                ],
+                [
+                  "Capacidad de intercambio catiónico",
+                  "16.9 cmol(c)/kg"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "pH",
+                  "7.9"
+                ],
+                [
+                  "Sand / silt / clay",
+                  "53.7 % / 31.3 % / 14.9 %"
+                ],
+                [
+                  "Organic carbon",
+                  "8.3 g/kg"
+                ],
+                [
+                  "Nitrogen",
+                  "1.80 g/kg"
+                ],
+                [
+                  "Cation exchange capacity",
+                  "16.9 cmol(c)/kg"
+                ]
+              ],
+              "fuente": "ISRIC SoilGrids v2.0, píxel en 24.1025, -110.41444",
+              "fuente_en": "ISRIC SoilGrids v2.0, pixel at 24.1025, -110.41444"
+            }
+          ]
+        },
+        "grupo_alerta": {
+          "titulo": "Perfil por profundidad en Los Planes",
+          "titulo_en": "Depth profile in Los Planes",
+          "tono": "neutro",
+          "nota": "SoilGrids 2.0, valor medio · 0 a 60 cm",
+          "nota_en": "SoilGrids 2.0, mean value · 0 to 60 cm",
+          "tarjetas": [
+            {
+              "chip": "Perfil · Los Planes",
+              "chip_en": "Profile · Los Planes",
+              "titulo": "0-5 cm",
+              "titulo_en": "0-5 cm",
+              "texto": "pH 8.0 · arena/limo/arcilla 55.8 % / 31.8 % / 12.4 % · carbono orgánico 8.5 g/kg · nitrógeno 1.06 g/kg · CIC 17.5 cmol(c)/kg.",
+              "texto_en": "pH 8.0 · sand/silt/clay 55.8 % / 31.8 % / 12.4 % · organic carbon 8.5 g/kg · nitrogen 1.06 g/kg · CEC 17.5 cmol(c)/kg.",
+              "motivo": "Clase textural USDA (derivada): franco arenoso.",
+              "motivo_en": "USDA textural class (derived): sandy loam.",
+              "fuente": "ISRIC SoilGrids v2.0 (modelo)",
+              "fuente_en": "ISRIC SoilGrids v2.0 (model)"
+            },
+            {
+              "chip": "Perfil · Los Planes",
+              "chip_en": "Profile · Los Planes",
+              "titulo": "5-15 cm",
+              "titulo_en": "5-15 cm",
+              "texto": "pH 8.0 · arena/limo/arcilla 55.6 % / 31.8 % / 12.6 % · carbono orgánico 4.7 g/kg · nitrógeno 0.87 g/kg · CIC 17.4 cmol(c)/kg.",
+              "texto_en": "pH 8.0 · sand/silt/clay 55.6 % / 31.8 % / 12.6 % · organic carbon 4.7 g/kg · nitrogen 0.87 g/kg · CEC 17.4 cmol(c)/kg.",
+              "motivo": "Clase textural USDA (derivada): franco arenoso.",
+              "motivo_en": "USDA textural class (derived): sandy loam.",
+              "fuente": "ISRIC SoilGrids v2.0 (modelo)",
+              "fuente_en": "ISRIC SoilGrids v2.0 (model)"
+            },
+            {
+              "chip": "Perfil · Los Planes",
+              "chip_en": "Profile · Los Planes",
+              "titulo": "15-30 cm",
+              "titulo_en": "15-30 cm",
+              "texto": "pH 8.0 · arena/limo/arcilla 56.0 % / 32.6 % / 11.4 % · carbono orgánico 4.2 g/kg · nitrógeno 0.77 g/kg · CIC 17.7 cmol(c)/kg.",
+              "texto_en": "pH 8.0 · sand/silt/clay 56.0 % / 32.6 % / 11.4 % · organic carbon 4.2 g/kg · nitrogen 0.77 g/kg · CEC 17.7 cmol(c)/kg.",
+              "motivo": "Clase textural USDA (derivada): franco arenoso.",
+              "motivo_en": "USDA textural class (derived): sandy loam.",
+              "fuente": "ISRIC SoilGrids v2.0 (modelo)",
+              "fuente_en": "ISRIC SoilGrids v2.0 (model)"
+            },
+            {
+              "chip": "Perfil · Los Planes",
+              "chip_en": "Profile · Los Planes",
+              "titulo": "30-60 cm",
+              "titulo_en": "30-60 cm",
+              "texto": "pH 7.9 · arena/limo/arcilla 56.0 % / 32.4 % / 11.6 % · carbono orgánico 3.2 g/kg · nitrógeno 0.58 g/kg · CIC 17.7 cmol(c)/kg.",
+              "texto_en": "pH 7.9 · sand/silt/clay 56.0 % / 32.4 % / 11.6 % · organic carbon 3.2 g/kg · nitrogen 0.58 g/kg · CEC 17.7 cmol(c)/kg.",
+              "motivo": "Clase textural USDA (derivada): franco arenoso.",
+              "motivo_en": "USDA textural class (derived): sandy loam.",
+              "fuente": "ISRIC SoilGrids v2.0 (modelo)",
+              "fuente_en": "ISRIC SoilGrids v2.0 (model)"
+            }
+          ]
+        },
+        "notas": [
+          {
+            "titulo": "Modelo, no muestreo",
+            "titulo_en": "Model, not sampling",
+            "texto": "SoilGrids es un modelo global a 250 m de resolución, no un muestreo de laboratorio en el sitio.",
+            "texto_en": "SoilGrids is a global model at 250 m resolution, not a laboratory sampling on site."
+          },
+          {
+            "titulo": "Licencia",
+            "titulo_en": "License",
+            "texto": "Los mapas de SoilGrids se publican bajo licencia CC BY 4.0 (ISRIC - World Soil Information).",
+            "texto_en": "SoilGrids maps are published under a CC BY 4.0 license (ISRIC - World Soil Information)."
+          },
+          {
+            "titulo": "Edafología INEGI no consultada",
+            "titulo_en": "INEGI soil survey not consulted",
+            "texto": "No se consultó la edafología de INEGI (tipo de suelo); por eso no se muestra.",
+            "texto_en": "The INEGI soil survey (soil type) was not consulted; that is why it is not shown."
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "ISRIC, SoilGrids v2.0 (API REST)",
+            "nombre_en": "ISRIC, SoilGrids v2.0 (REST API)",
+            "url": "https://www.isric.org/explore/soilgrids",
+            "licencia": "CC BY 4.0",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "GeoNames, coordenadas de las localidades",
+            "nombre_en": "GeoNames, coordinates of the localities",
+            "url": "https://www.geonames.org/",
+            "licencia": "CC BY 4.0",
+            "consultado": "2026-11-14"
+          }
+        ],
+        "cta": {
+          "etiqueta": "DATOS ABIERTOS",
+          "etiqueta_en": "OPEN DATA",
+          "titulo": "¿Quieres revisar los datos originales?",
+          "titulo_en": "Want to check the original data?",
+          "texto": "SoilGrids permite consultar cualquier punto del mundo.",
+          "texto_en": "SoilGrids lets you query any point in the world.",
+          "boton": "Abrir fuente (SoilGrids)",
+          "boton_en": "Open source (SoilGrids)",
+          "url": "https://www.isric.org/explore/soilgrids"
+        }
+      }
+    },
+    {
+      "id": "riesgos",
+      "titulo": "Riesgos y Sanidad",
+      "titulo_en": "Risks and Plant Health",
+      "subtitulo": "Sequía, sanidad y ciclones",
+      "subtitulo_en": "Drought, plant health and cyclones",
+      "chip": "Sequía: sin categoría registrada al 31 oct 2026",
+      "chip_en": "Drought: no category recorded as of 31 Oct 2026",
+      "enlace": "Ver sequía, sanidad y ciclones",
+      "enlace_en": "See drought, plant health and cyclones",
+      "detalle": {
+        "chips": [
+          "SMN-CONAGUA · DOF · SEPADA",
+          "SIN FIRMS NI SENASICA"
+        ],
+        "chips_en": [
+          "SMN-CONAGUA · DOF · SEPADA",
+          "NO FIRMS OR SENASICA"
+        ],
+        "titulo_largo": "Riesgos para la agricultura en el municipio de La Paz",
+        "titulo_largo_en": "Risks for agriculture in the municipality of La Paz",
+        "descripcion": "Lo que hay documentado con fuente oficial sobre sequía, mosca de la fruta y ciclones tropicales.",
+        "descripcion_en": "What is documented with an official source about drought, fruit flies and tropical cyclones.",
+        "veredicto": {
+          "etiqueta": "Monitor de Sequía, La Paz",
+          "etiqueta_en": "Drought Monitor, La Paz",
+          "valor": "Sin categoría al 31 oct 2026",
+          "valor_en": "No category as of 31 Oct 2026"
+        },
+        "dictamen": {
+          "titulo": "RESUMEN CON DATOS OFICIALES",
+          "titulo_en": "SUMMARY WITH OFFICIAL DATA",
+          "texto": "Monitor de Sequía (municipio de La Paz, 03003): sin categoría registrada al 31 oct 2026; última categoría: D0 (cortes del 30 jun al 31 ago 2026). Baja California Sur está declarada zona libre de moscas de la fruta del género Anastrepha (DOF 05/10/2018), aunque en 2023 el gobierno estatal informó brotes. Para ciclones solo hay una clasificación estatal.",
+          "texto_en": "Drought Monitor (municipality of La Paz, 03003): no category recorded as of 31 Oct 2026; last category: D0 (cuts from 30 Jun to 31 Aug 2026). Baja California Sur is declared a free zone of fruit flies of the genus Anastrepha (DOF 05/10/2018), although in 2023 the state government reported outbreaks. For cyclones there is only a state-level classification."
+        },
+        "grupo": {
+          "titulo": "Riesgos documentados",
+          "titulo_en": "Documented risks",
+          "nota": "SMN-CONAGUA, DOF, Secretaría de Salud BCS",
+          "nota_en": "SMN-CONAGUA, DOF, BCS Ministry of Health",
+          "tarjetas": [
+            {
+              "chip": "SMN-CONAGUA · municipal",
+              "chip_en": "SMN-CONAGUA · municipal",
+              "titulo": "Monitor de Sequía",
+              "titulo_en": "Drought Monitor",
+              "texto": "Municipio de La Paz (03003): sin categoría registrada al 31 oct 2026; última categoría: D0 (cortes del 30 jun al 31 ago 2026).",
+              "texto_en": "Municipality of La Paz (03003): no category recorded as of 31 Oct 2026; last category: D0 (cuts from 30 Jun to 31 Aug 2026).",
+              "filas": [
+                [
+                  "Último corte del archivo",
+                  "31 oct 2026"
+                ],
+                [
+                  "Última categoría registrada",
+                  "D0"
+                ],
+                [
+                  "Cortes con D0",
+                  "30 jun a 31 ago 2026"
+                ]
+              ],
+              "filas_en": [
+                [
+                  "Latest cut in the file",
+                  "31 Oct 2026"
+                ],
+                [
+                  "Last category recorded",
+                  "D0"
+                ],
+                [
+                  "Cuts with D0",
+                  "30 Jun to 31 Aug 2026"
+                ]
+              ],
+              "fuente": "SMN-CONAGUA, tabla MunicipiosSequia",
+              "fuente_en": "SMN-CONAGUA, MunicipiosSequia table"
+            },
+            {
+              "chip": "DOF 05/10/2018",
+              "chip_en": "DOF 05/10/2018",
+              "titulo": "Zona libre de moscas de la fruta",
+              "titulo_en": "Fruit fly free zone",
+              "texto": "El acuerdo declara zonas libres de moscas de la fruta del género Anastrepha de importancia cuarentenaria a Baja California y Baja California Sur (declaratoria original: DOF 26/02/1998).",
+              "texto_en": "The agreement declares Baja California and Baja California Sur free zones of fruit flies of the genus Anastrepha of quarantine importance (original declaration: DOF 26/02/1998).",
+              "fuente": "DOF 05/10/2018",
+              "fuente_en": "DOF 05/10/2018"
+            },
+            {
+              "chip": "Nivel estatal",
+              "chip_en": "State level",
+              "titulo": "Ciclones tropicales",
+              "titulo_en": "Tropical cyclones",
+              "texto": "Con base en indicadores del Atlas Nacional de Riesgos, 4 de 5 municipios de Baja California Sur se clasifican con riesgo muy alto de impacto de ciclones tropicales. No se pudo leer el grado específico de La Paz. Temporada en el Pacífico: 15 de mayo al 30 de noviembre.",
+              "texto_en": "Based on indicators from the National Risk Atlas, 4 of 5 municipalities of Baja California Sur are classified as having very high risk of tropical cyclone impact. The specific level for La Paz could not be read. Season in the Pacific: May 15 to November 30.",
+              "fuente": "Perfil Estatal de Riesgos BCS 2025 (Secretaría de Salud BCS)",
+              "fuente_en": "BCS State Risk Profile 2025 (BCS Ministry of Health)"
+            }
+          ]
+        },
+        "grupo_alerta": {
+          "titulo": "Brotes de mosca de la fruta en 2023",
+          "titulo_en": "Fruit fly outbreaks in 2023",
+          "nota": "SEPADA BCS (gobierno estatal, no SENASICA), 11 ago 2023",
+          "nota_en": "SEPADA BCS (state government, not SENASICA), 11 Aug 2023",
+          "tarjetas": [
+            {
+              "chip": "Fuente estatal",
+              "chip_en": "State source",
+              "titulo": "Brotes en La Paz y Los Cabos (2023)",
+              "titulo_en": "Outbreaks in La Paz and Los Cabos (2023)",
+              "texto": "En agosto de 2023 la SEPADA informó que SENASICA y USDA avalaron el Plan Emergente contra la mosca de la fruta; el foco de los brotes estaba entre los municipios de La Paz y Los Cabos.",
+              "texto_en": "In August 2023 SEPADA reported that SENASICA and USDA endorsed the Emergency Plan against the fruit fly; the focus of the outbreaks was between the municipalities of La Paz and Los Cabos.",
+              "motivo": "Según la SEPADA: «Baja California Sur mantiene su estatus como zona libre de mosca de la fruta».",
+              "motivo_en": "According to SEPADA: \"Baja California Sur keeps its status as a fruit fly free zone\".",
+              "fuente": "SEPADA BCS, 11/08/2023",
+              "fuente_en": "SEPADA BCS, 11/08/2023"
+            }
+          ]
+        },
+        "notas": [
+          {
+            "titulo": "SENASICA no consultado",
+            "titulo_en": "SENASICA not consulted",
+            "texto": "Las páginas de SENASICA no se pudieron consultar (error de acceso); no hay estatus fitosanitario 2025-2026 ni campañas vigentes.",
+            "texto_en": "The SENASICA pages could not be consulted (access error); there is no 2025-2026 plant health status or current campaigns."
+          },
+          {
+            "titulo": "Ciclones: sin grado municipal",
+            "titulo_en": "Cyclones: no municipal level",
+            "texto": "El grado de peligro de ciclones del municipio de La Paz está en un mapa imagen y no se pudo verificar; no se afirma.",
+            "texto_en": "The cyclone hazard level of the municipality of La Paz is in an image map and could not be verified; it is not stated."
+          },
+          {
+            "titulo": "Sequía e incendios",
+            "titulo_en": "Drought and fires",
+            "texto": "En el Monitor de Sequía la celda vacía se reporta como «sin categoría registrada», no como «sin sequía». Los incendios (NASA FIRMS) no se consultaron.",
+            "texto_en": "In the Drought Monitor the empty cell is reported as \"no category recorded\", not as \"no drought\". Fires (NASA FIRMS) were not consulted."
+          }
+        ],
+        "fuentes": [
+          {
+            "nombre": "SMN-CONAGUA, Monitor de Sequía en México (tabla de municipios)",
+            "nombre_en": "SMN-CONAGUA, Drought Monitor in Mexico (municipalities table)",
+            "url": "https://smn.conagua.gob.mx/tools/RESOURCES/Monitor%20de%20Sequia%20en%20Mexico/MunicipiosSequia.xlsx",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "DOF 05/10/2018, zonas libres de moscas de la fruta",
+            "nombre_en": "DOF 05/10/2018, fruit fly free zones",
+            "url": "https://dof.gob.mx/nota_detalle.php?codigo=5540162&fecha=05%2F10%2F2018",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "SEPADA BCS, Plan Emergente contra la mosca de la fruta (11/08/2023)",
+            "nombre_en": "SEPADA BCS, Emergency Plan against the fruit fly (11/08/2023)",
+            "url": "https://sepada.bcs.gob.mx/avalan-senasica-y-usda-plan-emergente-contra-la-mosca-de-la-fruta/",
+            "consultado": "2026-11-14"
+          },
+          {
+            "nombre": "Secretaría de Salud BCS, Perfil Estatal de Riesgos BCS 2025",
+            "nombre_en": "BCS Ministry of Health, BCS State Risk Profile 2025",
+            "url": "https://ssbcs.gob.mx/pdf/2025/vigilancia/Perfil_Estatal_de_Riesgos_BCS_2025.pdf",
+            "consultado": "2026-11-14"
+          }
+        ],
+        "cta": {
+          "etiqueta": "DATOS ABIERTOS",
+          "etiqueta_en": "OPEN DATA",
+          "titulo": "¿Quieres revisar los datos originales?",
+          "titulo_en": "Want to check the original data?",
+          "texto": "La tabla del Monitor de Sequía por municipio se descarga del Servicio Meteorológico Nacional.",
+          "texto_en": "The Drought Monitor table by municipality is downloaded from the National Meteorological Service.",
+          "boton": "Abrir fuente (SMN)",
+          "boton_en": "Open source (SMN)",
+          "url": "https://smn.conagua.gob.mx/tools/RESOURCES/Monitor%20de%20Sequia%20en%20Mexico/MunicipiosSequia.xlsx"
+        }
+      }
+    }
+  ]
+}

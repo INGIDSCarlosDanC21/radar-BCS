@@ -23,6 +23,33 @@
   - Se quitaron los textos "DATOS DE PRUEBA" de `web/README.md` y del HTML. La franja la escribe el JS y solo sale si `datos_de_prueba` es true.
   - En el mapa, el título dice "Zonas:" en lugar de "Zonas con más cambio:" cuando ninguna zona tiene una tendencia clara (pasa con calor).
   - Revisión a 360 px: Inicio, las 4 fichas, Mapa (6 polígonos) y Acciones, sin null, sin scroll horizontal, sin errores de consola y sin franja. Calor aparece como "Sin cambio claro" y agua aparece como regional.
+- **Mapa Agrícola** (rama `prog-b/mapa-agricola`, ruta `#agricola`): diseño de Figma con 4 fichas (Factibilidad y Cultivos, Clima y Agua, Salud del Suelo, Riesgos y Sanidad). Al hacer clic, la ficha se expande y oculta las demás; "✕ Cerrar", Esc o el botón atrás la regresan a la lista de fichas.
+  - **Datos:** `web/data/agricola.json` lo arma `web/tools/armar_agricola.py`, con caché en `data/cache/agricola/`. Fuentes y cifras:
+    - SIAP, cierre agrícola 2025, municipio de La Paz: 3,879.6 ha, 100 % riego.
+    - CONAGUA, DOF 09/11/2023: disponibilidad de 4 acuíferos.
+    - NASA POWER: clima.
+    - ISRIC SoilGrids (CC BY 4.0): suelo.
+    - SMN: Monitor de Sequía.
+    - DOF 2018: zona libre de moscas de la fruta.
+    - Perfil Estatal de Riesgos BCS 2025: ciclones.
+    - GeoNames (CC BY 4.0): coordenadas.
+  - **Quitado de Figma por no ser verificable:** "Viabilidad %", "ÓPTIMO", temperaturas en vivo, "Iniciar simulación", flujo de viento, PDF y calendarios de siembra.
+  - **Discrepancia sin resolver:** para el acuífero La Paz 0324, el DOF 09/11/2023 da −13.49 hm³/año y el DOF del 17/08/2023 da un déficit de 27.83 hm³/año. No se sabe cuál rige y la ficha lo dice.
+  - **Fuentes registradas** en `docs/RECURSOS.md` y `docs/entrega/07` (SIAP, CONAGUA/DOF, NASA POWER, SoilGrids, GeoNames, SMN, SEPADA, Salud BCS). Las licencias de los datos del gobierno de México quedan "por confirmar; solo se citan".
+- **Issue #78, auditoría de Carlos** (rama `prog-b/issue-78`, PR #89):
+  - **Método por ficha:** cada ficha explica su propio método según `significancia.metodo`. Calor y vegetación usan la prueba estacional; lluvia, el total anual; agua, la corrección por autocorrelación. La función es `RB.explicaMetodo` en `reglas.js` y tiene prueba.
+  - **Aviso de IA:** está en el pie general y en el pie de la Home: "Código y análisis escritos con ayuda de IA (Claude Code); interfaz diseñada con ayuda de Google Stitch". Ambas herramientas están declaradas en `docs/RECURSOS.md`.
+  - **Datos nuevos copiados una sola vez** (punto 4 de la cola de `docs/PLAN-CIERRE.md`): `web/data/{indicadores.json,zonas.geojson,zonas_tendencias.json}` son copia exacta de `data/salida/` (una prueba nueva lo exige). Calor +0.935 °C 2001-2021 (p < 0.001); vegetación −0.013 NDVI 2001-2026 (p = 0.004).
+  - **Calor por zona con cifra:** se quitó el "sin cifra"; 4 zonas con tendencia clara (Chametla +1.50, Oriente +1.10, Centro +1.09, Surponiente +0.897 °C) y 2 sin cambio claro (Sur, El Centenario), con nota del corte en 2021.
+  - **Arreglos:** el pie del mapa toma el periodo de cada capa (vegetación decía 2001–2021, que es el de calor); la conclusión de la ficha mostraba "p = 0.00" en vegetación por redondear a 2 decimales, ahora usa 3 como el resto; la Home dice "p < 0.001" en vez de "p = < 0.001".
+- **Issue #93, versión en inglés** (rama `prog-b/ingles`):
+  - `web/js/textos.js`: diccionario ES/EN en un solo archivo. `RBT.t(clave)` da los textos de la interfaz y `RBT.d(obj, campo)` usa `campo_en` de los datos de Luca. Lo usan `app.js`, `home.js` y `reglas.js`; los textos fijos de `index.html` llevan `data-t`.
+  - **Cómo se elige el idioma:** `?lang=en` abre en inglés; sin parámetro, en español. El idioma del navegador no cuenta. `<html lang>` cambia. El botón "English / Español" de la cabecera conserva la pantalla (el hash).
+  - **Probado a 360 px con `?lang=en`:** Inicio, Mapa, las 4 fichas y Acciones, sin líneas en español, sin scroll horizontal y sin null. Pruebas en `web/tests/textos.test.mjs`.
+  - **Arreglo de paso:** la barra inferior tenía 4 columnas para 5 enlaces y "Acciones" caía a otra fila; ahora tiene 5.
+  - **Mapa Agrícola en inglés:** `agricola.js` tiene su propio diccionario y lee los campos `*_en` que ahora escribe `armar_agricola.py`. Al JSON solo se le agregaron campos `_en` (comprobado quitándolos y comparando con `dev`); lo tradujo un subagente Sonnet y lo revisé.
+  - **Resumen de la ficha Clima corregido:** decía calor "sin cambio claro" y vegetación −0.019 (2001-2025), con los datos de antes. Ahora sale de `indicadores.json` vigente (+0.94 °C 2001-2021; −0.013 NDVI 2001-2026), con la función `dictamen_indicadores` y una prueba que lo exige.
+  - **Falta:** que Ehileen y Roberto revisen el inglés (#93) y probar el login en inglés cuando entre el #77.
 
 ## En curso
 
@@ -80,3 +107,7 @@ Carlos pidió dejar esto por escrito. El detalle completo y la lista de condicio
 - **Registra Supabase** en `docs/RECURSOS.md` y en `docs/entrega/04-project-details.md`, y arregla ahí la frase "needs no account".
 - **Rama `prog-b/login`, PR a `dev`.** **Hora de corte: domingo 15 nov, 09:00:** si no está probado (con y sin sesión, 360 px y celular real, issue #71) y opcional, no entra a `main`.
 - **Prioridad:** 1) integrar la interfaz de UI/UX, 2) probar en celular real (#71), 3) login.
+
+## 2026-11-15: decisión sobre el login (Carlos, por el asistente del Líder)
+
+El PR #77 se cerró sin fusionar: el login con Supabase **no entra a la entrega**. Tu rama `prog-b/login` y el proyecto de Supabase se conservan para después del evento. Motivos en `docs/decisiones.md` (2026-11-15). Tu tiempo ahora: 1) versión en inglés (#93), 2) correcciones a 360 px, 3) integrar logo e íconos. No borres la rama.
