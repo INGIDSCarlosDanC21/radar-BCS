@@ -158,3 +158,13 @@ Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agric
 - **Medido:** 360 y 1280 px (ES y EN) sin scroll horizontal, 6 marcadores, sin textos menores de 12 px, sin errores; vegetación cambia los íconos y lluvia no muestra marcadores (no hay dato por zona).
 - **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro, "Mi ubicación" (necesita permiso del navegador; solo se probó que el botón existe). Las 8 imágenes de la carpeta de Drive no se usaron: son PNG de origen y licencia sin confirmar; se usaron los glifos Material Symbols que ya están en `web/assets/iconos/mapa`. Ehileen puede entregar SVG propios.
 - **Límites:** el código postal solo aparece si Nominatim lo trae en el nombre; no se inventa. El centro de La Paz (24.1423, -110.3132) queda fuera de las 6 zonas con dato.
+
+## 2026-11-15: fichas expandibles del Mapa Pesquero (rama `prog-b/pesca-fichas`)
+
+- **Hecho:** los 4 mosaicos de Pesca pasan a fichas como las del Mapa Agrícola (mismas clases `.ag-*`, mismo formato): al abrir una se ocultan las otras 3 y ocupa todo el ancho; cabecera con ícono, lectura del modelo (no oficial), tarjetas con cifras, pendientes, fuentes y Cerrar (arriba, abajo y con Escape).
+- **Datos:** solo Open-Meteo (modelo) y NASA GIBS; reglas de `reglas-mar.js`. Lo del Figma sin fuente abierta (bandera, frecuencias, teléfonos, tallas, mareas, ANP) aparece como "Pendiente (sin fuente verificada)". Issue de datos para Luca: #190.
+- **Archivos:** `web/js/pesca.js`, `web/css/pesca.css`, `web/tests/pesca-avisos.test.mjs`; plan en `docs/handoffs/prog-b-plan-pesca-2026-11-15.md`.
+- **Medido:** 160 pruebas pasan; verificar-todo OK; 360 y 1280 px sin scroll horizontal, 0 textos menores de 12 px, foco al título al abrir y al botón al cerrar.
+- **Diferencia con Agrícola:** la ficha abierta no cambia la URL (`#pesca/<id>`), para no recrear el mapa con el router.
+- **Lluvia y agua por zona:** #189 (Luca) sigue abierto y no exporta nada a `data/`; la tabla de zonas no cambia hasta que haya dato por zona.
+- **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro de las fichas.
