@@ -6,7 +6,8 @@
 - `data/salida/indicadores.json` con calor y lluvia reales de La Paz, 2001-2025 (sin revisar por Investigación):
   - Calor (temperatura del aire, T2M): +1.465 °C, significativo (Mann-Kendall estacional + Sen).
   - Lluvia: 0.0 mm/año, no significativa (p = 0.18).
-- Vegetación: NDVI MODIS de 6 zonas, −0.019 (significativo). Agua sale `null`.
+- Vegetación: NDVI MODIS de 6 zonas, −0.019 (significativo). Agua: GRACE (JPL Mascon CRI), +1.2 cm en 2002-2025, regional, significativa; no es el acuífero.
+- `data/salida/zonas.geojson` real (6 zonas = píxeles MODIS) y `analisis/publicar.py` (sin ejecutar).
 - Aviso a Carlos: LST MODIS no muestra tendencia en la ciudad (p=0.11), el aire POWER sí; ver `analisis/PLAN.md`.
 
 ## En curso
@@ -17,10 +18,10 @@
 ## Falta
 
 - Procesar MODIS cuando terminen las tareas (`python -m analisis.appeears descargar`).
-- Agua: GRACE/GLDAS (tendencia regional).
-- `zonas.geojson` para el mapa (definir qué es una zona).
-- Copiar la salida a `web/data/` (decidir con Diego si es script o PR).
-- **Pedido del Líder (2026-11-14):** el contrato de datos quedó acordado; lee el *Anexo de Investigación* de `docs/contrato-datos.md` (reglas para lluvia, `p_valor`, nombre del método y zonas de prueba) y exporta los datos reales a `web/data/`. Meta: las 4 pantallas con datos reales hoy a las 20:00; congelar funciones a las 22:00. Detalle en los issues #7 y #8.
+- Agua: contraste con GLDAS-2.2 CLSM (GWS) y decidir con Carlos cómo se explica que el agua regional suba.
+- Copiar la salida a `web/data/` con `python -m analisis.publicar` en un PR acordado con Diego.
+- Carlos: decidir qué calor se muestra (aire POWER o superficie MODIS).
+- **Pedido del Líder (2026-11-14):** el contrato de datos quedó acordado; lee el *Anexo de Investigación* de `docs/contrato-datos.md` (reglas para lluvia, `p_valor`, nombre del método y zonas de prueba) y exporta los datos reales a `web/data/`. Meta: las 4 pantallas con datos reales hoy a las 20:00; sin congelamiento de funciones (se trabaja hasta que no se pueda). Detalle en los issues #7 y #8.
 
 ## Bloqueos
 

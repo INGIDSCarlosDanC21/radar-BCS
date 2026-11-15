@@ -20,7 +20,7 @@
 - IA: solo Claude (confirmado). Si se agrega voz o imagen generada, declararla en `docs/entrega/05-use-of-ai.md` con marca de agua.
 - Pegar el enlace único de la demo en `docs/entrega/02-demo-link.md` cuando exista, y probarlo sin sesión iniciada.
 - Actualizar resultados de `docs/entrega/04-project-details.md` y `06-nasa-data.md` cuando lleguen MODIS y el pipeline final.
-- Avisar al equipo en el checkpoint de las 14:00: congelar funciones hoy a las 22:00.
+- Avisar al equipo: no hay congelamiento de funciones; se trabaja hasta que no se pueda, con las 4 pantallas de datos reales como prioridad.
 
 ## Bloqueos
 
@@ -28,7 +28,7 @@
 
 ## Para otros roles
 
-- **Todos:** congelamiento de funciones hoy sáb 14 nov a las 22:00; el domingo solo bugs y entrega. Límite oficial 23:59; la meta del equipo es entregar antes de las 13:00.
+- **Todos:** sin congelamiento de funciones (decisión de Carlos, 2026-11-14): se trabaja hasta que no se pueda. Prioridad: las 4 pantallas con datos reales. Límite oficial 23:59; la meta del equipo es entregar antes de las 13:00.
 - **Prog. A (Luca):** avisar cuando MODIS esté analizado y qué datasets se usaron de verdad (`docs/entrega/06-nasa-data.md`, `docs/RECURSOS.md`).
 - **Prog. B (Diego):** cuando la web esté lista, avisar para volver a probar la URL pública (`docs/entrega/03-project-link.md`).
 - **UI/UX (Ehileen):** las cifras locales que se pueden usar en la web y con qué matiz están en `docs/investigacion/contexto-local.md`.

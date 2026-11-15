@@ -28,7 +28,7 @@ Fuente de todo lo de esta página: NASA POWER, datos mensuales (MERRA-2), comuni
 
 ## MODIS por zona: revisión de Investigación (2026-11-14)
 
-Origen: `data/salida/indicadores.json` y `zonas_tendencias.json` (Luca, PR #50), 6 puntos de La Paz (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), 2001-2025, Mann-Kendall estacional + Sen. **Investigación no reprodujo estas cifras:** los CSV de AppEEARS están fuera de git (`data/cache/`); se revisó el código (`analisis/modis.py`) y las salidas. Pendiente: que Luca comparta los CSV (Drive) o que alguien corra `python -m analisis.exportar` con ellos.
+Origen: `data/salida/indicadores.json` y `zonas_tendencias.json` (Luca, PR #50), 6 puntos de La Paz (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), 2001-2025, Mann-Kendall estacional + Sen. Investigación reprodujo las salidas con los CSV de Drive (ver "Reproducción" abajo).
 
 ### Resultados (como salen del pipeline)
 
@@ -49,6 +49,17 @@ Por punto: el NDVI baja de forma significativa en Centro (-0.034), Chametla (-0.
 4. **Son 6 puntos, no zonas.** Las celdas del mapa siguen siendo sintéticas. Nada de esto responde "¿dónde?" para toda la ciudad.
 5. **Causa:** nada de esto dice por qué cambió la vegetación o el calor.
 
+### Reproducción con los CSV de AppEEARS (2026-11-14, Investigación)
+
+Los CSV están en Drive (`datasets/appeears-6-zonas/`, subidos por Luca) y se copiaron a `data/cache/appeears/usuario/` (git los ignora).
+
+- **El pipeline reproduce sus salidas.** Al correr `modis.cargar` y `exportar.zonas` con esos CSV salen las mismas cifras de `zonas_tendencias.json` en las 6 zonas (calor y vegetación; cambio total y significancia). Esto confirma que los archivos y las salidas son consistentes entre sí; no es todavía una verificación independiente del método.
+- **Comprobación independiente de los datos (LST):** una matriz mensual armada otra vez desde el CSV (lecturas con calidad MODLAND 0b00 o 0b01, relleno 0 descartado, K a °C) coincide con la del pipeline (diferencia máxima 0.000 °C), y la prueba estacional (`pymannkendall.seasonal_test`) da lo mismo: El Centenario -0.054 °C por año (p = 0.0001), Sur -0.053 (p = 0.0006), Centro -0.004 (p = 0.70).
+- **Pero el resultado depende de la prueba.** Con la media de cada año y Mann-Kendall simple, El Centenario da -0.022 °C por año (p = 0.27) y Sur -0.026 (p = 0.39): **no significativo**. Con medias anuales y Mann-Kendall simple (mismos datos y mismo filtro), ninguna de las 6 zonas sale significativa para la superficie (p entre 0.25 y 0.59).
+- **La baja viene de los últimos años.** En El Centenario la media anual de superficie de día fue de 37-38.5 °C hasta 2021 y bajó a 36.9 (2022), 35.7 (2023), 35.6 (2024) y **33.5 °C (2025)**; las 46 lecturas de cada año son válidas. En Centro también cae en 2025 (30.0 °C frente a unos 32 de años anteriores). Una baja de ~4 °C de un año al otro en toda la ciudad no se parece a un cambio del paisaje.
+- **Hipótesis (sin verificar, no citar como hecho):** la órbita de Terra se desplaza desde 2020 y su hora de paso es cada vez más temprana (NASA: https://terra.nasa.gov/about/terra-orbital-drift-information); una lectura de "día" más temprano sería más fría. NASA dice que el efecto en los datos de tierra es pequeño, y no se encontró un estudio que mida su efecto sobre las tendencias de MOD11. Alguien tendría que comprobarlo (por ejemplo, con la hora de paso `Day_view_time` de MOD11A2 o con MYD11A2 de Aqua).
+- **Consecuencia para la web y la demo:** no se cita "baja de 1.3 °C" en El Centenario ni en Sur. Para la superficie se mantiene "sin cambio claro" en el promedio de la ciudad (p = 0.11) y una limitación que diga que la tendencia por punto cambia según la prueba y los últimos años.
+
 ### Frases propuestas para la web (sin causalidad)
 
 - **Calor:** "El aire en La Paz se calentó cerca de 1.5 °C entre 2001 y 2025 (cambio estadísticamente significativo; reanálisis de NASA POWER, ~50 km). La temperatura de la superficie que mide el satélite MODIS no muestra un cambio claro en el mismo periodo. Son dos mediciones distintas y no sabemos por qué no coinciden. Esto describe qué cambió, no por qué."
@@ -58,6 +69,6 @@ Por punto: el NDVI baja de forma significativa en Centro (-0.034), Chametla (-0.
 
 ## Pendiente
 
-- Reproducir las cifras de MODIS con los CSV de AppEEARS (Luca los comparte por Drive).
-- Revisar por qué la superficie baja en El Centenario y Sur.
+- Probar la hipótesis de la hora de paso de Terra (`Day_view_time` en MOD11A2 o MYD11A2 de Aqua) para explicar la baja de los últimos años.
+- Decidir si el pipeline debe usar también la prueba sobre medias anuales para la superficie.
 - Agua subterránea (GRACE/GLDAS): solo tendencia regional; no empezada.

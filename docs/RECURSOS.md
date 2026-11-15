@@ -9,7 +9,7 @@ Todo recurso externo (código, texto, imágenes, datos, audio, modelos 3D) se an
 | NASA POWER, datos mensuales (MERRA-2), comunidad AG, API v2.10.0 | <https://power.larc.nasa.gov/docs/services/api/temporal/monthly/> | **Usado** (pipeline `analisis/`, issues #5 y #7; descargado el 2026-11-14): temperatura del aire a 2 m (T2M) y lluvia (PRECTOTCORR), La Paz (24.14 N, -110.31 O), 2001-2025; salida `data/salida/indicadores.json` |
 | MODIS MOD11A2 V061 (temperatura de superficie, 1 km) | <https://lpdaac.usgs.gov/products/mod11a2v061/> | **Usado** (2026-11-14): LST de 6 zonas de La Paz 2001-2025 vía AppEEARS; filtros y resultado en `analisis/modis.py` |
 | MODIS MOD13Q1 V061 (NDVI, 250 m) | <https://lpdaac.usgs.gov/products/mod13q1v061/> | **Usado** (2026-11-14): NDVI de 6 zonas 2001-2025 vía AppEEARS; indicador `vegetacion` |
-| GRACE-FO / GLDAS (agua subterránea, regional) | <https://gracefo.jpl.nasa.gov/> y <https://ldas.gsfc.nasa.gov/gldas> | Previsto; sin usar todavía |
+| JPL GRACE y GRACE-FO Mascon CRI RL06.3Mv04 (agua total almacenada, malla de 0.5°, mensual desde 2002-04), DOI 10.5067/TEMSC-3JC634 | <https://doi.org/10.5067/TEMSC-3JC634> (PO.DAAC; cita: Wiese et al., 2023; datos descargados de PO.DAAC el 2026-11-14) | **Usado** (`analisis/agua.py`): anomalía de agua en la celda de La Paz, tendencia regional. GLDAS-2.2 CLSM (DOI 10.5067/TXBMLX370XX8) quedó previsto como contraste, sin usar |
 | ECOSTRESS (70 m) | <https://ecostress.jpl.nasa.gov/> | Previsto; sin usar todavía |
 | NASADEM (relieve, 30 m) | <https://lpdaac.usgs.gov/products/nasadem_hgtv001/> | Previsto; sin usar todavía |
 | NASA Earthdata AppEEARS (herramienta de descarga) | <https://appeears.earthdatacloud.nasa.gov/> | **Usado** (2026-11-14): extracción de puntos MODIS (`analisis/appeears.py`) |
@@ -33,7 +33,8 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | `pymannkendall` 1.4.3 (Hussain y Mahmud, 2019, DOI 10.21105/joss.01556) | <https://github.com/mmhs013/pyMannKendall> | MIT (PyPI, 2026-11-14) | `analisis/tendencias.py` (y el prototipo `analisis/prototipo_power.py`): pruebas Mann-Kendall estacionales y pendiente de Sen |
 | NumPy | <https://numpy.org/> | BSD-3-Clause (PyPI, 2026-11-14) | `analisis/tendencias.py` y `analisis/exportar.py` (y el prototipo) |
 | Requests | <https://requests.readthedocs.io/> | Apache-2.0 (PyPI, 2026-11-14) | `analisis/descargar.py`: descarga de NASA POWER (y el prototipo) |
-| pytest | <https://docs.pytest.org/> | MIT (PyPI) | `analisis/tests/`: pruebas del pipeline (solo desarrollo) |
+| netCDF4 (Python) 1.7.5 | <https://unidata.github.io/netcdf4-python/> | MIT (PyPI, 2026-11-14) | `analisis/agua.py`: lectura del netCDF de GRACE |
+| pytest | <https://docs.pytest.org/> | MIT (PyPI, versión 9.2.0, verificado el 2026-11-14) | `analisis/tests/`: pruebas del pipeline (solo desarrollo) |
 
 ## Uso de IA
 
@@ -46,7 +47,7 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | Codex | Tareas delegadas | — | **No usado** (confirmado por el equipo el 2026-11-14) |
 | Tripo3D | Modelo 3D (relieve) | — | **No usado** (confirmado el 2026-11-14) |
 | ElevenLabs | Voz/narración del video | — | **No usado** (confirmado el 2026-11-14); la narración es humana |
-| Gemini | Imagen/texto | — | **No usado** (confirmado el 2026-11-14) |
+| Google Stitch (herramienta de diseño de interfaces con IA, stitch.google.com), 2026-11-14 | Diseño de la interfaz de las 4 pantallas (disposición, paleta, logotipo) por UI/UX (Ehileen y Roberto). Lo que se use en la web se adapta y se revisa a mano | `web/assets/`, `diseno/` y la interfaz de `web/` (UI/UX anota aquí qué pantallas o imágenes salieron de Stitch) | **Usado** (confirmado por Carlos el 2026-11-14). Toda imagen generada lleva marca "AI-generated"; términos de uso y licencia de lo generado: POR CONFIRMAR por UI/UX |
 | Skills y plugins de terceros | Ver [`docs/skills-terceros.md`](skills-terceros.md) | Herramientas de desarrollo | Ver archivo |
 
 Recordatorio: imágenes y video generados llevan marca de agua visible "AI-generated"; prohibido usar o modificar logos de la NASA; sin menores de 18.
