@@ -248,3 +248,10 @@ Regla: no decir que la lluvia es de GPM ni que la TSM es de MODIS; hoy son POWER
 - **Barra:** Clima · Pesca · **Inicio al centro** (botón redondo) · Agro · Avisos, todos con ícono (también en el menú de escritorio). Se quita la hoja "Más".
 - **Acciones** deja de ser una pantalla de solo texto: vive al final de Clima como "¿Qué puedo hacer?", con una tarjeta con ícono por consejo (los mismos 10 de CDC y EPA, ninguno nuevo). `#acciones` redirige a `#clima/acciones`.
 - **Agro:** etiquetas de pines cortas (solo el nombre; el dato va en el popup), capas de NASA GIBS (satélite y vegetación NDVI) y los puntos de los 38 lugares de BCS con calor del aire y lluvia (NASA POWER).
+
+## Video sin etiquetas de IA en pantalla (Carlos, 2026-11-15)
+
+- **Contexto:** la primera versión del video de 30 s llevaba una línea fija arriba ("AI-generated voice (ElevenLabs)") y el logo con su marca "AI-generated". Se veía recargado y le quitaba espacio al contenido.
+- **Decisión (Carlos):** el video no muestra etiquetas de IA en pantalla: se quitan la línea fija y la marca del logo (el video usa `logo-radar-bcs.png`, versión limpia). Se conserva y no se debilita ninguna declaración escrita.
+- **Dónde queda declarado el uso de IA:** `docs/entrega/05-use-of-ai.md` (ElevenLabs para la voz, Gemini para el logo, Remotion para armar el video), `docs/RECURSOS.md`, la descripción del video ("Narration is an AI-generated voice (ElevenLabs)") y el campo "Use of SI" de la plataforma.
+- **Riesgo asumido:** la Guía de envío oficial dice que las imágenes y videos generados llevan marca de agua visible. El logo fue generado con Gemini y aparece sin marca en el video; la voz es audio (no imagen), pero el texto oficial no aclara si basta declararla por escrito. No está confirmado con la sede. Decidió y asume el riesgo: Carlos.
