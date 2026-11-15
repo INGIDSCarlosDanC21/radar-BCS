@@ -43,3 +43,9 @@
   .cabecera .menu-sup{justify-self:center;flex-wrap:nowrap;margin:0}
   .cabecera .idioma{justify-self:end}
 }
+
+/* Logo nuevo (pedido de UI/UX, 2026-11-15): ícono sin fondo y "Radar BCS" con la letra del menú (Manrope) en negrita. */
+.cabecera .marca{gap:10px;text-decoration:none;color:var(--texto)}
+.cabecera .marca img{height:40px;width:auto}
+.marca-t{font-family:var(--f-cuerpo);font-weight:700;font-size:20px;line-height:1;letter-spacing:-.2px;white-space:nowrap}
+@media (max-width:1023px){.cabecera .marca img{height:36px}.marca-t{font-size:18px}}

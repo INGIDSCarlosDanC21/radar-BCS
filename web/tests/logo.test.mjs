@@ -6,9 +6,10 @@ const leer = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
 
 // Pedido de UI/UX (2026-11-15, plan de ajustes): la cabecera usa el logo sin la marca "AI-generated".
 // El uso de IA del logo (Gemini) queda declarado en docs/FUENTES-Y-IA.md y docs/RECURSOS.md (regla 6).
-test('logo en la cabecera (sin marca en pantalla) y alt en ES/EN', () => {
+// Logo nuevo (2026-11-15): ícono sin fondo + "Radar BCS" en texto con la letra del menú; el enlace lleva el nombre accesible en ES/EN.
+test('logo en la cabecera: ícono sin fondo, texto "Radar BCS" y nombre accesible en ES/EN', () => {
   const html = leer('../index.html');
-  assert.match(html, /<a class="marca" href="#inicio"><img src="assets\/logo-radar-bcs\.png"[^>]*data-t-alt="html\.logo"><\/a><span class="sub"/);
+  assert.match(html, /<a class="marca" href="#inicio" aria-label="Radar BCS, inicio" data-t-aria="html\.logo"><img src="assets\/logo-radar-bcs-icono\.png"[^>]*alt=""><span class="marca-t">Radar BCS<\/span><\/a><span class="sub"/);
   assert.ok(!html.includes('marca-ia'), 'la etiqueta del encabezado se quitó (docs/FUENTES-Y-IA.md)');
   const T = leer('../js/textos.js');
   assert.match(T, /'html\.logo': 'Radar BCS, inicio'/);
