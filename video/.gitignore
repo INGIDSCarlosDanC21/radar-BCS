@@ -1,0 +1,15 @@
+node_modules
+dist
+.DS_Store
+.env
+
+# Salidas de render (no se suben)
+out
+
+# Narración de ElevenLabs: la genera Carlos, no va al repo
+public/narracion.mp3
+public/*.mp3
+public/*.wav
+
+# Capturas generadas por scripts/capturar-video.mjs (pesan más de 3 MB): se regeneran
+public/tomas/
