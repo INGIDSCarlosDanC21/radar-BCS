@@ -13,7 +13,8 @@
   });
 
   /* Secciones que viven dentro de "Más" en celular. */
-  var EN_MAS = ['ficha', 'agricola', 'acciones'];
+  /* Las fichas ya no tienen pestaña: se abren desde las tarjetas de Inicio (pedido de UI/UX, 2026-11-15). */
+  var EN_MAS = ['agricola', 'acciones'];
   function seccionDe(hash) {
     var h = String(hash || '#inicio').slice(1).split('/')[0];
     return ['inicio', 'mapa', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos'].indexOf(h) >= 0 ? h : 'inicio';

@@ -292,8 +292,7 @@
       '<footer class="ag-pie"><div class="ag-pie-grid"><div><p class="ag-marca"><i class="ag-dot"></i>RADAR BCS</p>' +
         '<p class="ag-pie-desc">' + esc(tx('pieDesc')) + '</p></div>' +
         '<nav aria-label="' + esc(tx('pieNav')) + '"><p class="ag-mono ag-negro">' + esc(tx('pantallas')) + '</p>' +
-        '<a href="#inicio">' + esc(tx('inicio')) + '</a><a href="#mapa">' + esc(tx('mapa')) + '</a><a href="#ficha/calor">' + esc(tx('fichas')) +
-        '</a><a href="#acciones">' + esc(tx('acciones')) + '</a><a href="#agricola">' + esc(tx('agricola')) + '</a></nav></div>' +
+        '<a href="#inicio">' + esc(tx('inicio')) + '</a><a href="#mapa">' + esc(tx('mapa')) + '</a><a href="#acciones">' + esc(tx('acciones')) + '</a><a href="#agricola">' + esc(tx('agricola')) + '</a></nav></div>' +
         '<p class="ag-mono ag-copy">' + tx('copy') + '</p></footer>' +
       '</div>';
     return h;

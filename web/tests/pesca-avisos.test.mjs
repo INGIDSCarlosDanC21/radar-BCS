@@ -197,21 +197,23 @@ test('inglés: mismas claves y {marcadores} en Pesca, Avisos, reglas del mar y m
   T.setLang('es');
 });
 
-test('menú: superior de texto en escritorio, inferior con iconos en celular, 5 pestañas abajo y "Más" con las otras 3', () => {
+// Sin pestaña "Ficha" (pedido de UI/UX, 2026-11-15): las fichas se abren solo desde las tarjetas de Inicio.
+test('menú: superior de texto en escritorio, inferior con iconos en celular, 5 pestañas abajo y "Más" con las otras 2', () => {
   const html = leer('index.html'), css = leer('css/menu.css');
   const sup = html.match(/<nav class="menu-sup"[\s\S]*?<\/nav>/)[0];
-  assert.equal((sup.match(/<a /g) || []).length, 7);
+  assert.equal((sup.match(/<a /g) || []).length, 6);
   assert.doesNotMatch(sup, /mi-ic|<img|<svg/, 'el menú superior es solo texto');
-  for (const r of ['inicio', 'mapa', 'ficha/calor', 'agricola', 'pesca', 'avisos', 'acciones']) assert.ok(sup.includes('href="#' + r + '"'), r);
+  for (const r of ['inicio', 'mapa', 'agricola', 'pesca', 'avisos', 'acciones']) assert.ok(sup.includes('href="#' + r + '"'), r);
+  assert.ok(!html.includes('data-nav="ficha"'), 'ningún menú lleva la pestaña Ficha');
   const barra = html.match(/<nav class="barra"[\s\S]*?<\/nav>/)[0];
   assert.equal((barra.match(/<a /g) || []).length + (barra.match(/<button /g) || []).length, 5);
   assert.equal((barra.match(/mi-ic/g) || []).length, 5, 'cada pestaña de abajo lleva ícono');
   assert.match(barra, /id="mas-btn"[^>]*aria-expanded="false"[^>]*aria-controls="mas"/);
   const mas = html.match(/<div id="mas"[\s\S]*?<\/div>/)[0];
-  assert.equal((mas.match(/<a /g) || []).length, 3);
-  for (const r of ['ficha', 'agricola', 'acciones']) assert.ok(mas.includes('data-nav="' + r + '"'), r);
+  assert.equal((mas.match(/<a /g) || []).length, 2);
+  for (const r of ['agricola', 'acciones']) assert.ok(mas.includes('data-nav="' + r + '"'), r);
   assert.match(css, /\.menu-sup\{display:none\}/); assert.match(css, /@media \(min-width:1024px\)\{[\s\S]*\.menu-sup\{display:flex/); assert.match(css, /\.barra,\.mas\{display:none\}/);
-  assert.deepEqual(['ficha', 'agricola', 'acciones'].every((s) => Menu.enMas(s)) && !['inicio', 'mapa', 'pesca', 'avisos'].some((s) => Menu.enMas(s)), true);
+  assert.deepEqual(['agricola', 'acciones'].every((s) => Menu.enMas(s)) && !['inicio', 'mapa', 'pesca', 'avisos', 'ficha'].some((s) => Menu.enMas(s)), true);
   assert.equal(Menu.seccionDe('#pesca'), 'pesca'); assert.equal(Menu.seccionDe('#ficha/calor'), 'ficha'); assert.equal(Menu.seccionDe('#nada'), 'inicio');
 });
 test('rutas: app.js conoce #pesca y #avisos y no espera a indicadores.json; scripts y estilos cargados antes de app.js', () => {

@@ -124,7 +124,7 @@
         '<div><p class="hm-marca"><i class="hm-punto"></i>RADAR BCS</p>' +
         '<p class="hm-pie-desc">' + t('home.pieDesc') + '</p></div>' +
         '<nav aria-label="' + t('home.pantallas') + '"><p class="hm-mono hm-negro">' + t('home.pantallas') + '</p>' +
-        '<a href="#mapa">' + t('nav.mapa') + '</a><a href="#ficha/calor">' + t('home.fichas') + '</a><a href="#agricola">' + t('titulo.agricola') + '</a><a href="#acciones">' + t('home.btnAcc') + '</a></nav>' +
+        '<a href="#mapa">' + t('nav.mapa') + '</a><a href="#agricola">' + t('titulo.agricola') + '</a><a href="#acciones">' + t('home.btnAcc') + '</a></nav>' +
         '<nav aria-label="' + t('home.datosCodigo') + '"><p class="hm-mono hm-negro">' + t('home.datosCodigo') + '</p>' +
         '<a href="' + REPO + '/blob/main/docs/entrega/06-nasa-data.md">' + t('home.fuentesNasa') + '</a>' +
         '<a href="' + REPO + '/blob/main/docs/entrega/05-use-of-ai.md">' + t('home.usoIA') + '</a>' +
