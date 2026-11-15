@@ -235,3 +235,9 @@ Regla: no decir que la lluvia es de GPM ni que la TSM es de MODIS; hoy son POWER
 - **Agua:** solo regional (GRACE, cientos de km): panel con la cifra regional, no pines vacíos. **Vegetación** y **calor del suelo** siguen siendo las 6 zonas MODIS de La Paz; la zona de calor se llama "calor del suelo" para no mezclarla con el aire.
 - **Resultado:** el aire subió en las 38 (+0.62 a +1.47 °C, todas significativas); la lluvia solo muestra aumento claro en 8 lugares de Los Cabos (3 celdas) y sin cambio claro en el resto. No se explica por qué.
 - **Pendiente:** NDVI y superficie MODIS para las nuevas localidades (requiere AppEEARS por punto); lluvia con IMERG 0.1° (issue #188, Luca) podría afinar La Paz.
+
+## Navegación, Acciones dentro de Clima y mapa Agro con capas (Carlos, 2026-11-15)
+
+- **Barra:** Clima · Pesca · **Inicio al centro** (botón redondo) · Agro · Avisos, todos con ícono (también en el menú de escritorio). Se quita la hoja "Más".
+- **Acciones** deja de ser una pantalla de solo texto: vive al final de Clima como "¿Qué puedo hacer?", con una tarjeta con ícono por consejo (los mismos 10 de CDC y EPA, ninguno nuevo). `#acciones` redirige a `#clima/acciones`.
+- **Agro:** etiquetas de pines cortas (solo el nombre; el dato va en el popup), capas de NASA GIBS (satélite y vegetación NDVI) y los puntos de los 38 lugares de BCS con calor del aire y lluvia (NASA POWER).
