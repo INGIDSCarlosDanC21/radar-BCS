@@ -82,3 +82,4 @@ Probar: `pip install -r analisis/requirements.txt`, `python -m analisis.exportar
 - Límite: Cabo San Lucas (-109.90) queda fuera de la cobertura del producto de clorofila (lon máx -110.006): sin dato, no se rellena. Los puntos son los de oleaje de la web, no se verificó que todos sean mar abierto.
 - Falta (puntos 2 a 4 del issue, sin tocar): anomalía de SST con climatología citada, tallas/vedas/CONANP/mareas oficiales, condición de uso de la API de USNO.
 - Bloquea: Carlos revisa y fusiona `data/`; Diego decide cómo mostrarlo en `web/` (aplica `web/data/`).
+- #197 puntos 2 a 4 (misma rama): anomalía de SST añadida al JSON (base 2003-2014, no 1991-2020). USNO: sin términos declarados, condición no confirmada. Vedas, tallas, CONANP, mareas y avisos: sin fuente oficial leída (páginas 404 / solo prensa), quedan fuera de la web. Falta: alguien lea DOF/CONAPESCA/CONANP desde un navegador.

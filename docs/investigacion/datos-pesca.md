@@ -104,3 +104,10 @@ Estado: **verificado** (respondió y se midió), **parcial** (existe pero con l�
 - Vedas: lectura manual del acuerdo vigente en DOF antes de mostrar fechas.
 - ANP: consultar CONANP.
 - Avisos oficiales: confirmar si SMN o Protección Civil BCS publican un feed.
+
+## Cierre de las preguntas del issue #197 (2026-11-15)
+- **Clorofila y SST por puerto:** hecho en `analisis/pesca_erddap.py` → `data/salida/pesca_mar.json` (7 días, fecha del último dato). Clorofila VIIRS llega solo al 2026-11-07; Cabo San Lucas queda fuera de su cobertura (lon máx −110.006).
+- **Anomalía de SST: verificada.** ERDDAP `jplMURSST41anom1day`, variable `sstAnom` (°C), diaria, 0.01°, hasta 2026-11-13. El metadato dice que se calcula contra la **climatología diaria MUR 2003-2014 (JPL)**, no 1991-2020; hay que citar ese periodo base. Valores de hoy en los 8 puertos: de +1.9 a +5.2 °C. Son salidas del producto sin contrastar con otra fuente; el +5.2 de Guerrero Negro es el más alto y está en zona lagunar/costera, así que mostrarlo con cautela. Sin CORS: solo vía pipeline.
+- **USNO fases lunares:** la página <https://aa.usno.navy.mil/data/api> **no declara** licencia, atribución ni límites de uso; solo dice que el parámetro `ID` es opcional (hasta 8 caracteres; para instituciones piden escribir a usno-ops-center@us.navy.mil) y que `nump` va de 1 a 99. Condición de uso: **no confirmada**; si el equipo quiere certeza, escribir a ese correo.
+- **Vedas:** `gob.mx/conapesca` (calendario de vedas) dio 404; solo hay prensa, con fechas que no coinciden entre notas (p. ej. langosta, abulón, camarón). **Sin fecha citable**: solo enlace al sitio de CONAPESCA.
+- **Tallas mínimas, áreas CONANP, mareas y avisos oficiales:** sin fuente oficial leída. CONANP (listado) dio 404 en la ruta probada. Siguen **fuera de la web**; hace falta que alguien lea el DOF y los sitios de CONAPESCA/CONANP desde un navegador.

@@ -29,6 +29,8 @@ PUERTOS = {  # id: (nombre, lat, lon) del punto de agua; igual que web/js/datos-
 PRODUCTOS = {
     "clorofila": {"dataset": "erdVHNchla1day", "var": "chla", "altitud": True, "unidad": "mg m^-3"},
     "sst": {"dataset": "jplMURSST41", "var": "analysed_sst", "altitud": False, "unidad": "°C"},
+    "anomalia_sst": {"dataset": "jplMURSST41anom1day", "var": "sstAnom", "altitud": False, "unidad": "°C",
+                     "base": "Climatología diaria MUR 2003-2014 (JPL), según el metadato de ERDDAP"},
 }
 
 
@@ -91,6 +93,8 @@ def construir(hoy=None):
     for prod, p in PRODUCTOS.items():
         sal["productos"][prod] = {"dataset": p["dataset"], "unidad": p["unidad"],
                                   "url": f"{BASE}{p['dataset']}.html", "licencia": licencia(prod)}
+        if "base" in p:
+            sal["productos"][prod]["periodo_base"] = p["base"]
     fines = {prod: fin_cobertura(prod) for prod in PRODUCTOS}
     for pid, (nombre, lat, lon) in PUERTOS.items():
         item = {"nombre": nombre, "punto": [lat, lon]}
