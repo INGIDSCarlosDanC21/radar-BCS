@@ -8,6 +8,7 @@
   'use strict';
   var T = (typeof window !== 'undefined' && window.RBT) || (typeof require !== 'undefined' ? require('./textos.js') : null);
   var CL = (typeof window !== 'undefined' && window.RBCielo) || (typeof require !== 'undefined' ? require('./cielo.js') : null);
+  var RB = (typeof window !== 'undefined' && window.RB) || (typeof require !== 'undefined' ? require('./reglas.js') : null);
   function t(k, v) { return T.t(k, v); }
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -126,16 +127,11 @@
   /* Nombres completos para el buscador (en el mapa algunos van abreviados). */
   var NOMBRE = { guerreronegro: 'Guerrero Negro', bahiamagdalena: 'Bahía Magdalena' };
   function nombreDe(l) { return NOMBRE[l.id] || l.es; }
-  function sinAcentos(s) { var x = String(s || '').toLowerCase().trim(); return x.normalize ? x.normalize('NFD').replace(/[̀-ͯ]/g, '') : x; }
-  /* Lugar que coincide con el texto: nombre exacto (completo o corto) o, si solo uno lo contiene, ese; si no, null. */
+  /* Lugar que coincide con el texto: nombre exacto (completo o corto) o, si solo uno lo contiene, ese; si no, null.
+     La comparación sin acentos está en reglas.js (RB.buscarNombre), compartida con Pesca. */
   function buscarLugar(texto) {
-    var q = sinAcentos(texto); if (!q) return null;
-    var exacto = null, parciales = [];
-    CL.LUGARES.forEach(function (l) {
-      var a = sinAcentos(nombreDe(l)), b = sinAcentos(l.es);
-      if (a === q || b === q) exacto = l; else if (a.indexOf(q) >= 0 || b.indexOf(q) >= 0) parciales.push(l);
-    });
-    return exacto || (parciales.length === 1 ? parciales[0] : null);
+    var i = RB.buscarNombre(CL.LUGARES, texto, function (l) { return [nombreDe(l), l.es]; });
+    return i >= 0 ? CL.LUGARES[i] : null;
   }
   var DIARIO = 'weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,uv_index_max,sunshine_duration,sunrise,sunset,' +
     'wind_speed_10m_max,wind_gusts_10m_max,wind_direction_10m_dominant,precipitation_sum,precipitation_probability_max,relative_humidity_2m_mean';

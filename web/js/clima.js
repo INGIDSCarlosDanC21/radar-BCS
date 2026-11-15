@@ -93,19 +93,9 @@
   function n(v, d) { return v == null || isNaN(v) ? t('cli.sin') : RB.num(v, d == null ? 0 : d); }
   function con(v, d, unidad) { return v == null || isNaN(v) ? t('cli.sin') : RB.num(v, d) + ' ' + unidad; }
   function rumbo(g) { return g == null || isNaN(g) ? '' : t('cli.r' + (Math.round(((g % 360) + 360) % 360 / 45) % 8)); }
-  function sinAcentos(s) { return String(s).toLowerCase().normalize ? String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '') : String(s).toLowerCase(); }
-
-  /* Buscador: devuelve el índice del pueblo que coincide con el texto (nombre exacto o, si solo uno lo contiene, ese), o -1. */
-  function buscarPueblo(puertos, texto) {
-    var q = sinAcentos(String(texto || '').trim());
-    if (!q) return -1;
-    var exacto = -1, parciales = [];
-    puertos.forEach(function (p, i) {
-      var nom = sinAcentos(p.nombre);
-      if (nom === q) exacto = i; else if (nom.indexOf(q) >= 0) parciales.push(i);
-    });
-    return exacto >= 0 ? exacto : parciales.length === 1 ? parciales[0] : -1;
-  }
+  /* Buscador: devuelve el índice del pueblo que coincide con el texto (nombre exacto o, si solo uno lo contiene, ese), o -1.
+     La comparación sin acentos está en reglas.js (RB.buscarNombre), compartida con Pesca. */
+  function buscarPueblo(puertos, texto) { return RB.buscarNombre(puertos, texto); }
 
   /* Valor y estilo del pin de cada pueblo según la capa. */
   function pines(datos, idx, capa, activo) {
