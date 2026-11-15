@@ -34,16 +34,25 @@
       'pes.cloVer': 'Ver en el mapa', 'pes.cloQuitar': 'Quitar del mapa', 'pes.cloFecha': 'Satélite NASA VIIRS NOAA-20 · {f}',
       'pes.cloTit': 'Clorofila (mg/m³, escala logarítmica)', 'pes.cloError': 'No se pudo cargar la capa de clorofila.',
       'pes.vedas': 'Vedas (CONAPESCA)',
-      'pes.pend.seg': 'Pendiente: sin feed abierto de avisos oficiales para BCS',
-      'pes.pend.oc': 'Pendiente: sin mareas oficiales abiertas para BCS',
-      'pes.pend.clo': 'Pendiente: clorofila en números (hoy solo imagen)',
-      'pes.pend.veda': 'Tallas y fechas de veda: sin fuente abierta verificada',
       'pes.ley.verde': 'Verde', 'pes.ley.amarillo': 'Amarillo', 'pes.ley.rojo': 'Rojo',
       'pes.ley.ola.verde': 'menos de 1.25 m', 'pes.ley.ola.amarillo': '1.25 a 2.5 m', 'pes.ley.ola.rojo': '2.5 m o más',
       'pes.ley.viento.verde': 'menos de 22 kt', 'pes.ley.viento.amarillo': '22 a 33 kt', 'pes.ley.viento.rojo': '34 kt o más',
       'pes.nota': 'Estimación de un modelo, no es un aviso oficial. Consulta a la Capitanía de Puerto (SEMAR). Datos del mar: Open-Meteo.com (CC BY 4.0).',
       'pes.cargando': 'Cargando el modelo marino…',
       'pes.error': 'No se pudo cargar el modelo marino (¿sin conexión?). El resto de la web no cambia.',
+      'pes.f.ver': 'Ver detalle', 'pes.f.cerrar': 'Cerrar', 'pes.f.dictT': 'LECTURA DEL MODELO (NO OFICIAL)', 'pes.f.fuentes': 'Fuentes',
+      'pes.f.estadoL': 'Estado (modelo)', 'pes.f.oleaje': 'Oleaje', 'pes.f.vientoT': 'Viento', 'pes.f.altura': 'Altura', 'pes.f.periodo': 'Periodo', 'pes.f.dir': 'Dirección',
+      'pes.f.nivel': 'Nivel', 'pes.f.sostenido': 'Sostenido', 'pes.f.rachas': 'Rachas', 'pes.f.escala': 'Escala', 'pes.f.umbrales': 'Umbrales usados',
+      'pes.f.fondo': 'Swell', 'pes.f.marFondo': 'Mar de fondo', 'pes.f.mar': 'Mar', 'pes.f.temp': 'Temperatura', 'pes.f.corr': 'Corriente', 'pes.f.corrT': 'Corriente del mar', 'pes.f.vel': 'Velocidad',
+      'pes.f.subOc': 'Oleaje, mar de fondo, temperatura y corriente', 'pes.f.subCl': 'Viento sostenido y rachas', 'pes.f.subClo': 'Capa satelital y vedas', 'pes.f.chipClo': 'NASA VIIRS',
+      'pes.f.dictClo': 'La clorofila indica dónde hay más fitoplancton, base de la cadena alimentaria. Es una imagen de satélite: no dice dónde hay peces ni autoriza la pesca.',
+      'pes.f.capa': 'Capa de clorofila', 'pes.f.vedasT': 'El calendario de vedas lo publica CONAPESCA; aquí solo va el enlace.',
+      'pes.f.desc.seg': 'Verde, amarillo o rojo según oleaje y viento del modelo.', 'pes.f.desc.oc': 'Cifras del modelo marino para el puerto y la hora elegidos.',
+      'pes.f.desc.cl': 'Viento del modelo en la costa para la hora elegida.', 'pes.f.desc.clo': 'Capa de clorofila de NASA y enlace a las vedas.',
+      'pes.f.pendSeg': 'Pendiente (sin fuente abierta verificada): bandera de puerto, avisos y protocolos oficiales. Consulta a la Capitanía de Puerto.',
+      'pes.f.pendOc': 'Pendiente (sin fuente verificada): mareas, fase lunar y ventanas de cruce.',
+      'pes.f.pendCl': 'Pendiente (sin fuente verificada): presión, visibilidad, lluvia y tormenta.',
+      'pes.f.pendClo': 'Pendiente (sin fuente verificada): temperatura de frentes, especies, tallas y áreas protegidas.',
       'pes.sinDato': 'sin dato', 'pes.sinDatoPuerto': 'Sin dato para esta hora',
       'pes.r0': 'norte', 'pes.r1': 'noreste', 'pes.r2': 'este', 'pes.r3': 'sureste', 'pes.r4': 'sur', 'pes.r5': 'suroeste', 'pes.r6': 'oeste', 'pes.r7': 'noroeste',
       'pes.pinOla': '{n}: oleaje {v}, {e}', 'pes.pinViento': '{n}: viento {v}, {e}', 'pes.pinSst': '{n}: temperatura del mar {v}'
@@ -63,16 +72,25 @@
       'pes.cloVer': 'Show on the map', 'pes.cloQuitar': 'Remove from the map', 'pes.cloFecha': 'NASA VIIRS NOAA-20 satellite · {f}',
       'pes.cloTit': 'Chlorophyll (mg/m³, logarithmic scale)', 'pes.cloError': 'The chlorophyll layer could not be loaded.',
       'pes.vedas': 'Fishing closures (CONAPESCA)',
-      'pes.pend.seg': 'Pending: no open feed of official warnings for BCS',
-      'pes.pend.oc': 'Pending: no open official tide data for BCS',
-      'pes.pend.clo': 'Pending: chlorophyll as numbers (image only today)',
-      'pes.pend.veda': 'Size limits and closure dates: no verified open source',
       'pes.ley.verde': 'Green', 'pes.ley.amarillo': 'Yellow', 'pes.ley.rojo': 'Red',
       'pes.ley.ola.verde': 'under 1.25 m', 'pes.ley.ola.amarillo': '1.25 to 2.5 m', 'pes.ley.ola.rojo': '2.5 m or more',
       'pes.ley.viento.verde': 'under 22 kt', 'pes.ley.viento.amarillo': '22 to 33 kt', 'pes.ley.viento.rojo': '34 kt or more',
       'pes.nota': 'Estimate from a model, not an official warning. Check with the Port Captaincy (SEMAR). Sea data: Open-Meteo.com (CC BY 4.0).',
       'pes.cargando': 'Loading the marine model…',
       'pes.error': 'The marine model could not be loaded (offline?). The rest of the site does not change.',
+      'pes.f.ver': 'See details', 'pes.f.cerrar': 'Close', 'pes.f.dictT': 'MODEL READING (NOT OFFICIAL)', 'pes.f.fuentes': 'Sources',
+      'pes.f.estadoL': 'State (model)', 'pes.f.oleaje': 'Waves', 'pes.f.vientoT': 'Wind', 'pes.f.altura': 'Height', 'pes.f.periodo': 'Period', 'pes.f.dir': 'Direction',
+      'pes.f.nivel': 'Level', 'pes.f.sostenido': 'Sustained', 'pes.f.rachas': 'Gusts', 'pes.f.escala': 'Scale', 'pes.f.umbrales': 'Thresholds used',
+      'pes.f.fondo': 'Swell', 'pes.f.marFondo': 'Swell', 'pes.f.mar': 'Sea', 'pes.f.temp': 'Temperature', 'pes.f.corr': 'Current', 'pes.f.corrT': 'Sea current', 'pes.f.vel': 'Speed',
+      'pes.f.subOc': 'Waves, swell, temperature and current', 'pes.f.subCl': 'Sustained wind and gusts', 'pes.f.subClo': 'Satellite layer and closures', 'pes.f.chipClo': 'NASA VIIRS',
+      'pes.f.dictClo': 'Chlorophyll shows where there is more phytoplankton, the base of the food chain. It is a satellite image: it does not say where fish are or authorize fishing.',
+      'pes.f.capa': 'Chlorophyll layer', 'pes.f.vedasT': 'The closure calendar is published by CONAPESCA; only the link is shown here.',
+      'pes.f.desc.seg': 'Green, yellow or red from the model waves and wind.', 'pes.f.desc.oc': 'Marine model figures for the chosen port and hour.',
+      'pes.f.desc.cl': 'Model coastal wind for the chosen hour.', 'pes.f.desc.clo': 'NASA chlorophyll layer and a link to the closures.',
+      'pes.f.pendSeg': 'Pending (no verified open source): port flag, official warnings and protocols. Check with the Port Captaincy.',
+      'pes.f.pendOc': 'Pending (no verified source): tides, moon phase and crossing windows.',
+      'pes.f.pendCl': 'Pending (no verified source): pressure, visibility, rain and storms.',
+      'pes.f.pendClo': 'Pending (no verified source): thermal fronts, species, sizes and protected areas.',
       'pes.sinDato': 'no data', 'pes.sinDatoPuerto': 'No data for this hour',
       'pes.r0': 'north', 'pes.r1': 'northeast', 'pes.r2': 'east', 'pes.r3': 'southeast', 'pes.r4': 'south', 'pes.r5': 'southwest', 'pes.r6': 'west', 'pes.r7': 'northwest',
       'pes.pinOla': '{n}: waves {v}, {e}', 'pes.pinViento': '{n}: wind {v}, {e}', 'pes.pinSst': '{n}: sea temperature {v}'
@@ -95,7 +113,7 @@
   function estadoPuerto(p, idx) {
     var ola = en(p.s.ola, idx), vi = en(p.s.viento, idx);
     return { ola: ola, per: en(p.s.per, idx), dir: en(p.s.dir, idx), sst: en(p.s.sst, idx), corr: en(p.s.corr, idx),
-      viento: vi, rachas: en(p.s.rachas, idx), vdir: en(p.s.vdir, idx), estado: M.estadoMar(ola, vi) };
+      viento: vi, rachas: en(p.s.rachas, idx), vdir: en(p.s.vdir, idx), estado: M.estadoMar(ola, vi), swell: en(p.s.swell, idx), cdir: en(p.s.cdir, idx) };
   }
   /* Pines del mapa para la variable v y la hora idx. */
   function pines(datos, idx, v, activo) {
@@ -119,26 +137,85 @@
     var la = datos.puertos.map(function (p) { return p.mar[0]; }), lo = datos.puertos.map(function (p) { return p.mar[1]; });
     return [[Math.min.apply(null, la), Math.min.apply(null, lo)], [Math.max.apply(null, la), Math.max.apply(null, lo)]];
   }
-  function mosaico(clase, icono, titulo, cuerpo) {
-    return '<article class="pe-m pe-m-' + clase + '"><div class="pe-m-cab"><img src="assets/iconos/' + icono + '.svg" alt="" aria-hidden="true" width="24" height="24"><h3>' + esc(titulo) + '</h3></div>' + cuerpo + '</article>';
+  /* ---------- Fichas expandibles (mismo formato y clases que las del Mapa Agrícola: .ag-*) ---------- */
+  var TONO_F = { seg: 'ambar', oc: 'cian', cl: 'pizarra', clo: 'verde' };
+  var ICO_F = { seg: 'pesca-semaforo-de-seguridad', oc: 'pesca-condiciones-oceanograficas', cl: 'pesca-clima-y-atmosfera-costera', clo: 'pesca-potencial-y-actividad-pesquera' };
+  var ORDEN_F = ['seg', 'oc', 'cl', 'clo'];
+  var SVG_X = '<svg class="ag-ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  var SVG_FLE = '<svg class="ag-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  function fila(k, v) { return '<div><dt>' + esc(k) + '</dt><dd>' + esc(v) + '</dd></div>'; }
+  function tarjeta(chip, titulo, filas, texto) {
+    return '<article class="ag-tj"><p class="ag-tj-chip">' + esc(chip) + '</p><h4 class="ag-tj-tit">' + esc(titulo) + '</h4>' +
+      (texto ? '<p class="ag-tj-txt">' + esc(texto) + '</p>' : '') + (filas ? '<dl class="ag-tj-filas">' + filas + '</dl>' : '') + '</article>';
   }
-  function mosaicos(p, idx, cloActiva, cloFecha) {
-    var e = estadoPuerto(p, idx), sem = e.estado || 'sin';
-    var seg = '<p class="pe-estado"><span class="pe-sem pe-sem-' + sem + '"><i aria-hidden="true"></i>' + esc(t('mar.e.' + sem)) + '</span> ' + esc(e.estado ? t('mar.e.' + sem + 'T') : '') + '</p>' +
-      '<p class="pe-dato">' + esc(t('pes.dOla', { h: n1(e.ola), v: n0(e.viento) })) + '</p><p class="pe-peq">' + esc(t('pes.segNota')) + '</p>' +
-      '<p class="pe-peq pe-pend">' + esc(t('pes.pend.seg')) + '</p>';
-    var oc = '<p class="pe-grande">' + esc(t('pes.vOla', { h: n1(e.ola), p: n0(e.per) })) + '</p>' +
-      '<p class="pe-dato">' + esc(t('pes.dMar', { d: rumbo(e.dir) || '—', s: n1(e.sst), c: n1(e.corr) })) + '</p>' +
-      '<p class="pe-peq pe-pend">' + esc(t('pes.pend.oc')) + '</p>';
-    var cl = '<p class="pe-grande">' + esc(t('pes.vViento', { v: n0(e.viento), d: rumbo(e.vdir) })) + '</p>' +
-      '<p class="pe-dato">' + esc(t('pes.dViento', { r: n0(e.rachas), b: M.beaufort(e.viento) == null ? '—' : M.beaufort(e.viento) })) + ' · ' + esc(M.textoViento(e.viento)) + '</p>';
-    var clo = '<button type="button" class="pe-btn" id="pe-clo" aria-pressed="' + (cloActiva ? 'true' : 'false') + '">' + esc(t(cloActiva ? 'pes.cloQuitar' : 'pes.cloVer')) + '</button>' +
-      '<p class="pe-dato">' + esc(t('pes.cloFecha', { f: cloFecha })) + '</p>' +
-      '<p class="pe-peq pe-pend">' + esc(t('pes.pend.clo')) + '</p>' +
-      '<p class="pe-peq pe-pend">' + esc(t('pes.pend.veda')) + '</p>' +
-      '<p class="pe-peq"><a href="' + URL_VEDAS + '" target="_blank" rel="noopener">' + esc(t('pes.vedas')) + '</a></p>';
-    return mosaico('seg', 'pesca-semaforo-de-seguridad', t('pes.m.seg'), seg) + mosaico('oc', 'pesca-condiciones-oceanograficas', t('pes.m.oc'), oc) +
-      mosaico('cl', 'pesca-clima-y-atmosfera-costera', t('pes.m.cl'), cl) + mosaico('clo', 'pesca-potencial-y-actividad-pesquera', t('pes.m.clo'), clo);
+  function kt(v) { return v == null ? t('pes.sinDato') : n0(v) + ' kt'; }
+  function mt(v) { return v == null ? t('pes.sinDato') : n1(v) + ' m'; }
+  /* Texto de cada ficha: solo cifras del modelo (Open-Meteo) y reglas de reglas-mar.js; lo demás queda como pendiente. */
+  function contenidoFicha(id, p, idx, clo, cloFecha) {
+    var e = estadoPuerto(p, idx), sem = e.estado || 'sin', c = { chip: '', sub: '', ver: null, dict: '', tjs: [], pend: '' };
+    var bf = M.beaufort(e.viento);
+    if (id === 'seg') {
+      c.chip = t('mar.e.' + sem); c.sub = t('pes.segNota'); c.ver = [t('pes.f.estadoL'), t('mar.e.' + sem)];
+      c.dict = e.estado ? t('mar.e.' + sem + 'T') : t('pes.sinDatoPuerto');
+      c.tjs.push(tarjeta(t('pes.v.ola'), t('pes.f.oleaje'), fila(t('pes.f.altura'), mt(e.ola)) + fila(t('pes.f.nivel'), M.textoOla(e.ola) || t('pes.sinDato'))));
+      c.tjs.push(tarjeta(t('pes.v.viento'), t('pes.f.vientoT'), fila(t('pes.f.sostenido'), kt(e.viento)) + fila('Beaufort', bf == null ? t('pes.sinDato') : String(bf)) + fila(t('pes.f.nivel'), M.textoViento(e.viento) || t('pes.sinDato'))));
+      c.tjs.push(tarjeta(t('pes.f.escala'), t('pes.f.umbrales'), fila(t('pes.ley.verde'), t('pes.ley.ola.verde') + ' · ' + t('pes.ley.viento.verde')) + fila(t('pes.ley.amarillo'), t('pes.ley.ola.amarillo') + ' · ' + t('pes.ley.viento.amarillo')) + fila(t('pes.ley.rojo'), t('pes.ley.ola.rojo') + ' · ' + t('pes.ley.viento.rojo'))));
+      c.pend = t('pes.f.pendSeg');
+    } else if (id === 'oc') {
+      c.chip = mt(e.ola) + (e.per != null ? ' · ' + n0(e.per) + ' s' : ''); c.sub = t('pes.f.subOc'); c.ver = [t('pes.v.ola'), mt(e.ola)];
+      c.dict = t('pes.dMar', { d: rumbo(e.dir) || '—', s: n1(e.sst), c: n1(e.corr) });
+      c.tjs.push(tarjeta(t('pes.v.ola'), t('pes.f.oleaje'), fila(t('pes.f.altura'), mt(e.ola)) + fila(t('pes.f.periodo'), e.per == null ? t('pes.sinDato') : n0(e.per) + ' s') + fila(t('pes.f.dir'), rumbo(e.dir) || t('pes.sinDato'))));
+      c.tjs.push(tarjeta(t('pes.f.fondo'), t('pes.f.marFondo'), fila(t('pes.f.altura'), mt(e.swell))));
+      c.tjs.push(tarjeta(t('pes.v.sst'), t('pes.f.mar'), fila(t('pes.f.temp'), e.sst == null ? t('pes.sinDato') : n1(e.sst) + ' °C')));
+      c.tjs.push(tarjeta(t('pes.f.corr'), t('pes.f.corrT'), fila(t('pes.f.vel'), e.corr == null ? t('pes.sinDato') : n1(e.corr) + ' km/h') + fila(t('pes.f.dir'), rumbo(e.cdir) || t('pes.sinDato'))));
+      c.pend = t('pes.f.pendOc');
+    } else if (id === 'cl') {
+      c.chip = kt(e.viento); c.sub = t('pes.f.subCl'); c.ver = [t('pes.v.viento'), kt(e.viento)];
+      c.dict = t('pes.vViento', { v: n0(e.viento), d: rumbo(e.vdir) }) + '. ' + t('pes.dViento', { r: n0(e.rachas), b: bf == null ? '—' : bf }) + ' · ' + M.textoViento(e.viento);
+      c.tjs.push(tarjeta(t('pes.v.viento'), t('pes.f.vientoT'), fila(t('pes.f.sostenido'), kt(e.viento)) + fila(t('pes.f.rachas'), kt(e.rachas)) + fila(t('pes.f.dir'), rumbo(e.vdir) || t('pes.sinDato')) + fila('Beaufort', bf == null ? t('pes.sinDato') : String(bf))));
+      c.pend = t('pes.f.pendCl');
+    } else {
+      c.chip = t('pes.f.chipClo'); c.sub = t('pes.f.subClo'); c.ver = null;
+      c.dict = t('pes.f.dictClo');
+      c.tjs.push('<article class="ag-tj"><p class="ag-tj-chip">' + esc(t('pes.m.clo')) + '</p><h4 class="ag-tj-tit">' + esc(t('pes.f.capa')) + '</h4>' +
+        '<p class="ag-tj-txt">' + esc(t('pes.cloFecha', { f: cloFecha })) + '</p>' +
+        '<button type="button" class="pe-btn" id="pe-clo" aria-pressed="' + (clo ? 'true' : 'false') + '">' + esc(t(clo ? 'pes.cloQuitar' : 'pes.cloVer')) + '</button></article>');
+      c.tjs.push('<article class="ag-tj"><p class="ag-tj-chip">CONAPESCA</p><h4 class="ag-tj-tit">' + esc(t('pes.vedas')) + '</h4>' +
+        '<p class="ag-tj-txt">' + esc(t('pes.f.vedasT')) + '</p><p class="ag-tj-fuente"><a href="' + URL_VEDAS + '" target="_blank" rel="noopener">gob.mx/conapesca</a></p></article>');
+      c.pend = t('pes.f.pendClo');
+    }
+    return c;
+  }
+  function fichaCerradaHtml(id, p, idx, clo, cloFecha) {
+    var c = contenidoFicha(id, p, idx, clo, cloFecha), titulo = t('pes.m.' + id);
+    return '<article class="ag-ficha ag-t-' + TONO_F[id] + '" data-ficha="' + id + '"><span class="ag-ficha-borde" aria-hidden="true"></span>' +
+      '<button type="button" class="ag-ficha-btn" aria-expanded="false" aria-controls="pe-det-' + id + '"><span class="ag-ficha-cab">' +
+      '<span class="ag-ficha-icono"><img class="ag-ico-svg" src="assets/iconos/' + ICO_F[id] + '.svg" alt="" aria-hidden="true" width="24" height="24"></span>' +
+      '<span class="ag-ficha-txt"><span class="ag-ficha-tit">' + esc(titulo) + '</span><span class="ag-ficha-sub">' + esc(c.sub) + '</span></span>' +
+      '<span class="ag-ficha-chip">' + esc(c.chip) + '</span></span>' +
+      '<span class="ag-ficha-pie"><span class="ag-ficha-enlace">' + esc(t('pes.f.ver')) + '</span>' + SVG_FLE + '</span></button></article>';
+  }
+  function fichaAbiertaHtml(id, p, idx, clo, cloFecha) {
+    var c = contenidoFicha(id, p, idx, clo, cloFecha), titulo = t('pes.m.' + id);
+    var cerrar = '<button type="button" class="ag-cerrar" data-cerrar="1">' + SVG_X + '<span class="ag-cerrar-t">' + esc(t('pes.f.cerrar')) + '</span></button>';
+    return '<article class="ag-ficha ag-abierta ag-t-' + TONO_F[id] + '" data-ficha="' + id + '"><span class="ag-ficha-borde" aria-hidden="true"></span>' +
+      '<div id="pe-det-' + id + '" class="ag-detalle" role="region" aria-labelledby="pe-tit-' + id + '">' +
+      '<div class="ag-det-cab"><div class="ag-det-cab-izq"><span class="ag-ficha-icono"><img class="ag-ico-svg" src="assets/iconos/' + ICO_F[id] + '.svg" alt="" aria-hidden="true" width="24" height="24"></span>' +
+      '<div class="ag-det-cab-txt"><h3 class="ag-det-tit" id="pe-tit-' + id + '" tabindex="-1">' + esc(titulo) + '</h3><p class="ag-det-desc">' + esc(t('pes.f.desc.' + id)) + '</p></div></div>' +
+      '<div class="ag-det-cab-der">' + (c.ver ? '<div class="ag-veredicto"><span class="ag-veredicto-e">' + esc(c.ver[0]) + '</span><span class="ag-veredicto-v">' + esc(c.ver[1]) + '</span></div>' : '') + cerrar + '</div></div>' +
+      '<section class="ag-dictamen"><p class="ag-mono ag-dictamen-t">' + esc(t('pes.f.dictT')) + '</p><p class="ag-dictamen-txt">' + esc(c.dict) + '</p></section>' +
+      '<section class="ag-grupo"><div class="ag-grupo-cab"><h4 class="ag-grupo-tit">' + esc(t('pes.zona', { z: p.nombre })) + '</h4><p class="ag-mono ag-grupo-nota">' + esc(t('pes.act')) + '</p></div><div class="ag-tjs">' + c.tjs.join('') + '</div></section>' +
+      '<p class="ag-mono pe-pend">' + esc(c.pend) + '</p>' +
+      '<details class="ag-fuentes"><summary class="ag-mono ag-fuentes-t">' + esc(t('pes.f.fuentes')) + '</summary><ul>' +
+      '<li><a href="https://open-meteo.com/en/docs/marine-weather-api" target="_blank" rel="noopener">Open-Meteo Marine</a> · CC BY 4.0</li>' +
+      '<li><a href="https://open-meteo.com/en/docs" target="_blank" rel="noopener">Open-Meteo Forecast</a> · CC BY 4.0</li>' +
+      '<li><a href="https://earthdata.nasa.gov/gibs" target="_blank" rel="noopener">NASA GIBS (VIIRS NOAA-20)</a></li></ul></details>' +
+      '<p class="ag-cerrar-pie">' + cerrar + '</p></div></article>';
+  }
+  /* Las 4 fichas; con una abierta, las otras 3 se omiten y la abierta ocupa todo el ancho (igual que en Agrícola). */
+  function fichas(p, idx, abierta, clo, cloFecha) {
+    if (abierta && ORDEN_F.indexOf(abierta) >= 0) return fichaAbiertaHtml(abierta, p, idx, clo, cloFecha);
+    return ORDEN_F.map(function (id) { return fichaCerradaHtml(id, p, idx, clo, cloFecha); }).join('');
   }
   function leyenda(v, clo) {
     if (clo) {
@@ -163,12 +240,13 @@
   function limpiar() {
     est.ficha++; parar();
     if (est.mapa) { est.mapa.destruir(); est.mapa = null; }
+    if (est.onKey) { document.removeEventListener('keydown', est.onKey); est.onKey = null; }
   }
 
   function montar(main, datos) {
     var cuerpo = main.querySelector('#pe-cuerpo');
     var ahora = V.indiceAhora(datos.horas);
-    var S = { dia: Math.min(3, Math.floor(ahora / 24)), h: ahora % 24, puerto: 'lapaz', v: 'ola', clo: false };
+    var S = { dia: Math.min(3, Math.floor(ahora / 24)), h: ahora % 24, puerto: 'lapaz', v: 'ola', clo: false, ficha: null };
     var porId = {}; datos.puertos.forEach(function (p) { porId[p.id] = p; });
     var cloFecha = V.sumaDias(V.fechaDe(datos.horas[ahora]), -1);
 
@@ -188,7 +266,7 @@
         '<button type="button" class="pe-flecha" id="pe-sig"><span class="mi-ic" style="-webkit-mask-image:url(assets/iconos/mapa/skip_next.svg);mask-image:url(assets/iconos/mapa/skip_next.svg)" aria-hidden="true"></span><span class="sr">' + esc(t('pes.diaSig')) + '</span></button></div>' +
       '<button type="button" class="pe-sim" id="pe-sim"></button>' +
       '<div class="pe-diag"><h2>' + esc(t('pes.diag')) + '</h2><p class="pe-zona" id="pe-zona"></p></div>' +
-      '<div class="pe-mosaicos" id="pe-mos"></div>' +
+      '<div class="ag-fichas pe-fichas" id="pe-mos"></div>' +
       '<p class="fuente pe-nota">' + esc(t('pes.nota')) + ' <a href="' + URL_CAPITANIA + '" target="_blank" rel="noopener">SEMAR</a></p>';
 
     var pill = main.querySelector('#pe-act'); if (pill) { pill.textContent = t('pes.act'); pill.hidden = false; }
@@ -213,7 +291,8 @@
       if (est.mapa) est.mapa.pines(pines(datos, i, S.v, S.puerto));
       cuerpo.querySelector('#pe-ley').innerHTML = leyenda(S.v, S.clo);
       cuerpo.querySelector('#pe-zona').textContent = t('pes.zona', { z: p.nombre });
-      cuerpo.querySelector('#pe-mos').innerHTML = mosaicos(p, i, S.clo, cloFecha);
+      var mos = cuerpo.querySelector('#pe-mos'); mos.className = 'ag-fichas pe-fichas' + (S.ficha ? ' ag-fichas-abierta' : '');
+      mos.innerHTML = fichas(p, i, S.ficha, S.clo, cloFecha);
       rotuloSim();
     }
     function capaClo() {
@@ -222,6 +301,13 @@
     }
     cuerpo.addEventListener('click', function (ev) {
       var b = ev.target.closest ? ev.target.closest('button') : null; if (!b) return;
+      if (b.hasAttribute('data-cerrar')) { cerrarFicha(); return; }
+      if (b.classList.contains('ag-ficha-btn')) {
+        var art = b.closest('[data-ficha]'); parar(); S.ficha = art && art.getAttribute('data-ficha'); pintar();
+        var tt = cuerpo.querySelector('#pe-tit-' + S.ficha); irAFichas();
+        if (tt && tt.focus) { try { tt.focus({ preventScroll: true }); } catch (x) { tt.focus(); } }
+        return;
+      }
       if (b.hasAttribute('data-puerto')) { S.puerto = b.getAttribute('data-puerto'); pintar(); }
       else if (b.hasAttribute('data-var')) { S.v = b.getAttribute('data-var'); pintar(); }
       else if (b.id === 'pe-clo') { S.clo = !S.clo; capaClo(); pintar(); }
@@ -234,6 +320,15 @@
         S.h += 1; pintar();
       }
     });
+    function irAFichas() { var h = cuerpo.querySelector('.pe-diag'); if (h && h.scrollIntoView) h.scrollIntoView({ block: 'start' }); }
+    function cerrarFicha() {
+      var previa = S.ficha; if (!previa) return;
+      S.ficha = null; pintar(); irAFichas();
+      var bt = cuerpo.querySelector('[data-ficha="' + previa + '"] .ag-ficha-btn'); if (bt && bt.focus) { try { bt.focus({ preventScroll: true }); } catch (x) { bt.focus(); } }
+    }
+    if (est.onKey) document.removeEventListener('keydown', est.onKey);
+    est.onKey = function (ev) { if (S.ficha && (ev.key === 'Escape' || ev.key === 'Esc')) cerrarFicha(); };
+    document.addEventListener('keydown', est.onKey);
     rng.addEventListener('input', function () { parar(); S.h = +rng.value; pintar(); });
     pintar();
   }
@@ -256,7 +351,7 @@
     });
   }
 
-  var RBPesca = { render: render, limpiar: limpiar, pines: pines, mosaicos: mosaicos, leyenda: leyenda, estadoPuerto: estadoPuerto, montar: montar, TX: TX };
+  var RBPesca = { render: render, limpiar: limpiar, pines: pines, fichas: fichas, leyenda: leyenda, estadoPuerto: estadoPuerto, montar: montar, TX: TX };
   if (typeof window !== 'undefined') window.RBPesca = RBPesca;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBPesca;
 })();
