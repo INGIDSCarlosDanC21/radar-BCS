@@ -74,3 +74,13 @@
   .cm-insignia{align-self:flex-start}
 }
 .cm-pin-sel .cm-pin-c{outline:3px solid #006d3d;outline-offset:2px}
+
+/* Lugares extra (2026-11-15): pines chicos para que 20 lugares quepan en el mapa. Lejos solo ícono; con zoom, ícono y temperatura; al elegirlo, también el nombre. */
+.cm-pin-mini{transform:translate(-13px,-50%);gap:3px}
+.cm-pin-mini .cm-pin-c{width:26px;height:26px}
+.cm-pin-mini .cm-pin-c .cl-ico{width:16px;height:16px}
+.cm-pin-mini .cm-pin-t{padding:1px 5px;font-size:11px;line-height:14px}
+.cm-pin-mini .cm-pin-t em,.cm-pin-mini .cm-pin-t .cm-n{display:none}
+.cm-pin-mini.cm-pin-sel .cm-pin-t .cm-n{display:inline}
+.cm-z-lejos .cm-pin-mini:not(.cm-pin-sel) .cm-pin-t{display:none}
+.cm-pin-mini::after{content:"";position:absolute;left:0;top:50%;width:44px;height:44px;transform:translate(-9px,-50%)}

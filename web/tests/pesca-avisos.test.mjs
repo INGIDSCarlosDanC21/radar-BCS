@@ -56,20 +56,20 @@ test('no se usan umbrales sin fuente verificada (calor ni milímetros por hora)'
   assert.doesNotMatch(f.replace(/\/\*[\s\S]*?\*\//, ''), /apparent|heat|calor|mm\/h/i);
 });
 
-test('datos-vivos: dos llamadas a Open-Meteo, 8 puertos, 96 horas, hora de La Paz y viento en nudos', () => {
+test('datos-vivos: dos llamadas a Open-Meteo, 19 puertos, 96 horas, hora de La Paz y viento en nudos', () => {
   const m = new URL(V.urlMar()), p = new URL(V.urlPron());
   assert.equal(m.host, 'marine-api.open-meteo.com'); assert.equal(p.host, 'api.open-meteo.com');
-  assert.equal(m.searchParams.get('latitude').split(',').length, 8);
-  assert.equal(p.searchParams.get('latitude').split(',').length, 16, '8 de mar + 8 pueblos');
+  assert.equal(m.searchParams.get('latitude').split(',').length, 19);
+  assert.equal(p.searchParams.get('latitude').split(',').length, 38, '19 de mar + 19 pueblos');
   for (const u of [m, p]) { assert.equal(u.searchParams.get('timezone'), 'America/Mazatlan'); assert.equal(u.searchParams.get('past_days'), '1'); assert.equal(u.searchParams.get('forecast_days'), '3'); }
   assert.equal(p.searchParams.get('wind_speed_unit'), 'kn');
   assert.ok(![...m.searchParams.keys(), ...p.searchParams.keys()].some((k) => /key|token/i.test(k)));
-  assert.equal(V.PUERTOS.length, 8);
-  for (const q of V.PUERTOS) { assert.ok(q.mar[0] > 22 && q.mar[0] < 28.5 && q.mar[1] < -109 && q.mar[1] > -115, q.nombre); }
+  assert.equal(V.PUERTOS.length, 19);
+  for (const q of V.PUERTOS) { assert.ok(q.mar[0] > 22 && q.mar[0] < 28.5 && q.mar[1] < -109 && q.mar[1] > -115.5, q.nombre); }
 });
 
 test('datos-vivos: unir con respuestas reales; rechaza respuestas incompletas', () => {
-  assert.equal(datos.puertos.length, 8); assert.equal(datos.horas.length, 96);
+  assert.equal(datos.puertos.length, 19); assert.equal(datos.horas.length, 96);
   for (const p of datos.puertos) for (const k of ['ola', 'per', 'dir', 'sst', 'viento', 'rachas', 'codigo', 'uv']) assert.equal(p.s[k].length, 96, p.id + '.' + k);
   assert.equal(V.unir(fx.mar.slice(0, 5), fx.pron), null);
   assert.equal(V.unir(fx.mar, fx.pron.slice(0, 10)), null);
@@ -132,11 +132,11 @@ test('avisos con datos reales: cada aviso trae zonas, hora dentro de la ventana 
   }
 });
 
-test('Pesca: 8 pines por variable con tono por umbral y nombre accesible; sin dato = "—"', () => {
+test('Pesca: 19 pines por variable con tono por umbral y nombre accesible; sin dato = "—"', () => {
   const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30');
   for (const v of ['ola', 'viento', 'sst']) {
     const ps = Pesca.pines(datos, idx, v, 'lapaz');
-    assert.equal(ps.length, 8); assert.equal(ps.filter((p) => p.activo).length, 1);
+    assert.equal(ps.length, 19); assert.equal(ps.filter((p) => p.activo).length, 1);
     for (const p of ps) { assert.ok(p.etiqueta.length > 8 && p.valor && p.icono, p.id); assert.ok(['verde', 'amarillo', 'rojo', 'neutro'].includes(p.tono)); }
   }
   assert.ok(Pesca.pines(datos, idx, 'sst', 'lapaz').every((p) => p.tono === 'neutro'));

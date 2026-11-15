@@ -1,7 +1,7 @@
 /* Datos en vivo para Pesca y Avisos (docs/PLAN-PESCA-AVISOS.md). ES5, sin build.
    - Mar: Open-Meteo Marine (modelo, no boyas; resolución sin confirmar), CC BY 4.0. Viento, lluvia (código WMO) y UV: Open-Meteo Forecast.
-   - Clima (docs/PLAN-CLIMA.md): una tercera petición, solo si se pide cargar({clima:true}), para los 8 pueblos.
-   - Una llamada de cada una para los 8 puertos, con ayer, hoy y 2 días más (96 horas). Caché de 10 min en sessionStorage.
+   - Clima (docs/PLAN-CLIMA.md): una tercera petición, solo si se pide cargar({clima:true}), para todos los pueblos de PUERTOS (19).
+   - Una llamada de cada una para todos los puertos de PUERTOS (19), con ayer, hoy y 2 días más (96 horas). Caché de 10 min en sessionStorage.
    - Nunca se inventa un dato: un valor que falta queda en null y la pantalla dice "sin dato".
    Puntos de mar elegidos y comprobados el 2026-11-15: la rejilla marina es gruesa (resolución sin confirmar) y dos puntos de prueba cayeron en tierra. */
 (function () {
@@ -20,7 +20,19 @@
     { id: 'lapaz', nombre: 'La Paz', costa: 'golfo', mar: [24.25, -110.35], pueblo: [24.142, -110.313] },
     { id: 'loreto', nombre: 'Loreto', costa: 'golfo', mar: [26.01, -111.25], pueblo: [26.012, -111.349] },
     { id: 'mulege', nombre: 'Mulegé', costa: 'golfo', mar: [26.90, -111.85], pueblo: [26.891, -111.983] },
-    { id: 'santarosalia', nombre: 'Santa Rosalía', costa: 'golfo', mar: [27.34, -112.15], pueblo: [27.340, -112.267] }
+    { id: 'santarosalia', nombre: 'Santa Rosalía', costa: 'golfo', mar: [27.34, -112.15], pueblo: [27.340, -112.267] },
+    /* 11 puertos más (2026-11-15). Puntos de mar medidos con el modelo marino el mismo día (todos con oleaje, temperatura y corriente); pueblos: GeoNames. */
+    { id: 'sanjosedelcabo', nombre: 'San José del Cabo', costa: 'cabo', menor: true, mar: [22.95, -109.65], pueblo: [23.054, -109.704] },
+    { id: 'cabopulmo', nombre: 'Cabo Pulmo', costa: 'cabo', menor: true, mar: [23.40, -109.35], pueblo: [23.437, -109.429] },
+    { id: 'laribera', nombre: 'La Ribera', costa: 'golfo', menor: true, mar: [23.55, -109.50], pueblo: [23.596, -109.586] },
+    { id: 'losbarriles', nombre: 'Los Barriles', costa: 'golfo', menor: true, mar: [23.65, -109.60], pueblo: [23.683, -109.700] },
+    { id: 'laventana', nombre: 'La Ventana', costa: 'golfo', menor: true, mar: [24.05, -109.93], pueblo: [24.052, -109.989] },
+    { id: 'sanjuandelacosta', nombre: 'San Juan de la Costa', costa: 'golfo', menor: true, mar: [24.35, -110.60], pueblo: [24.374, -110.690] },
+    { id: 'puertochale', nombre: 'Puerto Chale', costa: 'pacifico', menor: true, mar: [24.40, -111.70], pueblo: [24.425, -111.553] },
+    { id: 'puertolopezmateos', nombre: 'Puerto López Mateos', costa: 'pacifico', menor: true, mar: [25.10, -112.25], pueblo: [25.192, -112.110] },
+    { id: 'puntaabreojos', nombre: 'Punta Abreojos', costa: 'pacifico', menor: true, mar: [26.65, -113.70], pueblo: [26.715, -113.575] },
+    { id: 'bahiaasuncion', nombre: 'Bahía Asunción', costa: 'pacifico', menor: true, mar: [27.10, -114.40], pueblo: [27.142, -114.296] },
+    { id: 'bahiatortugas', nombre: 'Bahía Tortugas', costa: 'pacifico', menor: true, mar: [27.65, -115.00], pueblo: [27.691, -114.895] }
   ];
 
   var VAR_MAR = 'wave_height,wave_period,wave_direction,swell_wave_height,sea_surface_temperature,ocean_current_velocity,ocean_current_direction,wind_wave_height,wind_wave_period,wind_wave_direction,swell_wave_period,swell_wave_direction,sea_level_height_msl';
@@ -88,7 +100,7 @@
         perS: serie(m, 'swell_wave_period', H), dirS: serie(m, 'swell_wave_direction', H), nivel: serie(m, 'sea_level_height_msl', H),
         pres: serie(u, 'pressure_msl', H), vis: serie(u, 'visibility', H), pll: serie(u, 'precipitation_probability', H), cape: serie(u, 'cape', H), rocio: serie(u, 'dew_point_2m', H)
       };
-      var r = { id: p.id, nombre: p.nombre, costa: p.costa, mar: p.mar, pueblo: p.pueblo, s: s, dias: [], sol: dias(pron[n + k] && pron[n + k].daily) };
+      var r = { id: p.id, nombre: p.nombre, costa: p.costa, menor: !!p.menor, mar: p.mar, pueblo: p.pueblo, s: s, dias: [], sol: dias(pron[n + k] && pron[n + k].daily) };
       if (clima) {
         var c = clima[k] && clima[k].hourly;
         s.temp = serie(c, 'temperature_2m', H); s.sens = serie(c, 'apparent_temperature', H); s.hum = serie(c, 'relative_humidity_2m', H);

@@ -1,5 +1,5 @@
 /* Pantalla Clima (docs/PLAN-CLIMA.md). ES5, sin build. Sigue el patrón de Pesca (mapa de iconos) y del Mapa Agrícola (tarjetas con detalle).
-   Mapa con los 8 pueblos de RBVivo.PUERTOS, buscador, chips de capa y 4 tarjetas: calor y sensación térmica, UV y sol,
+   Mapa con los 19 lugares de RBVivo.PUERTOS, buscador, chips de capa y 4 tarjetas: calor y sensación térmica, UV y sol,
    viento, oleaje y corrientes, humedad y lluvia. Todo sale de Open-Meteo (modelo para el pueblo, NO son estaciones) vía
    RBVivo.cargar({clima:true}) y RBReglasClima; lo que falta se muestra como "sin dato". Sin etiqueta de calor (docs/investigacion/umbrales-clima.md). */
 (function () {
@@ -22,10 +22,10 @@
   var TX = {
     es: {
       'cli.kicker': 'Ahora · modelo Open-Meteo (no son estaciones)', 'cli.act': 'Actualizado {h} · modelo Open-Meteo, no son estaciones',
-      'cli.sub': 'Calor, sol, viento, mar y lluvia en 8 pueblos de Baja California Sur.',
+      'cli.sub': 'Calor, sol, viento, mar y lluvia en 19 lugares de Baja California Sur.',
       'cli.buscar': 'Buscar un pueblo', 'cli.buscarVacio': 'No hay un pueblo con ese nombre. Prueba con La Paz, Loreto o Cabo San Lucas.',
       'cli.capas': 'Dato en el mapa', 'cli.c.general': 'General', 'cli.c.calor': 'Calor', 'cli.c.viento': 'Viento', 'cli.c.uv': 'UV', 'cli.c.humedad': 'Humedad',
-      'cli.mapaReg': 'Mapa de 8 pueblos de Baja California Sur con temperatura, sensación térmica, viento, índice UV o humedad',
+      'cli.mapaReg': 'Mapa de 19 lugares de Baja California Sur con temperatura, sensación térmica, viento, índice UV o humedad',
       'cli.pin.general': '{n}: temperatura {v}', 'cli.pin.calor': '{n}: sensación térmica {v}', 'cli.pin.viento': '{n}: viento {v}',
       'cli.pin.uv': '{n}: índice UV máximo de hoy {v}', 'cli.pin.humedad': '{n}: humedad {v}',
       'cli.zona': 'Pueblo: {z}', 'cli.tarjetas': 'Tarjetas del clima en {z}',
@@ -53,10 +53,10 @@
     },
     en: {
       'cli.kicker': 'Now · Open-Meteo model (not weather stations)', 'cli.act': 'Updated {h} · Open-Meteo model, not weather stations',
-      'cli.sub': 'Heat, sun, wind, sea and rain in 8 towns of Baja California Sur.',
+      'cli.sub': 'Heat, sun, wind, sea and rain in 19 places of Baja California Sur.',
       'cli.buscar': 'Search for a town', 'cli.buscarVacio': 'No town has that name. Try La Paz, Loreto or Cabo San Lucas.',
       'cli.capas': 'Data on the map', 'cli.c.general': 'General', 'cli.c.calor': 'Heat', 'cli.c.viento': 'Wind', 'cli.c.uv': 'UV', 'cli.c.humedad': 'Humidity',
-      'cli.mapaReg': 'Map of 8 towns of Baja California Sur with temperature, apparent temperature, wind, UV index or humidity',
+      'cli.mapaReg': 'Map of 19 places of Baja California Sur with temperature, apparent temperature, wind, UV index or humidity',
       'cli.pin.general': '{n}: temperature {v}', 'cli.pin.calor': '{n}: apparent temperature {v}', 'cli.pin.viento': '{n}: wind {v}',
       'cli.pin.uv': '{n}: highest UV index today {v}', 'cli.pin.humedad': '{n}: humidity {v}',
       'cli.zona': 'Town: {z}', 'cli.tarjetas': 'Weather cards for {z}',
@@ -224,7 +224,11 @@
 
   /* Lugares del Mapa Meteorológico (cielo.js) y su pueblo en estas fichas; Comondú no tiene equivalente. */
   var LUGAR_PUEBLO = { lapaz: 'lapaz', loscabos: 'cabos', loreto: 'loreto', mulege: 'mulege', guerreronegro: 'guerreronegro', bahiamagdalena: 'bahiamagdalena' };
-  function puebloDe(lugar) { return lugar ? LUGAR_PUEBLO[lugar] || null : 'lapaz'; }
+  function puebloDe(lugar) {
+    if (!lugar) return 'lapaz';
+    if (LUGAR_PUEBLO[lugar]) return LUGAR_PUEBLO[lugar];
+    return V.PUERTOS.some(function (p) { return p.id === lugar; }) ? lugar : null;   // los lugares extra del mapa usan el id de su puerto
+  }
 
   function montar(main, datos, abierta, edadMs, lugar) {
     var cuerpo = main.querySelector('#cl-cuerpo');

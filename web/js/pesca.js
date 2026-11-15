@@ -145,7 +145,7 @@
         valor = e.ola == null ? '—' : n1(e.ola) + ' m'; icono = 'waves'; nivel = M.nivelOla(e.ola);
         etq = t('pes.pinOla', { n: p.nombre, v: valor, e: M.textoOla(e.ola) });
       }
-      return { id: p.id, lat: p.mar[0], lon: p.mar[1], icono: icono, valor: valor, tono: tono(nivel), etiqueta: etq, activo: p.id === activo };
+      return { id: p.id, menor: !!p.menor, lat: p.mar[0], lon: p.mar[1], icono: icono, valor: valor, tono: tono(nivel), etiqueta: etq, activo: p.id === activo };
     });
   }
   /* Caja que contiene todos los puertos: [[lat mín, lon mín], [lat máx, lon máx]]. */
@@ -356,7 +356,7 @@
     var pill = main.querySelector('#pe-act'); if (pill) { pill.textContent = t('pes.act'); pill.hidden = false; }
     var ancho = cuerpo.clientWidth || (typeof window !== 'undefined' ? window.innerWidth : 360);
     est.mapa = MI.crear(cuerpo.querySelector('#pe-mapa'), {
-      centro: ancho >= 640 ? [25.4, -111.9] : [25.3, -112.1], zoom: ancho >= 640 ? 7 : 6.5, minZoom: 6, maxZoom: 9, limites: [[21.5, -116.5], [29.5, -107.5]], ajustar: limitesPuertos(datos), margen: ancho >= 640 ? [70, 70] : [60, 56],
+      centro: ancho >= 640 ? [25.4, -111.9] : [25.3, -112.1], zoom: ancho >= 640 ? 7 : 6.5, minZoom: 6, maxZoom: 9, zoomMenores: ancho >= 640 ? 0 : 7.5, limites: [[21.5, -116.5], [29.5, -107.5]], ajustar: limitesPuertos(datos), margen: ancho >= 640 ? [70, 70] : [60, 56],
       alElegir: function (id) { S.puerto = id; pintar(); },
       alError: function () { var a = cuerpo.querySelector('#pe-aviso'); a.textContent = t('pes.cloError'); a.hidden = false; }
     });

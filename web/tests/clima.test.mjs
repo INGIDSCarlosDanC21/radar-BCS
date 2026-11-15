@@ -19,10 +19,11 @@ const LAPAZ = V.PUERTOS.findIndex((p) => p.id === 'lapaz');
 const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30');
 const crudo = (k) => fx.clima[k].hourly;
 
-test('urlClima: una petición para los 8 pueblos, variables del contrato, hora de La Paz y sin claves', () => {
+test('urlClima: una petición para los 19 lugares, variables del contrato, hora de La Paz y sin claves', () => {
   const u = new URL(V.urlClima());
   assert.equal(u.host, 'api.open-meteo.com');
-  assert.equal(u.searchParams.get('latitude').split(',').length, 8);
+  assert.equal(u.searchParams.get('latitude').split(',').length, V.PUERTOS.length);
+  assert.equal(V.PUERTOS.length, 19);
   assert.equal(u.searchParams.get('hourly'), 'temperature_2m,apparent_temperature,relative_humidity_2m,precipitation_probability,precipitation,shortwave_radiation');
   assert.equal(u.searchParams.get('daily'), 'temperature_2m_max,temperature_2m_min,uv_index_max,sunrise,sunset,sunshine_duration');
   assert.equal(u.searchParams.get('timezone'), 'America/Mazatlan');
@@ -78,7 +79,7 @@ test('resumenPuerto: cifras iguales a la respuesta cruda (La Paz, 15 nov 10:00)'
   assert.equal(r.calor.min, d.temperature_2m_min[i]);
   assert.equal(r.calor.nivel, null, 'sin fuente primaria no hay etiqueta de calor');
   assert.equal(r.uv.max, d.uv_index_max[i]);
-  assert.equal(r.uv.ahora, fx.pron[8 + LAPAZ].hourly.uv_index[idx]);
+  assert.equal(r.uv.ahora, fx.pron[V.PUERTOS.length + LAPAZ].hourly.uv_index[idx]);
   assert.equal(r.uv.amanecer, d.sunrise[i].slice(11, 16));
   assert.equal(r.uv.anochecer, d.sunset[i].slice(11, 16));
   assert.equal(r.uv.solH, Math.round(d.sunshine_duration[i] / 360) / 10);
@@ -92,7 +93,7 @@ test('resumenPuerto: cifras iguales a la respuesta cruda (La Paz, 15 nov 10:00)'
   assert.equal(r.viento.cdir, fx.mar[LAPAZ].hourly.ocean_current_direction[idx]);
   assert.equal(r.viento.sst, fx.mar[LAPAZ].hourly.sea_surface_temperature[idx]);
   assert.equal(r.lluvia.hum, h.relative_humidity_2m[idx]);
-  assert.equal(r.lluvia.codigo, fx.pron[8 + LAPAZ].hourly.weather_code[idx]);
+  assert.equal(r.lluvia.codigo, fx.pron[V.PUERTOS.length + LAPAZ].hourly.weather_code[idx]);
   const sig = (a) => a.slice(idx + 1, idx + 25).filter((x) => x != null);
   assert.equal(r.lluvia.prob24, Math.max(...sig(h.precipitation_probability)));
   assert.equal(r.lluvia.mm24, Math.round(sig(h.precipitation).reduce((a, b) => a + b, 0) * 10) / 10);

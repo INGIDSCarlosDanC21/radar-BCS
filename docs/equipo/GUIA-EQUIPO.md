@@ -70,7 +70,7 @@ El menú inferior es **Inicio · Clima · Pesca · Más** (en "Más": Agro, Avis
 - **Qué significa:** las 4 tarjetas son valores de un **modelo** (Open-Meteo), **no de estaciones**; la sensación térmica no lleva etiqueta de peligro porque no hallamos fuente primaria, y el UV usa la escala de la OMS. Las nubes y la lluvia de la animación son imágenes reales (no pronóstico). En el mapa de lugares el calor del aire subió en los 38 (de +0.6 a +1.5 °C, todos significativos) y la lluvia solo muestra aumento claro en 8 lugares de Los Cabos; en los demás no se detecta cambio. Los 38 lugares caen en **21 celdas de ~50 km** de NASA POWER: los que comparten celda tienen la misma cifra y la pantalla lo dice. El agua no se reparte por lugar porque GRACE mide cientos de km. La búsqueda envía lo que escribes a Nominatim y la pantalla lo avisa.
 
 ### Pesca
-- **Qué es:** mapa de 8 puertos con oleaje, viento o temperatura del mar, control de hora y animación de las horas del día, y cuatro fichas (estado del mar, condiciones, viento costero, clorofila).
+- **Qué es:** mapa de 19 puertos (los 8 principales siempre y los otros 11 al acercar) con oleaje, viento o temperatura del mar, control de hora y animación de las horas del día, y cuatro fichas (estado del mar, condiciones, viento costero, clorofila).
 - **Por qué está:** costa y ciclones son un problema local; el pescador necesita el panorama del mar.
 - **Qué significa:** el verde/amarillo/rojo sale de las escalas **Douglas** y **Beaufort** y es una **estimación del modelo, no un aviso oficial ni la bandera del puerto**. La clorofila es imagen de satélite de la NASA (VIIRS, servida por GIBS).
 
