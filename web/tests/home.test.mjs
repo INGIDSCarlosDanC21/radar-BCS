@@ -22,7 +22,8 @@ test('4 tarjetas data-indicador, cada una con Fuente:', () => {
 
 test('sin null/undefined/NaN ni textos de radar', () => {
   const h = RBHome.html(datos);
-  for (const bad of ['null', 'undefined', 'NaN', 'dBZ', 'GOES', 'en vivo']) {
+  // GOES-West sí aparece desde #144 (imagen real de NASA GIBS con su fuente); se sigue prohibiendo el "GOES-18 en vivo" de la maqueta.
+  for (const bad of ['null', 'undefined', 'NaN', 'dBZ', 'GOES-18', 'en vivo']) {
     assert.ok(!h.includes(bad), 'aparece ' + bad);
   }
 });
@@ -30,7 +31,7 @@ test('sin null/undefined/NaN ni textos de radar', () => {
 test('contenido obligatorio', () => {
   const h = RBHome.html(datos);
   assert.ok(h.includes('Mostramos qué cambió, no por qué. Una tendencia no prueba la causa.'));
-  assert.ok(h.includes('Tendencias 2001–2026 · NASA'));
+  assert.ok(h.includes('Tendencias 2001–2026 · datos de la NASA'));
   assert.ok(h.includes('Datos generados el ' + datos.generado), 'la fecha sale de indicadores.json, no fija');
   assert.ok(h.includes('Licencia Apache-2.0'));
 });

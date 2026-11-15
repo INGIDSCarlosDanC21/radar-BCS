@@ -294,7 +294,9 @@
     if (!DATOS) { main.setAttribute('aria-busy', 'true'); if (window.RBEsq) main.innerHTML = window.RBEsq.html(sec, t('html.cargando')); return; }
     main.removeAttribute('aria-busy');
     franja(sec);
-    if (sec === 'inicio') { if (window.RBHome) window.RBHome.render(main, DATOS); else inicio(); }
+    if (sec === 'inicio') {
+      if (window.RBHome) window.RBHome.render(main, DATOS); else inicio();
+    }
     else if (sec === 'mapa') mapaVista();
     else if (sec === 'ficha') ficha(h[1]);
     else if (sec === 'agricola') { agricolaVista(h[1] || null); document.title = 'Radar BCS — ' + t('titulo.agricola'); return; }
