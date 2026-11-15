@@ -11,17 +11,19 @@
 - Exportados: `diseno/pantallas/` y `diseno/componentes/`; `web/assets/` (logo `logo-radar-bcs.png`, íconos `iconos/*.svg`, `tokens.css`).
 - Especificación: `diseno/ESPECIFICACION.md`.
 - Pruebas: `powershell -File diseno/tools/verificar-diseno.ps1`.
-- PR: #99
+- PR: #99 (fusionado en `dev`).
+- **2026-11-14 (cierre, #98):** íconos identificados como Google Material Symbols (Apache 2.0, licencia en `web/assets/iconos/`); marca "AI-generated" junto al logo en el componente de encabezado y `web/assets/logo-radar-bcs-ai-generated.png`; términos de Gemini registrados (Stitch: sin página pública, NO VERIFICADO); revisión de personas/menores: ninguna en imágenes, se quitaron 2 nombres reales de ejemplo de las maquetas ("Ramón Bareño", "Armando Castro"); revisión de la web a 360 px en `diseno/revision-360/REPORTE.md`. PR: #PR_CIERRE
 
 ## En curso
 
 ## Falta
 
 - Revisión en celular real (#71).
-- Logotipo: hecho con Gemini (confirmado 2026-11-14); falta revisar los términos de uso de Gemini.
+- Términos de Stitch: no hay página pública; revisarlos dentro de la app y guardar captura.
 - Íconos: los 12 exportados son Google Material Symbols (Apache 2.0, verificado el 2026-11-14; ver `web/assets/iconos/README.md`). Si en otra pantalla se usó un ícono de Flaticon, falta identificarlo y poner su atribución.
 - Modo oscuro de los tokens.
-- Revisar las pantallas Ficha y Acciones a 360 px.
+- Que Diego corrija lo de `diseno/revision-360/REPORTE.md` (P0: scroll horizontal en Ficha de lluvia).
+- Revisar el inglés cuando Diego suba el diccionario (#93).
 
 ## Bloqueos
 

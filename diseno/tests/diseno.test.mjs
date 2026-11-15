@@ -185,3 +185,13 @@ test('iconos: licencia Apache de Material Symbols y cada SVG documentado en el R
     assert.ok(readme.includes('`' + f + '`'), `${f} no aparece en iconos/README.md`);
   }
 });
+
+test('#98: marca "AI-generated" junto al logo en el encabezado de cada pantalla', () => {
+  for (const p of auditoria.pantallas) assert.equal(p.marcaIAJuntoAlLogo, true, `${p.nombre}: falta la marca AI-generated junto al logo`);
+  const png = fs.readFileSync(R('web', 'assets', 'logo-radar-bcs-ai-generated.png'));
+  assert.equal(png.subarray(1, 4).toString('latin1'), 'PNG');
+});
+
+test('#98: sin nombres de personas reales como ejemplo en las maquetas', () => {
+  for (const p of auditoria.pantallas) assert.deepEqual(p.nombresDeEjemplo, [], `${p.nombre}: ${p.nombresDeEjemplo}`);
+});

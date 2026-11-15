@@ -1,6 +1,6 @@
 {
   "archivo": "Figma \"Radar paceño\" (ae9KMSMZUexeV0dBhDkNR1)",
-  "generado": "2026-11-15T05:24:20.477Z",
+  "generado": "2026-11-15T05:55:24.416Z",
   "pestanas": [
     "Inicio",
     "Clima",
@@ -123,11 +123,11 @@
   "paleta": [
     {
       "color": "#44474d",
-      "usos": 880
+      "usos": 897
     },
     {
       "color": "#ffffff",
-      "usos": 727
+      "usos": 744
     },
     {
       "color": "#000d21",
@@ -299,12 +299,13 @@
       "pestanasActivas": [
         "Agricultura"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 171,
+        "JetBrains Mono": 172,
         "Space Grotesk": 28,
         "Manrope": 41
       },
@@ -314,7 +315,8 @@
         "#51d8e8"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "108:2638",
@@ -332,12 +334,13 @@
       "pestanasActivas": [
         "Agricultura"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 133,
+        "JetBrains Mono": 134,
         "Space Grotesk": 21,
         "Manrope": 38
       },
@@ -347,7 +350,8 @@
         "#006d3d"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "83:2695",
@@ -365,12 +369,13 @@
       "pestanasActivas": [
         "Agricultura"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 44,
+        "JetBrains Mono": 45,
         "Space Grotesk": 9,
         "Manrope": 15
       },
@@ -378,7 +383,8 @@
       "tituloTexto": "Mapa Agrícola",
       "acento": null,
       "botonSimulacion": null,
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "112:3853",
@@ -396,12 +402,13 @@
       "pestanasActivas": [
         "Agricultura"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 73,
+        "JetBrains Mono": 74,
         "Space Grotesk": 30,
         "Manrope": 54
       },
@@ -411,7 +418,8 @@
         "#fbbf24"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "112:3267",
@@ -429,12 +437,13 @@
       "pestanasActivas": [
         "Agricultura"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 93,
+        "JetBrains Mono": 94,
         "Space Grotesk": 17,
         "Manrope": 46
       },
@@ -444,7 +453,8 @@
         "#7ed99e"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "99:2",
@@ -462,12 +472,13 @@
       "pestanasActivas": [
         "Avisos y Alertas"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 71,
+        "JetBrains Mono": 72,
         "Space Grotesk": 20,
         "Manrope": 26
       },
@@ -475,7 +486,8 @@
       "tituloTexto": null,
       "acento": null,
       "botonSimulacion": null,
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "115:446",
@@ -493,12 +505,13 @@
       "pestanasActivas": [
         "Clima"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 96,
+        "JetBrains Mono": 97,
         "Space Grotesk": 17,
         "Manrope": 25
       },
@@ -508,7 +521,8 @@
         "GRADIENT_LINEAR(#fbbf24>#d97706)"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "127:4758",
@@ -526,12 +540,13 @@
       "pestanasActivas": [
         "Clima"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 93,
+        "JetBrains Mono": 94,
         "Space Grotesk": 16,
         "Manrope": 22
       },
@@ -541,7 +556,8 @@
         "GRADIENT_LINEAR(#60a5fa>#0c2340)"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "66:325",
@@ -559,12 +575,13 @@
       "pestanasActivas": [
         "Clima"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 54,
+        "JetBrains Mono": 55,
         "Space Grotesk": 8,
         "Manrope": 16
       },
@@ -572,7 +589,8 @@
       "tituloTexto": "Mapa Meteorológico",
       "acento": null,
       "botonSimulacion": null,
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "127:2407",
@@ -590,12 +608,13 @@
       "pestanasActivas": [
         "Clima"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 80,
+        "JetBrains Mono": 81,
         "Space Grotesk": 10,
         "Manrope": 28
       },
@@ -605,7 +624,8 @@
         "GRADIENT_LINEAR(#f97316>#dc2626)"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "127:1351",
@@ -623,12 +643,13 @@
       "pestanasActivas": [
         "Clima"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 91,
+        "JetBrains Mono": 92,
         "Space Grotesk": 23,
         "Manrope": 25
       },
@@ -638,7 +659,8 @@
         "GRADIENT_LINEAR(#14b8a6>#006d3d)"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "62:2",
@@ -656,6 +678,7 @@
       "pestanasActivas": [
         "Inicio"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
@@ -663,13 +686,14 @@
       "fuentes": {
         "Space Grotesk": 34,
         "Manrope": 14,
-        "JetBrains Mono": 31
+        "JetBrains Mono": 32
       },
       "tituloX": null,
       "tituloTexto": null,
       "acento": null,
       "botonSimulacion": null,
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "141:2396",
@@ -687,12 +711,13 @@
       "pestanasActivas": [
         "Pesca"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 64,
+        "JetBrains Mono": 65,
         "Space Grotesk": 12,
         "Manrope": 75
       },
@@ -702,7 +727,8 @@
         "#4b5f7f"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "131:1008",
@@ -720,12 +746,13 @@
       "pestanasActivas": [
         "Pesca"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 113,
+        "JetBrains Mono": 114,
         "Space Grotesk": 17,
         "Manrope": 39
       },
@@ -735,7 +762,8 @@
         "#1eb8c8"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "90:496",
@@ -753,12 +781,13 @@
       "pestanasActivas": [
         "Pesca"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 43,
+        "JetBrains Mono": 44,
         "Space Grotesk": 8,
         "Manrope": 19
       },
@@ -766,7 +795,8 @@
       "tituloTexto": "Mapa Pesquero",
       "acento": null,
       "botonSimulacion": null,
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "142:3656",
@@ -784,12 +814,13 @@
       "pestanasActivas": [
         "Pesca"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 112,
+        "JetBrains Mono": 113,
         "Space Grotesk": 15,
         "Manrope": 44
       },
@@ -799,7 +830,8 @@
         "#006d3d"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     },
     {
       "id": "124:4511",
@@ -817,12 +849,13 @@
       "pestanasActivas": [
         "Pesca"
       ],
+      "marcaIAJuntoAlLogo": true,
       "footer": {
         "tipo": "INSTANCE",
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "JetBrains Mono": 79,
+        "JetBrains Mono": 80,
         "Space Grotesk": 13,
         "Manrope": 50
       },
@@ -832,7 +865,8 @@
         "#fbbf24"
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
-      "erratas": []
+      "erratas": [],
+      "nombresDeEjemplo": []
     }
   ]
 }

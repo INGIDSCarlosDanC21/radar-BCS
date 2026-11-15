@@ -9,7 +9,7 @@
   const RECEPTOR = 'http://127.0.0.1:8765/guardar?ruta=';
   const PESTANAS = ['Inicio', 'Clima', 'Agricultura', 'Pesca', 'Avisos y Alertas'];
   // Pantallas del conjunto final (lado izquierdo del lienzo). Las de x >= 5000 son borradores.
-  const esFinal = (n) => n.type === 'FRAME' && n.x < 5000 && !['Login', 'Registrar', 'Logo'].includes(n.name);
+  const esFinal = (n) => n.type === 'FRAME' && n.x < 5000 && !['Login', 'Registrar', 'Logo', 'Logo con marca AI-generated'].includes(n.name);
   const seccionDe = (nombre) => {
     if (nombre === 'Inicio') return 'Inicio';
     if (nombre === 'Avisos y Alertas') return 'Avisos y Alertas';
@@ -51,6 +51,7 @@
       seccion: seccionDe(f.name), ancho: Math.round(f.width), alto: Math.round(f.height),
       header: header ? { tipo: header.type, componente: header.mainComponent ? header.mainComponent.name : null, y: Math.round(header.y), alto: Math.round(header.height) } : null,
       pestanasActivas: activas,
+      marcaIAJuntoAlLogo: !!(header && header.findOne((n) => n.name === 'Marca AI-generated' && n.findOne((t) => t.type === 'TEXT' && t.characters === 'AI-generated'))),
       footer: footer ? { tipo: footer.type, componente: footer.mainComponent ? footer.mainComponent.name : null } : null,
       fuentes,
       tituloX: titulo ? Math.round(titulo.absoluteTransform[0][2] - f.absoluteTransform[0][2]) : null,
@@ -58,6 +59,8 @@
       acento: acento ? acento.fills.map(pintura) : null,
       botonSimulacion: boton ? boton.mainComponent.name : null,
       erratas: textos.filter((t) => /simulaciónl|Lorem|DATOS DE PRUEBA/i.test(t)).map((t) => t.slice(0, 60)),
+      // Nombres de personas reales usados como ejemplo (no deben aparecer en maquetas).
+      nombresDeEjemplo: textos.filter((t) => /Bare[ñn]o|Armando Castro/i.test(t)).map((t) => t.slice(0, 60)),
     };
   }
 
@@ -120,6 +123,9 @@
     const login = figma.currentPage.children.find((n) => n.name === 'Login');
     const logo = login && login.findOne((n) => n.name.startsWith('Figure - Brand Logo'));
     if (logo) log.push('logo ' + await enviar('web/assets/logo-radar-bcs.png', await logo.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 3 } })));
+    // Logotipo con la marca visible "AI-generated" al lado (versión que usa el sitio).
+    const conMarca = figma.currentPage.children.find((n) => n.name === 'Logo con marca AI-generated');
+    if (conMarca) log.push('logo con marca ' + await enviar('web/assets/logo-radar-bcs-ai-generated.png', await conMarca.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 3 } })));
     // Íconos de las tarjetas de sección de las pantallas maestras (vectores).
     for (const nombre of ['Clima - Mapa', 'Agricultura - Mapa', 'Pesca - Mapa']) {
       const f = figma.currentPage.children.find((n) => n.name === nombre);
