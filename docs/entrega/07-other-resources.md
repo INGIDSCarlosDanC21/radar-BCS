@@ -29,4 +29,6 @@ TODO: none planned in the repository. Add only if partner agency data is used.
 | CDC, *Five Steps to help your patients stay safe on hot days* | https://www.cdc.gov/heat-health/media/pdfs/2025/09/Five-Heat-Steps-factsheet-508.pdf | Official site; cited only | Heat tips on the Actions screen |
 | EPA WaterSense, *Start Saving* | https://www.epa.gov/watersense/start-saving | Official site; cited only | Water-saving tips on the Actions screen |
 | pytest | https://docs.pytest.org/ | MIT | Tests of the analysis code (development only) |
-| TODO: icons, images, fonts, audio, 3D models | TODO | TODO | TODO |
+| True-color image of Baja California Sur, NASA GIBS, MODIS Terra Corrected Reflectance, 20 April 2025 (no edits other than JPEG recompression; no NASA logos) | https://gibs.earthdata.nasa.gov/ (exact request URL in `web/img/FUENTES.md` of the repository) | CC0, per the NASA Earthdata data use policy: https://www.earthdata.nasa.gov/learn/use-data/data-use-policy | Home screen image |
+| Fonts Space Grotesk, Manrope and JetBrains Mono (loaded from Google Fonts) | https://github.com/google/fonts/tree/main/ofl/ | SIL Open Font License 1.1 | Website typography |
+| TODO: audio, 3D models, icons and the logo (UI/UX, issue #12), and Supabase if the optional login ships | TODO | TODO | TODO |

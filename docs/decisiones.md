@@ -114,3 +114,10 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Reemplaza** la entrada anterior ("la web muestra el aire y la superficie juntos") solo en cuál es el número principal; sigue valiendo que las dos mediciones se ven y que se dice que no coinciden.
 - **Cómo se revierte:** si Carlos prefiere al aire como número principal, es un cambio en `analisis/exportar.py` (indicador `calor`) y en `web/data/indicadores.json`.
 - **Quién decidió:** Carlos (Líder) la acepta el 2026-11-14 sin haberla propuesto; propuesta original de Luca, revisada por Claude e Investigación.
+
+### 2026-11-14 — Login con Supabase: clave publishable en el repo y correo de contacto
+
+- **Contexto:** Programación B implementa un login opcional con Supabase Auth (issue #73). Hacía falta decidir cómo llega la clave publishable a GitHub Pages y qué correo pone el aviso de privacidad para borrar cuentas.
+- **Decisión:** (1) la clave **publishable/anon** de Supabase **sí se sube al repo** (en `web/js/config.js`), porque es pública por diseño y la protegen las reglas de Row Level Security; **nunca** `service_role` ni `sb_secret_`. (2) El correo de contacto del aviso de privacidad para pedir que se borre una cuenta es el que dio Carlos (contactarfloppa@gmail.com). (3) Carlos comprobó que el correo de confirmación de Supabase sí llega.
+- **Condiciones que siguen valiendo:** login opcional, solo correo y contraseña, corte el domingo a las 09:00 (issue #73).
+- **Quién decidió:** Carlos (Líder), 2026-11-14.
