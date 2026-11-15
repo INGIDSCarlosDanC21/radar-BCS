@@ -1,6 +1,6 @@
 # Plan: Clima, lo que falta (domingo 15 de noviembre)
 
-Origen: documento "Plan de acción" de Nevid/Ehileen y el Figma `diseno/pantallas/clima-*.png`. Pide la vista de Clima con el **buscador arriba**, el mapa y **4 tarjetas** (*Calor y sensación térmica*, *Radiación UV y exposición solar*, *Viento, oleaje y corrientes*, *Humedad y lluvia*), con Agro como referencia. Decisión de Carlos (2026-11-15): entra, **solo con datos reales** y con **corte a las 09:30**; si no está verde, se envía sin lo que falte.
+Origen: el documento "Plan de acción" (control de instrucciones que usan Luca y Diego con sus asistentes) y el Figma `diseno/pantallas/clima-*.png`. Pide la vista de Clima con el **buscador arriba**, el mapa y **4 tarjetas** (*Calor y sensación térmica*, *Radiación UV y exposición solar*, *Viento, oleaje y corrientes*, *Humedad y lluvia*), con Agro como referencia. Decisión de Carlos (2026-11-15): entra, **solo con datos reales** y con **corte a las 09:30**; si no está verde, se envía sin lo que falte.
 
 ## 0. Qué ya está (actualizado a las 04:50)
 
@@ -10,7 +10,7 @@ El PR #164 de Ehileen (en `dev`) hizo **la pestaña Mapa como el frame "Clima - 
 
 1. **Buscador y chips de capa arriba del mapa** (como en el Figma): "Buscar ubicación en BCS…" filtra las 7 localidades; chips *General, Calor, Viento, UV, Humedad* cambian lo que dice cada pin.
 2. **Detalle de cada tarjeta, debajo, al tocarla** (patrón de las fichas del Agro): cifras clave del lugar elegido, **curva de 24 horas** y consejos. El enlace actual de cada tarjeta ("Ver consejos contra el calor →", etc.) queda como enlace secundario dentro del detalle.
-3. **Bugs** del documento: la línea dice solo "hu?"; falta que Nevid/Ehileen la aclare en el issue #166.
+3. **Bugs:** la línea del documento dice solo "hu?". Carlos aclaró (2026-11-15) que el documento es solo un control de instrucciones, así que **no hay un bug pendiente que aclarar**.
 
 ## 2. Reparto
 
