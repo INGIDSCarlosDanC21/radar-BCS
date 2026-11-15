@@ -25,4 +25,4 @@
 ## 2026-11-14 (noche): Stitch ya está declarado
 
 - Carlos confirmó que la interfaz se diseña en Google Stitch. Quedó declarado como **Usado** en `docs/RECURSOS.md` (sección IA) y en `docs/entrega/05-use-of-ai.md`.
-- **Tarea para Ehileen y Roberto** (antes del congelamiento de 22:00): anotar en la fila de Stitch de `docs/RECURSOS.md` qué pantallas, imágenes o logotipo salieron de Stitch, y revisar sus términos de uso (qué se puede hacer con lo generado). Lo que sea imagen generada lleva marca visible "AI-generated". Nada de logos ni marca de la NASA.
+- **Tarea para Ehileen y Roberto** (lo antes posible; ya no hay congelamiento): anotar en la fila de Stitch de `docs/RECURSOS.md` qué pantallas, imágenes o logotipo salieron de Stitch, y revisar sus términos de uso (qué se puede hacer con lo generado). Lo que sea imagen generada lleva marca visible "AI-generated". Nada de logos ni marca de la NASA.

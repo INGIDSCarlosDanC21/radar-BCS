@@ -21,7 +21,7 @@
 - Agua: contraste con GLDAS-2.2 CLSM (GWS) y decidir con Carlos cómo se explica que el agua regional suba.
 - Copiar la salida a `web/data/` con `python -m analisis.publicar` en un PR acordado con Diego.
 - Carlos: decidir qué calor se muestra (aire POWER o superficie MODIS).
-- **Pedido del Líder (2026-11-14):** el contrato de datos quedó acordado; lee el *Anexo de Investigación* de `docs/contrato-datos.md` (reglas para lluvia, `p_valor`, nombre del método y zonas de prueba) y exporta los datos reales a `web/data/`. Meta: las 4 pantallas con datos reales hoy a las 20:00; congelar funciones a las 22:00. Detalle en los issues #7 y #8.
+- **Pedido del Líder (2026-11-14):** el contrato de datos quedó acordado; lee el *Anexo de Investigación* de `docs/contrato-datos.md` (reglas para lluvia, `p_valor`, nombre del método y zonas de prueba) y exporta los datos reales a `web/data/`. Meta: las 4 pantallas con datos reales hoy a las 20:00; sin congelamiento de funciones (se trabaja hasta que no se pueda). Detalle en los issues #7 y #8.
 
 ## Bloqueos
 
