@@ -73,6 +73,14 @@ Limits we state on the site:
 - Shows how sure we are about each change, not only the change itself.
 - Gives simple actions for heat and water at the end of the visit.
 
+## Which local problems does it speak to?
+
+- **Water stress and drought:** rainfall (NASA POWER), regional water storage (GRACE and GRACE-FO) and vegetation (MODIS NDVI), with the farm-valley sheets of the Agricultural Map.
+- **Urban heat:** land surface temperature (MODIS Terra and Aqua), air temperature (NASA POWER) and vegetation (MODIS NDVI), at six sample points in La Paz.
+- **Coastal and cyclone risk:** current sea temperature, waves, wind and currents from the Open-Meteo weather and marine models (a model, not NASA satellite data), NASA GIBS satellite imagery, and links to official alerts (SMN and NHC). It is a current-conditions view, not a forecast or an erosion study.
+
+Not included yet: satellite rainfall (GPM), soil moisture (SMAP), air quality (OMI/TROPOMI), sea level and coastline change (Landsat/Sentinel) and urban heat at neighborhood scale (ECOSTRESS). We do not show figures for them.
+
 ## What do you hope to achieve?
 
 We hope residents of La Paz can see for themselves what has changed around them, how certain that change is, and what they can do about it. The target audience is the general public of La Paz, not only specialists. Next steps we would like to take: update the data every year, add more zones of the city, and apply the same method to other cities of Baja California Sur.

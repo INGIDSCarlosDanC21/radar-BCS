@@ -12,6 +12,10 @@ Todo recurso externo (código, texto, imágenes, datos, audio, modelos 3D) se an
 | MODIS MOD13Q1 V061 (NDVI, 250 m) | <https://lpdaac.usgs.gov/products/mod13q1v061/> | **Usado** (2026-11-14): NDVI de 6 zonas 2001-2025 vía AppEEARS; indicador `vegetacion` |
 | JPL GRACE y GRACE-FO Mascon CRI RL06.3Mv04 (agua total almacenada, malla de 0.5°, mensual desde 2002-04), DOI 10.5067/TEMSC-3JC634 | <https://doi.org/10.5067/TEMSC-3JC634> (PO.DAAC; cita: Wiese et al., 2023; datos descargados de PO.DAAC el 2026-11-14) | **Usado** (`analisis/agua.py`): anomalía de agua en la celda de La Paz, tendencia regional. GLDAS-2.2 CLSM (DOI 10.5067/TXBMLX370XX8) quedó previsto como contraste, sin usar |
 | ECOSTRESS (70 m) | <https://ecostress.jpl.nasa.gov/> | Previsto; sin usar todavía |
+| NASA GPM IMERG (precipitación satelital) | <https://gpm.nasa.gov/data/imerg> (comprobado el 2026-11-15) | Previsto; sin usar todavía. Hoy la lluvia sale de NASA POWER, no de GPM |
+| NASA SMAP (humedad del suelo) | <https://smap.jpl.nasa.gov/> (comprobado el 2026-11-15) | Previsto; sin usar todavía |
+| NASA Aura, aerosoles y calidad del aire (instrumento OMI) | <https://science.nasa.gov/mission/aura/> (comprobado el 2026-11-15; la página no nombra OMI, solo aerosoles) | Previsto; sin usar todavía. TROPOMI (Sentinel-5P, ESA): sin URL comprobada |
+| Landsat (NASA/USGS; línea de costa y temperatura urbana) | <https://science.nasa.gov/mission/landsat> (comprobado el 2026-11-15) | Previsto; sin usar todavía. Sentinel (ESA): sin URL comprobada |
 | NASADEM (relieve, 30 m) | <https://lpdaac.usgs.gov/products/nasadem_hgtv001/> | Previsto; sin usar todavía |
 | NASA Earthdata AppEEARS (herramienta de descarga) | <https://appeears.earthdatacloud.nasa.gov/> | **Usado** (2026-11-14): extracción de puntos MODIS (`analisis/appeears.py`) |
 
