@@ -231,3 +231,59 @@ test('#98: marca "AI-generated" junto al logo en el encabezado de cada pantalla'
 test('#98: sin nombres de personas reales como ejemplo en las maquetas', () => {
   for (const p of auditoria.pantallas) assert.deepEqual(p.nombresDeEjemplo, [], `${p.nombre}: ${p.nombresDeEjemplo}`);
 });
+
+// ---------- (g) #144: Inicio con textos verdaderos y estado del cielo con íconos ----------
+const dirCielo = R('web', 'assets', 'iconos', 'cielo');
+const CIELO = ['sunny', 'clear_night', 'partly_cloudy_day', 'partly_cloudy_night', 'cloud', 'foggy', 'rainy_light', 'rainy', 'thunderstorm'];
+
+test('#144: los 9 íconos del cielo existen, son SVG seguros y están documentados con su código WMO', () => {
+  const readme = fs.readFileSync(path.join(dirCielo, 'README.md'), 'utf8');
+  assert.match(readme, /Apache License 2\.0/);
+  for (const n of CIELO) {
+    const t = fs.readFileSync(path.join(dirCielo, n + '.svg'), 'utf8').trim();
+    assert.match(t, /^<svg[\s>][\s\S]*<\/svg>$/, n);
+    assert.doesNotMatch(t, /<script|(href|src)\s*=\s*["']\s*https?:|nasa/i, n);
+    assert.ok(readme.includes('`' + n + '`'), `${n} no aparece en cielo/README.md`);
+  }
+  // Cada código WMO de Open-Meteo tiene ícono en la tabla.
+  for (const c of [0, 1, 2, 3, 45, 48, 51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 71, 73, 75, 77, 80, 81, 82, 85, 86, 95, 96, 99]) {
+    const filas = readme.split('\n').filter((l) => l.startsWith('|')).map((l) => l.split('|')[1] || '');
+    assert.ok(filas.some((celda) => celda.split(/[^0-9]+/).includes(String(c))), `código WMO ${c} sin ícono en la tabla`);
+  }
+});
+
+test('#144: Inicio sin afirmaciones del mockup sin fuente (estaciones, radar, avisos, enlaces inexistentes)', () => {
+  const ini = auditoria.pantallas.find((p) => p.nombre === 'Inicio');
+  assert.deepEqual(ini.afirmacionesSinFuente, []);
+  // El pie es un componente: ninguna pantalla conserva sus enlaces o leyendas falsas.
+  for (const p of auditoria.pantallas) {
+    const pie = p.afirmacionesSinFuente.filter((t) => /API meteorológica|Red de telemetría|Protocolo OGC|Todos los derechos reservados/i.test(t));
+    assert.deepEqual(pie, [], p.nombre);
+  }
+});
+
+test('#144: el mapa de Inicio usa íconos del cielo y la leyenda cubre los 7 estados', () => {
+  const ini = auditoria.pantallas.find((p) => p.nombre === 'Inicio');
+  for (const n of ['sunny', 'partly_cloudy_day', 'cloud', 'foggy', 'rainy_light', 'rainy', 'thunderstorm']) {
+    assert.ok(ini.iconosCielo.includes(n), `falta ${n} en Inicio`);
+  }
+});
+
+test('#144: Inicio · 360 existe, mide 360 px y su PNG es válido', () => {
+  const m = (auditoria.movil || []).find((p) => p.nombre === 'Inicio · 360');
+  assert.ok(m, 'falta el frame "Inicio · 360" en la auditoría');
+  assert.equal(m.ancho, 360);
+  const { ancho } = leerPNG(R(...m.archivo.split('/')));
+  assert.equal(ancho, 720, 'el PNG se exporta a 2x');
+});
+
+test('#144: Inicio · 360 cumple la spec de celular (12 px, 44 px, sin desborde, marca de IA, sin afirmaciones)', () => {
+  const m = auditoria.movil.find((p) => p.nombre === 'Inicio · 360');
+  assert.deepEqual(m.textoMenorA12, [], 'texto menor a 12 px');
+  assert.deepEqual(m.fueraDelAncho, [], 'elementos fuera de los 360 px');
+  for (const t of m.tactiles) assert.ok(t.alto >= 44 && t.ancho >= 44, `${t.nombre}: ${t.ancho}x${t.alto}`);
+  assert.equal(m.marcaIA, true);
+  assert.deepEqual(m.afirmacionesSinFuente, []);
+  assert.deepEqual(Object.keys(m.fuentes).sort(), ['JetBrains Mono', 'Manrope', 'Space Grotesk']);
+  for (const n of ['sunny', 'partly_cloudy_day', 'cloud', 'foggy', 'rainy_light', 'rainy', 'thunderstorm']) assert.ok(m.iconosCielo.includes(n), n);
+});
