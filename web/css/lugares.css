@@ -1,0 +1,9 @@
+/* "Cómo ha cambiado cada lugar" dentro de Clima (lugares.js + mapaVista de app.js). */
+.lugares{padding-top:12px}
+.lugares #mapa-caja{height:540px}
+@media (min-width:640px){.lugares #mapa-caja{height:600px}}
+.lugares h2{margin-top:.2em}
+.lug-mas{margin:6px 0}
+.lug-mas summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:700;color:var(--acento)}
+.lug-mas summary:focus-visible{outline:3px solid var(--acento);outline-offset:2px;border-radius:8px}
+.lug-agua h2{font-size:1.15rem}

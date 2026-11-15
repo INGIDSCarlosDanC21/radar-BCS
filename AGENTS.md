@@ -15,7 +15,7 @@ La herramienta debe responder cuatro preguntas (confirmadas en la página oficia
 | Pregunta | Pantalla | Cómo |
 |---|---|---|
 | ¿Qué cambia? | 1. Inicio | 4 tarjetas: calor, vegetación, lluvia, agua |
-| ¿Dónde? | 2. Mapa | Zonas de La Paz con más cambio |
+| ¿Dónde? | 2. Clima (mapa de lugares) | 38 lugares de BCS (calor del aire y lluvia) y 6 zonas de La Paz (vegetación y calor del suelo); la pestaña Mapa se fusionó con Clima el 2026-11-15 |
 | ¿Cuánto? | 3. Ficha | Cambio total desde 2001 y por década |
 | ¿Es estadísticamente significativo? | 3. Ficha | Mann-Kendall estacional + pendiente de Sen (no llamarlo Hirsch-Slack; ver `docs/investigacion/metodo.md`) |
 | (extra) ¿Qué hago? | 4. Acciones | Consejos contra el calor y para ahorrar agua |

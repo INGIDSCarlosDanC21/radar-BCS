@@ -39,7 +39,7 @@ Cada una de estas piezas responde una pregunta del reto (ver sección 5). Si fal
 
 ## 4. Cada pantalla: qué es, por qué está y qué significa
 
-El menú inferior es **Inicio · Mapa · Clima · Pesca · Más** (en "Más": Agro, Avisos, Acciones). Cada número muestra su fuente.
+El menú inferior es **Inicio · Clima · Pesca · Más** (en "Más": Agro, Avisos, Acciones). Cada número muestra su fuente.
 
 ### Cómo leer los números (vale para todas las fichas)
 
@@ -63,15 +63,11 @@ El menú inferior es **Inicio · Mapa · Clima · Pesca · Más** (en "Más": Ag
   - **Lluvia:** cambia mucho de un año a otro; **no se detecta cambio claro** (p = 0.13). No mostramos pendiente: sería engañosa (la lluvia tiene muchos meses de cero).
   - **Agua (GRACE):** el agua almacenada en la **región** subió unos 1.4 cm (p = 0.009). **No es el acuífero de La Paz**; el satélite ve cientos de kilómetros.
 
-### Mapa
-- **Qué es:** mapa de las **zonas de La Paz** (6 puntos) con íconos por estado (sube, baja, sin cambio, sin datos), indicadores, búsqueda de un lugar (Nominatim/OpenStreetMap) y "Mira La Paz desde el espacio" (fotos de la NASA año por año).
-- **Por qué está:** responde **¿dónde?**.
-- **Qué significa:** son **6 puntos de muestra** (un píxel de 1 km cada uno), no polígonos de colonias. La búsqueda envía lo que escribes a Nominatim; el mapa lo avisa.
-
-### Clima
-- **Qué es:** mapa meteorológico de BCS con los lugares, buscador, 4 tarjetas (calor y sensación térmica, UV y sol, viento-oleaje-corrientes, humedad y lluvia) y su detalle con curva de 12 h hacia atrás y adelante; al tocar un lugar cambian las cifras.
-- **Por qué está:** el vecino pregunta "¿qué hago hoy?". Complementa las tendencias con **contexto de hoy**.
-- **Qué significa:** son valores de un **modelo** (Open-Meteo), **no de estaciones**. La sensación térmica se muestra sin etiqueta de peligro porque no hallamos una fuente primaria para un nivel; el UV usa la escala de la OMS.
+### Clima (incluye el antiguo Mapa)
+- **Qué es:** tres bloques en una sola pantalla. (1) El mapa meteorológico de BCS con buscador y 4 tarjetas (calor y sensación térmica, UV y sol, viento-oleaje-corrientes, humedad y lluvia) y su detalle con curva de 12 h hacia atrás y adelante; al tocar un lugar cambian las cifras.
+ (2) "Ver el cielo moverse": imágenes reales de satélite de la NASA en secuencia, nubes de las últimas 3 horas o lluvia estimada de las últimas 6, que arrancan solas. (3) "Cómo ha cambiado cada lugar": el mapa de **38 lugares de BCS** con el cambio de calor del aire y de lluvia de 2001 a 2025, las **6 zonas de La Paz** (vegetación y calor del suelo), el dato **regional** del agua, la búsqueda de un lugar y "Mira La Paz desde el espacio" (fotos de la NASA año por año).
+- **Por qué está:** el vecino pregunta "¿qué hago hoy?" (contexto de hoy) y "¿dónde cambió más?" (mapa de lugares, que responde el **¿dónde?** del reto).
+- **Qué significa:** las 4 tarjetas son valores de un **modelo** (Open-Meteo), **no de estaciones**; la sensación térmica no lleva etiqueta de peligro porque no hallamos fuente primaria, y el UV usa la escala de la OMS. Las nubes y la lluvia de la animación son imágenes reales (no pronóstico). En el mapa de lugares el calor del aire subió en los 38 (de +0.6 a +1.5 °C, todos significativos) y la lluvia solo muestra aumento claro en 8 lugares de Los Cabos; en los demás no se detecta cambio. Los 38 lugares caen en **21 celdas de ~50 km** de NASA POWER: los que comparten celda tienen la misma cifra y la pantalla lo dice. El agua no se reparte por lugar porque GRACE mide cientos de km. La búsqueda envía lo que escribes a Nominatim y la pantalla lo avisa.
 
 ### Pesca
 - **Qué es:** mapa de 8 puertos con oleaje, viento o temperatura del mar, control de hora y animación de las horas del día, y cuatro fichas (estado del mar, condiciones, viento costero, clorofila).
@@ -99,14 +95,14 @@ El menú inferior es **Inicio · Mapa · Clima · Pesca · Más** (en "Más": Ag
 | Pregunta del reto | Nuestra respuesta | Dónde |
 |---|---|---|
 | **¿Qué está cambiando?** | Calor (aire +1.5 °C), vegetación (baja), lluvia (sin cambio claro), agua regional (sube) | Inicio y fichas |
-| **¿Dónde?** | En 6 puntos de La Paz: por ejemplo, la vegetación baja en cuatro y sube un poco en Oriente y Sur | Mapa |
+| **¿Dónde?** | En 38 lugares de BCS (calor del aire y lluvia) y 6 puntos de La Paz (vegetación: baja en cuatro y sube un poco en Oriente y Sur) | Clima, "Cómo ha cambiado cada lugar" |
 | **¿Cuánto?** | Cambio total desde 2001 y por década, con cifra y unidades | Fichas |
 | **¿Es significativo?** | Sí para aire, vegetación y agua regional; **no** para lluvia; **no concluyente** para la superficie | Fichas |
 
 **Los 4 elementos de una respuesta exitosa del reto, y cómo los cumplimos:**
 
 1. **Variables con posible tendencia:** temperatura del aire y de superficie, NDVI, lluvia, agua almacenada.
-2. **Una región concreta:** La Paz, B.C.S., con 6 puntos de muestra.
+2. **Una región concreta:** La Paz y Baja California Sur: 38 lugares para calor del aire y lluvia (21 celdas de NASA POWER) y 6 puntos de muestra en La Paz para vegetación.
 3. **Serie de tiempo larga:** 25 años (2001-2025; agua 2002-2026) con gráfica.
 4. **Análisis estadístico básico:** pendiente de Sen y Mann-Kendall estacional, con valor p; mostramos también cuando **no** hay cambio claro (el reto lo considera válido).
 

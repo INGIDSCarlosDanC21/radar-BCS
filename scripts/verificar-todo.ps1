@@ -6,7 +6,7 @@
     1. pytest de analisis
     2. python -m analisis.validar  (contrato de datos + campos *_en)
     3. node --test de web/tests y de diseno/tests (si existen)
-    4. web/data/{indicadores.json,zonas.geojson,zonas_tendencias.json} idénticos a data/salida/
+    4. web/data/{indicadores.json,zonas.geojson,zonas_tendencias.json,localidades_tendencias.json} idénticos a data/salida/
     5. ningún archivo del repo pesa más de 5 MB
   Al final imprime un resumen y sale con código 1 si algo falló.
   Python: usa $env:PYTHON si está definido; si no, "python" (o "py"). Requiere pytest y las dependencias de analisis/requirements.txt.
@@ -55,7 +55,7 @@ else {
 }
 
 Paso "4/5 web/data idéntico a data/salida"
-foreach ($nombre in "indicadores.json", "zonas.geojson", "zonas_tendencias.json") {
+foreach ($nombre in "indicadores.json", "zonas.geojson", "zonas_tendencias.json", "localidades_tendencias.json") {
   $origen = Join-Path $raiz "data/salida/$nombre"
   $copia = Join-Path $raiz "web/data/$nombre"
   if (-not (Test-Path $origen)) { Falla "falta data/salida/$nombre (corre python -m analisis.exportar y python -m analisis.zonas)"; continue }

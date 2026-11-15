@@ -226,3 +226,12 @@ Se ordena lo que ya existe en 3 problemas; sin pantallas ni cifras nuevas.
 | Calor urbano y aire | Temperatura de superficie (MODIS Terra y Aqua), temperatura del aire (POWER), NDVI | ECOSTRESS/Landsat urbano, aerosoles (OMI/TROPOMI) |
 
 Regla: no decir que la lluvia es de GPM ni que la TSM es de MODIS; hoy son POWER y el modelo marino.
+
+## La pestaña Mapa se fusionó con Clima y hay 38 lugares (Carlos, 2026-11-15)
+
+- **Decisión:** se elimina la pestaña Mapa; su contenido vive en Clima como "Cómo ha cambiado cada lugar" (`#mapa` redirige a `#clima/zonas`). Menú: Inicio · Clima · Pesca · Más.
+- **Más lugares:** de 6 zonas a 38 localidades de BCS (GeoNames, 5 municipios) para **calor del aire** y **lluvia** con NASA POWER por celda (`analisis/localidades.py`, `data/salida/localidades_tendencias.json`). Las 38 caen en **21 celdas** de ~50 km: las que comparten celda muestran la misma cifra y se declara.
+- **La Paz** usa el mismo punto que `indicadores.json` (24.14, -110.31), que cae justo en el borde de dos celdas; así coincide con Inicio (+1.465 °C; lluvia p = 0.129).
+- **Agua:** solo regional (GRACE, cientos de km): panel con la cifra regional, no pines vacíos. **Vegetación** y **calor del suelo** siguen siendo las 6 zonas MODIS de La Paz; la zona de calor se llama "calor del suelo" para no mezclarla con el aire.
+- **Resultado:** el aire subió en las 38 (+0.62 a +1.47 °C, todas significativas); la lluvia solo muestra aumento claro en 8 lugares de Los Cabos (3 celdas) y sin cambio claro en el resto. No se explica por qué.
+- **Pendiente:** NDVI y superficie MODIS para las nuevas localidades (requiere AppEEARS por punto); lluvia con IMERG 0.1° (issue #188, Luca) podría afinar La Paz.

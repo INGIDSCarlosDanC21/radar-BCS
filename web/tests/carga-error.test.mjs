@@ -58,11 +58,3 @@ test('si se bloquea agricola.json: el error agrícola queda visible', async () =
   assert.match(main.innerHTML, /bloqueado/);
   assert.equal(main.getAttribute('aria-busy'), null);
 });
-
-test('si Leaflet no carga: el mapa avisa y la lista de zonas sigue', async () => {
-  const { main, els } = await arrancar({ hash: '#mapa', fetchFalso: (u) => respuesta(datos[u]) });
-  assert.equal(main.getAttribute('aria-busy'), null);
-  assert.match(els['aviso-mapa'].innerHTML, /class="aviso"/);
-  assert.equal(els['mapa-caja'].hidden, true);
-  assert.match(els.resumen.innerHTML, /<ol class="top">/);
-});

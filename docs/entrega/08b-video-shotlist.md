@@ -13,7 +13,7 @@ Reemplaza la versión de la mañana. **Decisión de Carlos (2026-11-15): pantall
 | 0:00 | Tarjeta de título "Radar BCS · OptiPaz" y luego **Inicio** con las 4 tarjetas (calor, vegetación, lluvia, agua) | "In La Paz, heat, water and the sea touch everyone. Radar BCS turns NASA data into answers." (17) |
 | 0:06 | **Ficha de Calor:** cifra del aire (+1.5 °C) y el "p < 0.001" a la vista | "Air temperature rose about 1.5 degrees since 2001, a statistically significant change." (12) |
 | 0:12 | **Ficha de Lluvia** ("no se detecta cambio claro") | "Where we are unsure, we say it: rainfall shows no clear change." (12) |
-| 0:17 | **Mapa de zonas** con los pines por estado | "The map shows where, across six zones." (7) |
+| 0:17 | **Mapa de lugares** (Clima) con los pines por estado | "The map shows where, across 38 places." (7) |
 | 0:21 | **Clima** (4 tarjetas) y un vistazo a **Pesca** con la pastilla "modelo, no oficial" | "Today's sea and weather are model estimates, not official warnings." (10) |
 | 0:26 | Texto: enlace de la web + "Data: NASA POWER · MODIS · GRACE · GIBS" | "What changed, not why. Radar BCS." (6) |
 
