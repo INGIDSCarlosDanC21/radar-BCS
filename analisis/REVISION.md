@@ -8,7 +8,7 @@ Para revisores (Luca e Investigación). Las cifras salen de `data/salida/indicad
 pip install -r analisis/requirements.txt
 python -m analisis.exportar --calor-hasta 2021     # escribe indicadores.json y zonas_tendencias.json
 python -m analisis.zonas --calor-hasta 2021        # escribe zonas.geojson
-python -m pytest analisis       # 23 funciones test_ (agua 5, modis 3, pipeline 11, zonas_appeears 4)
+python -m pytest analisis       # 48 pruebas
 ```
 
 Opcional: `python -m analisis.appeears descargar` baja los CSV de AppEEARS (requiere `.env`; no se leyó).
@@ -47,8 +47,8 @@ Pendiente de verificar contra la fuente: los valores de NDVI y de POWER T2M (no 
 ## Discrepancias detectadas (para revisar)
 
 - Agua, décadas: el JSON etiqueta `2022-2026` pero el promedio solo cubre 2022-2025 (así lo explica la `limitacion`).
-- `texto-ficha-agua.md` cita Spearman 0.52 (p = 0.018, 20 años) entre lluvia y agua: POR VERIFICAR, no hay código de ese cálculo en `analisis/`.
-- `PLAN.md` menciona `correlated_seasonal_test` para calor y vegetación; el código de `exportar.py` no lo usa (solo `tendencia_estacional_correlacionada` en agua).
+- Spearman 0.52 (p = 0.018, n = 20) entre lluvia y agua: ya lo calcula `python -m analisis.correlacion` (con prueba). Es una asociación, no una causa.
+- `correlated_seasonal_test` se usó como contraste para calor y vegetación (tabla de `PLAN.md`); `exportar.py` lo publica solo en agua.
 
 ## No pude verificar
 
