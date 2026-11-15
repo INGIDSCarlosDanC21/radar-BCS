@@ -1,9 +1,9 @@
 /* Datos en vivo para Pesca y Avisos (docs/PLAN-PESCA-AVISOS.md). ES5, sin build.
-   - Mar: Open-Meteo Marine (modelo de ~9 km, no boyas), CC BY 4.0. Viento, lluvia (código WMO) y UV: Open-Meteo Forecast.
+   - Mar: Open-Meteo Marine (modelo, no boyas; resolución sin confirmar), CC BY 4.0. Viento, lluvia (código WMO) y UV: Open-Meteo Forecast.
    - Clima (docs/PLAN-CLIMA.md): una tercera petición, solo si se pide cargar({clima:true}), para los 8 pueblos.
    - Una llamada de cada una para los 8 puertos, con ayer, hoy y 2 días más (96 horas). Caché de 10 min en sessionStorage.
    - Nunca se inventa un dato: un valor que falta queda en null y la pantalla dice "sin dato".
-   Puntos de mar elegidos y comprobados el 2026-11-15: la rejilla marina es de ~9 km y dos puntos de prueba cayeron en tierra. */
+   Puntos de mar elegidos y comprobados el 2026-11-15: la rejilla marina es gruesa (resolución sin confirmar) y dos puntos de prueba cayeron en tierra. */
 (function () {
   'use strict';
   var ZONA = 'America/Mazatlan';   // hora de La Paz, B.C.S.

@@ -67,6 +67,11 @@ Probar: `pip install -r analisis/requirements.txt`, `python -m analisis.exportar
 - Qué hice: acomodé los 3 problemas en `docs/decisiones.md`, entrega 01, 04 y 06, `RECURSOS.md` y `datasets.md`. Lo no usado quedó "previsto" sin cifras.
 - Falta: URL de TROPOMI/Sentinel (ESA, no respondió), DOI y resolución de los previstos, y decidir si se agrega alguno con datos.
 
+## Datos para las fichas del mapa pesquero (2026-11-15, prog-a/pesca-datos, issue #190)
+- Qué hice: tabla verificada en `docs/investigacion/datos-pesca.md`, muestras reales en `web/tests/fixtures/` y filas en `RECURSOS.md`. Verificado: Open-Meteo (oleaje, presión, visibilidad, CAPE, rocío, orto/ocaso, sin nulos en 8 puertos, CORS `*`), NHC (sin CORS), USNO. Clorofila y SST numéricas por punto funcionan en ERDDAP pero sin CORS.
+- No disponible: mareas oficiales abiertas de BCS, feeds de SMN/PC/SEMAR, vedas como dato abierto. Tallas mínimas sin verificar (DOF dio error de certificado).
+- Falta: leer DOF y CONAPESCA desde un navegador; elegir puntos en mar abierto por puerto; probar CORS desde el navegador; Diego decide qué pedir en `web/`. Nada en `data/`.
+
 ## Lluvia por celda con IMERG (2026-11-15, prog-a/lluvia-imerg, issue #188)
 - Qué hice: `analisis/imerg.py` recorta 288 meses (2001-2024) de 25 celdas de 0.1° con OPeNDAP (necesita `EARTHDATA_TOKEN` en `.env`) y calcula Mann-Kendall y Sen sobre el total anual. Resultado: ninguna celda con tendencia significativa (p de 0.11 a 0.44; pendientes de -2 a -4 mm/año, no significativas). Media anual de 195 a 275 mm por celda; POWER da 274 mm en el punto de La Paz (mismo orden de magnitud). Pruebas en `analisis/tests/test_imerg.py` (5 pasan).
 - Falta: contar cuántas celdas cubren las 6 zonas, exportar a `data/salida/` si Carlos lo aprueba, limitaciones de IMERG en la ficha de datos (costa, relieve, cambios de satélites), y decidir si se usa el Mann-Kendall estacional de `metodo.md` en vez del anual.

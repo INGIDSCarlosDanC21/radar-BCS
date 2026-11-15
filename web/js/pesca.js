@@ -1,5 +1,5 @@
 /* Pestaña Pesca (docs/PLAN-PESCA-AVISOS.md). ES5, sin build.
-   Mapa de iconos de 8 puertos con oleaje, viento y temperatura del mar de un MODELO (Open-Meteo Marine, ~9 km; no son boyas),
+   Mapa de iconos de 8 puertos con oleaje, viento y temperatura del mar de un MODELO (Open-Meteo Marine; no son boyas),
    control de hora con "Iniciar simulación" y 4 mosaicos cortos. Sin gráficas, sin tablas, sin textos largos.
    El "semáforo" del Figma pasa a "Estado del mar (modelo)": verde, amarillo o rojo con la escala de Douglas y de Beaufort
    (web/js/reglas-mar.js). No es una bandera oficial y así se rotula. La capa de clorofila es de NASA GIBS (VIIRS NOAA-20). */
@@ -20,7 +20,7 @@
 
   var TX = {
     es: {
-      'pes.kicker': 'Ahora · modelo marino Open-Meteo (no son boyas)', 'pes.act': 'Modelo de ~9 km · hora de La Paz',
+      'pes.kicker': 'Ahora · modelo marino Open-Meteo (no son boyas)', 'pes.act': 'Modelo marino · hora de La Paz',
       'pes.sub': 'Oleaje, viento y temperatura del mar en los puertos de BCS.',
       'pes.puerto': 'Puerto', 'pes.var': 'Dato en el mapa', 'pes.v.ola': 'Oleaje', 'pes.v.viento': 'Viento', 'pes.v.sst': 'Temp. del mar',
       'pes.mapaReg': 'Mapa de puertos de Baja California Sur con iconos de oleaje, viento o temperatura del mar',
@@ -37,7 +37,7 @@
       'pes.ley.verde': 'Verde', 'pes.ley.amarillo': 'Amarillo', 'pes.ley.rojo': 'Rojo',
       'pes.ley.ola.verde': 'menos de 1.25 m', 'pes.ley.ola.amarillo': '1.25 a 2.5 m', 'pes.ley.ola.rojo': '2.5 m o más',
       'pes.ley.viento.verde': 'menos de 22 kt', 'pes.ley.viento.amarillo': '22 a 33 kt', 'pes.ley.viento.rojo': '34 kt o más',
-      'pes.nota': 'Estimación de un modelo de ~9 km, no es un aviso oficial. Consulta a la Capitanía de Puerto (SEMAR). Datos del mar: Open-Meteo.com (CC BY 4.0).',
+      'pes.nota': 'Estimación de un modelo, no es un aviso oficial. Consulta a la Capitanía de Puerto (SEMAR). Datos del mar: Open-Meteo.com (CC BY 4.0).',
       'pes.cargando': 'Cargando el modelo marino…',
       'pes.error': 'No se pudo cargar el modelo marino (¿sin conexión?). El resto de la web no cambia.',
       'pes.f.ver': 'Ver detalle', 'pes.f.cerrar': 'Cerrar', 'pes.f.dictT': 'LECTURA DEL MODELO (NO OFICIAL)', 'pes.f.fuentes': 'Fuentes',
@@ -58,7 +58,7 @@
       'pes.pinOla': '{n}: oleaje {v}, {e}', 'pes.pinViento': '{n}: viento {v}, {e}', 'pes.pinSst': '{n}: temperatura del mar {v}'
     },
     en: {
-      'pes.kicker': 'Now · Open-Meteo marine model (not buoys)', 'pes.act': '~9 km model · La Paz time',
+      'pes.kicker': 'Now · Open-Meteo marine model (not buoys)', 'pes.act': 'Marine model · La Paz time',
       'pes.sub': 'Waves, wind and sea temperature at the ports of BCS.',
       'pes.puerto': 'Port', 'pes.var': 'Data on the map', 'pes.v.ola': 'Waves', 'pes.v.viento': 'Wind', 'pes.v.sst': 'Sea temp.',
       'pes.mapaReg': 'Map of ports of Baja California Sur with icons for waves, wind or sea temperature',
@@ -75,7 +75,7 @@
       'pes.ley.verde': 'Green', 'pes.ley.amarillo': 'Yellow', 'pes.ley.rojo': 'Red',
       'pes.ley.ola.verde': 'under 1.25 m', 'pes.ley.ola.amarillo': '1.25 to 2.5 m', 'pes.ley.ola.rojo': '2.5 m or more',
       'pes.ley.viento.verde': 'under 22 kt', 'pes.ley.viento.amarillo': '22 to 33 kt', 'pes.ley.viento.rojo': '34 kt or more',
-      'pes.nota': 'Estimate from a ~9 km model, not an official warning. Check with the Port Captaincy (SEMAR). Sea data: Open-Meteo.com (CC BY 4.0).',
+      'pes.nota': 'Estimate from a model, not an official warning. Check with the Port Captaincy (SEMAR). Sea data: Open-Meteo.com (CC BY 4.0).',
       'pes.cargando': 'Loading the marine model…',
       'pes.error': 'The marine model could not be loaded (offline?). The rest of the site does not change.',
       'pes.f.ver': 'See details', 'pes.f.cerrar': 'Close', 'pes.f.dictT': 'MODEL READING (NOT OFFICIAL)', 'pes.f.fuentes': 'Sources',
