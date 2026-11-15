@@ -38,6 +38,8 @@
 .cl-pin-izq{flex-direction:row-reverse;transform:translate(calc(-100% + 14px),-50%);padding:4px 8px 4px 10px}
 .cl-pin-arriba{transform:translate(-14px,-100%)}
 .cl-pin-izq.cl-pin-arriba{transform:translate(calc(-100% + 14px),-100%)}
+.cl-pin-abajo{transform:translate(-14px,0)}
+.cl-pin-izq.cl-pin-abajo{transform:translate(calc(-100% + 14px),0)}
 .cl-leyenda{background:#fff;border-radius:12px;margin:12px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.15)}
 .cl-leyenda ul{list-style:none;margin:8px 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 12px}
 .cl-leyenda li{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:16px;color:#000d21}
