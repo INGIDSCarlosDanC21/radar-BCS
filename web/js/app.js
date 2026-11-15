@@ -89,16 +89,18 @@
     pintar();
   }
 
-  /* Qué mide cada capa por zona (MODIS vía AppEEARS). nota: aviso bajo la lista de zonas.
-     Calor por zona usa 2001-2021, igual que la ficha (corte por la deriva de Terra, decisiones.md 2026-11-14). */
+  /* Qué mide cada capa por zona (MODIS vía AppEEARS). nota: aviso junto al mapa y la lista.
+     Calor por zona: superficie Terra 2001-2021, solo orientativa (opción B, decisiones.md 2026-11-15):
+     la ficha de calor es la del aire, así que el periodo sale de zonas.geojson y no se dice "tendencia clara". */
   var CAPA_ZONA = {
-    calor: { que: t('mapa.calor.que'), fuente: t('mapa.calor.fuente'), nota: t('mapa.calor.nota') },
+    calor: { que: t('mapa.calor.que'), fuente: t('mapa.calor.fuente'), nota: t('mapa.calor.nota'), titulo: t('mapa.calor.tit'), orientativo: true, periodoZonas: true },
     vegetacion: { que: t('mapa.veg.que'), fuente: t('mapa.veg.fuente') }
   };
 
   /* Periodo de la capa: cada producto llega a su propio año (calor 2001-2021, NDVI 2001-2026);
      el periodo global de zonas.geojson es el de calor, así que se toma el de la ficha. */
-  function periodoCapa(i) {
+  function periodoCapa(i, cfg) {
+    if (cfg && cfg.periodoZonas && ZONAS.periodo) return ZONAS.periodo.inicio + '–' + ZONAS.periodo.fin;
     var p = i.fuente && i.fuente.periodo;
     if (p) return p.replace('-', '–');
     return ZONAS.periodo ? ZONAS.periodo.inicio + '–' + ZONAS.periodo.fin : t('mapa.periodoPend');
@@ -112,6 +114,8 @@
     var m = 0;
     ZONAS.features.forEach(function (f) { var c = cz(f); if (c && c.cambio_total != null && c.significativo !== false) m = Math.max(m, Math.abs(c.cambio_total)); });
     function zonaTexto(c) { return c.significativo === false ? t('reg.sinCambio') : signo(c.cambio_total, un); }
+    // Capa orientativa (calor): nunca "tendencia clara"; la nota va arriba de la lista.
+    function zonaEtiqueta(c) { return cfg && cfg.orientativo ? t('mapa.orient') : etiqueta(c.significativo === undefined ? null : c.significativo)[0]; }
     var caja = document.getElementById('mapa-caja');
     if (typeof L === 'undefined') {
       document.getElementById('aviso-mapa').innerHTML = '<p class="aviso">' + t('mapa.sinMapa') + '</p>';
@@ -131,9 +135,8 @@
           },
           onEachFeature: function (f, l) {
             var c = cz(f) || {};
-            var e = etiqueta(c.significativo === undefined ? null : c.significativo);
             l.bindPopup('<strong>' + esc(D(f.properties, 'nombre')) + '</strong>' + prueba + '<br>' + esc(tit(i)) + ': ' +
-              esc(zonaTexto(c)) + '<br>' + e[0]);
+              esc(zonaTexto(c)) + '<br>' + esc(zonaEtiqueta(c)));
           }
         }).addTo(mapa);
         mapa.fitBounds(capa.getBounds());
@@ -149,6 +152,8 @@
         ley += '<span><i style="background:' + color(v, m) + '"></i>' + esc(signo(v, un)) + '</span>';
       });
     }
+    if (ZONAS.features.some(function (f) { var c = cz(f); return c && c.cambio_total != null && c.significativo === false; }))
+      ley += '<span><i class="sincambio"></i>' + t('mapa.leySinCambio') + '</span>';
     ley += '<span><i class="sindatos"></i>' + t('mapa.leySinDatos') + '</span>';
     document.getElementById('leyenda').innerHTML = ley;
 
@@ -161,8 +166,9 @@
       return Math.abs(cb.cambio_total) - Math.abs(ca.cambio_total);
     }).slice(0, esPrueba ? 5 : undefined);
     var hayClaro = lista.some(function (f) { return cz(f).significativo === true; });
-    var r = '<h2>' + (esPrueba ? t('mapa.hPrueba') : hayClaro ? t('mapa.hMas') : t('mapa.hZonas')) + esc(tit(i)) + '</h2>';
+    var r = '<h2>' + (cfg && cfg.titulo ? esc(cfg.titulo) : (esPrueba ? t('mapa.hPrueba') : hayClaro ? t('mapa.hMas') : t('mapa.hZonas')) + esc(tit(i))) + '</h2>';
     if (cfg) r += '<p>' + esc(cfg.que) + '</p>';
+    if (cfg && cfg.nota && lista.length) r += '<p class="nota-limite">' + esc(cfg.nota) + '</p>';
     if (!lista.length) {
       r += '<p class="aviso">' + esc(t('mapa.regional', { t: tit(i).toLowerCase() })) + '</p>';
     } else {
@@ -170,17 +176,16 @@
       lista.forEach(function (f) {
         var c = cz(f), zt = zonaTexto(c);
         r += '<li><strong>' + esc(D(f.properties, 'nombre')) + '</strong>' + prueba + ': ' +
-          (c.significativo === false ? esc(zt) : '<span class="' + clase(c.cambio_total) + '">' + esc(zt) + '</span> — ' + etiqueta(c.significativo)[0]) + '</li>';
+          (c.significativo === false ? esc(zt) : '<span class="' + clase(c.cambio_total) + '">' + esc(zt) + '</span> — ' + esc(zonaEtiqueta(c))) + '</li>';
       });
       r += '</ol>';
-      if (cfg && cfg.nota) r += '<p class="nota-limite">' + esc(cfg.nota) + '</p>';
     }
     r += '<p><a href="#ficha/' + esc(id) + '">' + esc(t('mapa.verFicha', { t: tit(i).toLowerCase() })) + '</a></p>';
     document.getElementById('resumen').innerHTML = r;
     var nota = ZONAS.features[0] && ZONAS.features[0].properties.nota;
     document.getElementById('fuente-mapa').textContent = (esPrueba ?
       t('mapa.piePrueba') :
-      cfg ? t('gen.fuente', { f: cfg.fuente }) + ', ' + periodoCapa(i) + t('mapa.pieMetodo') : '') +
+      cfg ? t('gen.fuente', { f: cfg.fuente }) + ', ' + periodoCapa(i, cfg) + t('mapa.pieMetodo') : '') +
       t('mapa.pieBase');
   }
 
