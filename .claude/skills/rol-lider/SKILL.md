@@ -49,7 +49,7 @@ Antes: abrir la URL pública sin sesión iniciada y comprobar las 4 pantallas en
 
 **Dom 15 nov 13:00. "Submit for Judging" (meta interna, para practicar)**
 - [ ] Formulario completo en la plataforma, **Lock** activado y "Submit for Judging" pulsado con una hora de margen.
-- [ ] Confirmación en pantalla de la plataforma vista y guardada en captura; enlaces verificados sin sesión iniciada.
+- [ ] Banner de confirmación ("Project Submitted for Judging") visto y guardado en captura; enlaces verificados sin sesión iniciada. Lista completa: `docs/entrega/CHECKLIST-ENVIO.md`.
 
 **Dom 15 nov 23:59. Hora límite oficial de entrega**
 (Confirmada por Carlos como límite oficial. La evaluación del jurado es a las 17:00, por eso se entrega antes.)
