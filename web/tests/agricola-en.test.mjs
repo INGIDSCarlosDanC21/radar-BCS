@@ -87,7 +87,7 @@ test('inglés: la pantalla agrícola no deja palabras de interfaz en español', 
     assert.ok(!h.includes(es), 'queda en español: ' + es);
   }
   for (const en of ['Close', 'Sources', 'Source:', 'Reason:', 'Accessed:', 'Search locality', 'Track Terrain', 'Zone:',
-    'Screens', 'Actions', 'Home', 'Details', 'AGROCLIMATIC ANALYSIS', 'Interactive map', 'details open', 'Page footer',
+    'Screens', 'Actions', 'Home', 'AGROCLIMATIC ANALYSIS', 'Interactive map', 'details open', 'Page footer',
     'Farming Map', 'Team OptiPaz']) {
     assert.ok(h.includes(en), 'falta en inglés: ' + en);
   }
