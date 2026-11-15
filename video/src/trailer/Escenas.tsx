@@ -2,7 +2,10 @@
 // porque se monta dentro de su <Sequence>. Los tiempos absolutos de la voz están en guion.ts.
 import { AbsoluteFill, Easing, Img, interpolate, staticFile } from 'remotion';
 import { COLOR, FUENTE_CUERPO, FUENTE_MONO, FUENTE_TITULO } from '../estilo';
-import { CIFRA_CALOR, LUGARES, P_CALOR, P_LLUVIA, PALABRAS_APERTURA } from '../guion';
+import { CIFRA_CALOR, LUGARES, MOMENTOS as M, P_CALOR, P_LLUVIA, PALABRAS_APERTURA, TRAILER_ESCENAS as E } from '../guion';
+
+// Convierte un momento ABSOLUTO de guion.ts a segundos locales de una escena.
+const local = (abs: number, escena: { desde: number }) => abs - escena.desde;
 import { Barras, Chyron, CL, Cromatica, ENTRA, SUAVE, useDeriva, useSeg } from './comun';
 import { aFoto, CAJA_FOTO, LUGARES_38, SERIE_CALOR, SERIE_LLUVIA } from './datos';
 import { Telefono } from './Telefono';
@@ -108,7 +111,7 @@ export const Apertura: React.FC = () => {
       <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', scale: `${salida}`, opacity: interpolate(t, [2.7, 3], [1, 0], CL) }}>
         <div style={{ display: 'flex', gap: 56, alignItems: 'baseline' }}>
           {PALABRAS_APERTURA.map((p, i) => {
-            const q = interpolate(t, [p.en - 0.05, p.en + 0.3], [0, 1], { ...CL, easing: SUAVE });
+            const q = interpolate(t, [local(p.en, E.apertura) - 0.05, local(p.en, E.apertura) + 0.3], [0, 1], { ...CL, easing: SUAVE });
             const colores = [NARANJA, COLOR.cian, '#7fb2ff'];
             return (
               <div key={p.texto} style={{ display: 'flex', alignItems: 'baseline', gap: 56 }}>
@@ -191,11 +194,12 @@ export const Titulo: React.FC = () => {
 export const Calor: React.FC = () => {
   const t = useSeg();
   const d = useDeriva('calor', 7);
-  const dur = 6;
-  const cuenta = interpolate(t, [0.5, 2.6], [0, 1.47], { ...CL, easing: Easing.out(Easing.cubic) });
-  const dibujo = interpolate(t, [1.0, 4.0], [0, 1], { ...CL, easing: Easing.inOut(Easing.quad) });
-  const sello = interpolate(t, [4.0, 4.25], [0, 1], { ...CL, easing: Easing.out(Easing.back(2)) });
-  const marcador = interpolate(t, [4.2, 4.7], [0, 100], { ...CL, easing: SUAVE });
+  const dur = E.calor.hasta - E.calor.desde;
+  const k = (abs: number) => local(abs, E.calor);
+  const cuenta = interpolate(t, [k(M.contadorDesde), k(M.contadorHasta)], [0, 1.47], { ...CL, easing: Easing.out(Easing.cubic) });
+  const dibujo = interpolate(t, [k(M.graficaDesde), k(M.graficaHasta)], [0, 1], { ...CL, easing: Easing.inOut(Easing.quad) });
+  const sello = interpolate(t, [k(M.sello), k(M.sello) + 0.25], [0, 1], { ...CL, easing: Easing.out(Easing.back(2)) });
+  const marcador = interpolate(t, [k(M.sello) + 0.2, k(M.sello) + 0.7], [0, 100], { ...CL, easing: SUAVE });
   // gráfica: valores reales de SERIE_CALOR (web/data/indicadores.json)
   const W = 860;
   const H = 250;
@@ -231,12 +235,12 @@ export const Calor: React.FC = () => {
               lineHeight: 1,
               color: '#fff',
               marginTop: 18,
-              textShadow: `0 0 50px rgba(255,138,61,${interpolate(t, [2.2, 2.7], [0.2, 0.9], CL)})`,
+              textShadow: `0 0 50px rgba(255,138,61,${interpolate(t, [k(M.contadorHasta) - 0.4, k(M.contadorHasta) + 0.1], [0.2, 0.9], CL)})`,
               fontVariantNumeric: 'tabular-nums',
-              opacity: interpolate(t, [0.4, 0.6], [0, 1], CL),
+              opacity: interpolate(t, [k(M.contadorDesde) - 0.1, k(M.contadorDesde) + 0.1], [0, 1], CL),
             }}
           >
-            {t < 2.6 ? `+${cuenta.toFixed(2)} °C` : CIFRA_CALOR}
+            {t < k(M.contadorHasta) ? `+${cuenta.toFixed(2)} °C` : CIFRA_CALOR}
           </div>
           <svg width={W + 120} height={H + 70} style={{ marginTop: 26, overflow: 'visible' }}>
             <defs>
@@ -291,7 +295,8 @@ export const Calor: React.FC = () => {
 export const Lluvia: React.FC = () => {
   const t = useSeg();
   const d = useDeriva('lluvia', 5);
-  const dur = 3.5;
+  const dur = E.lluvia.hasta - E.lluvia.desde;
+  const k = (abs: number) => local(abs, E.lluvia);
   const vals = SERIE_LLUVIA.map((p) => p.valor);
   const max = Math.max(...vals);
   const W = 1000;
@@ -309,7 +314,7 @@ export const Lluvia: React.FC = () => {
           rotY={interpolate(t, [0, dur], [-30, -16])}
           rotX={6}
           rotZ={-2}
-          desenfoque={interpolate(t, [1.3, 1.7], [0, 5], CL)}
+          desenfoque={interpolate(t, [k(M.noClearChange) - 0.2, k(M.noClearChange) + 0.2], [0, 5], CL)}
         />
         <div style={{ position: 'absolute', left: 110, top: 120 }}>
           <Chyron texto="RAINFALL · LA PAZ · 2001–2025 · MM PER YEAR" mono={FUENTE_MONO} color="#8fc8ff" />
@@ -323,10 +328,10 @@ export const Lluvia: React.FC = () => {
             <text x={0} y={H + 40} fill="rgba(255,255,255,0.7)" fontFamily={FUENTE_MONO} fontSize={20}>{SERIE_LLUVIA[0].anio}</text>
             <text x={W} y={H + 40} fill="rgba(255,255,255,0.7)" fontFamily={FUENTE_MONO} fontSize={20} textAnchor="end">{SERIE_LLUVIA[SERIE_LLUVIA.length - 1].anio}</text>
           </svg>
-          <Sube t={t} en={1.5} dur={0.5} style={{ marginTop: 30 }}>
+          <Sube t={t} en={k(M.noClearChange)} dur={0.5} style={{ marginTop: 30 }}>
             <div style={{ fontFamily: FUENTE_TITULO, fontSize: 120, color: '#fff', lineHeight: 1 }}>No clear change</div>
           </Sube>
-          <Sube t={t} en={2.0}>
+          <Sube t={t} en={k(M.pLluvia)}>
             <div style={{ fontFamily: FUENTE_MONO, fontSize: 30, color: '#8fc8ff', marginTop: 14, letterSpacing: 2 }}>{P_LLUVIA} · NOT STATISTICALLY SIGNIFICANT</div>
           </Sube>
         </div>
@@ -338,9 +343,10 @@ export const Lluvia: React.FC = () => {
 // ─── 5. MAPA (15.5–18.5 s): satélite inclinado + 38 pines en cascada ────────────────────────
 export const Mapa: React.FC = () => {
   const t = useSeg();
-  const dur = 3;
+  const dur = E.mapa.hasta - E.mapa.desde;
+  const k = (abs: number) => local(abs, E.mapa);
   const ordenados = [...LUGARES_38].sort((a, b) => b.lat - a.lat); // de norte a sur
-  const apareceEn = (i: number) => 0.5 + Math.floor(i / 10) * 0.5 + (i % 10) * 0.04; // olas en 16.0, 16.5, 17.0, 17.5
+  const apareceEn = (i: number) => k(M.pinesDesde) + Math.floor(i / 10) * M.pinesPaso + (i % 10) * 0.04; // 4 oleadas
   const visibles = ordenados.filter((_, i) => t >= apareceEn(i)).length;
   const lp = aFoto(24.14, -110.31);
   const escala = 1.15;
@@ -380,7 +386,7 @@ export const Mapa: React.FC = () => {
             fontSize: 30,
             color: '#fff',
             textShadow: '0 2px 10px #000',
-            opacity: interpolate(t, [2.0, 2.3], [0, 1], CL),
+            opacity: interpolate(t, [k(M.laPaz), k(M.laPaz) + 0.3], [0, 1], CL),
           }}
         >
           La Paz
@@ -395,7 +401,7 @@ export const Mapa: React.FC = () => {
         <Sube t={t} en={0.4}>
           <div style={{ fontFamily: FUENTE_TITULO, fontSize: 64, color: COLOR.cian, letterSpacing: 8 }}>PLACES</div>
         </Sube>
-        <Sube t={t} en={2.1}>
+        <Sube t={t} en={k(M.laPaz)}>
           <div style={{ fontFamily: FUENTE_MONO, fontSize: 22, color: COLOR.azulGris, marginTop: 20, letterSpacing: 2 }}>
             AIR HEAT AND RAIN TRENDS · {LUGARES} PLACES
           </div>
@@ -409,24 +415,29 @@ export const Mapa: React.FC = () => {
 export const Avisos: React.FC = () => {
   const t = useSeg();
   const d = useDeriva('avisos', 10, 0.8);
-  const plano = t < 0.5 ? 0 : t < 1.0 ? 1 : t < 1.5 ? 2 : 3;
+  const k = (abs: number) => local(abs, E.avisos);
+  const fin = E.avisos.hasta - E.avisos.desde;
+  const me = k(M.modelEstimates); // corte al plano final (texto)
+  const no = k(M.notOfficial);
+  // tres planos rápidos repartidos antes de 'model estimates'
+  const plano = t < me / 3 ? 0 : t < (2 * me) / 3 ? 1 : t < me ? 2 : 3;
   return (
     <AbsoluteFill style={{ background: FONDO, overflow: 'hidden' }}>
       {plano === 0 ? (
         <>
-          <Telefono captura="tomas/toma5a-clima.png" desdePx={interpolate(t, [0, 0.5], [0, 120])} ancho={760} x={1180 + d.x} y={interpolate(t, [0, 0.5], [760, 680])} rotZ={-7} rotX={18} rotY={-10} />
+          <Telefono captura="tomas/toma5a-clima.png" desdePx={interpolate(t, [0, me / 3], [0, 120])} ancho={760} x={1180 + d.x} y={interpolate(t, [0, me / 3], [760, 680])} rotZ={-7} rotX={18} rotY={-10} />
           <Chyron texto="TODAY'S WEATHER" mono={FUENTE_MONO} style={{ position: 'absolute', left: 110, top: 150, fontSize: 30 }} />
         </>
       ) : null}
       {plano === 1 ? (
         <>
-          <Telefono captura="tomas/toma5a-clima.png" desdePx={interpolate(t, [0.5, 1.0], [420, 560])} ancho={1300} x={760 + d.x} y={560 + d.y} rotY={16} rotX={4} rotZ={3} escala={interpolate(t, [0.5, 1.0], [1, 1.08])} />
+          <Telefono captura="tomas/toma5a-clima.png" desdePx={interpolate(t, [me / 3, (2 * me) / 3], [420, 560])} ancho={1300} x={760 + d.x} y={560 + d.y} rotY={16} rotX={4} rotZ={3} escala={interpolate(t, [me / 3, (2 * me) / 3], [1, 1.08])} />
           <Chyron texto="MODEL ESTIMATE" mono={FUENTE_MONO} style={{ position: 'absolute', right: 110, top: 150, fontSize: 30 }} />
         </>
       ) : null}
       {plano === 2 ? (
         <>
-          <Telefono captura="tomas/toma5b-pesca.png" desdePx={interpolate(t, [1.0, 1.5], [0, 180])} ancho={560} x={1300 + d.x} y={600} rotY={-24} rotX={10} rotZ={5} />
+          <Telefono captura="tomas/toma5b-pesca.png" desdePx={interpolate(t, [(2 * me) / 3, me], [0, 180])} ancho={560} x={1300 + d.x} y={600} rotY={-24} rotX={10} rotZ={5} />
           <Chyron texto="TODAY'S SEA" mono={FUENTE_MONO} style={{ position: 'absolute', left: 110, top: 150, fontSize: 30 }} />
         </>
       ) : null}
@@ -437,15 +448,15 @@ export const Avisos: React.FC = () => {
             desdePx={3162 - 40}
             ancho={1150}
             x={1260 + d.x}
-            y={interpolate(t, [1.5, 3.5], [640, 560]) + d.y}
-            rotY={interpolate(t, [1.5, 3.5], [-14, -6])}
+            y={interpolate(t, [me, fin], [640, 560]) + d.y}
+            rotY={interpolate(t, [me, fin], [-14, -6])}
             rotX={8}
             rotZ={2}
-            desenfoque={interpolate(t, [1.5, 1.9, 2.0, 2.4], [12, 0, 0, 7], CL)}
+            desenfoque={interpolate(t, [me, me + 0.4, no + 0.1, no + 0.5], [12, 0, 0, 7], CL)}
           />
           <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(0,13,33,0.95) 0%, rgba(0,13,33,0.7) 45%, rgba(0,13,33,0) 75%)' }} />
           <div style={{ position: 'absolute', left: 110, top: 300 }}>
-            <Sube t={t} en={1.55}>
+            <Sube t={t} en={me + 0.05}>
               <div style={{ fontFamily: FUENTE_TITULO, fontSize: 92, color: '#fff' }}>Model estimates.</div>
             </Sube>
             <div style={{ position: 'relative', marginTop: 16, display: 'inline-block' }}>
@@ -455,14 +466,14 @@ export const Avisos: React.FC = () => {
                   left: -14,
                   top: 10,
                   bottom: 4,
-                  width: `calc(${interpolate(t, [2.0, 2.5], [0, 100], { ...CL, easing: SUAVE })}% + ${interpolate(t, [2.0, 2.1], [0, 28], CL)}px)`,
+                  width: `calc(${interpolate(t, [no + 0.15, no + 0.65], [0, 100], { ...CL, easing: SUAVE })}% + ${interpolate(t, [no + 0.15, no + 0.25], [0, 28], CL)}px)`,
                   background: COLOR.cian,
                   borderRadius: 8,
                   rotate: '-1deg',
                 }}
               />
-              <Sube t={t} en={1.85}>
-                <div style={{ position: 'relative', fontFamily: FUENTE_TITULO, fontSize: 92, color: t > 2.3 ? COLOR.tinta : '#fff' }}>Not official warnings.</div>
+              <Sube t={t} en={no}>
+                <div style={{ position: 'relative', fontFamily: FUENTE_TITULO, fontSize: 92, color: t > no + 0.45 ? COLOR.tinta : '#fff' }}>Not official warnings.</div>
               </Sube>
             </div>
           </div>
@@ -475,19 +486,22 @@ export const Avisos: React.FC = () => {
 // ─── 7. CIERRE (22–28 s): "What changed, not why." + logo con destellos + URL ───────────────
 export const Cierre: React.FC<{ url: string; fuentes: string }> = ({ url, fuentes }) => {
   const t = useSeg();
-  const sube = interpolate(t, [1.4, 1.9], [0, 1], { ...CL, easing: SUAVE });
-  const logo = interpolate(t, [1.5, 2.0], [0, 1], { ...CL, easing: Easing.out(Easing.back(1.6)) });
-  const barrido = interpolate(t, [1.9, 2.6], [-40, 140], CL);
-  const rayos = interpolate(t, [1.5, 1.7, 3.0], [0, 1, 0], CL);
+  const k = (abs: number) => local(abs, E.cierre);
+  const lg = k(M.logo);
+  const fin = E.cierre.hasta - E.cierre.desde;
+  const sube = interpolate(t, [lg - 0.1, lg + 0.4], [0, 1], { ...CL, easing: SUAVE });
+  const logo = interpolate(t, [lg, lg + 0.5], [0, 1], { ...CL, easing: Easing.out(Easing.back(1.6)) });
+  const barrido = interpolate(t, [lg + 0.4, lg + 1.1], [-40, 140], CL);
+  const rayos = interpolate(t, [lg, lg + 0.2, lg + 1.5], [0, 1, 0], CL);
   return (
-    <AbsoluteFill style={{ background: FONDO, overflow: 'hidden', scale: `${interpolate(t, [0, 6], [1, 1.06])}` }}>
+    <AbsoluteFill style={{ background: FONDO, overflow: 'hidden', scale: `${interpolate(t, [0, fin], [1, 1.06])}` }}>
       <Img src={staticFile('bcs-modis.jpg')} style={{ position: 'absolute', left: -100, top: -200, width: 2200, opacity: 0.16, filter: 'blur(10px) saturate(0.5)', scale: `${1 + t * 0.015}` }} />
       <AbsoluteFill style={{ alignItems: 'center', transformOrigin: 'top center', top: interpolate(sube, [0, 1], [330, 150]), scale: `${interpolate(sube, [0, 1], [1, 0.62])}` }}>
         <div style={{ display: 'flex', gap: 34 }}>
-          <Sube t={t} en={0.0} dur={0.4}>
+          <Sube t={t} en={k(M.cierreFrase1)} dur={0.4}>
             <div style={{ fontFamily: FUENTE_TITULO, fontSize: 150, color: '#fff' }}>What changed,</div>
           </Sube>
-          <Sube t={t} en={0.5} dur={0.4}>
+          <Sube t={t} en={k(M.cierreFrase2)} dur={0.4}>
             <div style={{ fontFamily: FUENTE_TITULO, fontSize: 150, color: COLOR.cian }}>not why.</div>
           </Sube>
         </div>
@@ -506,19 +520,19 @@ export const Cierre: React.FC<{ url: string; fuentes: string }> = ({ url, fuente
       {/* chispas */}
       {Array.from({ length: 14 }).map((_, i) => {
         const a = (i / 14) * Math.PI * 2 + i;
-        const r = interpolate(t, [1.5, 2.6], [80, 420 + (i % 3) * 90], { ...CL, easing: Easing.out(Easing.cubic) });
-        const o = interpolate(t, [1.5, 1.7, 2.6], [0, 1, 0], CL);
+        const r = interpolate(t, [lg, lg + 1.1], [80, 420 + (i % 3) * 90], { ...CL, easing: Easing.out(Easing.cubic) });
+        const o = interpolate(t, [lg, lg + 0.2, lg + 1.1], [0, 1, 0], CL);
         return <div key={i} style={{ position: 'absolute', left: 960 + Math.cos(a) * r * 1.4, top: 576 + Math.sin(a) * r * 0.6, width: 8, height: 8, borderRadius: 4, background: '#fff', boxShadow: `0 0 16px ${COLOR.cian}`, opacity: o }} />;
       })}
       <div style={{ position: 'absolute', left: 0, right: 0, top: 760, textAlign: 'center' }}>
-        <Sube t={t} en={2.5}>
+        <Sube t={t} en={k(M.url)}>
           <div style={{ fontFamily: FUENTE_MONO, fontSize: 40, color: '#fff', letterSpacing: 1 }}>{url}</div>
         </Sube>
-        <Sube t={t} en={3.0}>
+        <Sube t={t} en={k(M.fuentes)}>
           <div style={{ fontFamily: FUENTE_MONO, fontSize: 26, color: COLOR.cian, marginTop: 12, letterSpacing: 2 }}>{fuentes}</div>
         </Sube>
       </div>
-      <AbsoluteFill style={{ background: '#000', opacity: interpolate(t, [5.4, 5.9], [0, 1], CL) }} />
+      <AbsoluteFill style={{ background: '#000', opacity: interpolate(t, [fin - 0.6, fin - 0.1], [0, 1], CL) }} />
     </AbsoluteFill>
   );
 };

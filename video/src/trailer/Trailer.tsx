@@ -3,7 +3,7 @@
 import { Audio } from '@remotion/media';
 import { AbsoluteFill, interpolate, Sequence, staticFile, Track, useCurrentFrame, useVideoConfig } from 'remotion';
 import { FUENTE_CUERPO } from '../estilo';
-import { FUENTES_DATOS, LECHO, SENALES, SUBTITULOS, TRAILER_ESCENAS as E, URL_WEB } from '../guion';
+import { FUENTES_DATOS, LECHO, SENALES, MOMENTOS as M, SUBTITULOS, TRAILER_DURACION_S, TRAILER_ESCENAS as E, URL_WEB } from '../guion';
 import { CL, Destello, FugaLuz, Gradacion, Grano, Vineta } from './comun';
 import { Apertura, Avisos, Calor, Cierre, Lluvia, Mapa, Titulo } from './Escenas';
 
@@ -48,8 +48,9 @@ const BandaInferior: React.FC = () => (
 // entre 25.4 y 26.4 s, y fundido a 0 en 27.5–28 s junto con la imagen.
 const volumenLecho = (f: number, fps: number) => {
   const t = f / fps;
-  const sube = interpolate(t, [25.4, 26.4], [0.2, 1], CL);
-  return sube * interpolate(t, [27.5, 28], [1, 0], CL);
+  const finVoz = SUBTITULOS[SUBTITULOS.length - 1].hasta + 0.2; // fin real de la voz (25.4 s hoy)
+  const sube = interpolate(t, [finVoz, finVoz + 1], [0.2, 1], CL);
+  return sube * interpolate(t, [TRAILER_DURACION_S - 0.5, TRAILER_DURACION_S], [1, 0], CL);
 };
 
 export const TrailerRadarBCS: React.FC<PropsTrailer> = ({ audios, hayNarracion }) => {
@@ -85,14 +86,14 @@ export const TrailerRadarBCS: React.FC<PropsTrailer> = ({ audios, hayNarracion }
         </Sequence>
       </Track>
       <Track name="Efectos">
-        <FugaLuz desde={0.3} hasta={2.8} tono="calido" max={0.55} />
-        <FugaLuz desde={3.0} hasta={4.3} tono="cian" max={0.6} />
-        <FugaLuz desde={23.3} hasta={25.3} tono="calido" max={0.45} />
-        <Destello en={3.0} />
-        <Destello en={6.0} color="#ffb070" max={0.6} />
-        <Destello en={15.5} color="#9fe8ff" max={0.55} />
-        <Destello en={20.0} color="#ffffff" max={0.35} dur={0.15} />
-        <Destello en={22.0} max={0.7} />
+        <FugaLuz desde={E.apertura.desde + 0.3} hasta={E.titulo.desde - 0.2} tono="calido" max={0.55} />
+        <FugaLuz desde={E.titulo.desde} hasta={E.titulo.desde + 1.3} tono="cian" max={0.6} />
+        <FugaLuz desde={M.logo - 0.2} hasta={M.logo + 1.8} tono="calido" max={0.45} />
+        <Destello en={E.titulo.desde} />
+        <Destello en={E.calor.desde} color="#ffb070" max={0.6} />
+        <Destello en={E.mapa.desde} color="#9fe8ff" max={0.55} />
+        <Destello en={M.modelEstimates} color="#ffffff" max={0.35} dur={0.15} />
+        <Destello en={E.cierre.desde} max={0.7} />
         <Vineta />
         <Grano />
         <BandaInferior />

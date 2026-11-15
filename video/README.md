@@ -19,6 +19,20 @@ Pasos (desde `video/`):
 
 Código del tráiler en `src/trailer/`: `Trailer.tsx` (capas, subtítulos, audio), `Escenas.tsx` (las 7 escenas), `Telefono.tsx` (teléfono 3D con transformaciones CSS y la captura real como pantalla), `comun.tsx` (grano, viñeta, destellos, fugas de luz, gradación, aberración cromática), `datos.ts` (lee la serie anual real de `web/data/indicadores.json` y las coordenadas de `web/data/localidades_tendencias.json`). Los efectos se hicieron con CSS/SVG (no con `@remotion/effects` ni Three.js) para que se vean igual en el render sin GPU y para no depender de paquetes con licencia no declarada (`@remotion/effects` dice `"license": "UNLICENSED"` en su `package.json`).
 
+### Re-tiempo cuando cambie la voz (solo se edita `src/guion.ts`)
+
+Ningún componente tiene tiempos de voz escritos a mano: todo sale de `src/guion.ts`.
+
+1. Copia la voz nueva a `public/narracion.mp3` y mide su duración: `npx remotion ffprobe -v error -show_entries format=duration -of csv=p=0 public/narracion.mp3` (máximo ~27 s para que quepa el cierre; el video sigue en 28 s, `TRAILER_DURACION_S`).
+2. Mide cuándo empieza cada frase. Opción rápida (pausas): `ffmpeg -i public/narracion.mp3 -af silencedetect=n=-35dB:d=0.08 -f null - 2>&1 | findstr silence_end` (cada `silence_end` es el inicio de un tramo de voz). Opción por palabra: Whisper con marcas de tiempo, p. ej. `npx remotion add @remotion/install-whisper-cpp` y su `transcribe()` con `tokenLevelTimestamps`, o la alineación forzada de ElevenLabs (como se hizo el 2026-11-15).
+3. En `src/guion.ts` actualiza, en este orden:
+   - `SUBTITULOS`: `desde`/`hasta` de cada frase (y el texto si cambió; el último `hasta` también mueve la subida del lecho al final).
+   - `PALABRAS_APERTURA`: segundo en que se oye HEAT, WATER y SEA.
+   - `MOMENTOS`: contador (`contadorDesde`/`contadorHasta`), gráfica, `sello` (p < 0.001), `noClearChange`, `pLluvia`, `pinesDesde`/`pinesPaso` (38 pines en 4 oleadas), `laPaz`, `modelEstimates`, `notOfficial`, frases del cierre, `logo`, `url`, `fuentes`.
+   - `TRAILER_ESCENAS`: los cortes (múltiplos de 0.5 s, sin huecos). Mueve un corte solo si la frase de esa escena ya no cabe.
+   - `SENALES` se recalcula solo a partir de escenas y momentos; solo cambia sus volúmenes si hace falta.
+4. Revisa en Studio (`npm run dev` → `RadarBCSTrailer`) y renderiza como en los pasos 6 y 7 (render + normalización de sonoridad + `ebur128`).
+
 La composición vertical anterior (`RadarBCS30s`, abajo) se conserva como respaldo.
 
 ---
