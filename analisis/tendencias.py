@@ -49,6 +49,12 @@ def tendencia_estacional(mat, alfa=ALFA):
             "significativo": bool(r.h), "tau": float(r.Tau)}
 
 
+def tendencia_estacional_correlacionada(mat, alfa=ALFA):
+    """Contraste: MK estacional que corrige la autocorrelación entre meses (p más conservador)."""
+    r = mk.correlated_seasonal_test(mat.reshape(-1), period=12, alpha=alfa)
+    return {"pendiente_por_anio": float(r.slope), "p_valor": float(r.p), "significativo": bool(r.h)}
+
+
 def tendencia_anual(serie, alfa=ALFA):
     """MK simple y Sen sobre una serie ANUAL (para lluvia: los ceros mensuales anulan el Sen estacional)."""
     v = np.asarray(serie, dtype=float)

@@ -12,6 +12,7 @@
 | `exportar.py` | Escribe `data/salida/indicadores.json` según `docs/contrato-datos.md` |
 | `modis.py` | CSV de AppEEARS (6 zonas) -> matrices mensuales con filtro de calidad |
 | `appeears.py` | Cliente de AppEEARS (credenciales en `.env`) |
+| `agua.py` | GRACE/GRACE-FO (JPL Mascon CRI) de PO.DAAC: baja el netCDF con tus credenciales de `.env` y extrae la celda de La Paz |
 | `zonas.py` | `data/salida/zonas.geojson`: cada zona es el píxel MODIS de 1 km donde se midió |
 | `publicar.py` | Copia la salida a `web/data/` (úsalo en un PR aparte, avisando a Prog. B) |
 | `tests/` | Pruebas con series sintéticas y validación del contrato |
@@ -28,7 +29,7 @@ python -m pytest analisis
 ## Estado
 
 - Calor y lluvia salen de NASA POWER (MERRA-2, ~50 km; reanálisis, no medición local). El calor es temperatura del aire, no de superficie.
-- Vegetación sale de MODIS MOD13Q1 (NDVI, 6 zonas). Agua (GRACE/GLDAS) va como `null`: no está en AppEEARS y falta confirmar el producto (ver `PLAN.md`).
+- Vegetación sale de MODIS MOD13Q1 (NDVI, 6 zonas). Agua sale de GRACE/GRACE-FO (tendencia regional, desde 2002; ver `PLAN.md`).
 - Código generado con IA (Claude); se declara en `generado_con` de cada salida.
 
 ## Prototipo NASA POWER (referencia de Investigación, no es el pipeline final)
