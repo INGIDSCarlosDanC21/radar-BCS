@@ -265,3 +265,24 @@ test('sin afirmaciones oficiales inventadas: ni bandera, ni decretos, ni "alta b
   const f = ['js/pesca.js', 'js/avisos.js', 'js/reglas-mar.js'].map(leer).join('\n').replace(/ag-dictamen(-t|-txt)?/g, 'ag-caja');
   assert.doesNotMatch(f, /Bandera Amarilla|decreta|Alta Biomasa|Zona Favorable|dictamen/i);
 });
+
+test('datos-vivos: las peticiones traen las variables nuevas de las fichas (presión, visibilidad, lluvia, CAPE, rocío, sol, mar de viento, nivel del mar)', () => {
+  const p = new URL(V.urlPron()), m = new URL(V.urlMar());
+  for (const k of ['pressure_msl', 'visibility', 'precipitation_probability', 'cape', 'dew_point_2m']) assert.ok(p.searchParams.get('hourly').split(',').includes(k), k);
+  assert.equal(p.searchParams.get('daily'), 'sunrise,sunset');
+  for (const k of ['wind_wave_height', 'wind_wave_period', 'sea_level_height_msl']) assert.ok(m.searchParams.get('hourly').split(',').includes(k), k);
+});
+test('Pesca: las fichas de condiciones y clima costero muestran las cifras nuevas tal cual y "sin dato" si faltan', () => {
+  T.setLang('es');
+  const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30'), p = JSON.parse(JSON.stringify(datos.puertos[0]));
+  const sin = Pesca.fichas(p, idx, 'cl', false, '2026-11-14', datos.horas[idx]);
+  assert.match(sin, /sin dato/); assert.doesNotMatch(sin, /NaN|undefined/);
+  const n = datos.horas.length, rep = (v) => Array.from({ length: n }, () => v);
+  Object.assign(p.s, { pres: rep(998.4), vis: rep(24000), pll: rep(35), cape: rep(120), rocio: rep(15.2), olaV: rep(0.6), perV: rep(4), nivel: rep(0.45) });
+  p.sol = [{ fecha: datos.horas[idx].slice(0, 10), amanecer: '2026-11-15T06:36', anochecer: '2026-11-15T17:34' }];
+  const cl = Pesca.fichas(p, idx, 'cl', false, '2026-11-14', datos.horas[idx]);
+  assert.match(cl, /998[.,]4 hPa/); assert.match(cl, /24[.,]0 km/); assert.match(cl, /35 %/); assert.match(cl, /120 J\/kg/); assert.match(cl, /15[.,]2 °C/);
+  assert.match(cl, /06:36/); assert.match(cl, /17:34/); assert.match(cl, /Cambio en 3 h/);
+  const oc = Pesca.fichas(p, idx, 'oc', false, '2026-11-14', datos.horas[idx]);
+  assert.match(oc, /0[.,]6 m/); assert.match(oc, /0[.,]5 m|0[.,]4 m/); assert.match(oc, /No es la tabla oficial de mareas/);
+});

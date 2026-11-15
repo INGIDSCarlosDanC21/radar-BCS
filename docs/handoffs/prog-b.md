@@ -176,3 +176,4 @@ Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agric
 - **Diferencia con Agrícola:** la ficha abierta no cambia la URL (`#pesca/<id>`), para no recrear el mapa con el router.
 - **Lluvia y agua por zona:** #189 (Luca) sigue abierto y no exporta nada a `data/`; la tabla de zonas no cambia hasta que haya dato por zona.
 - **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro de las fichas.
+- **Actualización (datos de #190 integrados en #191):** `datos-vivos.js` pide también mar de viento, nivel del mar con marea (modelo), presión, visibilidad, probabilidad de lluvia, CAPE, punto de rocío y amanecer/atardecer. La ficha de condiciones muestra mar de viento y nivel del mar (rotulado "no es la tabla oficial"); la de clima costero, presión con cambio en 3 h, lluvia y CAPE, visibilidad y rocío, y sol. Lo que falta sigue como "Pendiente". Verificado en navegador a 360 y 1280 px; 162 pruebas.
