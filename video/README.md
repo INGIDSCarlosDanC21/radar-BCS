@@ -2,7 +2,7 @@
 
 Video vertical 1080 × 1920, 30 fps, 27 s, para el campo de demo de la entrega. Guion y reglas: [`docs/entrega/08b-video-shotlist.md`](../docs/entrega/08b-video-shotlist.md) y [`08c-brief-video.md`](../docs/entrega/08c-brief-video.md).
 
-Lleva: capturas de nuestra web pública (en inglés), subtítulos en inglés quemados, la línea fija "AI-generated voice (ElevenLabs)" arriba durante todo el video, tarjeta de título y de cierre con la paleta de la web. Sin personas, sin logos de la NASA (solo se escribe "NASA"); el logo de Radar BCS aparece solo en su versión con la marca "AI-generated".
+Lleva: capturas de nuestra web pública (en inglés), subtítulos en inglés quemados, tarjeta de título y de cierre con la paleta de la web. Sin personas, sin logos de la NASA (solo se escribe "NASA"); el logo de Radar BCS aparece en su versión limpia. **Sin etiquetas de IA en pantalla** (decisión de Carlos, 2026-11-15, ver `docs/decisiones.md`): la declaración de la voz (ElevenLabs) va en la descripción del video, en `docs/entrega/05-use-of-ai.md`, en `docs/RECURSOS.md` y en el campo de IA de la plataforma.
 
 Remotion tiene licencia propia: es gratis para individuos, organizaciones sin fines de lucro y empresas de hasta 3 empleados ([LICENSE.md](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md)). Este es un proyecto no comercial de un hackatón y lo renderiza una persona (Carlos).
 
@@ -18,7 +18,7 @@ Requisitos: Node.js 20.19+ y Google Chrome. Todo desde la carpeta `video/`, salv
 4. **Previsualizar**: `npm run dev` (abre Remotion Studio en el navegador). Revisa que los subtítulos coincidan con la voz.
 5. **Renderizar**: `npm run render` → `video/out/radar-bcs-30s.mp4`. La primera vez Remotion baja su navegador. Si no existe `narracion.mp3`, renderiza igual **en silencio** y lo avisa en la consola (sirve solo como prueba).
 6. **Medir la duración** (no a ojo): `npm run duracion` (debe decir 30 o menos; hoy da `27.000000`). La de la voz: `npm run duracion:voz`. Al renderizar, la consola también imprime `Narración: X s; video: 27 s`.
-7. **Subir**: YouTube "no listado" o Google Drive con "cualquier persona con el enlace". Descripción: `Radar BCS (OptiPaz, NASA Space Apps 2026, La Paz). Narration is an AI-generated voice (ElevenLabs). Screen footage is our own website. Data: NASA POWER, MODIS, GRACE, GIBS.` Abre el enlace en una ventana de incógnito (sin sesión) para comprobar que es público y pégalo en el campo de demo.
+7. **Subir**: YouTube "no listado" o Google Drive con "cualquier persona con el enlace". Descripción (aquí va la declaración de IA, no en pantalla): `Radar BCS (OptiPaz, NASA Space Apps 2026, La Paz). Narration is an AI-generated voice (ElevenLabs). Screen footage is our own website. Data: NASA POWER, MODIS, GRACE, GIBS.` Abre el enlace en una ventana de incógnito (sin sesión) para comprobar que es público y pégalo en el campo de demo.
 
 ## Si la voz dura distinto
 
@@ -39,10 +39,10 @@ Repite las capturas: `node scripts/capturar-video.mjs` y vuelve a renderizar. La
 
 - `src/guion.ts`: texto, tiempos, planos (lo único que normalmente se edita).
 - `src/Root.tsx`: composición `RadarBCS30s`; detecta si hay narración y lee `public/tomas/tomas.json`.
-- `src/Video.tsx`: una secuencia por toma, subtítulos, línea de IA y audio.
+- `src/Video.tsx`: una secuencia por toma, subtítulos y audio.
 - `src/escenas/`: `TarjetaTitulo`, `TomaPantalla` (captura con scroll/fundido), `TarjetaCierre`.
-- `src/componentes/`: `LineaIA`, `Subtitulos`.
+- `src/componentes/`: `Subtitulos`.
 - `src/estilo.ts`: paleta y fuentes de la web (Space Grotesk, Manrope, JetBrains Mono; SIL OFL 1.1).
-- `public/logo-radar-bcs-ai-generated.png`: copia del logo del sitio con su marca "AI-generated".
+- `public/logo-radar-bcs.png`: copia del logo del sitio (versión limpia, sin marca en pantalla).
 
 Las capturas (`public/tomas/`, ~3.4 MB), la voz y `out/` no se suben al repo.

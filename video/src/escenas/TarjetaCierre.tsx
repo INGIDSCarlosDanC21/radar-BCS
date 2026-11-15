@@ -28,7 +28,7 @@ export const TarjetaCierre: React.FC = () => {
         }}
       >
         <div style={{ backgroundColor: COLOR.blanco, borderRadius: 32, padding: '28px 34px' }}>
-          <Img name="Logo Radar BCS (AI-generated)" src={staticFile('logo-radar-bcs-ai-generated.png')} style={{ width: 700, display: 'block' }} />
+          <Img name="Logo Radar BCS" src={staticFile('logo-radar-bcs.png')} style={{ width: 700, display: 'block' }} />
         </div>
         <Interactive.Div
           name="Enlace de la web"
