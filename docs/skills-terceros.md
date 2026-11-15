@@ -96,6 +96,15 @@ Verificada e **incluida** (antes estaba como "no confirmada"): `hazard-risk-map`
 
 Del repo K-Dense-AI no se incluyeron las otras ~167 skills (bioinformatica, quimica, etc., fuera de alcance). Ojo: no existe una skill `xarray` ni `rasterio` en ese indice; el trabajo con rasters/NetCDF se cubre con `geomaster` + `geopandas`.
 
+## Herramientas de video (2026-11-15, instaladas solo en la computadora del Líder, no en el repo)
+
+| Herramienta | Origen | Versión | Licencia | Uso | Escaneo (skillspector, estático) |
+|---|---|---|---|---|---|
+| remotion-best-practices (skills de Remotion) | remotion-dev/skills, commit 7e541aa (2026-11-11), instalada en `~/.claude/skills/` | 4.0.543 | La del repo no se declara en la página; **Remotion tiene licencia propia**: gratis para individuos y empresas de hasta 3 personas, el resto requiere licencia (<https://www.remotion.dev/docs/license/pricing>) | Armar el video de 30 s (motion graphics y subtítulos) | Puntuación 100 / "DO_NOT_INSTALL" por 70 hallazgos, **todos falsos positivos revisados**: `npx remotion` sin versión fija (52), documentación de Mapbox/Cesium que menciona tokens (6), clave pública de búsqueda de la documentación de Remotion (7 "External Transmission"), 2 "análisis incompleto" de un archivo de referencia. No hay `curl`/`eval`/`base64`/`rm -rf`/instrucciones de ignorar reglas |
+| FFmpeg 9.0.2 (build Gyan.dev) | `winget install Gyan.FFmpeg` | 9.0.2 | GPL (build completa) | Montar voz y subtítulos del video | No aplica (programa, no skill) |
+
+Regla: la skill de Remotion es solo texto de ayuda; nada se ejecuta al instalarla. Antes de renderizar con Remotion, confirmar que quien renderiza cumple la licencia gratuita (una persona) o decidir otra herramienta (FFmpeg solo).
+
 ## Plugins (no copiados)
 
 `superpowers` se instala como plugin, no como carpeta: `/plugin install superpowers@claude-plugins-official`.
