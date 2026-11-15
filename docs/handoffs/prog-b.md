@@ -144,3 +144,9 @@ Falta:
 Los 6 PRs se fusionan entre sí sin choques (62 pruebas en la suma). `verificar-todo.ps1` pasa completo en cada rama, con un `uv venv` en `.venv` (ignorado por git).
 
 Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agricola.json` cuando entre el calor del aire de Luca, teléfono real (#71), lector de pantalla real y vista previa al compartir.
+
+## Clima: pantalla #clima (2026-11-15, rama prog-b/clima, depende de prog-a/clima-datos)
+- Qué hice: `web/js/clima.js` y `web/css/clima.css`; mapa de 8 pueblos con chips (General, Calor, Viento, UV, Humedad), buscador, 4 tarjetas (calor, UV, viento y mar, humedad y lluvia) y detalle al elegir una (`#clima/calor|uv|viento|lluvia`) con cifras, curva de 24 h, consejos y fuente. Menú: Clima en la barra y Avisos pasó a "Más".
+- Datos: Open-Meteo (modelo, no estaciones) vía `RBVivo.cargar({clima:true})`; sin etiqueta de calor.
+- Probar: `python -m http.server 8777` en `web/` y abrir `#clima`; `node --test web/tests/`.
+- Falta: confirmar unidad y dirección de la corriente (se muestra km/h y grados); revisión visual de Ehileen; el servidor de red del equipo debe servir esta rama.

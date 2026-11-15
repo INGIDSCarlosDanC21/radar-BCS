@@ -283,18 +283,19 @@
     if (window.RBSim) window.RBSim.limpiar();
     if (window.RBPesca) window.RBPesca.limpiar();
     if (window.RBAvisos) window.RBAvisos.limpiar();
+    if (window.RBClima) window.RBClima.limpiar();
     var h = (location.hash || '#inicio').slice(1).split('/');
-    var sec = ['inicio', 'mapa', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
+    var sec = ['inicio', 'mapa', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
     document.querySelectorAll('[data-nav]').forEach(function (a) {
       if (a.getAttribute('data-nav') === (sec === 'ficha' ? 'inicio' : sec)) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     document.body.setAttribute('data-vista', sec);
     // Pesca y Avisos traen sus propios datos en vivo y no esperan a indicadores.json.
-    if (sec === 'pesca' || sec === 'avisos') {
-      var modulo = sec === 'pesca' ? window.RBPesca : window.RBAvisos;
+    if (sec === 'pesca' || sec === 'avisos' || sec === 'clima') {
+      var modulo = sec === 'pesca' ? window.RBPesca : sec === 'avisos' ? window.RBAvisos : window.RBClima;
       document.getElementById('franja').hidden = true;
       main.setAttribute('aria-busy', 'true');
-      if (modulo) modulo.render(main);
+      if (modulo) modulo.render(main, h[1] || null);
       document.title = 'Radar BCS — ' + t('titulo.' + sec);
       return;
     }
