@@ -57,6 +57,13 @@ svg.grafica text{fill:var(--suave);font-size:11px}
 .barras div{display:grid;grid-template-columns:90px 1fr 70px;gap:8px;align-items:center;font-size:.9rem}
 .barras .b{height:14px;background:var(--acento);border-radius:3px;min-width:2px}
 .error{border:2px solid var(--sube);border-radius:10px;padding:12px;background:var(--tarjeta)}
+/* Esqueleto de carga (#96): mismo alto que las tarjetas, sin parpadeo; quieto con prefers-reduced-motion */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.esq-b{border-radius:12px;margin:0 0 16px;background:linear-gradient(90deg,var(--borde) 0%,var(--tarjeta) 50%,var(--borde) 100%);background-size:200% 100%;animation:esq 1.6s ease-in-out infinite;opacity:.6}
+.esq-linea{width:60%}.esq-texto{width:90%}.esq-hero{border-radius:0}
+body[data-vista=inicio] .esq-b:not(.esq-hero),body[data-vista=agricola] .esq-b:not(.esq-hero){margin-left:16px;margin-right:16px}
+@keyframes esq{0%{background-position:100% 0}100%{background-position:-100% 0}}
+@media (prefers-reduced-motion:reduce){.esq-b{animation:none}}
 .pie{max-width:720px;margin:16px auto 0;padding:0 16px 16px;font-size:.85rem;color:var(--suave);text-align:center}
 .barra{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(5,1fr);background:var(--tarjeta);border-top:1px solid var(--borde);padding-bottom:env(safe-area-inset-bottom);z-index:1000}
 .barra a{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56px;text-decoration:none;color:var(--suave);font-size:.8rem;font-weight:600}

@@ -276,7 +276,7 @@
       if (a.getAttribute('data-nav') === sec) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
     document.body.setAttribute('data-vista', sec);
-    if (!DATOS) return;
+    if (!DATOS) { if (window.RBEsq) main.innerHTML = window.RBEsq.html(sec, t('html.cargando')); return; }
     franja(sec);
     if (sec === 'inicio') { if (window.RBHome) window.RBHome.render(main, DATOS); else inicio(); }
     else if (sec === 'mapa') mapaVista();
@@ -291,7 +291,7 @@
   function agricolaVista(abierta) {
     var pintar = function () { window.RBAgricola.render(main, AGRO, ZONAS, abierta); };
     if (AGRO) return pintar();
-    main.innerHTML = '<p class="cargando">' + t('agro.cargando') + '</p>';
+    main.innerHTML = window.RBEsq ? window.RBEsq.html('agricola', t('agro.cargando')) : '<p class="cargando">' + t('agro.cargando') + '</p>';
     fetch('data/agricola.json').then(ok).then(function (d) { AGRO = d; pintar(); }).catch(function (e) {
       main.innerHTML = '<div class="error" role="alert"><h2>' + t('err.agro') + '</h2><p>' + esc(t('err.detalle', { d: e.message })) + '</p></div>';
     });
@@ -304,6 +304,7 @@
     if (!(deAgro && aAgro)) window.scrollTo(0, 0);
   });
   T.aplicar(document);
+  ruta(); // sin datos todavía: pinta el esqueleto de la pantalla pedida
   cargar().then(function () { ruta(); }).catch(function (e) {
     main.innerHTML = '<div class="error" role="alert"><h2>' + t('err.datos') + '</h2><p>' + esc(t('err.detalle', { d: e.message })) +
       '</p><p>' + t('err.file') + '</p></div>';
