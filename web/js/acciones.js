@@ -38,8 +38,8 @@
   function ic(n) { return '<span class="ac-ic" style="-webkit-mask-image:url(assets/iconos/mapa/' + n + '.svg);mask-image:url(assets/iconos/mapa/' + n + '.svg)" aria-hidden="true"></span>'; }
   function tarjeta(par) {
     var k = par[0], tipo = k.charAt(0);
-    return '<li class="ac-card ac-' + (tipo === 'c' ? 'calor' : 'agua') + '"><details><summary><span class="ac-badge">' + ic(par[1]) + '</span><span class="ac-t">' + esc(t('acc.t.' + k)) + '</span></summary>' +
-      '<p>' + esc(t('acc.' + k)) + '</p></details></li>';
+    return '<li class="ac-card ac-' + (tipo === 'c' ? 'calor' : 'agua') + '" data-vm="no"><details><summary><span class="ac-badge">' + ic(par[1]) + '</span><span class="ac-t">' + esc(t('acc.t.' + k)) + '</span></summary>' +
+      '<p>' + esc(t('acc.' + k)) + '</p></details></li>';   // data-vm="no": texto corto dentro de un desplegable, sin "Ver más" (pedido de UI/UX)
   }
   function grupo(clase, icono, titulo, lista, url, fuente) {
     return '<div class="ac-grupo ac-g-' + clase + '"><h3><span class="ac-badge ac-badge-g">' + ic(icono) + '</span>' + esc(titulo) + '</h3>' +
@@ -51,7 +51,7 @@
       '<h2 id="ac-h">' + esc(t('acc.h1')) + '</h2><p class="ac-lead">' + esc(t('acc.lead')) + '</p>' +
       grupo('calor', 'thermostat', t('acc.calor'), CALOR, URL_CDC, t('acc.fCdc')) +
       grupo('agua', 'water_drop', t('acc.agua'), AGUA, URL_EPA, t('acc.fEpa')) +
-      '<p class="aviso">' + esc(t('acc.aviso')) + '</p></section>';
+      '<p class="aviso" data-vm="no">' + esc(t('acc.aviso')) + '</p></section>';
   }
 
   var RBAcciones = { html: html, CALOR: CALOR, AGUA: AGUA, TX: TX };
