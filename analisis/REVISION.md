@@ -6,8 +6,8 @@ Para revisores (Luca e Investigación). Las cifras salen de `data/salida/indicad
 
 ```
 pip install -r analisis/requirements.txt
-python -m analisis.exportar     # escribe indicadores.json y zonas_tendencias.json
-python -m analisis.zonas        # escribe zonas.geojson
+python -m analisis.exportar --calor-hasta 2021     # escribe indicadores.json y zonas_tendencias.json
+python -m analisis.zonas --calor-hasta 2021        # escribe zonas.geojson
 python -m pytest analisis       # 23 funciones test_ (agua 5, modis 3, pipeline 11, zonas_appeears 4)
 ```
 
@@ -20,8 +20,8 @@ Cifra = `cambio_total` (JSON). Sin cifra = `null`. Los valores son los del JSON 
 
 | Indicador (`id`) | Cifra publicada | p-valor (JSON) | Periodo | Método (`significancia.metodo`) | Campo JSON | Función en el código |
 |---|---|---|---|---|---|---|
-| Calor (`calor`, MODIS LST, 6 zonas) | sin cifra | 0.1101 (no significativo) | 2001-2025 | MK estacional + Sen | `indicadores[calor].cambio_total` = null; `significancia.p_valor` | `tendencias.tendencia_estacional` |
-| Vegetación (`vegetacion`, NDVI MOD13Q1) | -0.019 (NDVI) | 1.288e-05 (significativo) | 2001-2025 | MK estacional + Sen | `indicadores[vegetacion].cambio_total`; `tendencia_por_decada` = -0.008 | `tendencias.tendencia_estacional` |
+| Calor (`calor`, MODIS LST, 6 zonas) | +0.935 °C | 0.0003177 (significativo) | 2001-2021 (se corta antes de la deriva de Terra; `--calor-hasta 2021`) | MK estacional + Sen | `indicadores[calor].cambio_total`; `tendencia_por_decada` = 0.468 | `tendencias.tendencia_estacional` |
+| Vegetación (`vegetacion`, NDVI MOD13Q1) | -0.013 (NDVI) | 0.003626 (significativo) | 2001-2026 (2026 parcial) | MK estacional + Sen | `indicadores[vegetacion].cambio_total`; `tendencia_por_decada` = -0.005 | `tendencias.tendencia_estacional` |
 | Lluvia (`lluvia`, NASA POWER PRECTOTCORR) | sin cifra | 0.129 (no significativo) | 2001-2025 | MK sobre total anual + Sen | `indicadores[lluvia].cambio_total` = null | `tendencias.tendencia_anual` |
 | Agua (`agua`, GRACE/GRACE-FO CRI) | +1.362 cm | 0.009435 (significativo) | 2002-2026 | MK estacional con corrección por autocorrelación + Sen | `indicadores[agua].cambio_total`; `tendencia_por_decada` = 0.568 | `tendencias.tendencia_estacional_correlacionada` |
 
