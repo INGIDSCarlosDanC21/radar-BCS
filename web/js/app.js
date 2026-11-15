@@ -398,6 +398,7 @@
     if (window.RBPesca) window.RBPesca.limpiar();
     if (window.RBAvisos) window.RBAvisos.limpiar();
     if (window.RBClima) window.RBClima.limpiar();
+    if (window.RBAnim) window.RBAnim.limpiar();
     var h = (location.hash || '#inicio').slice(1).split('/');
     var sec = ['inicio', 'mapa', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
     document.querySelectorAll('[data-nav]').forEach(function (a) {
@@ -412,8 +413,10 @@
       if (sec === 'clima' && window.RBClimaMapa) {
         // La pestaña Clima muestra el "Mapa Meteorológico" (clima-mapa.js); el detalle de cada tarjeta sigue en clima.js.
         main.innerHTML = window.RBClimaMapa.html().replace(/<h2 class="cm-zonas-h">[^]*?<\/h2>/, '');
+        if (window.RBAnim) main.insertAdjacentHTML('beforeend', window.RBAnim.html());   // animación de satélite (aislada; web/js/animacion-satelite.js)
         main.removeAttribute('aria-busy');
         window.RBClimaMapa.cargar(main, { abrir: h[1] || null, lugar: h[2] || null });
+        if (window.RBAnim) window.RBAnim.activar(main);
       } else if (modulo) modulo.render(main, h[1] || null, h[2] || null);
       document.title = 'Radar BCS — ' + t('titulo.' + sec);
       return;
