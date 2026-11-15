@@ -126,9 +126,11 @@ Lista de revisión:
 ## 7. Declaración de IA del logotipo
 
 El logo fue generado con **Gemini** (Google), confirmado por Ehileen el 2026-11-14 y registrado en `docs/RECURSOS.md`, sección IA. Regla del proyecto: marca visible "AI-generated" o mención en el texto del sitio.
-Instrucción: en el footer agregar el texto **"Logotipo generado con IA (Gemini) · AI-generated"**.
+Instrucción (pedido del Líder en #98): la marca **"AI-generated" debe verse junto al logo en el encabezado**, no solo en el pie. Usar `web/assets/logo-radar-bcs-ai-generated.png` (logo + etiqueta, ya exportado a 3x; en el header mostrarlo a 44 px de alto con `alt="Radar BCS, logotipo generado con IA (AI-generated)"`) o maquetar la etiqueta como texto: JetBrains Mono Medium 10 px, color `--rb-texto-suave` (#44474d), borde 1 px #c4c6ce, radio 4 px, padding 2px 6px, 8 px a la derecha del logo. Además, en el pie: **"Logotipo generado con IA (Gemini) · AI-generated"**. Términos de Gemini revisados: <https://policies.google.com/terms> y <https://policies.google.com/terms/generative-ai/use-policy>.
 
-**Atribución de íconos (Flaticon):** parte de los íconos de `web/assets/iconos/` viene de Flaticon (el resto, de las maquetas de Stitch). La licencia gratuita de Flaticon exige, en la página donde se ve el ícono o en el pie, una línea por autor: *"Icon made by [autor] from www.flaticon.com"* ([guía de Flaticon](https://support.flaticon.com/s/article/Attribution-How-when-and-where-FI?language=en_US)). Qué íconos y qué autores: POR CONFIRMAR por UI/UX; no publicar los íconos sin esa línea. Sin logos ni marca de la NASA en ningún lado; las fuentes se citan con texto.
+**Hallazgos de la revisión a 360 px:** ver `diseno/revision-360/REPORTE.md` (P0: la Ficha de lluvia tiene scroll horizontal por la URL larga de la fuente).
+
+**Íconos:** los 12 de `web/assets/iconos/` son Google Material Symbols (Apache 2.0; ver `web/assets/iconos/README.md` y `LICENSE-material-symbols.txt`). No hace falta atribución en la web. Si se agrega un ícono de Flaticon, su licencia gratuita exige en la página o en el pie una línea por autor: *"Icon made by [autor] from www.flaticon.com"* ([guía de Flaticon](https://support.flaticon.com/s/article/Attribution-How-when-and-where-FI?language=en_US)).
 
 ## 8. Qué NO hacer
 

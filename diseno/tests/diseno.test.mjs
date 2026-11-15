@@ -175,3 +175,23 @@ test('logo existe y es proporcional a 156x44 (exportado a 3x)', () => {
   assert.ok(Math.abs(png.ancho / png.alto - 156 / 44) < 0.03, `${png.ancho}x${png.alto}`);
   assert.ok(Math.abs(png.ancho - 468) <= 4, `ancho ${png.ancho}`);
 });
+
+test('iconos: licencia Apache de Material Symbols y cada SVG documentado en el README', () => {
+  const dir = R('web', 'assets', 'iconos');
+  const licencia = fs.readFileSync(path.join(dir, 'LICENSE-material-symbols.txt'), 'utf8');
+  assert.match(licencia, /Apache License\s+Version 2\.0/);
+  const readme = fs.readFileSync(path.join(dir, 'README.md'), 'utf8');
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.svg'))) {
+    assert.ok(readme.includes('`' + f + '`'), `${f} no aparece en iconos/README.md`);
+  }
+});
+
+test('#98: marca "AI-generated" junto al logo en el encabezado de cada pantalla', () => {
+  for (const p of auditoria.pantallas) assert.equal(p.marcaIAJuntoAlLogo, true, `${p.nombre}: falta la marca AI-generated junto al logo`);
+  const png = fs.readFileSync(R('web', 'assets', 'logo-radar-bcs-ai-generated.png'));
+  assert.equal(png.subarray(1, 4).toString('latin1'), 'PNG');
+});
+
+test('#98: sin nombres de personas reales como ejemplo en las maquetas', () => {
+  for (const p of auditoria.pantallas) assert.deepEqual(p.nombresDeEjemplo, [], `${p.nombre}: ${p.nombresDeEjemplo}`);
+});
