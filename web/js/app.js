@@ -80,13 +80,14 @@
       h += '<button type="button" class="chip" data-ind="' + id + '" aria-pressed="' + (id === indMapa) + '">' + esc(tit(ind(id))) + '</button>';
     });
     h += '</div><div id="aviso-mapa"></div><div id="mapa-caja" role="region" aria-label="' + t('mapa.region') + '"></div>' +
-      '<div id="leyenda" class="leyenda"></div><div id="resumen"></div>' +
+      '<div id="leyenda" class="leyenda"></div>' + (window.RBSim ? window.RBSim.sateliteHtml() : '') + '<div id="resumen"></div>' +
       '<p class="fuente" id="fuente-mapa"></p>';
     main.innerHTML = h;
     main.querySelectorAll('.chip').forEach(function (b) {
       b.addEventListener('click', function () { indMapa = b.getAttribute('data-ind'); ruta(); });
     });
     pintar();
+    if (window.RBSim) window.RBSim.sateliteActivar(main);
   }
 
   /* Qué mide cada capa por zona (MODIS vía AppEEARS). nota: aviso junto al mapa y la lista.
@@ -116,6 +117,16 @@
     function zonaTexto(c) { return c.significativo === false ? t('reg.sinCambio') : signo(c.cambio_total, un); }
     // Capa orientativa (calor): nunca "tendencia clara"; la nota va arriba de la lista.
     function zonaEtiqueta(c) { return cfg && cfg.orientativo ? t('mapa.orient') : etiqueta(c.significativo === undefined ? null : c.significativo)[0]; }
+    // Real: todas las zonas con dato, primero las de tendencia clara. Prueba: top 5 con cifra.
+    var lista = ZONAS.features.filter(function (f) {
+      var c = cz(f); return c && c.cambio_total != null && (!esPrueba || c.significativo !== false);
+    }).sort(function (a, b) {
+      var ca = cz(a), cb = cz(b), sa = ca.significativo === false, sb = cb.significativo === false;
+      if (sa !== sb) return sa ? 1 : -1;
+      return Math.abs(cb.cambio_total) - Math.abs(ca.cambio_total);
+    }).slice(0, esPrueba ? 5 : undefined);
+    var puesto = {};
+    lista.forEach(function (f, k) { puesto[f.properties.id] = k + 1; });
     var caja = document.getElementById('mapa-caja');
     if (typeof L === 'undefined') {
       document.getElementById('aviso-mapa').innerHTML = '<p class="aviso">' + t('mapa.sinMapa') + '</p>';
@@ -137,6 +148,7 @@
             var c = cz(f) || {};
             l.bindPopup('<strong>' + esc(D(f.properties, 'nombre')) + '</strong>' + prueba + '<br>' + esc(tit(i)) + ': ' +
               esc(zonaTexto(c)) + '<br>' + esc(zonaEtiqueta(c)));
+            if (puesto[f.properties.id]) l.bindTooltip(String(puesto[f.properties.id]), { permanent: true, direction: 'top', offset: [0, -14], className: 'etq-zona' });
           }
         }).addTo(mapa);
         mapa.fitBounds(capa.getBounds());
@@ -157,14 +169,6 @@
     ley += '<span><i class="sindatos"></i>' + t('mapa.leySinDatos') + '</span>';
     document.getElementById('leyenda').innerHTML = ley;
 
-    // Real: todas las zonas con dato, primero las de tendencia clara. Prueba: top 5 con cifra.
-    var lista = ZONAS.features.filter(function (f) {
-      var c = cz(f); return c && c.cambio_total != null && (!esPrueba || c.significativo !== false);
-    }).sort(function (a, b) {
-      var ca = cz(a), cb = cz(b), sa = ca.significativo === false, sb = cb.significativo === false;
-      if (sa !== sb) return sa ? 1 : -1;
-      return Math.abs(cb.cambio_total) - Math.abs(ca.cambio_total);
-    }).slice(0, esPrueba ? 5 : undefined);
     var hayClaro = lista.some(function (f) { return cz(f).significativo === true; });
     var r = '<h2>' + (cfg && cfg.titulo ? esc(cfg.titulo) : (esPrueba ? t('mapa.hPrueba') : hayClaro ? t('mapa.hMas') : t('mapa.hZonas')) + esc(tit(i))) + '</h2>';
     if (cfg) r += '<p>' + esc(cfg.que) + '</p>';
@@ -172,6 +176,7 @@
     if (!lista.length) {
       r += '<p class="aviso">' + esc(t('mapa.regional', { t: tit(i).toLowerCase() })) + '</p>';
     } else {
+      if (window.RBSim) r += '<p class="fuente">' + esc(t('mapa.numeros')) + '</p>';
       r += '<ol class="top">';
       lista.forEach(function (f) {
         var c = cz(f), zt = zonaTexto(c);
@@ -230,7 +235,7 @@
     IDS.forEach(function (k) {
       h += '<a class="chip" style="display:inline-flex;align-items:center;text-decoration:none" href="#ficha/' + k + '"' + (k === i.id ? ' aria-current="page"' : '') + '>' + esc(tit(ind(k))) + '</a>';
     });
-    h += '</div><h1>' + RB.icono(i.id) + esc(tit(i)) + '</h1><p class="fuente">' + esc(D(i, 'variable')) + '</p>';
+    h += '</div><h1>' + RB.icono(i.id) + esc(tit(i)) + '</h1><p class="lead">' + esc(t('fic.sub.' + i.id)) + '</p><p class="fuente">' + esc(D(i, 'variable')) + '</p>';
     h += '<div class="bloque"><h2>' + esc(t('fic.desde', { a: ((i.fuente && i.fuente.periodo) || '2001').slice(0, 4) })) + '</h2><div class="grande ' + tc.clase + '">' + esc(tc.texto) + '</div>' +
       (tc.tipo === 'sin-cambio' ? '<p class="fuente">' + t('fic.sinCifra') + '</p>' :
         i.cambio_total_nota ? '<p class="fuente">' + esc(D(i, 'cambio_total_nota')) + '</p>' : '') +
@@ -245,18 +250,21 @@
         (x.media != null ? esc(num(x.media, dec(x.media)) + ' ' + U(i.unidades)) : t('reg.sinDatos')) + '</span></div>';
     });
     h += '</div></div>';
+    h += (window.RBSim ? window.RBSim.maquinaHtml(i) : '');
     h += '<div class="bloque"><h2>' + t('fic.serie') + '</h2>' + grafica(i) + '</div>';
     var g = i.significancia || {};
     h += '<div class="bloque"><h2>' + t('fic.sig') + '</h2>' +
       '<p><strong>' + esc(conclusion(i)) + '</strong></p>' +
+      '<details class="detalles"><summary>' + t('fic.detalles') + '</summary>' +
       '<p>' + esc(t('fic.metodo', { m: D(g, 'metodo') || t('fic.sinCalcular') })) + (RB.explicaMetodo(g.metodo) ? ' ' + esc(RB.explicaMetodo(g.metodo)) : '') + '</p>' +
-      '<p>' + esc(t('fic.pAlfa', { p: g.p_valor != null ? pTexto(g.p_valor, 3) : t('fic.sinCalcular'), a: g.alfa != null ? num(g.alfa, 2) : t('fic.sinDato') })) + '</p></div>';
+      '<p>' + esc(t('fic.pAlfa', { p: g.p_valor != null ? pTexto(g.p_valor, 3) : t('fic.sinCalcular'), a: g.alfa != null ? num(g.alfa, 2) : t('fic.sinDato') })) + '</p></details></div>';
     h += '<div class="bloque"><h2>' + t('fic.fuente') + '</h2><p><strong>' + esc(RB.textoFuente(i)) + '</strong></p><p>' +
       (f.url ? '<a class="enlace-fuente" href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(t('fic.abrir', { h: String(f.url).replace(/^https?:\/\//, '').split('/')[0] })) + '</a><br>' : '') +
       t('fic.resol') + ' ' + esc(D(f, 'resolucion') || t('fic.sinDato')) + '<br>' + t('fic.periodo') + ' ' + esc(f.periodo || t('fic.sinDato')) + '<br>' + t('fic.descarga') + ' ' + esc(f.fecha_descarga || t('fic.sinDato')) + '</p>' +
       (i.limitacion ? '<p><strong>' + t('fic.limitacion') + '</strong> ' + esc(D(i, 'limitacion')) + '</p>' : '') + '</div>';
     h += '<p class="aviso">' + t('aviso.causa') + '</p>';
     main.innerHTML = h;
+    if (window.RBSim) window.RBSim.maquinaActivar(main, i);
   }
 
   /* ---------- Acciones ---------- */
@@ -275,6 +283,7 @@
   /* ---------- Enrutador ---------- */
   function ruta() {
     if (mapa) { try { mapa.remove(); } catch (e) {} mapa = null; }
+    if (window.RBSim) window.RBSim.limpiar();
     var h = (location.hash || '#inicio').slice(1).split('/');
     var sec = ['inicio', 'mapa', 'ficha', 'acciones', 'agricola'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
     document.querySelectorAll('[data-nav]').forEach(function (a) {
