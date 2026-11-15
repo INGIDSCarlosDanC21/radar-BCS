@@ -3,6 +3,16 @@
 **Dueño:** Ehileen (UI/UX), con apoyo de Roberto.
 **Propósito:** Paleta, estilo, pantallas de Figma ("Radar paceño") y logotipo. No usar ni modificar marca de la NASA.
 
+## Aviso: las pantallas son maquetas con datos de ejemplo
+
+Las PNG de `pantallas/` y `componentes/` son **maquetas de diseño** (se importaron de Google Stitch, generado con IA). Muestran datos **de ejemplo** que no salen de ninguna fuente nuestra: temperaturas de ciudades, "Actualizado hace 4 min", "En vivo, Satélite GOES-18", escala de radar en dBZ, índice UV, viento, presión, alertas, "Red estatal de estaciones" y el texto "Todos los derechos reservados".
+
+Reglas (AGENTS.md, reglas 1 y 6):
+
+- **No se copian a la web ni se usan en el video, las diapositivas, capturas de la entrega o el sitio.** La web solo muestra cifras de `data/salida/`.
+- Solo se toma de ellas el estilo: disposición, tipografía, colores (`web/assets/tokens.css`) y componentes.
+- Si una imagen generada con IA se muestra al público, lleva la marca visible "AI-generated".
+
 ## Qué hay aquí
 
 | Ruta | Contenido |
