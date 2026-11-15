@@ -119,10 +119,11 @@ Hecho, un PR por tarea, todos hacia `dev`:
 - **#116, 360 px (reporte de Ehileen):** se quitó el scroll de la ficha de lluvia (la URL cruda pasa a "Abrir la fuente (dominio)"). Letra mínima de 12 px y toques de 44 px (zoom de los dos mapas, enlaces de fuente, "Saltar"). La unidad de "Media por década" ya no se parte.
 - **#121, logo e íconos:** logo en la cabecera con la marca "AI-generated" como texto legible al lado, `alt` en ES/EN y aviso de IA en el pie. Íconos Material Symbols en las tarjetas de Inicio y en el título de la ficha.
 
-Los tres se fusionan sin choques entre sí (comprobado con `git merge-tree`). Pruebas de `web/tests` en verde en cada rama. `verificar-todo.ps1`: pasa todo menos el pytest de `analisis`, porque pytest no está instalado en mi máquina (no toqué `analisis/`).
+- **#122, esqueleto de carga:** bloques con el alto de cada pantalla mientras llegan los JSON (también `agricola.json`); `aria-hidden` en los bloques y `role=status` con el texto de carga; quieto con `prefers-reduced-motion`; el error de carga lo sigue reemplazando.
+
+Los cuatro se fusionan sin choques entre sí (comprobado con `git merge-tree`). Pruebas de `web/tests` en verde en cada rama. `verificar-todo.ps1`: pasa todo menos el pytest de `analisis`, porque pytest no está instalado en mi máquina (no toqué `analisis/`).
 
 Falta:
-- Esqueleto de carga (lo último de la lista de Carlos).
 - Que Carlos actualice la fila del logo en `docs/entrega/07`: la marca es texto junto al logo, no el PNG con la etiqueta.
 - Teléfono real (#71) y contraste medido con herramienta.
 - P2 del reporte que no hice: chips de la ficha en una fila y `<details>` para el método.
