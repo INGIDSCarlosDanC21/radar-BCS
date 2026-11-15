@@ -386,21 +386,10 @@
   }
 
   /* ---------- Acciones ---------- */
-  function acciones() {
-    function sec(tt, items, url, nom) {
-      return '<div class="bloque"><h2>' + tt + '</h2><ul>' + items.map(function (x) { return '<li>' + x + '</li>'; }).join('') +
-        '</ul><p class="fuente">' + t('fic.fuente') + ': <a href="' + url + '" target="_blank" rel="noopener">' + nom + '</a></p></div>';
-    }
-    function ks(p, n) { var r = []; for (var k = 1; k <= n; k++) r.push(esc(t(p + k))); return r; }
-    main.innerHTML = '<h1>' + t('acc.h1') + '</h1>' +
-      sec(t('acc.calor'), ks('acc.c', 6), 'https://www.cdc.gov/heat-health/media/pdfs/2025/09/Five-Heat-Steps-factsheet-508.pdf', 'CDC, Five Steps (Heat Action Plan)') +
-      sec(t('acc.agua'), ks('acc.a', 4), 'https://www.epa.gov/watersense/start-saving', 'EPA WaterSense, Start Saving') +
-      '<p class="aviso">' + t('acc.aviso') + '</p>';
-  }
-
   /* ---------- Enrutador ---------- */
   function ruta() {
     // La pestaña Mapa se fusionó con Clima: los enlaces viejos (#mapa) llevan a esa sección.
+    if (/^#acciones(\/|$)/.test(location.hash || '')) { try { history.replaceState(null, '', '#clima/acciones'); } catch (e) { location.hash = '#clima/acciones'; } }
     if (/^#mapa(\/|$)/.test(location.hash || '')) { try { history.replaceState(null, '', '#clima/zonas'); } catch (e) { location.hash = '#clima/zonas'; } }
     if (mapa) { try { mapa.remove(); } catch (e) {} mapa = null; }
     if (window.RBSim) window.RBSim.limpiar();
@@ -409,7 +398,7 @@
     if (window.RBClima) window.RBClima.limpiar();
     if (window.RBAnim) window.RBAnim.limpiar();
     var h = (location.hash || '#inicio').slice(1).split('/');
-    var sec = ['inicio', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
+    var sec = ['inicio', 'ficha', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
     document.querySelectorAll('[data-nav]').forEach(function (a) {
       if (a.getAttribute('data-nav') === (sec === 'ficha' ? 'inicio' : sec)) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
@@ -423,13 +412,14 @@
         // La pestaña Clima muestra el "Mapa Meteorológico" (clima-mapa.js); el detalle de cada tarjeta sigue en clima.js.
         main.innerHTML = window.RBClimaMapa.html().replace(/<h2 class="cm-zonas-h">[^]*?<\/h2>/, '');
         if (window.RBAnim) main.insertAdjacentHTML('beforeend', window.RBAnim.html());   // animación de satélite (aislada; web/js/animacion-satelite.js)
-        main.insertAdjacentHTML('beforeend', '<section class="bloque lugares" id="lugares" aria-label="' + esc(t('lug.h')) + '"><p class="cargando">' + esc(t('html.cargando')) + '</p></section>' + (window.RBSim ? window.RBSim.sateliteHtml() : ''));
+        main.insertAdjacentHTML('beforeend', '<section class="bloque lugares" id="lugares" aria-label="' + esc(t('lug.h')) + '"><p class="cargando">' + esc(t('html.cargando')) + '</p></section>' + (window.RBSim ? window.RBSim.sateliteHtml() : '') + (window.RBAcciones ? window.RBAcciones.html() : ''));
         main.removeAttribute('aria-busy');
-        window.RBClimaMapa.cargar(main, { abrir: h[1] === 'zonas' ? null : (h[1] || null), lugar: h[2] || null });
+        window.RBClimaMapa.cargar(main, { abrir: (h[1] === 'zonas' || h[1] === 'acciones') ? null : (h[1] || null), lugar: h[2] || null });
         if (window.RBAnim) window.RBAnim.activar(main);
         var lug = document.getElementById('lugares');
         if (DATOS && ZONAS) { mapaVista(lug); if (window.RBSim) window.RBSim.sateliteActivar(main); }
         if (h[1] === 'zonas' && DATOS && lug) setTimeout(function () { lug.scrollIntoView({ block: 'start' }); }, 120);
+        if (h[1] === 'acciones') setTimeout(function () { var a = document.getElementById('acciones'); if (a) a.scrollIntoView({ block: 'start' }); }, 250);
       } else if (modulo) modulo.render(main, h[1] || null, h[2] || null);
       document.title = 'Radar BCS — ' + t('titulo.' + sec);
       return;
@@ -444,14 +434,13 @@
     }
     else if (sec === 'ficha') ficha(h[1]);
     else if (sec === 'agricola') { agricolaVista(h[1] || null); document.title = 'Radar BCS — ' + t('titulo.agricola'); return; }
-    else acciones();
     document.title = 'Radar BCS — ' + t('titulo.' + sec);
   }
 
   /* ---------- Mapa Agrícola (datos en data/agricola.json) ---------- */
   var AGRO = null;
   function agricolaVista(abierta) {
-    var pintar = function () { main.removeAttribute('aria-busy'); window.RBAgricola.render(main, AGRO, ZONAS, abierta); };
+    var pintar = function () { main.removeAttribute('aria-busy'); window.RBAgricola.render(main, AGRO, ZONAS, abierta, LOCS); };
     if (AGRO) return pintar();
     main.setAttribute('aria-busy', 'true');
     main.innerHTML = window.RBEsq ? window.RBEsq.html('agricola', t('agro.cargando')) : '<p class="cargando">' + t('agro.cargando') + '</p>';

@@ -90,7 +90,7 @@
   var IZQ = { bahiamagdalena: true };
   function pinHtml(f) {
     var l = f.lugar;
-    return '<span data-lugar="' + l.id + '" class="cm-pin' + (l.id === S.lugar ? ' cm-pin-sel' : '') + (l.principal ? ' cm-pin-lp' : '') + (IZQ[l.id] ? ' cm-pin-izq' : '') + '" role="img" aria-label="' + esc(l.es + ': ' + f.e.texto + ', ' + num(f.c.temperature_2m) + ' °C') + '">' +
+    return '<span data-lugar="' + l.id + '" class="cm-pin' + (l.extra ? ' cm-pin-mini' : '') + (l.id === S.lugar ? ' cm-pin-sel' : '') + (l.principal ? ' cm-pin-lp' : '') + (IZQ[l.id] ? ' cm-pin-izq' : '') + '" role="img" aria-label="' + esc(l.es + ': ' + f.e.texto + ', ' + num(f.c.temperature_2m) + ' °C') + '">' +
       '<span class="cm-pin-c">' + CL.icono(f.e, l.principal ? 'cl-blanco' : '') + '</span>' +
       '<span class="cm-pin-t" aria-hidden="true"><span class="cm-n">' + esc(l.es) + ' · </span>' + num(f.c.temperature_2m) + '°C<em> ' + esc(f.e.texto) + '</em></span></span>';
   }
@@ -101,6 +101,7 @@
   /* Fichas técnicas en la misma pantalla (sin cambiar de vista): datos de RBVivo.cargar({clima:true}) y detalle de RBClima.
      Se buscan al usarlos: datos-vivos.js y clima.js se cargan después de este archivo. */
   var PUERTO = { lapaz: 'lapaz', loscabos: 'cabos', loreto: 'loreto', mulege: 'mulege', guerreronegro: 'guerreronegro', bahiamagdalena: 'bahiamagdalena' };
+  CL.LUGARES.forEach(function (l) { if (l.extra) PUERTO[l.id] = l.id; });   // los lugares extra tienen el mismo id que su puerto de RBVivo.PUERTOS
   var FICHAS = ['calor', 'uv', 'viento', 'lluvia'], FICHA = null, PROMESA = null;
   function vivo() { return (typeof window !== 'undefined' && window.RBVivo) || (typeof require !== 'undefined' ? require('./datos-vivos.js') : null); }
   function url(id) { try { history.replaceState(null, '', id ? '#clima/' + id + '/' + S.lugar : '#clima'); } catch (e) { /* sin historial */ } }
@@ -178,6 +179,13 @@
       MAPA.fitBounds(CL.LUGARES.map(function (l) { return [l.lat, l.lon]; }),
         ancho < 700 ? { paddingTopLeft: [56, 48], paddingBottomRight: [96, 36] } : { paddingTopLeft: [150, 30], paddingBottomRight: [420, 30] });
       CAPA = null;
+      // Lejos (poco zoom) los pines chicos muestran solo el ícono; con zoom 8 o más, también la temperatura.
+      var lejos = function () {
+        var z = MAPA.getZoom();
+        caja.classList.toggle('cm-z-lejos', z < 8);
+        caja.classList.toggle('cm-z-estrecho', z < 7.5 && (caja.clientWidth || 360) < 640);   // en celular, con poco zoom solo los lugares principales
+      };
+      MAPA.on('zoomend', lejos); lejos();
     }
     if (CAPA) CAPA.remove();
     CAPA = L.layerGroup(filas.map(function (f) {

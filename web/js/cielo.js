@@ -29,7 +29,21 @@
     { id: 'comondu', es: 'Comondú', lat: 25.0321, lon: -111.66256, geonames: 4013723, tarjeta: true, lado: 'der', v: 'arriba' },
     { id: 'mulege', es: 'Mulegé', lat: 26.89141, lon: -111.9826, geonames: 3995236, tarjeta: true, lado: 'der' },
     { id: 'guerreronegro', es: 'Gmo. Negro', lat: 27.96005, lon: -114.05589, geonames: 4021858, tarjeta: true, lado: 'der', v: 'abajo' },
-    { id: 'bahiamagdalena', es: 'Bahía Magd.', lat: 24.78874, lon: -112.10504, geonames: 3987485, tarjeta: true, lado: 'izq', v: 'abajo' }
+    { id: 'bahiamagdalena', es: 'Bahía Magd.', lat: 24.78874, lon: -112.10504, geonames: 3987485, tarjeta: true, lado: 'izq', v: 'abajo' },
+    /* Más lugares solo para el mapa de Clima (2026-11-15; pines chicos, sin tarjeta en Inicio ni pin sobre la imagen de Inicio). Coordenadas: GeoNames (CC BY 4.0). */
+    { id: 'todossantos', es: 'Todos Santos', lat: 23.44688, lon: -110.22308, extra: true },
+    { id: 'santarosalia', es: 'Santa Rosalía', lat: 27.34035, lon: -112.26706, extra: true },
+    { id: 'sanjosedelcabo', es: 'San José del Cabo', lat: 23.05406, lon: -109.70367, extra: true },
+    { id: 'cabopulmo', es: 'Cabo Pulmo', lat: 23.43718, lon: -109.42924, extra: true },
+    { id: 'laribera', es: 'La Ribera', lat: 23.59581, lon: -109.58586, extra: true },
+    { id: 'losbarriles', es: 'Los Barriles', lat: 23.68273, lon: -109.69953, extra: true },
+    { id: 'laventana', es: 'La Ventana', lat: 24.05178, lon: -109.98918, extra: true },
+    { id: 'sanjuandelacosta', es: 'San Juan de la Costa', lat: 24.37364, lon: -110.68983, extra: true },
+    { id: 'puertochale', es: 'Puerto Chale', lat: 24.42463, lon: -111.55287, extra: true },
+    { id: 'puertolopezmateos', es: 'Puerto López Mateos', lat: 25.19241, lon: -112.1104, extra: true },
+    { id: 'puntaabreojos', es: 'Punta Abreojos', lat: 26.71541, lon: -113.57451, extra: true },
+    { id: 'bahiaasuncion', es: 'Bahía Asunción', lat: 27.14231, lon: -114.29582, extra: true },
+    { id: 'bahiatortugas', es: 'Bahía Tortugas', lat: 27.69132, lon: -114.8948, extra: true }
   ];
   var CADA_MIN = 10; // tarjetas, pines e imagen se actualizan juntos (GOES-West también cambia cada 10 min)
   var CAJA = { latN: 28.1, latS: 22.8, lonO: -115.3, lonE: -109.3 };
@@ -153,7 +167,7 @@
   }
   /* Un pin por tarjeta, con el mismo nombre, ícono y temperatura que su tarjeta. */
   function pines(filas) {
-    return filas.map(function (f) {
+    return filas.filter(function (f) { return !f.lugar.extra; }).map(function (f) {
       var l = f.lugar, p = posicion(l), oscuro = l.principal;
       var clase = (oscuro ? ' cl-pin-oscuro' : '') + (l.lado === 'izq' ? ' cl-pin-izq' : '') + (l.v ? ' cl-pin-' + l.v : '');
       return '<span class="cl-pin' + clase + '" data-lugar="' + esc(l.id) + '" style="left:' + p.x.toFixed(2) + '%;top:' + p.y.toFixed(2) + '%" role="img" aria-label="' +
