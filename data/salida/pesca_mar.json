@@ -1,0 +1,913 @@
+{
+ "generado_por": "analisis/pesca_erddap.py",
+ "fecha": "2026-11-15",
+ "aviso": "Datos de satélite (modelo/composición diaria), no boyas ni aviso oficial. Un día sin valor es nube o costa.",
+ "productos": {
+  "clorofila": {
+   "dataset": "erdVHNchla1day",
+   "unidad": "mg m^-3",
+   "url": "https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdVHNchla1day.html",
+   "licencia": "The data may be used and redistributed for free but is not intended for legal use, since it may contain inaccuracies. Neither the data Contributor, ERD, NOAA, nor the United States Government, nor any of their employees or contractors, makes any warranty, express or implied, including warranties of merchantability and fitness for a particular purpose, or assumes any legal liability for the accuracy, completeness, or usefulness, of this information."
+  },
+  "sst": {
+   "dataset": "jplMURSST41",
+   "unidad": "°C",
+   "url": "https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41.html",
+   "licencia": "These data are available free of charge under the JPL PO.DAAC data policy. The data may be used and redistributed for free but is not intended for legal use, since it may contain inaccuracies. Neither the data Contributor, ERD, NOAA, nor the United States Government, nor any of their employees or contractors, makes any warranty, express or implied, including warranties of merchantability and fitness for a particular purpose, or assumes any legal liability for the accuracy, completeness, or usefulness, of this information."
+  },
+  "anomalia_sst": {
+   "dataset": "jplMURSST41anom1day",
+   "unidad": "°C",
+   "url": "https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplMURSST41anom1day.html",
+   "licencia": "The data may be used and redistributed for free but is not intended for legal use, since it may contain inaccuracies. Neither the data Contributor, ERD, NOAA, nor the United States Government, nor any of their employees or contractors, makes any warranty, express or implied, including warranties of merchantability and fitness for a particular purpose, or assumes any legal liability for the accuracy, completeness, or usefulness, of this information.",
+   "periodo_base": "Climatología diaria MUR 2003-2014 (JPL), según el metadato de ERDDAP"
+  }
+ },
+ "puertos": {
+  "bahiamagdalena": {
+   "nombre": "Bahía Magdalena",
+   "punto": [
+    24.7,
+    -112.3
+   ],
+   "clorofila": {
+    "celda": [
+     24.70125,
+     -112.30125
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-02",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-03",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-04",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-05",
+      "valor": 0.643
+     },
+     {
+      "fecha": "2026-11-06",
+      "valor": 0.439
+     },
+     {
+      "fecha": "2026-11-07",
+      "valor": 0.225
+     }
+    ],
+    "ultimo_dato": "2026-11-07"
+   },
+   "sst": {
+    "celda": [
+     24.7,
+     -112.3
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-08",
+      "valor": 28.687
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 28.627
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 28.84
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 28.745
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 28.236
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 28.151
+     },
+     {
+      "fecha": "2026-11-14",
+      "valor": 27.897
+     }
+    ],
+    "ultimo_dato": "2026-11-14"
+   },
+   "anomalia_sst": {
+    "celda": [
+     24.7,
+     -112.3
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-07",
+      "valor": 4.106
+     },
+     {
+      "fecha": "2026-11-08",
+      "valor": 4.298
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 4.228
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 4.454
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 4.429
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 4.044
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 4.009
+     }
+    ],
+    "ultimo_dato": "2026-11-13"
+   }
+  },
+  "guerreronegro": {
+   "nombre": "Guerrero Negro",
+   "punto": [
+    27.9,
+    -114.45
+   ],
+   "clorofila": {
+    "celda": [
+     27.90375,
+     -114.44625
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-02",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-03",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-04",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-05",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-06",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-07",
+      "valor": 1.357
+     }
+    ],
+    "ultimo_dato": "2026-11-07"
+   },
+   "sst": {
+    "celda": [
+     27.9,
+     -114.45
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-08",
+      "valor": 25.514
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 25.152
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 25.39
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 25.686
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 25.665
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 25.557
+     },
+     {
+      "fecha": "2026-11-14",
+      "valor": 25.522
+     }
+    ],
+    "ultimo_dato": "2026-11-14"
+   },
+   "anomalia_sst": {
+    "celda": [
+     27.9,
+     -114.45
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-07",
+      "valor": 4.803
+     },
+     {
+      "fecha": "2026-11-08",
+      "valor": 4.918
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 4.578
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 4.954
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 5.324
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 5.315
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 5.15
+     }
+    ],
+    "ultimo_dato": "2026-11-13"
+   }
+  },
+  "todossantos": {
+   "nombre": "Todos Santos",
+   "punto": [
+    23.4,
+    -110.35
+   ],
+   "clorofila": {
+    "celda": [
+     23.40375,
+     -110.35125
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-02",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-03",
+      "valor": 0.288
+     },
+     {
+      "fecha": "2026-11-04",
+      "valor": 0.253
+     },
+     {
+      "fecha": "2026-11-05",
+      "valor": 0.23
+     },
+     {
+      "fecha": "2026-11-06",
+      "valor": 0.212
+     },
+     {
+      "fecha": "2026-11-07",
+      "valor": 0.171
+     }
+    ],
+    "ultimo_dato": "2026-11-07"
+   },
+   "sst": {
+    "celda": [
+     23.4,
+     -110.35
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-08",
+      "valor": 30.056
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 29.844
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 29.868
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 29.779
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 29.704
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 29.318
+     },
+     {
+      "fecha": "2026-11-14",
+      "valor": 29.326
+     }
+    ],
+    "ultimo_dato": "2026-11-14"
+   },
+   "anomalia_sst": {
+    "celda": [
+     23.4,
+     -110.35
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-07",
+      "valor": 3.186
+     },
+     {
+      "fecha": "2026-11-08",
+      "valor": 3.232
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 2.927
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 2.989
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 2.95
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 2.976
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 2.694
+     }
+    ],
+    "ultimo_dato": "2026-11-13"
+   }
+  },
+  "cabos": {
+   "nombre": "Cabo San Lucas",
+   "punto": [
+    22.85,
+    -109.9
+   ],
+   "clorofila": {
+    "celda": null,
+    "serie": [],
+    "ultimo_dato": null,
+    "nota": "fuera de la cobertura del producto"
+   },
+   "sst": {
+    "celda": [
+     22.85,
+     -109.9
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-08",
+      "valor": 29.761
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 29.638
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 29.499
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 29.284
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 29.199
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 29.072
+     },
+     {
+      "fecha": "2026-11-14",
+      "valor": 28.792
+     }
+    ],
+    "ultimo_dato": "2026-11-14"
+   },
+   "anomalia_sst": {
+    "celda": [
+     22.85,
+     -109.9
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-07",
+      "valor": 1.931
+     },
+     {
+      "fecha": "2026-11-08",
+      "valor": 2.017
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 1.933
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 1.939
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 1.827
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 1.953
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 1.89
+     }
+    ],
+    "ultimo_dato": "2026-11-13"
+   }
+  },
+  "lapaz": {
+   "nombre": "La Paz",
+   "punto": [
+    24.25,
+    -110.35
+   ],
+   "clorofila": {
+    "celda": [
+     24.25125,
+     -110.35125
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-02",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-03",
+      "valor": 0.391
+     },
+     {
+      "fecha": "2026-11-04",
+      "valor": 0.583
+     },
+     {
+      "fecha": "2026-11-05",
+      "valor": 0.435
+     },
+     {
+      "fecha": "2026-11-06",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-07",
+      "valor": null
+     }
+    ],
+    "ultimo_dato": "2026-11-05"
+   },
+   "sst": {
+    "celda": [
+     24.25,
+     -110.35
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-08",
+      "valor": 30.007
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 30.091
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 30.119
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 29.765
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 29.515
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 29.328
+     },
+     {
+      "fecha": "2026-11-14",
+      "valor": 29.191
+     }
+    ],
+    "ultimo_dato": "2026-11-14"
+   },
+   "anomalia_sst": {
+    "celda": [
+     24.25,
+     -110.35
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-07",
+      "valor": 2.517
+     },
+     {
+      "fecha": "2026-11-08",
+      "valor": 2.821
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 2.941
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 3.023
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 2.74
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 2.654
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 2.494
+     }
+    ],
+    "ultimo_dato": "2026-11-13"
+   }
+  },
+  "loreto": {
+   "nombre": "Loreto",
+   "punto": [
+    26.01,
+    -111.25
+   ],
+   "clorofila": {
+    "celda": [
+     26.01375,
+     -111.25125
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-02",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-03",
+      "valor": 0.808
+     },
+     {
+      "fecha": "2026-11-04",
+      "valor": 0.482
+     },
+     {
+      "fecha": "2026-11-05",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-06",
+      "valor": 0.469
+     },
+     {
+      "fecha": "2026-11-07",
+      "valor": 3.157
+     }
+    ],
+    "ultimo_dato": "2026-11-07"
+   },
+   "sst": {
+    "celda": [
+     26.01,
+     -111.25
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-08",
+      "valor": 29.266
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 29.093
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 29.247
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 29.192
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 29.052
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 28.702
+     },
+     {
+      "fecha": "2026-11-14",
+      "valor": 28.6
+     }
+    ],
+    "ultimo_dato": "2026-11-14"
+   },
+   "anomalia_sst": {
+    "celda": [
+     26.01,
+     -111.25
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-07",
+      "valor": 2.991
+     },
+     {
+      "fecha": "2026-11-08",
+      "valor": 3.111
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 2.962
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 3.067
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 3.145
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 3.088
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 2.935
+     }
+    ],
+    "ultimo_dato": "2026-11-13"
+   }
+  },
+  "mulege": {
+   "nombre": "Mulegé",
+   "punto": [
+    26.9,
+    -111.85
+   ],
+   "clorofila": {
+    "celda": [
+     26.89875,
+     -111.85125
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-02",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-03",
+      "valor": 0.821
+     },
+     {
+      "fecha": "2026-11-04",
+      "valor": 1.726
+     },
+     {
+      "fecha": "2026-11-05",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-06",
+      "valor": 0.937
+     },
+     {
+      "fecha": "2026-11-07",
+      "valor": 0.997
+     }
+    ],
+    "ultimo_dato": "2026-11-07"
+   },
+   "sst": {
+    "celda": [
+     26.9,
+     -111.85
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-08",
+      "valor": 28.073
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 27.993
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 28.006
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 27.918
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 27.977
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 27.745
+     },
+     {
+      "fecha": "2026-11-14",
+      "valor": 27.559
+     }
+    ],
+    "ultimo_dato": "2026-11-14"
+   },
+   "anomalia_sst": {
+    "celda": [
+     26.9,
+     -111.85
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-07",
+      "valor": 2.755
+     },
+     {
+      "fecha": "2026-11-08",
+      "valor": 2.826
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 2.858
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 2.833
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 3.014
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 3.214
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 3.032
+     }
+    ],
+    "ultimo_dato": "2026-11-13"
+   }
+  },
+  "santarosalia": {
+   "nombre": "Santa Rosalía",
+   "punto": [
+    27.34,
+    -112.15
+   ],
+   "clorofila": {
+    "celda": [
+     27.34125,
+     -112.15125
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-02",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-03",
+      "valor": 0.592
+     },
+     {
+      "fecha": "2026-11-04",
+      "valor": 2.618
+     },
+     {
+      "fecha": "2026-11-05",
+      "valor": 1.072
+     },
+     {
+      "fecha": "2026-11-06",
+      "valor": null
+     },
+     {
+      "fecha": "2026-11-07",
+      "valor": 0.826
+     }
+    ],
+    "ultimo_dato": "2026-11-07"
+   },
+   "sst": {
+    "celda": [
+     27.34,
+     -112.15
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-08",
+      "valor": 28.056
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 27.872
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 27.934
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 28.003
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 28.234
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 28.24
+     },
+     {
+      "fecha": "2026-11-14",
+      "valor": 28.189
+     }
+    ],
+    "ultimo_dato": "2026-11-14"
+   },
+   "anomalia_sst": {
+    "celda": [
+     27.34,
+     -112.15
+    ],
+    "serie": [
+     {
+      "fecha": "2026-11-07",
+      "valor": 3.058
+     },
+     {
+      "fecha": "2026-11-08",
+      "valor": 3.118
+     },
+     {
+      "fecha": "2026-11-09",
+      "valor": 3.281
+     },
+     {
+      "fecha": "2026-11-10",
+      "valor": 3.397
+     },
+     {
+      "fecha": "2026-11-11",
+      "valor": 3.704
+     },
+     {
+      "fecha": "2026-11-12",
+      "valor": 3.94
+     },
+     {
+      "fecha": "2026-11-13",
+      "valor": 4.002
+     }
+    ],
+    "ultimo_dato": "2026-11-13"
+   }
+  }
+ }
+}

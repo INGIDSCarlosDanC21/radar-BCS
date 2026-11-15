@@ -80,7 +80,10 @@
 /* Fichas: mismo formato que el Mapa Agrícola (clases .ag-* de agricola.css); solo se añade el tono pizarra, el botón de clorofila y la nota de pendientes. */
 .ag-t-pizarra{--c:#4b5f7f;--cb:#e3e9f2;--cc:#dbe3ef;--ct:#34475f}
 .pe-fichas{margin-top:12px}
-.pe-pend{margin:20px 0 0;padding:10px 12px;border-radius:8px;background:#f2f4f7;color:#44474d}
 .pe-fichas .ag-tj .pe-btn{align-self:flex-start}
 .pe-fichas .ag-tj-fuente a{color:var(--ct);font-weight:600}
 .pe-fichas .ag-ficha-btn:focus-visible,.pe-fichas .ag-cerrar:focus-visible,.pe-fichas .ag-det-tit:focus-visible{outline:3px solid #006d3d;outline-offset:2px}
+.pe-fichas .ag-tj-chip{text-transform:uppercase}
+.pe-curva{display:block;width:100%;height:auto;max-height:96px;color:var(--ct);margin:2px 0 4px}
+.pe-enl{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:4px 16px}
+.pe-enl a{display:inline-flex;align-items:center;min-height:44px;color:var(--ct);font:600 13px 'JetBrains Mono',monospace}

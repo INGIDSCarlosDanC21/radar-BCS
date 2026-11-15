@@ -124,3 +124,17 @@ body[data-vista=inicio] main{max-width:none;margin:0;padding:0}
   .hm-pie{padding:40px 32px 24px}
   .hm-pie-grid{grid-template-columns:596fr 286fr 286fr}
 }
+
+/* "¿Qué cambia?": 4 tarjetas iguales, mismo alto y mismos datos (pedido de UI/UX, 2026-11-15). */
+.hm-cuatro{display:grid;gap:16px;grid-template-columns:1fr;align-items:stretch}
+.hm-tarjeta{position:relative;overflow:hidden;display:flex;flex-direction:column;padding:24px 20px 12px}
+.hm-tarjeta .hm-cifra{font-size:32px;line-height:40px}
+.hm-ico-chico{width:44px;height:44px}
+.hm-ico-chico img.ico{height:24px;width:24px}
+.hm-datos-2{grid-template-columns:1fr 1fr!important;margin-top:12px}
+.hm-tarjeta .hm-enlace{margin-top:auto;padding-top:8px}
+@media (min-width:640px){.hm-cuatro{grid-template-columns:1fr 1fr}}
+@media (min-width:1024px){.hm-cuatro{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}}
+
+/* Pie sencillo: marca y descripción, y la barra con © y licencia. */
+@media (min-width:1024px){.hm-pie-grid{grid-template-columns:1fr}}

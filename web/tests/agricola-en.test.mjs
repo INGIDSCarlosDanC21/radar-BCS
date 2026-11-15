@@ -87,7 +87,7 @@ test('inglés: la pantalla agrícola no deja palabras de interfaz en español', 
     assert.ok(!h.includes(es), 'queda en español: ' + es);
   }
   for (const en of ['Close', 'Sources', 'Source:', 'Reason:', 'Accessed:', 'Search locality', 'Track Terrain', 'Zone:',
-    'Screens', 'Actions', 'Home', 'AGROCLIMATIC ANALYSIS', 'Interactive map', 'details open', 'Page footer',
+    'AGROCLIMATIC ANALYSIS', 'Interactive map', 'details open',
     'Farming Map', 'Team OptiPaz']) {
     assert.ok(h.includes(en), 'falta en inglés: ' + en);
   }
@@ -102,7 +102,7 @@ test('español sin parámetro: textos y marcas de siempre', (t) => {
   for (const es of ['>Mapa Agrícola</h1>', 'Cerrar</span></button>', '>Fuentes (', 'Fuente: ', '<b>Motivo:</b>', 'Consultado: ',
     'Rastrear Terreno', 'placeholder="Buscar localidad (Los Planes, El Carrizal…)"', 'ANÁLISIS AGROCLIMÁTICO',
     'Diagnóstico Agroclimático &amp; Sanidad de Suelos', 'Zona: <b>Municipio de La Paz, B.C.S.</b>', 'ficha abierta',
-    'aria-label="Pie de página"', 'Licencia Apache-2.0', 'Factibilidad y Cultivos', 'Tomate rojo (jitomate)']) {
+    'Licencia Apache-2.0', 'Factibilidad y Cultivos', 'Tomate rojo (jitomate)']) {
     assert.ok(h.includes(es), 'cambió el español: ' + es);
   }
   assert.ok(!h.includes('Farming Map') && !h.includes('Close</button>'));
