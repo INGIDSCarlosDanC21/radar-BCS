@@ -166,3 +166,13 @@ Pendiente de personas: fusionar los PRs (no fusiono los míos), regenerar `agric
 - **Necesita script de Luca:** clorofila numérica (ERDDAP) y ciclones (NHC): ambos sin CORS.
 - **Pendiente sin fuente verificada:** mareas oficiales, fase lunar, anomalía de SST, tallas, vedas con fechas, ANP, avisos oficiales.
 - **Error del Figma:** "NOM-009-SAG/PESC" es el procedimiento de vedas, no de tallas mínimas.
+
+## 2026-11-15: fichas expandibles del Mapa Pesquero (rama `prog-b/pesca-fichas`)
+
+- **Hecho:** los 4 mosaicos de Pesca pasan a fichas como las del Mapa Agrícola (mismas clases `.ag-*`, mismo formato): al abrir una se ocultan las otras 3 y ocupa todo el ancho; cabecera con ícono, lectura del modelo (no oficial), tarjetas con cifras, pendientes, fuentes y Cerrar (arriba, abajo y con Escape).
+- **Datos:** solo Open-Meteo (modelo) y NASA GIBS; reglas de `reglas-mar.js`. Lo del Figma sin fuente abierta (bandera, frecuencias, teléfonos, tallas, mareas, ANP) aparece como "Pendiente (sin fuente verificada)". Issue de datos para Luca: #190.
+- **Archivos:** `web/js/pesca.js`, `web/css/pesca.css`, `web/tests/pesca-avisos.test.mjs`; plan en `docs/handoffs/prog-b-plan-pesca-2026-11-15.md`.
+- **Medido:** 160 pruebas pasan; verificar-todo OK; 360 y 1280 px sin scroll horizontal, 0 textos menores de 12 px, foco al título al abrir y al botón al cerrar.
+- **Diferencia con Agrícola:** la ficha abierta no cambia la URL (`#pesca/<id>`), para no recrear el mapa con el router.
+- **Lluvia y agua por zona:** #189 (Luca) sigue abierto y no exporta nada a `data/`; la tabla de zonas no cambia hasta que haya dato por zona.
+- **No verificado:** teléfono real (#71), lector de pantalla real, modo oscuro de las fichas.
