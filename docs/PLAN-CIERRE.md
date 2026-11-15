@@ -102,7 +102,7 @@ Todo en verde, o no pasa:
 - [ ] `python -m analisis.validar` (con los campos `*_en`).
 - [ ] `node --test "web/tests/*.test.mjs"` y `node --test "diseno/tests/*.test.mjs"` (si el PR de Ehileen ya entró).
 - [ ] `web/data/` idéntico a `data/salida/` para los tres archivos de indicadores.
-- [ ] Cada cifra de la web coincide con `data/salida/` y con `docs/entrega/04` (calor +0.94 °C 2001-2021 y aire +1.47 °C; vegetación -0.013 p = 0.004 a 2026; lluvia sin cambio claro p = 0.129; agua +1.36 cm p = 0.009, regional).
+- [ ] Cada cifra de la web coincide con `data/salida/` y con `docs/entrega/04` (calor: aire +1.47 °C 2001-2025 como cifra principal y superficie "no concluyente" sin cifra principal; vegetación -0.013 p = 0.004 a 2026; lluvia sin cambio claro p = 0.129; agua +1.36 cm p = 0.009, regional).
 - [ ] Sitio abierto **sin sesión iniciada**, en ES y con `?lang=en`: sin errores en la consola, sin pedir registro, 4 pantallas con fuente visible, y a 360 px sin scroll horizontal.
 - [ ] No hay nombre, foto ni voz de menores de 18 en el repo ni en el sitio (búsqueda del nombre que indicó Carlos; no se escribe en ningún archivo).
 - [ ] No hay logos de NASA, claves secretas ni archivos de más de 5 MB.
