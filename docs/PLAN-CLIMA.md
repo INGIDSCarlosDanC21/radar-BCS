@@ -16,26 +16,20 @@ El PR #164 de Ehileen (en `dev`) hizo **la pestaña Mapa como el frame "Clima - 
 
 | Quién | Entrega | Rama | Archivos |
 |---|---|---|---|
-| Luca | Datos y reglas (primero, en 90 min) | `prog-a/clima-datos` | `web/js/clima-datos.js` (nuevo), `web/js/reglas-clima.js` (nuevo), `web/tests/clima.test.mjs`, `web/tests/fixtures/clima-2026-11-15.json`, `docs/investigacion/umbrales-clima.md` |
+| Luca | Datos y reglas (primero, en 90 min) | `prog-a/clima-datos` | `web/js/datos-vivos.js` (solo agregar), `web/js/reglas-clima.js` (nuevo), `web/tests/clima.test.mjs`, `web/tests/fixtures/clima-2026-11-15.json`, `docs/investigacion/umbrales-clima.md` |
 | Diego | Buscador, chips y detalle | `prog-b/clima-detalle` | `web/js/clima-detalle.js` (nuevo), `web/css/clima-detalle.css` (nuevo), y cambios chicos en `clima-mapa.js`, `app.js`, `index.html` |
 | Asistente del Líder | Revisión, fusión a `dev`, docs | `lider/*` | `docs/` |
 
 Ehileen duerme: `clima-mapa.js` y `cielo.js` son suyos, pero hoy no hay PR abierto suyo sobre ellos; Diego los edita en pequeño y deja anotado en el PR para que ella lo vea. PR a `dev` (nunca a `main`), sin `push --force`, se fusionan de a uno con puerta de calidad.
 
-## 3. Datos (Luca)
+## 3. Datos (Luca) — ajustado a las 04:30 según su primer commit
 
-**No se tocan `cielo.js` ni `datos-vivos.js`** (Inicio, Pesca y Avisos no se rompen). Nuevo `clima-datos.js`, con el mismo estilo (ES5, caché de 10 minutos en `sessionStorage`, sin inventar: lo que falta queda `null` → "sin dato"):
+Luca (commit `32e7350` de `prog-a/clima-datos`, 146 pruebas en verde combinado con `dev`) **extendió `datos-vivos.js` por puerto** con las series nuevas y escribió `reglas-clima.js`, sus pruebas, un fixture real y `docs/investigacion/umbrales-clima.md` (UV con la escala de la OMS; `nivelCalor()` devuelve `null` porque no hay fuente primaria para la temperatura aparente de Open-Meteo; sin reglas de lluvia en mm/h). **Se acepta ese enfoque** (es más barato que una segunda llamada y ya está probado) y se descarta la idea de un `clima-datos.js` aparte.
 
-- **Una llamada** de Open-Meteo Forecast para las **7 localidades de `RBCielo.LUGARES`** (las mismas de los pines), con ayer, hoy y 2 días: por hora `temperature_2m, apparent_temperature, relative_humidity_2m, precipitation_probability, precipitation, uv_index, wind_speed_10m, wind_gusts_10m, wind_direction_10m, shortwave_radiation`; por día `temperature_2m_max/min, uv_index_max, sunrise, sunset, sunshine_duration`.
-- **Marino bajo demanda:** solo al abrir el detalle de *Viento, oleaje y corrientes*, se usa `RBVivo.cargar()` (ya existe) y se asocia cada localidad con su puerto: La Paz→`lapaz`, Los Cabos→`cabos`, Loreto→`loreto`, Mulegé→`mulege`, Gmo. Negro→`guerreronegro`, Bahía Magd.→`bahiamagdalena`; **Comondú no tiene punto de mar** (muestra viento y "oleaje: sin dato").
-- **Límite de Open-Meteo:** antes de subir el PR, leer la regla de conteo en <https://open-meteo.com/en/pricing> (las peticiones con muchas variables o ubicaciones pueden contar más de una) y anotar el cálculo en `docs/investigacion/disponibilidad-servicios.md`. Si sube mucho, pedir menos variables o solo La Paz hasta que el usuario elija otra localidad.
-
-`reglas-clima.js` exporta `RBReglasClima` (mismo estilo que `reglas-mar.js`; textos ES/EN dentro del archivo con prefijo `clm.`):
-- `resumen(datos, k, ahora)` → `{ calor:{temp, sens, max, min}, uv:{ahora, max, nivel, amanecer, anochecer, solH}, viento:{kt, rachas, rumbo, beaufort}, lluvia:{hum, prob24, mm24, codigo} }`.
-- `curva24(datos, k, serie, ahora)` → 25 valores (12 horas antes y 12 después) para dibujar.
-- `nivelUV(uv)` con la **escala de la OMS** (0-2 bajo, 3-5 moderado, 6-7 alto, 8-10 muy alto, 11+ extremo): coincide con la categoría que ya muestra #164.
-- `nivelCalor(sens)` → **`null` hasta que Luca confirme la fuente primaria** en `docs/investigacion/umbrales-clima.md`. Sin fuente no hay etiqueta, solo el número ("sensación térmica del modelo").
-- Contrastar también Douglas y Beaufort de `reglas-mar.js` con su fuente primaria (pendiente de Pesca).
+- **Un solo origen de datos:** `RBVivo.cargar()` (8 puertos, una llamada de mar y una de pronóstico, caché de 10 min). Los pueblos de los puertos son los mismos de los pines: **mapa localidad→puerto** para el detalle: La Paz→`lapaz`, Los Cabos→`cabos`, Loreto→`loreto`, Mulegé→`mulege`, Gmo. Negro→`guerreronegro`, Bahía Magd.→`bahiamagdalena`. **Comondú no tiene puerto**: su detalle dice "sin dato detallado para esta localidad" (la tarjeta y el pin de #164 siguen funcionando).
+- **Límite de Open-Meteo:** el cálculo del conteo de llamadas va en `docs/investigacion/disponibilidad-servicios.md` (Luca). Pesca y Avisos no se rompen.
+- `reglas-clima.js` exporta `RBReglasClima` (`resumen…`, `curva24…`, `nivelUV`, `nivelCalor` = `null`): Diego usa lo que exporta el archivo, no esta lista. Sin etiqueta de calor, solo el número ("sensación térmica del modelo"). Decisión del Líder: si más adelante hay fuente primaria, se agrega; hoy no.
+- Contrastar Douglas y Beaufort de `reglas-mar.js` con su fuente primaria sigue pendiente.
 
 ## 4. Pantalla (Diego)
 
