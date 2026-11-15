@@ -111,3 +111,18 @@ Carlos pidió dejar esto por escrito. El detalle completo y la lista de condicio
 ## 2026-11-15: decisión sobre el login (Carlos, por el asistente del Líder)
 
 El PR #77 se cerró sin fusionar: el login con Supabase **no entra a la entrega**. Tu rama `prog-b/login` y el proyecto de Supabase se conservan para después del evento. Motivos en `docs/decisiones.md` (2026-11-15). Tu tiempo ahora: 1) versión en inglés (#93), 2) correcciones a 360 px, 3) integrar logo e íconos. No borres la rama.
+
+## 2026-11-15: issue #96 (cierre de la noche)
+
+Hecho, un PR por tarea, todos hacia `dev`:
+- **#115, calor por zona orientativo (opción B):** la nota de Carlos (Aqua no confirma) va arriba de la lista, junto al mapa; título "Zonas: superficie, Terra (orientativo)"; ninguna zona dice "tendencia clara"; el periodo del mapa sale de `zonas.geojson` (2001-2021). La leyenda separa "sin cambio claro" de "sin datos". ES y EN. Conviene fusionarlo junto con el PR de Luca que pasa la ficha de calor al aire.
+- **#116, 360 px (reporte de Ehileen):** se quitó el scroll de la ficha de lluvia (la URL cruda pasa a "Abrir la fuente (dominio)"). Letra mínima de 12 px y toques de 44 px (zoom de los dos mapas, enlaces de fuente, "Saltar"). La unidad de "Media por década" ya no se parte.
+- **#121, logo e íconos:** logo en la cabecera con la marca "AI-generated" como texto legible al lado, `alt` en ES/EN y aviso de IA en el pie. Íconos Material Symbols en las tarjetas de Inicio y en el título de la ficha.
+
+Los tres se fusionan sin choques entre sí (comprobado con `git merge-tree`). Pruebas de `web/tests` en verde en cada rama. `verificar-todo.ps1`: pasa todo menos el pytest de `analisis`, porque pytest no está instalado en mi máquina (no toqué `analisis/`).
+
+Falta:
+- Esqueleto de carga (lo último de la lista de Carlos).
+- Que Carlos actualice la fila del logo en `docs/entrega/07`: la marca es texto junto al logo, no el PNG con la etiqueta.
+- Teléfono real (#71) y contraste medido con herramienta.
+- P2 del reporte que no hice: chips de la ficha en una fila y `<details>` para el método.
