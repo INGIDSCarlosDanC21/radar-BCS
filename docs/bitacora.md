@@ -18,3 +18,4 @@ Fecha y hora (La Paz), decisión o hecho, quién, por qué. Las decisiones forma
 - **Noche — Hora límite oficial 23:59.** Carlos aclaró que el límite oficial es el domingo 23:59 (como la diapositiva). Meta interna: enviar a más tardar 13:00 para practicar. Ver `docs/decisiones.md`.
 - **Noche — Equipo UI/UX.** Carlos invitó a `rvega22` (Roberto) al repositorio con permiso de escritura para trabajar el diseño junto con Ehileen. Cada quien en su rama `ui-ux/<tema>`, PR hacia `dev`.
 - **Noche — Declaración de IA.** Carlos confirmó que UI/UX diseña la interfaz con Google Stitch y que Gemini nunca se usó. Se declara Stitch en `docs/RECURSOS.md` y `docs/entrega/05-use-of-ai.md` y se quita Gemini. Pendiente: UI/UX anota qué salió de Stitch y la licencia.
+- **Noche — Sin congelamiento.** Carlos decidió no congelar funciones: se trabaja hasta que no se pueda; prioridad, las 4 pantallas con datos reales. Ver `docs/decisiones.md`.

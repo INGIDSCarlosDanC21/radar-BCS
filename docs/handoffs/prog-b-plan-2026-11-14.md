@@ -2,7 +2,7 @@
 
 > **Para agentes:** SUB-SKILL REQUERIDA: superpowers:subagent-driven-development (recomendado) o superpowers:executing-plans. Los pasos usan casillas (`- [ ]`).
 
-**Objetivo:** que las 4 pantallas muestren los datos reales de Luca (`data/salida/indicadores.json`) sin presentar como medición nada que no lo sea. Meta: 20:00. Congelar funciones: 22:00.
+**Objetivo:** que las 4 pantallas muestren los datos reales de Luca (`data/salida/indicadores.json`) sin presentar como medición nada que no lo sea. Meta: 20:00. Sin congelamiento de funciones (decisión de Carlos).
 
 **Arquitectura:** la web sigue siendo estática y sin build. Las reglas de presentación que hoy están mezcladas en `web/js/app.js` pasan a un archivo puro, `web/js/reglas.js`, que expone `window.RB` y `module.exports`. Así se puede probar con `node --test`, sin navegador. `app.js` solo arma HTML con esas reglas.
 
@@ -54,7 +54,7 @@
 ### Se puede mejorar o adelantar
 - Mostrar "Datos generados el …" a partir de `generado` (Tarea 4, barato).
 - Capturas de las 4 pantallas para la demo de Carlos (#13), hechas en la Tarea 5.
-- Paleta y logo de Ehileen (#11, #12): integrarlos solo si llegan antes de las 22:00. Fuera de este plan.
+- Paleta y logo de Ehileen (#11, #12): integrarlos en cuanto lleguen, siempre que no rompan `dev`. Fuera de este plan.
 
 ## Restricciones globales
 - **No inventes datos:** todo número lleva fuente verificable; lo no verificado se marca como pendiente.
