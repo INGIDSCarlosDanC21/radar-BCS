@@ -34,7 +34,18 @@
       noMapa: 'No se pudo mostrar el mapa.', noLoc: 'No encontramos esa localidad en el mapa.',
       acercar: 'Acercar', alejar: 'Alejar', coord: 'Coordenadas: ',
       capaMapa: 'Mapa', capaSat: 'Satélite (NASA)', capaNdvi: 'Vegetación NDVI (NASA)',
-      ptCalor: 'Calor del aire', ptLluvia: 'Lluvia', ptSinCambio: 'sin cambio claro', ptFuente: 'NASA POWER, 2001-2025 (celda de ~50 km, reanálisis)', ptMas: 'Otros lugares de BCS: toca un punto'
+      ptCalor: 'Calor del aire', ptLluvia: 'Lluvia', ptSinCambio: 'sin cambio claro', ptFuente: 'NASA POWER, 2001-2025 (celda de ~50 km, reanálisis)', ptMas: 'Otros lugares de BCS: toca un punto',
+      zonaLoc: '{l} (municipio de La Paz)', locPuntoLP: 'normales del punto de La Paz', verMunicipio: 'Ver todo el municipio',
+      locEn: 'En {l}', locMuni: '(municipio)', locSinSuelo: 'Sin dato de suelo para {l}', locSinAcu: 'Sin acuífero asignado a {l} en los datos',
+      locAcu: 'Acuífero {a}: {e}', locCalor: 'Calor del aire {c} desde 2001', locLluviaMedia: '≈{v} mm de lluvia al año',
+      locCultivosNota: 'El SIAP no separa los cultivos por localidad: las cifras de esta ficha son del municipio de La Paz.',
+      locRiesgosNota: 'No hay datos de riesgos por localidad: lo de esta ficha es del municipio de La Paz o del estado.',
+      locClimaCelda: '{l} cae en una celda de NASA POWER casi idéntica a la de La Paz: las normales de esta ficha le aplican.',
+      locClimaSin: 'No hay serie de NASA POWER propia para {l}: las normales de esta ficha son del punto de La Paz (celda de ~50 km).',
+      locTend: 'Tendencia 2001-2025 en la celda de {l} (NASA POWER, ~50 km): calor del aire {c}; lluvia {ll}. Promedios: {t} °C y ≈{m} mm al año.',
+      locComparte: 'Comparte celda con {o}: muestran la misma cifra.',
+      locSueloPerfil: 'El perfil por profundidad de abajo es de Los Planes.', locSueloOtro: 'El perfil por profundidad de abajo es de Los Planes, no de {l}.',
+      locAcuNota: 'Asignación de localidad a acuífero por nombre (no con polígonos), como en los datos.'
     },
     en: {
       cerrar: 'Close', mas: 'More data', notas: 'Notes and limits', fuentes: 'Sources', fuenteDos: 'Source: ', motivo: 'Reason:', consultado: 'Accessed: ',
@@ -53,12 +64,27 @@
       noMapa: 'The map could not be displayed.', noLoc: 'We could not find that locality on the map.',
       acercar: 'Zoom in', alejar: 'Zoom out', coord: 'Coordinates: ',
       capaMapa: 'Map', capaSat: 'Satellite (NASA)', capaNdvi: 'Vegetation NDVI (NASA)',
-      ptCalor: 'Air heat', ptLluvia: 'Rainfall', ptSinCambio: 'no clear change', ptFuente: 'NASA POWER, 2001-2025 (~50 km cell, reanalysis)', ptMas: 'Other places in BCS: tap a dot'
+      ptCalor: 'Air heat', ptLluvia: 'Rainfall', ptSinCambio: 'no clear change', ptFuente: 'NASA POWER, 2001-2025 (~50 km cell, reanalysis)', ptMas: 'Other places in BCS: tap a dot',
+      zonaLoc: '{l} (municipality of La Paz)', locPuntoLP: 'normals of the La Paz point', verMunicipio: 'See the whole municipality',
+      locEn: 'In {l}', locMuni: '(municipality)', locSinSuelo: 'No soil data for {l}', locSinAcu: 'No aquifer assigned to {l} in the data',
+      locAcu: '{a} aquifer: {e}', locCalor: 'Air heat {c} since 2001', locLluviaMedia: '≈{v} mm of rain a year',
+      locCultivosNota: 'SIAP does not split crops by locality: the figures in this card are for the municipality of La Paz.',
+      locRiesgosNota: 'There is no risk data by locality: this card covers the municipality of La Paz or the state.',
+      locClimaCelda: '{l} falls in a NASA POWER cell almost identical to that of La Paz: the normals in this card apply to it.',
+      locClimaSin: 'There is no NASA POWER series of its own for {l}: the normals in this card are for the La Paz point (~50 km cell).',
+      locTend: '2001-2025 trend in the cell of {l} (NASA POWER, ~50 km): air heat {c}; rainfall {ll}. Averages: {t} °C and ≈{m} mm a year.',
+      locComparte: 'Shares a cell with {o}: they show the same figure.',
+      locSueloPerfil: 'The depth profile below is for Los Planes.', locSueloOtro: 'The depth profile below is for Los Planes, not {l}.',
+      locAcuNota: 'Locality-to-aquifer assignment by name (not with polygons), as in the data.'
     }
   };
   function rbt() { return typeof window !== 'undefined' && window.RBT ? window.RBT : null; }
   function idioma() { var r = rbt(); return r && r.lang && r.lang() === 'en' ? 'en' : 'es'; }
-  function tx(k) { var v = TX[idioma()][k]; return v != null ? v : TX.es[k]; }
+  function tx(k, vars) {
+    var v = TX[idioma()][k]; v = v != null ? v : TX.es[k];
+    if (vars) for (var n in vars) if (Object.prototype.hasOwnProperty.call(vars, n)) v = v.split('{' + n + '}').join(vars[n]);
+    return v;
+  }
   /* Texto de los datos: campo_en en inglés si existe; si no, el campo en español. */
   function D(o, campo) {
     var r = rbt();
@@ -100,6 +126,71 @@
   }
   var TONO = { cultivos: 'verde', clima: 'cian', suelo: 'claro', riesgos: 'ambar' };
 
+  /* ---------- Localidad elegida (pedido de UI/UX, 2026-11-15) ----------
+     Al elegir una localidad (buscador o pin), cada tarjeta muestra lo que los datos tienen para ese lugar:
+     suelo (SoilGrids, por localidad), acuífero (asignado por nombre en los datos) y tendencia de calor y lluvia de su celda
+     de NASA POWER (localidades_tendencias.json). Cultivos (SIAP) y riesgos solo existen por municipio: se dice así. Nada se inventa. */
+  var SEL = { loc: null, locs: null, datos: null };
+  function fichaDe(datos, id) { var r = null; arr(datos && datos.fichas).forEach(function (f) { if (f.id === id) r = f; }); return r; }
+  function cambioTxt(c, un, dec) {
+    if (!c || c.cambio_total == null || !c.significativo) return tx('ptSinCambio');
+    return (c.cambio_total > 0 ? '+' : '−') + Math.abs(c.cambio_total).toFixed(dec) + ' ' + un;
+  }
+  function perfil(datos, l) {
+    if (!l) return null;
+    var n = norm(l.nombre), p = { l: l, suelo: null, textura: null, ph: null, acu: null, tend: null };
+    var su = fichaDe(datos, 'suelo');
+    arr(su && su.detalle && su.detalle.grupo && su.detalle.grupo.tarjetas).forEach(function (t) {
+      if (norm(t.titulo) !== n) return;
+      p.suelo = t;
+      arr(t.filas).forEach(function (r) { if (r[0] === 'pH') p.ph = r[1]; });
+      var m = /\):\s*([^.]+)\./.exec(D(t, 'texto') || ''); if (m) p.textura = m[1];
+    });
+    ['clima', 'cultivos'].forEach(function (id) {
+      var f = fichaDe(datos, id);
+      arr(f && f.detalle && f.detalle.grupo_alerta && f.detalle.grupo_alerta.tarjetas).forEach(function (t) {
+        if (!p.acu && norm(t.titulo).indexOf('acuifero ' + n + ' (') === 0) p.acu = t;
+      });
+    });
+    arr(SEL.locs && SEL.locs.localidades).forEach(function (x) { if (!p.tend && norm(x.nombre) === n) p.tend = x; });
+    return p;
+  }
+  /* Chip de la tarjeta cerrada para la localidad elegida. */
+  function chipLoc(datos, f, p) {
+    var id = f.id;
+    function acu() {
+      var m = /DMA\)\s*([+\-−]?[\d.]+ hm³\/(año|year))/.exec(D(p.acu, 'texto') || '');
+      return tx('locAcu', { a: p.l.nombre, e: String(D(p.acu, 'chip')).toLowerCase() }) + (m ? ' (' + m[1] + ')' : '');
+    }
+    if (id === 'suelo') return p.suelo ? 'pH ' + p.ph + (p.textura ? ' · ' + p.textura : '') : tx('locSinSuelo', { l: p.l.nombre });
+    if (id === 'cultivos') return p.acu ? acu() : D(f, 'chip') + ' ' + tx('locMuni');
+    if (id === 'clima') {
+      if (p.tend) return tx('locCalor', { c: cambioTxt(p.tend.calor, '°C', 2) }) + ' · ' + tx('locLluviaMedia', { v: Math.round(p.tend.lluvia_media_anual_mm) });
+      return D(f, 'chip') + ' · ' + tx('locPuntoLP');
+    }
+    return D(f, 'chip') + ' ' + tx('locMuni');
+  }
+  /* Bloque "En <localidad>" al inicio del detalle abierto. */
+  function bloqueLoc(datos, f, p) {
+    var id = f.id, h = '', nom = p.l.nombre;
+    function nota(txt) { return '<p class="ag-loc-txt">' + esc(txt) + '</p>'; }
+    if (id === 'suelo') {
+      h += p.suelo ? '<div class="ag-tjs">' + tarjeta(p.suelo, false) + '</div>' : nota(tx('locSinSuelo', { l: nom }));
+      h += nota(norm(nom) === 'los planes' ? tx('locSueloPerfil') : tx('locSueloOtro', { l: nom }));
+    } else if (id === 'clima') {
+      if (p.tend) {
+        h += nota(tx('locTend', { l: nom, c: cambioTxt(p.tend.calor, '°C', 2), ll: cambioTxt(p.tend.lluvia, 'mm', 0), t: p.tend.calor_medio_c, m: Math.round(p.tend.lluvia_media_anual_mm) }));
+        var otros = arr(p.tend.comparte_celda_con).map(function (o) { var r = o; arr(SEL.locs && SEL.locs.localidades).forEach(function (x) { if (x.id === o) r = x.nombre; }); return r; });
+        if (otros.length) h += nota(tx('locComparte', { o: otros.join(', ') }));
+      } else h += nota(norm(nom) === 'los planes' ? tx('locClimaCelda', { l: nom }) : tx('locClimaSin', { l: nom }));
+      h += p.acu ? '<div class="ag-tjs">' + tarjeta(p.acu, true) + '</div>' + nota(tx('locAcuNota')) : nota(tx('locSinAcu', { l: nom }));
+    } else if (id === 'cultivos') {
+      h += nota(tx('locCultivosNota'));
+      h += p.acu ? '<div class="ag-tjs">' + tarjeta(p.acu, true) + '</div>' + nota(tx('locAcuNota')) : nota(tx('locSinAcu', { l: nom }));
+    } else h += nota(tx('locRiesgosNota'));
+    return '<section class="ag-loc" aria-label="' + esc(tx('locEn', { l: nom })) + '"><p class="ag-mono ag-loc-t">' + ico('pin', 'ag-verde', 14) + esc(tx('locEn', { l: nom })) + '</p>' + h + '</section>';
+  }
+
   /* ---------- Ficha cerrada ---------- */
   function fichaCerrada(f, abierta) {
     var id = f.id, oculta = abierta && abierta !== id;
@@ -112,7 +203,7 @@
           '<span class="ag-ficha-icono">' + icoFicha(id) + '</span>' +
           '<span class="ag-ficha-txt"><span class="ag-ficha-tit">' + esc(D(f, 'titulo')) + '</span>' +
           '<span class="ag-ficha-sub">' + esc(D(f, 'subtitulo')) + '</span></span>' +
-          (f.chip ? '<span class="ag-ficha-chip">' + esc(D(f, 'chip')) + '</span>' : '') +
+          (SEL.loc ? '<span class="ag-ficha-chip ag-ficha-chip-loc">' + esc(chipLoc(SEL.datos, f, SEL.loc)) + '</span>' : f.chip ? '<span class="ag-ficha-chip">' + esc(D(f, 'chip')) + '</span>' : '') +
         '</span>' +
         '<span class="ag-ficha-pie"><span class="ag-ficha-enlace">' + esc(D(f, 'enlace')) + '</span>' + ico('flecha', '', 16) + '</span>' +
       '</button>' +
@@ -157,6 +248,7 @@
     }
     h += '<button type="button" class="ag-cerrar" data-cerrar="1">' + ico('x', '', 14) + '<span class="ag-cerrar-t">' + esc(tx('cerrar')) + '</span></button></div></div>';
 
+    if (SEL.loc) h += bloqueLoc(SEL.datos, f, SEL.loc);
     if (d.dictamen) {
       h += '<section class="ag-dictamen" aria-label="' + esc(D(d.dictamen, 'titulo')) + '"><p class="ag-mono ag-dictamen-t">' + ico('check', '', 14) + esc(D(d.dictamen, 'titulo')) + '</p>' +
         '<p class="ag-dictamen-txt">' + esc(D(d.dictamen, 'texto')) + '</p></section>';
@@ -250,11 +342,17 @@
     return m;
   }
 
+  function zonaHtml(datos) {
+    return ico('pin', '', 12) + tx('zona') + '<b>' + esc(SEL.loc ? tx('zonaLoc', { l: SEL.loc.l.nombre }) : D(datos, 'zona')) + '</b>' +
+      (SEL.loc ? ' <button type="button" class="ag-ver-muni" data-municipio="1">' + esc(tx('verMunicipio')) + '</button>' : '');
+  }
+
   /* ---------- HTML completo ---------- */
   function html(datos, zonas, abierta) {
     if (!datos || !arr(datos.fichas).length) {
       return '<div class="ag"><p class="ag-error" role="alert">' + tx('sinDatos') + '</p></div>';
     }
+    SEL.datos = datos;
     var m = datos.mapa || {}, ley = m.leyenda || {}, info = m.info || {}, locs = arr(m.localidades);
     // Antes iba arriba y confundía; ahora cierra la página (la fecha de consulta y las fuentes siguen visibles, al final).
     var estadoPie = '<div class="ag-estado ag-estado-pie">' +
@@ -290,7 +388,7 @@
         '<div class="ag-sec-cab"><div><p class="ag-mono ag-sec-eti">' + ico('analisis', 'ag-verde', 14) + tx('eti') + '</p>' +
         '<h2 id="ag-h2">' + tx('h2') + '</h2>' +
         '<p class="ag-sec-sub">' + esc(tx('secSub')) + '</p></div>' +
-        (datos.zona ? '<p class="ag-mono ag-zona">' + ico('pin', '', 12) + tx('zona') + '<b>' + esc(D(datos, 'zona')) + '</b></p>' : '') + '</div>' +
+        (datos.zona ? '<p class="ag-mono ag-zona" id="ag-zona">' + zonaHtml(datos) + '</p>' : '') + '</div>' +
         '<div class="ag-fichas' + (abierta ? ' ag-fichas-abierta' : '') + '" id="ag-fichas">' + fichasHtml(datos, abierta) + '</div>' +
         '<div id="ag-cta">' + ctaDe(datos, abierta) + '</div>' +
       '</section>' + estadoPie + '</div>' +
@@ -385,6 +483,12 @@
     termina();
   }
 
+  function elegirLoc(est, l) {
+    SEL.loc = l ? perfil(est.datos, l) : null;
+    var z = est.main.querySelector('#ag-zona'); if (z) z.innerHTML = zonaHtml(est.datos);
+    pintaFichas(est, false);
+  }
+
   function abrirUrl(id) {
     if (typeof history === 'undefined' || !history.pushState) return;
     history.pushState({ ag: 1 }, '', '#agricola/' + id);
@@ -460,6 +564,7 @@
         var mk = L.marker([l.lat, l.lon], { icon: icon, title: l.nombre, keyboard: true }).addTo(mapa);
         mk.bindPopup('<strong>' + esc(l.nombre) + '</strong>' + (l.etiqueta ? '<br>' + esc(D(l, 'etiqueta')) : '') +
           (l.fuente_coord ? '<br><small>' + tx('coord') + esc(D(l, 'fuente_coord')) + '</small>' : ''));
+        mk.on('click', function () { elegirLoc(est, l); });
         est.marcas[l.id] = mk;
       });
       /* Más lugares de BCS (los 38 de Clima): punto chico con el cambio de calor del aire y de lluvia de NASA POWER en el popup. */
@@ -501,12 +606,14 @@
       return;
     }
     destruye();
+    SEL.loc = null; SEL.locs = locs || null;
     main.innerHTML = html(datos, zonas, abierta);
     var est = ESTADO = { main: main, datos: datos, locs: locs || null, abierta: abierta, mapa: null, marcas: {}, cajas: {} };
 
     main.addEventListener('click', function (e) {
       if (ESTADO !== est) return;
       var t = e.target;
+      if (t.closest && t.closest('[data-municipio]')) { elegirLoc(est, null); return; }
       var cer = t.closest ? t.closest('[data-cerrar]') : null;
       if (cer) { e.preventDefault(); if (!cerrarUrl(est)) cambiar(est, null); return; }
       var bt = t.closest ? t.closest('.ag-ficha-btn') : null;
@@ -524,6 +631,7 @@
       var l = buscarLoc(datos, q);
       if (!l) { msg.textContent = tx('noLoc'); msg.className = 'ag-msg ag-msg-on'; return; }
       msg.textContent = ''; msg.className = 'ag-msg';
+      elegirLoc(est, l);
       if (est.mapa) {
         if (reducido()) est.mapa.setView([l.lat, l.lon], 12); else est.mapa.flyTo([l.lat, l.lon], 12);
         var mk = est.marcas[l.id];
@@ -547,7 +655,7 @@
     montaMapa(est, zonas);
   }
 
-  var RBAgricola = { html: html, render: render };
+  var RBAgricola = { html: html, render: render, perfil: perfil, chipLoc: chipLoc, bloqueLoc: bloqueLoc, SEL: SEL };
   if (typeof window !== 'undefined') window.RBAgricola = RBAgricola;
   if (typeof module !== 'undefined' && module.exports) module.exports = RBAgricola;
 })();
