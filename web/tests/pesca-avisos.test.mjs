@@ -143,16 +143,40 @@ test('Pesca: 8 pines por variable con tono por umbral y nombre accesible; sin da
   const d = JSON.parse(JSON.stringify(datos)); d.puertos[0].s.ola = null;
   const p0 = Pesca.pines(d, idx, 'ola', 'x')[0]; assert.equal(p0.valor, '—'); assert.equal(p0.tono, 'neutro');
 });
-test('Pesca: 4 mosaicos cortos, rotulados como estimación y sin tablas ni gráficas', () => {
+test('Pesca: 4 fichas cerradas con el formato de Agrícola, rotuladas como estimación y sin tablas ni gráficas', () => {
   T.setLang('es');
   const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30');
-  const html = Pesca.mosaicos(datos.puertos[0], idx, false, '2026-11-14');
-  assert.equal((html.match(/class="pe-m /g) || []).length, 4);
+  const html = Pesca.fichas(datos.puertos[0], idx, null, false, '2026-11-14');
+  assert.equal((html.match(/class="ag-ficha ag-t-/g) || []).length, 4);
+  assert.equal((html.match(/aria-expanded="false"/g) || []).length, 4);
   assert.match(html, /no es aviso oficial/); assert.match(html, /Estado del mar/);
-  assert.doesNotMatch(html, /<table|<canvas|<svg|<td|<th|bandera/i);
-  const parrafos = [...html.matchAll(/<p[^>]*>(.*?)<\/p>/g)].map((m) => m[1].replace(/<[^>]+>/g, ''));
-  for (const p of parrafos) assert.ok(p.length <= 90, 'texto largo en un mosaico: ' + p);
-  assert.doesNotMatch(Pesca.mosaicos(datos.puertos[0], idx, true, '2026-11-14'), /aria-pressed="false"/, 'con la clorofila activa el botón queda presionado');
+  assert.doesNotMatch(html, /<table|<canvas|<td|<th|bandera/i);
+});
+test('Pesca: una ficha abierta muestra solo esa ficha (las otras 3 se omiten), con cierre, fuentes y pendientes', () => {
+  T.setLang('es');
+  const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30');
+  for (const id of ['seg', 'oc', 'cl', 'clo']) {
+    const html = Pesca.fichas(datos.puertos[0], idx, id, false, '2026-11-14');
+    assert.equal((html.match(/data-ficha=/g) || []).length, 1, id);
+    assert.match(html, /ag-abierta/); assert.match(html, /data-cerrar="1"/); assert.match(html, /role="region"/);
+    assert.match(html, /Pendiente \(sin fuente/); assert.match(html, /Open-Meteo/);
+  }
+  assert.match(Pesca.fichas(datos.puertos[0], idx, 'clo', true, '2026-11-14'), /aria-pressed="true"/);
+  assert.match(Pesca.fichas(datos.puertos[0], idx, 'clo', false, '2026-11-14'), /aria-pressed="false"/);
+});
+test('Pesca: con datos faltantes la ficha dice "sin dato" y no inventa cifras', () => {
+  T.setLang('es');
+  const d = JSON.parse(JSON.stringify(datos)); const s = d.puertos[0].s;
+  for (const k of Object.keys(s)) if (Array.isArray(s[k])) s[k] = s[k].map(() => null);
+  const html = Pesca.fichas(d.puertos[0], 30, 'oc', false, '2026-11-14');
+  assert.match(html, /sin dato/); assert.doesNotMatch(html, /NaN|undefined|null/);
+});
+test('Pesca: fichas en inglés', () => {
+  T.setLang('en');
+  const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30');
+  const html = Pesca.fichas(datos.puertos[0], idx, 'seg', false, '2026-11-14');
+  assert.match(html, /Close/); assert.match(html, /Pending \(no verified/); assert.doesNotMatch(html, /Cerrar|Pendiente/);
+  T.setLang('es');
 });
 test('Pesca: la leyenda dice los umbrales y la de clorofila trae la escala', () => {
   T.setLang('es');
@@ -237,6 +261,7 @@ test('todos los iconos que usan Pesca, Avisos y el menú existen en web/assets/i
   for (const u of usados) assert.ok(existsSync(new URL('assets/iconos/' + u + '.svg', raiz)), u);
 });
 test('sin afirmaciones oficiales inventadas: ni bandera, ni decretos, ni "alta biomasa" en las pantallas', () => {
-  const f = ['js/pesca.js', 'js/avisos.js', 'js/reglas-mar.js'].map(leer).join('\n');
+  // Se ignoran los nombres de clase CSS (ag-dictamen se reutiliza del formato de Agrícola): importa el texto que ve la persona.
+  const f = ['js/pesca.js', 'js/avisos.js', 'js/reglas-mar.js'].map(leer).join('\n').replace(/ag-dictamen(-t|-txt)?/g, 'ag-caja');
   assert.doesNotMatch(f, /Bandera Amarilla|decreta|Alta Biomasa|Zona Favorable|dictamen/i);
 });
