@@ -36,7 +36,7 @@
     "unidades": "NDVI",
     "pendiente_por_anio": -0.0014,
     "cambio_total": -0.034,
-    "p_valor": 0.0,
+    "p_valor": 8.158e-29,
     "significativo": true,
     "meses_sin_dato": 3
    }
