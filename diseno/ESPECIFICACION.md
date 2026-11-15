@@ -88,7 +88,8 @@ Tamaños de H1 y tarjetas: aproximados en el PNG, no medidos en la auditoría (P
 ## 5. Responsive a 360 px
 
 Figma solo tiene escritorio (1280). Lo siguiente es **(propuesta de UI/UX, no está en Figma)**:
-- Header: logo a la izquierda + botón de menú (hamburguesa) a la derecha; el menú se abre como lista vertical con las 5 pestañas, "Inicio de sesión" y "Registro". Alternativa: barra de pestañas con scroll horizontal. Mantener la regla de pestaña activa.
+- Navegación: la **barra inferior** que ya tiene la web (Inicio, Mapa, Ficha, Agro, Acciones; ≥44 px, `aria-current`) se queda; es mejor que una hamburguesa en celular. Mantener la regla de pestaña activa.
+- Header: logo con la marca "AI-generated" a la izquierda (ver §7) y el botón "English" a la derecha.
 - Márgenes laterales de 16 px en vez de 32; contenido a todo el ancho.
 - Tarjetas de diagnóstico: 1 columna (en escritorio son 2).
 - Buscador y chips de filtro: chips en una fila con scroll horizontal.
@@ -111,6 +112,10 @@ Resultados de contraste (WCAG 2.1, calculados en `diseno/tests/diseno.test.mjs`;
 
 Sin hallazgos de contraste fallido en estos 5 pares. No se revisaron los demás pares del diseño (por ejemplo, texto naranja/ámbar de etiquetas sobre fondos claros, que en el mockup se ve de bajo contraste): POR REVISAR.
 
+**Modo oscuro** (propuesta de UI/UX, no está en Figma): bloque `@media (prefers-color-scheme: dark)` al final de `web/assets/tokens.css`. Usa los mismos fondos y textos oscuros que `web/css/estilos.css` y tonos claros de la paleta de marca. Los 12 pares de texto pasan 4.5:1 (pruebas en `diseno/tests/diseno.test.mjs`). Para fondos de tarjeta usar `--rb-fondo-tarjeta`, no `--rb-blanco`.
+
+**Hallazgo en `dev` (2026-11-14):** en modo oscuro, Inicio (`home.css`) y Agrícola (`agricola.css`) fijan el fondo claro `#f7f9fc` con colores escritos a mano, mientras la cabecera y el pie usan texto claro del tema oscuro. Resultado medido: "La Paz, B.C.S.", "English" y el pie quedan con contraste de 1.80:1 y 1.96:1 (falla). En modo claro las 5 rutas pasan. Arreglo: en esos dos CSS cambiar los hex fijos por los tokens `--rb-*` (que ya cambian solos en oscuro) e importar `assets/tokens.css` en `index.html`.
+
 Lista de revisión:
 - [ ] Foco visible en enlaces, pestañas y botones (`:focus-visible` con contorno de 2 px de `--rb-marino` o `--rb-verde-vivo`; no quitar `outline`).
 - [ ] Pestaña activa con `aria-current="page"`.
@@ -128,7 +133,7 @@ Lista de revisión:
 El logo fue generado con **Gemini** (Google), confirmado por Ehileen el 2026-11-14 y registrado en `docs/RECURSOS.md`, sección IA. Regla del proyecto: marca visible "AI-generated" o mención en el texto del sitio.
 Instrucción (pedido del Líder en #98): la marca **"AI-generated" debe verse junto al logo en el encabezado**, no solo en el pie. Usar `web/assets/logo-radar-bcs-ai-generated.png` (logo + etiqueta, ya exportado a 3x; en el header mostrarlo a 44 px de alto con `alt="Radar BCS, logotipo generado con IA (AI-generated)"`) o maquetar la etiqueta como texto: JetBrains Mono Medium 10 px, color `--rb-texto-suave` (#44474d), borde 1 px #c4c6ce, radio 4 px, padding 2px 6px, 8 px a la derecha del logo. Además, en el pie: **"Logotipo generado con IA (Gemini) · AI-generated"**. Términos de Gemini revisados: <https://policies.google.com/terms> y <https://policies.google.com/terms/generative-ai/use-policy>.
 
-**Hallazgos de la revisión a 360 px:** ver `diseno/revision-360/REPORTE.md` (P0: la Ficha de lluvia tiene scroll horizontal por la URL larga de la fuente).
+**Hallazgos de la revisión a 360 px:** ver `diseno/revision-360/REPORTE.md` (P0: la Ficha de lluvia tiene scroll horizontal por la URL larga de la fuente; sigue en `dev` el 2026-11-14). Se puede repetir con `diseno/tools/revisar-360.js`.
 
 **Íconos:** los 12 de `web/assets/iconos/` son Google Material Symbols (Apache 2.0; ver `web/assets/iconos/README.md` y `LICENSE-material-symbols.txt`). No hace falta atribución en la web. Si se agrega un ícono de Flaticon, su licencia gratuita exige en la página o en el pie una línea por autor: *"Icon made by [autor] from www.flaticon.com"* ([guía de Flaticon](https://support.flaticon.com/s/article/Attribution-How-when-and-where-FI?language=en_US)).
 
@@ -139,7 +144,7 @@ Instrucción (pedido del Líder en #98): la marca **"AI-generated" debe verse ju
 - No dejar textos del mockup que afirmen cosas no verificadas: "ENLACE SATELITAL ACTIVO", "en tiempo real", "Fuente de telemetría: CONAGUA / SMN / Red Radar Costero BCS", "Protocolo OGC", "API meteorológica". Cada uno requiere confirmar que existe o cambiarlo.
 - No afirmar causas ("por qué"): solo qué cambió.
 - No agregar más fuentes ni colores fuera de `tokens.css`.
-- No inventar colores de modo oscuro (pendiente en Figma).
+- No usar colores de modo oscuro fuera del bloque oscuro de `tokens.css` (propuesta de UI/UX con contraste probado; ver §6).
 - No editar `diseno/pantallas/*.png` a mano: se regeneran desde Figma (ver `diseno/tools/README.md`).
 - No usar imágenes de personas menores de 18.
 

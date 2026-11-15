@@ -2,8 +2,9 @@
    Fuente: Figma "Radar paceno", id ae9KMSMZUexeV0dBhDkNR1
    Auditoria: diseno/figma-auditoria.json. Especificacion: diseno/ESPECIFICACION.md
    Prefijo --rb- para no chocar con web/css/*.css.
-   TODO (pendiente): bloque de modo oscuro. Figma aun no define colores oscuros;
-   no inventarlos. Cuando existan, agregarlos en @media (prefers-color-scheme: dark). */
+   Modo oscuro: bloque al final del archivo. Es propuesta de UI/UX (Figma solo tiene
+   modo claro); reutiliza los colores oscuros que ya usa web/css/estilos.css y colores
+   de la paleta de marca. Contraste comprobado en diseno/tests/diseno.test.mjs. */
 :root {
   /* Colores de marca */
   --rb-tinta: #000d21;          /* texto principal, titulos */
@@ -13,6 +14,7 @@
   --rb-texto-base: #191c1e;
   --rb-fondo-pagina: #f7f9fc;
   --rb-blanco: #ffffff;
+  --rb-fondo-tarjeta: #ffffff;  /* usar este (no --rb-blanco) para fondos de tarjeta */
   --rb-gris-110: #f2f4f7;
   --rb-gris-120: #eceef1;
   --rb-gris-130: #e6e8eb;
@@ -72,4 +74,34 @@
 
   /* Sombra del header: valor aproximado, POR CONFIRMAR en Figma */
   --rb-sombra-header: 0 1px 4px rgba(0, 13, 33, 0.12);
+}
+
+/* Modo oscuro (propuesta de UI/UX, no está en Figma).
+   Fondos, texto y bordes = los de @media (prefers-color-scheme:dark) en web/css/estilos.css,
+   para que Inicio y Agrícola no queden con fondo claro y cabecera oscura.
+   Verdes, cian, error e info = tonos claros que ya existen en la paleta de marca.
+   Todos los pares de texto pasan 4.5:1 (ver diseno/tests/diseno.test.mjs). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rb-tinta: #f0f2f4;
+    --rb-texto-base: #f0f2f4;
+    --rb-texto-suave: #b6bdc4;
+    --rb-fondo-pagina: #12161a;
+    --rb-fondo-tarjeta: #1d2329;
+    --rb-gris-110: #232a31;
+    --rb-gris-120: #273038;
+    --rb-gris-130: #2a333b;
+    --rb-gris-140: #2e363e;
+    --rb-gris-borde: #3a434b;
+    --rb-gris-medio: #9aa1a8;
+    --rb-marino: #1f3a5f;         /* pestaña activa y botón primario, texto blanco */
+    --rb-verde-vivo: #7ed99e;
+    --rb-pildora-fondo: #0f3d24;
+    --rb-pildora-texto: #9af6b8;
+    --rb-cian-oscuro: #90f1ff;
+    --rb-error: #ffdad6;
+    --rb-error-fondo: #93000a;
+    --rb-azul-info: #7db8ff;
+    --rb-sombra-header: 0 1px 4px rgba(0, 0, 0, 0.5);
+  }
 }
