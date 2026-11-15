@@ -47,3 +47,11 @@ Cómo revisar: `git diff --stat dev` debe mostrar solo `docs/`.
 
 - **Luca (Prog. A):** sube a Drive (`datasets/`) los CSV de AppEEARS de las 6 zonas, para que Investigación reproduzca las cifras. Revisa por qué la superficie baja en El Centenario y Sur (calidad 0b01, hora de paso) antes de que se cite.
 - **Diego (Prog. B):** hecho en el PR #57: Calor muestra la superficie MODIS con su nota (el aire sube +1.47 °C; no coinciden) y `web/data/` ya tiene la salida nueva. Falta integrar la interfaz de UI/UX.
+
+## 2026-11-15 (madrugada, 03:50 a 05:30)
+
+- **Hecho:** fusionados a `dev` los PR de Ehileen (#157, #159, #162, #164), de Luca (#174, #178 vía #180) y los propios: fuentes e IA fuera de la pantalla (#163), "Ver más" y pliegues (#167, #171), plan de Clima (#165, #168, #173), entrega al día (#169, #170, #182), regla de IA con el texto oficial (#177), marca de agua dentro del logo (#181). `main` recibió #172 (con el "fusiona" de Carlos).
+- **Qué hay en `main` y qué falta:** PR #183 (`dev → main`) abierto con Clima, la marca del logo y la entrega lista; **espera el "fusiona" de Carlos**.
+- **Qué falta (mío):** prueba con sol real después de las 07:00 y segunda prueba de disponibilidad de servicios a las 12:00 (`docs/investigacion/disponibilidad-servicios.md`).
+- **Qué falta (de Carlos):** video de 30 s (hoy, antes de las 23:59), pasos de la plataforma con `docs/entrega/PLATAFORMA-LISTA.md` y Submit for Judging (meta 13:00).
+- **Qué bloquea:** nada de mi lado. Aviso: dos PR de Luca se abrieron hacia `main` por error; se redirigieron a `dev` (los PR van siempre a `dev`).
