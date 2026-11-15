@@ -63,3 +63,20 @@ test('el resumen de la ficha Clima coincide con indicadores.json (no se queda vi
     if (i.cambio_total !== null) assert.ok(texto.includes(i.fuente.periodo), `${i.id}: falta ${i.fuente.periodo}`)
   }
 })
+
+test('auditoría de Luca (#119 D4): leyenda NDVI con el periodo de la vegetación, "volumen de extracción total" y límite del calor según su variable', () => {
+  const ind = JSON.parse(readFileSync(new URL('../data/indicadores.json', import.meta.url), 'utf8'));
+  const veg = ind.indicadores.find((i) => i.id === 'vegetacion').fuente.periodo.replace('-', '–');
+  assert.equal(datos.mapa.leyenda.titulo, 'CAMBIO DE NDVI ' + veg);
+  assert.equal(datos.mapa.leyenda.titulo_en, 'NDVI CHANGE ' + veg);
+  const todo = JSON.stringify(datos);
+  assert.ok(!/· extracción \d/.test(todo) && !/· extraction \d/.test(todo), 'la etiqueta es "volumen de extracción total"');
+  const calor = ind.indicadores.find((i) => i.id === 'calor');
+  const dict = datos.fichas.find((f) => f.id === 'clima').detalle.dictamen;
+  if (/T2M/.test(calor.variable)) {
+    assert.match(dict.texto, /temperatura del aire/);
+    assert.ok(!/superficie, no del aire/.test(dict.texto));
+  } else {
+    assert.match(dict.texto, /superficie, no del aire/);
+  }
+});

@@ -61,8 +61,8 @@
       }
     ],
     "leyenda": {
-      "titulo": "CAMBIO DE NDVI 2001–2025",
-      "titulo_en": "NDVI CHANGE 2001–2025",
+      "titulo": "CAMBIO DE NDVI 2001–2026",
+      "titulo_en": "NDVI CHANGE 2001–2026",
       "etiqueta": "Índice NDVI",
       "etiqueta_en": "NDVI index",
       "min": "Baja",
@@ -87,12 +87,12 @@
     {
       "id": "cultivos",
       "titulo": "Factibilidad y Cultivos",
-      "titulo_en": "Feasibility and Crops",
       "subtitulo": "Qué se siembra y qué límites de agua hay",
-      "subtitulo_en": "What is planted and what water limits exist",
       "chip": "3,879.6 ha sembradas",
-      "chip_en": "3,879.6 ha sown",
       "enlace": "Ver cultivos sembrados y restricciones de agua",
+      "titulo_en": "Feasibility and Crops",
+      "subtitulo_en": "What is planted and what water limits exist",
+      "chip_en": "3,879.6 ha sown",
       "enlace_en": "See planted crops and water restrictions",
       "detalle": {
         "chips": [
@@ -506,8 +506,8 @@
               "chip_en": "No availability",
               "titulo": "Acuífero Los Planes (0323)",
               "titulo_en": "Los Planes aquifer (0323)",
-              "texto": "Recarga 10.8 hm³/año · descarga natural comprometida 0.2 · extracción 12.94 · disponibilidad media anual (DMA) -2.34 hm³/año (déficit).",
-              "texto_en": "Recharge 10.8 hm³/year · committed natural discharge 0.2 · extraction 12.94 · mean annual availability (DMA) -2.34 hm³/year (deficit).",
+              "texto": "Recarga 10.8 hm³/año · descarga natural comprometida 0.2 · volumen de extracción total 12.94 · disponibilidad media anual (DMA) -2.34 hm³/año (déficit).",
+              "texto_en": "Recharge 10.8 hm³/year · committed natural discharge 0.2 · total extraction volume 12.94 · mean annual availability (DMA) -2.34 hm³/year (deficit).",
               "motivo": "Ficha de CONAGUA: «no existe volumen disponible para otorgar nuevas concesiones; por el contrario su déficit es de 2'337,757 m3.»",
               "motivo_en": "CONAGUA fact sheet: \"there is no volume available to grant new concessions; on the contrary, its deficit is 2'337,757 m3.\"",
               "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
@@ -518,8 +518,8 @@
               "chip_en": "No availability",
               "titulo": "Acuífero Todos Santos (0313)",
               "titulo_en": "Todos Santos aquifer (0313)",
-              "texto": "Recarga 18.4 hm³/año · descarga natural comprometida 14.7 · extracción 6.66 · disponibilidad media anual (DMA) -2.96 hm³/año (déficit).",
-              "texto_en": "Recharge 18.4 hm³/year · committed natural discharge 14.7 · extraction 6.66 · mean annual availability (DMA) -2.96 hm³/year (deficit).",
+              "texto": "Recarga 18.4 hm³/año · descarga natural comprometida 14.7 · volumen de extracción total 6.66 · disponibilidad media anual (DMA) -2.96 hm³/año (déficit).",
+              "texto_en": "Recharge 18.4 hm³/year · committed natural discharge 14.7 · total extraction volume 6.66 · mean annual availability (DMA) -2.96 hm³/year (deficit).",
               "motivo": "Ficha de CONAGUA: «no existe un volumen disponible para otorgar nuevas concesiones; por el contrario el déficit es de 2,964,513 m3 anuales.»",
               "motivo_en": "CONAGUA fact sheet: \"there is no volume available to grant new concessions; on the contrary, the deficit is 2,964,513 m3 per year.\"",
               "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
@@ -530,8 +530,8 @@
               "chip_en": "No availability",
               "titulo": "Acuífero La Paz (0324)",
               "titulo_en": "La Paz aquifer (0324)",
-              "texto": "Recarga 21.0 hm³/año · descarga natural comprometida 0.0 · extracción 34.49 · disponibilidad media anual (DMA) -13.49 hm³/año (déficit).",
-              "texto_en": "Recharge 21.0 hm³/year · committed natural discharge 0.0 · extraction 34.49 · mean annual availability (DMA) -13.49 hm³/year (deficit).",
+              "texto": "Recarga 21.0 hm³/año · descarga natural comprometida 0.0 · volumen de extracción total 34.49 · disponibilidad media anual (DMA) -13.49 hm³/año (déficit).",
+              "texto_en": "Recharge 21.0 hm³/year · committed natural discharge 0.0 · total extraction volume 34.49 · mean annual availability (DMA) -13.49 hm³/year (deficit).",
               "motivo": "La tabla del DOF 09/11/2023 registra DMA negativa. El acuerdo específico del DOF 17/08/2023 da otro déficit: «resultando en el acuífero un déficit de 27.82732 millones de metros cúbicos anuales» (volúmenes al 30-sep-2021). No se pudo verificar cuál rige.",
               "motivo_en": "The DOF 09/11/2023 table records a negative DMA. The specific agreement of DOF 17/08/2023 gives another deficit: \"resulting in a deficit in the aquifer of 27.82732 million cubic meters per year\" (volumes as of 30-Sep-2021). It could not be verified which one governs.",
               "fuente": "DOF 09/11/2023 (corte 30-dic-2022) y DOF 17/08/2023",
@@ -607,12 +607,12 @@
     {
       "id": "clima",
       "titulo": "Clima y Agua",
-      "titulo_en": "Climate and Water",
       "subtitulo": "Normales de NASA POWER 2001-2025",
-      "subtitulo_en": "NASA POWER normals 2001-2025",
       "chip": "≈262.8 mm de lluvia al año (estimación)",
-      "chip_en": "≈262.8 mm of rain per year (estimate)",
       "enlace": "Ver clima, tendencias y agua subterránea",
+      "titulo_en": "Climate and Water",
+      "subtitulo_en": "NASA POWER normals 2001-2025",
+      "chip_en": "≈262.8 mm of rain per year (estimate)",
       "enlace_en": "See climate, trends and groundwater",
       "detalle": {
         "chips": [
@@ -894,8 +894,8 @@
               "chip_en": "With available volume",
               "titulo": "Acuífero El Carrizal (0322)",
               "titulo_en": "El Carrizal aquifer (0322)",
-              "texto": "Recarga 14.2 hm³/año · descarga natural comprometida 0.0 · extracción 13.49 · disponibilidad media anual (DMA) +0.71 hm³/año (volumen disponible).",
-              "texto_en": "Recharge 14.2 hm³/year · committed natural discharge 0.0 · extraction 13.49 · mean annual availability (DMA) +0.71 hm³/year (available volume).",
+              "texto": "Recarga 14.2 hm³/año · descarga natural comprometida 0.0 · volumen de extracción total 13.49 · disponibilidad media anual (DMA) +0.71 hm³/año (volumen disponible).",
+              "texto_en": "Recharge 14.2 hm³/year · committed natural discharge 0.0 · total extraction volume 13.49 · mean annual availability (DMA) +0.71 hm³/year (available volume).",
               "motivo": "Ficha de CONAGUA: «existe un volumen disponible para otorgar nuevas concesiones de 713,376 m3 anuales.»",
               "motivo_en": "CONAGUA fact sheet: \"there is a volume available to grant new concessions of 713,376 m3 per year.\"",
               "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
@@ -906,8 +906,8 @@
               "chip_en": "No availability",
               "titulo": "Acuífero Los Planes (0323)",
               "titulo_en": "Los Planes aquifer (0323)",
-              "texto": "Recarga 10.8 hm³/año · descarga natural comprometida 0.2 · extracción 12.94 · disponibilidad media anual (DMA) -2.34 hm³/año (déficit).",
-              "texto_en": "Recharge 10.8 hm³/year · committed natural discharge 0.2 · extraction 12.94 · mean annual availability (DMA) -2.34 hm³/year (deficit).",
+              "texto": "Recarga 10.8 hm³/año · descarga natural comprometida 0.2 · volumen de extracción total 12.94 · disponibilidad media anual (DMA) -2.34 hm³/año (déficit).",
+              "texto_en": "Recharge 10.8 hm³/year · committed natural discharge 0.2 · total extraction volume 12.94 · mean annual availability (DMA) -2.34 hm³/year (deficit).",
               "motivo": "Ficha de CONAGUA: «no existe volumen disponible para otorgar nuevas concesiones; por el contrario su déficit es de 2'337,757 m3.»",
               "motivo_en": "CONAGUA fact sheet: \"there is no volume available to grant new concessions; on the contrary, its deficit is 2'337,757 m3.\"",
               "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
@@ -918,8 +918,8 @@
               "chip_en": "No availability",
               "titulo": "Acuífero La Paz (0324)",
               "titulo_en": "La Paz aquifer (0324)",
-              "texto": "Recarga 21.0 hm³/año · descarga natural comprometida 0.0 · extracción 34.49 · disponibilidad media anual (DMA) -13.49 hm³/año (déficit).",
-              "texto_en": "Recharge 21.0 hm³/year · committed natural discharge 0.0 · extraction 34.49 · mean annual availability (DMA) -13.49 hm³/year (deficit).",
+              "texto": "Recarga 21.0 hm³/año · descarga natural comprometida 0.0 · volumen de extracción total 34.49 · disponibilidad media anual (DMA) -13.49 hm³/año (déficit).",
+              "texto_en": "Recharge 21.0 hm³/year · committed natural discharge 0.0 · total extraction volume 34.49 · mean annual availability (DMA) -13.49 hm³/year (deficit).",
               "motivo": "La tabla del DOF 09/11/2023 registra DMA negativa. El acuerdo específico del DOF 17/08/2023 da otro déficit; ver la nota sobre la discrepancia.",
               "motivo_en": "The DOF 09/11/2023 table records a negative DMA. The specific agreement of DOF 17/08/2023 gives another deficit; see the note on the discrepancy.",
               "fuente": "DOF 09/11/2023 (corte 30-dic-2022)",
@@ -995,12 +995,12 @@
     {
       "id": "suelo",
       "titulo": "Salud del Suelo",
-      "titulo_en": "Soil Health",
       "subtitulo": "Propiedades modeladas por SoilGrids",
-      "subtitulo_en": "Properties modeled by SoilGrids",
       "chip": "Franco arenoso (derivada)",
-      "chip_en": "Sandy loam (derived)",
       "enlace": "Ver propiedades del suelo por localidad",
+      "titulo_en": "Soil Health",
+      "subtitulo_en": "Properties modeled by SoilGrids",
+      "chip_en": "Sandy loam (derived)",
       "enlace_en": "See soil properties by locality",
       "detalle": {
         "chips": [
@@ -1024,8 +1024,8 @@
         "dictamen": {
           "titulo": "RESUMEN CON DATOS DE MODELO",
           "titulo_en": "SUMMARY WITH MODEL DATA",
-          "texto": "Clase textural derivada con el triángulo USDA a partir de arena, limo y arcilla: Los Planes, franco arenoso; El Carrizal, franco arenoso; El Centenario, franco arenoso. pH a 0-5 cm: Los Planes 8.0, El Carrizal 8.0 y El Centenario 7.9. Son estimaciones de modelo, no análisis de laboratorio.",
-          "texto_en": "Textural class derived with the USDA triangle from sand, silt and clay: Los Planes, sandy loam; El Carrizal, sandy loam; El Centenario, sandy loam. pH at 0-5 cm: Los Planes 8.0, El Carrizal 8.0 and El Centenario 7.9. These are model estimates, not laboratory analyses."
+          "texto_en": "Textural class derived with the USDA triangle from sand, silt and clay: Los Planes, sandy loam; El Carrizal, sandy loam; El Centenario, sandy loam. pH at 0-5 cm: Los Planes 8.0, El Carrizal 8.0 and El Centenario 7.9. These are model estimates, not laboratory analyses.",
+          "texto": "Clase textural derivada con el triángulo USDA a partir de arena, limo y arcilla: Los Planes, franco arenoso; El Carrizal, franco arenoso; El Centenario, franco arenoso. pH a 0-5 cm: Los Planes 8.0, El Carrizal 8.0 y El Centenario 7.9. Son estimaciones de modelo, no análisis de laboratorio."
         },
         "grupo": {
           "titulo": "Propiedades a 0-5 cm por localidad",
@@ -1306,12 +1306,12 @@
     {
       "id": "riesgos",
       "titulo": "Riesgos y Sanidad",
-      "titulo_en": "Risks and Plant Health",
       "subtitulo": "Sequía, sanidad y ciclones",
-      "subtitulo_en": "Drought, plant health and cyclones",
       "chip": "Sequía: sin categoría registrada al 31 oct 2026",
-      "chip_en": "Drought: no category recorded as of 31 Oct 2026",
       "enlace": "Ver sequía, sanidad y ciclones",
+      "titulo_en": "Risks and Plant Health",
+      "subtitulo_en": "Drought, plant health and cyclones",
+      "chip_en": "Drought: no category recorded as of 31 Oct 2026",
       "enlace_en": "See drought, plant health and cyclones",
       "detalle": {
         "chips": [
@@ -1335,8 +1335,8 @@
         "dictamen": {
           "titulo": "RESUMEN CON DATOS OFICIALES",
           "titulo_en": "SUMMARY WITH OFFICIAL DATA",
-          "texto": "Monitor de Sequía (municipio de La Paz, 03003): sin categoría registrada al 31 oct 2026; última categoría: D0 (cortes del 30 jun al 31 ago 2026). Baja California Sur está declarada zona libre de moscas de la fruta del género Anastrepha (DOF 05/10/2018), aunque en 2023 el gobierno estatal informó brotes. Para ciclones solo hay una clasificación estatal.",
-          "texto_en": "Drought Monitor (municipality of La Paz, 03003): no category recorded as of 31 Oct 2026; last category: D0 (cuts from 30 Jun to 31 Aug 2026). Baja California Sur is declared a free zone of fruit flies of the genus Anastrepha (DOF 05/10/2018), although in 2023 the state government reported outbreaks. For cyclones there is only a state-level classification."
+          "texto_en": "Drought Monitor (municipality of La Paz, 03003): no category recorded as of 31 Oct 2026; last category: D0 (cuts from 30 Jun to 31 Aug 2026). Baja California Sur is declared a free zone of fruit flies of the genus Anastrepha (DOF 05/10/2018), although in 2023 the state government reported outbreaks. For cyclones there is only a state-level classification.",
+          "texto": "Monitor de Sequía (municipio de La Paz, 03003): sin categoría registrada al 31 oct 2026; última categoría: D0 (cortes del 30 jun al 31 ago 2026). Baja California Sur está declarada zona libre de moscas de la fruta del género Anastrepha (DOF 05/10/2018), aunque en 2023 el gobierno estatal informó brotes. Para ciclones solo hay una clasificación estatal."
         },
         "grupo": {
           "titulo": "Riesgos documentados",

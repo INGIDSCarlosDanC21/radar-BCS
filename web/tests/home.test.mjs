@@ -31,7 +31,7 @@ test('contenido obligatorio', () => {
   const h = RBHome.html(datos);
   assert.ok(h.includes('Mostramos qué cambió, no por qué. Una tendencia no prueba la causa.'));
   assert.ok(h.includes('Tendencias 2001–2026 · NASA'));
-  assert.ok(h.includes('Datos generados el 2026-11-14'));
+  assert.ok(h.includes('Datos generados el ' + datos.generado), 'la fecha sale de indicadores.json, no fija');
   assert.ok(h.includes('Licencia Apache-2.0'));
 });
 
