@@ -45,6 +45,8 @@
       'cm.d.mar': 'El oleaje y las corrientes del modelo marino solo están para hoy: míralos en el Mapa Pesquero.', 'cm.d.pesca': 'Ver el Mapa Pesquero',
       'cm.pAhora': 'Ahora', 'cm.pHoy': '{v} °C (sensación {s} °C) · UV máx. {u} · viento {k} km/h · lluvia {l} %',
       'cm.pDia': 'Máx. {x} °C · mín. {m} °C · UV máx. {u} · rachas {r} km/h · lluvia {l} % ({mm} mm)',
+      'cm.guardado429': 'Open-Meteo llegó a su límite de consultas por hoy desde esta red: se muestra el último dato guardado ({h}). Prueba más tarde o con otra conexión.',
+      'cm.guardado': 'Open-Meteo no responde ahora: se muestra el último dato guardado ({h}).',
       'cm.rotHoy': 'Ahora · {z}', 'cm.rotDia': '{f} · {z} · valores del día',
       'cm.limite': 'El servicio del clima (Open-Meteo) llegó a su límite de consultas por hoy desde esta red. Intenta más tarde o desde otra conexión.',
       'cm.d.nota': 'Valores del día del modelo Open-Meteo para este lugar: no son estaciones ni avisos oficiales. Datos del tiempo: Open-Meteo.com (CC BY 4.0).'
@@ -76,6 +78,8 @@
       'cm.d.mar': 'Waves and currents from the marine model are only available for today: see them on the Fishing Map.', 'cm.d.pesca': 'See the Fishing Map',
       'cm.pAhora': 'Now', 'cm.pHoy': '{v} °C (feels like {s} °C) · UV peak {u} · wind {k} km/h · rain {l} %',
       'cm.pDia': 'High {x} °C · low {m} °C · UV peak {u} · gusts {r} km/h · rain {l} % ({mm} mm)',
+      'cm.guardado429': 'Open-Meteo reached its request limit for today from this network: showing the last saved data ({h}). Try again later or from another connection.',
+      'cm.guardado': 'Open-Meteo is not responding: showing the last saved data ({h}).',
       'cm.rotHoy': 'Now · {z}', 'cm.rotDia': '{f} · {z} · daily values',
       'cm.limite': 'The weather service (Open-Meteo) reached its request limit for today from this network. Try again later or from another connection.',
       'cm.d.nota': "Daily values from the Open-Meteo model for this place: not weather stations or official warnings. Weather data: Open-Meteo.com (CC BY 4.0)."
@@ -460,14 +464,15 @@
       var lp = filaDe(S.lugar);
       elegir(raiz, lp.lugar.id);
       var est = raiz.querySelector('#cm-estado');
-      if (est) est.textContent = t('cielo.sincro', { h: (lp.c.time || '').slice(11, 16) });
+      if (est && filas.guardado) { est.textContent = t(filas.guardado.motivo === '429' ? 'cm.guardado429' : 'cm.guardado', { h: (lp.c.time || '').slice(11, 16) }); est.className = 'cm-estado cl-error'; }
+      else if (est) { est.textContent = t('cielo.sincro', { h: (lp.c.time || '').slice(11, 16) }); est.className = 'cm-estado'; }
       pintarMapa(raiz, filas); rotuloMapa(raiz, lp);
       programar(raiz, opciones);
       if (opciones.abrir && !opciones._abierta && FICHAS.indexOf(opciones.abrir) >= 0) { opciones._abierta = true; abrirFicha(raiz, opciones.abrir); }
       return true;
-    }).catch(function () {
+    }).catch(function (e) {
       var est = raiz.querySelector('#cm-estado');
-      if (est) { est.textContent = t('cm.error'); est.className = 'cm-estado cl-error'; }
+      if (est) { est.textContent = t(e && e.message === '429' ? 'cm.limite' : 'cm.error'); est.className = 'cm-estado cl-error'; }
       programar(raiz, opciones);
       return false;
     });
@@ -480,6 +485,7 @@
       var caja = raiz.querySelector('#cm-tarjetas');
       if (!caja || caja.isConnected === false) return; // ya se salió de la pantalla Clima
       if (S.fecha) return;                             // con una fecha elegida no se refresca
+      if (CL.oculta && CL.oculta()) { programar(raiz, opciones); return; }   // pestaña oculta: no gasta consultas
       cargar(raiz, opciones);
     }, ms);
   }
