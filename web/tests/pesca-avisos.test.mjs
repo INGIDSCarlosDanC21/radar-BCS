@@ -152,14 +152,14 @@ test('Pesca: 4 fichas cerradas con el formato de Agrícola, rotuladas como estim
   assert.match(html, /no es aviso oficial/); assert.match(html, /Estado del mar/);
   assert.doesNotMatch(html, /<table|<canvas|<td|<th|bandera/i);
 });
-test('Pesca: una ficha abierta muestra solo esa ficha (las otras 3 se omiten), con cierre, fuentes y pendientes', () => {
+test('Pesca: una ficha abierta muestra solo esa ficha (las otras 3 se omiten), con cierre y fuentes, sin textos de pendiente', () => {
   T.setLang('es');
   const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30');
   for (const id of ['seg', 'oc', 'cl', 'clo']) {
     const html = Pesca.fichas(datos.puertos[0], idx, id, false, '2026-11-14');
     assert.equal((html.match(/data-ficha=/g) || []).length, 1, id);
     assert.match(html, /ag-abierta/); assert.match(html, /data-cerrar="1"/); assert.match(html, /role="region"/);
-    assert.match(html, /Pendiente \(sin fuente/); assert.match(html, /Open-Meteo/);
+    assert.doesNotMatch(html, /Pendiente|Pending/); assert.match(html, /Open-Meteo/); assert.match(html, /Pilar \d/);
   }
   assert.match(Pesca.fichas(datos.puertos[0], idx, 'clo', true, '2026-11-14'), /aria-pressed="true"/);
   assert.match(Pesca.fichas(datos.puertos[0], idx, 'clo', false, '2026-11-14'), /aria-pressed="false"/);
@@ -175,7 +175,7 @@ test('Pesca: fichas en inglés', () => {
   T.setLang('en');
   const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30');
   const html = Pesca.fichas(datos.puertos[0], idx, 'seg', false, '2026-11-14');
-  assert.match(html, /Close/); assert.match(html, /Pending \(no verified/); assert.doesNotMatch(html, /Cerrar|Pendiente/);
+  assert.match(html, /Close/); assert.match(html, /Pillar 1/); assert.doesNotMatch(html, /Cerrar|Pendiente|Pilar/);
   T.setLang('es');
 });
 test('Pesca: la leyenda dice los umbrales y la de clorofila trae la escala', () => {
@@ -285,4 +285,50 @@ test('Pesca: las fichas de condiciones y clima costero muestran las cifras nueva
   assert.match(cl, /06:36/); assert.match(cl, /17:34/); assert.match(cl, /Cambio en 3 h/);
   const oc = Pesca.fichas(p, idx, 'oc', false, '2026-11-14', datos.horas[idx]);
   assert.match(oc, /0[.,]6 m/); assert.match(oc, /0[.,]5 m|0[.,]4 m/); assert.match(oc, /No es la tabla oficial de mareas/);
+});
+
+test('Pesca: mareograma del día con máximo y mínimo del modelo, y sin curva si faltan datos', () => {
+  T.setLang('es');
+  const idx = 24 + 10, p = JSON.parse(JSON.stringify(datos.puertos[0]));
+  p.s.nivel = Array.from({ length: datos.horas.length }, (_, i) => Math.round((0.5 + 0.4 * Math.sin(i / 2)) * 100) / 100);
+  const m = Pesca.mareograma(p, idx);
+  const dia = p.s.nivel.slice(24, 48);
+  assert.equal(m.max, Math.max(...dia)); assert.equal(m.min, Math.min(...dia));
+  assert.match(m.svg, /<svg[^>]*role="img"[^>]*aria-label="Nivel del mar del día/); assert.match(m.svg, /<polyline/);
+  const html = Pesca.fichas(p, idx, 'oc', false, '2026-11-14', datos.horas[idx], null);
+  assert.match(html, /Pilar 1 · Mareograma \(modelo\)/); assert.match(html, /No es la tabla oficial de mareas/);
+  p.s.nivel = null; assert.equal(Pesca.mareograma(p, idx), null);
+  assert.doesNotMatch(Pesca.fichas(p, idx, 'oc', false, '2026-11-14', datos.horas[idx], null), /Mareograma/);
+});
+test('Pesca: fase lunar del U.S. Naval Observatory pasada a la hora de La Paz; sin respuesta, la tarjeta no aparece', async () => {
+  T.setLang('es');
+  assert.equal(Pesca.urlLuna('2026-11-05'), 'https://aa.usno.navy.mil/api/moon/phases/date?date=2026-11-5&nump=4');
+  const crudo = { phasedata: [{ day: 17, month: 11, phase: 'First Quarter', time: '11:48', year: 2026 }, { day: 24, month: 11, phase: 'Full Moon', time: '14:53', year: 2026 }, { day: 1, month: 12, phase: 'Raro', time: '06:08', year: 2026 }] };
+  const f = Pesca.fasesLunares(crudo);
+  assert.equal(f.length, 2, 'una fase desconocida se descarta');
+  assert.equal(f[0].ms, Date.UTC(2026, 10, 17, 11, 48)); assert.equal(f[0].fase, 'pes.f.lunaCrec');
+  const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30');
+  const con = Pesca.fichas(datos.puertos[0], idx, 'oc', false, '2026-11-14', datos.horas[idx], f);
+  assert.match(con, /Cuarto creciente/); assert.match(con, /Luna llena/); assert.match(con, /Naval Observatory/);
+  assert.match(con, /04:48/, '11:48 UT son las 04:48 en La Paz (UTC-7)');
+  for (const sin of [null, false, undefined, []]) assert.doesNotMatch(Pesca.fichas(datos.puertos[0], idx, 'oc', false, '2026-11-14', datos.horas[idx], sin), /Fase lunar/);
+  assert.deepEqual(Pesca.fasesLunares(null), []);
+  await assert.rejects(Pesca.pedirLuna('2026-11-15', async () => ({ ok: false, status: 500 })), /HTTP 500/);
+  const ok = await Pesca.pedirLuna('2026-11-15', async () => ({ ok: true, json: async () => crudo }));
+  assert.equal(ok.length, 2);
+});
+test('Pesca: ninguna ficha muestra textos de pendiente ni tallas, vedas con fechas o avisos oficiales inventados', () => {
+  const idx = V.indiceAhora(datos.horas, '2026-11-15 10:30');
+  for (const lang of ['es', 'en']) {
+    T.setLang(lang);
+    for (const id of ['seg', 'oc', 'cl', 'clo']) {
+      const h = Pesca.fichas(datos.puertos[0], idx, id, false, '2026-11-14', datos.horas[idx], null);
+      assert.doesNotMatch(h, /Pendiente|Pending|talla|size limit|bandera|flag/i, lang + id);
+    }
+  }
+  T.setLang('es');
+});
+test('datos-vivos: pide también dirección y periodo del mar de fondo y la dirección del mar de viento', () => {
+  const m = new URL(V.urlMar()).searchParams.get('hourly').split(',');
+  for (const k of ['swell_wave_period', 'swell_wave_direction', 'wind_wave_direction']) assert.ok(m.includes(k), k);
 });

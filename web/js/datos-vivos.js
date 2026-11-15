@@ -23,7 +23,7 @@
     { id: 'santarosalia', nombre: 'Santa Rosalía', costa: 'golfo', mar: [27.34, -112.15], pueblo: [27.340, -112.267] }
   ];
 
-  var VAR_MAR = 'wave_height,wave_period,wave_direction,swell_wave_height,sea_surface_temperature,ocean_current_velocity,ocean_current_direction,wind_wave_height,wind_wave_period,sea_level_height_msl';
+  var VAR_MAR = 'wave_height,wave_period,wave_direction,swell_wave_height,sea_surface_temperature,ocean_current_velocity,ocean_current_direction,wind_wave_height,wind_wave_period,wind_wave_direction,swell_wave_period,swell_wave_direction,sea_level_height_msl';
   var VAR_PRON = 'wind_speed_10m,wind_gusts_10m,wind_direction_10m,weather_code,uv_index,pressure_msl,visibility,precipitation_probability,cape,dew_point_2m';
   /* Clima (docs/PLAN-CLIMA.md): solo los 8 pueblos, en una petición aparte y solo si se pide con cargar({clima:true}),
      para que Pesca y Avisos no paguen las variables nuevas. */
@@ -84,7 +84,8 @@
         sst: serie(m, 'sea_surface_temperature', H), corr: serie(m, 'ocean_current_velocity', H), cdir: serie(m, 'ocean_current_direction', H),
         viento: serie(v, 'wind_speed_10m', H), rachas: serie(v, 'wind_gusts_10m', H), vdir: serie(v, 'wind_direction_10m', H),
         codigo: serie(u, 'weather_code', H), uv: serie(u, 'uv_index', H),
-        olaV: serie(m, 'wind_wave_height', H), perV: serie(m, 'wind_wave_period', H), nivel: serie(m, 'sea_level_height_msl', H),
+        olaV: serie(m, 'wind_wave_height', H), perV: serie(m, 'wind_wave_period', H), dirV: serie(m, 'wind_wave_direction', H),
+        perS: serie(m, 'swell_wave_period', H), dirS: serie(m, 'swell_wave_direction', H), nivel: serie(m, 'sea_level_height_msl', H),
         pres: serie(u, 'pressure_msl', H), vis: serie(u, 'visibility', H), pll: serie(u, 'precipitation_probability', H), cape: serie(u, 'cape', H), rocio: serie(u, 'dew_point_2m', H)
       };
       var r = { id: p.id, nombre: p.nombre, costa: p.costa, mar: p.mar, pueblo: p.pueblo, s: s, dias: [], sol: dias(pron[n + k] && pron[n + k].daily) };
