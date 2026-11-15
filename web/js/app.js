@@ -307,6 +307,8 @@
   var saltar = document.querySelector('.saltar');
   if (saltar) saltar.addEventListener('click', function (ev) { ev.preventDefault(); main.focus(); });
   var anuncio = document.getElementById('anuncio');
+  // aria-live en <main> leía la pantalla entera en cada cambio; con JS lo sustituye #anuncio (solo el título).
+  if (anuncio) main.removeAttribute('aria-live');
   function anunciar() { if (anuncio) anuncio.textContent = document.title; }
   window.addEventListener('hashchange', function (ev) {
     // Dentro del Mapa Agrícola (abrir/cerrar ficha) no se sube al inicio: agricola.js maneja el scroll.

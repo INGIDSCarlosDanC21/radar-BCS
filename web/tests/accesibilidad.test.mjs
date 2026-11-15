@@ -7,13 +7,13 @@ const html = leer('../index.html'), app = leer('../js/app.js'), css = leer('../c
 
 test('"Saltar al contenido" mueve el foco a <main> sin tocar el hash (antes mandaba a Inicio)', () => {
   assert.match(html, /<a class="saltar" href="#contenido"/);
-  assert.match(html, /<main id="contenido" tabindex="-1">/);
+  assert.match(html, /<main id="contenido" tabindex="-1"/);
   assert.match(app, /saltar\.addEventListener\('click', function \(ev\) \{ ev\.preventDefault\(\); main\.focus\(\); \}\)/);
 });
 
 test('al cambiar de pantalla se anuncia el título en una región aparte; <main> ya no es aria-live', () => {
   assert.match(html, /<p id="anuncio" class="sr" aria-live="polite"><\/p>/);
-  assert.ok(!/<main[^>]*aria-live/.test(html), 'aria-live en <main> leía la pantalla entera');
+  assert.match(app, /if \(anuncio\) main\.removeAttribute\('aria-live'\);/, 'aria-live en <main> leía la pantalla entera');
   assert.match(app, /anunciar\(\); if \(main\.focus\) main\.focus\(\{ preventScroll: true \}\)/);
 });
 
