@@ -12,11 +12,27 @@
 - Issue #9: mapa real. `web/data/zonas.geojson` es copia sin BOM de `data/salida/zonas.geojson` (Luca): 6 píxeles MODIS de 1 km (Centro, Chametla, El Centenario, Oriente, Sur, Surponiente), `datos_de_prueba: false`, así que ya no sale la franja. Vegetación muestra cifra y color en las 4 zonas con tendencia clara. Calor (superficie) muestra "Sin cambio claro" sin cifra en todas, por decisión de Investigación (`docs/investigacion/hallazgos.md`: la baja por zona depende de la prueba). Lluvia y agua: escala regional. Con la nota de Carlos (revisión del PR #57) bajo la lista de calor.
 - Salida nueva de Luca copiada a `web/data/indicadores.json`: calor = superficie MODIS "Sin cambio claro" (p = 0.11) con nota que dice que el aire sí sube +1.47 °C; agua real GRACE +1.36 cm (2002-2026, tendencia clara, regional). La ficha dice "Cambio total desde" el primer año del periodo.
 
+- PR #57 fusionado y `dev` → `main` (PR #64).
+- Pantallas de Figma (rama `prog-b/figma-pantallas`). Plan en `docs/handoffs/prog-b-plan-figma-2026-11-14.md`.
+  - **Home** (`web/js/home.js`, `web/css/home.css`): reemplaza Inicio con el diseño de Figma y solo datos de `indicadores.json`. Se quitaron las temperaturas en vivo, el radar dBZ, GOES-18 y los avisos, que eran ficticios.
+  - **Imagen:** MODIS Terra de NASA GIBS (CC0), en `web/img/` con su `FUENTES.md`.
+  - **Earth Engine:** script `web/tools/gee_imagen_bcs.py` para un compuesto MCD43A4. Requiere cuenta y no se ha corrido.
+- **Login y Register:** por el issue #73, se sacaron del PR #69 y pasaron a la rama `prog-b/login`, con su PR aparte a `dev`. Corte: domingo 15 nov, 09:00.
+
 ## En curso
 
-- PR `prog-b/mapa-zonas` → `dev` (issue #9).
+- PR #69 (`prog-b/figma-pantallas` → `dev`): Home e imagen NASA, sin login.
+- Rama `prog-b/login`: ajustar el login a las condiciones del #73.
 
 ## Falta
+
+- **Login (#73):**
+  - Definir para qué sirve la cuenta.
+  - Crear el proyecto de Supabase con confirmación de correo y límites de tasa.
+  - Definir un canal para pedir el borrado de una cuenta.
+  - Probarlo en un celular real (#71).
+- **Textos de relleno de Register** y logotipo: Ehileen (#11, #12).
+- **Registrar en `docs/RECURSOS.md`:** la imagen GIBS y Space Grotesk, Manrope y JetBrains Mono (OFL).
 
 - Que Carlos fusione `dev` → `main`; luego comprobar la URL pública sin sesión.
 - Si Investigación cambia la prueba para la superficie por zona, quitar `sinCifra` de `CAPA_ZONA.calor` en `web/js/app.js`.

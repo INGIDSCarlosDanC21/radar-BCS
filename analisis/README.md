@@ -24,6 +24,7 @@ pip install -r analisis/requirements.txt
 python -m analisis.exportar
 python -m analisis.zonas
 python -m pytest analisis
+python -m analisis.validar   # valida data/salida/ contra el contrato
 ```
 
 ## Estado

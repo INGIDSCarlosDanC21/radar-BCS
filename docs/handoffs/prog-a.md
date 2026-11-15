@@ -2,39 +2,39 @@
 
 ## Hecho
 
-- Pipeline de tendencias (PR #37, #38, #52): `analisis/` con NASA POWER, MODIS (AppEEARS, 6 puntos), GRACE y exportación según `docs/contrato-datos.md`; 22 pruebas.
+- Pipeline de tendencias (PR #37, #38, #52, #63, #70): `analisis/` con NASA POWER, MODIS (AppEEARS, 6 puntos), GRACE y exportación según `docs/contrato-datos.md`; 47 pruebas.
 - `data/salida/` (cifras calculadas por código generado con IA, sin revisión de Investigación):
-  - Calor = MODIS LST (decisión de Carlos), 2001-2025: sin cambio claro (p = 0.11), por eso sin cifra; el aire POWER sube +1.47 °C y se cita en la limitación.
-  - Vegetación = NDVI MODIS: -0.019, significativo.
+  - Calor = MODIS LST (aceptado por Carlos, `docs/decisiones.md`), 2001-2025: sin cambio claro (p = 0.11), sin cifra; el aire POWER sube +1.47 °C y se cita en la limitación.
   - Lluvia (total anual, POWER): sin cambio claro (p = 0.13), sin cifra.
   - Agua = GRACE (JPL Mascon CRI), 2002-2026 (2026 parcial): +1.36 cm, regional, significativo; no es el acuífero.
-  - `zonas.geojson` real (6 zonas = píxeles MODIS de 1 km) y `zonas_tendencias.json`.
-- CSV de AppEEARS (6 zonas) en Drive: `datasets/appeears-6-zonas/`.
-- Texto de la ficha de agua listo para Carlos: `analisis/texto-ficha-agua.md`.
-- Estado completo y decisiones: `analisis/PLAN.md`.
+  - `zonas.geojson` real (6 zonas = píxeles MODIS de 1 km) y `zonas_tendencias.json`. `web/data/` coincide con `data/salida/` en `dev`.
+- `python -m analisis.validar` valida `data/salida/` contra el contrato; `analisis/REVISION.md` dice cómo reproducir cada cifra.
+- Calidad MODIS revisada (causa en `analisis/PLAN.md`): LST Oriente/Sur por precisión de emisividad; NDVI Centro parece artefacto de costa. Aceptar 0b10 no cambia la conclusión.
+- Spearman lluvia vs agua: `python -m analisis.correlacion` (rho = 0.52, p = 0.018, n = 20, 2003-2025), con pruebas. Es correlación, no causa.
+- Texto de la ficha de agua: `analisis/texto-ficha-agua.md`. CSV de AppEEARS en Drive: `datasets/appeears-6-zonas/`.
 
 ## En curso
 
-- PR con los últimos cambios (calor MODIS, agua hasta 2026, p-valor real, texto de la ficha de agua).
+- Rama `prog-a/extender-2026`: código de 2026 y vegetación 2001-2026 (parcial: -0.013, p = 0.0036). Calor queda en 2001-2025 (`python -m analisis.exportar --calor-hasta 2025`).
+- Con 2026, calor sale -1.06 °C significativo y baja pareja en las 6 zonas desde 2022: sospechoso (deriva del paso de Terra). Se pidió a AppEEARS la hora de observación (`python -m analisis.appeears enviarhora`, luego `descargar`); falta compararla por año. No se cita como causa hasta comprobarlo.
 
 ## Falta
 
-- Extensión a 2026 (rama `prog-a/extender-2026`): vegetación sale a 2001-2026 (parcial; -0.013, p = 0.0036). Calor queda en 2001-2025 (`python -m analisis.exportar --calor-hasta 2025`) hasta revisar la deriva de Terra con la hora de paso (`python -m analisis.appeears enviarhora`): con 2026 sale -1.06 °C significativo y baja pareja en las 6 zonas desde 2022, sospechoso.
-
-- Copiar la salida a `web/data/` con `python -m analisis.publicar`, en un PR acordado con Diego (su PR #57 de mapa pide las coordenadas de los 6 puntos: están en `zonas.geojson`).
-- Agua: contraste con GLDAS-2.2 CLSM (GWS); opcional.
+- Hora de paso de Terra (o MYD11A2 de Aqua) y resultado para `docs/investigacion/hallazgos.md` (de Carlos).
+- Avisar a Diego de los cambios en `web/data/` (vegetación a 2026, etiquetas de década) y regenerar la copia en un PR suyo.
+- Agua: contraste con GLDAS-2.2 CLSM; opcional.
 - Revisión humana de cifras y código por Luca e Investigación.
 
 ## Bloqueos
 
-- Ninguno por mi parte. Necesito a Carlos para fusionar y a Diego para acordar la copia a `web/`.
+- Ninguno por mi parte. Mi token no puede abrir PRs ni comentar; los abre el usuario desde la web.
 
 ## Para otros roles
 
-- Carlos: revisar `analisis/texto-ficha-agua.md`; comentar y cerrar el issue #7 (todo lo pedido está hecho).
-- Diego: `data/salida/zonas.geojson` y `indicadores.json` actualizados; falta copiarlos a `web/data/`.
+- Carlos: revisar `analisis/texto-ficha-agua.md`; el Spearman ya tiene código.
+- Diego: correr `web/tests` con node; ver los hallazgos de seguridad del login (#77).
 
-Probar: `pip install -r analisis/requirements.txt`, `python -m analisis.exportar`, `python -m analisis.zonas`, `python -m pytest analisis`.
+Probar: `pip install -r analisis/requirements.txt`, `python -m analisis.exportar`, `python -m analisis.zonas`, `python -m analisis.validar`, `python -m pytest analisis`.
 
 ---
 

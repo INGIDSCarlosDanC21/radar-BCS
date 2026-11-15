@@ -283,9 +283,10 @@
     document.querySelectorAll('[data-nav]').forEach(function (a) {
       if (a.getAttribute('data-nav') === sec) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
+    document.body.setAttribute('data-vista', sec);
     if (!DATOS) return;
     franja(sec);
-    if (sec === 'inicio') inicio();
+    if (sec === 'inicio') { if (window.RBHome) window.RBHome.render(main, DATOS); else inicio(); }
     else if (sec === 'mapa') mapaVista();
     else if (sec === 'ficha') ficha(h[1]);
     else acciones();
