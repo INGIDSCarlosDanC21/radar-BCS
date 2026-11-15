@@ -62,3 +62,14 @@
   .menu-sup a{gap:8px}
   .menu-sup .mi-ic{width:20px;height:20px}
 }
+/* Logo nuevo (pedido de UI/UX, 2026-11-15): ícono sin fondo y "Radar BCS" con la letra del menú (Manrope) en negrita. */
+.cabecera .marca{gap:10px;min-height:44px;text-decoration:none;color:var(--acento)}
+.cabecera .marca img{height:40px;width:auto}
+.marca-t{font-family:var(--f-cuerpo);font-weight:700;font-size:20px;line-height:1;letter-spacing:-.2px;white-space:nowrap}
+@media (max-width:1023px){.cabecera .marca img{height:36px}.marca-t{font-size:18px}}
+
+/* Cabecera a todo lo ancho también en celular y tableta: el botón de idioma queda pegado a la derecha y no se encoge. */
+@media (max-width:1023px){
+  .cabecera{max-width:none;margin:0;padding:12px 16px 0}
+}
+.cabecera .idioma{flex:none;flex-shrink:0;width:auto;min-width:max-content}
