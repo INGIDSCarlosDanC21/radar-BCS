@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo.** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Plan para terminar lo que falta (domingo 15 de noviembre)
 
 Escrito a las 03:28 (hora de La Paz) por el asistente del Líder. Quedan **9 h 30 min** para la meta interna (**Submit for Judging a las 13:00**) y **20 h 30 min** para el cierre oficial (23:59). Este plan reemplaza las listas sueltas del chat. Lo anterior está en [`PLAN-CIERRE.md`](PLAN-CIERRE.md) (noche del sábado) y la lista de campos de la plataforma en [`entrega/CHECKLIST-ENVIO.md`](entrega/CHECKLIST-ENVIO.md).

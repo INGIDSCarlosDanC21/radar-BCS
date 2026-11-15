@@ -34,7 +34,7 @@ Las claves van en `.env` (copia de `.env.example`), que nunca se sube.
 
 | Carpeta | Contenido | Dueño |
 |---|---|---|
-| `web/` | Sitio (4 pantallas) y `web/assets/` | Diego / Ehileen |
+| `web/` | Sitio (Inicio, Clima, Pesca, Agro, Avisos; Ficha desde Inicio) y `web/assets/` | Diego / Ehileen |
 | `analisis/` | Scripts de datos y estadística (Mann-Kendall, Sen) | Luca |
 | `data/` | Datos procesados pequeños; lo pesado va en Drive | Luca |
 | `diseno/` | Paleta, bocetos, logotipo | Ehileen |

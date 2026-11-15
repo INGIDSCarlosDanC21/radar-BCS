@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo.** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Plan: textos largos con "Ver más" (menos scroll)
 
 Pedido de Carlos (chat, 2026-11-15): que los textos largos se acorten y ofrezcan un botón **"Ver más"** con el resto de la información, para optimizar el espacio. La gente hace mucho scroll.

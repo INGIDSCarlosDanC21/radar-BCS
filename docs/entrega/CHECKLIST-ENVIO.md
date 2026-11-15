@@ -41,7 +41,7 @@ Aparece **un banner arriba de la pantalla con un mensaje de confirmación**, y e
 
 Se abrió Edit Details como dueño del equipo y solo se leyó. Estado de la página: todo vacío; "Project OptiPaz — Check back later". Datos que **no** estaban en el PDF o que conviene saber:
 
-- **El Summary tiene tope de 1500 caracteres** (contador "0/1500"), además de las 50-200 palabras sugeridas. Nuestro `01` mide unos 1100 caracteres: cabe.
+- **El Summary tiene tope de 1500 caracteres** (contador "0/1500"), además de las 50-200 palabras sugeridas. Nuestro `01` mide 1203 caracteres: cabe.
 - **"Project Name"** viene con el texto "Project OptiPaz"; hay que cambiarlo por el nombre real (Radar BCS).
 - **Project Details** es un editor de texto enriquecido: se pega el texto de `04` (sin formato raro).
 - **La pregunta "Use of Super Intelligence (SI)" es una lista de opciones múltiples** ("select all that apply") y la respuesta **no la ven los jueces**, solo sirve para recopilar datos. Lo que sí ven son las marcas "AI-generated", el texto descriptivo y los metadatos dentro del proyecto. Se elige todo lo que usamos, sin omitir nada (regla 10).
@@ -53,10 +53,10 @@ Se abrió Edit Details como dueño del equipo y solo se leyó. Estado de la pág
 
 ## Estado (se actualiza aquí; última revisión 2026-11-15, 05:20)
 
-- [x] 01 resumen (193 palabras, 1168 caracteres; incluye los 3 problemas locales y el contexto en vivo)
+- [x] 01 resumen (198 palabras, 1203 caracteres; incluye los 3 problemas locales y el contexto en vivo)
 - [ ] 02 enlace de la demo: **video por grabar** (guion en `08b-video-shotlist.md`); debe subirse y probarse sin sesión antes de las 23:59
 - [x] 03 enlace del proyecto: sitio público probado sin sesión el 2026-11-15, en español y en inglés (`?lang=en`), sin errores de consola
-- [x] 04 detalles al día con la web final (Mapa Meteorológico, Clima, Pesca, Avisos); falta anotar el celular real si se prueba (#71) y confirmar equipos
+- [x] 04 detalles al día con la web final (Clima con mapa de 38 lugares y Acciones, Pesca, Avisos, Agro); falta anotar el celular real si se prueba (#71) y confirmar equipos
 - [x] 05 uso de IA al día (Claude Code, Gemini para el logo con marca de agua dentro de la imagen, Google Stitch); falta elegir las opciones en el menú de la plataforma
 - [x] 06 datos NASA (incluye las 3 capas de NASA GIBS)
 - [x] 07 referencias al día (logo con marca, Open-Meteo con la tercera petición de Clima)

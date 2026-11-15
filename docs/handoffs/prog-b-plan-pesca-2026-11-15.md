@@ -1,3 +1,5 @@
+> **Nota (2026-11-15): documento histórico; lo que contradiga a `docs/decisiones.md` (2026-11-15) está superado por ese archivo.** Ver la web actual: menú Clima · Pesca · Inicio · Agro · Avisos, 38 lugares en Clima, 19 puertos en Pesca.
+
 # Plan Diego (prog-b), 2026-11-15: lluvia/agua en el mapa de zonas, issue de datos de pesca y fichas de pesca
 
 Estado: solo plan, nada implementado. Skills: rol-ui-ux (la carpeta `equipo/UI/UX` no existe; las skills están en `.claude/skills/`), rol-programador-b, orquestar-barato.
