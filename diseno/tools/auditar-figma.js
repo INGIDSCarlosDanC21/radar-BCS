@@ -9,13 +9,16 @@
   const RECEPTOR = 'http://127.0.0.1:8765/guardar?ruta=';
   const PESTANAS = ['Inicio', 'Clima', 'Agricultura', 'Pesca', 'Avisos y Alertas'];
   // Pantallas del conjunto final (lado izquierdo del lienzo). Las de x >= 5000 son borradores.
-  const esFinal = (n) => n.type === 'FRAME' && n.x < 5000 && !['Login', 'Registrar', 'Logo', 'Logo con marca AI-generated'].includes(n.name);
+  // Las versiones de celular ("… · 360") se auditan aparte (movil).
+  const esMovil = (n) => n.type === 'FRAME' && n.x < 5000 && / · 360$/.test(n.name);
+  const esFinal = (n) => n.type === 'FRAME' && n.x < 5000 && !esMovil(n) && !['Login', 'Registrar', 'Logo', 'Logo con marca AI-generated'].includes(n.name);
   const seccionDe = (nombre) => {
     if (nombre === 'Inicio') return 'Inicio';
     if (nombre === 'Avisos y Alertas') return 'Avisos y Alertas';
     const pre = nombre.split(' - ')[0];
     return PESTANAS.includes(pre) ? pre : null;
   };
+  const AFIRMACIONES = /RED ESTATAL DE ESTACIONES|dBZ|Avisos Activos|ESTACIÓN PRINCIPAL OCEANOGRÁFICA|GOES-18|En vivo|API meteorológica|Red de telemetría|Protocolo OGC|Todos los derechos reservados/i;
   const hex = (c) => '#' + [c.r, c.g, c.b].map((v) => Math.round(v * 255).toString(16).padStart(2, '0')).join('');
   const pintura = (p) => p.type === 'SOLID' ? hex(p.color)
     : p.type.startsWith('GRADIENT') ? `${p.type}(${p.gradientStops.map((g) => hex(g.color)).join('>')})` : p.type;
@@ -61,6 +64,10 @@
       erratas: textos.filter((t) => /simulaciónl|Lorem|DATOS DE PRUEBA/i.test(t)).map((t) => t.slice(0, 60)),
       // Nombres de personas reales usados como ejemplo (no deben aparecer en maquetas).
       nombresDeEjemplo: textos.filter((t) => /Bare[ñn]o|Armando Castro/i.test(t)).map((t) => t.slice(0, 60)),
+      // Afirmaciones del mockup sin fuente real (#144): estaciones, radar, avisos, enlaces inexistentes.
+      afirmacionesSinFuente: textos.filter((t) => AFIRMACIONES.test(t)).map((t) => t.slice(0, 60)),
+      // Íconos del estado del cielo (web/assets/iconos/cielo/) presentes en la pantalla.
+      iconosCielo: f.findAll((n) => n.name.startsWith('Cielo / ')).map((n) => n.name.slice(8)),
     };
   }
 
@@ -98,6 +105,18 @@
       acentosPorSeccion: acentosMaestros(),
       paleta: paleta(frames),
       pantallas: frames.map(auditarPantalla).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es')),
+      movil: figma.currentPage.children.filter(esMovil).map((f) => {
+        const textos = f.findAll((n) => n.type === 'TEXT');
+        const fuentes = {}; for (const t of textos) for (const s of t.getStyledTextSegments(['fontName', 'fontSize'])) { fuentes[s.fontName.family] = (fuentes[s.fontName.family] || 0) + 1; }
+        const chicos = textos.filter((t) => t.getStyledTextSegments(['fontSize']).some((s) => s.fontSize < 12)).map((t) => t.characters.slice(0, 40));
+        const fuera = f.findAll((n) => 'absoluteBoundingBox' in n && n.absoluteBoundingBox && n.visible !== false && n.absoluteBoundingBox.x + n.absoluteBoundingBox.width > f.absoluteBoundingBox.x + f.width + 0.5).map((n) => n.name).slice(0, 10);
+        const tactiles = f.findAll((n) => /^(Botón|Pestaña) /.test(n.name)).map((n) => ({ nombre: n.name, alto: Math.round(n.height), ancho: Math.round(n.width) }));
+        return { nombre: f.name, archivo: `diseno/pantallas/${slug(f.name)}.png`, ancho: Math.round(f.width), alto: Math.round(f.height), fuentes,
+          textoMenorA12: chicos, fueraDelAncho: fuera, tactiles,
+          afirmacionesSinFuente: textos.map((t) => t.characters).filter((t) => AFIRMACIONES.test(t)),
+          marcaIA: textos.some((t) => t.characters === 'AI-generated'),
+          iconosCielo: [...new Set(f.findAll((n) => n.name.startsWith('Cielo / ')).map((n) => n.name.slice(8)))] };
+      }),
     };
     await enviar('diseno/figma-auditoria.json', JSON.stringify(datos, null, 2));
     return { pantallas: datos.pantallas.length, componentes: comps.length };
@@ -111,6 +130,9 @@
       do { bytes = await f.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: s } }); s -= 0.25; }
       while (bytes.length > 4.5 * 1024 * 1024 && s > 0.25);
       log.push(f.name + ' ' + await enviar(`diseno/pantallas/${slug(f.name)}.png`, bytes));
+    }
+    for (const f of figma.currentPage.children.filter(esMovil)) {
+      log.push(f.name + ' ' + await enviar(`diseno/pantallas/${slug(f.name)}.png`, await f.exportAsync({ format: 'PNG', constraint: { type: 'SCALE', value: 2 } })));
     }
     for (const nombre of ['Login', 'Registrar']) {
       const f = figma.currentPage.children.find((n) => n.name === nombre);

@@ -1,6 +1,6 @@
 {
   "archivo": "Figma \"Radar paceño\" (ae9KMSMZUexeV0dBhDkNR1)",
-  "generado": "2026-11-15T05:55:24.416Z",
+  "generado": "2026-11-15T08:41:27.550Z",
   "pestanas": [
     "Inicio",
     "Clima",
@@ -123,31 +123,31 @@
   "paleta": [
     {
       "color": "#44474d",
-      "usos": 897
+      "usos": 899
     },
     {
       "color": "#ffffff",
-      "usos": 744
+      "usos": 746
     },
     {
       "color": "#000d21",
-      "usos": 634
+      "usos": 659
     },
     {
       "color": "#006d3d",
-      "usos": 367
+      "usos": 369
     },
     {
       "color": "#f2f4f7",
-      "usos": 143
+      "usos": 148
     },
     {
       "color": "#191c1e",
-      "usos": 134
+      "usos": 135
     },
     {
       "color": "#0c2340",
-      "usos": 120
+      "usos": 119
     },
     {
       "color": "#e0e3e6",
@@ -159,7 +159,7 @@
     },
     {
       "color": "#97f3b5",
-      "usos": 78
+      "usos": 79
     },
     {
       "color": "#778bad",
@@ -175,19 +175,19 @@
     },
     {
       "color": "#51d8e8",
-      "usos": 40
-    },
-    {
-      "color": "#0098a6",
-      "usos": 35
-    },
-    {
-      "color": "#f59e0b",
-      "usos": 33
+      "usos": 39
     },
     {
       "color": "#d97706",
-      "usos": 29
+      "usos": 37
+    },
+    {
+      "color": "#0098a6",
+      "usos": 34
+    },
+    {
+      "color": "#f59e0b",
+      "usos": 30
     },
     {
       "color": "#e6e8eb",
@@ -203,7 +203,7 @@
     },
     {
       "color": "#b45309",
-      "usos": 27
+      "usos": 28
     },
     {
       "color": "#ba1a1a",
@@ -220,6 +220,10 @@
     {
       "color": "#92400e",
       "usos": 20
+    },
+    {
+      "color": "#74777e",
+      "usos": 18
     },
     {
       "color": "#ffdad6",
@@ -250,15 +254,11 @@
       "usos": 14
     },
     {
-      "color": "#74777e",
-      "usos": 14
-    },
-    {
       "color": "#c4c6ce",
       "usos": 13
     },
     {
-      "color": "#fbbf24",
+      "color": "#4b5f7f",
       "usos": 11
     },
     {
@@ -266,12 +266,8 @@
       "usos": 10
     },
     {
-      "color": "#4b5f7f",
+      "color": "#fbbf24",
       "usos": 10
-    },
-    {
-      "color": "#dc2626",
-      "usos": 9
     },
     {
       "color": "#1e88e5",
@@ -279,6 +275,10 @@
     },
     {
       "color": "#ecfdf5",
+      "usos": 9
+    },
+    {
+      "color": "#065f46",
       "usos": 9
     }
   ],
@@ -316,7 +316,9 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "108:2638",
@@ -351,7 +353,9 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "83:2695",
@@ -384,7 +388,9 @@
       "acento": null,
       "botonSimulacion": null,
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "112:3853",
@@ -419,7 +425,9 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "112:3267",
@@ -454,7 +462,9 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "99:2",
@@ -487,7 +497,9 @@
       "acento": null,
       "botonSimulacion": null,
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "115:446",
@@ -522,7 +534,11 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
     },
     {
       "id": "127:4758",
@@ -557,7 +573,11 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
     },
     {
       "id": "66:325",
@@ -590,7 +610,11 @@
       "acento": null,
       "botonSimulacion": null,
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
     },
     {
       "id": "127:2407",
@@ -625,7 +649,11 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
     },
     {
       "id": "127:1351",
@@ -660,7 +688,11 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [
+        "Hoy, En vivo (Intervalo 15m)"
+      ],
+      "iconosCielo": []
     },
     {
       "id": "62:2",
@@ -668,7 +700,7 @@
       "archivo": "diseno/pantallas/inicio.png",
       "seccion": "Inicio",
       "ancho": 1280,
-      "alto": 2261,
+      "alto": 2716,
       "header": {
         "tipo": "INSTANCE",
         "componente": "Header / Navegación principal",
@@ -684,16 +716,37 @@
         "componente": "Footer / Pie de página"
       },
       "fuentes": {
-        "Space Grotesk": 34,
-        "Manrope": 14,
-        "JetBrains Mono": 32
+        "Space Grotesk": 52,
+        "Manrope": 15,
+        "JetBrains Mono": 42
       },
       "tituloX": null,
       "tituloTexto": null,
       "acento": null,
       "botonSimulacion": null,
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": [
+        "sunny",
+        "sunny",
+        "partly_cloudy_day",
+        "cloud",
+        "foggy",
+        "rainy_light",
+        "sunny",
+        "sunny",
+        "rainy_light",
+        "sunny",
+        "partly_cloudy_day",
+        "sunny",
+        "partly_cloudy_day",
+        "cloud",
+        "foggy",
+        "rainy_light",
+        "rainy",
+        "thunderstorm"
+      ]
     },
     {
       "id": "141:2396",
@@ -728,7 +781,9 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "131:1008",
@@ -763,7 +818,9 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "90:496",
@@ -796,7 +853,9 @@
       "acento": null,
       "botonSimulacion": null,
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "142:3656",
@@ -831,7 +890,9 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
     },
     {
       "id": "124:4511",
@@ -866,7 +927,77 @@
       ],
       "botonSimulacion": "Botón / Iniciar simulación",
       "erratas": [],
-      "nombresDeEjemplo": []
+      "nombresDeEjemplo": [],
+      "afirmacionesSinFuente": [],
+      "iconosCielo": []
+    }
+  ],
+  "movil": [
+    {
+      "nombre": "Inicio · 360",
+      "archivo": "diseno/pantallas/inicio-360.png",
+      "ancho": 360,
+      "alto": 3046,
+      "fuentes": {
+        "JetBrains Mono": 40,
+        "Space Grotesk": 39,
+        "Manrope": 4
+      },
+      "textoMenorA12": [],
+      "fueraDelAncho": [],
+      "tactiles": [
+        {
+          "nombre": "Botón English",
+          "alto": 46,
+          "ancho": 81
+        },
+        {
+          "nombre": "Botón / Ver mapa de zonas",
+          "alto": 51,
+          "ancho": 328
+        },
+        {
+          "nombre": "Botón / Qué puedo hacer",
+          "alto": 51,
+          "ancho": 328
+        },
+        {
+          "nombre": "Pestaña / Inicio",
+          "alto": 56,
+          "ancho": 72
+        },
+        {
+          "nombre": "Pestaña / Mapa",
+          "alto": 56,
+          "ancho": 72
+        },
+        {
+          "nombre": "Pestaña / Ficha",
+          "alto": 56,
+          "ancho": 72
+        },
+        {
+          "nombre": "Pestaña / Agro",
+          "alto": 56,
+          "ancho": 72
+        },
+        {
+          "nombre": "Pestaña / Acciones",
+          "alto": 56,
+          "ancho": 72
+        }
+      ],
+      "afirmacionesSinFuente": [],
+      "marcaIA": true,
+      "iconosCielo": [
+        "sunny",
+        "partly_cloudy_day",
+        "cloud",
+        "foggy",
+        "rainy_light",
+        "rainy",
+        "thunderstorm"
+      ]
     }
   ]
 }

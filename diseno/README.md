@@ -7,6 +7,8 @@
 
 Las PNG de `pantallas/` y `componentes/` son **maquetas de diseño** (el equipo hizo un prototipo de media fidelidad, se ajustó en Google Stitch, que es IA, y la edición final se hizo a mano en Figma; confirmado por Ehileen el 2026-11-15). Muestran datos **de ejemplo** que no salen de ninguna fuente nuestra: temperaturas de ciudades, "Actualizado hace 4 min", "En vivo, Satélite GOES-18", escala de radar en dBZ, índice UV, viento, presión, alertas, "Red estatal de estaciones" y el texto "Todos los derechos reservados".
 
+**Excepción: Inicio (#144, 2026-11-15).** En `inicio.png` e `inicio-360.png`, la sección "¿Qué cambia?" usa las cifras reales de `web/data/indicadores.json` del 2026-11-15. "El cielo ahora en BCS" y los pines del mapa siguen siendo **de ejemplo**: la web los tomaría de Open-Meteo si se aprueba (ver `ESPECIFICACION.md` §10). La imagen del mapa y del héroe es la de MODIS Terra de `web/img/` (NASA GIBS, CC0).
+
 Reglas (AGENTS.md, reglas 1 y 6):
 
 - **No se copian a la web ni se usan en el video, las diapositivas, capturas de la entrega o el sitio.** La web solo muestra cifras de `data/salida/`.

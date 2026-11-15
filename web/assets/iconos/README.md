@@ -20,3 +20,5 @@ Los 12 íconos son glifos de **Google Material Symbols** (<https://fonts.google.
 | `pesca-condiciones-oceanograficas.svg` | `waves` |
 | `pesca-potencial-y-actividad-pesquera.svg` | `set_meal` |
 | `pesca-semaforo-de-seguridad.svg` | `flag` |
+
+**Subcarpeta `cielo/`:** 9 íconos del estado del cielo (también Material Symbols, Apache 2.0) para Inicio (#144). La relación código del clima → ícono está en `cielo/README.md`.

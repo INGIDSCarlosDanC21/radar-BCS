@@ -112,7 +112,7 @@ Resultados de contraste (WCAG 2.1, calculados en `diseno/tests/diseno.test.mjs`;
 
 Sin hallazgos de contraste fallido en estos 5 pares. No se revisaron los demás pares del diseño (por ejemplo, texto naranja/ámbar de etiquetas sobre fondos claros, que en el mockup se ve de bajo contraste): POR REVISAR.
 
-**Modo oscuro** (propuesta de UI/UX, no está en Figma): bloque `@media (prefers-color-scheme: dark)` al final de `web/assets/tokens.css`. Usa los mismos fondos y textos oscuros que `web/css/estilos.css` y tonos claros de la paleta de marca. Los 12 pares de texto pasan 4.5:1 (pruebas en `diseno/tests/diseno.test.mjs`). Para fondos de tarjeta usar `--rb-fondo-tarjeta`, no `--rb-blanco`.
+**Modo oscuro:** la web es siempre clara (decisión de Carlos, PR #142). El bloque oscuro de `web/assets/tokens.css` queda como propuesta sin cargar; sus 12 pares de texto pasan 4.5:1 por si algún día se retoma.
 
 **Hallazgo en `dev` (2026-11-14):** en modo oscuro, Inicio (`home.css`) y Agrícola (`agricola.css`) fijan el fondo claro `#f7f9fc` con colores escritos a mano, mientras la cabecera y el pie usan texto claro del tema oscuro. Resultado medido: "La Paz, B.C.S.", "English" y el pie quedan con contraste de 1.80:1 y 1.96:1 (falla). En modo claro las 5 rutas pasan. Arreglo: en esos dos CSS cambiar los hex fijos por los tokens `--rb-*` (que ya cambian solos en oscuro) e importar `assets/tokens.css` en `index.html`.
 
@@ -162,3 +162,29 @@ Instrucción (pedido del Líder en #98): la marca **"AI-generated" debe verse ju
 10. Versión móvil de 360 px (sección 5) y revisión con la lista de accesibilidad (sección 6).
 11. Reemplazar todos los números de ejemplo por datos reales con fuente.
 12. Correr `powershell -File diseno/tools/verificar-diseno.ps1` y `node --test "web/tests/*.test.mjs"`; abrir PR a `dev`.
+
+## 10. Inicio fiel a Figma y estado del cielo (issue #144)
+
+Frames: **"Inicio"** (1280, `diseno/pantallas/inicio.png`) e **"Inicio · 360"** (celular, `diseno/pantallas/inicio-360.png`, exportado a 2x). Los generan `diseno/tools/inicio-figma.js` e `inicio-360-figma.js`. Las pruebas de `diseno/tests` revisan que no haya afirmaciones sin fuente, que el texto no baje de 12 px, que las áreas táctiles midan 44 px y que estén los íconos del cielo.
+
+**Fase 1 (dentro del alcance, ya se puede hacer):** orden y textos de Inicio con los datos que ya existen.
+
+| # | Sección | Contenido | Datos |
+|---|---|---|---|
+| 1 | Héroe | "Cómo ha cambiado **La Paz** desde 2001" (La Paz en cian `#51d8e8`, subrayado), subtítulo, botones "Ver mapa de zonas" y "Qué puedo hacer". Imagen MODIS de `web/img/` con velo `#000d21` al 72 %. Sin carrusel ni flechas | Ya está en `home.js` |
+| 2 | ¿Qué cambia? | Kicker "TENDENCIAS DESDE 2001 · DATOS DE LA NASA". Tarjeta principal de **Calor** (+1.47 °C, aire 2001-2025, NASA POWER), más Vegetación, Lluvia y Agua (región) con su ícono de sección, p-valor y estado. Aviso "Mostramos qué cambió, no por qué" | `web/data/indicadores.json` |
+| 3 | El cielo ahora en BCS | Tarjeta grande de La Paz y 6 tarjetas: Los Cabos, Loreto, Comondú, Mulegé, Guerrero Negro y Bahía Magdalena | **Fase 2** (Open-Meteo) |
+| 4 | Monitoreo satelital | Mapa de la península con un **pin por localidad: ícono del cielo + temperatura**, y la leyenda "Estado del cielo" (7 estados) | **Fase 2** (GIBS GOES-West + Open-Meteo) |
+| 5 | Pie | Componente actualizado: sin "API meteorológica", "Red de telemetría", "Protocolo OGC" ni "Todos los derechos reservados". Lleva "Logotipo generado con IA (Gemini) · AI-generated" y la licencia Apache-2.0 | Texto fijo |
+
+Mientras no exista la fase 2, las secciones 3 y 4 **no se muestran**: no hay que dejar las cifras de ejemplo de la maqueta.
+
+**Fase 2 (solo si Carlos aprueba en #144):**
+- **Datos:** una sola llamada a Open-Meteo con las 7 coordenadas (`latitude=..,..&longitude=..,..`), con `current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,is_day,wind_speed_10m,wind_direction_10m,surface_pressure`, `daily=temperature_2m_min` y `timezone=America/Mazatlan`. Sin clave. Licencia y atribución: POR VERIFICAR antes de publicar. Índice UV: POR VERIFICAR; si no está en `current`, se quita la métrica.
+- **Rótulo honesto:** "Ahora · modelo meteorológico Open-Meteo (no son estaciones)" y "Actualizado HH:MM · hora de La Paz", con la hora que trae la respuesta, no la del celular.
+- **Íconos:** tabla código WMO → ícono en `web/assets/iconos/cielo/README.md`. Colores: ámbar `#d97706` para sol, gris `#74777e` para nubes y niebla, azul `#1f5f99` para lluvia, `#4b5f7f` para tormenta y blanco sobre pines oscuros. Cada ícono lleva `alt` o `aria-label` con el estado ("Despejado", "Clear").
+- **Pines:** marcadores de Leaflet en la coordenada de cada localidad. Coordenadas de la maqueta (aproximadas, POR VERIFICAR con INEGI por Luca): Santa Rosalía 27.34, −112.27 · Loreto 26.01, −111.35 · Bahía Magdalena 24.79, −112.11 · La Paz 24.14, −110.31 · Cabo San Lucas 22.89, −109.91. Texto del pin: "La Paz 28°C"; `aria-label` "La Paz: despejado, 28 °C".
+- **Fondo del mapa:** capa casi en tiempo real de NASA GIBS GOES-West (WMTS `epsg3857/nrt`; nombre exacto de la capa POR VERIFICAR en el GetCapabilities). Insignia "Imagen GOES-West · NASA GIBS" con la hora de la imagen. En la maqueta el fondo es la imagen MODIS fija.
+- **Estados:** cargando (esqueleto, como #122); **sin conexión** ("No pudimos cargar el clima de ahora. Las tendencias siguen disponibles." / "We couldn't load the current weather. The trends are still available."); dato con **más de 1 hora** ("Dato de hace más de 1 hora"); código desconocido → `cloud` + "Sin dato del cielo".
+- **360 px:** una columna; la leyenda va **debajo** del mapa (no encima); las 6 localidades en 2 columnas de 160 px; los botones del héroe a todo el ancho y de 48 px o más; la barra inferior de la web se queda igual.
+- **Lo que no cambia:** el reto es de tendencias. "El cielo ahora" es contexto, no una tendencia, y no se usa para afirmar causas (regla 2).
