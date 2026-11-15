@@ -1,0 +1,75 @@
+/* Radar BCS - tokens de diseno (variables CSS)
+   Fuente: Figma "Radar paceno", id ae9KMSMZUexeV0dBhDkNR1
+   Auditoria: diseno/figma-auditoria.json. Especificacion: diseno/ESPECIFICACION.md
+   Prefijo --rb- para no chocar con web/css/*.css.
+   TODO (pendiente): bloque de modo oscuro. Figma aun no define colores oscuros;
+   no inventarlos. Cuando existan, agregarlos en @media (prefers-color-scheme: dark). */
+:root {
+  /* Colores de marca */
+  --rb-tinta: #000d21;          /* texto principal, titulos */
+  --rb-marino: #0c2340;         /* pestana activa, boton primario */
+  --rb-verde-vivo: #006d3d;     /* estado "en vivo", acentos verdes */
+  --rb-texto-suave: #44474d;    /* texto secundario, enlaces del menu */
+  --rb-texto-base: #191c1e;
+  --rb-fondo-pagina: #f7f9fc;
+  --rb-blanco: #ffffff;
+  --rb-gris-110: #f2f4f7;
+  --rb-gris-120: #eceef1;
+  --rb-gris-130: #e6e8eb;
+  --rb-gris-140: #e0e3e6;
+  --rb-gris-borde: #c4c6ce;
+  --rb-gris-medio: #74777e;
+  --rb-azul-gris: #778bad;
+  --rb-pildora-fondo: #97f3b5;  /* pildora de estado */
+  --rb-pildora-texto: #047240;
+  --rb-verde-claro: #9af6b8;
+  --rb-cian: #51d8e8;
+  --rb-cian-oscuro: #0098a6;
+  --rb-cian-claro: #90f1ff;
+  --rb-error: #ba1a1a;
+  --rb-error-oscuro: #93000a;
+  --rb-error-fondo: #ffdad6;
+  --rb-alerta-rosa: #e11d48;
+  --rb-alerta-rosa-fondo: #fff1f2;
+  --rb-azul-info: #0284c7;
+
+  /* Acentos de seccion: Clima (degradado de 6px) */
+  --rb-acento-clima-calor: linear-gradient(90deg, #fbbf24, #d97706);
+  --rb-acento-clima-uv: linear-gradient(90deg, #f97316, #dc2626);
+  --rb-acento-clima-viento: linear-gradient(90deg, #14b8a6, #006d3d);
+  --rb-acento-clima-lluvia: linear-gradient(90deg, #60a5fa, #0c2340);
+  --rb-acento-clima-alto: 6px;
+
+  /* Acentos de seccion: Agricultura (solido de 4px) */
+  --rb-acento-agri-cultivos: #006d3d;
+  --rb-acento-agri-agua: #51d8e8;
+  --rb-acento-agri-suelo: #7ed99e;
+  --rb-acento-agri-riesgos: #fbbf24;
+
+  /* Acentos de seccion: Pesca (solido de 4px) */
+  --rb-acento-pesca-seguridad: #fbbf24;
+  --rb-acento-pesca-oceano: #1eb8c8;
+  --rb-acento-pesca-atmosfera: #4b5f7f;
+  --rb-acento-pesca-potencial: #006d3d;
+  --rb-acento-solido-alto: 4px;
+
+  /* Tipografia (Google Fonts, SIL OFL 1.1) */
+  --rb-fuente-titulo: "Space Grotesk", system-ui, sans-serif;
+  --rb-fuente-cuerpo: "Manrope", system-ui, sans-serif;
+  --rb-fuente-datos: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Espaciado y medidas (escritorio, 1280 px) */
+  --rb-margen: 32px;
+  --rb-ancho-contenido: 1216px;
+  --rb-ancho-pagina: 1280px;
+  --rb-alto-header: 64px;
+  --rb-alto-boton-simulacion: 56px;
+  --rb-espacio-pestana: 4px 16px;
+
+  /* Radios */
+  --rb-radio-pestana: 8px;
+  --rb-radio-pildora: 999px;
+
+  /* Sombra del header: valor aproximado, POR CONFIRMAR en Figma */
+  --rb-sombra-header: 0 1px 4px rgba(0, 13, 33, 0.12);
+}

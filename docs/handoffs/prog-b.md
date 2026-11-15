@@ -17,22 +17,26 @@
   - **Home** (`web/js/home.js`, `web/css/home.css`): reemplaza Inicio con el diseño de Figma y solo datos de `indicadores.json`. Se quitaron las temperaturas en vivo, el radar dBZ, GOES-18 y los avisos, que eran ficticios.
   - **Imagen:** MODIS Terra de NASA GIBS (CC0), en `web/img/` con su `FUENTES.md`.
   - **Earth Engine:** script `web/tools/gee_imagen_bcs.py` para un compuesto MCD43A4. Requiere cuenta y no se ha corrido.
-- **Login y Register:** por el issue #73, se sacaron del PR #69 y pasaron a la rama `prog-b/login`, con su PR aparte a `dev`. Corte: domingo 15 nov, 09:00.
+- **Login y Register:** por el issue #73, se sacaron del PR #69 y pasaron a la rama `prog-b/login` (PR #77, en borrador). Corte: domingo 15 nov, 09:00.
+- PR #69 (Home e imagen NASA) fusionado en `dev`.
+- **Issue #78** (rama `prog-b/sin-datos-prueba`):
+  - Se quitaron los textos "DATOS DE PRUEBA" de `web/README.md` y del HTML. La franja la escribe el JS y solo sale si `datos_de_prueba` es true.
+  - En el mapa, el título dice "Zonas:" en lugar de "Zonas con más cambio:" cuando ninguna zona tiene una tendencia clara (pasa con calor).
+  - Revisión a 360 px: Inicio, las 4 fichas, Mapa (6 polígonos) y Acciones, sin null, sin scroll horizontal, sin errores de consola y sin franja. Calor aparece como "Sin cambio claro" y agua aparece como regional.
 
 ## En curso
 
-- PR #69 (`prog-b/figma-pantallas` → `dev`): Home e imagen NASA, sin login.
-- Rama `prog-b/login`: ajustar el login a las condiciones del #73.
+- PR #77 (`prog-b/login`, borrador): al día con `dev` el 15 nov (se volvieron a agregar `acceso.js`, `acceso.css` y `generar-config.ps1`). Falta: la URL y la clave publishable del proyecto en `web/js/config.js` (las pone Carlos; nunca la secreta), la revisión de seguridad de Luca (#81) y la prueba en celular. Corte: domingo 15 nov, 09:00.
 
 ## Falta
 
+- **#78-1:** integrar las 2 pantallas de UI/UX cuando Ehileen y Roberto las entreguen (#11 no tiene entregas todavía).
+- **#78-4 y #71:** probar en un celular real con Carlos y Roberto.
 - **Login (#73):**
   - Definir para qué sirve la cuenta.
   - Crear el proyecto de Supabase con confirmación de correo y límites de tasa.
   - Definir un canal para pedir el borrado de una cuenta.
-  - Probarlo en un celular real (#71).
 - **Textos de relleno de Register** y logotipo: Ehileen (#11, #12).
-- **Registrar en `docs/RECURSOS.md`:** la imagen GIBS y Space Grotesk, Manrope y JetBrains Mono (OFL).
 
 - Que Carlos fusione `dev` → `main`; luego comprobar la URL pública sin sesión.
 - Si Investigación cambia la prueba para la superficie por zona, quitar `sinCifra` de `CAPA_ZONA.calor` en `web/js/app.js`.

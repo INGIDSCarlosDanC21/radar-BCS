@@ -20,19 +20,26 @@ NDVI = {"prefijo": "MOD13Q1_061", "valor": "MOD13Q1_061__250m_16_days_NDVI",
         "calidad": "MOD13Q1_061__250m_16_days_VI_Quality_MODLAND"}
 
 
-def leer(ruta, capa, convertir=lambda v: v, valido=lambda v: True):
-    """Devuelve {zona: [(año, mes, valor)]} con solo las lecturas válidas."""
-    zonas = {}
-    with open(ruta, encoding="utf-8") as f:
-        for r in csv.DictReader(f):
-            try:
-                v = float(r[capa["valor"]])
-            except ValueError:
-                continue
-            if r[capa["calidad"]] not in BUENA or not valido(v):
-                continue
-            anio, mes = int(r["Date"][:4]), int(r["Date"][5:7])
-            zonas.setdefault(r["Category"], []).append((anio, mes, convertir(v)))
+def leer(rutas, capa, convertir=lambda v: v, valido=lambda v: True):
+    """Devuelve {zona: [(año, mes, valor)]} con solo las lecturas válidas.
+
+    `rutas` es un CSV o una lista (2001-2025 y 2026); una composición repetida (misma zona y fecha) cuenta una vez.
+    """
+    zonas, vistos = {}, set()
+    for ruta in ([rutas] if isinstance(rutas, (str, Path)) else rutas):
+        with open(ruta, encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                if (r["Category"], r["Date"]) in vistos:
+                    continue
+                vistos.add((r["Category"], r["Date"]))
+                try:
+                    v = float(r[capa["valor"]])
+                except ValueError:
+                    continue
+                if r[capa["calidad"]] not in BUENA or not valido(v):
+                    continue
+                anio, mes = int(r["Date"][:4]), int(r["Date"][5:7])
+                zonas.setdefault(r["Category"], []).append((anio, mes, convertir(v)))
     return zonas
 
 
@@ -61,9 +68,28 @@ def ruta_csv(producto):
     raise FileNotFoundError(f"No hay CSV de {producto} en {CACHE}")
 
 
-def cargar(inicio, fin):
-    """Devuelve (mats_lst_por_zona, mats_ndvi_por_zona) en °C y NDVI."""
-    lst = leer(ruta_csv("MOD11A2"), LST, lambda k: k - 273.15, lambda v: v > 0)
-    ndvi = leer(ruta_csv("MOD13Q1"), NDVI, valido=lambda v: v > -2000)
+def rutas_csv(producto):
+    """CSV de usuario (2001-2025) más los de las tareas de zonas (p. ej. 2026), si existen."""
+    extra = sorted((CACHE / f"{producto}.061-zonas-2026").glob(f"*{producto}*results.csv"))
+    return [ruta_csv(producto)] + extra
+
+
+def tope_calor(argv):
+    """Valor de `--calor-hasta AAAA` en la línea de comandos (None si no se pide); congela calor mientras se revisa la deriva de Terra."""
+    return int(argv[argv.index("--calor-hasta") + 1]) if "--calor-hasta" in argv else None
+
+
+def anio_final(producto, tope=None):
+    """Último año con alguna lectura válida de ese producto (limitado por `tope` si se da)."""
+    capa, conv, ok = ((LST, lambda k: k - 273.15, lambda v: v > 0) if producto == "MOD11A2"
+                      else (NDVI, lambda v: v, lambda v: v > -2000))
+    ultimo = max(a for z in leer(rutas_csv(producto), capa, conv, ok).values() for a, _, _ in z)
+    return min(ultimo, tope) if tope else ultimo
+
+
+def cargar(inicio, fin, fin_ndvi=None):
+    """Devuelve (mats_lst_por_zona, mats_ndvi_por_zona) en °C y NDVI; cada producto llega hasta su año final."""
+    lst = leer(rutas_csv("MOD11A2"), LST, lambda k: k - 273.15, lambda v: v > 0)
+    ndvi = leer(rutas_csv("MOD13Q1"), NDVI, valido=lambda v: v > -2000)
     return ({z: matriz(l, inicio, fin) for z, l in lst.items()},
-            {z: matriz(l, inicio, fin) for z, l in ndvi.items()})
+            {z: matriz(l, inicio, fin_ndvi or fin) for z, l in ndvi.items()})

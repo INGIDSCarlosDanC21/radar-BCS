@@ -22,3 +22,11 @@ test('config.js no contiene claves secretas', () => {
 test('ya no existe supabase.sql', () => {
   assert.equal(existsSync(ruta('../tools/supabase.sql')), false);
 });
+
+test('el login sigue conectado tras traer dev: rutas, scripts y hueco de cuenta', () => {
+  const app = readFileSync(new URL('../js/app.js', import.meta.url), 'utf8')
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8')
+  assert.ok(app.includes("'login', 'registro'"), 'app.js no enruta #login/#registro')
+  assert.ok(app.includes('RBAcceso.render'), 'app.js no llama a RBAcceso.render')
+  for (const s of ['js/config.js', 'js/acceso.js', 'css/acceso.css', 'id="cuenta"']) assert.ok(html.includes(s), 'falta ' + s + ' en index.html')
+})

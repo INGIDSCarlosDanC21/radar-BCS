@@ -14,7 +14,8 @@ Código generado con IA (Claude); revisar antes de citar cifras.
 ## Falla o bloquea
 - **Tarea MOD13Q1 de AppEEARS** sigue descargando (~26%); no hace falta para los resultados porque se usan los CSV de 6 zonas de Luca (`data/cache/appeears/usuario/`). MOD11A2 de la tarea del pipeline ya bajó.
 - **Calor: POWER (aire) y MODIS (superficie) no coinciden.** Decidido (`docs/decisiones.md`, 2026-11-14): el número principal es MODIS (sin cifra, p = 0.11) y el aire (+1.465 °C, significativo) va en la `limitacion`. Solo El Centenario y Sur bajan significativamente por zona; el mapa los muestra "sin cambio claro".
-- LST: Oriente y Sur solo tienen calidad MODLAND 0b01 (no 0b00); NDVI de Centro pierde 167 meses al filtrar.
+- LST Oriente/Sur: **causa confirmada** (revisión de QC de los CSV): todas las lecturas son MODLAND 0b01 por la precisión de la emisividad (Emis_Error ≤ 0.02 en vez de ≤ 0.01); `Data_Quality_flag` es "Good" en el 100 % y el error de LST es ≤ 2 K en el 99.7 % de lo aceptado (96 % en Oriente). Exigir solo 0b00 vaciaría Oriente y Sur, así que se mantiene 0b00/0b01. Por qué el píxel tiene esa emisividad: no confirmado.
+- NDVI Centro: 167 de 300 meses sin dato. 405 de 576 lecturas salen como "nube probable" (0b10), pero solo 37 tienen bit de nube y 399 caen en píxel de costa: parece artefacto de píxel costero, no nubes (no confirmado). Prueba de sensibilidad aceptando 0b10: NDVI ciudad −0.0205 (p = 1.9e-6) frente a −0.0192 (p = 1.3e-5) hoy; Centro sigue significativo. La conclusión no cambia, así que se mantiene el filtro y se declara el límite.
 - `web/data/` ya trae los archivos reales (PR #57); `analisis/publicar.py` solo hace falta si se regeneran.
 - `appeears.py` sin pruebas.
 
@@ -68,3 +69,9 @@ Es otro píxel que los de las 6 zonas, así que no se compara valor por valor; s
 
 ## Corrección del p-valor del agua (2026-11-14)
 El indicador `agua` publicaba p = 9.9e-18 (Mann-Kendall estacional simple), demasiado optimista: GRACE tiene fuerte autocorrelación entre meses. Ahora `significancia` usa la prueba con corrección por autocorrelación (`tendencia_estacional_correlacionada`): **p = 0.0094, significativa**, con la misma pendiente de Sen (+0.057 cm/año, +1.362 cm en 2002-2026). El método se rotula "Mann-Kendall estacional con corrección por autocorrelación + pendiente de Sen". Prueba nueva (23 en total). Calor y vegetación siguen con la prueba estacional simple y coinciden con la correlacionada en significancia (calor sin cambio claro: p = 0.11 y 0.38; vegetación: p = 1.3e-5 y 0.022).
+
+## Hora de paso de Terra y calor (2026-11-15)
+- `python -m analisis.hora_paso`: la hora local de observación de MOD11A2 fue estable en 2001-2021 (≈10.7-10.9 h) y baja desde 2022: 10.58 (2022), 10.37 (2023), 10.06 (2024), 9.65 (2025), 9.17 (2026). Coincide con la deriva de órbita de Terra que documenta NASA.
+- Calor de superficie (promedio de 6 zonas): 2001-2021, antes de la deriva, **+0.94 °C, significativo (p = 0.0003)**; 2001-2025, **−0.48 °C, p = 0.11**. La anomalía frente a 2001-2021 baja a −0.3 (2022), −1.6 (2023), −1.8 (2024), −3.6 (2025) y −5.5 °C (2026, ene-oct) a medida que el paso se adelanta. Es lo esperado si el sensor mide más temprano en la mañana, cuando la superficie aún se está calentando.
+- Lectura: el "sin cambio claro" de 2001-2025 probablemente mezcla un calentamiento real hasta 2021 con un sesgo del paso del satélite después. No está probado que el sesgo explique toda la baja; falta contrastar con Aqua (MYD11A2, tarea `enviaraqua`; su propia hora de paso también viene en el CSV).
+- **Decisión (2026-11-15, Luca; Carlos la confirma al fusionar):** calor se publica con 2001-2021 (+0.94 °C, p = 0.0003) y una nota de la deriva en la limitación; regenerar con `--calor-hasta 2021`. Pendiente: contraste con Aqua.

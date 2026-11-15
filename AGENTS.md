@@ -67,7 +67,7 @@ El modelo principal de la sesión **solo orquesta**: planea, reparte, revisa e i
 
 - Lectura, búsqueda, redacción y código rutinario → subagentes con modelo pequeño (haiku; sonnet si hace falta razonar).
 - Trabajo en volumen → agentes externos gratuitos con `scripts/delegar.ps1 "<tarea>"` (Codex, OpenCode, Gemini CLI, Ollama; usa el primero disponible y guarda la respuesta en un archivo).
-- No hay datos sensibles en este proyecto, así que se puede mandar contexto a agentes externos. **Nunca** claves ni datos personales.
+- No hay datos sensibles en el análisis ni en el código, así que se puede mandar contexto a agentes externos. **Nunca** claves ni datos personales; si sale el login opcional con Supabase, los correos de las cuentas nunca se copian al repo, a los chats ni a agentes externos.
 - Revisa siempre lo que devuelve un agente antes de integrarlo.
 
 Ver skill `orquestar-barato`.
@@ -85,5 +85,5 @@ Ver skill `equipo-sync`.
 
 ## Entrega (resumen; detalle en skill `entrega-space-apps`)
 
-Página del proyecto en inglés · resumen de 50–200 palabras · **un** enlace de demo público (máx. 7 diapositivas contando portada, o video ≤30 s con subtítulos en inglés) · enlace al proyecto · detalles · uso de IA · datos NASA con enlaces · otros recursos · licencia Apache-2.0. Borradores en `docs/entrega/`.
+Página del proyecto en inglés · resumen de 50–200 palabras · **un** enlace de demo público (máx. 7 diapositivas contando portada, o video ≤30 s con subtítulos en inglés) · enlace al proyecto · detalles · uso de IA · datos NASA con enlaces · otros recursos · licencia Apache-2.0. Borradores en `docs/entrega/`. **Todos deben leer `docs/entrega/CHECKLIST-ENVIO.md`** (qué hay que entregar, resumido del PDF oficial de envío): inglés escrito también en el enlace del proyecto final (nuestra web), ni nombre, voz ni imagen de menores, marca "AI-generated" y nada de marca NASA, enlaces públicos sin registro, y al enviar aparece un banner de confirmación (guardar captura).
 Criterios (1–5, también en la evaluación local): Impact, Creativity, Validity, Relevance, Presentation. Detalle y premios en `docs/referencia/guia-de-calificacion.md`. Meta principal: **Local Impact Award**; también Best Use of Data y Best Use of Science. Presentación vale igual que los otros cuatro criterios.

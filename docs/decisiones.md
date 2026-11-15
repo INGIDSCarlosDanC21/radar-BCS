@@ -114,3 +114,24 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Reemplaza** la entrada anterior ("la web muestra el aire y la superficie juntos") solo en cuál es el número principal; sigue valiendo que las dos mediciones se ven y que se dice que no coinciden.
 - **Cómo se revierte:** si Carlos prefiere al aire como número principal, es un cambio en `analisis/exportar.py` (indicador `calor`) y en `web/data/indicadores.json`.
 - **Quién decidió:** Carlos (Líder) la acepta el 2026-11-14 sin haberla propuesto; propuesta original de Luca, revisada por Claude e Investigación.
+
+### 2026-11-14 — Login con Supabase: clave publishable en el repo y correo de contacto
+
+- **Contexto:** Programación B implementa un login opcional con Supabase Auth (issue #73). Hacía falta decidir cómo llega la clave publishable a GitHub Pages y qué correo pone el aviso de privacidad para borrar cuentas.
+- **Decisión:** (1) la clave **publishable/anon** de Supabase **sí se sube al repo** (en `web/js/config.js`), porque es pública por diseño y la protegen las reglas de Row Level Security; **nunca** `service_role` ni `sb_secret_`. (2) El correo de contacto del aviso de privacidad para pedir que se borre una cuenta es el que dio Carlos (contactarfloppa@gmail.com). (3) Carlos comprobó que el correo de confirmación de Supabase sí llega.
+- **Condiciones que siguen valiendo:** login opcional, solo correo y contraseña, corte el domingo a las 09:00 (issue #73).
+- **Quién decidió:** Carlos (Líder), 2026-11-14.
+
+### 2026-11-14 — Calor de superficie: la serie se corta en 2021 por la deriva de Terra
+
+- **Contexto:** con 2001-2025 la superficie MODIS daba "sin cambio claro" (p = 0.11); con 2026 daba una baja de -1.06 °C. Luca comprobó con `Day_view_time` de MOD11A2 que desde 2022 Terra pasa cada vez más temprano (hora local media de unas 10.8 h a 9.2 h en 2026), así que la superficie se mide antes de calentarse y la serie baja de forma artificial. Con 2001-2021 sale +0.94 °C significativo (p = 0.0003) y El Centenario y Sur (la "baja" que reproduje) dejan de salir significativos (PR #90).
+- **Decisión:** Calor muestra la superficie MODIS en 2001-2021 (+0.94 °C) y el aire POWER (+1.47 °C, 2001-2025) en la nota; la limitación explica el corte completo en la tarjeta. Falta el contraste con Aqua (MYD11A2): si Aqua no muestra calentamiento, se revisa. Es la causa más probable, no está probada; la web no la presenta como hecho.
+- **Reemplaza** la entrada "Calor: el número principal es la superficie (MODIS)" solo en el periodo y en la cifra: antes "sin cifra".
+- **Cómo se revierte:** `python -m analisis.exportar --calor-hasta 2025` y `python -m analisis.zonas --calor-hasta 2025`, y copiar a `web/data/`.
+- **Quién decidió:** propuesta de Luca, aceptada en `dev` por el asistente del Líder; **confirmada por Carlos el 2026-11-14** (ver la entrada siguiente).
+
+### 2026-11-14 — Carlos confirma Calor 2001-2021; entra el Mapa Agrícola; el PR #85 se queda como vehículo a `main`
+
+- **Calor:** Carlos confirmó la superficie MODIS en 2001-2021 (+0.94 °C) **con la condición de que no haya datos de superficie más recientes y confiables**. Si el contraste con Aqua (#87) u otro producto permite medir bien 2022-2026, se vuelve a revisar con él. Mientras tanto no se extiende la serie.
+- **Mapa Agrícola (PR #88, Diego):** Carlos decidió que **entra**. No lo pidió el reto; se acepta como pantalla extra. Condiciones que siguen vigentes: auditoría de fuentes por Luca antes de `main`, versión en inglés, y todo recurso nuevo (SIAP, CONAGUA/DOF, SoilGrids CC BY 4.0, SMN, GeoNames, NASA POWER) en `docs/RECURSOS.md` y `docs/entrega/07`. Si no pasa la auditoría, se deja fuera de `main`.
+- **PR #85 (dev → main):** lo decidió el asistente del Líder por encargo de Carlos. Es un PR de rama a rama y se actualiza solo con `dev`, así que **se conserva como vehículo** (no se cierra ni se reabre otro). Se retituló y su descripción lleva la puerta de calidad; **no se fusiona hasta que pase** y Carlos lo apruebe.

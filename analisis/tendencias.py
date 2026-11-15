@@ -38,6 +38,14 @@ def promedio_anual(mat):
         return np.nanmean(mat, axis=1)
 
 
+def promedio_anual_sin_parcial(mat):
+    """Como promedio_anual, pero el último año con algún mes sin dato queda NaN (un año parcial sesga por estación)."""
+    anual = promedio_anual(mat)
+    if anual.size and np.isnan(mat[-1]).any():
+        anual[-1] = np.nan
+    return anual
+
+
 def suma_anual(mat):
     """Suma anual; NaN si falta algún mes (no se rellena un total incompleto)."""
     return np.where(np.isnan(mat).any(axis=1), np.nan, np.nansum(mat, axis=1))
@@ -80,7 +88,9 @@ def por_decada(anios, valores, inicio, fin):
     ini = inicio
     while ini <= fin:
         fin_d = min(ini + 9, fin)
-        sel = [v for a, v in zip(anios, valores) if ini <= a <= fin_d and not np.isnan(v)]
-        filas.append({"decada": f"{ini}-{fin_d}", "media": float(np.mean(sel)) if sel else None})
+        con = [(a, v) for a, v in zip(anios, valores) if ini <= a <= fin_d and not np.isnan(v)]
+        sel = [v for _, v in con]
+        rango = f"{con[0][0]}-{con[-1][0]}" if con else f"{ini}-{fin_d}"  # años que de verdad entran a la media
+        filas.append({"decada": rango, "media": float(np.mean(sel)) if sel else None})
         ini += 10
     return filas

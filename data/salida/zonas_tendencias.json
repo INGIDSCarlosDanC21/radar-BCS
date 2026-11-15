@@ -2,115 +2,115 @@
  "generado_con": "analisis/exportar.py (código generado con IA: sí, Claude)",
  "periodo": {
   "inicio": 2001,
-  "fin": 2025
+  "fin": 2021
  },
  "zonas": {
   "Centro": {
    "calor_lst": {
     "unidades": "°C",
-    "pendiente_por_anio": -0.0041,
-    "cambio_total": -0.099,
-    "p_valor": 0.6958,
-    "significativo": false,
+    "pendiente_por_anio": 0.0543,
+    "cambio_total": 1.086,
+    "p_valor": 2.303e-06,
+    "significativo": true,
     "meses_sin_dato": 0
    },
    "vegetacion_ndvi": {
     "unidades": "NDVI",
-    "pendiente_por_anio": -0.0014,
-    "cambio_total": -0.034,
-    "p_valor": 8.581e-07,
+    "pendiente_por_anio": -0.0012,
+    "cambio_total": -0.03,
+    "p_valor": 1.058e-05,
     "significativo": true,
-    "meses_sin_dato": 167
+    "meses_sin_dato": 175
    }
   },
   "Chametla": {
    "calor_lst": {
     "unidades": "°C",
-    "pendiente_por_anio": 0.0021,
-    "cambio_total": 0.051,
-    "p_valor": 0.9087,
-    "significativo": false,
+    "pendiente_por_anio": 0.075,
+    "cambio_total": 1.5,
+    "p_valor": 1.005e-06,
+    "significativo": true,
     "meses_sin_dato": 0
    },
    "vegetacion_ndvi": {
     "unidades": "NDVI",
-    "pendiente_por_anio": -0.0014,
-    "cambio_total": -0.034,
-    "p_valor": 8.158e-29,
+    "pendiente_por_anio": -0.0013,
+    "cambio_total": -0.033,
+    "p_valor": 1.049e-25,
     "significativo": true,
-    "meses_sin_dato": 3
+    "meses_sin_dato": 7
    }
   },
   "El Centenario": {
    "calor_lst": {
     "unidades": "°C",
-    "pendiente_por_anio": -0.0542,
-    "cambio_total": -1.301,
-    "p_valor": 0.0001393,
-    "significativo": true,
+    "pendiente_por_anio": 0.0192,
+    "cambio_total": 0.383,
+    "p_valor": 0.2062,
+    "significativo": false,
     "meses_sin_dato": 0
    },
    "vegetacion_ndvi": {
     "unidades": "NDVI",
-    "pendiente_por_anio": -0.002,
-    "cambio_total": -0.047,
-    "p_valor": 8.615e-14,
+    "pendiente_por_anio": -0.0018,
+    "cambio_total": -0.046,
+    "p_valor": 1.621e-12,
     "significativo": true,
-    "meses_sin_dato": 20
+    "meses_sin_dato": 25
    }
   },
   "Oriente": {
    "calor_lst": {
     "unidades": "°C",
-    "pendiente_por_anio": -0.0167,
-    "cambio_total": -0.401,
-    "p_valor": 0.2123,
-    "significativo": false,
+    "pendiente_por_anio": 0.055,
+    "cambio_total": 1.1,
+    "p_valor": 0.0001603,
+    "significativo": true,
     "meses_sin_dato": 0
    },
    "vegetacion_ndvi": {
     "unidades": "NDVI",
-    "pendiente_por_anio": 0.0002,
-    "cambio_total": 0.004,
-    "p_valor": 0.07479,
-    "significativo": false,
-    "meses_sin_dato": 1
+    "pendiente_por_anio": 0.0003,
+    "cambio_total": 0.008,
+    "p_valor": 0.001474,
+    "significativo": true,
+    "meses_sin_dato": 3
    }
   },
   "Sur": {
    "calor_lst": {
     "unidades": "°C",
-    "pendiente_por_anio": -0.0525,
-    "cambio_total": -1.26,
-    "p_valor": 0.0005704,
-    "significativo": true,
+    "pendiente_por_anio": 0.0208,
+    "cambio_total": 0.415,
+    "p_valor": 0.1553,
+    "significativo": false,
     "meses_sin_dato": 0
    },
    "vegetacion_ndvi": {
     "unidades": "NDVI",
-    "pendiente_por_anio": 0.0005,
-    "cambio_total": 0.013,
-    "p_valor": 0.08051,
-    "significativo": false,
-    "meses_sin_dato": 1
+    "pendiente_por_anio": 0.0009,
+    "cambio_total": 0.024,
+    "p_valor": 0.00333,
+    "significativo": true,
+    "meses_sin_dato": 3
    }
   },
   "Surponiente": {
    "calor_lst": {
     "unidades": "°C",
-    "pendiente_por_anio": -0.0091,
-    "cambio_total": -0.219,
-    "p_valor": 0.3807,
-    "significativo": false,
+    "pendiente_por_anio": 0.0449,
+    "cambio_total": 0.897,
+    "p_valor": 0.0002113,
+    "significativo": true,
     "meses_sin_dato": 0
    },
    "vegetacion_ndvi": {
     "unidades": "NDVI",
-    "pendiente_por_anio": -0.0021,
-    "cambio_total": -0.05,
-    "p_valor": 3.624e-05,
+    "pendiente_por_anio": -0.0017,
+    "cambio_total": -0.042,
+    "p_valor": 0.0009546,
     "significativo": true,
-    "meses_sin_dato": 30
+    "meses_sin_dato": 34
    }
   }
  }
