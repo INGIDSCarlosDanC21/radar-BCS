@@ -30,7 +30,7 @@ Solo texto repetido. Todo sigue documentado arriba. Se oculta con `web/css/fuent
 
 | Qué | Dónde salía | Alto que ocupaba (celular, 390 px) |
 |---|---|---|
-| Etiqueta "AI-generated" junto al logo | Encabezado de todas las pantallas | 14 px por pantalla (y una fila extra en celular) |
+| Etiqueta de texto "AI-generated" junto al logo (la marca de agua ahora va **dentro de la imagen del logo**, sin fila extra) | Encabezado de todas las pantallas | 14 px por pantalla (y una fila extra en celular) |
 | "Fuente: …" en cada tarjeta | Inicio, 4 tarjetas | unos 112 px |
 | Crédito de la imagen GOES (la insignia de arriba ya dice "Imagen GOES-West · NASA GIBS") | Inicio | 40 px |
 | "Fuente: …" en cada tarjeta | Mapa Agrícola, unas 9 tarjetas por ficha | unos 340 px en la ficha Clima y Agua |
@@ -53,5 +53,5 @@ Medido antes y después con el navegador (incluye también los cambios de Ehilee
 
 - ~~Borrar el `<span class="marca-ia">` de `web/index.html`~~: hecho el 2026-11-15 tras fusionar #159. Para volver a mostrar la etiqueta hay que poner de nuevo el `span` en el encabezado.
 - `diseno/ESPECIFICACION.md` (§7) y el Figma todavía piden la marca junto al logo del encabezado: es referencia de diseño; Ehileen decide si lo actualiza.
-- **Decisión de Carlos sobre la marca de agua del logo.** El texto oficial la exige en imágenes generadas. Hay un PR **listo y sin fusionar** (#176) que la pone dentro de la propia imagen del logo, sin ocupar más espacio en el encabezado (204 × 36 px en celular, encabezado de 56 px). Si no se fusiona, el riesgo queda asumido por el Líder.
+- **Marca de agua del logo: resuelta (2026-11-15).** Carlos delegó la decisión; se eligió lo recomendado: la marca "AI-generated" va **dentro de la propia imagen del logo** (`web/assets/logo-radar-bcs-ai-generated.png`), así cumple la "visible watermark" de la guía oficial sin ocupar más espacio (204 × 36 px en celular, encabezado de 56 px). La etiqueta de texto separada sigue fuera.
 - Posible siguiente recorte (no hecho): plegar el bloque "Fuente, resolución, periodo y descarga" de cada Ficha como "Sobre los datos" (ver `docs/PLAN-VER-MAS.md`, sección 7).
