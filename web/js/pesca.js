@@ -49,9 +49,14 @@
       'pes.f.capa': 'Capa de clorofila', 'pes.f.vedasT': 'El calendario de vedas lo publica CONAPESCA; aquí solo va el enlace.',
       'pes.f.desc.seg': 'Verde, amarillo o rojo según oleaje y viento del modelo.', 'pes.f.desc.oc': 'Cifras del modelo marino para el puerto y la hora elegidos.',
       'pes.f.desc.cl': 'Viento del modelo en la costa para la hora elegida.', 'pes.f.desc.clo': 'Capa de clorofila de NASA y enlace a las vedas.',
+      'pes.f.olaV': 'Mar de viento', 'pes.f.olaVT': 'Oleaje de viento', 'pes.f.nivelMar': 'Modelo', 'pes.f.nivelMarT': 'Nivel del mar', 'pes.f.nivelM': 'Sobre el nivel medio',
+      'pes.f.nivelNota': 'Incluye marea, según un modelo global (Open-Meteo). No es la tabla oficial de mareas.',
+      'pes.f.pres': 'Presión', 'pes.f.presT': 'Presión atmosférica', 'pes.f.actual': 'Actual', 'pes.f.tend': 'Cambio en 3 h', 'pes.f.lluv': 'Lluvia', 'pes.f.lluvT': 'Lluvia y tormenta',
+      'pes.f.prob': 'Probabilidad', 'pes.f.vis': 'Visibilidad', 'pes.f.visT': 'Visibilidad y rocío', 'pes.f.visK': 'Visibilidad', 'pes.f.rocio': 'Punto de rocío',
+      'pes.f.sol': 'Sol', 'pes.f.solT': 'Amanecer y atardecer', 'pes.f.amanece': 'Amanece', 'pes.f.anochece': 'Atardece',
       'pes.f.pendSeg': 'Pendiente (sin fuente abierta verificada): bandera de puerto, avisos y protocolos oficiales. Consulta a la Capitanía de Puerto.',
-      'pes.f.pendOc': 'Pendiente (sin fuente verificada): mareas, fase lunar y ventanas de cruce.',
-      'pes.f.pendCl': 'Pendiente (sin fuente verificada): presión, visibilidad, lluvia y tormenta.',
+      'pes.f.pendOc': 'Pendiente (sin fuente verificada): mareas oficiales, fase lunar y ventanas de cruce.',
+      'pes.f.pendCl': 'Pendiente (sin fuente verificada): avisos oficiales de tormenta y radar de lluvia.',
       'pes.f.pendClo': 'Pendiente (sin fuente verificada): temperatura de frentes, especies, tallas y áreas protegidas.',
       'pes.sinDato': 'sin dato', 'pes.sinDatoPuerto': 'Sin dato para esta hora',
       'pes.r0': 'norte', 'pes.r1': 'noreste', 'pes.r2': 'este', 'pes.r3': 'sureste', 'pes.r4': 'sur', 'pes.r5': 'suroeste', 'pes.r6': 'oeste', 'pes.r7': 'noroeste',
@@ -87,9 +92,14 @@
       'pes.f.capa': 'Chlorophyll layer', 'pes.f.vedasT': 'The closure calendar is published by CONAPESCA; only the link is shown here.',
       'pes.f.desc.seg': 'Green, yellow or red from the model waves and wind.', 'pes.f.desc.oc': 'Marine model figures for the chosen port and hour.',
       'pes.f.desc.cl': 'Model coastal wind for the chosen hour.', 'pes.f.desc.clo': 'NASA chlorophyll layer and a link to the closures.',
+      'pes.f.olaV': 'Wind sea', 'pes.f.olaVT': 'Wind waves', 'pes.f.nivelMar': 'Model', 'pes.f.nivelMarT': 'Sea level', 'pes.f.nivelM': 'Above mean sea level',
+      'pes.f.nivelNota': 'Includes tide, from a global model (Open-Meteo). It is not the official tide table.',
+      'pes.f.pres': 'Pressure', 'pes.f.presT': 'Atmospheric pressure', 'pes.f.actual': 'Now', 'pes.f.tend': 'Change in 3 h', 'pes.f.lluv': 'Rain', 'pes.f.lluvT': 'Rain and storms',
+      'pes.f.prob': 'Probability', 'pes.f.vis': 'Visibility', 'pes.f.visT': 'Visibility and dew point', 'pes.f.visK': 'Visibility', 'pes.f.rocio': 'Dew point',
+      'pes.f.sol': 'Sun', 'pes.f.solT': 'Sunrise and sunset', 'pes.f.amanece': 'Sunrise', 'pes.f.anochece': 'Sunset',
       'pes.f.pendSeg': 'Pending (no verified open source): port flag, official warnings and protocols. Check with the Port Captaincy.',
-      'pes.f.pendOc': 'Pending (no verified source): tides, moon phase and crossing windows.',
-      'pes.f.pendCl': 'Pending (no verified source): pressure, visibility, rain and storms.',
+      'pes.f.pendOc': 'Pending (no verified source): official tides, moon phase and crossing windows.',
+      'pes.f.pendCl': 'Pending (no verified source): official storm warnings and rain radar.',
       'pes.f.pendClo': 'Pending (no verified source): thermal fronts, species, sizes and protected areas.',
       'pes.sinDato': 'no data', 'pes.sinDatoPuerto': 'No data for this hour',
       'pes.r0': 'north', 'pes.r1': 'northeast', 'pes.r2': 'east', 'pes.r3': 'southeast', 'pes.r4': 'south', 'pes.r5': 'southwest', 'pes.r6': 'west', 'pes.r7': 'northwest',
@@ -113,7 +123,9 @@
   function estadoPuerto(p, idx) {
     var ola = en(p.s.ola, idx), vi = en(p.s.viento, idx);
     return { ola: ola, per: en(p.s.per, idx), dir: en(p.s.dir, idx), sst: en(p.s.sst, idx), corr: en(p.s.corr, idx),
-      viento: vi, rachas: en(p.s.rachas, idx), vdir: en(p.s.vdir, idx), estado: M.estadoMar(ola, vi), swell: en(p.s.swell, idx), cdir: en(p.s.cdir, idx) };
+      viento: vi, rachas: en(p.s.rachas, idx), vdir: en(p.s.vdir, idx), estado: M.estadoMar(ola, vi), swell: en(p.s.swell, idx), cdir: en(p.s.cdir, idx),
+      olaV: en(p.s.olaV, idx), perV: en(p.s.perV, idx), nivel: en(p.s.nivel, idx), pres: en(p.s.pres, idx), presAntes: idx >= 3 ? en(p.s.pres, idx - 3) : null,
+      vis: en(p.s.vis, idx), pll: en(p.s.pll, idx), cape: en(p.s.cape, idx), rocio: en(p.s.rocio, idx) };
   }
   /* Pines del mapa para la variable v y la hora idx. */
   function pines(datos, idx, v, activo) {
@@ -151,7 +163,8 @@
   function kt(v) { return v == null ? t('pes.sinDato') : n0(v) + ' kt'; }
   function mt(v) { return v == null ? t('pes.sinDato') : n1(v) + ' m'; }
   /* Texto de cada ficha: solo cifras del modelo (Open-Meteo) y reglas de reglas-mar.js; lo demás queda como pendiente. */
-  function contenidoFicha(id, p, idx, clo, cloFecha) {
+  function hhmm(x) { return x ? String(x).slice(11, 16) : t('pes.sinDato'); }
+  function contenidoFicha(id, p, idx, clo, cloFecha, hora) {
     var e = estadoPuerto(p, idx), sem = e.estado || 'sin', c = { chip: '', sub: '', ver: null, dict: '', tjs: [], pend: '' };
     var bf = M.beaufort(e.viento);
     if (id === 'seg') {
@@ -167,12 +180,20 @@
       c.tjs.push(tarjeta(t('pes.v.ola'), t('pes.f.oleaje'), fila(t('pes.f.altura'), mt(e.ola)) + fila(t('pes.f.periodo'), e.per == null ? t('pes.sinDato') : n0(e.per) + ' s') + fila(t('pes.f.dir'), rumbo(e.dir) || t('pes.sinDato'))));
       c.tjs.push(tarjeta(t('pes.f.fondo'), t('pes.f.marFondo'), fila(t('pes.f.altura'), mt(e.swell))));
       c.tjs.push(tarjeta(t('pes.v.sst'), t('pes.f.mar'), fila(t('pes.f.temp'), e.sst == null ? t('pes.sinDato') : n1(e.sst) + ' °C')));
+      c.tjs.push(tarjeta(t('pes.f.olaV'), t('pes.f.olaVT'), fila(t('pes.f.altura'), mt(e.olaV)) + fila(t('pes.f.periodo'), !e.perV ? t('pes.sinDato') : n0(e.perV) + ' s')));
+      c.tjs.push(tarjeta(t('pes.f.nivelMar'), t('pes.f.nivelMarT'), fila(t('pes.f.nivelM'), e.nivel == null ? t('pes.sinDato') : n1(e.nivel) + ' m'), t('pes.f.nivelNota')));
       c.tjs.push(tarjeta(t('pes.f.corr'), t('pes.f.corrT'), fila(t('pes.f.vel'), e.corr == null ? t('pes.sinDato') : n1(e.corr) + ' km/h') + fila(t('pes.f.dir'), rumbo(e.cdir) || t('pes.sinDato'))));
       c.pend = t('pes.f.pendOc');
     } else if (id === 'cl') {
       c.chip = kt(e.viento); c.sub = t('pes.f.subCl'); c.ver = [t('pes.v.viento'), kt(e.viento)];
       c.dict = t('pes.vViento', { v: n0(e.viento), d: rumbo(e.vdir) }) + '. ' + t('pes.dViento', { r: n0(e.rachas), b: bf == null ? '—' : bf }) + ' · ' + M.textoViento(e.viento);
       c.tjs.push(tarjeta(t('pes.v.viento'), t('pes.f.vientoT'), fila(t('pes.f.sostenido'), kt(e.viento)) + fila(t('pes.f.rachas'), kt(e.rachas)) + fila(t('pes.f.dir'), rumbo(e.vdir) || t('pes.sinDato')) + fila('Beaufort', bf == null ? t('pes.sinDato') : String(bf))));
+      var dp = e.pres != null && e.presAntes != null ? e.pres - e.presAntes : null, sol = null, fh = String(hora || '').slice(0, 10);
+      (p.sol || []).forEach(function (d) { if (d.fecha === fh) sol = d; });
+      c.tjs.push(tarjeta(t('pes.f.pres'), t('pes.f.presT'), fila(t('pes.f.actual'), e.pres == null ? t('pes.sinDato') : n1(e.pres) + ' hPa') + fila(t('pes.f.tend'), dp == null ? t('pes.sinDato') : (dp > 0 ? '+' : '') + n1(dp) + ' hPa')));
+      c.tjs.push(tarjeta(t('pes.f.lluv'), t('pes.f.lluvT'), fila(t('pes.f.prob'), e.pll == null ? t('pes.sinDato') : n0(e.pll) + ' %') + fila('CAPE', e.cape == null ? t('pes.sinDato') : n0(e.cape) + ' J/kg')));
+      c.tjs.push(tarjeta(t('pes.f.vis'), t('pes.f.visT'), fila(t('pes.f.visK'), e.vis == null ? t('pes.sinDato') : n1(e.vis / 1000) + ' km') + fila(t('pes.f.rocio'), e.rocio == null ? t('pes.sinDato') : n1(e.rocio) + ' °C')));
+      c.tjs.push(tarjeta(t('pes.f.sol'), t('pes.f.solT'), fila(t('pes.f.amanece'), sol ? hhmm(sol.amanecer) : t('pes.sinDato')) + fila(t('pes.f.anochece'), sol ? hhmm(sol.anochecer) : t('pes.sinDato'))));
       c.pend = t('pes.f.pendCl');
     } else {
       c.chip = t('pes.f.chipClo'); c.sub = t('pes.f.subClo'); c.ver = null;
@@ -186,8 +207,8 @@
     }
     return c;
   }
-  function fichaCerradaHtml(id, p, idx, clo, cloFecha) {
-    var c = contenidoFicha(id, p, idx, clo, cloFecha), titulo = t('pes.m.' + id);
+  function fichaCerradaHtml(id, p, idx, clo, cloFecha, hora) {
+    var c = contenidoFicha(id, p, idx, clo, cloFecha, hora), titulo = t('pes.m.' + id);
     return '<article class="ag-ficha ag-t-' + TONO_F[id] + '" data-ficha="' + id + '"><span class="ag-ficha-borde" aria-hidden="true"></span>' +
       '<button type="button" class="ag-ficha-btn" aria-expanded="false" aria-controls="pe-det-' + id + '"><span class="ag-ficha-cab">' +
       '<span class="ag-ficha-icono"><img class="ag-ico-svg" src="assets/iconos/' + ICO_F[id] + '.svg" alt="" aria-hidden="true" width="24" height="24"></span>' +
@@ -195,8 +216,8 @@
       '<span class="ag-ficha-chip">' + esc(c.chip) + '</span></span>' +
       '<span class="ag-ficha-pie"><span class="ag-ficha-enlace">' + esc(t('pes.f.ver')) + '</span>' + SVG_FLE + '</span></button></article>';
   }
-  function fichaAbiertaHtml(id, p, idx, clo, cloFecha) {
-    var c = contenidoFicha(id, p, idx, clo, cloFecha), titulo = t('pes.m.' + id);
+  function fichaAbiertaHtml(id, p, idx, clo, cloFecha, hora) {
+    var c = contenidoFicha(id, p, idx, clo, cloFecha, hora), titulo = t('pes.m.' + id);
     var cerrar = '<button type="button" class="ag-cerrar" data-cerrar="1">' + SVG_X + '<span class="ag-cerrar-t">' + esc(t('pes.f.cerrar')) + '</span></button>';
     return '<article class="ag-ficha ag-abierta ag-t-' + TONO_F[id] + '" data-ficha="' + id + '"><span class="ag-ficha-borde" aria-hidden="true"></span>' +
       '<div id="pe-det-' + id + '" class="ag-detalle" role="region" aria-labelledby="pe-tit-' + id + '">' +
@@ -213,9 +234,9 @@
       '<p class="ag-cerrar-pie">' + cerrar + '</p></div></article>';
   }
   /* Las 4 fichas; con una abierta, las otras 3 se omiten y la abierta ocupa todo el ancho (igual que en Agrícola). */
-  function fichas(p, idx, abierta, clo, cloFecha) {
-    if (abierta && ORDEN_F.indexOf(abierta) >= 0) return fichaAbiertaHtml(abierta, p, idx, clo, cloFecha);
-    return ORDEN_F.map(function (id) { return fichaCerradaHtml(id, p, idx, clo, cloFecha); }).join('');
+  function fichas(p, idx, abierta, clo, cloFecha, hora) {
+    if (abierta && ORDEN_F.indexOf(abierta) >= 0) return fichaAbiertaHtml(abierta, p, idx, clo, cloFecha, hora);
+    return ORDEN_F.map(function (id) { return fichaCerradaHtml(id, p, idx, clo, cloFecha, hora); }).join('');
   }
   function leyenda(v, clo) {
     if (clo) {
@@ -292,7 +313,7 @@
       cuerpo.querySelector('#pe-ley').innerHTML = leyenda(S.v, S.clo);
       cuerpo.querySelector('#pe-zona').textContent = t('pes.zona', { z: p.nombre });
       var mos = cuerpo.querySelector('#pe-mos'); mos.className = 'ag-fichas pe-fichas' + (S.ficha ? ' ag-fichas-abierta' : '');
-      mos.innerHTML = fichas(p, i, S.ficha, S.clo, cloFecha);
+      mos.innerHTML = fichas(p, i, S.ficha, S.clo, cloFecha, datos.horas[i]);
       rotuloSim();
     }
     function capaClo() {
