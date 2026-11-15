@@ -214,9 +214,9 @@ export const Calor: React.FC = () => {
         <Telefono
           captura="tomas/toma2-calor.png"
           desdePx={interpolate(t, [0.6, 3.2], [0, 330], { ...CL, easing: Easing.inOut(Easing.cubic) })}
-          ancho={400}
-          x={interpolate(t, [0, dur], [470, 500])}
-          y={545}
+          ancho={360}
+          x={interpolate(t, [0, dur], [480, 510])}
+          y={515}
           rotY={interpolate(t, [0, dur], [32, 12], { ...CL, easing: Easing.out(Easing.quad) })}
           rotX={interpolate(t, [0, dur], [10, 3])}
           rotZ={interpolate(t, [0, dur], [3, 0])}
@@ -303,9 +303,9 @@ export const Lluvia: React.FC = () => {
         <Telefono
           captura="tomas/toma3-lluvia.png"
           desdePx={interpolate(t, [0.3, 2.0], [0, 260], { ...CL, easing: Easing.inOut(Easing.cubic) })}
-          ancho={380}
+          ancho={350}
           x={1540}
-          y={540}
+          y={515}
           rotY={interpolate(t, [0, dur], [-30, -16])}
           rotX={6}
           rotZ={-2}
@@ -518,7 +518,7 @@ export const Cierre: React.FC<{ url: string; fuentes: string }> = ({ url, fuente
           <div style={{ fontFamily: FUENTE_MONO, fontSize: 26, color: COLOR.cian, marginTop: 12, letterSpacing: 2 }}>{fuentes}</div>
         </Sube>
       </div>
-      <AbsoluteFill style={{ background: '#000', opacity: interpolate(t, [5.5, 6.0], [0, 1], CL) }} />
+      <AbsoluteFill style={{ background: '#000', opacity: interpolate(t, [5.4, 5.9], [0, 1], CL) }} />
     </AbsoluteFill>
   );
 };
