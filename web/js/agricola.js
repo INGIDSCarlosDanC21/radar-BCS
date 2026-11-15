@@ -261,13 +261,40 @@
   function pintaFichas(est, animar) {
     var main = est.main, g = main.querySelector('#ag-fichas');
     if (!g) return;
+    // Posición de la tarjeta elegida antes de ocultar las demás: la ficha crece desde ahí
+    // hacia el espacio de las tarjetas no seleccionadas.
+    var previa = est.abierta && g.querySelector('[data-ficha="' + est.abierta + '"]');
+    var caja = previa && !previa.hidden && !previa.classList.contains('ag-abierta') ? rel(previa, g) : null;
+    if (caja && !caja.w) caja = null;
     g.className = 'ag-fichas' + (est.abierta ? ' ag-fichas-abierta' : '');
     g.innerHTML = fichasHtml(est.datos, est.abierta);
     main.querySelector('#ag-cta').innerHTML = ctaDe(est.datos, est.abierta);
-    if (animar && est.abierta && !reducido()) {
+    if (est.abierta) {
       var a = g.querySelector('.ag-abierta');
-      if (a) { a.classList.add('ag-anima'); setTimeout(function () { a.classList.remove('ag-anima'); }, 400); }
+      if (!a) return;
+      if (caja) est.cajas[est.abierta] = caja;
+      fijaInicio(a, est.cajas[est.abierta] || cajaPorOrden(est, g, est.abierta));
+      if (animar && !reducido()) { a.classList.add('ag-anima'); setTimeout(function () { a.classList.remove('ag-anima'); }, 400); }
     }
+  }
+  function rel(el, g) {
+    var r = el.getBoundingClientRect(), b = g.getBoundingClientRect();
+    return { top: r.top - b.top, left: r.left - b.left, w: r.width, h: r.height };
+  }
+  // Para una ficha abierta desde la URL: posición que tendría en la cuadrícula cerrada.
+  function cajaPorOrden(est, g, id) {
+    var fs = arr(est.datos && est.datos.fichas), i = 0;
+    for (var k = 0; k < fs.length; k++) if (fs[k].id === id) i = k;
+    var cols = (getComputedStyle(g).gridTemplateColumns || '').split(' ').filter(Boolean).length || 1;
+    var gap = 24, ancho = g.clientWidth, w = (ancho - gap * (cols - 1)) / cols, h = 176;
+    return { top: Math.floor(i / cols) * (h + gap), left: (i % cols) * (w + gap), w: w, h: h };
+  }
+  // Recorte inicial (y final al cerrar) que deja ver solo el lugar original de la tarjeta.
+  function fijaInicio(a, c) {
+    var W = a.offsetWidth, H = a.offsetHeight;
+    var t = Math.max(0, c.top), l = Math.max(0, c.left);
+    var r = Math.max(0, W - l - c.w), b = Math.max(0, H - t - c.h);
+    a.style.setProperty('--ag-ini', 'inset(' + t + 'px ' + r + 'px ' + b + 'px ' + l + 'px round 12px)');
   }
   function irASeccion() {
     var s = ESTADO && ESTADO.main.querySelector('#ag-fichas-sec');
@@ -385,7 +412,7 @@
     }
     destruye();
     main.innerHTML = html(datos, zonas, abierta);
-    var est = ESTADO = { main: main, datos: datos, abierta: abierta, mapa: null, marcas: {} };
+    var est = ESTADO = { main: main, datos: datos, abierta: abierta, mapa: null, marcas: {}, cajas: {} };
 
     main.addEventListener('click', function (e) {
       if (ESTADO !== est) return;

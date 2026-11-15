@@ -102,29 +102,31 @@ body[data-vista=agricola] main{max-width:none;margin:0;padding:0}
 
 /* Ficha abierta */
 .ag-abierta{grid-column:1/-1;box-shadow:0 2px 4px rgba(0,0,0,.1),0 4px 6px rgba(0,0,0,.1)}
-.ag-abierta .ag-ficha-borde{background:#006d3d}
+.ag-abierta .ag-ficha-borde{background:var(--c)}
+/* Cada ficha abierta conserva el color de su tarjeta (--c, --cb, --cc, --ct) */
+.ag-abierta{--cl:color-mix(in srgb,var(--c) 40%,#fff)}
 .ag-detalle{padding:28px 16px 24px;outline:none}
 .ag-anima{animation:agExpande .3s ease-out both}
 .ag-cierra{animation:agExpande .28s ease-in reverse both}
-@keyframes agExpande{from{opacity:.6;clip-path:inset(0 52% 60% 0 round 12px)}to{opacity:1;clip-path:inset(0 0 0 0 round 12px)}}
+@keyframes agExpande{from{opacity:.6;clip-path:var(--ag-ini,inset(0 52% 60% 0 round 12px))}to{opacity:1;clip-path:inset(0 0 0 0 round 12px)}}
 .ag-det-cab{display:flex;flex-direction:column;gap:16px;align-items:stretch}
 .ag-det-cab-izq{display:flex;gap:16px;align-items:flex-start;min-width:0}
 .ag-det-cab-txt{min-width:0}
 .ag-det-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
 .ag-det-chip{display:inline-block;border-radius:9999px;padding:1px 10px;font-family:'JetBrains Mono',monospace;font-weight:500;font-size:10px;line-height:16px;letter-spacing:.3px;background:#f2f4f7;color:#44474d;border:1px solid #e0e3e6}
-.ag-det-chip-1{background:#e1f4e8;color:#006d3d;border-color:#bde5cb;font-weight:700}
-.ag-det-chip:not(.ag-det-chip-1):nth-child(3){background:#eefaf2;color:#006d3d;border-color:#cdeed8}
+.ag-det-chip-1{background:var(--cb);color:var(--ct);border-color:var(--cl);font-weight:700}
+.ag-det-chip:not(.ag-det-chip-1):nth-child(3){background:var(--cb);color:var(--ct);border-color:var(--cl)}
 .ag-det-tit{font-size:24px;line-height:32px;letter-spacing:-.5px;outline:none}
 .ag-det-desc{margin-top:2px;font-size:14px;line-height:20px;color:#44474d}
 .ag-det-cab-der{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .ag-veredicto{display:flex;flex-direction:column;align-items:flex-start}
-.ag-veredicto-e{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:10px;line-height:14px;color:#006d3d}
-.ag-veredicto-v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;line-height:28px;color:#006d3d}
+.ag-veredicto-e{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:10px;line-height:14px;color:var(--ct)}
+.ag-veredicto-v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;line-height:28px;color:var(--ct)}
 .ag-cerrar{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;border:1px solid #f3b8b8;background:#fff5f5;color:#ba1a1a;cursor:pointer;
   font-family:'JetBrains Mono',monospace;font-weight:500;font-size:12px;line-height:16px}
 .ag-cerrar:hover{background:#ffe9e9}
-.ag-dictamen{margin-top:24px;background:#f2f4f7;border-left:4px solid #006d3d;border-radius:8px;padding:16px 20px}
-.ag-dictamen-t{display:flex;align-items:center;gap:8px;color:#006d3d;font-size:10px;line-height:14px;font-weight:700;margin-bottom:6px}
+.ag-dictamen{margin-top:24px;background:#f2f4f7;border-left:4px solid var(--ct);border-radius:8px;padding:16px 20px}
+.ag-dictamen-t{display:flex;align-items:center;gap:8px;color:var(--ct);font-size:10px;line-height:14px;font-weight:700;margin-bottom:6px}
 .ag-dictamen-txt{font-size:14px;line-height:23px;color:#000d21}
 .ag-grupo{margin-top:28px}
 .ag-grupo-cab{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
@@ -132,15 +134,15 @@ body[data-vista=agricola] main{max-width:none;margin:0;padding:0}
 .ag-grupo-nota{font-size:10px;line-height:14px}
 .ag-pil-rojo{align-self:flex-start;background:#ffdad6;color:#ba1a1a;border-radius:9999px;padding:2px 12px;font-size:10px;line-height:16px}
 .ag-tjs{display:grid;grid-template-columns:1fr;gap:16px}
-.ag-tj{background:#fff;border:1.5px solid #c9ecd6;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
-.ag-tj-chip{align-self:flex-start;background:#eefaf2;color:#006d3d;border:1px solid #cdeed8;border-radius:9999px;padding:0 8px;font-family:'JetBrains Mono',monospace;font-size:10px;line-height:16px}
+.ag-tj{background:#fff;border:1.5px solid var(--cl);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.ag-tj-chip{align-self:flex-start;background:var(--cb);color:var(--ct);border:1px solid var(--cl);border-radius:9999px;padding:0 8px;font-family:'JetBrains Mono',monospace;font-size:10px;line-height:16px}
 .ag-tj-tit{font-size:16px;line-height:22px}
 .ag-tj-txt{font-size:12px;line-height:18px;color:#44474d}
 .ag-tj-filas{display:flex;flex-direction:column;gap:6px;margin-top:4px}
 .ag-tj-filas div{display:flex;justify-content:space-between;gap:12px}
 .ag-tj-filas dt,.ag-tj-filas dd{font-family:'JetBrains Mono',monospace;font-size:10px;line-height:14px}
 .ag-tj-filas dt{color:#44474d}
-.ag-tj-filas dd{color:#006d3d;font-weight:700;text-align:right}
+.ag-tj-filas dd{color:var(--ct);font-weight:700;text-align:right}
 .ag-tj-motivo{font-family:'JetBrains Mono',monospace;font-size:10px;line-height:14px;color:#ba1a1a}
 .ag-tj-fuente{margin-top:auto;padding-top:6px;font-family:'JetBrains Mono',monospace;font-size:10px;line-height:14px;color:#6b6f76}
 .ag-tj-alerta{background:#fff5f5;border-color:#f6cfcf}
@@ -153,7 +155,7 @@ body[data-vista=agricola] main{max-width:none;margin:0;padding:0}
 .ag-fuentes{margin-top:28px;border-top:1px solid #e8eaee;padding-top:16px}
 .ag-fuentes-t{color:#000d21;font-size:11px;font-weight:700;margin-bottom:8px;text-transform:uppercase}
 .ag-fuentes li{font-size:12px;line-height:20px;color:#44474d;padding:4px 0}
-.ag-fuentes a{color:#006d3d;font-weight:600;overflow-wrap:anywhere}
+.ag-fuentes a{color:var(--ct);font-weight:600;overflow-wrap:anywhere}
 .ag-cta{display:flex;flex-direction:column;gap:16px;margin-top:24px;background:#000d21;border-radius:12px;padding:24px;color:#fff}
 .ag-cta:empty{display:none}
 #ag-cta:empty{display:none}
