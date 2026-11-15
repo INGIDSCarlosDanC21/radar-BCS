@@ -96,7 +96,7 @@
     return 'linear-gradient(90deg,' + LEY_LLUVIA.map(function (c) { return 'rgb(' + c[1] + ')'; }).join(',') + ')';
   }
   function html() {
-    return '<section class="bloque ani" id="ani" aria-labelledby="ani-h"><details id="ani-det">' +
+    return '<section class="bloque ani" id="ani" aria-labelledby="ani-h"><details id="ani-det" open>' +
       '<summary class="ani-sum"><span id="ani-h" class="ani-tit">' + esc(t('ani.h')) + '</span><span class="ani-sub">' + esc(t('ani.sub')) + '</span></summary>' +
       '<div class="ani-cuerpo" id="ani-cuerpo"><p>' + esc(t('ani.lead')) + '</p>' +
       '<div class="chips" role="group" aria-label="' + esc(t('ani.capa')) + '">' +
@@ -138,6 +138,10 @@
       img.src = urlSonda(capa, tiempo);
     }
     probar();
+  }
+
+  function reducirMovimiento() {
+    try { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) { return false; }
   }
 
   function activar(raiz) {
@@ -195,6 +199,7 @@
         });
         rng.min = 0; rng.max = lista.length - 1; rng.disabled = false; play.disabled = false;
         texto(lista); mostrar(lista.length - 1);
+        if (!reducirMovimiento()) setTimeout(function () { if (mi === est.ficha && capaPedida === est.capa && !est.timer) reproducir(); }, 400);   // arranca sola, salvo que la persona pida menos movimiento
       });
     }
     function reproducir() {
@@ -204,7 +209,10 @@
       (function paso() {
         est.timer = setTimeout(function () {
           if (mi !== est.ficha) return;
-          if (est.i >= est.marcos.length - 1) { parar(); rotuloPlay(false); return; }
+          if (est.i >= est.marcos.length - 1) {   // da la vuelta como en un noticiero: pausa en el último cuadro y vuelve al primero
+            est.timer = setTimeout(function () { if (mi !== est.ficha) return; mostrar(0); paso(); }, 1500);
+            return;
+          }
           mostrar(est.i + 1); paso();
         }, PAUSA_MS);
       })();
@@ -218,6 +226,7 @@
       } catch (e) { aviso.innerHTML = '<p class="aviso">' + esc(t('ani.error')) + '</p>'; caja.hidden = true; play.disabled = true; return; }
       cargarCapa();
     }
+    if (det.open) setTimeout(function () { if (mi === est.ficha) iniciar(); }, 0);   // abierto de entrada: se ve sin tocar nada
     det.addEventListener('toggle', function () {
       if (det.open) { iniciar(); if (est.mapa) setTimeout(function () { try { est.mapa.invalidateSize(); } catch (e) {} }, 60); }
       else { parar(); rotuloPlay(false); }

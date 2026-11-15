@@ -53,7 +53,7 @@ test('los textos existen en español e inglés con las mismas claves y avisan qu
 
 test('el bloque HTML es plegable, accesible y trae los controles', () => {
   const h = A.html();
-  assert.match(h, /<details id="ani-det">/);
+  assert.match(h, /<details id="ani-det" open>/, 'abierto de entrada para que se vea sin tocar nada');
   assert.match(h, /role="group"/);
   assert.match(h, /id="ani-rng"[^>]*disabled/, 'el control arranca deshabilitado hasta que hay cuadros');
   assert.match(h, /<label class="sr" for="ani-rng">/);

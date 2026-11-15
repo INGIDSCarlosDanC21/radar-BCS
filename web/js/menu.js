@@ -17,7 +17,7 @@
   var EN_MAS = ['agricola', 'acciones', 'avisos'];
   function seccionDe(hash) {
     var h = String(hash || '#inicio').slice(1).split('/')[0];
-    return ['inicio', 'mapa', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h) >= 0 ? h : 'inicio';
+    return ['inicio', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h) >= 0 ? h : 'inicio';
   }
   function enMas(sec) { return EN_MAS.indexOf(sec) >= 0; }
 

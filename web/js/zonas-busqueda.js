@@ -71,7 +71,7 @@
     return c.cambio_total > 0 ? 'sube' : 'baja';
   }
   /* Glifo de Material Symbols (web/assets/iconos/mapa) por capa y estado; sin glifo = símbolo de texto con CSS. */
-  var GLIFO = { calor: { sube: 'local_fire_department', baja: 'ac_unit' }, vegetacion: { sube: 'grass', baja: 'grass' } };
+  var GLIFO = { calor: { sube: 'local_fire_department', baja: 'ac_unit' }, vegetacion: { sube: 'grass', baja: 'grass' }, lluvia: { sube: 'water_drop', baja: 'water_drop' } };
   function glifo(capa, est) { return GLIFO[capa] && GLIFO[capa][est] ? GLIFO[capa][est] : null; }
 
   /* HTML del marcador. color = el mismo del relleno del polígono; etiqueta = texto para lector de pantalla. */

@@ -1,9 +1,9 @@
 (function () {
   'use strict';
   var main = document.getElementById('contenido');
-  var DATOS = null, ZONAS = null, mapa = null, indMapa = 'calor';
+  var DATOS = null, ZONAS = null, LOCS = null, mapa = null, indMapa = 'calor';
   var capasZona = {}, capaZonas = null, pinBusqueda = null, enfocarFn = null; // marcadores y búsqueda del mapa de zonas
-  var IDS = ['calor', 'vegetacion', 'lluvia', 'agua'];
+  var IDS = ['calor', 'lluvia', 'vegetacion', 'suelo', 'agua'];   // 'suelo' = calor del suelo (MODIS, 6 zonas de La Paz): usa la clave 'calor' de zonas.geojson
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -28,8 +28,9 @@
   function cargar() {
     return Promise.all([
       fetch('data/indicadores.json').then(ok),
-      fetch('data/zonas.geojson').then(ok)
-    ]).then(function (r) { DATOS = r[0]; ZONAS = r[1]; });
+      fetch('data/zonas.geojson').then(ok),
+      fetch('data/localidades_tendencias.json').then(ok).catch(function () { return null; })   // opcional: sin él, Calor y Lluvia caen a las 6 zonas
+    ]).then(function (r) { DATOS = r[0]; ZONAS = r[1]; LOCS = r[2]; });
   }
   function franja(sec) {
     var f = document.getElementById('franja');
@@ -75,22 +76,22 @@
     return mezcla(PAL.mid, v < 0 ? PAL.neg : PAL.pos, 0.15 + 0.85 * t);
   }
 
-  function mapaVista() {
-    // El Mapa Meteorológico vive ahora en la pestaña Clima; aquí solo quedan las tendencias por zona.
-    var h = '<h1>' + t('titulo.mapa') + '</h1><p class="lead">' + t('mapa.lead') + '</p><div class="chips" role="group" aria-label="' + t('mapa.grupo') + '">';
+  /* "Cómo ha cambiado cada lugar": vive dentro de la pantalla Clima (la pestaña Mapa ya no existe). Se vuelve a pintar solo este bloque al cambiar de capa. */
+  function mapaVista(cont) {
+    if (mapa) { try { mapa.remove(); } catch (e) {} mapa = null; }
+    var h = '<h2>' + t('lug.h') + '</h2><p class="lead">' + t('lug.lead') + '</p><div class="chips" role="group" aria-label="' + t('lug.chips') + '">';
     IDS.forEach(function (id) {
-      h += '<button type="button" class="chip" data-ind="' + id + '" aria-pressed="' + (id === indMapa) + '">' + esc(tit(ind(id))) + '</button>';
+      h += '<button type="button" class="chip" data-ind="' + id + '" aria-pressed="' + (id === indMapa) + '">' + esc(t('lug.' + id)) + '</button>';
     });
-    h += '</div>' + buscadorHtml() + '<div id="aviso-mapa"></div><div id="mapa-caja" role="region" aria-label="' + t('mapa.region') + '"></div>' +
-      '<div id="leyenda" class="leyenda"></div>' + (window.RBSim ? window.RBSim.sateliteHtml() : '') + '<div id="resumen"></div>' +
+    h += '</div>' + buscadorHtml() + '<div id="aviso-mapa"></div><div id="mapa-caja" role="region" aria-label="' + t(LOCS && (indMapa === 'calor' || indMapa === 'lluvia') ? 'lug.region' : 'mapa.region') + '"></div>' +
+      '<div id="leyenda" class="leyenda"></div><div id="resumen"></div>' +
       '<p class="fuente" id="fuente-mapa"></p>';
-    main.innerHTML = h;
-    main.querySelectorAll('.chip').forEach(function (b) {
-      b.addEventListener('click', function () { indMapa = b.getAttribute('data-ind'); ruta(); });
+    cont.innerHTML = h;
+    cont.querySelectorAll('.chip').forEach(function (b) {
+      b.addEventListener('click', function () { indMapa = b.getAttribute('data-ind'); mapaVista(cont); });
     });
     pintar();
     bindBusqueda();
-    if (window.RBSim) window.RBSim.sateliteActivar(main);
   }
 
   /* Búsqueda de un lugar sobre el mapa de zonas (zonas-busqueda.js). */
@@ -174,7 +175,13 @@
   }
 
   function pintar() {
-    var id = indMapa, i = ind(id), un = i.unidades;
+    // Calor del aire y lluvia por localidad (lugares.js) y agua como dato regional; el resto son las 6 zonas de La Paz.
+    if (window.RBLugares && (indMapa === 'agua' || (LOCS && (indMapa === 'calor' || indMapa === 'lluvia')))) {
+      var rr = window.RBLugares.render({ id: indMapa, locs: LOCS, agua: ind('agua'), alPin: function (m) { pinBusqueda = m; } });
+      mapa = rr.mapa; enfocarFn = rr.enfocar; capasZona = {}; capaZonas = null; pinBusqueda = null;
+      return;
+    }
+    var id = indMapa === 'suelo' ? 'calor' : indMapa, i = ind(id), un = i.unidades;
     var esPrueba = ZONAS.datos_de_prueba === true, prueba = esPrueba ? t('mapa.datoPrueba') : '';
     var cfg = esPrueba ? null : CAPA_ZONA[id];
     function cz(f) { return f.properties.cambios[id]; }
@@ -393,6 +400,8 @@
 
   /* ---------- Enrutador ---------- */
   function ruta() {
+    // La pestaña Mapa se fusionó con Clima: los enlaces viejos (#mapa) llevan a esa sección.
+    if (/^#mapa(\/|$)/.test(location.hash || '')) { try { history.replaceState(null, '', '#clima/zonas'); } catch (e) { location.hash = '#clima/zonas'; } }
     if (mapa) { try { mapa.remove(); } catch (e) {} mapa = null; }
     if (window.RBSim) window.RBSim.limpiar();
     if (window.RBPesca) window.RBPesca.limpiar();
@@ -400,7 +409,7 @@
     if (window.RBClima) window.RBClima.limpiar();
     if (window.RBAnim) window.RBAnim.limpiar();
     var h = (location.hash || '#inicio').slice(1).split('/');
-    var sec = ['inicio', 'mapa', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
+    var sec = ['inicio', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos', 'clima'].indexOf(h[0]) >= 0 ? h[0] : 'inicio';
     document.querySelectorAll('[data-nav]').forEach(function (a) {
       if (a.getAttribute('data-nav') === (sec === 'ficha' ? 'inicio' : sec)) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
@@ -414,9 +423,13 @@
         // La pestaña Clima muestra el "Mapa Meteorológico" (clima-mapa.js); el detalle de cada tarjeta sigue en clima.js.
         main.innerHTML = window.RBClimaMapa.html().replace(/<h2 class="cm-zonas-h">[^]*?<\/h2>/, '');
         if (window.RBAnim) main.insertAdjacentHTML('beforeend', window.RBAnim.html());   // animación de satélite (aislada; web/js/animacion-satelite.js)
+        main.insertAdjacentHTML('beforeend', '<section class="bloque lugares" id="lugares" aria-label="' + esc(t('lug.h')) + '"><p class="cargando">' + esc(t('html.cargando')) + '</p></section>' + (window.RBSim ? window.RBSim.sateliteHtml() : ''));
         main.removeAttribute('aria-busy');
-        window.RBClimaMapa.cargar(main, { abrir: h[1] || null, lugar: h[2] || null });
+        window.RBClimaMapa.cargar(main, { abrir: h[1] === 'zonas' ? null : (h[1] || null), lugar: h[2] || null });
         if (window.RBAnim) window.RBAnim.activar(main);
+        var lug = document.getElementById('lugares');
+        if (DATOS && ZONAS) { mapaVista(lug); if (window.RBSim) window.RBSim.sateliteActivar(main); }
+        if (h[1] === 'zonas' && DATOS && lug) setTimeout(function () { lug.scrollIntoView({ block: 'start' }); }, 120);
       } else if (modulo) modulo.render(main, h[1] || null, h[2] || null);
       document.title = 'Radar BCS — ' + t('titulo.' + sec);
       return;
@@ -429,7 +442,6 @@
       if (window.RBHome) window.RBHome.render(main, DATOS); else inicio();
       if (h[1] === 'que-cambia') irAQueCambia();
     }
-    else if (sec === 'mapa') mapaVista();
     else if (sec === 'ficha') ficha(h[1]);
     else if (sec === 'agricola') { agricolaVista(h[1] || null); document.title = 'Radar BCS — ' + t('titulo.agricola'); return; }
     else acciones();
