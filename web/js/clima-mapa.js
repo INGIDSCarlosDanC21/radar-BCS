@@ -107,23 +107,8 @@
       renglon: function (f) { return f.dia ? t('cm.lluviaSD', { v: num(f.dia.relative_humidity_2m_mean) }) : t('cm.lluviaS', { v: num(f.c.relative_humidity_2m) }); } }
   ];
 
-  /* Fechas (hora de La Paz). Open-Meteo acepta de ~3 meses atrás a 16 días adelante (medido el 2026-11-15:
-     "allowed range from 2026-08-14 to 2026-11-30"); se ofrece de hoy − 92 a hoy + 15 días. */
-  var DIAS_ATRAS = 92, DIAS_ADELANTE = 15;
-  function hoyISO(ahora) {
-    var d = ahora || new Date();
-    try { return d.toLocaleDateString('en-CA', { timeZone: 'America/Mazatlan' }); } catch (e) { return d.toISOString().slice(0, 10); }
-  }
-  function sumarDias(iso, n) {
-    var p = String(iso).split('-'), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + n, 12));
-    return d.toISOString().slice(0, 10);
-  }
-  function rangoFechas(ahora) { var h = hoyISO(ahora); return { min: sumarDias(h, -DIAS_ATRAS), max: sumarDias(h, DIAS_ADELANTE), hoy: h }; }
-  function fechaTexto(iso) {
-    var p = String(iso).split('-');
-    try { return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2], 12)).toLocaleDateString(T.locale ? T.locale() : 'es-MX', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }); }
-    catch (e) { return iso; }
-  }
+  /* Fechas (hora de La Paz), de hoy − 92 a hoy + 15 días: el campo de fecha es compartido con Pesca (reglas.js). */
+  var hoyISO = RB.hoyISO, rangoFechas = RB.rangoFechas, fechaTexto = RB.fechaTexto;
   /* Nombres completos para el buscador (en el mapa algunos van abreviados). */
   var NOMBRE = { guerreronegro: 'Guerrero Negro', bahiamagdalena: 'Bahía Magdalena' };
   function nombreDe(l) { return NOMBRE[l.id] || l.es; }
@@ -206,7 +191,7 @@
     return '<form class="cm-busca" id="cm-busca" role="search" aria-label="' + esc(t('cm.busca')) + '" novalidate>' +
       '<div class="cm-campo cm-campo-l"><label for="cm-q">' + esc(t('cm.bLugar')) + '</label><input id="cm-q" type="search" list="cm-lista" autocomplete="off" placeholder="' + esc(t('cm.bLugarPh')) + '">' +
       '<datalist id="cm-lista">' + CL.LUGARES.map(function (l) { return '<option value="' + esc(nombreDe(l)) + '"></option>'; }).join('') + '</datalist></div>' +
-      '<div class="cm-campo"><label for="cm-f">' + esc(t('cm.bFecha')) + '</label><input id="cm-f" type="date" min="' + r.min + '" max="' + r.max + '" value="' + r.hoy + '"></div>' +
+      RB.campoFecha('cm-f', t('cm.bFecha'), r) +
       '<div class="cm-acc"><button type="submit" class="cm-btn">' + esc(t('cm.bVer')) + '</button><button type="button" class="cm-btn cm-btn-2" data-hoy>' + esc(t('cm.bHoy')) + '</button></div>' +
       '<p class="cm-busca-msg" id="cm-busca-msg" role="status" hidden></p>' +
       '<p class="cm-busca-ayuda">' + esc(t('cm.bAyuda', { a: fechaTexto(r.min), b: fechaTexto(r.max) })) + '</p></form>';
