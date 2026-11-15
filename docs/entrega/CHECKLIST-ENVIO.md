@@ -28,7 +28,7 @@ Al final, dos casillas obligatorias: **Agree to Terms and Conditions** y **Confi
 
 1. **Inglés escrito** en la página de entrega, **en el enlace del proyecto final (nuestra web)** y en la demo. El video puede hablarse en español con subtítulos en inglés. **Nuestra web hoy está en español: ver el issue de la versión en inglés.**
 2. **Menores de 18: ni nombre, ni voz, ni imagen** en la demo, en el proyecto ni en ninguna parte de lo que se entrega. Los mayores que aparezcan o se nombren deben estar de acuerdo con que NASA use su nombre e imagen en relación con el material.
-3. **IA:** imágenes y videos generados llevan marca de agua visible "AI-generated"; el código y los datos generados se reconocen en texto descriptivo y metadatos. **Nada de logos, banderas ni identificadores de misión de NASA** en lo generado.
+3. **IA** (regla nueva de Carlos, 2026-11-15: toda fuente e IA documentada, no obligatoriamente en pantalla; ver `docs/FUENTES-Y-IA.md`; texto oficial de la regla nueva por citar): imágenes y videos generados llevan marca de agua visible "AI-generated" según la diapositiva de envío; el código y los datos generados se reconocen en texto descriptivo y metadatos. **Nada de logos, banderas ni identificadores de misión de NASA** en lo generado.
 4. **Todos los miembros** registrados en la plataforma, en La Paz, listados en la Project Page y fuera de la lista de espera. Después del cierre no se pueden agregar.
 5. Sin groserías ni contenido inapropiado.
 6. Los enlaces (demo y proyecto) abiertos sin sesión, sin contraseña, sin pedir registro. Revisarlos antes del cierre.
