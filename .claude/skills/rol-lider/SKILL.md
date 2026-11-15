@@ -38,8 +38,8 @@ Antes: abrir la URL pública sin sesión iniciada y comprobar las 4 pantallas en
 - [ ] `dev` publicado en GitHub Pages; `docs/contrato-datos.md` vigente.
 - [ ] Bitácora al día; bloqueos abiertos como issues.
 
-**Sáb 14 nov 22:00. Congelar funciones (solo bugs, textos y entrega)**
-- [ ] Anunciar el congelamiento al equipo; rechazar PRs de funciones nuevas.
+**Sáb 14 nov noche. Sin congelamiento de funciones (decisión de Carlos, 2026-11-14)**
+- [ ] Avisar al equipo: se trabaja hasta que no se pueda; prioridad, las 4 pantallas con datos reales. Todo lo que pase a `main` se prueba antes.
 - [ ] Textos de la web revisados: lenguaje sencillo, sin causalidad (con Investigación y UI/UX).
 - [ ] Guion del demo definido (`docs/entrega/08-demo-draft.md`); grabación en marcha.
 
@@ -49,7 +49,7 @@ Antes: abrir la URL pública sin sesión iniciada y comprobar las 4 pantallas en
 
 **Dom 15 nov 13:00. "Submit for Judging" (meta interna, para practicar)**
 - [ ] Formulario completo en la plataforma, **Lock** activado y "Submit for Judging" pulsado con una hora de margen.
-- [ ] Banner de confirmación visto; enlaces verificados sin sesión iniciada.
+- [ ] Confirmación en pantalla de la plataforma vista y guardada en captura; enlaces verificados sin sesión iniciada.
 
 **Dom 15 nov 23:59. Hora límite oficial de entrega**
 (Confirmada por Carlos como límite oficial. La evaluación del jurado es a las 17:00, por eso se entrega antes.)

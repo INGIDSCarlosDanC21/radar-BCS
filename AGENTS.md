@@ -25,7 +25,7 @@ Detalle completo: `docs/referencia/` (documentos del evento convertidos a Markdo
 ## Fechas (hora local de La Paz)
 
 - Sáb 14 nov 20:00 — las 4 pantallas con datos reales.
-- **Sáb 14 nov 22:00 — congelar funciones**; después solo bugs, textos y entrega.
+- **Sin congelamiento de funciones** (decisión de Carlos, 2026-11-14): se trabaja hasta que ya no se pueda. Prioridad: las 4 pantallas con datos reales. Todo cambio a `main` se prueba antes (regla 9).
 - Dom 15 nov 11:00 — entrega completa en borrador (`docs/entrega/`), demo lista y `main` actualizado.
 - **Dom 15 nov 13:00 — meta interna: pulsar "Submit for Judging"** (deja la tarde para practicar el pitch antes del jurado).
 - **Dom 15 nov 23:59 — hora límite oficial de entrega** (confirmada por Carlos el 2026-11-14; coincide con la diapositiva oficial y con la plataforma; ver `docs/decisiones.md`). No se usa como meta: se entrega antes.

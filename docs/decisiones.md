@@ -99,3 +99,10 @@ Registro de decisiones del equipo. Una entrada por decisión; no se borran, se r
 - **Decisión:** la tarjeta y la ficha de **Calor** muestran las dos mediciones y dicen que no coinciden y que no se sabe por qué. El número principal sigue siendo el del aire (es el indicador del contrato), pero la `limitacion` que menciona la superficie debe verse junto a la cifra, no escondida. No se interpreta la baja de ~1.3 °C en El Centenario y Sur hasta revisarla. Frases en `docs/investigacion/hallazgos.md`.
 - **Alternativas descartadas:** mostrar solo el aire; mostrar solo la superficie; promediar ambas (no tiene sentido físico).
 - **Quién decidió:** Carlos (Líder) con Investigación; propuesta de Claude, pendiente de que Carlos la confirme si prefiere otra cosa.
+
+### 2026-11-14 — Sin congelamiento de funciones
+
+- **Contexto:** el calendario tenía "congelar funciones el sábado a las 22:00". Carlos decidió que no se congela.
+- **Decisión:** el equipo trabaja hasta que ya no pueda. La prioridad es que las 4 pantallas muestren datos reales. El agua (issue #7) se hace si llega; si no, se declara "sin datos". Sigue la meta interna de enviar a las 13:00 del domingo y el límite oficial de las 23:59. Lo que sí se mantiene: probar antes de pasar a `main` (regla 9).
+- **Reemplaza** el congelamiento de las entradas anteriores sobre el calendario.
+- **Quién decidió:** Carlos (Líder).
