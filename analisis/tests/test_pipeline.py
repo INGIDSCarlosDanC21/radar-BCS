@@ -89,7 +89,8 @@ def test_salida_cumple_contrato():
     assert salida["version_contrato"] == "0.1" and salida["datos_de_prueba"] is False
     assert [i["id"] for i in salida["indicadores"]] == ["calor", "vegetacion", "lluvia", "agua"]
     claves = {"id", "titulo", "variable", "unidades", "cambio_total", "cambio_total_nota", "tendencia_por_decada",
-              "por_decada", "significancia", "serie_anual", "fuente", "limitacion"}
+              "por_decada", "significancia", "serie_anual", "fuente", "limitacion",
+              "titulo_en", "variable_en", "cambio_total_nota_en", "limitacion_en"}
     for i in salida["indicadores"]:
         assert set(i) == claves
     calor, veg, lluvia_i, agua = salida["indicadores"]

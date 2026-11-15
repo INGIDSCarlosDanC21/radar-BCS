@@ -18,6 +18,13 @@
 - Rama `prog-a/extender-2026`: código de 2026 y vegetación 2001-2026 (parcial: -0.013, p = 0.0036). Calor queda en 2001-2025 (`python -m analisis.exportar --calor-hasta 2025`).
 - Con 2026, calor sale -1.06 °C significativo y baja pareja en las 6 zonas desde 2022: sospechoso (deriva del paso de Terra). Se pidió a AppEEARS la hora de observación (`python -m analisis.appeears enviarhora`, luego `descargar`); falta compararla por año. No se cita como causa hasta comprobarlo.
 
+## 2026-11-15 (issue #97)
+
+- Campos `*_en` en `data/salida/` (título, variable, nota del cambio, limitación, método, dataset y resolución de la fuente; `nombre_en` y `nota_en` por zona). Mismas cifras que el español; `analisis.validar` los exige. No hay campo "descripción" en el contrato: `variable_en` hace ese papel. Los nombres de zona son propios y no se traducen.
+- `scripts/verificar-todo.ps1`: pytest, validar, `node --test` (web y diseño), `web/data` = `data/salida` (3 archivos) y archivos de menos de 5 MB. Probar: `powershell -File scripts/verificar-todo.ps1`.
+- `analisis.publicar` ahora copia también `zonas_tendencias.json`.
+- Falta del #97: auditoría del Mapa Agrícola (#88), contraste con Aqua (#87), revisión del login (#77/#81).
+
 ## Falta
 
 - Hora de paso de Terra (o MYD11A2 de Aqua) y resultado para `docs/investigacion/hallazgos.md` (de Carlos).
