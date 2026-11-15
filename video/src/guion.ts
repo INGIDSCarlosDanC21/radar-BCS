@@ -7,18 +7,18 @@
 // - Regla: DURACION_S <= 30 (objetivo 27). Cifras solo las del guion (data/salida/indicadores.json).
 
 export const FPS = 30;
-export const DURACION_S = 27;
+export const DURACION_S = 26; // voz de ElevenLabs (Sarah, velocidad 1.15): 25.4 s
 
 // Escenas, una por toma del brief (docs/entrega/08c-brief-video.md). Deben ir seguidas y sin huecos.
 export const ESCENAS = {
   titulo: { desde: 0, hasta: 1.8 }, // toma 1: tarjeta "Radar BCS · OptiPaz"
-  inicio: { desde: 1.8, hasta: 6 }, // toma 1: Inicio con las 4 tarjetas
-  calor: { desde: 6, hasta: 11.5 }, // toma 2: ficha de Calor (+1.47 °C, p < 0.001)
-  lluvia: { desde: 11.5, hasta: 16 }, // toma 3: ficha de Lluvia (no clear change)
-  mapa: { desde: 16, hasta: 19.5 }, // toma 4: mapa de 38 lugares
-  clima: { desde: 19.5, hasta: 21.7 }, // toma 5: Clima (4 tarjetas)
-  pesca: { desde: 21.7, hasta: 24 }, // toma 5: Pesca ("model", "not an official warning")
-  cierre: { desde: 24, hasta: DURACION_S }, // toma 6: enlace y fuentes
+  inicio: { desde: 1.8, hasta: 6.2 }, // toma 1: Inicio con las 4 tarjetas
+  calor: { desde: 6.2, hasta: 12 }, // toma 2: ficha de Calor (+1.47 °C, p < 0.001)
+  lluvia: { desde: 12, hasta: 15.6 }, // toma 3: ficha de Lluvia (no clear change)
+  mapa: { desde: 15.6, hasta: 18.2 }, // toma 4: mapa de 38 lugares
+  clima: { desde: 18.2, hasta: 19.9 }, // toma 5: Clima (4 tarjetas)
+  pesca: { desde: 19.9, hasta: 21.7 }, // toma 5: Pesca ("model", "not an official warning")
+  cierre: { desde: 21.7, hasta: DURACION_S }, // toma 6: enlace y fuentes
 } as const;
 
 export type Subtitulo = { texto: string; desde: number; hasta: number };
@@ -26,22 +26,17 @@ export type Subtitulo = { texto: string; desde: number; hasta: number };
 // Subtítulos quemados (EN). Una frase larga se parte en dos para que quepa en pantalla;
 // juntas dicen exactamente el texto del guion.
 export const SUBTITULOS: Subtitulo[] = [
-  // Toma 1 (17 palabras)
-  { texto: 'In La Paz, heat, water and the sea touch everyone.', desde: 0.2, hasta: 3.0 },
-  { texto: 'Radar BCS turns NASA data into answers.', desde: 3.0, hasta: 5.9 },
-  // Toma 2 (12)
-  { texto: 'Air temperature rose about 1.5 degrees since 2001,', desde: 6.1, hasta: 8.9 },
-  { texto: 'a statistically significant change.', desde: 8.9, hasta: 11.3 },
-  // Toma 3 (12)
-  { texto: 'Where we are unsure, we say it:', desde: 11.6, hasta: 13.6 },
-  { texto: 'rainfall shows no clear change.', desde: 13.6, hasta: 15.8 },
-  // Toma 4 (7)
-  { texto: 'The map shows where, across 38 places.', desde: 16.1, hasta: 19.3 },
-  // Toma 5 (10)
-  { texto: "Today's sea and weather are model estimates,", desde: 19.6, hasta: 21.9 },
-  { texto: 'not official warnings.', desde: 21.9, hasta: 23.9 },
-  // Toma 6 (6)
-  { texto: 'What changed, not why. Radar BCS.', desde: 24.2, hasta: 26.8 },
+  // Tiempos medidos con alineación forzada de ElevenLabs sobre narracion.mp3 (2026-11-15)
+  { texto: "In La Paz, heat, water and the sea touch everyone.", desde: 0.2, hasta: 3.0 },
+  { texto: "Radar BCS turns NASA data into answers.", desde: 3.3, hasta: 6.0 },
+  { texto: "Air temperature rose about 1.5 degrees since 2001,", desde: 6.4, hasta: 9.8 },
+  { texto: "a statistically significant change.", desde: 9.8, hasta: 11.8 },
+  { texto: "Where we are unsure, we say it:", desde: 12.1, hasta: 13.5 },
+  { texto: "rainfall shows no clear change.", desde: 13.5, hasta: 15.5 },
+  { texto: "The map shows where, across 38 places.", desde: 15.7, hasta: 18.0 },
+  { texto: "Today's sea and weather are model estimates,", desde: 18.4, hasta: 20.1 },
+  { texto: "not official warnings.", desde: 20.1, hasta: 21.5 },
+  { texto: "What changed, not why. Radar BCS.", desde: 21.8, hasta: 25.2 },
 ];
 
 // Movimiento dentro de cada captura (segundos relativos al inicio de la escena).
