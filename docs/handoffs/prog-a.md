@@ -31,7 +31,8 @@
 
 ## Para otros roles
 
-- Carlos: revisar `analisis/texto-ficha-agua.md`; el Spearman ya tiene código.
+- Carlos: revisar `analisis/texto-ficha-agua.md`; el Spearman ya tiene código. Calor ahora es 2001-2021, +0.94 °C (p = 0.0003) por la deriva de Terra: alinear `docs/investigacion/hallazgos.md` y `docs/decisiones.md`.
+- Diego: copiar `data/salida/` a `web/data/` (calor con cifra; vegetación y agua a 2026; etiquetas de década nuevas) y cambiar el texto `CAPA_ZONA.calor.sinCifra` de `web/js/app.js`, que ya no aplica.
 - Diego: correr `web/tests` con node; ver los hallazgos de seguridad del login (#77).
 
 Probar: `pip install -r analisis/requirements.txt`, `python -m analisis.exportar`, `python -m analisis.zonas`, `python -m analisis.validar`, `python -m pytest analisis`.

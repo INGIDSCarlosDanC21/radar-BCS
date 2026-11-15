@@ -4,7 +4,7 @@
  "generado_con": "analisis/exportar.py (código generado con IA: sí, Claude)",
  "periodo": {
   "inicio": 2001,
-  "fin": 2025
+  "fin": 2021
  },
  "features": [
   {
@@ -41,8 +41,8 @@
     "nombre": "Centro",
     "cambios": {
      "calor": {
-      "cambio_total": -0.099,
-      "significativo": false
+      "cambio_total": 1.086,
+      "significativo": true
      },
      "vegetacion": {
       "cambio_total": -0.03,
@@ -94,8 +94,8 @@
     "nombre": "Chametla",
     "cambios": {
      "calor": {
-      "cambio_total": 0.051,
-      "significativo": false
+      "cambio_total": 1.5,
+      "significativo": true
      },
      "vegetacion": {
       "cambio_total": -0.033,
@@ -147,8 +147,8 @@
     "nombre": "El Centenario",
     "cambios": {
      "calor": {
-      "cambio_total": -1.301,
-      "significativo": true
+      "cambio_total": 0.383,
+      "significativo": false
      },
      "vegetacion": {
       "cambio_total": -0.046,
@@ -200,8 +200,8 @@
     "nombre": "Oriente",
     "cambios": {
      "calor": {
-      "cambio_total": -0.401,
-      "significativo": false
+      "cambio_total": 1.1,
+      "significativo": true
      },
      "vegetacion": {
       "cambio_total": 0.008,
@@ -253,8 +253,8 @@
     "nombre": "Sur",
     "cambios": {
      "calor": {
-      "cambio_total": -1.26,
-      "significativo": true
+      "cambio_total": 0.415,
+      "significativo": false
      },
      "vegetacion": {
       "cambio_total": 0.024,
@@ -306,8 +306,8 @@
     "nombre": "Surponiente",
     "cambios": {
      "calor": {
-      "cambio_total": -0.219,
-      "significativo": false
+      "cambio_total": 0.897,
+      "significativo": true
      },
      "vegetacion": {
       "cambio_total": -0.042,

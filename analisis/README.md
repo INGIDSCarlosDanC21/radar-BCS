@@ -29,7 +29,7 @@ python -m analisis.validar   # valida data/salida/ contra el contrato
 
 ## Estado
 
-- Calor sale de MODIS MOD11A2 (temperatura de la superficie de día, 6 zonas); el aire de NASA POWER (+1.47 °C) va en la limitación porque no coinciden. Lluvia sale de NASA POWER (MERRA-2, ~50 km; reanálisis, no medición local).
+- Calor sale de MODIS MOD11A2 (temperatura de la superficie de día, 6 zonas) y se corta en 2021 (`--calor-hasta 2021`) porque Terra pasa más temprano desde 2022 (`python -m analisis.hora_paso`); el aire de NASA POWER (+1.47 °C) va en la limitación porque no coinciden. Lluvia sale de NASA POWER (MERRA-2, ~50 km; reanálisis, no medición local).
 - Vegetación sale de MODIS MOD13Q1 (NDVI, 6 zonas). Agua sale de GRACE/GRACE-FO (tendencia regional, desde 2002; ver `PLAN.md`).
 - Código generado con IA (Claude); se declara en `generado_con` de cada salida.
 

@@ -124,6 +124,25 @@ def enviar_hora_paso(h):
     print(f"{clave}: tarea enviada ({tareas[clave]})")
 
 
+def enviar_aqua(h):
+    """MYD11A2 (Aqua, paso de tarde, sin la deriva de Terra) en las 6 zonas, 2002-2026: contraste del LST de Terra."""
+    clave = "MYD11A2.061-aqua-zonas"
+    tareas = _tareas()
+    if clave in tareas:
+        print(f"{clave}: ya enviada ({tareas[clave]})")
+        return
+    cuerpo = {"task_type": "point", "task_name": f"radar-bcs-{clave}",
+              "params": {"dates": [{"startDate": "07-04-2002", "endDate": "12-31-2026"}],
+                         "layers": [{"product": "MYD11A2.061", "layer": c} for c in ("LST_Day_1km", "QC_Day", "Day_view_time")],
+                         "coordinates": _puntos_zonas()}}
+    r = requests.post(f"{API}/task", json=cuerpo, headers=h, timeout=60)
+    if r.status_code not in (200, 202):
+        sys.exit(f"{clave}: HTTP {r.status_code} {r.text[:300]}")
+    tareas[clave] = r.json()["task_id"]
+    TAREAS.write_text(json.dumps(tareas, indent=1), encoding="utf-8")
+    print(f"{clave}: tarea enviada ({tareas[clave]})")
+
+
 def descargar_tareas(h):
     for producto, tid in _tareas().items():
         est = requests.get(f"{API}/status/{tid}", headers=h, timeout=60).json()
@@ -154,5 +173,7 @@ if __name__ == "__main__":
         enviar_zonas_2026(cabeceras)
     elif orden == "enviarhora":
         enviar_hora_paso(cabeceras)
+    elif orden == "enviaraqua":
+        enviar_aqua(cabeceras)
     elif orden == "descargar":
         descargar_tareas(cabeceras)

@@ -13,9 +13,9 @@
    "titulo": "Calor",
    "variable": "Temperatura de superficie de día (MODIS MOD11A2 LST), promedio de 6 zonas",
    "unidades": "°C",
-   "cambio_total": null,
-   "cambio_total_nota": "No se detecta un cambio claro; por eso no se muestra una cifra de cambio.",
-   "tendencia_por_decada": null,
+   "cambio_total": 0.935,
+   "cambio_total_nota": "pendiente de Sen por año × 20 intervalos anuales (2001-2021); estimación, no medición",
+   "tendencia_por_decada": 0.468,
    "por_decada": [
     {
      "decada": "2001-2010",
@@ -26,15 +26,15 @@
      "media": 36.085
     },
     {
-     "decada": "2021-2025",
-     "media": 34.442
+     "decada": "2021-2021",
+     "media": 36.14
     }
    ],
    "significancia": {
     "metodo": "Mann-Kendall estacional + pendiente de Sen",
-    "p_valor": 0.1101,
+    "p_valor": 0.0003177,
     "alfa": 0.05,
-    "significativo": false
+    "significativo": true
    },
    "serie_anual": [
     {
@@ -120,32 +120,16 @@
     {
      "anio": 2021,
      "valor": 36.14
-    },
-    {
-     "anio": 2022,
-     "valor": 35.505
-    },
-    {
-     "anio": 2023,
-     "valor": 34.257
-    },
-    {
-     "anio": 2024,
-     "valor": 34.062
-    },
-    {
-     "anio": 2025,
-     "valor": 32.245
     }
    ],
    "fuente": {
     "url": "https://appeears.earthdatacloud.nasa.gov/",
     "resolucion": "1 km, 6 puntos de La Paz (promedio de zonas)",
     "dataset": "MODIS MOD11A2.061 (LST_Day_1km) vía NASA AppEEARS",
-    "periodo": "2001-2025",
+    "periodo": "2001-2021",
     "fecha_descarga": "2026-11-14"
    },
-   "limitacion": "Temperatura de la superficie (suelo y techos), no del aire. Se descartan lecturas de relleno y nubes. La temperatura del aire (NASA POWER, reanálisis ~50 km) sí sube: +1.47 °C en 2001-2025; miden cosas distintas y no se explica la diferencia."
+   "limitacion": "Temperatura de la superficie (suelo y techos), no del aire. Se descartan lecturas de relleno y nubes. La temperatura del aire (NASA POWER, reanálisis ~50 km) sí sube: +1.47 °C en 2001-2025; miden cosas distintas y no se explica la diferencia. El periodo termina en 2021 a propósito: desde 2022 el satélite Terra pasa cada vez más temprano (hora local media de 10.8 h a 9.2 h en 2026, según el campo Day_view_time de MOD11A2), la superficie se mide antes de calentarse y la serie baja de forma artificial. Es lo más probable, no está probado que lo explique todo. El cambio del aire se calcula con todo el periodo de POWER."
   },
   {
    "id": "vegetacion",
