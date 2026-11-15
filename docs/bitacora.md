@@ -32,3 +32,22 @@ Fecha y hora (La Paz), decisión o hecho, quién, por qué. Las decisiones forma
 - **Noche — Hallazgos y formulario real.** `docs/investigacion/hallazgos.md` al día con las cifras de dev (calor 2001-2021 +0.935, vegetación 2001-2026 -0.013, agua GRACE). Se revisó el formulario real de la plataforma sin guardar nada: Summary topa en 1500 caracteres, la respuesta de SI no la ven los jueces, Save Progress hace visibles los cambios al público. Detalle en `docs/entrega/CHECKLIST-ENVIO.md`.
 - **Noche — Login pospuesto.** Se cerró el PR #77 sin fusionar (el login no entra a la entrega); se conservan la rama `prog-b/login` y el proyecto de Supabase. Se cerró también el issue #98 (UI/UX cumplido en #99 y #104; lo que queda va en #93 y #79). El PR #85 queda a cargo del asistente del Líder, con revisión de Luca y fusión por Carlos.
 - **Noche — Calor, opción B.** Carlos eligió B: el calor encabeza con el aire (+1.47 °C, 2001-2025) y la superficie MODIS se muestra como no concluyente porque Aqua (+0.27 °C, p = 0.29) no confirma a Terra (+1.04 °C, 2003-2021). Se alinearon 04, 06 (suma MYD11A2), 08, hallazgos y decisiones. Pendiente de código: Luca (`exportar.py`) y Diego (nota de calor por zona).
+- **23:09 — Login fuera de la entrega.** PR #107: el login con Supabase no entra a la entrega (decisión y alineación de docs).
+- **23:29 — Inglés.** PR #110 (Prog. B): versión en inglés con `?lang=en` e interruptor ES/EN; la entrega (PR #114, 23:55) ya dice que la web está en español e inglés.
+
+## Domingo 15 de noviembre de 2026
+
+- **00:45 — Calor opción B en el código.** PR #133: el indicador sale de NASA POWER T2M (aire, +1.47 °C 2001-2025). Ese mismo minuto se fusionó la auditoría de fuentes del Mapa Agrícola (#134, "no pasa todavía") y, a las 01:26, la segunda pasada de Luca (#140, "pasa con reserva").
+- **01:52 — Mapa Agrícola.** Decisión (PR #148): entra con la reserva de SIAP y SEPADA; la proyección se queda.
+- **01:53 — `dev` a `main` (PR #85).** "Versión del domingo", con la puerta de calidad pendiente en su descripción.
+- **02:01 — El cielo en BCS.** PR #149: estado del cielo en vivo con íconos en Inicio; `main` lo recibió a las 02:18 (PR #150).
+- **02:42 — Pesca y Avisos.** PR #155: mapa de íconos con datos reales, menú superior de texto en escritorio e inferior con íconos en celular. A `main` a las 02:56 (PR #156).
+- **04:08 a 04:37 — Fichas, Mapa y fusión.** Fichas sin pestaña (#159, 04:08); pestaña Mapa como el frame Clima de Figma (#164, 04:17); `dev` a `main` con el Mapa Meteorológico (PR #172, 04:37).
+- **04:57 — Clima y logo.** Pantalla de Clima con detalle de las 4 tarjetas (#180) y marca de agua AI-generated dentro del logo (#181, 04:58). Entrega lista con paquete para la plataforma (#182, 05:02). `dev` a `main` a las 05:16 (PR #183).
+- **06:18 — Datos de Luca a `main`.** IMERG a 0.1° para La Paz (#189) y datos de las 4 fichas pesqueras (#192, 06:30). Los PR de Luca se abrieron hacia `main` por error; se pidió abrirlos a `dev`.
+- **07:36 — ERDDAP.** Clorofila, SST y anomalía por puerto (#198). `dev` a `main` a las 07:38 (PR #200) y 07:52 (PR #202, "Subir" compacto).
+- **08:08 — Guía y video.** Clima con fichas por lugar (#203, 08:08); guía del equipo, video con voz de ElevenLabs y ajustes de entrega (#204, 08:17). `main` a las 08:22 (PR #205).
+- **08:36 — Animación del cielo.** PR #207 (GIBS: nubes y lluvia en secuencia) y registro de herramientas de video (#206); la imagen de Inicio usa TIME para no mostrar la de noche de día (#209). `main` a las 08:46 (PR #208).
+- **09:07 — 38 localidades.** PR #210: el mapa pasa dentro de Clima, con calor del aire y lluvia de NASA POWER para 38 localidades; `main` a las 09:09 (PR #211).
+- **10:02 — Navegación con íconos.** PRs #212 a #214: menú con íconos e Inicio al centro, Acciones dentro de Clima, mapa Agro con capas, 19 puertos y 20 lugares en el mapa del tiempo, y animación de las últimas 2 horas de satélite en Inicio.
+- **10:04 — Marcas de conflicto.** Al fusionar #214 quedaron marcas de conflicto en `docs/entrega/04-project-details.md`; se arregló en el PR #215 (10:04) antes de llegar a `main`. Se abrió el PR #216 (`dev` a `main`), que espera el "fusiona" de Carlos.
