@@ -11,7 +11,7 @@
 - Exportados: `diseno/pantallas/` y `diseno/componentes/`; `web/assets/` (logo `logo-radar-bcs.png`, íconos `iconos/*.svg`, `tokens.css`).
 - Especificación: `diseno/ESPECIFICACION.md`.
 - Pruebas: `powershell -File diseno/tools/verificar-diseno.ps1`.
-- PR: #PR_PENDIENTE
+- PR: #99
 
 ## En curso
 
