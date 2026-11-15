@@ -9,6 +9,7 @@
   function t(k, v) { return T.t(k, v); }
   function tit(i) { return T.d(i, 'titulo'); }
 
+  var REPO = 'https://github.com/INGIDSCarlosDanC21/radar-BCS';
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -34,6 +35,15 @@
   }
   function cortoDataset(i) {
     return String(RB.textoFuente(i)).split(/ v[ií]a /)[0];
+  }
+  /* Valores cortos para las cajas de la tarjeta principal, como en Figma ("Mann-Kendall", "NASA POWER").
+     El nombre completo sigue en la línea "Fuente:" de la tarjeta y en la ficha. */
+  function cortoMetodo(m) {
+    var s = String(m || '');
+    return /Mann-Kendall/i.test(s) ? 'Mann-Kendall' : s.split(' + ')[0];
+  }
+  function cortoFuente(i) {
+    return cortoDataset(i).split(/\s*[(,]|\s+(Monthly|Mascon)\b/)[0];
   }
   /* Rango de años real, desde fuente.periodo de todos los indicadores. */
   function rango(datos) {
@@ -61,17 +71,18 @@
     var c = RB.textoCambio(i), p = pTxt(i), f = i.fuente || {};
     var h = '<article class="hm-principal" data-indicador="' + esc(i.id) + '">' +
       '<div class="hm-barra" aria-hidden="true"></div>' +
-      '<p class="hm-mono hm-verde">' + t('home.principal') + '</p>' +
-      '<h3 class="hm-t-prin">' + RB.icono(i.id) + esc(t('home.enLaPaz', { t: tit(i) })) + '</h3>' +
-      '<p class="hm-cifra-grande ' + esc(c.clase) + '">' + esc(c.texto) + '</p>' +
-      '<p class="hm-linea">' + etq(i) + (p ? ' <span class="hm-mono">' + esc(p) + '</span>' : '') + '</p>' +
-      (i.limitacion ? '<p class="hm-peq">' + esc(T.d(i, 'limitacion')) + '</p>' : '') +
+      '<div class="hm-prin-cab"><div><p class="hm-mono hm-verde">' + t('home.principal') + '</p>' +
+      '<h3 class="hm-t-prin">' + esc(t('home.enLaPaz', { t: tit(i) })) + '</h3></div>' +
+      '<span class="hm-ico-circ" aria-hidden="true">' + RB.icono(i.id) + '</span></div>' +
+      '<div class="hm-prin-cifra"><p class="hm-cifra-grande ' + esc(c.clase) + '">' + esc(c.texto) + '</p>' +
+      '<p class="hm-linea">' + etq(i) + '</p></div>' +
       '<div class="hm-datos">';
     if (f.periodo) h += dato(t('home.dPeriodo'), f.periodo);
-    if (i.tendencia_por_decada != null) h += dato(t('home.dDecada'), RB.signo(i.tendencia_por_decada, i.unidades));
-    if (i.significancia && i.significancia.metodo) h += dato(t('home.dPrueba'), T.d(i.significancia, 'metodo'));
-    h += dato(t('home.dDataset'), cortoDataset(i));
-    h += '</div><p class="fuente hm-fuente">' + esc(t('gen.fuente', { f: RB.textoFuente(i) })) + '</p>' +
+    if (i.significancia && i.significancia.metodo) h += dato(t('home.dPrueba'), cortoMetodo(T.d(i.significancia, 'metodo')));
+    if (p) h += dato(t('home.dP'), p.replace(/^p\s*=?\s*/, ''));
+    h += dato(t('home.dFuente'), cortoFuente(i));
+    h += '</div>' + (i.limitacion ? '<p class="hm-peq">' + esc(T.d(i, 'limitacion')) + '</p>' : '') +
+      '<p class="fuente hm-fuente">' + esc(t('gen.fuente', { f: RB.textoFuente(i) })) + '</p>' +
       '<a class="hm-enlace" href="#ficha/' + esc(i.id) + '">' + esc(t('home.verFichaDe', { t: String(tit(i)).toLowerCase() })) + '</a></article>';
     return h;
   }
@@ -81,9 +92,10 @@
     var nota = '';
     if (i.id === 'agua' && i.limitacion) nota = String(T.d(i, 'limitacion')).split('. ')[0] + '.';
     return '<article class="hm-peque" data-indicador="' + esc(i.id) + '">' +
-      '<h3 class="hm-t-peq">' + RB.icono(i.id) + esc(tit(i)) + '</h3>' +
-      '<p class="hm-cifra ' + esc(c.clase) + '">' + esc(c.texto) + '</p>' +
-      '<p class="hm-linea">' + etq(i) + (p ? ' <span class="hm-mono">' + esc(p) + '</span>' : '') + '</p>' +
+      '<div class="hm-peq-cab"><h3 class="hm-t-peq">' + esc(tit(i)) + '</h3><span class="hm-ico-der" aria-hidden="true">' + RB.icono(i.id) + '</span></div>' +
+      '<div class="hm-peq-val"><p class="hm-cifra ' + esc(c.clase) + '">' + esc(c.texto) + '</p>' +
+      (p ? '<span class="hm-mono hm-p">' + esc(p) + '</span>' : '') + '</div>' +
+      '<p class="hm-linea">' + etq(i) + '</p>' +
       (nota ? '<p class="hm-peq">' + esc(nota) + '</p>' : '') +
       '<p class="fuente hm-fuente">' + esc(t('gen.fuente', { f: RB.textoFuente(i) })) + '</p>' +
       '<a class="hm-enlace" href="#ficha/' + esc(i.id) + '">' + t('home.verFicha') + '</a></article>';
@@ -114,17 +126,23 @@
     h += '</div></div>' +
       '<p class="aviso hm-aviso">' + t('aviso.causa') + '</p></section>' +
       '<section class="hm-sec hm-sec-mapa" aria-labelledby="hm-h3"><div class="hm-marco">' +
-        '<div class="hm-marco-cab"><h2 id="hm-h3">' + t('home.hMapa') + '</h2></div>' +
+        '<div class="hm-marco-cab"><h2 id="hm-h3">' + t('home.hMapa') + '</h2>' +
+        '<p class="hm-mono hm-insignia"><i class="hm-punto" aria-hidden="true"></i>' + t('home.insignia') + '</p></div>' +
         '<figure class="hm-fig"><img src="img/bcs-modis-2025-04-20-600.jpg" srcset="img/bcs-modis-2025-04-20-600.jpg 600w, img/bcs-modis-2025-04-20.jpg 1200w" sizes="(min-width: 1024px) 1216px, 100vw" width="1200" height="1060" alt="' + esc(t('home.alt')) + '" loading="lazy">' +
-        '<figcaption class="hm-cred">' + t('home.cred') + '</figcaption>' +
-        '<a class="hm-btn hm-btn-claro hm-fig-btn" href="#mapa">' + t('home.btnZonas') + '</a></figure>' +
+        '<figcaption class="hm-cred">' + t('home.cred') + '</figcaption></figure>' +
       '</div></section>' +
       '<footer class="hm-pie"><div class="hm-pie-grid">' +
         '<div><p class="hm-marca"><i class="hm-punto"></i>RADAR BCS</p>' +
         '<p class="hm-pie-desc">' + t('home.pieDesc') + '</p></div>' +
-        '<nav aria-label="' + t('home.piePag') + '"><p class="hm-mono hm-negro">' + t('home.pantallas') + '</p>' +
-        '<a href="#inicio">' + t('nav.inicio') + '</a><a href="#mapa">' + t('nav.mapa') + '</a><a href="#ficha/calor">' + t('home.fichas') + '</a><a href="#acciones">' + t('nav.acciones') + '</a></nav>' +
-      '</div><p class="hm-mono hm-copy">' + t('home.copy') + '<br>' + t('html.ia') + '</p></footer>' +
+        '<nav aria-label="' + t('home.pantallas') + '"><p class="hm-mono hm-negro">' + t('home.pantallas') + '</p>' +
+        '<a href="#mapa">' + t('nav.mapa') + '</a><a href="#ficha/calor">' + t('home.fichas') + '</a><a href="#agricola">' + t('titulo.agricola') + '</a><a href="#acciones">' + t('home.btnAcc') + '</a></nav>' +
+        '<nav aria-label="' + t('home.datosCodigo') + '"><p class="hm-mono hm-negro">' + t('home.datosCodigo') + '</p>' +
+        '<a href="' + REPO + '/blob/main/docs/entrega/06-nasa-data.md">' + t('home.fuentesNasa') + '</a>' +
+        '<a href="' + REPO + '/blob/main/docs/entrega/05-use-of-ai.md">' + t('home.usoIA') + '</a>' +
+        '<a href="' + REPO + '">' + t('home.codigo') + '</a></nav>' +
+      '</div><div class="hm-pie-barra"><p class="hm-mono hm-copy">' + t('home.copy') + '<br>' + t('html.ia') + '</p>' +
+        '<p class="hm-mono hm-pie-enlaces"><a href="' + REPO + '/blob/main/LICENSE">' + t('home.licencia') + '</a>' +
+        '<span class="hm-ia-et">AI-generated</span></p></div></footer>' +
       '</div>';
     return h;
   }
