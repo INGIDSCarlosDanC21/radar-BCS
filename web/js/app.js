@@ -156,7 +156,8 @@
       if (sa !== sb) return sa ? 1 : -1;
       return Math.abs(cb.cambio_total) - Math.abs(ca.cambio_total);
     }).slice(0, esPrueba ? 5 : undefined);
-    var r = '<h2>' + (esPrueba ? 'Zonas de prueba del mapa (no son mediciones): ' : 'Zonas con más cambio: ') + esc(i.titulo) + '</h2>';
+    var hayClaro = lista.some(function (f) { return cz(f).significativo === true; });
+    var r = '<h2>' + (esPrueba ? 'Zonas de prueba del mapa (no son mediciones): ' : hayClaro ? 'Zonas con más cambio: ' : 'Zonas: ') + esc(i.titulo) + '</h2>';
     if (cfg) r += '<p>' + esc(cfg.que) + '</p>';
     if (!lista.length) {
       r += '<p class="aviso">Este indicador se mide a escala regional, no por zona; por eso el mapa no tiene datos para ' + esc(i.titulo.toLowerCase()) + '. Mira la ficha para ver el cambio en La Paz.</p>';

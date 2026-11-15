@@ -62,13 +62,13 @@ About 60 spoken words (about 24 s at a calm pace, 6 s of margin). Narrated in Sp
 |---|---|---|---|
 | 0:00 | Team name + "Be An Earth System Trend Detective!" | "Somos OptiPaz, de La Paz." | "We are OptiPaz, from La Paz." |
 | 0:03 | Phone: Home with the four cards | "Radar BCS: datos de la NASA, explicados para cada vecino." | "Radar BCS: NASA data, explained for every resident." |
-| 0:07 | Heat sheet (surface and note on air) | "El aire subió 1.47 grados; la superficie, vista por satélite, no muestra cambio claro. Mostramos ambos." | "Air temperature rose 1.47 °C; satellite surface temperature shows no clear change. We show both." |
+| 0:07 | Heat sheet (surface and note on air) | "El aire subió 1.47 grados y la superficie, vista por satélite, casi 1 grado hasta 2021." | "Air temperature rose 1.47 °C, and satellite surface temperature almost 1 °C through 2021." |
 | 0:13 | Vegetation sheet or map | "La vegetación bajó, y es significativo." | "Vegetation declined, a statistically significant trend." |
 | 0:17 | Water sheet with the word "regional" | "El agua regional subió, pero no mide nuestro acuífero." | "Regional water storage rose, but it does not measure our aquifer." |
 | 0:22 | Actions screen | "Qué cambió y qué tan seguro es; no por qué." | "What changed and how sure we are, not why." |
 | 0:26 | Link + "Data: NASA MODIS · POWER · GRACE" (text only) | "Radar BCS: datos abiertos para La Paz." | "Radar BCS: open data for La Paz." |
 
-Do not say: that heat is rising in La Paz (the surface does not show it), that there is more water or the aquifer is recovering, or any cause (urbanization, climate change). Do not claim it was tested on a real phone until issue #71 is done.
+Do not say: why heat rose, that the surface warmed after 2021 (we cut the series there on purpose), that there is more water or the aquifer is recovering, or any cause (urbanization, climate change). Do not claim it was tested on a real phone until issue #71 is done.
 
 Production checklist for the video:
 - [ ] Subtitles burned in (English), readable on a phone.

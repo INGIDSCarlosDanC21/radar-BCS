@@ -17,7 +17,12 @@
   - **Home** (`web/js/home.js`, `web/css/home.css`): reemplaza Inicio con el diseño de Figma y solo datos de `indicadores.json`. Se quitaron las temperaturas en vivo, el radar dBZ, GOES-18 y los avisos, que eran ficticios.
   - **Imagen:** MODIS Terra de NASA GIBS (CC0), en `web/img/` con su `FUENTES.md`.
   - **Earth Engine:** script `web/tools/gee_imagen_bcs.py` para un compuesto MCD43A4. Requiere cuenta y no se ha corrido.
-- **Login y Register:** por el issue #73, se sacaron del PR #69 y pasaron a la rama `prog-b/login`, con su PR aparte a `dev`. Corte: domingo 15 nov, 09:00.
+- **Login y Register:** por el issue #73, se sacaron del PR #69 y pasaron a la rama `prog-b/login` (PR #77, en borrador). Corte: domingo 15 nov, 09:00.
+- PR #69 (Home e imagen NASA) fusionado en `dev`.
+- **Issue #78** (rama `prog-b/sin-datos-prueba`):
+  - Se quitaron los textos "DATOS DE PRUEBA" de `web/README.md` y del HTML. La franja la escribe el JS y solo sale si `datos_de_prueba` es true.
+  - En el mapa, el título dice "Zonas:" en lugar de "Zonas con más cambio:" cuando ninguna zona tiene una tendencia clara (pasa con calor).
+  - Revisión a 360 px: Inicio, las 4 fichas, Mapa (6 polígonos) y Acciones, sin null, sin scroll horizontal, sin errores de consola y sin franja. Calor aparece como "Sin cambio claro" y agua aparece como regional.
 - **Mapa Agrícola** (rama `prog-b/mapa-agricola`, ruta `#agricola`): diseño de Figma con 4 fichas (Factibilidad y Cultivos, Clima y Agua, Salud del Suelo, Riesgos y Sanidad). Al hacer clic, la ficha se expande y oculta las demás; "✕ Cerrar", Esc o el botón atrás la regresan a la lista de fichas.
   - **Datos:** `web/data/agricola.json` lo arma `web/tools/armar_agricola.py`, con caché en `data/cache/agricola/`. Fuentes y cifras:
     - SIAP, cierre agrícola 2025, municipio de La Paz: 3,879.6 ha, 100 % riego.
@@ -30,24 +35,21 @@
     - GeoNames (CC BY 4.0): coordenadas.
   - **Quitado de Figma por no ser verificable:** "Viabilidad %", "ÓPTIMO", temperaturas en vivo, "Iniciar simulación", flujo de viento, PDF y calendarios de siembra.
   - **Discrepancia sin resolver:** para el acuífero La Paz 0324, el DOF 09/11/2023 da −13.49 hm³/año y el DOF del 17/08/2023 da un déficit de 27.83 hm³/año. No se sabe cuál rige y la ficha lo dice.
+  - **Fuentes registradas** en `docs/RECURSOS.md` y `docs/entrega/07` (SIAP, CONAGUA/DOF, NASA POWER, SoilGrids, GeoNames, SMN, SEPADA, Salud BCS). Las licencias de los datos del gobierno de México quedan "por confirmar; solo se citan".
 
 ## En curso
 
-- PR #69 (`prog-b/figma-pantallas` → `dev`): Home e imagen NASA, sin login.
-- Rama `prog-b/login`: ajustar el login a las condiciones del #73.
+- PR #77 (`prog-b/login`): faltan el propósito de la cuenta, el proyecto de Supabase, el canal de borrado y la prueba en celular.
 
 ## Falta
 
+- **#78-1:** integrar las 2 pantallas de UI/UX cuando Ehileen y Roberto las entreguen (#11 no tiene entregas todavía).
+- **#78-4 y #71:** probar en un celular real con Carlos y Roberto.
 - **Login (#73):**
   - Definir para qué sirve la cuenta.
   - Crear el proyecto de Supabase con confirmación de correo y límites de tasa.
   - Definir un canal para pedir el borrado de una cuenta.
-  - Probarlo en un celular real (#71).
 - **Textos de relleno de Register** y logotipo: Ehileen (#11, #12).
-- **Registrar en `docs/RECURSOS.md`:**
-  - La imagen GIBS.
-  - Space Grotesk, Manrope y JetBrains Mono (OFL).
-  - Para el Mapa Agrícola: SIAP, CONAGUA/DOF, NASA POWER, SMN, SoilGrids (CC BY 4.0) y GeoNames (CC BY 4.0).
 
 - Que Carlos fusione `dev` → `main`; luego comprobar la URL pública sin sesión.
 - Si Investigación cambia la prueba para la superficie por zona, quitar `sinCifra` de `CAPA_ZONA.calor` en `web/js/app.js`.
