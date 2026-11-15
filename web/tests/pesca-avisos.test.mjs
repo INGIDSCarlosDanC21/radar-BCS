@@ -222,28 +222,26 @@ test('inglés: mismas claves y {marcadores} en Pesca, Avisos, reglas del mar y m
 });
 
 // Sin pestaña "Ficha" (pedido de UI/UX, 2026-11-15): las fichas se abren solo desde las tarjetas de Inicio.
-test('menú: superior de texto en escritorio, inferior con iconos en celular, 4 pestañas abajo y "Más" con las otras 3', () => {
+test('menú: 5 secciones con ícono, Inicio al centro, sin hoja "Más" (Acciones vive dentro de Clima)', () => {
   const html = leer('index.html'), css = leer('css/menu.css');
   const sup = html.match(/<nav class="menu-sup"[\s\S]*?<\/nav>/)[0];
-  assert.equal((sup.match(/<a /g) || []).length, 6);
-  assert.doesNotMatch(sup, /mi-ic|<img|<svg/, 'el menú superior es solo texto');
-  for (const r of ['inicio', 'clima', 'agricola', 'pesca', 'avisos', 'acciones']) assert.ok(sup.includes('href="#' + r + '"'), r);
-  assert.ok(!sup.includes('href="#mapa"') && !html.includes('data-nav="mapa"'), 'la pestaña Mapa se fusionó con Clima');
+  const orden = ['clima', 'pesca', 'inicio', 'agricola', 'avisos'];
+  assert.deepEqual([...sup.matchAll(/href="#([a-z]+)"/g)].map((m) => m[1]), orden, 'Inicio en el medio');
+  assert.equal((sup.match(/mi-ic/g) || []).length, 5, 'el menú superior también lleva íconos');
   assert.ok(!html.includes('data-nav="ficha"'), 'ningún menú lleva la pestaña Ficha');
+  assert.ok(!html.includes('data-nav="acciones"') && !html.includes('data-nav="mapa"') && !html.includes('id="mas"') && !html.includes('mas-btn'), 'sin Mapa, Acciones ni "Más"');
   const barra = html.match(/<nav class="barra"[\s\S]*?<\/nav>/)[0];
-  assert.equal((barra.match(/<a /g) || []).length + (barra.match(/<button /g) || []).length, 4);
-  assert.equal((barra.match(/mi-ic/g) || []).length, 4, 'cada pestaña de abajo lleva ícono');
-  assert.match(barra, /id="mas-btn"[^>]*aria-expanded="false"[^>]*aria-controls="mas"/);
-  const mas = html.match(/<div id="mas"[\s\S]*?<\/div>/)[0];
-  assert.equal((mas.match(/<a /g) || []).length, 3);
-  for (const r of ['agricola', 'avisos', 'acciones']) assert.ok(mas.includes('data-nav="' + r + '"'), r);
+  assert.deepEqual([...barra.matchAll(/href="#([a-z]+)"/g)].map((m) => m[1]), orden);
+  assert.equal((barra.match(/mi-ic/g) || []).length, 5, 'cada pestaña de abajo lleva ícono');
+  assert.match(barra, /<a href="#inicio" data-nav="inicio" class="barra-centro">/, 'Inicio es el botón central');
   assert.match(css, /\.menu-sup\{display:none\}/); assert.match(css, /@media \(min-width:1024px\)\{[\s\S]*\.menu-sup\{display:flex/); assert.match(css, /\.barra,\.mas\{display:none\}/);
-  assert.deepEqual(['agricola', 'avisos', 'acciones'].every((s) => Menu.enMas(s)) && !['inicio', 'clima', 'pesca', 'ficha'].some((s) => Menu.enMas(s)), true);
+  assert.match(css, /\.barra a\.barra-centro::before/);
+  assert.equal(Menu.enMas('agricola'), false); assert.equal(Menu.enMas('acciones'), false);
   assert.equal(Menu.seccionDe('#pesca'), 'pesca'); assert.equal(Menu.seccionDe('#ficha/calor'), 'ficha'); assert.equal(Menu.seccionDe('#nada'), 'inicio');
 });
 test('rutas: app.js conoce #pesca y #avisos y no espera a indicadores.json; scripts y estilos cargados antes de app.js', () => {
   const app = leer('js/app.js'), html = leer('index.html');
-  assert.match(app, /\['inicio', 'ficha', 'acciones', 'agricola', 'pesca', 'avisos', 'clima'\]/);
+  assert.match(app, /\['inicio', 'ficha', 'agricola', 'pesca', 'avisos', 'clima'\]/);
   assert.match(app, /if \(sec === 'pesca' \|\| sec === 'avisos' \|\| sec === 'clima'\)/);
   assert.match(app, /RBPesca\.limpiar\(\)/); assert.match(app, /RBAvisos\.limpiar\(\)/); assert.match(app, /RBClima\.limpiar\(\)/);
   const orden = ['textos', 'reglas', 'datos-vivos', 'reglas-mar', 'mapa-iconos', 'menu', 'reglas-clima', 'pesca', 'avisos', 'clima', 'app'].map((s) => html.indexOf('js/' + s + '.js'));

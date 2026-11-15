@@ -242,3 +242,9 @@ Regla: no decir que la lluvia es de GPM ni que la TSM es de MODIS; hoy son POWER
 - **Clima (mapa del tiempo):** de 7 a **20 lugares**; los 13 nuevos son pines chicos (ícono, y temperatura con zoom) y abren las mismas 4 fichas. Inicio sigue con 7.
 - **Límite de Open-Meteo:** cada visita con caché fría pide unas 76 coordenadas (antes 32); el límite gratuito es 10 000 al día. Si hubiera mucho tráfico, el caché de 10 minutos del navegador ayuda; se declara como riesgo.
 - **Pruebas:** se regrabaron las 4 fixtures (`mar`, `clima`, `open-meteo`, `open-meteo-diario`) agregando solo los puntos nuevos con la misma petición real del 2026-11-15.
+
+## Navegación, Acciones dentro de Clima y mapa Agro con capas (Carlos, 2026-11-15)
+
+- **Barra:** Clima · Pesca · **Inicio al centro** (botón redondo) · Agro · Avisos, todos con ícono (también en el menú de escritorio). Se quita la hoja "Más".
+- **Acciones** deja de ser una pantalla de solo texto: vive al final de Clima como "¿Qué puedo hacer?", con una tarjeta con ícono por consejo (los mismos 10 de CDC y EPA, ninguno nuevo). `#acciones` redirige a `#clima/acciones`.
+- **Agro:** etiquetas de pines cortas (solo el nombre; el dato va en el popup), capas de NASA GIBS (satélite y vegetación NDVI) y los puntos de los 38 lugares de BCS con calor del aire y lluvia (NASA POWER).
