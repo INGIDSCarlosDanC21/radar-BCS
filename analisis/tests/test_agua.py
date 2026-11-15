@@ -30,3 +30,13 @@ def test_promedio_anual_exige_meses_minimos():
     mat[1, :8] = 5.0
     a = agua.promedio_anual_minimo(mat)
     assert a[0] == 2.0 and np.isnan(a[1])
+
+
+def test_p_valor_del_agua_corrige_autocorrelacion():
+    from analisis import exportar, tendencias as t
+    rng = np.random.default_rng(2)
+    mat = np.cumsum(rng.normal(0, 0.3, 24 * 12)).reshape(24, 12) + np.arange(24)[:, None] * 0.05
+    ind = exportar._agua(mat, "2026-11-14", 2025)
+    assert ind["significancia"]["p_valor"] == pytest.approx(
+        float(f"{t.tendencia_estacional_correlacionada(mat)['p_valor']:.4g}"))
+    assert "autocorrelación" in ind["significancia"]["metodo"]
