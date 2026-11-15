@@ -12,7 +12,7 @@
 - Especificación: `diseno/ESPECIFICACION.md`.
 - Pruebas: `powershell -File diseno/tools/verificar-diseno.ps1`.
 - PR: #99 (fusionado en `dev`).
-- **2026-11-14 (cierre, #98):** íconos identificados como Google Material Symbols (Apache 2.0, licencia en `web/assets/iconos/`); marca "AI-generated" junto al logo en el componente de encabezado y `web/assets/logo-radar-bcs-ai-generated.png`; términos de Gemini registrados (Stitch: sin página pública, NO VERIFICADO); revisión de personas/menores: ninguna en imágenes, se quitaron 2 nombres reales de ejemplo de las maquetas ("Ramón Bareño", "Armando Castro"); revisión de la web a 360 px en `diseno/revision-360/REPORTE.md`. PR: #PR_CIERRE
+- **2026-11-14 (cierre, #98):** íconos identificados como Google Material Symbols (Apache 2.0, licencia en `web/assets/iconos/`); marca "AI-generated" junto al logo en el componente de encabezado y `web/assets/logo-radar-bcs-ai-generated.png`; términos de Gemini registrados (Stitch: sin página pública, NO VERIFICADO); revisión de personas/menores: ninguna en imágenes, se quitaron 2 nombres reales de ejemplo de las maquetas ("Ramón Bareño", "Armando Castro"); revisión de la web a 360 px en `diseno/revision-360/REPORTE.md`. PR: #104
 
 ## En curso
 
