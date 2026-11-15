@@ -34,6 +34,14 @@ p{margin:.4em 0}
 .tarjetas{display:grid;gap:12px;margin-top:16px}
 .tarjeta{display:block;background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;min-height:44px}
 .tarjeta:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+/* #119 D6: foco visible también en campos, elementos con tabindex y el mapa */
+input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:not([tabindex="-1"]):focus-visible,.leaflet-container:focus-visible{outline:3px solid var(--acento);outline-offset:2px}
+main:focus-visible{outline:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Inicio y Mapa Agrícola son claros también en modo oscuro (diseño de Figma): la cabecera usa los colores claros
+   para no quedar con texto claro sobre fondo claro (contraste 1.8 medido en modo oscuro). */
+body[data-vista=inicio] .cabecera,body[data-vista=agricola] .cabecera,body[data-vista=inicio] .saltar,body[data-vista=agricola] .saltar{
+  --texto:#1b1f23;--suave:#4a525a;--borde:#cfd3d8;--acento:#0b5cad;--tarjeta:#fff;color:var(--texto)}
 .tarjeta h2{margin:0 0 4px;font-size:1.1rem}
 .cifra{font-size:2rem;font-weight:800;line-height:1.1}
 .cifra small{font-size:1rem;font-weight:600;color:var(--suave)}

@@ -306,11 +306,19 @@
     });
   }
   var prev = null;
+  /* Accesibilidad (#119 D6). "Saltar al contenido" no cambia el hash: el enrutador lo leía como pantalla
+     desconocida y mandaba a Inicio. Al cambiar de pantalla se anuncia el título y el foco va a <main>. */
+  var saltar = document.querySelector('.saltar');
+  if (saltar) saltar.addEventListener('click', function (ev) { ev.preventDefault(); main.focus(); });
+  var anuncio = document.getElementById('anuncio');
+  // aria-live en <main> leía la pantalla entera en cada cambio; con JS lo sustituye #anuncio (solo el título).
+  if (anuncio) main.removeAttribute('aria-live');
+  function anunciar() { if (anuncio) anuncio.textContent = document.title; }
   window.addEventListener('hashchange', function (ev) {
     // Dentro del Mapa Agrícola (abrir/cerrar ficha) no se sube al inicio: agricola.js maneja el scroll.
     var deAgro = /#agricola(\/|$)/.test(ev.oldURL || ''), aAgro = /^#agricola(\/|$)/.test(location.hash);
     ruta();
-    if (!(deAgro && aAgro)) window.scrollTo(0, 0);
+    if (!(deAgro && aAgro)) { window.scrollTo(0, 0); anunciar(); if (main.focus) main.focus({ preventScroll: true }); }
   });
   T.aplicar(document);
   ruta(); // sin datos todavía: pinta el esqueleto de la pantalla pedida
