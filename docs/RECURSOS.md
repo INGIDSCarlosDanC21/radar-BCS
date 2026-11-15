@@ -47,7 +47,7 @@ Enlaces comprobados el 2026-11-14 (responden y el título coincide con el produc
 | Codex | Tareas delegadas | — | **No usado** (confirmado por el equipo el 2026-11-14) |
 | Tripo3D | Modelo 3D (relieve) | — | **No usado** (confirmado el 2026-11-14) |
 | ElevenLabs | Voz/narración del video | — | **No usado** (confirmado el 2026-11-14); la narración es humana |
-| Gemini | Imagen/texto | — | **No usado** (confirmado el 2026-11-14) |
+| Google Stitch (herramienta de diseño de interfaces con IA, stitch.google.com), 2026-11-14 | Diseño de la interfaz de las 4 pantallas (disposición, paleta, logotipo) por UI/UX (Ehileen y Roberto). Lo que se use en la web se adapta y se revisa a mano | `web/assets/`, `diseno/` y la interfaz de `web/` (UI/UX anota aquí qué pantallas o imágenes salieron de Stitch) | **Usado** (confirmado por Carlos el 2026-11-14). Toda imagen generada lleva marca "AI-generated"; términos de uso y licencia de lo generado: POR CONFIRMAR por UI/UX |
 | Skills y plugins de terceros | Ver [`docs/skills-terceros.md`](skills-terceros.md) | Herramientas de desarrollo | Ver archivo |
 
 Recordatorio: imágenes y video generados llevan marca de agua visible "AI-generated"; prohibido usar o modificar logos de la NASA; sin menores de 18.
