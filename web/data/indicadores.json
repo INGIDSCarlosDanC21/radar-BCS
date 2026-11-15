@@ -1,7 +1,7 @@
 {
  "version_contrato": "0.1",
  "datos_de_prueba": false,
- "generado": "2026-11-14",
+ "generado": "2026-11-15",
  "generado_con": "analisis/exportar.py (código generado con IA: sí, Claude)",
  "periodo": {
   "inicio": 2001,
@@ -12,131 +12,147 @@
    "id": "calor",
    "titulo": "Calor",
    "titulo_en": "Heat",
-   "variable": "Temperatura de superficie de día (MODIS MOD11A2 LST), promedio de 6 zonas",
-   "variable_en": "Daytime land surface temperature (MODIS MOD11A2 LST), average of 6 zones",
+   "variable": "Temperatura del aire a 2 m (NASA POWER T2M)",
+   "variable_en": "Air temperature at 2 m (NASA POWER T2M)",
    "unidades": "°C",
-   "cambio_total": 0.935,
-   "cambio_total_nota": "pendiente de Sen por año × 20 intervalos anuales (2001-2021); estimación, no medición",
-   "cambio_total_nota_en": "Sen's slope per year × 20 yearly intervals (2001-2021); an estimate, not a measurement",
-   "tendencia_por_decada": 0.468,
+   "cambio_total": 1.465,
+   "cambio_total_nota": "pendiente de Sen por año × 24 intervalos anuales (2001-2025); estimación, no medición",
+   "cambio_total_nota_en": "Sen's slope per year × 24 yearly intervals (2001-2025); an estimate, not a measurement",
+   "tendencia_por_decada": 0.611,
    "por_decada": [
     {
      "decada": "2001-2010",
-     "media": 35.541
+     "media": 24.239
     },
     {
      "decada": "2011-2020",
-     "media": 36.085
+     "media": 25.13
     },
     {
-     "decada": "2021-2021",
-     "media": 36.14
+     "decada": "2021-2025",
+     "media": 25.194
     }
    ],
    "significancia": {
     "metodo": "Mann-Kendall estacional + pendiente de Sen",
     "metodo_en": "Seasonal Mann-Kendall + Sen's slope",
-    "p_valor": 0.0003177,
+    "p_valor": 2.762e-17,
     "alfa": 0.05,
     "significativo": true
    },
    "serie_anual": [
     {
      "anio": 2001,
-     "valor": 35.759
+     "valor": 23.897
     },
     {
      "anio": 2002,
-     "valor": 35.327
+     "valor": 24.143
     },
     {
      "anio": 2003,
-     "valor": 35.068
+     "valor": 24.237
     },
     {
      "anio": 2004,
-     "valor": 35.278
+     "valor": 24.033
     },
     {
      "anio": 2005,
-     "valor": 35.189
+     "valor": 24.138
     },
     {
      "anio": 2006,
-     "valor": 35.66
+     "valor": 24.647
     },
     {
      "anio": 2007,
-     "valor": 35.469
+     "valor": 24.109
     },
     {
      "anio": 2008,
-     "valor": 35.464
+     "valor": 24.298
     },
     {
      "anio": 2009,
-     "valor": 36.01
+     "valor": 24.694
     },
     {
      "anio": 2010,
-     "valor": 36.189
+     "valor": 24.198
     },
     {
      "anio": 2011,
-     "valor": 36.367
+     "valor": 24.578
     },
     {
      "anio": 2012,
-     "valor": 35.751
+     "valor": 24.626
     },
     {
      "anio": 2013,
-     "valor": 35.802
+     "valor": 24.621
     },
     {
      "anio": 2014,
-     "valor": 36.649
+     "valor": 25.613
     },
     {
      "anio": 2015,
-     "valor": 35.788
+     "valor": 25.577
     },
     {
      "anio": 2016,
-     "valor": 36.495
+     "valor": 25.493
     },
     {
      "anio": 2017,
-     "valor": 36.666
+     "valor": 25.354
     },
     {
      "anio": 2018,
-     "valor": 35.767
+     "valor": 25.335
     },
     {
      "anio": 2019,
-     "valor": 35.404
+     "valor": 24.872
     },
     {
      "anio": 2020,
-     "valor": 36.159
+     "valor": 25.231
     },
     {
      "anio": 2021,
-     "valor": 36.14
+     "valor": 25.195
+    },
+    {
+     "anio": 2022,
+     "valor": 24.799
+    },
+    {
+     "anio": 2023,
+     "valor": 25.186
+    },
+    {
+     "anio": 2024,
+     "valor": 25.383
+    },
+    {
+     "anio": 2025,
+     "valor": 25.407
     }
    ],
    "fuente": {
-    "url": "https://appeears.earthdatacloud.nasa.gov/",
-    "resolucion": "1 km, 6 puntos de La Paz (promedio de zonas)",
-    "resolucion_en": "1 km, 6 points in La Paz (average of the zones)",
-    "dataset": "MODIS MOD11A2.061 (LST_Day_1km) vía NASA AppEEARS",
-    "dataset_en": "MODIS MOD11A2.061 (LST_Day_1km) via NASA AppEEARS",
-    "periodo": "2001-2021",
+    "url": "https://power.larc.nasa.gov/docs/services/api/temporal/monthly/",
+    "resolucion": "reanálisis MERRA-2, ~50 km (no es medición local)",
+    "resolucion_en": "MERRA-2 reanalysis, ~50 km (not a local measurement)",
+    "dataset": "NASA POWER Monthly (MERRA-2), parámetro T2M, community AG",
+    "dataset_en": "NASA POWER Monthly (MERRA-2), parameter T2M, community AG",
+    "periodo": "2001-2025",
     "fecha_descarga": "2026-11-14"
    },
-   "limitacion": "Temperatura de la superficie (suelo y techos), no del aire. Se descartan lecturas de relleno y nubes. La temperatura del aire (NASA POWER, reanálisis ~50 km) sí sube: +1.47 °C en 2001-2025; miden cosas distintas y no se explica la diferencia. El periodo termina en 2021 a propósito: desde 2022 el satélite Terra pasa cada vez más temprano (hora local media de 10.8 h a 9.2 h en 2026, según el campo Day_view_time de MOD11A2), la superficie se mide antes de calentarse y la serie baja de forma artificial. Es lo más probable, no está probado que lo explique todo. El cambio del aire se calcula con todo el periodo de POWER.",
-   "limitacion_en": "Temperature of the surface (ground and roofs), not of the air. Fill values and clouds are discarded. Air temperature (NASA POWER, ~50 km reanalysis) does rise: +1.47 °C in 2001-2025; they measure different things and the difference is not explained. The period ends in 2021 on purpose: since 2022 the Terra satellite passes earlier and earlier (mean local time from 10.8 h to 9.2 h in 2026, from the Day_view_time field of MOD11A2), so the surface is measured before it warms up and the series drops artificially. This is the most likely reason; it is not proven that it explains everything. The air temperature change is computed with the whole POWER period."
+   "limitacion": "Es temperatura del aire a 2 m (reanálisis MERRA-2, ~50 km), no una medición local ni de la superficie. La temperatura de la superficie (MODIS) no es la cifra principal porque no es concluyente: Terra da +0.9 °C en 2001-2021 (p = 0.0003) pero Aqua, en los mismos puntos, da +0.27 °C en 2003-2021 (p = 0.29, sin cambio claro), y la hora de paso de ambos satélites se mueve desde 2022. No se explica la diferencia entre aire y superficie. No indica la causa del cambio.",
+   "limitacion_en": "This is air temperature at 2 m (MERRA-2 reanalysis, ~50 km), not a local measurement nor surface temperature. Surface temperature (MODIS) is not the main figure because it is inconclusive: Terra gives +0.9 °C in 2001-2021 (p = 0.0003) but Aqua, at the same points, gives +0.27 °C in 2003-2021 (p = 0.29, no clear change), and the overpass time of both satellites has been shifting since 2022. The difference between air and surface is not explained. It does not tell the cause of the change."
   },
   {
    "id": "vegetacion",
@@ -427,7 +443,7 @@
     "resolucion": "reanálisis MERRA-2, ~50 km (no es medición local)",
     "resolucion_en": "MERRA-2 reanalysis, ~50 km (not a local measurement)",
     "dataset": "NASA POWER Monthly (MERRA-2), parámetro PRECTOTCORR, community AG",
-    "dataset_en": "NASA POWER Monthly (MERRA-2), parámetro PRECTOTCORR, community AG",
+    "dataset_en": "NASA POWER Monthly (MERRA-2), parameter PRECTOTCORR, community AG",
     "periodo": "2001-2025",
     "fecha_descarga": "2026-11-14"
    },

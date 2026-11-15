@@ -46,7 +46,7 @@ def _indicador(id_, titulo, variable, unidades, mat_anual_fn, mat, datos, fecha,
         "significancia": {"metodo": metodo_es, "metodo_en": en.get("metodo"), "p_valor": float(f"{est['p_valor']:.4g}"),
                           "alfa": t.ALFA, "significativo": est["significativo"]},
         "serie_anual": [{"anio": a, "valor": _r(v)} for a, v in zip(anios, anual)],
-        "fuente": {**fuente_extra, "dataset_en": fuente_extra.get("dataset_en") or fuente_extra["dataset"].replace(" vía ", " via "),
+        "fuente": {**fuente_extra, "dataset_en": fuente_extra.get("dataset_en") or fuente_extra["dataset"].replace(" vía ", " via ").replace("parámetro", "parameter"),
                    "periodo": f"{inicio}-{fin}", "fecha_descarga": fecha},
         "limitacion": limitacion, "limitacion_en": en.get("limitacion"),
     }
@@ -71,25 +71,6 @@ def _parcial_en(mat, fin):
     if not np.isnan(mat[-1]).any():
         return ""
     return f" The year {fin} is partial: it enters the monthly trend test, but not the annual average or the decade average."
-
-
-def _deriva(fin_lst, fin):
-    """Nota cuando el calor se corta antes del último año: Terra pasa cada vez más temprano desde 2022."""
-    if fin_lst >= fin:
-        return ""
-    return (f" El periodo termina en {fin_lst} a propósito: desde 2022 el satélite Terra pasa cada vez más temprano "
-            "(hora local media de 10.8 h a 9.2 h en 2026, según el campo Day_view_time de MOD11A2), la superficie "
-            "se mide antes de calentarse y la serie baja de forma artificial. Es lo más probable, no está probado que lo explique todo. "
-            "El cambio del aire se calcula con todo el periodo de POWER.")
-
-
-def _deriva_en(fin_lst, fin):
-    if fin_lst >= fin:
-        return ""
-    return (f" The period ends in {fin_lst} on purpose: since 2022 the Terra satellite passes earlier and earlier "
-            "(mean local time from 10.8 h to 9.2 h in 2026, from the Day_view_time field of MOD11A2), so the surface "
-            "is measured before it warms up and the series drops artificially. This is the most likely reason; it is not proven that it explains everything. "
-            "The air temperature change is computed with the whole POWER period.")
 
 
 FUENTE_MODIS = {"url": "https://appeears.earthdatacloud.nasa.gov/", "resolucion": "MODIS, 6 puntos de La Paz (promedio de zonas)",
@@ -151,36 +132,27 @@ def zonas(lst, ndvi, inicio, fin):
     return sal
 
 
-def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, lst_mat=None, agua_mat=None, fin_agua=None,
-              fin_lst=None, fin_ndvi=None):
+def construir(datos, fecha, inicio=descargar.INICIO, fin=None, ndvi_zonas=None, agua_mat=None, fin_agua=None, fin_ndvi=None):
     fin = fin or descargar.ultimo_anio_completo()
     fuente_power = {"url": descargar.DOCS, "resolucion": "reanálisis MERRA-2, ~50 km (no es medición local)",
                     "resolucion_en": "MERRA-2 reanalysis, ~50 km (not a local measurement)"}
     t2m = t.matriz_mensual(datos, "T2M", inicio, fin)
     lluvia = t.mm_por_mes(t.matriz_mensual(datos, "PRECTOTCORR", inicio, fin), inicio)
-    est_aire = t.tendencia_estacional(t2m)
-    fin_lst, fin_ndvi = fin_lst or fin, fin_ndvi or fin
-    if lst_mat is not None:
-        calor = _indicador(
-            "calor", "Calor", "Temperatura de superficie de día (MODIS MOD11A2 LST), promedio de 6 zonas", "°C",
-            t.promedio_anual_sin_parcial, lst_mat, datos, fecha, inicio, fin_lst,
-            {**FUENTE_MODIS, "dataset": "MODIS MOD11A2.061 (LST_Day_1km) vía NASA AppEEARS", "resolucion": "1 km, 6 puntos de La Paz (promedio de zonas)",
-             "dataset_en": "MODIS MOD11A2.061 (LST_Day_1km) via NASA AppEEARS", "resolucion_en": "1 km, 6 points in La Paz (average of the zones)"},
-            "Temperatura de la superficie (suelo y techos), no del aire. Se descartan lecturas de relleno y nubes. "
-            f"La temperatura del aire (NASA POWER, reanálisis ~50 km) sí sube: {est_aire['pendiente_por_anio'] * (fin - inicio):+.2f} °C en {inicio}-{fin}; "
-            "miden cosas distintas y no se explica la diferencia." + _parcial(lst_mat, fin_lst) + _deriva(fin_lst, fin),
-            en={"titulo": "Heat", "variable": "Daytime land surface temperature (MODIS MOD11A2 LST), average of 6 zones",
-                "metodo": "Seasonal Mann-Kendall + Sen's slope",
-                "limitacion": "Temperature of the surface (ground and roofs), not of the air. Fill values and clouds are discarded. "
-                              f"Air temperature (NASA POWER, ~50 km reanalysis) does rise: {est_aire['pendiente_por_anio'] * (fin - inicio):+.2f} °C in {inicio}-{fin}; "
-                              "they measure different things and the difference is not explained." + _parcial_en(lst_mat, fin_lst) + _deriva_en(fin_lst, fin)})
-    else:
-        calor = _indicador(
-            "calor", "Calor", "Temperatura del aire a 2 m (NASA POWER T2M)", "°C", t.promedio_anual, t2m, datos, fecha,
-            inicio, fin, {**fuente_power, "dataset": "NASA POWER Monthly (MERRA-2), parámetro T2M, community AG"},
-            "Es temperatura del aire (reanálisis ~50 km), no de la superficie. Pendiente: MODIS MOD11A2.",
-            en={"titulo": "Heat", "variable": "Air temperature at 2 m (NASA POWER T2M)", "metodo": "Seasonal Mann-Kendall + Sen's slope",
-                "limitacion": "This is air temperature (~50 km reanalysis), not surface temperature. Pending: MODIS MOD11A2."})
+    fin_ndvi = fin_ndvi or fin
+    # Opción B (docs/decisiones.md, 2026-11-15): el calor es el del aire (POWER T2M); la superficie MODIS es "no concluyente"
+    # porque Aqua no confirma a Terra (python -m analisis.contraste_aqua). MODIS sigue en zonas.py y en el contraste.
+    calor = _indicador(
+        "calor", "Calor", "Temperatura del aire a 2 m (NASA POWER T2M)", "°C", t.promedio_anual, t2m, datos, fecha,
+        inicio, fin, {**fuente_power, "dataset": "NASA POWER Monthly (MERRA-2), parámetro T2M, community AG"},
+        "Es temperatura del aire a 2 m (reanálisis MERRA-2, ~50 km), no una medición local ni de la superficie. "
+        "La temperatura de la superficie (MODIS) no es la cifra principal porque no es concluyente: Terra da +0.9 °C en 2001-2021 (p = 0.0003) "
+        "pero Aqua, en los mismos puntos, da +0.27 °C en 2003-2021 (p = 0.29, sin cambio claro), y la hora de paso de ambos satélites "
+        "se mueve desde 2022. No se explica la diferencia entre aire y superficie. No indica la causa del cambio.",
+        en={"titulo": "Heat", "variable": "Air temperature at 2 m (NASA POWER T2M)", "metodo": "Seasonal Mann-Kendall + Sen's slope",
+            "limitacion": "This is air temperature at 2 m (MERRA-2 reanalysis, ~50 km), not a local measurement nor surface temperature. "
+                          "Surface temperature (MODIS) is not the main figure because it is inconclusive: Terra gives +0.9 °C in 2001-2021 (p = 0.0003) "
+                          "but Aqua, at the same points, gives +0.27 °C in 2003-2021 (p = 0.29, no clear change), and the overpass time of both satellites "
+                          "has been shifting since 2022. The difference between air and surface is not explained. It does not tell the cause of the change."})
     rain = _indicador(
         "lluvia", "Lluvia", "Precipitación corregida (NASA POWER PRECTOTCORR), total anual", "mm/año", t.suma_anual,
         lluvia, datos, fecha, inicio, fin,
@@ -214,7 +186,7 @@ def main():
     lecturas = agua.leer(ruta)
     fin_agua = max(a for a, _, _ in lecturas)  # lo más reciente que tenga GRACE (2026 parcial)
     mat_agua = agua.matriz_grace(lecturas, fin_agua)
-    salida = construir(datos, fecha, inicio, fin, ndvi, modis.ciudad(lst), mat_agua, fin_agua, fin_lst, fin_ndvi)
+    salida = construir(datos, fecha, inicio, fin, ndvi, mat_agua, fin_agua, fin_ndvi)
     salida["indicadores"][3]["fuente"]["fecha_descarga"] = fecha_grace
     SALIDA_ZONAS.write_text(json.dumps({"generado_con": GENERADO_CON, "periodo": {"inicio": inicio, "fin": fin_lst},
                                         "zonas": zonas(lst, ndvi, inicio, fin_lst)}, ensure_ascii=False, indent=1), encoding="utf-8")

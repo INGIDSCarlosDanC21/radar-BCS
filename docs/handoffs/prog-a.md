@@ -6,7 +6,7 @@ Actualizado el 2026-11-15 (issues #97 y #81). Rama de este bloque: `prog-a/campo
 
 - Pipeline de tendencias en `analisis/` (NASA POWER, MODIS por AppEEARS en 6 puntos, GRACE) y exportación según `docs/contrato-datos.md`; 56 pruebas. `data/salida/` lo genera código escrito con IA, sin revisión de Investigación.
 - Cifras vigentes en `data/salida/` (`python -m analisis.exportar --calor-hasta 2021`):
-  - Calor (MODIS LST): 2001-2021, +0.94 °C (p = 0.0003). El periodo se corta antes de la deriva de Terra (decisión de Carlos, `docs/decisiones.md`).
+  - Calor (opción B): aire NASA POWER T2M, 2001-2025, +1.47 °C (p = 2.8e-17). La superficie MODIS (+0.94 °C 2001-2021) queda solo por zona, como orientativa.
   - Vegetación (NDVI): 2001-2026 (2026 parcial), -0.013 (p = 0.0036).
   - Lluvia (POWER, total anual): sin cifra (p = 0.13).
   - Agua (GRACE, regional, no el acuífero): 2002-2026, +1.36 cm (p = 0.0094).
@@ -23,7 +23,7 @@ Actualizado el 2026-11-15 (issues #97 y #81). Rama de este bloque: `prog-a/campo
 
 ## Falta
 
-- Carlos: decidir si el calor se publica con cifra tras el contraste con Aqua y corregir la `limitacion` (hoy atribuye la caída a la deriva); actualizar `docs/investigacion/hallazgos.md` (suyo) con este resultado.
+- Carlos: revisar la `limitacion` nueva del calor y que `docs/entrega/04` y `hallazgos.md` digan lo mismo.
 - Diego: copiar `data/salida/` a `web/data/` (`python -m analisis.publicar`), cambiar `CAPA_ZONA.calor.sinCifra` de `web/js/app.js`, usar los `*_en` para ES/EN, regenerar `agricola.json` con cifras vigentes y corregir lo del login.
 - Auditar SIAP del #88 (necesita descargar el CSV); repetir la auditoría cuando Diego corrija.
 - Opcional: GLDAS-2.2 CLSM como contraste del agua; pruebas para `analisis/appeears.py`; Carlos revisa `analisis/texto-ficha-agua.md` y define el canal de borrado de cuentas.

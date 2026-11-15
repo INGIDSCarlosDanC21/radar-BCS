@@ -21,6 +21,7 @@ FUENTE_CAMPOS = ("dataset", "url", "resolucion", "periodo", "fecha_descarga")
 IND_EN = ("titulo_en", "variable_en", "cambio_total_nota_en", "limitacion_en")
 FUENTE_EN = ("dataset_en", "resolucion_en")
 UNIDADES_FIJAS = {"calor": "°C", "lluvia": "mm/año"}  # vegetación y agua las define Prog. A
+# Calor, opción B (docs/decisiones.md, 2026-11-15): cifra principal = aire (POWER T2M) desde 2001; la limitación explica por qué la superficie no es la principal
 
 
 def _num(x):
@@ -53,6 +54,18 @@ def _texto(obj, campo, donde, err):
     v = obj.get(campo)
     if not isinstance(v, str) or not v.strip():
         err.append(f"{donde}.{campo}: falta el texto en inglés (cadena no vacía)")
+
+
+def _calor_del_aire(ind, donde, err):
+    """El calor publicado es el del aire (T2M, desde 2001) y su limitación explica el contraste con Aqua, en español y en inglés."""
+    if "T2M" not in str(ind.get("variable")):
+        err.append(f"{donde}.variable: el calor debe ser el del aire (NASA POWER T2M), no la superficie")
+    periodo = str((ind.get("fuente") or {}).get("periodo"))
+    if not periodo.startswith("2001-"):
+        err.append(f"{donde}.fuente.periodo: el calor debe empezar en 2001, no {periodo}")
+    for campo in ("limitacion", "limitacion_en"):
+        if "aqua" not in str(ind.get(campo)).lower():
+            err.append(f"{donde}.{campo}: debe mencionar el contraste con Aqua")
 
 
 def _indicador(ind, donde, err):
@@ -93,6 +106,8 @@ def _indicador(ind, donde, err):
 
     # un indicador sin dato va con fuente null; si trae fuente, debe estar completa
     if ind.get("fuente") is not None:
+        if ind.get("id") == "calor":
+            _calor_del_aire(ind, donde, err)
         _faltan(ind["fuente"], FUENTE_CAMPOS, f"{donde}.fuente", err)
         # solo los indicadores con datos llevan inglés; los "pendiente" (fuente null) no tienen texto que traducir
         for c in IND_EN:
